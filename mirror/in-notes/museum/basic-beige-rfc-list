@@ -1,0 +1,70 @@
+	Key "Basic Beige" RFCs - compiled by J.K. Reynolds
+			25-August 1989
+
+
+RFC-768       User Datagram Protocol (UDP)
+RFC-791       Internet Protocol (IP)
+RFC-792       Internet Control Message Protocol (ICMP)
+RFC-793       Transmission Control Protocol (TCP)
+RFC-821       Simple Mail Transfer Protocol (SMTP)
+RFC-822       Standard for the Format of ARPA Internet Text Messages
+RFC-826       Ethernet Address Resolution Protocol
+RFC-854       Telnet Protocol
+RFC-862       Echo Protocol
+RFC-894       A Standard for the Transmission of IP
+              Datagrams over Ethernet Networks
+RFC-904       Exterior Gateway Protocol 
+RFC-919       Broadcasting Internet Datagrams
+RFC-922       Broadcasting Internet Datagrams in the Presence of Subnets
+RFC-950       Internet Standard Subnetting Procedure
+RFC-951       Bootstrap Protocol (BOOTP)
+RFC-959       File Transfer Protocol (FTP)
+RFC-966       Host Groups: A Multicast Extension to the Internet Protocol
+RFC-974       Mail Routing and the Domain System
+RFC-1000      The Request for Comments Reference Guide
+RFC-1009      Requirements for Internet Gateways
+RFC-1010      Assigned Numbers
+RFC-1011      Official Internet Protocols
+RFC-1012      Bibliography of Request for Comments 1 through 999
+RFC-1034      Domain Names - Concepts and Facilities
+RFC-1035      Domain Names - Implementation
+RFC-1042      A Standard for the Transmission of IP
+              Datagrams over IEEE 802 Networks
+RFC-1048      BOOTP Vendor Information Extensions
+RFC-1058      Routing Information Protocol
+RFC-1062      Internet Numbers
+RFC-1065      Structure and Identification of
+              Management Information for TCP/IP-based internets
+RFC-1066      Management Information Base for Network
+              Management of TCP/IP-based internets
+RFC-1084      BOOTP Vendor Information Extensions
+RFC-1087      Ethics and the Internet
+RFC-1095      The Common Management Information
+              Services and Protocol over TCP/IP (CMOT)
+RFC-1098      A Simple Network Management Protocol (SNMP)
+RFC-1100      IAB Official Protocol Standards
+RFC-1101      DNS Encoding of Network Names and Other Types
+RFC-1112      Host Extensions for IP Multicasting
+RFC-XXXX      Network Time Protocol (NTP)
+RFC-XXXX      Host Requirements (Upper and Lower Level)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,1010 @@
+21-Oct-85 09:28:45-PDT,44577;000000000001
+Return-Path: <NIC@SRI-NIC.ARPA>
+Received: FROM SRI-NIC.ARPA BY USC-ISIB.ARPA WITH TCP ; 18 Oct 85 15:49:20 PDT
+Date: Fri 18 Oct 85 12:21:00-PDT
+From: DDN Reference <NIC@SRI-NIC.ARPA>
+Subject: DDN News #41
+To: DDN-NEWS: ;
+cc: nic@SRI-NIC.ARPA
+Message-ID: <12152158617.21.NIC@SRI-NIC.ARPA>
+
+======================================================================
+DDN NEWS 41, SPECIAL ISSUE                  DCA DDN Program Mgt Office    
+18 Oct 85                            Published by: Network Info Center
+                                    (NIC@SRI-NIC.ARPA)  (800) 235-3155
+
+
+                        DEFENSE  DATA  NETWORK
+
+                              NEWSLETTER
+
+
+Maximum Distribution Requested.  The DDN NEWSLETTER is distributed by
+the Network Information Center under DCA contract.  For addition to
+the online mailing list, contact NIC@SRI-NIC.ARPA.  Back issues may be
+read through the TACNEWS server ("@n" command at the TAC) or by FTP
+from the SRI-NIC host [26.0.0.73 or 10.0.0.51] using the filename
+DDN-NEWS:DDN-NEWS-xx.TXT (where "xx" is the newsletter number.)
+======================================================================
+
+Section I. OFFICIAL
+
+             Topic:   1.  DDN GROWTH PROJECTIONS
+		      2.  DDN NODE INSTALLATION SCHEDULE
+		      3.  MILNET IMPS UPGRADED TO C/30E CONFIGURATION
+		      4.  DDN TRUNKS TO BE ROUTED OVER DCTN
+		      5.  DDN TRANSMISSION REQUIREMENTS
+		      6.  DDN E & I MANUAL
+		      7.  PACKET SWITCH NODE (PSN) RELEASE 5 OVERVIEW
+		      8.  PACKET SWITCH NODE (PSN) RELEASE 6 OVERVIEW
+		      9.  DDN SOFTWARE PATCH RELEASES
+		     10.  DDN HOST INTERFACE CONTRACTS
+		     11.  HOST INTERFACE QUALIFICATIONS
+		     12.  MILNET TAC AUDIT
+		     13.  WIN COMMUNICATIONS SUBSYSTEM
+		     14.  DDN USER REQUIREMENTS DATA BASE
+		     15.  SUBSCRIBER EDUCATION
+		     16.  DDN LOGISTIC SUPPORT CONCEPT
+		     17.  ARMY DDN SYSTEM ANALYSIS
+		     18.  DDN LIFE CYCLE COST ESTIMATE
+		     19.  CENTRAL INFORMATION FACILITY (CIF) IMPLEMENTED
+		            AT DDN PMO
+		     20.  DDN MANAGEMENT BULLETINS AND NEWSLETTERS
+		     21.  INTER-SERVICE/AGENCY AUTOMATED MESSAGE
+			    PROCESSING EXCHANGE (I-S/A AMPE)
+
+
+		 	     FOREWORD
+
+
+As most of you know, we have undertaken a greatly accelerated node
+installation schedule which, as a following article shows, is largely
+on schedule.  We continue to have difficulties obtaining access
+circuitry and there are insufficient host interfaces available in the
+market place.  The case for obtaining access circuits is not resolved
+and we are continuing to try different methods to obtain service.  With
+respect to host interfaces, increasingly more vendors are supporting
+the set DoD protocol.  The following article shows the schedule for
+those DDN PMO contracted interfaces.
+
+The DDN is being built for the Services and Agencies, not for DCA.
+Accordingly, I am most interested that you be kept informed as to what
+we are doing with your money and your requirements.  I think there are
+a variety of ways to do this and this newsletter is but one of them.  A
+further way is to make the data on which I base my decisions available
+to you.  A primary effort in this vein is in putting the URDB in an
+easier manipulated DBMS and making it available through the DDN.  We
+completed this last month.  I am gathering 19 in-house data bases
+currently on DBase III and intend to put them in ADABAS for network	
+access.
+
+We have lost several key individuals this past summer who were
+pioneers in developing the DDN and in determining the scope and
+direction of our efforts.  The most serious loss was the death of Dr.
+Tom Harris who was the Division Chief for Engineering Development and
+Acquisition.  Dr. Harris was an expert in network topology, was a whiz
+in translating the requirements of an individual system into the DDN
+architecture, and intimately knew packet switching advantages and
+limitations.  Thus, he was a key technical advisor to the Director, DCA
+and to OSD as well as being a pillar of competence in the DDN.  His
+loss will be almost impossible to replace.
+
+The PCS of the entire military representation of the User Integration
+Division took place this summer.  Of the nine persons in that division
+a year ago, only three remain today.  The good news is that the Services
+are providing outstanding replacements and they are beginning to
+report in now.
+
+In July of this year, a team of Management Experts from the Navy
+visited the DDN PMO at the request of LTGEN Powers to assess the PMO
+and to make recommendations for increased efficiency.  In addition to
+spending about a month in the PMO, the team visited several of our
+users as well as our contractors.  The results of that visit have been
+published in a report that I intend to distribute to the Services in
+the near future.  Among their recommendations was a suggested
+reorganization for the PMO which would integrate DDN, AUTODIN, and
+AMPE, and an increase in resources devoted to planning.  Most of their
+recommendations require additional manpower in that none of their
+suggestions contained a recommendation that we stop doing any
+particular function.
+
+						F. LEE MAYBAUM
+						Colonel, USAF
+						Program Manager
+						Defense Data Network
+
+
+
+ 		       1.  DDN GROWTH PROJECTIONS
+
+The following graphs illustrate the growth that the DDN has
+experienced and shows that even a greater rate of growth is needed to
+satisfy projected requirements.
+
+    	                HOST PROJECTIONS END FY86
+
+        	Operational		     308
+		Within Lead Time	     307
+		Awaiting Access Lines        217
+		Awaiting Trunk Circuits        0
+		Awaiting DDN Nodes             0
+		Awaiting Host Interfaces     500 (est.)
+		Awaiting User Action	    2218
+
+			TOTAL               3550	
+
+
+The present projection for hosts requiring connections to the DDN is
+3550 by the end of FY86.  As can be observed from the [above figures],
+monumental efforts will be required to satisfy the requirement.  The
+extent to which the requirement will be satisfied depends on many
+actions by many organizations.  The services and agencies must provide  
+feeder TSRs to the DDN PMO; the DDN PMO must prepare TSRs for the access
+lines and install the packet switches; DECCO must contract for the
+circuits; the common carriers must install the circuits; and the
+subscribers must actively pursue the acquisition of host interfaces to
+connect to the DDN.
+
+Relatively slow growth was experienced prior to mid FY85.  This is
+mostly attributed to two problems: the common carriers have been very
+slow in circuit installation, and the dearth of vendor supported host
+interfaces.  The DDN PMO is agressively seeking solutions to these
+problems.  The DDN PMO has contracted for host interfaces for the
+common host families as well as the development of a host front-end
+device (HFEP) under the Network Access Component (NAC) acquisition.   
+
+The solution to the circuit installation problem has shown to be more
+elusive (see circuit projection--chart following) due in large measure
+to the AT&T divestiture.  However, all circuit acquisition alternatives
+are being investigated.
+
+		       PACKET SWITCH PROJECTIONS
+
+	400
+			       |	
+	350		      /|<-- Projected requirement  350 PSNs
+			     / |	
+	300		    / /|<-- Current schedule  300 PSNs
+			   / / |	
+	250		  / /  |	
+			 / /   |
+	200		/ / <------ 194 Actual (7/26/85)
+		       / /    -|<-- 171 Program plan		
+	150           / / -    |
+	             //- <--------- Actual 110 (2/26/85)   
+	100  	   -           |
+	   	-   	       |
+	 50  -		       |
+			       |
+	  0		       |	
+	     83 . 84 . 85 . 86 . 87 . 88 . 89 .		
+			       FISCAL YEAR
+
+To satisfy the projected requirement for host connections, the DDN PMO
+took action in February 1985 to accelerate the packet switch
+installations.  The preceding chart shows that at the current rate,
+there will be sufficient packet switches to satisfy projected host
+requirements.
+
+		       [CIRCUIT PROJECTIONS GRAPH
+	               AVAILABLE IN HARDCOPY ONLY;
+			       CONTACT NIC]
+
+This chart graphically illustrates the circuit installation problem.
+While the DDN PMO has processed approximately 2500 TSRs from the end of
+February 1985 to the end of July 1985, only approximately 500 circuits
+were installed and approximately 400 circuit requirements had expired
+service dates.  As can be observed from the Installation curve, the
+installation rate must increase dramatically from 95 to 350 per month to
+meet the projected requirement.
+									
+
+	             [DATA GROWTH PROJECTIONS GRAPH
+                       AVAILABLE IN HARDCOPY ONLY;
+		              CONTACT NIC]
+
+
+The chart, while not quantified, illustrates how data is expected to
+grow relative to voice.  The chart is included to add credence to the
+belief of the DDN PMO that the growth shown on the preceding host,
+packet switch and circuit projections will continue well beyond FY86.
+(Col F. Lee Maybaum, B600, (703) 285-5010, (V) 356-5010.)
+
+
+		   2.  DDN NODE INSTALLATlON SCHEDULE
+
+DCA message 281941Z FEB 85, Subject: DDN Node Installation Schedule
+announced a schedule of node installations for the period January 1985
+through April 1986.
+
+A total of 50 nodes were scheduled for installation by the end of July
+1985.  As of 31 July 1985, the following was achieved against the
+schedule:
+
+	New Nodes Installed and Operational     18
+	New Nodes Installed (Awaiting lines 
+		            for activation)     24
+	New Nodes with Installation Underway     5
+	New Nodes Slipped to August 1985         3
+					       ---	
+					        50
+
+The eight nodes referenced above as having installation underway or
+having slipped into August 1985 for installation represent a
+shortcoming in terms of schedule.  This is indicative of the
+difficulty of doing business in a different way.  As we progress into
+the schedule, the rough edges are smoothing and a higher degree of
+success in node installation and activations is expected.
+
+Associated with the installation of nodes is the required survey of
+prospective node sites.  A total of 60 node site surveys were scheduled
+for the period February through July 1985.  Of that number, 56 have
+been completed.  Four site surveys were not conducted because the
+candidate node site from the present node installation schedule was
+removed.
+
+Activation of installed nodes is running ahead of last year by count,
+but this is still significantly behind the desired level.  Ideally, all
+nodes would be activated upon installation; however, acquisition of
+high speed digital and wideband trunks requires an excessively long
+lead time.  A high percentage of node activations will initially be
+classed operational only as a result of being single connected to a
+colocated or previously-existing, operational node.
+
+On several occasions, letters have been sent to both ATT
+Communications and ATT Information Systems, our principal supplier of
+leased lines, identifying those inter-switch trunk lines which we
+consider absolutely critical to the activation of nodes through this
+schedule.  They have acknowledged receipt of the letters and stated
+their understanding of the need and support of the current effort.  It
+remains to be seen if this produces positive results.
+
+Following is a recap of the installation status of nodes scheduled for
+installation from January through July 1985:
+
+
+		          JAN 85 INSTALLATlONS
+
+   FT LEAVENWORTH - ARMY - MILNET - NODE OPERATIONAL
+
+		          FEB 85 INSTALLATIONS
+
+   DCAOC - DOD - MILNET - NODE AND MONITORING CENTER OPERATIONAL
+   ROTA - NAVY - MILNET - INSTALLATION COMPLETE
+   TORREJON TAC - USAF - MILNET - REMOTE TAC OPERATIONAL
+   NARDAC SF - NAVY - MILNET - INSTALLATION COMPLETE
+
+		          MAR 85 INSTALLATIONS
+
+   WPAFB 2 - USAF - MILNET - NODE OPERATIONAL
+   HUMOSA - USAF - MILNET - NODE OPERATIONAL
+   RAMSTEIN 2 - USAF - MILNET - NODE OPERATIONAL
+   MCCLELLAN 1 - USAF - MILNET - NODE INSTALLED
+   MCCLELLAN 2 - USAF - MILNET - NODE INSTALLED
+   AMC (DARCOM) 2 - ARMY - MILNET - NODE OPERATIONAL
+   NTEC ORLANDO - NAVY - MILNET - NODE INSTALLED
+   AFSD 2 - USAF - MILNET - NODE OPERATIONAL
+   RANDOLPH 2 - USAF - MILNET - NODE OPERATIONAL
+   RANDOLPH 3 - USAF - MILNET - NODE OPERATIONAL
+   RANDOLPH 4 - USAF - MILNET - NODE INSTALLED
+   DIAC BOLLING - TS/SCI - NODE AND MONITORING CENTER OPERATIONAL
+
+		          APR 85 INSTALLATIONS
+
+   AFIS, BOLLING - TS/SCI - INSTALLATION UNDERWAY
+   PENTAGON 1 - USAF - DISNET - NODE INSTALLED
+   PENTAGON 2 - USAF - DISNET - NODE INSTALLED
+   ANDREWS - USAF - DISNET - NODE INSTALLED
+   LANDSTUHL 1 - ARMY - MILNET - NODE INSTALLED
+   LANDSTUHL 2 - ARMY - MILNET -NODE INSTALLED
+   DIA PENTAGON - TS/SCI - NODE OPERATIONAL
+   FSTC CHARLOTTESVILLE - TS/SCI - NODE OPERATIONAL
+   DCAOC - DOD - DISNET - ABIDES - NODE AND MONITORING CENTER OPERATIONAL
+   DCAOC - DOD - DISNET - VFDMIS - INSTALLED
+
+		          MAY 85 INSTALLATIONS
+
+   LOWRY 1 - USAF - MILNET - NODE OPERATIONAL
+   LOWRY 2 - USAF - MILNET - NODE OPERATIONAL
+   SCOTT - USAF - DISNET - NODE INSTALLED
+   LANGLEY - USAF - MILNET - NODE INSTALLED
+   MECHANICSBURG - NAVY - MILNET - NODE INSTALLED
+   CORPUS CHRISTI - NAVY - MILNET - NODE INSTALLED
+   MCCLELLAN - USAF - DISNET - NODE INSTALLED
+
+		          JUN 85 INSTALLATIONS
+
+   FT SILL - ARMY - MILNET - NODE INSTALLED
+   FT DETRICK - ARMY - MILNET - NODE INSTALLED
+   FT BELVOIR - ARMY - MILNET - NODE INSTALLED
+   LANGLEY - TS/SCI - NODE INSTALLED
+   WHEELER - DOD - MILNET - INSTALLATION UNDERWAY
+   CAMP ZAMA - ARMY - MILNET - INSTALLATION UNDERWAY
+   CROUGHTON - USAF - MILNET - AUG 85 INSTALLATION
+
+		          JUL 85 INSTALLATIONS
+
+   FT BELVOIR 1 - ARMY - DISNET - NODE INSTALLED
+   FT BELVOIR 2 - ARMY - DISNET - NODE INSTALLED
+   MACDILL - TS/SCI - INSTALLATION UNDERWAY
+   EGLIN - TS/SCI - NODE INSTALLED
+   NORFOLK 2 - NAVY - MILNET - NODE OPERATIONAL
+   HILL AFB 1 - USAF - MILNET - AUG 85 INSTALLATION
+   HILL AFB 2 - USAF - MILNET - AUG 85 INSTALLATION
+   CAMP ROBERTS - ARMY - MILNET - NODE INSTALLED
+   CLARK - USAF - MILNET - INSTALLATION UNDERWAY
+
+(LTC Bruce Sweeny, B647, (703) 285-5007, (V) 356-5007.)
+
+
+	    3.  MILNET IMPS UPGRADED TO C/3OE CONFIGURATION
+
+The DDN MILNET completed the upgrade to C/3OE at all deployed nodes
+worldwide on 5 May 85.  This hardware upgrade, together with the
+enhancement to IMP and monitoring center software programs now
+completing development, will permit simultaneous connection of all
+authorized types of host interfaces to any node, thereby greatly
+improving efficiency of host access to the network.  The upgrade expanded
+the IMP RAM memory from 64K words to 256K words.  In addition, microcode
+and I/O port expansions were also done at many sites.  In all, 87
+operational IMPS were upgraded in a three month period.  This was
+accomplished by scheduling all work at the time of a quarterly
+preventative maintenance visit by BBNCC Field Service.  Except for
+very few instances, all nodes were upgraded without significant impact
+to users and was in every way a professionally executed project due
+principally to the efforts of Ms. Liz Walb, BBNCC C/3OE Upgrade Action
+Officer, and BBNCC Field Service.
+
+C/3OE Upgrades are being planned for the WINCS and ARPANET in the near
+future. (LTC Bruce Sweeny, B647, (703) 285-5007, (V) 356-5007.)
+
+
+	4.  DDN TRUNKS TO BE ROUTED OVER THE DEFENSE COMMERCIAL
+		   TELECOMMUNICATIONS NETWORK (DCTN)
+
+The DDN plans to use DCTN for service from Node site to Node site.  The
+DDN PMO has identified 30 interswitch trunks (IST) as candidates for
+routing over DCTN beginning in 1986.  These ISTs will be totally
+terrestrial with end-to-end (from node to node) service.  DCTN will
+provide an interface to the DDN that is totally compatible with those
+used on the network today (e.g., DATAPHONE (R) DIGITAL SERVICE).
+(Charles F. Russell B627, (703) 285-5102, (V) 356-5102.)
+
+			PLANS FOR PUERTO RICO	
+
+The DDN plans to have two new 50/56 Kbps backbone interswitch trunks
+(IST) to Puerto Rico with the installation of I-S/A AMPE.  These trunks
+will be associated with the classified segment of the DDN (DISNET).
+Although end locations cannot be identified at this time, major
+communications facilities on the CONUS East Coast are the most obvious
+candidates for the mainland connections.  (Charles F. Russell, B627, 
+(703) 285-5l02, (V) 356-5102.)
+
+		PLANS FOR THE SOUTHERN REGION OF EUROPE
+
+The DDN has identified requirements into the Southern Region of
+Europe (Spain, Greece, Italy and Turkey) for 50 Kbps interswitch trunks
+(IST) coming into/exiting these countries.  Specific point-to-point
+connectivity cannot be determined until we have a more complete set
+of user requirements.  We need at least three wideband (50 Kbps) trunks
+from each major military installation in the region and up to eight 50
+Kbps trunks at satellite ground stations.  Diverse routing is also
+required for survivability of the DDN. (Charles F. Russell, B627, 
+(703) 285-5102, (V) 356-5102.)
+
+		  PLANS FOR CENTRAL AMERICA--PANAMA
+
+As part of the Information System Architecture/Integration Plan-Panama,
+the DDN specified for two 50/56 Kbps Interswitch trunks each for
+MILNET, DISNET, DODIIS and WINCS coming into/exiting Panama.  The DDN
+is the driving force in acquiring a leased satellite communications
+system between Fort Belvoir, Va. and Corozal, Panama.  Host and terminal
+access lines will be required to support valid user requirements in
+that area when they have been identified.  The TSR submission requested
+a September 85 activation of the T-1 pipe between these two points.
+However, delays in acquiring this service have extended the
+availability date into early CY 1986. (Charles F. Russell, B627, 
+(703) 285-5102, (V) 356-5102.)
+
+
+		   5.  DDN TRANSMISSION REQUIREMENTS
+
+The DDN PMO has identified 43 interswitch trunks (IST) that are
+required for DDN expansion.  We had discussed our requirements with
+other DCSO organizations and pointed out our need for diverse routing
+and specific needs in this area (trunk-by-trunk).  We put our IST
+requirements in a priority list, by their urgency, for
+coordination/validation.  However, only 12 out of the 43 IST's have
+been forwarded to JCS for out-of-cycle validation over MILSATCOM
+facilities.  All other IST requirements will be over commercial
+facilities.
+
+		   DDN SATELLITE TRUNK PRIORITY LIST
+		       (CY 85 AND PARTIAL CY 86)
+
+NUMBER 	FROM 		TO 		NET 	MEDlA
+
+1. 	TAEGU 		FT BUCKNER 	MILNET 	DSCS WESTPAC (AT JCS)
+2. 	TAEGU 		CP ZAMA 	MILNET  COMMERCIAL/DCS
+3. 	CP ZAMA 	CP ROBERTS 	MILNET  DSCS WESTPAC
+4. 	CLARK 		CP ZAMA 	MILNET  DSCS WESTPAC (AT JCS)
+5. 	LANDSTUHL 	FT BUCKNER	MILNET  INDIAN OCEAN DSCS
+6. 	LANDSTUHL 	ANDREWS AFB 	MILNET  COMMERCIAL
+7. 	CLARK 		CP ROBERTS 	MILNET  DSCS WESTPAC
+8. 	CP ZAMA 	FT BUCKNER 	MILNET  DSCS WESTPAC (AT JCS)
+9. 	RAMSTEIN 	CROUGHTON 	MILNET  COMMERCIAL
+10.     CAPODICHINO     COLTANO         MILNET  DCS/COMMERCIAL
+11.     WAHIAWA         OFFUTT 		MILNET  COMMERCIAL
+12. 	CP SMITH 	BOLLING AFB 	DODIIS  COMMERCIAL
+13. 	TANGO, KS 	CP SMITH 	DODIIS  DSCS WESTPAC
+14. 	HUMOSA 		COLTANO 	MILNET  COMMERCIAL
+15.	FT. BUCKNER 	WAHIAWA 	MILNET 	DSCS WESTPAC
+16. 	CROUGHTON	FT DETRICK 	MILNET 	COMMERCIAL
+17. 	CLARK 		FINEGAYAN 	MILNET  COMMERCIAL
+18. 	CROUGHTON 	ROTA 		MILNET  COMMERCIAL
+19. 	CROUGHTON 	HUMOSA 		MILNET  COMMERCIAL
+20.	INCIRLIK	ATHENS		MILNET  PSCS INDIAN OCEAN
+21. 	CAPODICHINO 	INCIRLIK 	MILNET  DSCS INDIAN OCEAN
+22. 	PANAMA 		FT DETRICK	MILNET  COMMERCIAL
+23. 	PANAMA		MAC DILL	DODlIS  COMMERCIAL
+24.	HQ DCA 		DCA PAC 	WINCS 	COMMERCIAL (9.6)
+25. 	HQ DCA		DCA EUROPE	WINCS   COMMERCIAL (9.6)
+26. 	OFFUTT		ELMENDORF	MILNET  DSCS EASTPAC
+27. 	MCCLELLAN 	ELMENDORF	MILNET  COMMERCIAL
+28.	LANGLEY		CAPODICHINO	MILNET  COMMERCIAL
+29.	VAIHINGEN	CAMBRIDGE, MASS MILNET  COMMERCIAL
+30. 	FT DETRICK	PANAMA		DISNET  COMMERCIAL
+31.	FT DETRICK	RAMSTEIN	DISNET  COMMERCIAL
+32.	WAHIAWA		YOKOTA		DISNET	COMMERCIAL
+33.	YOKOTA 		OSAN 		DISNET 	COMMERCIAL/DCS
+34.	FT DETRICK 	VAIHINGEN 	DISNET	COMMERCIAL
+35.	MCCLELLAN	WAHIAWA		DISNET  COMMERCIAL
+36.	FT DETRICK	CROUGHTON	WINCS	DSCS
+37.	FT BUCKNER	WAHIAWA		DISNET  DSCS WESTPAC
+38. 	FT BUCKNER 	TAEGU		WINCS	DSCS WESTPAC
+39.	LANDSTUHL	FT BUCKNER	WINCS	DSCS INDIAN OCEAN
+40.	FT DETRICK	PANAMA 		WINCS 	COMMERCIAL
+41. 	FRANKFURT 	BERLIN 		MILNET  DSCS INDIAN OCEAN
+42. 	TANGO 		WAHIAWA 	MILNET  COMMERCIAL
+43. 	GUAM 		FT BUCKNER 	MILNET  DSCS WESTPAC
+44.	WAHIAWA		FT DETRICK      MILNET  DSCS EASTPAC
+45.	WAHIAWA		FT DETRICK 	DISNET 	DSCS EASTPAC
+46.	TAEGU		MAKALAPA	WINCS	DSCS WESTPAC
+
+(Charles F. Russell, B627, (703) 285-5102, (V) 356-5102.)
+
+
+			  6.  DDN E & I MANUAL
+
+The first version (dated 8 March 1985) of the DDN Engineering and
+Installation Manual for classified networks has been released.
+Subsequent to its release, the DDN PMO hosted a review conference at BBN
+in Cambridge, Mass.  As a result of this conference, the manual will be
+reorganized as a collection of topical documents, probably a series
+of DCA Circulars.  Some guidance regarding the Services' host/terminal
+sites will be given, DDN requirements for Red/Black grounding will be
+described, and all sections will be expanded to some degree.
+
+The present manual will be used pending final document development.  A
+companion manual for unclassified networks is already being produced.
+The reorganized and expanded manual set is due for distribution in
+the May/June 1986 time frame.  (Mr. Darryl Henry, (7O3) 285-5038,
+(V) 356-5038, DHENRY@DDN1.)
+
+
+         7.  PACKET SWITCH NODE (PSN) RELEASE 5--RELEASE OVERVIEW
+
+The Packet Switch Node (PSN) Software Release 5 Overview (PSN R5) for
+the C/3OE processor was conditionally approved by the DDN
+Configuration Control Board (CCB) on 20 June 1985 pending final
+approval of documentation.  PSN R5 contains the following enhancements
+over the X.25 PSN R4: supports up to 44 host connections to the C/3OE,
+supports up to 500 concurrent X.25 virtual circuits vice 150, collects
+usage of X.25 Virtual Circuits and passes it to the NOC, allows for
+"logical addressing", allows for networks consisting of up to 255
+PSN's, allows the NOC to control modems and other devices depending
+upon the levels at specific interface pins and allows X.25 and 1822
+HDH hosts to be homed to the same packet switch.  (Mike Corrigan,
+B612, (703) 285-5030, (V) 356-5030.)
+
+
+        8.  PACKET SWITCH NODE (PSN) RELEASE 6--RELEASE OVERVIEW
+
+The Packet Switch Node (PSN) Software Release 6 Overview (PSN R6) for
+the C/3OE processor has been approved by the DDN Configuration Control
+Board.  The release itself is PSN R6 which offers the following
+enhancements over PSN R5: Standard Service X.25 interface in
+conjunction with support for interoperablity between Standard service
+hosts and 1822 hosts.  X.25 Closed User Group (CUG) support, full
+compliance with FIPS 1041 requirements for X.25 packet switching
+networks with the availability of the "CUG" facility, support for X.75
+lnternetwork Gateways, global definition of a default window and
+packet sizes other than the X.25 standard defaults.  (Mike Corrigan, B612, 
+(703) 285-5030, (V) 356-5030.)
+
+
+		    9.  DDN SOFTWARE PATCH RELEASES
+
+Effective 1 August, software patches to all DDN software releases will
+be distributed via a Monthly Software Update (MSU) tape.  This tape
+will be a cumulative tape containing all the Configuration Control
+Group (CCG) approved patches for all the software releases.  The MSU
+tape will be updated monthly with patches approved by the CCG; cutoff
+date for adding patches will be the first Tuesday of the month.  The
+tape will be identified by the year and sequentially numbered (e.g.
+85-1, 85-2).  The sequential number has no relationship to the month
+since there will be some months when no patches are approved by the
+CCG.  Automatic shipment of the tape will only be to the ARPANET,
+CONUS MILNET, European MILNET, and Pacific MILNET (when operational)
+Monitoring Centers.  The special networks supported by DDN will be
+advised when the MSU tape contains patches for the software being
+utilized.  By then they should forward a request to CONUS MILNET
+Monitor Center (CMMC) who will generate the required software cassette
+tape.  DCA Code B646 should be an information addressee on the request.
+(Ms. Martha Lewis, B646, (703) 285-5228, (V) 356-5228.)
+
+
+		   10.  DDN HOST INTERFACE CONTRACTS
+
+Contract DCA2OO-84-C-0045 was awarded to System Development
+Corporation on 10 June 1985.  This contract is for development and
+purchase of host interfaces for the DDN.  The contract calls for
+Burroughs B5000, B6000, B7000, and MCP Operating System. 
+(Ms Angela Anderson, B626, (703) 285-5136, (V) 356-5136.)
+
+
+		   11.  HOST INTERFACE QUALIFICATlONS
+
+The DDN PMO has granted fully qualified status to the following host
+interfaces following the successful completion of X.25 basic testing
+at 19.2 Kbps.
+
+Advanced Computer Communications (ACC)
+
+   IF-11/X.25 version 3.7 (2 boards Z-80 based. (Digital Unibus)
+   ACP 625 X.25 (Digital Unibus Computers)
+
+Protocom Devices
+
+   P2500 PAD
+
+Sperry Corporation Computer Systems
+
+   DDN X.25 IRI (Sperry 1100 System)
+
+Tandem Computers Inc.
+
+   Tandem TNS-11 Release Guardian A-06 using communications
+	controller T-16/62003 or 6204.
+
+(Charles A. Ely, B617, (703) 285-5337, (V) 356-5337.)
+
+
+		         12.  MILNET TAC AUDIT
+
+DDN Management Bulletin 26, 30 Jan 85 and DCA AUTODIN message 211531Z
+Nov 84 (with amendments) advised that the DDN PMO would be
+establishing configuration management for the DDN TACs for a number of
+reasons: to provide centralized TAC port allocation, to validate those
+connections to TAC ports that were authorized and operational, and to
+identify those connections requiring transfer of billing from the
+current organization to DDN.  Supporting commands of the TACs were
+requested to submit Request for Service (RFS)/Feeder
+Telecommunications Service Request (TSR) to justify and validate the
+current port connections.  This was to be accomplished by 1 May 85.  The
+DDN PMO also advised that any connections not validated would be
+disabled effective 15 May 85.
+
+Effective 1 Aug 85, all TAC port connections that have not been
+validated by an RFS/Feeder TSR will be disabled.  Ten TACs per week
+will be selected for this action, until all the TACs have been
+covered.
+
+The DDN PMO will accept requests to stay a port disablement for 60
+days to allow for submission of the appropriate RFS/Feeder TSR.  Ten
+days after port disablement, the DDN PMO will take action to
+disconnect the circuit and remove any equipment from the node site, as
+appropriate, providing no arrangements to the contrary have been made
+with the PMO.
+
+Effective 1 Aug 85, problems associated with the TAC connection should
+be referred to the MILNET Manager, LT Fennig, DCA/B646, (703) 285-5230,
+(V) 356-5230.  (Mr. Jack Snively, B646, (703) 285-5227, (V) 356-5227.)
+
+
+		   13.  WIN COMMUNICATIONS SUBSYSTEM
+
+There is action underway to issue a record purpose only
+Telecommunications Service Request (TSR) assigning Command
+Communications Service Designators (CCSD's) to the existing WINCS
+local host access lines.  This action will document the access lines in
+the DCA database and allow reporting per DCA Circular 310-55-1.
+(Major Steve Rudd, B646, (703) 285-5316, (V) 356-5316.)
+
+
+		  14.  DDN USER REQUIREMENTS DATA BASE
+
+The DDN User Requirement Data Base (URDB) has been converted to the
+ADABAS Data Base Management System (DBMS) effective 31 July 85.  ADABAS
+is a more powerful and flexible DBMS than the one used previously.  The
+new software provides enhanced data entry and output reports
+capability.  Training in use of the new software was conducted 30 and
+31 July 85 for users in the Washington, DC area.  Training for other
+users will be conducted as required.  It is anticipated that
+Services/agencies will now perform URDB data entry using the new
+software.  (Ms. Sandi Vest, B616, (703) 285-5335, (V) 356-5335.) 
+
+
+                       15.  SUBSCRIBER EDUCATION   
+
+In an effort to facilitate subscriber planning for optimum use of the
+DDN, DoD communications systems managers and planners may soon receive
+timely instruction on DDN engineering and transition during a course
+being developed by the Network Strategies, Inc. under contract to the
+PMO.  The course will contain tutorial and specific engineering topics
+based on actual experience in DDN expansion.
+
+Material planned for inclusion in the course will be presented in four
+sections.  The first section outlines the functionality required to
+achieve reliable data communications in an internetwork environment.
+The perspective is evolutionary, tracing the development of data
+communication from early telegraphy to a modern internet such as the
+Defense Data Network.  In the second section, basic architectural
+concepts are presented and lead to a comparison of the DDN with the
+two major commercial architectures: ISO-OSI and Systems Network
+Architecture (SNA).  The DDN protocol suite is explored in depth in the
+third section, followed by a discussion of the architectural and
+functional relationships of the major DDN hardware components.  In the
+final section, strategies for transitioning a variety of prototypic
+systems and networks, as well as general issues such as internet
+addressing, monitoring and control, and security, are discussed in
+detail.
+
+It is expected that the course will be available by mid fall 1985.  In
+the near future, the PMO will solicit input from the services/agencies
+on the course, location and schedules for presentation, and desired
+objectives.  (Mr. Vic Russell, B616, (703) 285-5028, (V) 356-5028.)
+
+
+		   16.  DDN LOGISTIC SUPPORT CONCEPT
+
+After analysis and careful consideration of various support concept
+alternatives, the DDN PMO has decided on a support concept for the DDN.
+The concept will be competitive contractor logistic support for
+on-site and off-site maintenance with contractor furnished spares.  This
+concept will be included in the upcoming revision of the Management
+Engineering Plan, the Logistic Support Plan (LSP), and other DDN
+documents. (Ms. Carolyn Taylor, B635, (703) 285-5444, (V) 356-5444.)
+				
+
+                     17.  ARMY DDN SYSTEM ANALYSIS
+
+The Controller of the Headquarters, US Army Information Systems Command,
+conducted a DDN System Analysis to evaluate the cost and systems
+effectiveness of the DDN Communications service.  The executive summary
+of the analysis is quoted below with the concurrence of the
+originating organization subject to the following notation: The views,
+opinions, and findings contained herein are those of the author and
+should not be construed as an official Department of Army policy or
+position unless so designated by other official documentation.
+
+	"Executive Summary.  The DDN was developed to provide
+	common-user long-haul communications support for data
+   	networks.  This study was undertaken to evaluate the
+        effectiveness of the DDN in providing this support.
+        A comparison of	dedicated leased-line communications
+        support	versus DDN support for three candidate DDN networks
+        was used as the basis for this evaluation.  The comparison
+        showed that DDN	support is not generally cost effective as a
+	direct wire-replacement for dedicated leased line networks.
+        However, much of the reduced effectiveness of DDN service
+        can be attributed to suboptimal utilization of the common-user
+	capabilities when used in this fashion.  Including DDN support
+        as an integral part of the systems design can increase the
+        systems	efficiency and, subsequently, the cost-effectiveness.
+        As the Army information	systems manager, USAISC has the inherent
+	responsibility for developing and promulgating systems
+        architecture which derives maximum effectiveness of the DDN
+        in support of Army data	networks."
+
+DCA comments on the analysis were provided as follows:
+
+	"The analysis is generally right on target. There is no
+        question that using DDN as a wire replacement is inefficient;
+        however, the DDN PMO questions the accuracy of the cost
+        advantage of dedicated lines over the worse case DDN tariffs
+	that is shown in the analysis.  The case for DDN would be
+        even stronger if the current commercial	tariffs were used,
+        and if the DDN's potential for reducing the costs of day-to-day
+        user management and control of long-haul communications 
+	were considered.  Also, DDN affords a system such as ARADS,
+        a mobilization mission capability, which dedicated lines 
+        never could.
+
+	The conclusions and recommendations presented in the
+        analysis should be acted upon as quickly as possible.  DDN
+        is ideally suited to the distributed processing goals of the
+        Army's Automation Architecture Plan.  It can support the
+	centralized batch oriented systems that are prevalent in the
+        Army today, but that is much like a multi-function touch tone
+        telephone system supporting field and rotary dial telephone
+        instruments.  Those existing batch systems will have to undergo
+        both hardware and software changes to make effective use of the
+	DDN or distributed processing.  However, actions to upgrade or
+        replace existing systems have historically tended to avoid
+        making any software changes.  The Army cannot begin to realize
+        the full potential of DDN or achieve its architectural goals
+        of distributed processing until that tendency is changed."
+	
+(Mr. James A. Powell, B613, (703) 285-5101, (V) 356-5101.)
+
+
+		    18.  DDN LIFE CYCLE COST ESTIMATE
+
+The Defense Data Network (DDN) Program Management Office (PMO) in
+coordination with the DCA Comptroller's Office has developed a Life
+Cycle Cost Estimate (LCCE) for the DDN program through FY 96.  The cost
+estimate was developed by MITRE Corporation as a spreadsheet based model
+using LOTUS 1-2-3 as its core system and is intended to run on an IBM
+PC.  This approach allows for rapid maintenance and updating of the
+estimates as well as utilizing the spreadsheet to perform analysis.  The
+LCCE model depicts a detailed work breakdown structure which reflects
+the current DDN System Description.  Work breakdown structure cost
+elements can be manually updated as necessary or can be generated as
+part of a pre-processing routine using the estimated node installation
+schedule as an input parameter.  It is anticipated that the LCCE will be
+of valuable input to the Program Manager when conducting future cost
+assessments of the DDN in addition to being the principle tool in
+generating future cost projections of the DDN which are necessary for
+the development of the DCA Five Year Program (FYP), Five Year Corporate
+Plan (FYCP) and other Planning, Programming, and Budgeting (PPBS)
+documents. (Major Larry E. Wheeler, B613, (7O3) 285-5031, (V) 356-5031.)
+
+
+    19.  CENTRAL INFORMATION FAClLlTY (CIF) IMPLEMENTED AT DDN PMO
+
+The DDN PMO has implemented a centralized collection of locally
+maintained data files for the purpose of providing information reports
+to the DDN PMO Management Staff.  Currently 19 files of information are
+available for use in the generation of management reports and responses
+to AD HOC queries.  At the present time, usage of the CIF is limited to
+internal DDN PMO staff and is not accessible to the network community of
+users.  However, the majority of the CIF data will eventually be available
+through the work being accomplished by the Network Information System
+(NIS) Activity at the Defense Communications Engineering Center (DCEC)
+at Reston, Virginia. (Ms. Betty Windham, B628, (703) 285-5219, (V) 356-5219.)
+
+
+		20.  DDN MANAGEMENT BULLETINS AND NEWSLETTERS
+
+The following DDN Management Bulletins and DDN Newsletters were issued since
+the last Quarterly Newsletter:
+
+DDN Management Bulletins
+
+Issue #   Date 		Topic
+
+  27	  12 Feb 85 	Rollover Expiration of Individual MILNET
+			  TAC Access Cards
+  28 	  14 Mar 85 	Implementation of ARPANET TAC Access Control
+			  is Underway
+  29 	  30 Apr 85 	New Location for CONUS MILNET Monitoring Center
+  30 	  14 Jun 85 	Survey Request
+
+DDN Newsletters
+
+Issue #   Date  	Topic
+
+  39 	  25 Apr 85 	MILNET/MINET Integration
+			DDN Node Installation Schedule
+			DODIIS Network
+			Host Interface Qualification Activity
+			Draft DCA Circular for X.25/1822 HDH
+			   Qualification Testing
+			DDN Host Interface Acquisition
+			Personal Computer PC Support
+			MILNET TAC Access Control
+			DEADBOLT--An Encryption/Authentication Device
+			User Requirements Database (URDB) Status
+			Telecommunications Service Requests (TSRs)
+			DDN Cost Allocation Model
+			DDN Logistic Support
+			Network Access Component (NAC) Units for the DDN
+			Request for Documents
+			DDN Management Bulletins and Newsletters
+  40 	1 Jul 85 	MILNET TAC Management
+
+Users may obtain copies of these files via FTP from the SRI-NIC machine
+(10.0.0.51, 26.0.0.73) by logging in as "anonymous" with password "guest" 
+and using the pathnames:
+
+		DDN-NEWS:DDN-MGT-BULLETIN-xx.TXT
+
+		DDN-NEWS:DDN-NEWS-xx.TXT
+
+where xx = the issue number.
+
+If access to the network is via a TAC, users may read online issues with
+the TACNEWS service.  To access the TACNEWS service, just after
+connecting to a TAC:
+
+		Type "@n<Return>"	
+		Log in to the TAC with user ID and Access Code
+		Type "tacnews<Return>" at the @ prompt
+		Type "help<Return>" for further instructions or help
+
+If you experience problems invoking these procedures please call User
+Assistance at the NIC, (800) 235-3155. (Mr. Jack Snively, B646, 
+(703) 285-5227, (V) 356-5227.)
+
+
+	21.  INTER-SERVICE/AGENCY AUTOMATED MESSAGE PROCESSING EXCHANGE
+			 (I-S/A AMPE)
+
+The I-S/A AMPE program will field 100 I-S/A AMPE systems to standardize
+the current service/Agency AMPEs such as the LDMX, AMME, AFAMPE and
+Streamliner, and, combined with the Defense Data Network (DDN), replace
+the AUTODIN Switching Centers (ASCs).  I-S/A AMPE will provide a
+multi-level secure, DDN host which can provide the same capabilities as
+today's systems; modernize the standard DoD Formal Message Service; and,
+in addition, extend automated communications to the user.  Program goals
+include DSSCS/GENSER consolidation and user DDN as a subscriber
+transmission media.
+
+The I-S/A AMPE is an element of the Integrated AUTODIN System
+Architecture (IASA), an architecture defining DoD data communications
+into the 1990's.  The IASA includes the Defense Data Network - the
+transmission media; BLACKER - a host-to-host security device to encrypt
+messages which leaves the address intact for message routing; the I-S/A
+AMPE; and the DoD AUTODIN Subscriber Terminals - a program to
+consolidate multi-service terminal procurements where requirements
+intersect.
+
+Fielding the I-S/A AMPE will increase the survivability of the formal
+message network by increasing the number and dispersal of switching
+nodes.  The program is further designed to eliminate the duplication of
+effort associated with separate development and procurement of different
+Service and Agency AMPE systems.  I-S/A AMPE will be responsive to the
+message traffic requirements of the National Command Authorities, the
+Joint Chiefs of Staff, Unified/Specified Commands, the Military
+Departments, and to the DoD and US Government Agencies during peace and
+war.
+
+The AUTODIN Switching Centers (ASCs) have provided reliable, highspeed,
+and secure record communications for the DoD since the early 1960's, far
+outliving their 10-year life expectancy.  However, aging equipment and new
+user requirements for even higher rates of speed have resulted in
+maintainability and connectivity problems and have necessitated a $50
+millon dollar upgrade program to keep the ASCs viable until they are
+replaced by I-S/A AMPEs.  Additionally, the survivability of AUTODIN's 15
+node network in a hostile or wartime environment is highly improbable.
+The existing Service and Agency AMPEs, installed in the early seventies, 
+are to be replaced by the standardized I-S/A AMPE.
+
+The I-S/A AMPE Program has a proposed baseline system topology of one
+hundred (100) systems: 94 to be operationally fielded, two to be located
+at the System Support Facility at Gunter AFS, AL, and four to be
+located at Keesler AFB, MS, for training.  Being modular in nature,
+the I-S/A AMPE will have the capability to adapt to subscriber
+connectivity and throughput sizing.  It will accommodate a minimum number
+of thirty-two (32) full duplex subscriber terminations and expand to a
+maximum number of one hundred and twenty-eight (128); and will have the
+capability to process traffic at the sustained rate of 4O to 120
+lineblocks per second.
+
+A minimum system baseline topology, which will meet operational
+requirements and is supportable by the Services and concerned Defense
+Agencies is expected to be validated by JCS this summer.  Until full
+DSSCS/GENSER consolidation is achieved, some locations will have more
+than one I-S/A AMPE system.  The following listing contains candidate
+operational I-S/A AMPE locations:
+
+	                CONUS Locations
+
+	FY 1989-90 		  FY 1991
+
+	Eglin AFB, FL		  New Orleans LA
+	McGuire AFB, NJ 	  Redstone Army Arsenal, AL
+	MacDill AFB, FL 	  San Diego, CA
+	Lowry AFB, CO 		  Homestead AFB, FL
+	Langley AFB, VA		  Gentile AFS, OH
+	Fort Meade, MD 		  Fort Detrick, MD
+	Oakland Army Depot, CA 	  Crystal Plaza, VA
+	Scott AFB, IL 		  Fort Bragg, NC
+	Aberdeen, MD 		  Fort Leavenworth, KS
+	Staten Island, NY 	  Fort Ben Harrison, IN
+	Elmendorf AFB, AK 	  Randolph AFB, TX
+	Letterkenny Army Depot, PA
+	Rosman, N C
+	Travis AFB, CA
+	Fort Bliss, TX
+
+	FY 1992 		  FY 1993-94
+
+	Tracy, CA 		  Battle Creek, MI
+	Jacksonville NAS, FL	  Wright Patterson AFB, OH
+	Breezy Point, VA 	  Camp LeJune, NC
+	Bailey's Crossroads, VA   Fort Monmouth, NJ
+	Hampton Roads, VA 	  McClellan AFB, CA
+	Offutt AFB, NE 		  Bangor, WA
+	Roosevelt Roads, PR 	  Kelly AFB, TX
+	Tinker AFB, OK 		  Robins AFB, GA
+			          North Island, CA
+				  Hill AFB, UT
+				  Fort Gillem, GA
+				  Charleston, SC
+				  March AFB, CA
+				  Vandenberg AFB, CA
+			 	  Barksdale AFB, LA
+
+
+                      European Locations
+
+	FY 1989-90 		  FY-1991
+
+	NONE 			  Rota, SP
+				  Ramstein AB, GE
+				  Pirmasens, GE
+				  RAF West Ruislip, UK
+				  Harrogate, UK
+				  Torrejon, SP
+				  Naples, IT
+				  Izmir, TU
+
+	FY - 1992 		  FY 1993-94
+
+	Sigonella, IT 		  Brussels, BE
+	London, UK 		  Stuttgart, GE
+	Mildenhall, UK
+	Kalkar, GE
+	Coltano, IT
+	Frankfurt, GE
+	Bad Abling, GE
+
+	             Pacific Locations
+
+	FY-1989-90 		  FY 1991
+
+	Hickam AFB, HI 		  Kadena AB, JA
+	Subic Bay, PI 		  Clark AFB, RP
+				  Finegayan, GU
+				  Yokota AB, JA
+				  Misawa AB, JA
+
+	FY 1992 		  FY 1993-94
+
+	Osan AB, ROK 		  NAS Atsugi, JA
+	Kunia, HI 		  Teagu, ROK
+	Pearl Harbor, HI
+	Camp Smith, HI
+	Yongsan, ROK
+
+
+The Program Manager at DCA is Code B660.  Air Force is the Lead Military
+Department and the Automated Systems Project Office (ASPO) is acquiring
+the I-S/A AMPE.  All Services and Agencies are participating and have
+established Liaison Offices with the ASPO - Army, Navy, USAF, DLA, DIA,
+NSA, and DCA.
+
+The following are major milestones in the program:
+
+	SEP 82 - I-S/A AMPE Functional System Description Approved by
+		  Services and Agencies
+
+	MAY 83 - Justification for Major System New Start
+
+	NOV 83 - Air Force and Defense Acquisition Review Council
+
+	JUN 84 - RFP Release
+
+	JUN 85 - Design Period Contract Award
+
+	MAR 89 - Contract Award for Implementation Period
+
+	SEP 89 - IOC, installation continues at 2 to 3 systems per month
+
+Continue to watch this space for more I-S/A AMPE news.  More information
+can be obtained from DCA Code B660, Washington, DC, 20305-2000; 
+(V) 222-2047.
+
+-------

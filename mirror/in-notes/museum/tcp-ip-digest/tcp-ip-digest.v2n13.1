@@ -1,0 +1,308 @@
+31-Aug-83 10:51:21-PDT,13107;000000000001
+Return-Path: <tcp-ip@brl-vgr>
+Received: FROM BRL-VGR BY USC-ISIF.ARPA WITH TCP ; 26 Aug 83 03:46:12 PDT
+Received: From Brl-Vgr.ARPA by BRL-VGR via smtp;  26 Aug 83 5:39 EDT
+Sender:    Mike Muuss <TCP-IP@brl>
+From:      TCP-IP@brl
+To:        TCP-IP@brl
+Date:      25 Aug 1983 00:00 EST
+Subject:   TCP-IP Digest, Vol 2 #13
+
+TCP/IP Digest           Thursday, 25 Aug 1983      Volume 2 : Issue 13
+
+Today's Topics:
+      Administrivia && Connecting IBM Mainframes to Foreign Devices
+      TCP/IP from IBM && Looking for TCP/IP to SNA Protocol Gateway
+              BBN TCP has Retransmit-overtaking-Persist Bug
+                  Comments on the Parsing of HOSTS.TXT
+                2 more implementations of TCP/IP for VMS
+                Seeking Portable TCP/IP in Pascal or ADA
+                     Information on Omninet hardware
+----------------------------------------------------------------------
+                  TCP/IP Digest --- The InterNet Digest
+                         LIMITED DISTRIBUTION
+          For Research Use Only --- Not for Public Distribution
+----------------------------------------------------------------------
+
+From:	 Mike Muuss <Mike@BRL>
+Subject: Administrivia
+
+This is the first digest in quite some time, caused by overwork, and
+slow rate of submissions.  There are quite a few interesting topics
+still left to be discussed, though!
+
+One important item which I would like to bring to your attention:
+
+For some time now, the NIC has published a much smaller mailing list, on
+a direct re-transmission basis, which carries the (perhaps unfortunate)
+name <TCP-IP @ SRI-NIC>.  A great deal of mail directed to that list
+would be profitably displayed in this Digest as well.
+
+The most interesting transmissions to the NIC list I have requested
+permission from the authors to reprint, and (so far) have always been
+granted permission.  However, this is a tremendous administrative burden
+on me, and it is no longer my desire to continue with this strategy.
+Furthermore, a great many people have urged me to automaticly publish
+all traffic on that list in this digest, as they wish to "keep informed",
+a request which seems quite justified.
+
+Based on a fair quantity of writing with various people, and a good deal
+of contemplation, I have decided to begin printing excerpts from the
+NIC TCP-IP (direct) mailing list in the TCP-IP Digest, so that readers
+of the Digest can stay informed.  Please be aware of the fact that messages
+which get sent to the NIC list *might* be published in the TCP-IP Digest.
+
+I will, of course, attempt to be discrete, and will not reprint messages
+which "obviously" should not receive wider distribution than they already
+got.  Good examples are crassly commercial comments, and random flaming.
+But, I feel compelled to broadcast solid, technical discussion out to the
+widest possible audience, to attempt to increase the understanding and
+acceptance of TCP/IP, and to sensitize computer people to the demands
+and benefits of inter-operable networks.  The subscribers to the NIC list
+have been notified of this new policy.
+
+Please direct your comments on this topic to TCP-IP-REQUEST @ BRL,
+and I will summarize the response.
+
+		Best,
+		 -Mike Muuss, Moderator
+
+------------------------------
+
+Date: Thursday, 30 Jun 1983 09:29-PDT
+To: tcp-ip@brl, local-nets@mc
+Subject: Connecting IBM mainframes to foreign devices
+From: imagen!cpr%Shasta@su-score
+
+There are currently two basic routes to go to connect your IBM mainframe
+to special devices: the 4300-series DACU, and the Auscom general
+channel-to-Qbus.  ACC also makes an IBM channel attachment for Ethernet
+which emulates a 327x cluster controller, with individual Ethernet
+stations corresponding to 3278 tubes or 328x printers.  I haven't been
+able to find out more from ACC, and it sounds like a special-purpose
+solution, so I won't go into it.
+
+For the 4300 series mainframes, IBM is trying very hard to support OEMs
+and customers with special device-connection requirements, using what
+they call a DACU (Device Attachment Control Unit), which is basically a
+fast buffer between a block multiplexor channel on a 4300 and a true
+Unibus, with an IBM PC (personal computer) as the controlling device.
+The cost (no OEM pricing yet) is $13,500, without the PC (which only
+requires a minimal configuration, of a cost around $2500).  The
+contact, Bill Denson (Information Systems Group, Atlanta,
+404-238-4710), is extremely helpful and informative.  Seems that IBM
+has finally realized there's money in attaching foreign devices to
+their mainframes.
+
+Auscom is a company in Austin, Texas, whose sole business for years
+has been making IBM channel attachment devices.  The kernel of their
+interface is a 3-quad-board Qbus set, which they sell alone for about
+$8k, or packaged in an LSI-11 system with software to drive a whole
+slew of devices, for about $20k.  (Don't believe the prices; talk to
+them.)  The contact is Linda Lewis, 512-836-8080.  I'm quite impressed
+with them; they appear to be the only company making this their entire
+business, and their customer list is top-notch.  For example, they have
+a standard channel-to-Ethernet (with simple DoD IP-based protocol),
+emulating an IBM tape drive or line printer, etc.  (They use Interlan
+Ethernet Qbus interfaces.)
+
+--Chris Ryland, IMAGEN Corporation
+
+------------------------------
+
+Date: Mon 8 Aug 83 17:57:04-PDT
+From: Suzanne Johnson <JOHNSON@SUMEX-AIM.ARPA>
+Subject: IBM TCP/IP
+To: tcp-ip@BRL.ARPA
+
+My understanding is that although trial versions of IBM TCP/IP are becoming
+available, IBM has not worked out any method for making a product out of
+this software.  That means that they are not planning a way for a site to
+arrange for support service other than through (I believe) an expensive
+contract situation with their Federal Systems Division.
+
+It is therefore important that if you are interested in this software, that
+you have your local IBM rep call the IBM Special Products Group in Chicago
+and say that they have a customer site interested in a supported version
+of the software.  If the SPG gets 10 or so of these calls, they begin to
+believe that they need to establish a product related way to handle the
+software.
+
+If only tcp/ip were a bit better known outside of DoD related communities,
+it might occur to some of the organizations which are implementing internal
+LANs, and scratching their heads over what protocol to use, that tcp/ip is
+a natural to consider in this respect.  Especially since many LAN's contain
+many of the mainframe/os combinations currently supported by tcp/ip
+implementations.
+
+Suzanne Johnson
+
+------------------------------
+
+Date:  10 August 1983 09:30 edt
+From:  Vinograd.Multics@mit-multics
+Subject:  TCP/IP-SNA Gateway
+To:  TCP-IP@brl
+
+I am looking for any information on a TCP/IP to SNA gateway. What I have
+in mind is the ability to telnet/FTP to any host on an SNA net, given a
+physical connection to one host on the SNA net. The reverse access from
+the SNA net is equally important.
+
+SMTP support would be useful, but is not a requirement.
+
+Any pointers or rumors of such a capability would be most helpful.
+
+Thanks - Dave
+
+------------------------------
+
+Date:  6 Jul 1983 10:53:51 EDT (Wednesday)
+From: Dennis Rockwell <drockwel@bbn-vax>
+Subject: retransmit overtaking persist bug
+To: tcp-ip@brl-vgr, tcp-ip@nic, bbn-tcp@bbn-vax
+
+There is a bug in the BBN TCP timer code which causes connections
+with large delays to hang.  The symptom is that the sender will
+continually send single-octet packets which are one octet past
+the receiver's advertised window.  The cause is that the persist
+timer (used for probing closed windows) was fixed, which the
+retransmit timer is adaptive (variable).  When the persist timer
+goes off, it resets the retransmit timer.  Thus, when the retransmit
+timer exceeds the persist timer, you hang.
+
+The fix is to replace the token T_PERS in tcp_procs.c (about line 250)
+with tp->t_xmtime*2.  This is the only instance of T_PERS except for
+its definition (which you can delete if you wish).  This guarantees
+that the persist timer is always greater than the retransmit timer.
+
+If you know of any system running the BBN software that doesn't receive
+one of these mailing lists, please inform either them or me.
+
+Sorry to send this out to such a wide audience, but this bug will
+bite more systems as the Internet grows.
+
+------------------------------
+
+Date:     12 Aug 83 15:43:01 BST (Fri)
+From:     Steve Kille <steve@ucl-cs>
+To:       tcp-ip@brl.arpa
+cc:       robert@ucl-cs
+Subject:  Parsing of hosts.txt
+
+We have found a problem which some sites are having with the UCL-CS
+hosts.txt entry.  It appeared in the BBN UNIX software, but
+this may well not be the only guilty system.
+
+
+1. Some SMTP sites check the name of a caller against the callers address,
+thus if you use a multi-homed host for mail under a single name
+it is useful to put all the addresses in the NIC hosts table.
+
+2. UCL has the facility to route mail over SATNET or IPSS so we use
+two addresses for UCL-CS (128.16.9.3 the main address and 14.0.0.9)
+
+3. BBN software for SMTP compiles a mail host table from the NIC
+tables, it sorts any multiple addreses against the host name.  Thus
+
+HOST : 128.16.9.3, 14.0.0.9 : UCL-CS,UCL :: LOGICAL-HOST : IP,TCP/SMTP :
+
+becomes
+
+UCL-CS,UCL : 14.0.0.9 : 128.16.9.3,
+
+Thats OK, but the mailer only ever uses the first address.
+The whole point of arranging the addresses in the original
+table was to cause mailers to try the first address first.
+
+4. Unless some activity at UCL has opened the IPSS tunnel all
+attempts to reach 14.0.0.9 will fail; because of time zone
+differences this is quite likely.
+
+Thus it looks as though UCL is hardly ever up, and when I
+complain to people about their mailer, they complain ours is
+never up.
+
+There seems to be an assumption, valid or otherwise, that all
+Internet paths are either up or down, but never
+UNI-DIRECTIONAL!
+
+Robert Cole + Steve Kille
+
+
+------------------------------
+
+Date: Wednesday, 27 Jul 1983 09:35-PDT
+To: tcp-ip@BRL-BMD.ARPA
+Subject: Re:  TCP/IP for VMS
+From: Chris Kent <decwrl!kent%Shasta@su-score>
+
+Kashtan's stuff works and seems to be available from the Wollongong
+Group. It's full 4.1c networking code.
+
+The people at Rice that did the Phoenix Unix under VMS emulator are
+also reported to have the Berkeley TCP/IP running under their system,
+but I don't know details.
+
+Cheers,
+chris
+
+------------------------------
+
+Date:  6 Aug 1983 1121-PDT
+From: LYONS@usc-isi
+Subject: TCP-IP IN HOL
+To:   TCP-IP@brl
+cc:   LYONS@usc-isi, LYONS@dca-ems
+
+I AM INTERESTED IN KNOWING OF HIGH ORDER LANGUAGE IMPLEMENTATIONS
+OF TCP AND IP WHICH ARE PORTABLE, ESPECIALLY IMPLEMENTATIONS
+IN PASCAL OR ADA.  DO YOU KNOW OF ANY?
+
+REGARDS,    BOB LYONS/DCEC
+
+[ I believe that the CSNET TCP/IP implementation for the IBM was written
+  mostly in PASCAL.  There is also a commercial version in PASCAL, for
+  Cybers and other mainframes, mentioned in earlier Digests.  -Mike ]
+
+------------------------------
+
+[ This message is reprinted with permission. -Mike ]
+
+Date: Wed 27 Jul 83 10:17:39-PDT
+From: Chris Ryland <g.Ryland@SU-SCORE.ARPA>
+Subject: Re: request for Omninet vs VAXes info
+To: local-nets@MIT-MC.ARPA
+
+I've been looking into Omninet lately for other reasons, and, as far as
+I can tell, there isn't much activity with interconnection to VAXes, or,
+for that matter, with other networks.  Omninet DOES have an XNS packet
+encapsulation protocol, which they and Xerox agreed to (it's published
+in the Omninet protocol handbook).  There is, I believe, a Unibus
+Omninet board just announced or to be announced, though I can't find the
+information right now.  With that, I suppose you could write a VMS
+driver for Omninet.
+
+For people's information, Omninet seems to be the dominant "cheapo" LAN
+for the micro world right now (they claim over 20,000 networks, of average
+size 4 (stations)).  It's a 1mb twisted-pair RS422 network, using two
+proprietary chips (they sell) and a Motorola 6801 (with their custom code
+burned in) to accomplish the link-level, and little of the transport level.
+Thus, for the IBM PC, their board is very simple, and low-cost (about $300,
+I believe), as well as reasonably efficient, as they DMA from the network
+to waiting buffers in the CPU.
+
+It's really a wonderful network from the point of view of cabling: the
+"transceivers" cost $10, and can be wired by anyone with a screwdriver.
+
+1mb isn't bad for a small cluster of workstations.  There are some limitations
+on the number and type of connections a given workstation can have open: only
+one "remote disk" connection at a time is allowed, and only three more other
+connections of non-remote-disk type are allowed simultaneously.
+
+/Chris Ryland
+
+------------------------------
+
+END OF TCP-IP DIGEST
+********************

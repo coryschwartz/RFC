@@ -1,0 +1,2370 @@
+                                                            UNISYS Corporation
+6 February 1987                   -1-                       TM-WD-8801/206/00
+
+
+
+                        DCEC PROTOCOL LABORATORY
+                    TRANSMISSION CONTROL PROTOCOL (TCP)
+                              MIL-STD-1778
+                          TRACEABILITY MATRIX
+
+This Traceability Index provides information on the derivation,
+organization, and function of tests specified for TCP within the DCEC
+Protocol Laboratory.
+
+This document is divided into five sections:
+
+     TCP TRACEABILITY INDEX;
+     TCP TESTS INDEX;
+     TCP TEST SCENARIOS INDEX;
+     TCP SCENARIOS AND TESTS DESCRIPTIONS.
+
+                             -------------
+
+TCP TRACEABILITY INDEX: TCP TEST NUMBERS VERSUS TCP MIL-STD-1778
+References...
+
+The table indicates the cross reference between the Test Scenarios and
+the applicable section in MIL-STD-1778 regarding each required
+function, operation, option, mode, response, or state.
+
+                             -------------
+
+TCP TESTS INDEX: TCP TEST NUMBERS versus TCP
+Commands/Primitives/Options/Modes...
+
+The table shows the TCP Test Numbers which may be regarded as the
+"principle tests" of each TCP Command or Primitive and/or Option or
+Mode.
+
+                             -------------
+
+TCP TEST SCENARIOS INDEX: TCP TEST SCENARIO FILES versus TCP TEST
+NUMBERS...
+
+The table shows, for each TCP Test Number, the UNIX filenames of the
+TCP Test Scenario Files in which it appears.
+
+                             -------------
+
+TCP SCENARIOS AND TESTS DESCRIPTIONS...
+
+This section provides a brief narrative of the scope and objectives of
+each TCP Test Scenario File and a narrative or graphic operational
+description of each TCP Test Number.
+                                                            UNISYS Corporation
+6 February 1987                   -2-                       TM-WD-8801/206/00
+
+
+
+                         TCP TRACEABILITY MATRIX
+
+TCP TEST NUMBERS
+    versus
+        TCP MIL-STD-1778 References
+
+The table indicates the cross reference between the TCP tests and the
+applicable section in MIL-STD 1778. The TCP Test Numbers may be
+regarded as the "principal tests" of the applicable section in MIL
+STD-1778 regarding each required function, operation, option, mode,
+response, or state.
+
+Reference                               Test Number
+---------                               ----------
+
+TCP Service Request Primitives
+------------------------------
+
+6.4.1 Unspecified Passive Open          1, 39, 57
+6.4.2 Fully Specified Passive Open      9, 10, 40
+6.4.3 Active Open                       2, 38, 55
+6.4.4 Active Open with Data             11, 12
+6.4.5 Send                              3, 14, 15, 16, 56
+6.4.6 Allocate                          51
+6.4.7 Close                             6, 7, 14, 15, 16
+6.4.8 Abort                             17, 18, 19, 20
+6.4.9 Status                            24
+
+TCP Service Response Primitives
+-------------------------------
+
+6.4.10.1 Open Id                        1, 2, 9, 10, 11
+6.4.10.2 Open Failure                   35, 371, 41, 42, 49, 63
+6.4.10.3 Open Success                   1, 2, 66
+6.4.10.4 Deliver                        3, 6
+6.4.10.5 Closing                        6, 7
+6.4.10.6 Terminate                      6, 7, 17, 18, 19, 20,
+                                        21, 44, 45, 46, 50, 55
+                                        56, 57, 58, 67
+6.4.10.7 Status Response                24
+6.4.10.8 Error                          4, 5, 31, 38, 40, 73
+
+TCP Mechanisms Tested
+---------------------
+
+9.2.3 Flow Control Window               59, 61
+9.2.4 Duplicate/Order Detection         25, 26, 27, 29, 32
+9.2.5 Acks and Retransmission           27, 52, 53, 54
+9.2.6 Checksum                          28
+9.2.7 Push                              63, 64
+9.2.8 Urgent                            60, 61, 62
+9.2.9 ULP Timeout/Action                55, 56, 57, 58
+9.2.10 Security                         38, 39, 40, 41, 42, 43
+                                        44, 45, 46, 47, 48, 49, 50
+                                                            UNISYS Corporation
+6 February 1987                   -3-                       TM-WD-8801/206/00
+
+
+
+9.2.11 Precedence Level                 21, 22, 23
+9.2.12 Multiplexing                     30, 31, 32, 33, 34, 36
+9.2.13 Connection Opening               35, 37
+9.2.14 Connection Closing               14, 15, 16, 17
+9.2.15 Resets                           35, 50, 65, 66, 67, 68,
+                                        69, 70, 71, 72
+
+9.3.1 Source Port Address Range         13
+9.3.2 Destination Port
+      Address Range                     13
+
+TCP Options Tested
+------------------
+
+9.3.11.1.3 Maximum Segment Size 52
+                                                            UNISYS Corporation
+6 February 1987                   -4-                       TM-WD-8801/206/00
+
+
+
+                            TCP TESTS INDEX
+
+TCP TEST NUMBERS versus TCP Commands/Primitives/Options/Modes...
+
+The table shows the TCP Test Numbers which may be regarded as the
+"principle tests" of each TCP Command or Primitive and/or Option or
+Mode.
+
+
+TEST NUMBER     PURPOSE
+---- ------     ------
+      1         Unspecified Passive Open Request
+      2         Active Open Request
+      3         Basic Data Transfer
+      4         Remote Driver Interpretation of command LCN
+      5         Determine IUT Standard Send Buffer
+      6         Closing Handshake - IUT initiates close
+      7         Closing Handshake - IUT peer initiates close
+      8         Ability to reconnect Remote Driver command channel
+
+      9         Fully Specified Passive Open Request
+     10         Illegal Fully Specified Passive Open Request
+     11         Active Open with Data
+     12         Active Open with Data
+     13         Port Number Range
+
+     14         Graceful Closing - completion of data transfer after ULP close
+     15         Graceful Closing - data transfer after receipt of peer's FIN
+     16         Graceful Closing - peer data transfer after IUT initiates close
+     17         ULP Abort
+     18         Peer Abort
+     19         ULP Abort - data queued for sending
+     20         Peer Abort - data queued for sending
+     21         Precedence - mismatched
+     22         Precedence - matched
+     23         Precedence Negotiation
+     24         Status
+
+     25         Out of order data
+     26         Overlapping data
+     27         Lost data
+     28         Bad Checksum detection
+     29         Sequence number wraparound
+     30         Multiplexing - two connections with unique 4-tuple
+                IUT opens passively
+     31         Multiplexing - common destination port in 4-tuple common
+                  IUT port
+     32         Multiplexing - common destination port in 4-tuple common
+                  REF port
+     33         Multiplexing - two connections with unique 4-tuple IUT
+                  opens actively
+     34         Multiplexing - three connections with common IUT port
+                  in 4-tuple
+                                                            UNISYS Corporation
+6 February 1987                   -5-                       TM-WD-8801/206/00
+
+
+TEST NUMBER      PURPOSE
+---- ------      -------
+     35         Duplicate connection attempt - IUT passive
+     36         Multiplexing - Same sequence numbers on two connections.
+     37         Duplicate connection attempt - IUT active
+
+     38         Setting security in Active Open
+     39         Setting security in Passive Open
+     40         Setting security in Fully Specified Passive Open
+     41         Secure IUT rejecting connection to unsecured peer
+     42         Secure IUT rejecting connection from unsecured peer
+     43         Security option placement in sending data
+     44         Response to data with mismatched security class
+     45         Response to data with mismatched security protection authority
+     46         Response to data with extra protection authority
+     47         Use of security option for unclassified connections
+     48         Recognition of UNCLASS and GENSER as unsecured
+     49         Unsecured IUT response to connection attempt by secured host
+     50         Unsecured IUT response to data marked with classified security
+
+     51         Alloc
+
+     52         Maximum segment size option
+     53         Retransmission after acknowledgment of data
+     54         Retransmission after acknowledgment of SYN and FIN
+     55         ULP timeout service in Active Open
+     56         ULP timeout service in Send
+     57         ULP timeout service in Passive Open
+
+     58         ULP timeout notify action tested.
+
+     59         TCP in window mechanism
+     60         Urgent service
+     61         Urgent service when peer has zero window
+     62         Urgent data delivery
+     63         Push Service - Service not requested
+     64         Push service - Service requested
+
+     65         Reset - as response to connection refusal
+     66         Reset - partial reset prior to connection establishment
+     67         Reset - response to reset received while sending data
+     68         Reset segment format on receipt of Active Open with no
+                  listening port
+     69         Reset segment format on receipt of Active Open with
+                  data with no listening port
+     70         Reset segment format on receipt of invalid segment with ACK set
+     71         Reset segment format on receipt of invalid segment with
+                  SYN and ACK set
+     72         Reset - no reset sent on receipt of segment with bad
+                  acknowledgment number
+
+     73         Determine number of connections resources will allow
+                                                            UNISYS Corporation
+6 February 1987                   -6-                       TM-WD-8801/206/00
+
+
+
+                         TCP TEST SCENARIOS INDEX
+
+TCP TEST SCENARIO FILES versus TCP TEST NUMBERS...
+
+The table shows, for each TCP Test Number, the UNIX filenames of the
+TCP test Scenario Files in which it appears.
+
+
+TEST NUMBER             SCENARIO NAME
+-----------             -------------
+      1                      INIT1
+      2                      INIT1
+      3                      INIT1
+      4                      INIT1
+      5                      INIT1
+      6                      INIT1
+      7                      INIT1
+      8                      INIT1
+
+      9                      BASIC1
+     10                      BASIC1
+     11                      BASIC1
+     12                      BASIC1
+     13                      BASIC1
+
+     14                      BASIC2
+     15                      BASIC2
+     16                      BASIC2
+     17                      BASIC2
+     18                      BASIC2
+     19                      BASIC2
+     20                      BASIC2
+     21                      BASIC2
+     22                      BASIC2
+     23                      BASIC2
+     24                      BASIC2
+
+     25                      BASIC3
+     26                      BASIC3
+     27                      BASIC3
+     28                      BASIC3
+     29                      BASIC3
+                                                            UNISYS Corporation
+6 February 1987                   -7-                       TM-WD-8801/206/00
+
+
+
+
+TEST NUMBER               SCENARIO NAME
+-----------               -------------
+     30                      BASIC4
+     31                      BASIC4
+     32                      BASIC4
+     33                      BASIC4
+     34                      BASIC4
+     35                      BASIC4
+     36                      BASIC4
+     37                      BASIC4
+
+     38                      BASIC5
+     39                      BASIC5
+     40                      BASIC5
+     41                      BASIC5
+     42                      BASIC5
+     43                      BASIC5
+     44                      BASIC5
+     45                      BASIC5
+     46                      BASIC5
+     47                      BASIC5
+     48                      BASIC5
+     49                      BASIC5
+     50                      BASIC5
+
+     51                      BASIC6
+
+     52                      FULL1
+     53                      FULL1
+     54                      FULL1
+     55                      FULL1
+     56                      FULL1
+     57                      FULL1
+     58                      FULL1
+
+     59                      FULL2
+     60                      FULL2
+     61                      FULL2
+     62                      FULL2
+     63                      FULL2
+     64                      FULL2
+
+     65                      FULL3
+     66                      FULL3
+     67                      FULL3
+     68                      FULL3
+     69                      FULL3
+     70                      FULL3
+     71                      FULL3
+     72                      FULL3
+
+     73                      QUAL1
+                                                            UNISYS Corporation
+6 February 1987                   -8-                       TM-WD-8801/206/00
+
+
+
+                 TCP SCENARIOS AND TESTS DESCRIPTIONS
+
+This section provides a brief narrative of the scope and objectives of
+each TCP test Scenario File and a narrative of each individual test in
+that scenario.
+
+
+========================================================================
+
+
+Scenario INIT1
+--------------
+
+Scenario INIT1 is the first test of a test session. This scenario
+tests the most basic TCP functions of the TCP Implementation Under
+Test (IUT) and the compliance of the IUT Remote Driver to the DCA
+Protocol Laboratory TCP Remote Driver Specification. If the IUT and
+the Remote Driver do not receive good results on the first run of
+this scenario, further testing should be abandoned until the problems
+exhibited are corrected.
+
+INIT1 tests the TCP implementation for its ability to perform the most
+basic TCP functions: Active Open, Passive Open, transfer of data and
+closing. The scenario determines that the Remote Driver interprets
+Central Driver commands correctly, acknowledges the receipt of a
+command from the Central Driver and correctly formats IUT responses
+that it sends to the Central Driver.
+
+
+____________________________________
+
+
+Test 1:  UNSPECIFIED PASSIVE OPEN
+------
+       - Does the Implementation Under Test (IUT) implement a Passive
+         Open which accepts an Active Open request?
+
+       - Action: Remote Driver (RD) performs a Specified Passive
+                 Open. Laboratory Slave Driver (LSD) does an Active
+                 Open to it.
+
+       - Verification: Determine that a connection is made by finding
+                       an OPEN SUCCESS response from the LSD. Ensure that
+                       the RD acknowledges all commands received from the
+                       Central Driver (CD). Determine that all RD
+                       responses are correctly formatted.
+
+       Success: The connection is made. The RD correctly interprets
+                CD commands, acknowledges CD commands and formats
+                IUT responses.
+
+       Failure: Connection is not made or the RD does not correctly
+                interpret CD commands, acknowledge CD commands, or
+                format IUT responses.
+                                                            UNISYS Corporation
+6 February 1987                   -9-                       TM-WD-8801/206/00
+
+
+Test 2:  ACTIVE OPEN
+------
+
+       - Can the Implementation Under Test (IUT) implement an Active
+         Open?
+
+       - Action: Laboratory Slave Driver (LSD) performs a Passive
+                 Open. The Remote Driver (RD) does an Active Open
+                 to the listening port.
+
+       - Verification: Determine that a connection is made by finding
+                       an OPEN SUCCESS response from the RD. Ensure that
+                       the RD acknowledges all commands received from the
+                       Central Driver. Determine that all RD responses
+                       are correctly formatted.
+
+       Success: The connection is made. The RD correctly
+                interprets CD commands, acknowledges CD commands
+                and formats IUT responses.
+
+       Failure: Connection is not made or the RD does not correctly
+                interpret CD commands, acknowledge CD commands, or
+                format IUT responses.
+
+
+Test 3:  BASIC DATA TRANSFER
+------
+
+       - Does the Implementation Under Test (IUT) send and deliver data
+         correctly?
+
+       - Action: The Laboratory Slave Driver (LSD) sends data to the
+                 Remote Driver (RD). The RD sends data to the LSD.
+
+       - Verification: Ensure that all the data the IUT is directed to
+                       send to the LSD is received by the Laboratory
+                       Reference Implementation (REF). Check that all the
+                       data sent by the LSD is delivered to the RD by the
+                       IUT. Ensure that the RD acknowledges all commands
+                       received from the Central Driver. Determine that
+                       all RD responses are correctly formatted.
+
+       Success: The IUT sends all the data it is requested to send
+                and delivers all the data it receives. The RD
+                correctly interprets CD commands, acknowledges CD
+                commands and formats IUT responses.
+
+       Failure: The IUT does not send all the data it is requested
+                to send or does not deliver all the data it
+                receives. Also that the RD does not correctly
+                interpret CD commands, acknowledges CD commands or
+                format IUT responses.
+                                                            UNISYS Corporation
+6 February 1987                   -10-                      TM-WD-8801/206/00
+
+
+Test 4:  SIGNIFICANCE OF COMMAND LCN TO REMOTE DRIVER AND IUT
+------
+       - Do the Implementation Under Test (IUT) and the IUT Remote
+         Driver (RD) correctly interpret the local connection name
+         (lcn) specified in the commands the RD receives from the
+         Central Driver (CD).
+
+       - Action: The Central Driver (CD) sends a Send command to the
+                 Remote Driver (RD) which contains an lcn for a
+                 connection that is not established. The RD
+                 requests the IUT to send data to the LSD over this
+                 connection.
+
+       - Verification: Ensure that the RD reports in correct format
+                       that the IUT reponds to the incorrect lcn with TCP
+                       ERROR: CONNECTION DOES NOT EXIST.
+
+       Success: The IUT recognizes an invalid lcn. The RD
+                correctly interprets CD commands, acknowledges CD
+                commands and formats IUT responses.
+
+       Failure: The IUT does not recognize an invalid lcn. Also,
+                the RD does not correctly interpret CD commands,
+                acknowledge CD commands or format IUT responses.
+
+
+Test 5:  DETERMINE IUT STANDARD SEND BUFFER FOR TESTING PURPOSES
+------
+       - Determine the standard size buffer that the
+         Implementation Under Test (IUT) requires to guarantee that
+         the IUT will output at least two segments without delay.
+
+       - Action: The Remote Driver issues a series of Send commands.
+                 each command requests a larger increment of data to
+                 be sent.  After each Send command, the LSD waits
+                 for the data to be delivered. Once the data is
+                 delivered, check the TCP segments collected by the
+                 Laboratory Reference Implementation (REF) to
+                 determine if more than one segment was required to
+                 send the data. When more than one segment is used
+                 to send the data or the response TCP ERROR:
+                 INSUFFICIENT RESOURCES is returned by the IUT, the
+                 test is ended.
+
+       - Verification: When a Send command data length requires the
+                       IUT to send the data in more than one segment, that
+                       data length is noted. If the response TCP ERROR:
+                       INSUFFICIENT RESOURCES has been reported, the data
+                       length of the Send command immediately preceding
+                       the command that caused that response is noted.
+
+       - Observation: The IUT standard send buffer is noted for the
+                      test operator.
+                                                            UNISYS Corporation
+6 February 1987                   -11-                      TM-WD-8801/206/00
+
+
+Test 6:  CLOSING HANDSHAKE WHEN IUT INITIATES CLOSE
+------
+       - Does the Implementation Under Test (IUT) correctly perform
+         the closing handshake when it initiates closing.
+
+       - Action: The Remote Driver (RD) performs a close. When the
+                 Laboratory Slave Driver (LSD) receives the
+                 indication of peer closing from the Laboratory
+                 ReferenceImplementation (REF), it performs a close.
+
+       - Verification: Ensure that the RD reports TERMINATE:
+                       CONNECTION CLOSED or TERMINATE: ULP CLOSE when the
+                       IUT indicates the connection closed. Check the TCP
+                       segments collected by the REF to determine that the
+                       IUT acknowledged the FIN from the REF before it
+                       terminated.
+
+       Success: The IUT acknowledges the FIN of the REF. The IUT
+                reports its connection closed. The RD correctly
+                interprets Central Driver (CD) commands,
+                acknowledges CD commands and formats IUT responses.
+
+       Failure: The IUT does not acknowledge the FIN of the REF or
+                the IUT does not report its connection closed. The
+                IUT reports its connection closed before the REF
+                closes. The RD does not correctly interpret CD
+                commands, acknowledge CD commands or format IUT
+                responses.
+
+
+Test 7:  CLOSING HANDSHAKE WHEN IUT PEER INITIATES CLOSE
+------
+       - Does the Implementation Under Test (IUT) correctly perform
+         the closing handshake when its peer initiates closing.
+
+       - Action: The Laboratory Slave Driver (LSD) performs a close.
+                 When the IUT reports receiving the Laboratory
+                 Reference Implementation (REF) closing, it performs
+                 a close.
+
+       - Verification: Ensure that the RP correctly reports CLOSING
+                       and TERMINATE: CONNECTION CLOSED when it receives
+                       these responses from the IUT for the REF's closing
+                       and the final closing of the connection. Check the
+                       TCP segments collected by the REF to determine that
+                       the IUT did not send its FIN before being
+                       instructed to close by the RD. Also check that the
+                       IUT sends a FIN to the REF once it has been
+                       instructed to close.
+                                                            UNISYS Corporation
+6 February 1987                   -12-                      TM-WD-8801/206/00
+
+
+       Success: The IUT waits to be instructed to close before it
+                sends a FIN. It sends a FIN when it is instructed
+                to close. The IUT correctly reports its peer's
+                closing and the closing of the connection. The RD
+                correctly interprets Central Driver (CD) commands,
+                acknowledges CD commands and formats IUT
+                responses.
+
+       Failure: The IUT sends a FIN in response to a peer's FIN
+                before it is instructed to close or the IUT does
+                not send a FIN when it is instructed to close.
+                Failure also occurs when the IUT does not report a
+                peer's closing or the closing of the connection.
+                Other reasons for failure are when the RD does not
+                correctly interpret CD commands, acknowledge CD
+                commands or format IUT responses.
+
+
+Test 8:  ABILITY TO RECONNECT TO COMMAND CHANNEL AFTER CLOSURE
+------
+       - Does the Implementation Under Test Remote Driver remain
+         listening after the Central Driver closes the command
+         channel?
+
+       - Action: The Central Driver instructs the Remote Driver to
+                 kill itself. After waiting five seconds to allow
+                 the connection to be cleared, the Central Driver
+                 attempts to reconnect the command channel to the
+                 Remote Driver.
+
+       - Verification: If the scenario aborts when the Central Driver
+                       attempts to reconnect the command channel to the
+                       Remote Driver, the Remote Driver is no longer
+                       listening. If the Central Driver is able to
+                       reconnect the command channel, a Remote Driver is
+                       left listening after the command channel is closed.
+
+       Success: A Remote Driver is left listening when the Central
+                Driver (CD) closes the command channel to the
+                Remote Driver, and reconnection to the Central
+                Driver occurs.
+
+       Failure: A Remote Driver is not left listening when the
+                Central Driver closes the command channel to the
+                Remote Driver. The Remote Driver does not
+                correctly interpret CD commands, acknowledge CD
+                commands or format IUT responses.
+                                                            UNISYS Corporation
+6 February 1987                   -13-                      TM-WD-8801/206/00
+
+
+
+                   TCP SCENARIOS AND TEST DESCRIPTIONS
+
+Scenario BASIC1
+---------------
+
+Scenario BASIC1 tests the TCP implementation of Fully Specified
+Passive Open, and Active Open with Data.
+_____________________________________
+
+
+Test 9:  FULLY SPECIFIED PASSIVE OPEN
+------
+       - Does the Implementation Under Test (IUT) implement a passive
+         open which accepts an Active Open request only from a
+         specified addresss
+
+       - Action: Remote Driver (RD) performs a fully Specified
+                 Passive Open. Laboratory Slave Driver (LSD) does
+                 an Active Open to it from a socket bound with the
+                 specified address.
+
+       - Verification: Determine that a connection was made by
+                       finding an OPEN SUCCESS response from the LSD.
+
+       Success: The connection was made.
+
+       Failure: Connection was not made.
+
+
+Test 10:  FULLY SPECIFIED PASSIVE OPEN
+-------
+
+       - Will the the Implementation Under Test (IUT) fully Specified
+         passive Open accept an Active Open request from an
+         unspecified port?
+
+       - Action: Remote Driver (RD) performs a fully Specified
+                 Passive Open. Laboratory Slave Driver (LSD) does
+                 an Active Open to it from a socket with a different
+                 port number than the one specified in the fully
+                 Specified Passive Open.
+
+       - Verification: Determine that a connection was made by
+                       checking that the Laboratory Reference
+                       Implementation (REF) sent an OPEN FAILURE
+                       response.
+
+       Success: Connection was not made.
+
+       Failure: Connection was made.
+                                                            UNISYS Corporation
+6 February 1987                   -14-                      TM-WD-8801/206/00
+
+
+
+Test 11:  ACTIVE OPEN WITH DATA
+-------
+       - Does the Implementation Under Test (IUT) send data on its SYN
+         segment on an Active Open with Data.
+
+       - Action: Remote Driver (RD) performs an Active 0pen with Data.
+
+       - Verification: Check the IUT's SYN segment to see if data
+                       was sent on that segment.
+
+       Success: The IUT sends data on its SYN segment.
+
+       Failure: The IUT does not send data on its SYN segment.
+
+
+Test 12: ACTIVE OPEN WITH DATA
+-------
+       - Does the Implementation Under Test (IUT) acknowledge
+         data received on the SYN segment in its SYN ACK (before
+         connection establishment)s
+
+       - Action: Laboratory Slave Driver (LSD) performs an Active
+                 Open with Data.
+
+       - Verification: Check the IUT SYN ACK segment to ensure that it
+                       does not acknowledge data.
+
+       Success: Data is not acknowledged on the IUT SYN ACK segment.
+
+       Failure: Data is acknowledged on the IUT SYN ACK segment.
+
+
+Test 13: PORT NUMBER RANGE
+-------
+       - Can the Implementation Under Test (IUT) assign a range of
+         local port numbers?
+
+       - Action: Remote Driver (RD) does two Passive Open requests:
+                 one specifies source port 1 and the other specifies
+                 source port 65535. The RD also does an Active Open
+                 to destination port 65534.
+
+       - Verification: Determine whether the IUT returns SYSTEM ERROR:
+                       REQUESTED SOURCE PORT NOT PERMITTED or the OPEN ID
+                       from the Passive Open requests. Ensure that
+                       a connection was made when destination port 65534
+                       was specified in the Active Open.
+
+       Observation: Result is to indicate the range of port numbers
+                    that the IUT allows to be assigned.
+                                                            UNISYS Corporation
+6 February 1987                   -15-                      TM-WD-8801/206/00
+
+
+
+                 TCP SCENARIOS AND TEST DESCRIPTIONS
+
+Scenario BASIC2
+---------------
+
+Scenario BASIC2 tests the TCP implementation of graceful closings, its
+handling of aborts, precedence, and status.
+
+
+_______________________________________
+
+
+TEST 14: DATA TRANSFER IN CLOSING STATES
+-------
+       - Does the Implementation Under Test (IUT) provide graceful
+         closing by completing data transfer after its Upper Level
+         Protocol has initiated closings
+
+       - Action: The Remote Driver (RD) sends a large amount of
+                 data and immediately closes.
+
+       - Verification: Determine that the Laboratory Reference
+                       Implementation (REF) receives all the data the IUT
+                       was requested to send.
+
+       Success: All expected data was received by the REF.
+
+       Failure: All expected data not received by REF.
+
+
+TEST 15: DATA TRANSFER IN CLOSING STATES
+-------
+       - Does the Implementation Under Test (IUT) provide graceful
+         closing by continuing to send data after receiving peer's
+         FIN segments
+
+       - Action: The IUT is instructed to send data after it has
+                 received its peer's closing FIN segment.
+
+       - Verification: Determine that the IUT sends the data by
+                       checking that all expected data is received by the
+                       Laboratory Reference Implementation (REF).
+
+       Success: REF receives all data IUT was asked to send.
+
+       Failure: REF does not receive all data IUT was asked to send.
+                                                            UNISYS Corporation
+6 February 1987                   -16-                      TM-WD-8801/206/00
+
+
+TEST 16: DATA TRANSFER IN CLOSING STATES
+-------
+       - Does the Implementation Under Test (IUT) deliver data sent
+         after it has initiated closings
+
+       - Action: Remote Driver tells IUT to close. On receiving the
+                 IUT's close, the Laboratory Slave Driver (LSD)
+                 requests the Laboratory Reference Implementation
+                 (REF) to send data to the IUT.
+
+       - Verification: Determine that the IUT delivers all the data
+                       sent by the REF.
+
+       Success: IUT delivers all data sent by REF.
+
+       Failure: IUT does not deliver all data sent by REF.
+
+
+TEST 17: UPPER LAYER PROTOCOL ABORT
+-------
+       - Does the Implementation Under Test (IUT) perform an abort by
+         sending a correct reset segments
+
+       - Action: Remote Driver (RD) aborts the connection.
+
+       - Verification: Check that the Laboratory Slave Driver (LSD)
+                       reports a TERMINATE: REMOTE ABORT response and the
+                       RD reports TERMINATE: ULP ABORT or TERMINATE: USER
+                       ABORT.
+
+       Success: The IUT sends a reset segment and the correct
+                terminate response.
+
+       Failure: The IUT does not send a reset segment or correct
+                terminate response.
+
+
+Test 18: PEER ABORT
+-------
+       - Can the Implementation Under Test (IUT) detect its peer's aborts
+
+       - Action: The Laboratory Slave Driver (LSD) instructs its
+                 Laboratory Reference Implementation (REF) to abort
+                 connection.
+
+       - Verification: Check that the IUT reports TERMINATE: REMOTE ABORT.
+
+       Success: IUT correctly reports REMOTE ABORT.
+
+       Failure: IUT does not correctly report its peer's abort.
+                                                            UNISYS Corporation
+6 February 1987                   -17-                      TM-WD-8801/206/00
+
+
+TEST 19: UPPER LAYER PROCESS ABORT
+-------
+       - Does the Implementation Under Test (IUT) discard data queued
+         for sending when it performs a ULP aborts
+
+       - Action: Remote Driver (RD) sends data to its peer and then
+                 immediately aborts the connection.
+
+       - Verification: Check that the Laboratory Slave Driver (LSD)
+                       reports a TERMINATE: REMOTE ABORT response and the
+                       RD reports TERMINATE: ULP ABORT. Examine the IUT
+                       reset segment for correctness and determine if all
+                       data sent by the RD was received by the LSD.
+
+       Success: The IUT sends the correct terminate response, its
+                reset segment is correctly formatted, and not all
+                data sent by the IUT is received by the
+                Laboratory Reference Implementation (REF).
+
+       Failure: The IUT sends an incorrect terminate response or an
+                incorrect reset segment. If all data is received
+                by the LSD, this particular result is inconclusive
+                as the data may already be sent before the Central
+                Driver command to abort is received by the IUT.
+
+
+Test 20: PEER ABORT
+-------
+       - Does the Implementation Under Test (IUT) detect its peer's
+         abort and then discard data queued for sendings
+
+       - Action: The Laboratory Slave Driver (LSD) instructs its
+                 Laboratory Reference Implementation (REF) to abort
+                 while the IUT is sending data.
+
+       - Verification: Check that the IUT reports TERMINATE: REMOTE
+                       ABORT and that the IUT stops sending data after
+                       receiving the peer's abort.
+
+       Success: IUT correctly reports REMOTE ABORT and stops sending
+                data after receiving its peer's reset.
+
+       Failure: IUT does not correctly report its peer's abort. If
+                all the data sent is received by the LSD, that
+                particular result is inconclusive as all the data
+                may be delivered before the Central Driver
+                command to abort is received.
+                                                            UNISYS Corporation
+6 February 1987                   -18-                      TM-WD-8801/206/00
+
+
+Test 21: MISMATCHED PRECEDENCE
+-------
+       - Does the Implementation Under Test (IUT) provide the option
+         to set a precedence value for the connection and make correct
+         hecks of the precedence of incoming segments to the
+         connections
+
+       - Action: Remote Driver (RD) passively opens a connection
+                 with maximum precedence. Laboratory Slave Driver
+                 (LSD) actively opens at a less than maximum
+                 precedence and Laboratory Reference Implementation
+                 (REF) does not raise its precedence.
+
+       - Verification: Determine that IUT sets the precedence option
+                       by checking the segments output by the IUT. Ensure
+                       that IUT aborts the connection when REF does not
+                       match precedence by looking for TERMINATE: REMOTE
+                       ABORT from the LSD or an OPEN FAILURE from the LSD
+                       connection.
+
+       Success: IUT sets precedence option and aborts connection
+                when peer's precedence does not match.
+
+       Failure: IUT does not set precedence option or makes
+                connection when precedence does not match.
+
+
+Test 22: PRECEDENCE
+-------
+       - Does the Implementation Under Test (IUT) provide the option
+         to set precedence for the connection and make correct checks
+         on the incoming segments to the connection?
+
+       - Action: Remote Driver (RD) passively opens a connection
+                 with maximum precedence. Laboratory Slave Driver
+                 (LSD) actively opens at a less than maximum
+                 precedence. The Laboratory Reference Implementation
+                 (REF) raises its precedence during the opening
+                 handshake.
+
+       - Verification: Determine that the connection is made by
+                       checking that the LSD reports an OPEN SUCCESS.
+                       Check the IUT segments to ensure that precedence
+                       was set.
+
+       Success: The IUT makes the connection and sets-precedence.
+
+       Failure: The IUT does not set precedence or does not make
+                the connection even though the REF matched its
+                precedence.
+                                                            UNISYS Corporation
+6 February 1987                   -19-                      TM-WD-8801/206/00
+
+
+Test 23: PRECEDENCE NEGOTIATION
+-------
+       - Does the Implementation Under Test (IUT) provide the option
+         to set precedence for the connection and raise its precedence
+         to match its peer's precedences
+
+       - Action: Laboratory Slave Driver (LSD) passively opens a
+                 connection with a given precedence. The Remote
+                 Driver opens with a zero precedence.
+
+       - Verification: Determine that the connection is made by
+                       checking that the LSD reports an OPEN SUCCESS.
+                       Check the IUT segments to ensure that precedence
+                       was raised.
+
+       Success: The IUT makes the connection and sets precedence.
+
+       Failure: The IUT does not raise precedence to match the
+                precedence of the REF.
+
+
+Test 24: STATUS
+-------
+       - Does the Implementation Under Test (IUT) in its status
+         response correctly report a connection's source port,
+         destination port, destination address, window,
+         precedence and states (These fields were selected to
+         represent both static and dynamic internal information).
+
+       - Action: The Remote Driver (RD) asks the IUT to give the
+                 status of a connection.
+
+       - Verification: Ensure that the status response given matches
+                       the true status of the connection.
+
+       Success: The IUT reports the status of the connection
+                correctly.
+
+       Failure: The IUT does not report the status of the connection 
+                correctly.
+                                                            UNISYS Corporation
+6 February 1987                   -20-                      TM-WD-8801/206/00
+
+
+                 TCP SCENARIOS AND TEST DESCRIPTIONS
+
+Scenario BASIC3
+---------------
+
+Scenario BASIC3 tests the TCP implementation's ability to maintain
+data integrity: out of order data, overlapping data, lost data,
+segments with bad checksums and segments with sequence number
+wraparound.
+
+
+________________________________________
+
+
+Test 25: OUT OF ORDER DATA
+       - Can the Implementation Under Test (IUT) correctly handle
+         segments which arrive out of order, as indicated by their
+         sequence number?
+
+       - Action: The Laboratory Slave Driver (LSD) sends data to the
+                 IUT. The Laboratory Reference Implementation (REF)
+                 divides the data into segments and outputs them out
+                 of order.
+
+       - Verification: Determine if the IUT delivers the data in the
+                       correct order.
+
+       Success: The IUT correctly reorders the data.
+
+       Failure: The IUT does not correctly reorder the data.
+
+
+Test 26: OVERLAPPING DATA
+-------
+       - Can the Implementation Under Test (IUT) clean up overlapping
+         datas
+
+       - Action: The Laboratory Slave Driver (LAB) sends data to the
+                 IUT. The Laboratory Reference Implementation (REF)
+                 repackages the data for retransmission so that some
+                 segments contain both new data and data already
+                 sent.
+
+       - Verification: Determine that IUT accepts the data and
+                       correctly delivers it.
+
+       Success: The IUT is able to accept the overlapping data and
+                deliver it correctly.
+
+       Failure: The IUT does not deliver the data on segments after
+                the first arrival or delivers the data incorrectly.
+                                                            UNISYS Corporation
+6 February 1987                   -21-                      TM-WD-8801/206/00
+
+
+Test 27: LOST DATA
+-------
+       - Can the Implementation Under Test (IUT) detect that data is losts
+
+       - Action: The Laboratory Slave Driver (LSD) sends data to the
+                 Remote Driver. The Laboratory Reference
+                 Implementation (REF) divides the data into several
+                 segments and sends data, omitting a segment. The
+                 missing segment is not sent until the last segment
+                 sent is retransmitted several times.
+
+       - Verification: Determine that the IUT does not acknowledge
+                       anything sent after this missing segment until the
+                       missing segment is transmitted.
+
+       Success: The IUT does not acknowledge any data received after
+                the last correctly ordered segment, until the
+                missing segment is sent.
+
+      Failure: The IUT acknowledges data sent after the missing
+                segment before the missing segment is sent.
+
+
+TEST 28: CHECKSUM
+-------
+       - Does the Implementation Under Test (IUT) detect a segment
+         with a bad checksum and discard it? -
+
+       - Action: Laboratory Slave Driver (LSD) sends data to the
+                 IUT. The Reference Implementation (REF) sends out
+                 a segment with a bad checksum and retransmits it
+                 incorrectly several times before transmitting it
+                 correctly.
+
+       Verification: Determine that the IUT acknowledges only the
+                       segments sent with a good checksum by checking
+                       segment data collected by the REF.
+
+       Success: The IUT only acknowledges segments sent with good
+                checksums.
+
+       Failure: REF acknowledges segments sent with bad checksums.
+                                                            UNlSYS Corporation
+6 February 1987                   -22-                      TM-WD-8801/206/00
+
+
+
+
+Test 29: SEQUENCE NUMBER WRAPAROUND
+-------
+       - Does the Implementation Under Test (IUT) use correct module
+         arithmetic when comparing sequence numberss
+
+       - Action: The Laboratory Slave Driver (LSD) sends data to the
+                 IUT. The Laboratory Reference Implementation (REF)
+                 uses as its initial sequence number a number
+                 guaranteed to cause wraparound from 2**32-1 to 0
+                 on the data segments.
+
+       - Verification: Determine if the IUT acknowledges all data sent
+                       by the REF.
+
+       Success: The IUT acknowledges the data sent by the REF.
+
+       Failure: The IUT does not acknowledge any data sent by the
+                REF after the sequence number wraparound occurs.
+                                                            UNISYS Corporation
+6 February 1987                   -23-                      TM-WD-8801/206/00
+
+
+
+                 TCP SCENARIOS AND TEST DESCRIPTIONS
+
+Scenario BASIC4
+---------------
+
+Scenario basic 4 test how well the TCP implementation can establish
+multiple connections and demultiplex data sent over these connections.
+A TCP connection is defined by the source port, source address,
+destination port and destination address of the connection. This four
+element identification is known as a 4-tuple. This scenario tests by
+opening multiple connections with different combinations in the 4
+tuple (from the viewpoint of the IUT).
+
+_________________________________________
+
+
+Test 30: MULTIPLEX DATA OVER 2 CONNECTIONS WITH UNIQUE 4-TUPLES.
+-------
+       - Can the Implementation Under Test (IUT) correctly deliver
+         data sent over two connections it actively opened with no
+         4-tuple element in common?
+
+       - Action: The Remote Driver (RD) opens two connections to the
+                 Laboratory Slave Driver(LSD). The LSD then sends
+                 unique data over each connection.
+
+       - Verification: Determine that the IUT keeps the data sent on
+                       each connection separate and delivers it correctly.
+
+       Success: The IUT delivers the data sent over each connection
+                correctly.
+
+       Failure: The IUT does not deliver the data sent over each
+                connection correctly.
+                                                            UNISYS Corporation
+6 February 1987                   -24-                      TM-WD-8801/206/00
+
+
+
+
+Test 31: MULTIPLEX OVER 2 CONNECTIONS WITH COMMON DEST.  PORT IN 4-TUPLE.
+-------
+       - Can the Implementation Under Test (IUT) multiplex data over
+         two connections which share a common destination port in
+         their 4-tuples.
+
+       - Action: Two connections are opened which have the same
+                 destination port on the Laboratory Reference
+                 Implementation (REF). The LSD sends unique data
+                 over each connection.
+
+       - Verification: Determine that the IUT keeps the data received
+                       over connection separate and delivers it correctly.
+
+       Success: The IUT delivers the data sent over each connection
+                correctly.
+
+       Failure: The IUT does not deliver the data sent over each
+                connection correctly.
+
+
+Test 32: MULTIPLEX WITH 2 CONNECTIONS HAVING SAME REF SRC PORT IN 4-TUPLES.
+-------
+       - Can the Implementation Under Test multiplex data over two
+         connections that have the same destination port in their
+         4-tuples?
+
+       - Action: The Laboratory Slave Driver (LSD) actively opens
+                 two connections from the same source port to
+                 distinct listening ports on the IUT. The LSD then
+                 sends unique data to the Remote Driver (RD) over
+                 each,connection.
+
+       - Verification: Determine that all the data sent by the LSD is
+                       delivered correctly to the RD.
+
+       Success: All sent data is delivered correctly to the RD.
+
+       Failure: Data is not delivered correctly to the RD.
+
+
+Test 33: MULTIPLEX DATA OVER 2 CONNECTIONS WITH UNIQUE 4-TUPLES.
+-------
+       - Can the Implementation Under Test (IUT) correctly deliver
+         data sent over two connections that the IUT passively opens,
+         that have no 4-tuple elements in commons
+
+       - Action: The Laboratory Slave Driver (LSD) opens two
+                 connections to the Remote Driver (RD). The LSD
+                 then sends unique data data over each connection.
+                                                            UNISYS Corporation
+6 February 1987                   -25-                      TM-WD-8801/206/00
+
+
+       - Verification: Determine that the IUT keeps the data sent on
+                       each connection separate and delivers it correctly.
+
+       Success: The IUT delivers the data sent over each connection
+                correctly.
+
+       Failure: The IUT does not deliver the data sent over each
+                connection correctly.
+
+TEST 34: MULTIPLEX DATA OVER 3 CONNECTIONS WITH SAME SRC PORT IN 4-TUPLE
+-------
+       - Can the Implementation Under Test (IUT) correctly establish
+         connections and demultiplex data when the same IUT source
+         port is in the 4-tuple of 3 connectionss
+
+       - Action: The Laboratory Slave Driver (LSD) actively opens 3
+                 connections to the same IUT port. The LSD then
+                 sends unique data to the Remote Driver (RD) over
+                 each connection.
+
+       - Verification: Determine that all three connections are opened
+                       and that the all the data sent over each connection
+                       is correctly delivered.
+
+       Success: All the data sent over the 3 connections is
+                correctly delivered.
+
+       Failure: The data sent over the 3 connections is not
+                correctly delivered.
+
+
+TEST 35: IUT REJECTS DUPLICATE CONNECTION
+-------
+       - Does the Implementation Under Test (IUT) reject an attempt to
+         make a duplicate connection to its listening ports
+
+       - Action: The Laboratory Slave Driver (LSD) actively opens 2
+                 connections to the IUT from different ports. LSD
+                 then attempts to make a third connection using the
+                 same source and destination port used in the second
+                 connection.
+
+       - Verification: Determine that IUT resets the original of the
+                       duplicate connections, refuses to make the
+                       duplicate connection (OPEN FAILURE response
+                       received by LSD) and does not enter into the
+                       opening handshake for the duplicate connection.
+
+       Success: IUT rejects the duplicate connection and does not
+                enter into the opening handshake for that
+                connection.
+
+       Failure: The IUT fails to reject the duplicate connection.
+                                                            UNISYS Corporation
+6 February 1987                   -26-                      TM-WD-8801/206/00
+
+
+TEST 36: MULTIPLEX DATA OVER CONNECTIONS USING THE SAME SEQUENCE NUMBERS
+-------
+       - Can the Implementation Under Test (IUT) multiplex data when
+         the REF uses the same sequence number on two connections s
+
+       - Action: The Laboratory Slave Driver opens three connections
+                 to the IUT and sends unique data over the three
+                 connections to the Remote Driver (RD). The
+                 Laborory Reference Implementation (REF) ensures
+                 that the the TCP segments on two of the connections
+                 have the same sequence numbers.
+
+       - Verification: Determine that all the data sent over each
+                       connection is correctly delivered to the RD.
+
+       Success: All the data sent over each connection is correctly
+                delivered.
+
+       Failure: The data sent over each connection is not correctly
+                delivered.
+
+
+Test 37: IUT'S REFUSAL TO MAKE DUPLICATE CONNECTION
+-------
+       - Does the Implementation Under Test refuse to make a
+         duplicate connection when it is actively opening?
+
+       - Action: The Remote Driver (RD) makes a connection to the
+                 Laboratory Slave Driver (LSD). RD then attempts to
+                 open a second connection with the same 4-tuple
+                 (same source and destination ports).
+
+       - Verification: Verify that the IUT refuses to make the
+                       duplicate connection by responding with TCP ERROR:
+                       CONNECTION ALREADY EXISTS or SYSTEM ERROR:
+                       REQUESTED SOURCE PORT IN USE.
+
+       Success: IUT does not make a duplicate connection and does
+                not allocate resources for a duplicate connection.
+
+       Failure: IUT allocates resources for a duplicate connection
+                or does not give proper response to the attempt to
+                open the duplicate connection.
+                                                            UNISYS Corporation
+6 February 1987                   -27-                      TM-WD-8801/206/00
+
+
+                 TCP SCENARIOS AND TEST DESCRIPTIONS
+
+Scenario BASIC5
+---------------
+
+Scenario BASIC5 tests the TCP Implementation Under Test (IUT) for
+basic and default security. It tests that the IUT:
+
+       - allows the security of the connection to be set by the use
+         of parameters in the open service requests
+
+       - rejects a connection request with a wrong security level,
+
+       - aborts the connection if a segment arrives with any mismatch
+         of the security option.
+
+Tests 38 through 46 test basic security. Tests 47 through 50 test
+default security. Default security checks are those checks which both
+classified and unclassified hosts should perform. If the IUT does not
+pass Test 38 or Test 39 (the setting of security in the IUT Active
+Open and the IUT Passive Open), tests 40 through 46 are not executed.
+
+Test 38: IUT'S ABILITY TO SET SECURITY IN ITS ACTIVE OPEN
+-------
+       - Is the Implementation Under Test (IUT) able to set security
+         in its Active Open s
+
+       - Action: The Remote Driver (RD) opens a connection with the
+                 classification and protection parameters supplied
+                 for the IUT Active Open. The Laboratory Slave
+                 Driver (LSD) opens with the same security in its
+                 Passive Open.
+
+       - Verification: Determine if the connection is opened success
+                       fully. If the connection is opened, determine that
+                       the security parameters have been set correctly.
+                       If the open service request does not return an OPEN
+                       ID, the response TCP ERROR: SEC/PREC NOT ALLOWED or
+                       SYSTEM ERROR: REQUESTED PARAMETER NOT IMPLEMENTED
+                       must be found.
+
+       Success: Connection is successfully opened showing that the
+                security parameters have been set correctly. If the
+                connection is not established the response TCE
+                ERROR: SEC/PREC NOT ALLOWED or SYSTEM ERROR:
+                REQUESTED PARAMETER NOT IMPLEMENTED is found.
+
+       Failure: Connection is not established and neither the
+                response TCP ERROR: SEC/PREC NOT ALLOWED nor SYSTEM
+                ERROR: REQUESTED PARAMETER NOT IMPLEMENTED is
+                returned from the IUT. Connection is established
+                but the parameters have not been set correctly.
+                                                            UNISYS Corporation
+6 February 1987                   -28-                      TM-WD-8801/206/00
+
+
+Test 39: IUT'S ABILITY TO SET SECURITY PARAMETERS IN ITS PASSIVE OPEN
+-------
+       - Is the Implementation Under Test (IUT) able to set security
+         in its Passive Open ?
+
+       - Action: The Remote Driver (RD) uses the classification
+                 and protection parameters that it is given for an
+                 IUT Passive Open. The Laboratory Slave Driver
+                 (LSD) sets the same parameters in its Active Open
+                 and attempts to open a connection.
+
+       - Verification: Determine that the connection is established.
+                       If a connection is opened successfully, then
+                       security fields in the TCP segments are checked to
+                       make sure that the IUT is setting the security from
+                       its input parameter. The Laboratory Reference
+                       Implementation (REF) collects these segments. If a
+                       connection is not established, check that the IUT
+                       open service response returned the response TCP
+                       ERROR: SEC/PREC NOT ALLOWED or SYSTEM ERROR:
+                       REQUESTED PARAMETER NOT IMPLEMENTED.
+
+       Success: The connection is established. Analysis determines
+                that the security parameters were set in the IUT
+                Passive Open. Also, the connection is not
+                established but the IUT returns either TCP ERROR:
+                SEC/PREC NOT ALLOWED or SYSTEM ERROR: REQUESTED
+                PARAMETER NOT IMPLEMENTED in response to the open
+                service request.
+
+       Failure: Although the connection is established, analysis
+                reveals that the IUT is not setting security but
+                merely matching peer's security. Also, the
+                connection is not established but no proper security
+                related response is received to the open service request.
+
+
+Test 40: IUT'S ABILITY TO SET SECURITY IN ITS SPECIFIED PASSIVE OPEN
+-------
+       - Is the Implementation Under Test (IUT) able to set security
+         in its Specified Passive Opens
+
+       - Action: The Remote Driver (RD) uses the classification
+                 CONFID and protection DIA as the parameters for an
+                 IUT Passive Open. The Laboratory Slave Driver
+                 (LSD) sets the same parameters in its Active Open
+                 and attempts to open a connection.
+
+       - Verification: Determine that the connection is established.
+                       If a connection is opened successfully, the
+                       security fields in the TCP segments are checked to
+                       make sure that the IUT is setting security from its
+                       input parameter. The Laboratory Reference
+                       Implementation (REF) collects these segments. If a
+                       connection is not established, check that the IUT
+                                                            UNISYS Corporation
+6 February 1987                   -29-                      TM-WD-8801/206/00
+
+
+                       open service reponse returned the response TCP
+                       ERROR: SEC/PREC NOT ALLOWED or SYSTEM ERROR:
+                       REQUESTED PARAMETER NOT IMPLEMENTED.
+
+       Success: The connection is established and analysis deter
+                mines that the security parameters were set in the
+                IUT specified passive open. Also, the connection
+                is not established but the IUT returns either TCP
+                ERROR: SEC/PREC NOT ALLOWED or SYSTEM ERROR:
+                REQUESTED PARAMETER NOT IMPLEMENTED in response to
+                the open service request.
+
+       Failure: Connection is established but analysis reveals that
+                the IUT is not setting security but merely matching
+                peer's security. Also, connection is not
+                established and no proper security related response
+                is received to the open service request.
+
+
+Test 41: SECURE IUT REJECTS CONNECTION TO UNSECURED PEER
+-------
+       - Does the secured Implementation Under Test (IUT) reject a
+         connection to an unsecured peers
+
+       - Action: The Remote Driver (RD) with security set in its
+                 Active Open opens to the Laboratory Reference
+                 Implementation (REF). The REF has passively opened
+                 without security set.
+
+       - Verification: Check that the IUT returns an OPEN EAILURE and
+                       that the connection is not established.
+
+       Success: The IUT successfully gets an OPEN FAILURE.
+
+       Failure: The IUT-fails to get an OPEN FAILURE.
+
+
+Test 42: SECURE IUT REJECTS CONNECTION ATTEMPT OF UNSECURED PEER
+-------
+       - Does the secured Implementation Under Test (IUT) reject
+         connection attempt of an unsecured host ?
+
+       - Action: Laboratory Slave Driver (LSP) with no security
+                 actively opens to the IUT. The IUT has passively
+                 opened with security set.
+
+       - Verification: Determine that no connection is established by
+                       checking for an OPEN FAILURE response from the
+                       Laboratory Reference Implementation (REF).
+
+       Success: The REF gets an OPEN FAILURE or the IUT can not set
+                security parameters.
+
+       Failure: The connection is established.
+                                                            UNISYS Corporation
+6 February 1987                   -30-                      TM-WD-8801/206/00
+
+
+
+Test 43: SECURITY OPTION PLACEMENT IN DATA SEGMENTS
+-------
+       - Is the Implementation Under Test (IUT) consistent in its
+         security option placement when sending datas
+
+       - Action: A secure connection is opened. Both the Laboratory
+                 Slave Driver (LSD) and the Remote Driver (RD) send data.
+
+       - Verification: Determine that all the data sent by the LSD and
+                       the RD is correctly delivered by the other peer.
+                       Check the segment information collected by the
+                       Laboratory Reference Implementation (REF) to ensure
+                       that the correct security was placed on every
+                       segment.
+
+       Success: All data is delivered and the security is correctly
+                placed on each TCP segment.
+
+       Failure: All data is not correctly delivered or the security
+                fields are not correctly placed on every TCP segment.
+
+
+TEST 44: RESPONSE TO DATA WITH MISMATCHED SECURITY CLASS
+-------
+       - Does the Implementation Under Test (IUT) reset a connection
+         on receiving data with a mismatched security class?
+
+       - Action: A secure connection is established. The Laboratory
+                 Slave Driver (LSD) sends data to the Remote Driver
+                 (RD). The Laboratory Reference Implementation
+                 (REF) places a wrong security class on the data
+                 segments.
+
+       - Verification: Determine that the IUT resets the connection by
+                       checking that the REF reports REMOTE ABORT. Check
+                       that the IUT reports SEC/PREC MISMATCH.
+
+       Success: The IUT resets the connection and reports SEC/PREC
+                MISMATCH.
+
+       Failure: IUT fails to reset connection or does not report
+                SEC/PREC MISMATCH.
+                                                            UNISYS Corporation
+6 February 1987                   -31-                      TM-WD-8801/206/00
+
+
+
+TEST 45: RESPONSE TO DATA WITH MISMATCHED PROTECTION AUTHORITY
+-------
+       - Does the Implementation Under Test (IUT) reset a connection
+         on receiving data with a mismatched security authority?
+
+       - Action: A secure connection is established. The Laboratory
+                 Slave Driver (LSD) sends data to the Remote Driver
+                 (RD). The Laboratory Reference Implementation
+                 (REF) places an incorrect protection authority on
+                 the data segments.
+
+       - Verification: Determine that the IUT resets the connection by
+                       checking that the REF reports REMOTE ABORT. Check
+                       that the IUT reports SEC/PREC MISMATCH.
+
+       Success: The IUT resets the connection and reports SEC/PREC
+                MIS MATCH.
+
+       Failure: IUT fails to reset connection or does not report
+                SEC/PREC MISMATCH.
+
+
+TEST 46: RESPONSE TO DATA WITH AN EXTRA PROTECTION AUTHORITY
+-------
+       - Does the Implementation Under Test (IUT) reset a connection
+         on receiving data with an extra security protection
+         authority?
+
+       - Action: A secure connection is established. The Laboratory
+                 Slave Driver (LSD) sends data to the Remote Driver
+                 (RD). The Laboratory Reference Implementation
+                 (REF) places an extra protection authority on the
+                 data segments.
+
+       - Verification: Determine that the IUT resets the connection by
+                       checking that the REF reports REMOTE ABORT. Check
+                       that the IUT reports SEC/PREC MISMATCH.
+
+       Success: The IUT resets the connection and reports SEC/PREC
+                MISMATCH.
+
+       Failure: IUT fails to reset connection or does not report
+                SEC/PREC MISMATCH.
+                                                            UNISYS Corporation
+6 February 1987                   -32-                      TM-WD-8801/206/00
+
+
+
+TEST 47: USE OF SECURITY OPTION FOR UNCLASSIFIED CONNECTIONS
+-------
+       - Does the Implementation Under Test (IUT) use the security
+         option for unclassified connection ?
+
+       - Action: Laboratory Slave Driver (LSD) does a Passive Open
+         with security set. The Remote Driver (RD) does an
+         Active Open with no security set.
+
+       - Verification: Check TCP segments collected by the Laboratory
+                       Reference Implementation (REF) to determine if IUT
+                       uses the security option at a default level for an
+                       unsecured connection. Ensure that the connection
+                       is not opened by looking for the OPEN FAILURE
+                       response from the IUT.
+
+       Observation: IUT does or does not use the security option for
+                    unclassified connections.
+
+       Failure: Test connection opened.
+
+
+TEST 48: RECOGNITION OF UNCLASS AND GENSER AS EQUIVALENT TO UNSECURE
+-------
+       - Does the unsecured Implementation Under Test (IUT) connect
+         with peer with security of UNCLASS and GENSERs
+
+       - Action: Laboratory Slave Driver (LSD) does a passive open
+                 with security set to UNCLASS and GENSER. The
+                 Remote Driver (RD) does an active open with no
+                 security setting.
+
+       - Verification: Determine that the connection is opened by
+                       looking for OPEN SUCCESS response from the IUT.
+
+       Success: Connection established.
+
+       Failure: Connection not established.
+                                                            UNISYS Corporation
+6 February 1987                   -33-                      TM-WD-8801/206/00
+
+
+
+TEST 49: UNSECURED IUT RESPONSE TO CONNECTION ATTEMPT BY SECURE HOST
+-------
+       - Does the IUT with no security reject an Active Open from a
+         peer with security sets
+
+       - Action: Remote Driver (RD) does a Passive Open with no
+                 security set. The Laboratory Slave Driver (LSD)
+                 does an Active Open with security set to CONFID and DIA.
+
+       - Verification: Determine that the IUT rejects the connection
+                       by searching for OPEN FAILURE response reported by
+                       LSD.
+
+       Success: Connection is not established.
+
+       Failure: Connection established.
+
+
+TEST 50: UNSECURED IUT RESPONSE TO DATA MARKED WITH CLASSIFIED SECURITY
+-------
+       - Does the Implementation Under Test (IUT) reset connection
+         when finding data marked with security higher than unclassifieds
+
+       - Actions: A connection is established with no security
+                 settings. The Laboratory Slave Driver (LSD) sends
+                 data to the Remote Driver (RD). The Laboratory
+                 Reference Implementation (REF) places a classified
+                 security option on a data segment.
+
+       - Verification: Determine that the IUT resets the connection
+                       and reports SEC/PREC MISMATCH to the Remote Driver.
+
+       Success: The IUT correctly resets connection on finding
+                incorrectly marked security on data.
+
+       Failure: The IUT fails to recognize wrong security marking
+                on data and does not reset the connection.
+                                                            UNISYS Corporation
+6 February 1987                   -34-                      TM-WD-8801/206/00
+
+
+                 TCP SCENARIOS AND TEST DESCRIPTIONS
+
+Scenario BASIC6
+---------------
+
+Scenario BASIC6 tests the TCP implementation for its ability to
+perform the ALLOC service request correctly in the EXPLICIT mode under
+control of the Central Driver.
+
+________________________________________
+
+TEST 51: ALLOC
+-------
+       - Can the Implementation Under Test (IUT) perform the ALLOC
+         service request correctly ?
+
+       - Action: Remote Driver (RD) and Laboratory Slave Driver
+                 (LSD) establish a connection. The RD instructs the
+                 IUT it has allocated a specified buffer size for
+                 data. Then the LSD sends data equal to twice that
+                 buffer size to the RD.
+
+       - Verification: Determine that the amount of data delivered to
+                       the RD by the IUT is not greater than that
+                       specified in the ALLOC request. If all the sent
+                       data is acknowledged prior to the RD sending
+                       another ALLOC, the amount of data delivered must be
+                       equal to or less than the buffer size specified in
+                       the ALLOC. If it is necessary for the RD to send a
+                       second ALLOC for all the sent data to be
+                       acknowledged, then results are determined by
+                       examining the TCP segments collected by the
+                       Laboratory Reference Implementation (REF). The
+                       segments are analyzed to make sure that no more
+                       data than was specified in the ALLOC was
+                       acknowledged before the IUT receive window was set
+                       to zero.
+
+       Success: The IUT delivers data equal to or less than the
+                ALLOC request.
+
+       Failure: The IUT delivers more data than ALLOC specifies.
+
+       Inconclusive: Analysis cannot be done to determine IUT's performance.
+                                                            UNISYS Corporation
+6 February 1987                   -35-                      TM-WD-8801/206/00
+
+
+                  TCP SCENARIOS AND TEST DESCRIPTIONS
+
+Scenario FULL1
+--------------
+
+Scenario FULL1 tests the TCP implementation of maximum segment size
+option, basic retransmission and ULP timeout.
+
+________________________________________
+
+Test 52: MAXIMUM SEGMENT SIZE OPTION
+-------
+       - Does the Implementation Under Test (IUT) use the maximum
+         segment size (MSS) option and respond correctly to its peer's
+         maximum transmission units
+
+       - Action: The Laboratory Slave Driver (LSD) and the Remote
+                 Driver (RD) establish a connection. The Laboratory
+                 Reference Implementation (REF) places a low MSS on
+                 its opening segment. The RD sends data.
+
+       - Verification: Check segment data collected by the REF to see
+                       if IUT uses the MSS option. Examine the segment
+                       data to see if the IUT sends any data segment with
+                       a length greater than the MSS specified by the REF.
+
+       Success: The IUT sends segments which do not exceed the
+                maximum segment size specified by the REF.
+
+       Failure: IUT sends segments which exceed the maximum segment
+                size specified by the REF.
+
+       Observation: Observation is made as to whether the IUT uses
+                    the MSS-option.
+
+
+TEST 53: RETRANSMISSION AFTER ACKNOWLEDGMENT OF DATA.
+-------
+       - Does the Implementation Under Test (IUT) stop retransmitting
+         promptly after receiving acknowledgment of datas
+
+       - Action: The Laboratory Slave Driver (LSD) and the Remote
+                 Driver (RD) establish a connection. The RD sends
+                 data. The Laboratory Slave Driver (LSD) withholds
+                 acknowledgments until it has received several
+                 transmissions of the oldest data.
+
+       - Verification: Examine the TCP segments collected by the REF.
+                       Count the number of retransmissions of data sent
+                       after the data is acknowledged. Ensure that the
+                       REF receives no more than two retransmissions after
+                       it has acknowledged data.
+
+       Success: The IUT does not retransmit after data is acknowledged.
+                                                            UNISYS Corporation
+6 February 1987                   -36-                      TM-WD-8801/206/00
+
+       Failure: IUT does not stop retransmitting promptly after
+                data is acknowledged.
+
+
+Test 54: RETRANSMISSION AFTER ACKNOWLEDGMENT OF SYN AND FIN
+-------
+       - Does the Implementation Under Test (IUT) stop retransmitting
+         promptly after its SYN and FIN are acknowledgeds
+
+       - Action: The Laboratory Slave Driver (LSD) actively opens a
+                 connection to the Remote Driver (RD). The
+                 Laboratory Reference Implementation (REF) withholds
+                 acknowledgments of the IUT's SYN segment until it
+                 is transmitted several times. Then the RD closes
+                 the connection. The REF withholds retransmissions
+                 until the IUT's FIN segment is transmitted several times.
+
+       - Verification: Examine the TCP segments collected by the REF.
+                       Count the number of times the IUT SYN segment is
+                       retransmitted after it is acknowledged. Count the
+                       number of times the IUT FIN segment is retrans
+                       mitted after it is acknowledged. Ensure that the
+                       REF receives no more than two retransmissions after
+                       it acknowledges SYN or FIN.
+
+       Success: The IUT does not retransmit its SYN and FIN
+                segments after they are acknowledged.
+
+       Failure: The IUT does not stop retransmitting its SYN and
+                FIN segments promptly after they are acknowledged.
+
+
+TEST 55: IMPLEMENTATION OF ULP TIMEOUT SERVICE IN ACTIVE OPEN
+-------
+       - Does the Implementation Under Test (IUT) implement ULP
+         timeout when timeout is specified in its Active Open ?
+
+       - Action: Find the number of retransmissions by the IUT when
+                 the IUT's default ULP timeout occurs or when the
+                 default timeout of two minutes suggested by
+                 MIL-STD 1778 is reached. This is done by opening a
+                 connection and having the Remote Driver (RD) send
+                 data. The Laboratory Reference Implementation (REF)
+                 does not acknowledge the data. When the connection
+                 is aborted (or after 2 minutes), check the TCE
+                 segments collected by the REF and count the number
+                 of retransmissions for one data element. This
+                 becomes the default number of retransmissions. The
+                 Remote Driver (RD) does an Active Open with a small
+                 ULP timeout and a timeout action of terminate set.
+                 The RD then sends data. The Laboratory Reference
+                 Implementation (REF) withholds acknowledgments.
+                 The test continues until the connection terminates
+                 or 2 minutes pass.
+                                                            UNISYS Corporation
+6 February 1987                   -37-                      TM-WD-8801/206/00
+
+
+       - Verification: Check the TCP segments collected by the REF.
+                       Count the number of times a data element is
+                       retransmitted. The number of retransmissions must
+                       be significantly smaller than the default number of
+                       retransmissions.
+
+       Success: IUT implements ULP timeout if it resets the
+                connection and the number of data retransmissions
+                is significantly smaller than the default number of
+                retransmissions.
+
+                 Failure: IUT does not implement ULP timeout. The IUT does
+                not reset the connection or, if the connection is
+                reset, the number of IUT retransmissions indicate
+                that the abort was caused by the TCP default rather
+                than the prescribed ULP timeout.
+
+
+TEST 56: IMPLEMENTATION OF ULP TIMEOUT SERVICE IN SEND
+-------
+       - Does the Implementation Under Test (IUT) implement ULP
+         timeout when timeout specified in its Sends
+
+       - Action: The Remote Driver (RD) and the Laboratory Slave
+                 Driver (LSD) establish a connection. The RD sends
+                 data with a small ULP timeout and a timeout action
+                 of terminate set. The Laboratory Reference
+                 Implementation (REF) withholds acknowledgments.
+                 The test continues until the connection terminates
+                 or 2 minutes pass.
+
+       - Verification: Check the TCP segments collected by the REF.
+                       Count the number of times a data element is
+                       retransmitted. The number of retransmissions must
+                       be significantly smaller than the default number
+                       of retransmissions (determined in Test 55).
+
+       Success: IUT implements ULP timeout if it resets the
+                connections and the number of data retransmissions
+                is significantly smaller than the default number of
+                retransmissions.
+
+       Failure: IUT does not implement ULP timeout. The IUT does
+                not reset the connection or, if the connection is
+                reset, the number of IUT retransmissions indicate
+                that the abort was caused by the TCP default rather
+                than the prescribed ULP timeout.
+                                                            UNISYS Corporation
+6 February 1987                   -38-                      TM-WD-8801/206/00
+
+
+TEST 57: IMPLEMENTATION OF ULP TIMEOUT SERVICE IN PASSIVE OPEN
+-------
+       - Does the Implementation Under Test (IUT) implement ULP
+         timeout when timeout specified in its Passive Opens
+
+       - Action: The Remote Driver (RD) does a Passive Open with a
+                 ULP timeout set. The Laboratory Slave Driver (LSD)
+                 performs an Active Open and a connection is
+                 established. The RD then sends data. The
+                 Laboratory Reference Implementation (REF) withholds
+                 acknowledgments. The test continues until the
+                 connection terminates or 2 minutes pass.
+
+       - Verification: Check the TCP segments collected by the REF.
+                       Count the number of times a data element is
+                       retransmitted. The number of data retransmissions
+                       must be significantly smaller than the default
+                       number of retransmissions (determined in Test 55).
+
+       Success: IUT implements ULP timeout if it resets the
+                connections and the number of data retransmissions
+                is significantly smaller than the default number of
+                retransmissions.
+
+       Failure: IUT does not implement ULP timeout. The IUT does
+                not reset the connection or, if the connection is
+                reset, the number of IUT retransmissions indicate
+                that the abort was caused by the TCP default rather
+                than the prescribed ULP timeout.
+
+
+TEST 58: IMPLEMENTATION OF ULP TIMEOUT NOTIFY SERVICE
+-------
+       - Does the Implementation Under Test (IUT) implement a ULP
+         timeout where the timeout action is notifys
+
+       - Action: The Remote Driver (RD) does an Active Open with an
+                 ULP notify timeout set and establishes a
+                 connection with the Laboratory Slave Driver (LSD).
+                 The RD sends data. The Laboratory Reference
+                 Implementation (REF) withholds acknowledgments on
+                 the data. The test continues until the connection
+                 terminates or 2 minutes pass.
+
+       - Verification: Check that the RD reports the TCP ERROR message
+                       ULP NOTIFY
+
+       Success: IUT implements ULP notify.
+
+       Failure: IUT does not implements ULP notify.
+                                                            UNISYS Corporation
+6 February 1987                   -39-                      TM-WD-8801/206/00
+
+
+                 TCP SCENARIOS AND TEST DESCRIPTIONS
+
+Scenario FULL2
+--------------
+
+Tests the TCP implementation of zero window, urgent data, and pushed
+data.
+
+------------------------------------------
+
+Test 59: RESPONSE TO ZERO WINDOW
+-------
+       - Does the Implementation Under Test (IUT) correctly respond to
+         a peer's zero windows
+
+       - Action: A connection is established between the Laboratory
+                 Slave Driver (LSD) and the Remote Driver (RD).
+                 The RD sends data to the LSD. The Laboratory
+                 Reference Implementation (REF) acknowledges the
+                 first data segment but announces a zero window in
+                 this acknowledgment.
+
+       - Verification: Check the TCP segments collected by the REF
+                       for the amount of data sent by the IUT while the
+                       REF had a zero window. The IUT should not send
+                       more than one byte of data while the REF has a
+                       zero window.
+
+       Success: The IUT sends no segment of-length greater than 1
+                while its peer has a zero window.
+
+       Failure: The IUT sends a segment of length greater than 1
+                while its peer has a zero window.
+
+
+TEST 60: IMPLEMENTATION OF URGENT SERVICE
+-------
+       - Does the Implementation Under Test (IUT) set the urgent flag
+         and urgent pointer when requested to send urgent datas
+
+       - Action: The Laboratory Slave Driver (LSD) and the Remote
+                 Driver (RD) establish a connection. The RD sends
+                 urgent data to the LSD.
+
+       - Verification: Check the TCP segment information collected by
+                       the Laboratory Reference Implementation (REF) to
+                       ensure that the IUT sets the urgent flag on every
+                       segment of the data. Also check that the value of
+                       the urgent pointer on these segments equals the
+                       amount of urgent data that exists between the
+                       first sequence number of the segment to the end of
+                       the urgent data.
+                                                            UNISYS Corporation
+6 February 1987                   -40-                      TM-WD-8801/206/00
+
+
+       Success: The IUT correctly sets the urgent flag and urgent
+                pointer on urgent data.
+
+       Failure: The IUT does not set the urgent flag or urgent
+                pointer correctly on urgent data.
+
+
+Test 61: URGENT SERVICE WHEN PEER HAS ZERO WINDOW
+-------
+       - Does the Implementation Under Test (IUT) handle urgent
+         correctly when its peer has a zero window s
+
+       - Action: The Laboratory Slave Driver (LSD) and the Remote
+                 Driver (RD) establish a connection. The RD sends
+                 normal data and then urgent data to the LSD. The
+                 Laboratory Reference Implementation (REF) sets its
+                 receive window to zero when it acknowledges the
+                 first IUT segment. The REF opens its window again
+                 later in the data transfer.
+
+       - Verification: Check the TCP segments collected by the REF.
+                       Ensure that IUT sends segment while the REF is
+                       showing a zero window with the urgent flag set,
+                       the value of the urgent pointer set to the number
+                       of bytes of urgent data to be sent, and a length
+                       no longer than 1.
+
+       Success: The IUT sends one byte probe segmensts and sets
+                the urgent flag and urgent pointer correctly in them.
+
+       Failure: The IUT does not send one byte probe segments
+                although urgent data is present, or it does not
+                set the urgent flag or urgent pointer correctly in
+                the probe segments it sends.
+
+
+Test 62: DIFFERENTIATION BETWEEN URGENT AND NON-URGENT DATA
+-------
+       - Is the Implementation Under Test (IUT) able to deliver urgent data?
+
+       - Action: To make sure that the IUT can differentiate and
+                 deliver urgent and non-urgent data. The Laboratory
+                 Slave Driver (LSD) and the Remote Driver (RD)
+                 establish a connection. The LSD sends 1 byte of
+                 urgent data to the RD. It then sends the RD some
+                 bytes of non-urgent data.
+
+       - Verification: Evaluate the DELIVER responses from the RD.
+                       The urgent data must be delivered in a separate
+                       DELIVER from the non-urgent data.
+                                                            UNISYS Corporation
+6 February 1987                   -41-                      TM-WD- 801/206/00
+
+
+       Success: The RD DELIVER responses show the 1 byte of urgent
+                data delivered separately from the subsequent non
+                urgent data.
+
+       Failure: The RD DELIVER responses do not show the 1 byte of
+                urgent data delivered separately from the
+                subsequent non-urgent data.
+
+
+Test 63: PUSH SERVICE WHEN NOT REQUESTED
+-------
+       - Does the Implementation Under Test (IUT) push data when not
+         requested to do so?
+
+       - Action: The Laboratory Slave Driver (LSD) and the Remote
+                 Driver (RD) establish a connection. The RD sends
+                 data to the LSD. lt does not request that the
+                 data be pushed.
+
+       - Verification: Examine the TCP segments collected by the REF.
+                       The Push flag should not be set on any segments
+                       sent by the IUT except possibly the last data
+                       segment. (It is permissible for the IUT to set a
+                       push flag on the very last data segment sent).
+
+       Success: The IUT correctly does not push any data or IUT
+                only pushes the last data segment.
+
+       Failure: The IUT incorrectly sets push flags on data not
+                requested to be pushed.
+
+
+Test 64: PUSH SERVICE ON REQUEST
+-------
+       - Is the Implementation Under Test (IUT) able to push data on
+         requests
+
+       - Action: The Laboratory Slave Driver (LSD) and the Remote
+                 Driver (RD) establish a connection. The RD sends
+                 some bytes of data with a push indication. It
+                 then sends data without the push indication.
+
+       - Verification: Examine the TCP segments collected by the
+                       Laboratory Reference Implementation (REF). The
+                       first data segment the IUT sends should have the
+                       push flag set and should contain at least the
+                       number of bytes of data sent with the push
+                       indication. The only other segment which could
+                       have a valid push flag is the last data segment.
+
+       Success: The IUT correctly sets push flag only on pushed
+                data and possibly the last data segment.
+
+       Failure: The IUT fails to set push flag on pushed data or
+                sets push flag on unpushed data.
+                                                            UNISYS Corporation
+6 February 1987                   -42-                      TM-WD-8801/206/00
+
+
+       Observation: The IUT allows it Upper Level Protocol to
+                    request rather than command push service. This
+                    observation is made when the segment with the push
+                    flag carries more than the pushed data.
+                                                            UNISYS Corporation
+6 February 1987                   -43-                      TM-WD-8801/206/00
+
+
+                 TCP SCENARIOS AND TEST DESCRIPTIONS
+
+Scenario FULL3
+--------------
+
+Tests whether the TCP implementation does correct reset processing.
+It tests the common reset conditions.
+
+________________________________________
+
+
+Test 65: RESPONSE TO CONNECTION REFUSAL
+-------
+
+       - Does the Implementation Under Test (IUT) respond correctly to
+         connection refusals
+
+       - Action: The Remote Driver (RD) actively opens. There is
+                 no listening process at the destination port of
+                 its Active Open.
+
+       - Verification: Determine that the RD receives an OPEN FAILURE
+                       response from the IUT.
+
+       Success: The IUT reports an OPEN FAILURE.
+
+       Failure: The IUT does not report an OPEN FAILURE .
+
+
+Test 66: PARTIAL RESET PRIOR TO CONNECTION ESTABLISHMENT
+-------
+       - Does the Implementation Under Test (IUT) continue listening
+         after receiving a reset during connection
+         establishments
+
+       - Action: The Remote Driver (RD) initiates a Passive Open.
+                 The Laboratory Slave Driver (LSD) actively opens.
+                 On receipt of the IUT's SYN ACK, the Laboratory
+                 Reference Implementation (REF) resets the
+                 connection. The LSD attempts to open the
+                 connection again.
+
+       - Verification: Determine that the LSD reports an OPEN SUCCESS
+                       response from the REF on the second connection.
+
+       Success: The second connection is established.
+
+       Failure: The second connection cannot be established.
+                                                            UNISYS Corporation
+6 February 1987                   -44-                      TM-WD-8801/206/00
+
+
+Test 67: RESPONSE TO RESET RCVD WHILE SENDING DATA OVER CONNECTION
+-------
+       - Does the IUT abort with the correct responses when its peer
+         aborts while the IUT is sending data over a connections
+
+       - Action: The Laboratory Slave Driver (LSD) and the Remote
+                 Driver (RD) establish a connection. The RD sends
+                 data. When the Laboratory Reference Implementa
+                 tion (REF) receives the first IUT data segment,
+                 the REF resets the connection.
+
+       - Verification: Determine that after the reset, the RD reports
+                       the response TERMINATE: REMOTE ABORT from the IUT
+                       and the LSD reports the response TERMINATE:
+                       SERVICE FAILURE from the REF.
+
+       Success: The correct TERMINATE responses are reported from
+                the IUT and the REF.
+
+       Failure: The correct TERMINATE responses are not received
+                from the IUT and the REF.
+
+
+TEST 68: RESET FORMAT RESPONDING TO ACTIVE OPEN WITHOUT LISTENING PORT
+-------
+       - Does the Implementation Under Test (IUT) send a correct reset
+         segment on receipt of a SYN for a non-existent ports
+
+       - Action: The Laboratory Slave Driver (LSD) initiates an
+                 Active Open to a port on the IUT without a
+                 listening process.
+
+       - Verification: Check the TCP segments collected by the
+                       Laboratory Reference Implementation (REF). The
+                       IUT reset segment must have the format: sequence
+                       number = 0, acknowledgment number = the sequence
+                       number of the REF's SYN(segment<s+1>s),and the ACK and
+                       RESET flags set.
+
+       Success: IUT uses correct reset segment format.
+
+       Failure: The IUT uses incorrect reset segment format.
+                                                            UNISYS Corporation
+6 February 1987                   -45-                      TM-WD-8801/206/00
+
+
+
+TEST 69: RESET FORMAT RESPONDING TO ACTIVE OPEN WITH DATA WITHOUT
+-------  LISTENING PORT
+       - Does the Implementation Under Test (IUT) send a correct reset
+         when it receives the SYN of an Active Open with Data for a
+         non-existent ports
+
+       - Action: The Laboratory Slave Driver (LSD) initiates an
+                 Active Open with Data to a port on the IUT
+                 without a list process.
+
+       - Verification: Check the TCP segments collected by the
+                       Laboratory Reference Implementation (REF). The
+                       IUT reset segment must have the format: sequence
+                       number = 0; acknowledgment number = the sequence
+                       number of the last byte of data on the REF's syn
+                       segment, and the ACK and RESET flags set. If the
+                       IUT has not passed the Active Open with Data test,
+                       the reset segment must have the expected format of
+                       Test 68.
+
+       Success: IUT uses correct reset segment format.
+
+       Failure: IUT uses incorrect reset segment format.
+
+
+TEST 70: RESET FORMAT ON RECEIPT OF INVALID SEGMENT WITH ACK SET
+-------
+       - Does the Implementation Under Test (IUT) send the correct
+         reset format on receiving a segment with ACK set for a
+         non-existent port?
+
+       - Action: The Laboratory Slave Driver (LSD) initiates an
+                 Active Open to a port on the IUT without a
+                 listening process. The Laboratory Reference
+                 Implementation (REF) omits the SYN from its
+                 initial segment but sets the acknowledgment flag
+                 and puts a value in the acknowledgment number.
+
+       - Verification: Check the TCP segments collected by the
+                       Laboratory Reference Implementation. The IUT's
+                       reset must have the format: sequence number =
+                       acknowledgment number on the REF's initial
+                       segment, and the RESET flag set. The ACK flag
+                       must not be set.
+
+       Success: IUT uses correct reset segment format.
+
+       Failure: The IUT uses incorrect reset segment format.
+                                                            UNISYS Corporation
+6 February 1987                   -46-                      TM-WD-8801/206/00
+
+
+TEST 71: RESET FORMAT ON RECEIPT OF INVALID SEGMENT WITH SYN AND ACK SET
+-------
+       - Does the Implementation Under Test (IUT) send a correct reset
+         on receiving a SYN segment with ACK set for a port in LISTEN
+         state?
+
+       - Action: The Remote Driver (RD) does a Passive Open. The
+                 Laboratory Slave Driver (LSD) does an Active Open.
+                 The Laboratory Reference Implementation (REF)
+                 places an acknowledgment on its SYN segment.
+
+       - Verification: Determine that no connection is established.
+                       Check that an OPEN FAILURE is reported from the
+                       REF. If the connection attempt correctly fails,
+                       check the TCP segments collected by the REF. The
+                       IUT reset must have the following format: sequence
+                       number = acknowledgment number on the REF's
+                       initial segment, and the RESET flag set. The ACK
+                       flag must not be set.
+
+       Success: IUT resets and uses correct reset format.
+
+       Failure: The IUT establishes connection after receiving
+                invalid SYN segment or the IUT uses incorrect
+                reset segment format.
+
+
+Test 72: NO RESET ON RECEIPT OF SEGMENT WITH BAD ACK
+-------
+       - Does the Implementation Under Test (IUT) erroneously perform
+         a reset on receiving a segment with a bad acknowledgment number?
+
+       - Action: The Laboratory Slave Driver (LSD) and the Remote
+                 Driver (RD) establish a connection. The LSD sends
+                 data to the the RD. The Laboratory Reference
+                 Implementation (REF) places an incorrect
+                 acknowledgment number on an outgoing segment. The
+                 REF retransmits the bad segment three times and
+                 then corrects it.
+
+       - Verification: Determine that the IUT does not terminate the
+                       connection. If the connection is not terminated,
+                       check the TCP segments collected by the REF to
+                       determine that the IUT has transmitted empty
+                       acknowledgments. These acknowledgments must have
+                       the format: sequence number = IUT's current
+                       segment sequence number, acknowledgment number =
+                       the sequence number of the REF's segment (not
+                       incremented to acknowledge any of the data on the
+                       bad segment) and the ACK flag set.
+                                                            UNISYS Corporation
+6 February 1987                   -47-                      TM-WD-8801/206/00
+
+
+       Success: The IUT sends empty acknowledgments until it
+                receives the corrected segment. The connection is
+                not reset.
+
+       Failure: The IUT resets the connection on receiving the bad
+                data segment or the IUT acknowledges data segments
+                with bad acknowledgment number.
+                                                            UNISYS Corporation
+6 February 1987                   -48-                      TM-WD-8801/206/00
+
+
+                    TCP SCENARIOS AND TEST DESCRIPTIONS
+
+Scenario QUAL1
+--------------
+
+QUAL1 tests the TCP implementation to determine how many TCE
+it is able to provide. The scenario tests up to 145
+
+____________________________
+
+
+Test 73:  NUMBER OF TCP CONNECTIONS RESOURCES CAN SUPPORT
+-------
+       - Determine the maximum number of TCP connections provided by
+         the Implementation Under Test(IUT).
+
+       - Action: The Laboratory Slave Driver (LSD) performs 12
+                 passive opens. The Remote Driver (RD) is
+                 instructed to consecutively open 12 active
+                 connections to each of these ports until it runs
+                 out of resources.
+
+       - Verification: Count every connection where an OPEN SUCCESS
+                       is the response received on the IUT Active Open
+                       Request. When the response TCP ERROR:
+                       INSUFFICIENT RESOURCES is found or 144 connections
+                       are opened, the test is ended. The total number
+                       of connections the IUT can support equals the
+                       number of connections the RD has opened plus the
+                       connection for the command channel.
+
+       Observation: The total number of connections the IUT is able
+                    to support is noted. If the IUT is able to
+                    support more than 145 connections (it does not run
+                    out of resources), this observation is noted.
+

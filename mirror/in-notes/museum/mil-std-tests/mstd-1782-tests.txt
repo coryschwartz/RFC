@@ -1,0 +1,1323 @@
+                    DCEC PROTOCOL LABORATORY
+                    TELNET PROTOCOL (TELNET)
+                          MIL-STD-1782
+                    CERTIFICATION TESTS INDEX
+
+This Certification Tests Index provides information on the
+derivation, organization, and function of tests specified for
+TELNET within the DCEC Protocol Laboratory.
+
+This document is divided into five sections:
+
+     TELNET TRACEABILITY INDEX;
+
+     USER TELNET TESTS INDEX;
+
+     SERVER TELNET TESTS INDEX;,
+
+     TELNET TEST SCENARIOS INDEX;
+
+     and TELNET SCENARIOS AND TESTS DESCRIPTIONS.
+
+
+
+
+TELNET TRACEABILITY INDEX: TELNET TEST NUMBERS versus TELNET
+MIL-STD-1782 References...
+
+The table shows, for MIL-STD-1782, the TELNET Test Numbers which
+may be regarded as the "principal tests" of each required
+function, operation, option, mode, response, or state.
+
+                         ----------
+
+
+NOTE...
+
+Although the Test Numbers in the USER scenarios replicate the
+Test Numbers in the SERVER scenarios a common Test Number does
+not indicate equivalent, complementary, or corresponding tests;
+
+                          ---------
+
+USER TELNET TESTS INDEX: TELNET TEST NUMBERS versus USER TELNET
+Commands/Primitives/Options/Modes...
+
+The table shows the TELNET Test Numbers which may be regarded as
+the "principal tests" of each USER TELNET Command or Primitive
+and/or Option or Mode.
+
+                          ----------
+
+
+SERVER TELNET TESTS INDEX: TELNET TEST NUMBERS versus SERVER
+TELNET Response Codes...
+
+The table shows the TELNET Test Numbers which may be regarded as
+the "principal tests" of each SERVER TELNET Response (or State,
+etc.) to the indicated TELNET Commands or Primitives.
+
+TELNET TEST SCENARIOS INDEX: TELNET TEST SCENARIO FILES versus
+TELNET TEST NUMBERS...
+
+The table shows, for each TELNET Test Number, the UNIX filenames
+of the TELNET test Scenario Files in which it may be regarded as
+a "principal test objective,.
+
+                         ---------
+
+
+TELNET SCENARIOS AND TESTS DESCRIPTIONS...
+
+This section provides a brief narrative of the scope and
+objectives of each TELNET test Scenario File and a narrative or
+graphic operational description of each TELNET Test Number.
+
+                   TELNET TRACEABILITY INDEX
+
+TELNET TEST NUMBERS
+    versus
+        TELNET MIL-STD-1782 References
+
+The following table shows, for MIL-STD-1782, the TELNET Test
+Numbers which may be regarded as the "principal tests" of each
+required function, operation, option, mode, response, or state.
+
+Test Numbers not indicated here may be used to establish
+necessary predecessor conditions for these tests.
+
+Although the Test Numbers in the USER scenarios replicate the
+Test Numbers in the SERVER scenarios a common Test Number does
+not indicate equivalent, complementary, or corresponding tests.
+
+Reference                                   User Test Number
+---------                                   ----------------
+
+4.2.2                                       1, 2, 3, 4, 5, 6
+4.2.3                                       1, 2, 3, 4, 5, 6
+4.2.4                                       18, 20
+4.3                                         0, 14
+4.3.1.2                                     0
+4.3.2                                       19
+4.4.1                                       17
+4.4.2                                       11
+4.4.3                                       8
+4.4.4                                       9
+4.4.5                                       10
+4.5                                         7
+4.6.1.1                                     15, 16
+4.6.1.3.2                                   13
+4.7.1.b                                     12
+4.8                                         0
+APPENDIX A                                  3
+APPENDIX B                                  1
+APPENDIX C                                  2
+APPENDIX D                                  6
+APPENDIX E                                  4
+APPENDIX F                                  5
+
+                    TELNET TRACEABILITY INDEX
+                            Continued
+
+Reference                                   Server Test Number
+---------                                   --------------------
+
+4.2.2                                       1, 2, 3, 4, 5, 6
+4.2.3                                       1, 2, 3, 4, 5, 6
+4.3                                         0, 11
+4.3.1.2                                     0
+4.4.2                                       7
+4.5                                         7
+4.5.1                                       15
+4.6.1.1                                     11, 12
+4.6.1.3.3                                   17
+4.6.1.3.4                                   16
+4.6.1.3.5                                   8
+4.6.1.3.6                                   9
+4.6.1.3.7                                   10
+4.7.1.b                                     14
+4.8                                         0
+APPENDIX A                                  3
+APPENDIX B                                  1
+APPENDIX C                                  2
+APPENDIX D                                  6
+APPENDIX E                                  4
+APPENDIX F                                  5
+
+                    USER TELNET TESTS INDEX
+
+USER TEST NUMBERS
+    versus
+        USER TELNET Commands/Primitives/Options/Modes
+
+The following table shows the TELNET Test Numbers which may be
+regarded as the "principal tests" of each U8ER TELNET Command or
+Primitive and/or Option or Mode.
+
+Test Numbers not indicated here may be used to establish
+necessary predecessor conditions for these tests.
+
+Although the Test Numbers in the USER scenarios replicate the
+Test Numbers in the SERVER scenarios a common Test Number does
+not indicate equivalent, complementary, or corresponding tests.
+
+Command or Primitive     Option              User Test Number
+--------------------     ------              --------------------
+
+Open connection                              0
+Network Virtual Terminal Go Ahead status     0
+Network Virtual Terminal Echo status         0
+
+Response to DO option request
+                         Remote echo         1
+                         GoAhead             2
+                         Binary              3
+                         Timing Mark         4
+                         Extended Options    5
+                         Status              6
+
+Response to DO option request for enabled option
+                         Remote echo         1
+                         GoAhead             2
+                         Binary              3
+                         Timing Mark         4
+                         Extended Options    5
+                         Status              6
+
+Response to DON'T option request for disabled option
+                         Remote echo         1
+                         GoAhead             2
+                         Binary              3
+                         Timing Mark         4
+                         Extended Options    5
+                         Status              6
+
+Response to WILL option request for enabled option
+                         Remote echo         1
+                         GoAhead             2
+                         Binary              3
+                         Timing Mark         4
+                         Extended Options    5
+                         Status              6
+
+Response to WONT option--announcement of disabling
+                         Remote echo         1
+                         GoAhead             2
+                         Binary              3
+                         Timing Mark         4
+                         Extended Options    5
+                         Status              6
+
+Response to request to enable option peer has enabled
+                         Remote echo         1
+                         GoAhead             2
+                         Binary              3
+                         Timing Mark         4
+                         Extended Options    5
+                         Status              6
+                         
+Correct implementation of enabled option
+                         Remote echo         1
+                         GoAhead             2
+                         Binary              3
+                         Status              6
+
+Correct implementation after disabling option
+                         Remote echo         1
+                         GoAhead             2
+                         Binary              3
+                         Status              6
+
+Correct implementation of option when both sides enabled
+                         GoAhead             2
+                         Binary              3
+                         Status              6
+
+Generation of synch embedding Data Mark (DM) 7
+Generation of Are You There command (AYT)    8
+Generation of Erase Character command (EC)   9
+Generation of Erase Line command (EL)        10
+Generation of Abort Output command (AO)      11
+Generation of No Operation (NOP)             12
+Generation of Break command (BRK)            13
+Transmission of ASCII printable characters   14
+Transmission and receipt of Newline (CRLF)   15
+Transmission and receipt of Carriage Return (CR NULL) 16
+Generation of Interrupt Process command (IP) 17
+Non-transmission of request for previously refused option
+                         Binary              18
+Generation of GoAhead command (GA)           19
+Non-transmission of subnegotiation for disabled option
+                         Status              20
+Close connection                             21
+
+                    SERVER TELNET TESTS INDEX
+
+TELNET TEST NUMBERS
+    versus
+        SERVER TELNET Responses to each SERVER TELNET Command or
+Primitive.
+
+The following table shows the TELNET Test Numbers which may be
+regarded as the "principal tests" of each SERVER TELNET Response
+(or State, etc.) to the indicated SERVER TELNET Commands or
+Primitives.
+
+Test Numbers not indicated here may be used to establish
+necessary predecessor conditions for these tests.
+
+Although the Test Numbers in the USER scenarios replicate the
+Test Numbers in the SERVER scenarios a common Test Number does
+not indicate equivalent, complementary, or corresponding tests.
+
+Command or Primitive     Option              Server Test Number
+--------------------     ------              --------------------
+
+Open connection                              0
+Network Virtual Terminal go ahead status     0
+Network Virtual Terminal echo status         0
+
+Response to DO option request
+                         Remote echo         1
+                         GoAhead             2
+                         Binary              3
+                         Timing Mark         4
+                         Extended Options    5
+                         Status              6
+
+Response to DO option request for enabled option
+                         Remote echo         1
+                         GoAhead             2
+                         Binary              3
+                         Timing Mark         4
+                         Extended Options    5
+                         Status              6
+
+Response to DON'T option request for disabled option
+                         Remote echo         1
+                         GoAhead             2
+                         Binary              3
+                         Timing Mark         4
+                         Extended Options    5
+                         Status              6
+
+Response to WILL option request for enabled option
+                         Remote echo         1
+                         GoAhead             2
+                         Binary              3
+                         Timing Mark         4
+                         Extended Options    5
+                         Status              6
+
+Response to WONT option--announcement of disabling
+                         Remote echo         1
+                         GoAhead             2
+                         Binary              3
+                         Timing Mark         4
+                         Extended Options    5
+                         Status              6
+
+Response to request to enable option peer has enabled
+                         Remote echo         1
+                         GoAhead             2
+                         Binary              3
+                         Timing Mark         4
+                         Extended Options    5
+                         Status              6
+
+Correct implementation of enabled option
+                         Remote echo         1
+                         GoAhead             2
+                         Binary              3
+                         Status              6
+
+Correct implementation after disabling option
+                         Remote echo         1
+                         GoAhead             2
+                         Binary              3
+                         Status              6
+
+Correct implementation of option when both sides enabled
+                         GoAhead             2
+                         Binary              3
+                         Status              6
+
+Response to synch                            7
+Response to Are You There (AYT)              8
+Response to Erase Character (EC)             9
+Response to Erase Line (EL)                  10
+Receipt of ASCII printable characters        11
+Transmission and receipt of newline (CRLF)   12
+Transmission and receipt of carriage return (CR NULL) 13
+Response to No Operation (NOP)               14
+Response to Data Mark (DM) with no TCP Urgent 15
+Response to Abort Output (AO)                16
+Response to Interrupt Process (IP)           17
+Close connection                             18
+
+                 TELNET TEST SCENARIOS INDEX
+
+TELNET TEST SCENARIO FILES
+    versus
+        TELNET TEST NUMBERS
+
+Within the PROTOLAB VAX-11/750 Test Master System, all TELNET
+test Scenario Files may be found in the following UNIX directory:
+
+/usr/users/TSL/test/telnet
+
+The following table shows, for each TELNET Test Number, the UNIX
+filenames of the TELNET test Scenario Files in which it may be
+regarded as a "principal test objective".
+
+A Test Number may be used, to establish necessary predecessor
+conditions for other Test Numbers, in Scenario Files not
+indicated here.
+
+Although the Test Numbers in the USER scenarios replicate the
+Test Numbers in the SERVER scenarios a common Test Number does
+not indicate equivalent, complementary, or corresponding tests.
+
+Test Number              User Scenario File
+--------------------     ----------------------------------------
+
+                         USER_BASIC
+0
+1
+2
+3
+4
+5
+6
+14
+15
+16
+18
+20
+21
+                         USER_OPTIONS1
+8
+9
+10
+17
+19
+                         USER_OPTIONS2
+11
+13
+                         USER_SYNCH
+7
+                    TELNET TEST SCENARIOS INDEX
+                             Continued
+
+Test Number Server       Scenario File
+--------------------     ----------------------------------------
+
+                         SERVER_BASIC
+0
+1
+2
+3
+4
+5
+6
+11
+12
+13
+14
+15
+18
+                         SERVER_OPTIONS1
+8
+9
+10
+17
+                         SERVER_OPTIONS2
+16
+                         SERVER_SYNCH
+7
+          TELNET SCENARIOS AND TESTS DESCRIPTIONS
+
+Scenario File USER_BASIC Tests Network Virtual Terminal (NVT)
+characteristics of TELNET implementation.
+
+------------------------------------
+
+
+Test 0  Open, initial NVT GoAHead and Echo status
+
+          a. Open
+
+            - Can a connection be opened?
+            - Action: IUT directed to send an open command.
+            - Verification: Check that message "SERVER TELNET"
+                received from REF server implementation.
+
+            SUCCESS: Connection opened.
+            FAILURE: Connection not opened.
+
+          b. NVT GoAhead status
+
+            - Is the user TELNET waiting for the GoAhead before
+                sending data?
+            - Action: Send a data string from the IUT to the REF
+                peer.
+            - Verification: Check that data not received by REF
+                peer until the REF has sent a GoAhead.
+
+          SUCCESS: Data sent within 60 seconds of receiving a
+             GoAhead.
+          FAILURE: Data sent without waiting for GoAhead or
+             not sent within 60 seconds of receiving GoAhead-
+
+          c. NVT echo status
+
+            - Is the user not remotely echoing?
+            - Action: Send a data string REF to the IUT.
+            - Verification: Check that the data string the REF
+                has issued is not returned back over the network
+                connection to the REF.
+
+          SUCCESS: Data string not received back by REF.
+             therefore IUT not remotely echoing.
+          FAILURE: Data string received back by REF - IUT
+             remotely echoing.
+
+Test 12  NoOperation (NOP) command
+
+          - Can the user TELNET generate a NOP?
+          - Action: IUT sends a NOP command.
+          - Verification: Check that REF reports that it has
+             received the NOP command.
+
+          SUCCESS: NOP command received by REF.
+          FAILURE: NOP command not received by REF.
+
+Test 14  Correct generation of ASCII printable character set
+
+          - Can the user TELNET correctly generate the ASCII
+              printable character set?
+          - Action: The IUT sends a string containing all the
+              ASCII printable characters to the REF.
+          - Verification: Check that the REF receives the
+              character string sent by the IUT with all characters
+              correctly transmitted.
+
+          SUCCESS: REF receives a correctly transmitted character
+              string of all the ASCII printable characters.
+          FAILURE: REF does not correctly receive a character
+              string of all ASCII printable characters.
+
+Test 15  Transmission and reception of newline character.
+
+          - Does the IUT correctly send and receive the Carriage
+              Return Line-Feed <CR LF> combination?
+          - Action: The IUT sends a data string with newline
+              characters embedded. The REF sends a data string with
+              newline characters embedded to the IUT.
+          - Verification: Check that the REF receives the data
+              string with the newlines in the correct places. Check
+              that the IUT receives the data string with the newlines
+              in the correct places.
+
+          SUCCESS: The IUT user TELNET correctly sends the
+              <CR LF> combination for newline and correctly
+              interprets <CR LF> as newline when it is received.
+          FAILURE: The IUT does not correctly send and/or
+              interpret the newline character.
+
+Test 16  Transmission and reception of Carriage Return
+
+          - Does the IUT correctly transmit a Carriage Return as
+              <CR NULL> and interpret <CR NULL> as Carriage Return
+              when it is received?
+          - Action: IUT sends a data string with a carriage
+              return embedded in it. The REF sends a data string
+              with a carriage return embedded in it.
+          - Verification: Check that the REF reports that it has
+              received a <CR NULL> from the IUT. Check that the IUT
+              has received a data string from the REF contains a
+              carriage return.
+
+          SUCCESS: The IUT correctly transmits a <CR NULL> for a
+              carriage return and can correctly interpret a <CR NULL>
+              as a carriage return.
+          FAILURE: The IUT does not correctly transmit <CR NULL>
+              for carriage return and/or interpret <CR NULL> as
+              carriage return.
+
+Test 1  Negotiation and Implementation of Remote Echo option
+
+          - Does the IUT user TELNET correctly respond to
+              negotiation requests and denials?
+            Does the IUT correctly enable the remote echo option
+              it has agreed to enable?
+            Does the IUT correctly disable the remote echo option
+              when negotiated?
+
+          - Action: REF initiates negotiation sequence and takes
+              the IUT through the states of responding to the request
+              to do the the option, responding to a request for an
+              option when it is already enabled, responding to a
+              request to disable the option, responding to a peer's
+              announcement that it wishes to do an option, and the
+              peer's refusal to do the option.
+
+              If the IUT agrees to enable the remote echo, the REF
+              sends a data string to the IUT to determine if the
+              string is remotely echoed back. When the option is
+              disabled, the REF sends a data string to the IUT to
+              determine whether the IUT is still remotely echoing.
+
+          - Verification: Check the option replies reported as
+              received by the REF for correctness. If testing
+              correct implementation of the remote echo, check if the
+              REF has received back the transmitted data string.
+
+          SUCCESS: The IUT correctly responds to the negotiation
+              sequences. The IUT correctly enables and disables the
+              remote echo. The data string is received by the REF
+              when the IUT is in remote echo mode; it is not
+              received when the option is disabled.
+          FAILURE: The IUT does not correctly respond to the
+              negotiation sequences and/or the IUT does not correctly
+              enable and disable the Remote Echo option.
+
+Test 2  Negotiation and Implementation of Suppress GoAhead option
+
+          - Does the IUT user TELNET correctly respond to
+              negotiation requests and denials?
+            Does the IUT correctly enable the GoAhead option it
+              has agreed to enable?
+            Does the IUT correctly disable the GoAhead option
+              when negotiated?
+
+          - Action: REF initiates negotiation sequence and takes
+              the IUT through the states of responding to a request
+              to do the option, responding to a request for the
+              option when it is already enabled, responding to a
+              command to disable the option, responding to its peer's
+              announcement that is wishes to enable the option, and
+              responding to the peer's command to disable the option.
+
+              If the IUT agrees to enable the Suppress GoAhead
+              option, the IUT sends a data string to the REF; no
+              GoAheads are being generated by the server REF. When
+              the option is disabled, the REF is inhibited from
+              sending GoAheads and the IUT attempts to send a data
+              string to the REF.
+
+          - Verification: Check the IUT option replies reported
+              by the REF for correctness. If testing correct
+              implementation of the Suppress GoAhead, check if the
+              REF has received the transmitted data string although
+              no GoAheads are being generated. If the option is
+              disabled, check if the IUT waited for the GoAhead to
+              send data and if the data string was sent within 60
+              seconds of receiving the GoAhead.
+
+          SUCCESS: The IUT correctly responds to the negotiation
+              sequences. The IUT correctly enables and disables the
+              Suppress GoAhead option.
+          FAILURE: The IUT does not correctly respond to the
+              negotiation sequences and/or the IUT does not correctly
+              enable and disable the Suppress GoAhead option.
+
+Test 3  Negotiation and Implementation of Binary option
+
+          - Does the IUT user TELNET correctly respond to
+              negotiation requests and denials?
+            Does the IUT correctly enable the Binary option it
+              has agreed to enable?
+            Does the IUT correctly disable the Binary option when
+              negotiated?
+          - Action: REF initiates negotiation sequence and takes
+              the IUT through the states of responding to a request
+              to do the option, responding to a request for the
+              option when it is already enabled, responding to a
+              command to disable the option, responding to its peer's
+              announcement that is wishes to enable the option, and
+              responding to the peer's command to disable the option.
+
+              If the IUT agrees to enable the Binary option, the
+              IUT sends a data string of non-printable ASCII
+              characters , including one TELNET IAC(377), to the REF;
+              When the option is disabled, the IUT sends the same
+              data string to the IUT. When the IUT has agreed that
+              the REF can transmit in binary, a data string
+              containing ASCII unprintable characters is sent from
+              the REF to the IUT.
+          - Verification: Check the IUT option replies reported
+              by the REF for correctness. When testing
+              implementation of the enabled Binary option, check if
+              the REF has reported receiving two IACs from the IUT.
+              When the option has been disabled, check the REF to
+              determine that two IACs have not been transmitted.
+              When the IUT has agreed that the REF may transmit
+              Binary, check that the transmitted data string was
+              correctly interpreted by the IUT.
+
+          SUCCESS: The IUT correctly responds to the negotiation
+              sequences. The IUT correctly enables and disables the
+              Binary option.
+          FAILURE: The IUT does not correctly respond to the
+              negotiation sequences and/or the IUT does not correctly
+              enable and disable the Binary option.
+
+Test 4  Negotiation of Timing Mark option
+
+          - Does the IUT user TELNET correctly respond to
+              negotiation requests and denials?
+          - Action: REF initiates negotiation sequence and takes
+              the IUT through the states of responding to a request
+              to do the option, responding to a request for the
+              option when it is already enabled, responding to a
+              command to disable the option, responding to its peer's
+              announcement that is wishes to enable the option, and
+              responding to the peer's command to disable the option.
+          - Verification: Check the IUT option replies reported
+              by the REF for correctness.
+              
+          SUCCESS: The IUT correctly responds to the negotiation
+              sequences.
+          FAILURE: The IUT does not correctly respond to the
+              negotiation sequences.
+              
+Test 5  Negotiation of Extend Option List option
+              
+          - Does the IUT user TELNET correctly respond to
+              negotiation requests and denials?
+          - Action: REF initiates negotiation sequence and takes
+              the IUT through the states of responding to a request
+              to do the option, responding to a request for the
+              option when it is already enabled, responding to a
+              command to disable the option, responding to its peer's
+              announcement that is wishes to enable the option, and
+              responding to the peer's command to disable the option.
+          - Verification: Check the IUT option replies reported
+              by the REF for correctness.
+
+          SUCCESS: The IUT correctly responds to the negotiation
+              sequences.
+          FAILURE: The IUT does not correctly respond to the
+              negotiation sequences.
+
+Test 6  Negotiation and Implementation of Status option
+
+          - Does the IUT user TELNET correctly respond to
+              negotiation requests and denials?
+              Does the IUT correctly enable the Status option it
+              has agreed to enable?
+              Does the IUT correctly disable the Status option when
+              negotiated?
+
+          - Action: REF initiates negotiation sequence and takes
+              the IUT through the states of responding to a request
+              to do the option, responding to a request for the
+              option when it is already enabled, responding to a
+              command to disable the option, responding to its peer's
+              announcement that is wishes to enable the option, and
+              responding to the peer's command to disable the option.
+
+              If the IUT agrees to enable the Status option, the
+              REF sends the subnegotiation command Status Send to the
+              IUT.
+
+          - Verification: Check the IUT option replies reported
+              by the REF for correctness. When testing
+              implementation of the enabled Status option, check if
+              the REF has reported receiving a Status is
+              subnegotiation reply from the IUT correctly listing the
+              status of the negotiated options.
+              SUCCESS: The IUT correctly responds to the negotiation
+              sequences. The IUT correctly enables the Status
+              option.
+
+          FAILURE: The IUT does not correctly respond to the
+              negotiation sequences and/or the IUT does not correctly
+              enable the Status option.
+Test 18  Non transmission of request for a refused option until
+a new connection has been made or the status of another option changed.
+
+          - Does the IUT user TELNET correctly not send a request
+              for a previously refused option?
+          - Action: REF is placed in a state where it refuses
+              all options. The IUT requests the REF to Do Binary and
+              is refused. The IUT is directed to again request the
+              option.
+          - Verification: Check to see if the REF reports
+              having received the second option request.
+
+          SUCCESS: The IUT correctly did not send the second
+              option request to the REF.
+          FAILURE: The IUT sends the second option request to
+              the REF.
+
+Test 20  Subnegotiation command not sent for an unnegotiated option
+
+          - Does the IUT user TELNET correctly not send a
+              subnegotiation request for an unnegotiated option?
+          - Action: Status option is not enabled. IUT is
+              directed to send the subnegotiation command Status Send
+              to the REF.
+          - Verification: Check to see if the REF reports
+              having received the subnegotiation request.
+
+          SUCCESS: The IUT correctly did not send the
+              subnegotiation request to the REF.
+          FAILURE: The IUT sends the subnegotiation request to
+              the REF.
+
+Test 21  Close the Telnet Connection (Not an explicit part of
+MIL STD 1782)
+
+          - Can the IUT user TELNET close the Telnet connection?
+          - Action: The IUT is directed to close the connection.
+          - Verification: Check to see if the REF reports
+              having received the Close.
+
+          SUCCESS: The IUT correctly closes the Telnet
+              connection.
+          FAILURE: The REF never receives a Close from the IUT.
+
+              TELNET SCENARIOS AND TESTS DESCRIPTIONS
+
+Scenario File USER_OPTIONS1 Tests commonly implemented optional
+TELNET commands: Are You There; Erase Character; Erase Line; Go
+Ahead; and Interrupt Process.
+
+------------------------------------
+
+Test 8   Are You There (AYT) command
+
+          - Can the user TELNET generate an AYT?
+          - Action: IUT sends a AYT command.
+          - Verification: Check that REF reports that it has
+              received the AYT command.
+
+          SUCCESS: AYT command received by REF.
+          FAILURE: AYT command not received by REF.
+
+Test 9   Erase Character (EC) command
+
+          - Can the user TELNET generate an EC?
+          - Action: IUT sends a EC command.
+          - Verification: Check that REF reports that it has
+              received the EC command.
+
+          SUCCESS: EC command received by REF.
+          FAILURE: EC command not received by REF.
+
+Test 10  Erase Line (EL) command
+
+          - Can the user TELNET generate an EL?
+          - Action: IUT sends a EL command.
+          - Verification: Check that REF reports that it has
+              received the EL command.
+
+          SUCCESS: EL command received by REF.
+          FAILURE: EL command not received by REF.
+
+Test 19  GoAhead (GA) command
+
+          - Can the user TELNET generate a GA?
+          - Action: IUT sends a GA command.
+          - Verification: Check that REF reports that it has
+              received the GA command.
+
+          SUCCESS: GA command received by REF.
+          FAILURE: GA command not received by REF.
+
+Test 20  Interrupt Process (IP) command
+
+          - Can the user TELNET generate an IP?
+          - Action: IUT sends a IP command.
+          - Verification: Check that REF reports that it has
+              received the IP command.
+
+          SUCCESS: IP command received by REF.
+          FAILURE: IP command not received by REF.
+
+             TELNET SCENARIOS AND TESTS DESCRIPTIONS
+
+Scenario File USER_OPTIONS2 Tests less commonly implemented
+optional TELNET commands: Break and Abort Output.
+
+------------------------------------
+
+Test 13  Break (BRK) command
+
+          - Can the user TELNET generate a BRK?
+          - Action: IUT sends a BRK command.
+          - Verification: Check that REF reports that it has
+              received the BRK command.
+
+          SUCCESS: BRK command received by REF.
+          FAILURE: BRK command not received by REF.
+
+Test 11  Abort Output (AO) command
+
+          - Can the user TELNET generate an AO?
+          - Action: IUT sends an AO command.
+          - Verification: Check that REF reports that it has
+              received the AO command.
+
+          SUCCESS: AO command received by REF.
+          FAILURE: AO command not received by REF.
+
+            TELNET SCENARIOS AND TESTS DESCRIPTIONS
+
+Scenario File USER_SYNCH Tests less commonly implemented optional
+TELNET command: Synch.
+
+------------------------------------
+
+
+Test 7   Synch command (TCP urgent with Data Mark (DM) embedded in
+data stream).
+
+          - Can the user TELNET generate a Synch?
+          - Action: IUT sends a Synch command embedded in a data
+              string.
+          - Verification: Check that REF reports that it has
+              received the TCP Urgent and the DM. Check that the DM
+              is placed in the proper position in the data stream.
+
+          SUCCESS: The TCP Urgent and the correctly placed DM
+              received by REF.
+          FAILURE: The TCP Urgent and/or the correctly placed DM
+              not received by REF.
+
+            TELNET SCENARIOS AND TESTS DESCRIPTIONS
+
+Scenario File SERVER_BASIC Tests Network Virtual Terminal (NVT)
+characteristics of TELNET implementation.
+
+------------------------------------
+
+test 0  Open, initial NVT GoAHead and Echo status
+
+          a. Open
+
+            - Can a connection be opened?
+            - Action: REF sends an open command.
+            - Verification: Check that message "login" received
+                from REF user implementation.
+
+            SUCCESS: Connection opened.
+            FAILURE: Connection not opened.
+
+          b. NVT GoAhead status
+
+            - Is the server TELNET generating the GoAhead?
+            - Action: Opening the connection should result in
+                the server Telnet sending a GoAhead to user Telnet.
+            - Verification: Check that the REF reports having
+                received a GoAhead.
+
+            SUCCESS: A GoAhead generated by the IUT.
+            FAILURE: IUT not generating GoAhead.
+
+          c. NVT echo status
+
+            - Is the IUT server remotely echoing?
+            - Action: Send a data string from the REF to the IUT.
+            - Verification: Check that the data string the REF
+                has issued is not returned back over the network
+                connection to the REF.
+
+            SUCCESS: Data string not received back by REF 
+              therefore IUT not remotely echoing.
+            FAILURE: Data string received back by REF - IUT
+              remotely echoing.
+
+Test 11  Correct interpretation of ASCII printable character set
+          - Can the server TELNET correctly interpret the ASCII
+              printable character set?
+          - Action: The REF sends a string containing all the
+              ASCII printable characters to the IUT.
+          - Verification: Check that the IUT returns to the
+              Central Driver the same data string sent by the REF.
+
+          SUCCESS: IUT correctly interprets the character string
+              of all the ASCII printable characters.
+          FAILURE: IUT does not correctly interpret a character
+              string of all ASCII printable characters.
+
+Test 12  Transmission of newline character.
+
+          - Does the IUT correctly send the Carriage-Return
+              Line-Feed <CR LF> combination?
+          - Action: The IUT is directed to send a data string
+              with newline characters embedded.
+          - Verification: Check that the REF receives the data
+              string with the newlines in the correct places and
+              specified with a <CR><LF>(octal 15 followed by octal 12)
+
+          SUCCESS: The IUT user TELNET correctly sends the
+              <CR LF> combination for newline.
+          FAILURE: The IUT does not correctly send newline
+              character.
+
+Test 13  Transmission and reception of Carriage Return
+
+          - Does the IUT correctly transmit a Carriage Return as
+              <CR NULL> and interpret <CR NULL> as Carriage Return
+              when it is received?
+          - Action: IUT sends a data string with a carriage
+              return embedded in it. The REF sends a data string
+              with a carriage return embedded in it.
+          - Verification: Check that the REF has received a data
+              string from the IUT containing a <CR> (an octal 15).
+              Check that the IUT has received a data string from the
+              REF containing a carriage return.
+
+          SUCCESS: The IUT correctly transmits a <CR NULL> for a
+              carriage return and can correctly interpret a <CR NULL>
+              as a carriage return.
+          FAILURE: The IUT does not correctly transmit <CR NULL>
+              for carriage return and/or interpret <CR NULL> as
+              carriage return.
+
+Test 14  NoOperation (NOP) command
+
+          - Can the server TELNET correctly handle a NOP in the
+              data stream?
+          - Action: REF sends a NOP command embedded in a data
+              string to the IUT .
+          - Verification: Check that IUT returns to the Central
+              Driver the data string with the NOP removed and having
+              had no effect on the data string.
+
+          SUCCESS: NOP command correctly handled by IUT.
+          FAILURE: NOP command not correctly handled by the IUT.
+
+Test 15  Data Mark (DM) command with no corresponding TCP Urgent.
+
+          - Can the server TELNET correctly handle a DM in the
+              data stream?
+          - Action: REF sends a DM command embedded in a data
+              string to the IUT. No TCP Urgent is sent.
+          - Verification: Check that IUT returns to the Central
+              Driver the data string with the DM removed and having
+              had no effect on the data string.
+
+          SUCCESS: Unaccompanied DM command correctly handled by IUT.n
+          FAILURE: Unaccompanied DM command not correctly handled
+              by the IUT.
+
+Test 1  Negotiation and Implementation of Remote Echo option
+
+          - Does the IUT server TELNET correctly respond to
+              negotiation requests and denials?
+            Does the IUT correctly enable the remote echo option
+              it has agreed to enable?
+            Does the IUT correctly disable the remote echo option
+              when negotiated?
+
+          - Action: REF initiates negotiation sequence and takes
+              the IUT through the states of responding to the request
+              to do the the option, responding to a request for an
+              option when it is already enabled, responding to a
+              request to disable the option, responding to a peer's
+              announcement that it wishes to do an option, and the
+              peer's refusal to do the option.
+
+              If the IUT agrees to enable the remote echo, the REF
+              sends a data string to the IUT to determine if the
+              string is remotely echoed back. When the option is
+              disabled, the REF sends a data string to the IUT to
+              determine whether the IUT is still remotely echoing.
+
+          - Verification: Check the option replies reported as
+              received by the REF for correctness. If testing
+              correct implementation of the remote echo, check if the
+              REF has received back the transmitted data string.
+
+          SUCCESS: The IUT correctly responds to the negotiation
+              sequences. The IUT correctly enables and disables the
+              remote echo. The data string is received by the REF
+              when the IUT is in remote echo mode; it is not
+              received when the option is disabled.
+          FAILURE: The IUT does not correctly respond to the
+              negotiation sequences and/or the IUT does not correctly
+              enable and disable the Remote Echo option.
+              
+Test 2 Negotiation and Implementation of Suppress GoAhead option
+              
+          - Does the IUT server TELNET correctly respond to
+              negotiation requests and denials?
+            Does the IUT correctly enable the GoAhead option it
+              has agreed to enable?
+            Does the IUT correctly disable the GoAhead option
+              when negotiated?
+              
+          - Action: REF initiates negotiation sequence and takes
+              the IUT through the states of responding to a request
+              to do the option, responding to a request for the
+              option when it is already enabled, responding to a
+              command to disable the option, responding to its peer's
+              announcement that is wishes to enable the option, and
+              responding to the peer's command to disable the option.
+              If the IUT agrees to enable the Suppress GoAhead
+              option, the IUT sends a data string to the REF; no
+              GoAheads are being generated by the server REF. When
+              the option is disabled, the REF is inhibited from
+              sending GoAheads and the IUT attempts to send a data
+              string to the REF.
+              
+          - Verification: Check the IUT option replies reported
+              by the REF for correctness. If testing correct
+              implementation of the Suppress GoAhead, check if the
+              REF has received the transmitted data string although
+              no GoAheads are being generated. If the option is
+              disabled, check if the IUT waited for the GoAhead to
+              send data and if the data string was sent within 60
+              seconds of receiving the GoAhead.
+
+          SUCCESS: The IUT correctly responds to the negotiation
+              sequences. The IUT correctly enables and disables the
+              Suppress GoAhead option.
+          FAILURE: The IUT does not correctly respond to the
+              negotiation sequences and/or the IUT does not correctly
+              enable and disable the Suppress GoAhead option.
+
+Test 3  Negotiation and Implementation of Binary option
+
+          - Does the IUT server TELNET correctly respond to
+              negotiation requests and denials?
+            Does the IUT correctly enable the Binary option it
+              has agreed to enable?
+            Does the IUT correctly disable the Binary option when
+              negotiated?
+
+          - Action: REF initiates negotiation sequence and takes
+              the IUT through the states of responding to a request
+              to do the option, responding to a request for the
+              option when it is already enabled, responding to a
+              command to disable the option, responding to its peer's
+              announcement that is wishes to enable the option, and
+              responding to the peer's command to disable the option.
+
+              If the IUT agrees to enable the Binary option, the
+              IUT sends a data string of non-printable ASCII
+              characters , including one TELNET IAC(377), to the REF;
+              When the option is disabled, the IUT sends the same
+              data string to the IUT. When the IUT has agreed that
+              the REF can transmit in binary, a data string
+              containing ASCII unprintable characters is sent from
+              the REF to the IUT.
+
+          - Verification: Check the IUT option replies reported
+              by the REF for correctness. When testing
+              implementation of the enabled Binary option, check if
+              the REF has reported receiving two IACs from the IUT.
+              When the option has been disabled, check the REF to
+              determine that two IACs have not been transmitted.
+              When the IUT has agreed that the REF may transmit
+              Binary, check that the transmitted data string was
+              correctly interpreted by the IUT.
+
+          SUCCESS: The IUT correctly responds to the negotiation
+              sequences. The IUT correctly enables and disables the
+              Binary option.
+          FAILURE: The IUT does not correctly respond to the
+              negotiation sequences and/or the IUT does not correctly
+              enable and disable the Binary option.
+
+Test 4  Negotiation of Timing Mark option
+
+          - Does the IUT server TELNET correctly respond to
+              negotiation requests and denials?
+          - Action: REF initiates negotiation sequence and takes
+              the IUT through the states of responding to a request
+              to do the option, responding to a request for the
+              option when it is already enabled, responding to a
+              command to disable the option, responding to its peer's
+              announcement that is wishes to enable the option, and
+              responding to the peer's command to disable the option.
+          - Verification: Check the IUT option replies reported
+              by the REF for correctness.
+
+          SUCCESS: The IUT correctly responds to the negotiation
+              sequences.
+          FAILURE: The IUT does not correctly respond to the
+              negotiation sequences.
+
+Test 5  Negotiation of Extend Option List option
+
+          - Does the IUT server TELNET correctly respond to
+              negotiation requests and denials?
+
+          - Action: REF initiates negotiation sequence and takes
+              the IUT through the states of responding to a request
+              to do the option, responding to a request for the
+              option when it is already enabled, responding to a
+              command to disable the option, responding to its peer's
+              announcement that is wishes to enable the option, and
+              responding to the peer's command to disable the option.
+
+          - Verification: Check the IUT option replies reported
+              by the REF for correctness.
+
+          SUCCESS: The IUT correctly responds to the negotiation
+              sequences.
+          FAILURE: The IUT does not correctly respond to the
+              negotiation sequences.
+
+Test 6  Negotiation and Implementation of Status option
+
+          - Does the IUT server TELNET correctly respond to
+              negotiation requests and denials?
+            Does the IUT correctly enable the Status option it
+              has agreed to enable?
+            Does the IUT correctly disable the Status option when
+              negotiated?
+          - Action: REF initiates negotiation sequence and takes
+              the IUT through the states of responding to a request
+              to do the option, responding to a request for the
+              option when it is already enabled, responding to a
+              command to disable the option, responding to its peer's
+              announcement that is wishes to enable the option, and
+              responding to the peer's command to disable the option.
+
+              If the IUT agrees to enable the Status option, the
+              REF sends the subnegotiation command Status Send to the IUT.
+
+          - Verification: Check the IUT option replies reported
+              by the REF for correctness. When testing
+              implementation of the enabled STATUS, check if the REF
+              has reported receiving a Status is subnegotiation reply
+              from the IUT correctly listing the status of the
+              negotiated options.
+
+          SUCCESS: The IUT correctly responds to the negotiation
+              sequences. The IUT correctly enables the Status
+              option.
+          FAILURE: The IUT does not correctly respond to the
+              negotiation sequences and/or the IUT does not correctly
+              enable the Status option.
+
+Test 18  Close the Telnet Connection (Not an explicit part of
+MIL STD 1782)
+
+          - Does the IUT server TELNET respond correctly when the
+              user TELNET closes the connection.
+          - Action: The REF sends a command to close the
+              connection.
+          - Verification: Check to see if the REF reports the
+              connection closed.
+
+          SUCCESS: The IUT correctly responds to a close of the
+              Telnet connection.
+          FAILURE: The IUT does not correctly respond to a close.
+
+             TELNET SCENARIOS AND TESTS DESCRIPTIONS
+
+Scenario File SERVER_OPTIONS1 Tests commonly implemented optional
+TELNET commands: Are You There; Erase Character; Erase Line;
+GoAhead; and Interrupt Process.
+
+
+
+Test 8  Are You There (AYT) command
+
+          - Can the server TELNET correctly respond to an AYT?
+          - Action: REF sends an AYT command.
+          - Verification: Check that REF reports that it has
+              received a visible response from the IUT.
+
+          SUCCESS: Receipt of AYT command causes IUT to respond
+              with a visible response.
+          FAILURE: No visible response returned by IUT after
+              receiving an AYT command.
+
+Test 9  Erase Character (EC) command
+
+          - Can the server TELNET correctly respond to an EC?
+          - Action: REF sends a EC command embedded in a data
+              string.
+          - Verification: Check that IUT sends to the Central
+              Driver the data string with the character immediately
+              preceding the EC deleted.
+
+          SUCCESS: IUT correctly handles EC command by deleting
+              immediately preceding character.
+          FAILURE: IUT does not correctly handle EC command -
+              the character immediately preceding the EC is not
+              deleted.
+
+Test 10  Erase Line (EL) command
+
+          - Can the user TELNET correctly respond to an EL?
+          - Action: REF sends a EL command embedded in a string
+              string containing three lines..
+          - Verification: Check that IUT returns to the Central
+              Driver the received data string with the line
+              immediately preceding the EL command deleted.
+
+          SUCCESS: IUT correctly handles EL by deleting
+              immediately preceding line.
+          FAILURE: IUT does not correctly handled EL -- the
+              correct line was not deleted.
+
+Test 17  Interrupt Process (IP) command
+
+          - Can the server TELNET correctly respond to an IP?
+          - Action: REF sends a IP command.
+          - Verification: Check that REF reports that it has
+              received the IUT cursor indicating that the process
+              being run has been interrupted. (The process being run
+              on the IUT was the server Remote Driver.)
+          SUCCESS: IUT correctly responds to IP by interrupting
+              its running process.
+          FAILURE: IUT does not correctly respond to IP command.
+
+         TELNET SCENARIOS AND TESTS DESCRIPTIONS
+
+Scenario File SERVER_OPTIONS2 Tests optional TELNET command:
+Abort Output.
+
+------------------------------------
+
+
+Test 11  Abort Output (AO) command
+
+          - Does the server TELNET respond correctly to AO?
+          - Action: REF sends an AO command.
+          - Verification: Check that REF reports that it has
+              received a Synch. Then the IUT is directed to send a
+              data string and the REF checked to see if the data
+              string is received. It should not be received.
+
+          SUCCESS: The IUT responds to an AO by sending the REF a
+              Synch and not sending any further output data across
+              the TELNET connection.
+          FAILURE: The IUT either does not respond to an AO with
+              a Synch and/or continues to send output data to the
+              peer protocol.
+
+            TELNET SCENARIOS AND TESTS DESCRIPTIONS
+
+Scenario File SERVER_SYNCH Tests optional TELNET command: Synch.
+
+------------------------------------
+
+Test 7  Synch command (TCP urgent with Data Mark (DM) embedded in
+data stream).
+
+          - Does the server TELNET correctly respond to a Synch?
+          - Action: REF sends a series of Synch commands
+              embedded in a very long data string.
+          - Verification: Check the data string returned to the
+              Central Driver by the IUT to determine if any data
+              immediately preceding a Synch has been lost. The loss
+              of this data indicates that the IUT has responded
+              correctly to the Synch. However, if no data is lost
+              the IUT may also have handled the Synch correctly.
+          
+          SUCCESS: Data immediately preceding a Synch was lost or
+              no data was lost indicates successful handling of the
+              Synch by the IUT.
+          FAILURE: If data transmitted after the last Synch was
+              lost this indicates that the Synch is not being
+              correctly handled by the IUT.

@@ -1,0 +1,203 @@
+
+
+            XYPLEX-MIB DEFINITIONS ::= BEGIN
+
+                    IMPORTS
+                            enterprises
+                                    FROM RFC1155-SMI;
+
+            xyplex          OBJECT IDENTIFIER ::= { enterprises 33 }
+            agent           OBJECT IDENTIFIER ::= { xyplex 8 }
+
+            -- This is a MIB module for all Xyplex systems
+
+            -- Copyright 1993 Xyplex, Inc..  All Rights Reserved.
+            -- Reproduction of this document is authorized on
+            -- condition that this copyright notice is included.
+            -- This MIB document embodies Xyplex, Inc.'s proprietary
+            -- intellectual property.  Xyplex, Inc. retains all
+            -- title and ownership in this MIB, including any
+            -- revisions.
+            --
+            -- It is Xyplex, Inc.'s intent to encourage the widespread
+            -- use of this MIB in connection with the management of
+            -- Xyplex, Inc. products. Xyplex, Inc. grants vendors,
+            -- end-users, and other interested parties a non-exclusive
+            -- license to use this MIB in connection with the
+            -- management of Xyplex, Inc. products.
+            --
+            -- This MIB document is supplied "AS IS," and Xyplex, Inc.
+            -- makes no warranty, either express or implied, as to the
+            -- use operation, condition, or performance of the MIB.
+
+
+            -- Textual Conventions
+
+            DateTime ::=
+                OCTET STRING (SIZE (8))
+            -- This data type is used throughout the Xyplex private MIB
+            -- to model an absolute date and time.
+            -- In order, the octets contain the following information:
+            -- century, year within century (0..99), month (1..12),
+            -- day (1..31), hour (0..23), minute (0..59),
+            -- second (0..59), hundredth (0..99).  If the century
+            -- value is zero, the date and time are unknown, and the
+            -- other values are meaningless.
+
+            AddressType ::=
+                INTEGER  { unknown(1), other(2), local(3),
+                           ip(4), ethernet(5) }
+            -- This data type is used throughout the Xyplex private MIB
+            -- to indicate the type of an address stored in a related
+            -- octet string.
+
+            TypedAddress ::=
+                OCTET STRING (SIZE (1..32))
+            -- This data type is used throughout the Xyplex private MIB
+            -- to indicate an address with a type attached.  The type is
+            -- the first byte.  The address immediately follows the
+            -- type, occupying the appropriate number of bytes, (0..31).
+            -- The type values are:
+            --     1   unknown
+            --     2   other
+            --     3   local
+            --     4   ip
+            --     5   ethernet
+
+            SoftwareType ::=
+                INTEGER  { terminalServer(1), bridge(3), repeater(4),
+                           bridgeRouter(5), router(6),
+                           bridgeRouterRepeater(7), switch(8) }
+            -- This data type is used throughout the Xyplex private MIB
+            -- to indicate the type software running on a system. 
+
+            HardwareType ::=
+                INTEGER  { mxAsyncG8(30), mxAsyncJ8(31), mxTservJ8(32),
+                           mxTServJ8(33), mxTservJ16(34), mxManF2(35),
+                           mx1500(36), mx1100(37), mx1800(38),
+                           mxNpcP1(39), mxTsrLJ16(40), mxTsrvLJ8(41), 
+                           mxTsrvMj8(42), mxTsrvNJ8(43), mxTsrvOJ8(44),
+                           mx1400(45), mx6510(46),
+                           mx1500x8(49), mx1710(50), mx2710(51),
+                           ts3395(52), mx1120(53), mx1520(54),
+                           mx1820(55), mx2220(56), mx3510(57),
+                           mx6625(58), mx2120(59), mx6020(60),
+                           mx3610(61), etsmim(62), mx3010(63),
+                           mx6025(64), lannetTs(65), fn1500(66),
+                           dpXp1(67), mx3710(68), mx3210(69),
+                           mx6710(70), mx6220(71),
+                           mx1600a(74), mx1450(75),
+                           ts720(76), so3395aTs(77), mx1608(78),
+                           mx2210a(79), br401(80), mx6800a(81),
+                           rp201(83), rp210(84),
+                           mx6800b(85), mx1620(86), mx2240(87),
+                           ps3m(88), nio1600(90),
+                           asy160(91), mx1640(92), br220(93),
+                           rp211(94), br221(95), mx2210b(96),
+                           mx1600b(97), mx1600c(98), mx800a(99),
+                           mx1600d(100), mx800b(102),
+                           br501(103), pm402(109)}
+
+            -- This data type is used throughout the Xyplex private MIB
+            -- to indicate the type of a systems main function 
+            -- hardware.  A value of 0 indicates that the systems main
+			-- function is unknown.
+
+            ChassisType ::=
+                 INTEGER { other(1), mx45xx(2), net9000(3), net9000SWITCH (4) }               
+            -- This data type is used throughout the Xyplex private MIB
+            -- to indicate the type of chassis hardware.
+
+            IOType ::=
+                 INTEGER { io301x12(160), io512x3(176), io511x3(177),
+                           io469x2(183),
+                           io467x4(184), io467x2(185), io468x4(186),
+                           io468x2(187), io466x4(188), io465x2(189),
+                           io464x4(190), io463x2(191), io201(192),
+                           io202(193), io204(194), io203(195),
+                           io251(196), io231(197), io254(198),
+                           io206(199), io253(200), io201A(201),
+						   io202A(202), io203A(203), io256(204),
+                           io205x12(209),
+                           io205(210), io255(214), io721a(224),
+                           io721(225), io411(226), io724(227),
+                           io723(232), io462(233), io412(234),
+                           io461(237), io101(238), io119(239) }
+            -- This data type is used throughout the Xyplex private MIB
+            -- to indicate the type of I/O hardware.
+
+
+            -- Agent Object Identifiers
+
+            -- A Xyplex agent identifer has the following fields:
+            --
+            --     xyplex.agent.software.variant.version
+            --
+            -- Where:
+            --
+            --     xyplex.agent   is an ordinary OID prefix.
+            --                    Note that Xyplex's original form for
+            --                    such OID's used the value 1 for agent
+            --                    and had no variant or version.  Later
+            --                    forms included variant and version in
+            --                    an inconsistent manner.
+            --
+            --     software       a value of the Xyplex SoftwareType
+            --                    textual convention.
+            --
+            --     variant        a variant within a software type,
+            --                    typically hardware dependent.  If the
+            --                    software has no variants, it uses the
+            --                    value 1.
+            --
+            --     version        a version number within the variant,
+            --                    increased by one each time that
+            --                    variant's agent changes in a way that
+            --                    is significant to its MIB
+            --                    capabilities description
+
+            -- Terminal Servers
+
+            terminalServer   OBJECT IDENTIFIER ::= { agent 1 }
+
+            --     MAXserver variants, 1M memory
+            tsMxCard1M       OBJECT IDENTIFIER ::= { terminalServer 1 }
+            tsMxBox1M        OBJECT IDENTIFIER ::= { terminalServer 2 }
+
+            --     MAXserver variants, 1M memory
+            tsMxCard         OBJECT IDENTIFIER ::= { terminalServer 3 }
+            tsMxBox          OBJECT IDENTIFIER ::= { terminalServer 4 }
+
+            --     Network 9000 variant
+            tsN9             OBJECT IDENTIFIER ::= { terminalServer 5 }
+
+            --     Printer controller variant
+            tsPrint          OBJECT IDENTIFIER ::= { terminalServer 6 }
+
+            --     X.25 Gateway variant
+            tsX25            OBJECT IDENTIFIER ::= { terminalServer 7 }
+
+            -- Bridges
+
+            bridge                 OBJECT IDENTIFIER ::= { agent 3 }
+
+            -- Repeaters
+
+            repeater               OBJECT IDENTIFIER ::= { agent 4 }
+
+            --     MAXserver variant
+            rpMx                   OBJECT IDENTIFIER ::= { repeater 1 }
+
+            --     Network 9000 variant
+            rpN9                   OBJECT IDENTIFIER ::= { repeater 2 }
+
+            -- Bridge/Routers
+
+            bridgeRouter           OBJECT IDENTIFIER ::= { agent 5 }
+
+            -- Bridge/Router/Repeaters
+
+            bridgeRouterRepeater   OBJECT IDENTIFIER ::= { agent 7 }
+
+END
+

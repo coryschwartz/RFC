@@ -1,0 +1,61 @@
+ 6-Sep-82 16:30:41-PDT,2623;000000000001
+Mail-from: ARPANET host SRI-NIC rcvd at 6-Sep-82 1630-PDT
+Date:  6 Sep 1982 1521-PDT
+From: Nic at SRI-NIC
+Subject: Network News No. 14 - Please Read - Important Announcement!!
+To:   ANEWS-DIST:
+cc:   NIC-STAFF:
+
+=====================================================================
+ANEWS-14                                                DCA Code B645
+6 August 1982                                        (DCACODE252@ISI)
+                                                     (202) 692-6175/6
+
+                  DoD NETWORK NEWSLETTER
+
+
+=====================================================================
+
+      ATTENTION!  - Netwide TCP Experiment - October 1, 1982
+
+---------------------------------------------------------------------
+
+On October 1, from 12:00 to 16:00 EDT, a TCP-only experiment will be 
+conducted on the ARPANET.  During this period, the ARPANET IMPs will be 
+disabled from sending NCP Host-to-Host traffic, and network traffic 
+measurements will be made.
+
+The method that will be used to disable the NCP traffic will be for the 
+IMPs to reject any messages submitted by the hosts that use link 0 
+(i.e., that have bits 65-72 in the 1822 leader set to zero).  If an IMP 
+receives such a message, it will respond to the host with a type 7 
+(destination host or IMP dead) subtype 3 (communication with the 
+destination host is administratively prohibited) message (see BBN Report
+1822, Page 3-30).  This response is consistent with the IMP's present 
+behavior, and this is similar to the method that was used when short 
+leaders were removed from the network.
+
+During the test, hosts that are running NCP and TCP in parallel with 
+shared remote host state tables may encounter some problems unless their
+NCP is turned off for the duration.  Several TOPS-20 TCP implementations
+fall into this category, and other hosts may as well.  TCP-only hosts 
+should encounter no difficulties, and NCP-only hosts will be unable to 
+use the network.
+
+It is important to note that this method of disabling NCP traffic will 
+be used once the network passes the TCP-only date next year (1 Jan 83), 
+so your host software should (if it cannot now) be able to correctly 
+recognize and handle type 7, subtype 3 messages from the IMP.
+
+Any technical questions concerning the test may be directed to Andrew 
+Malis (Malis@bbn-unix).  Any administrative questions should be directed
+to DCA Code B645 (formerly Code 252) (DCACODE252USC-ISI).
+
+Regards,
+Jack Snively
+DCA Code B645(252)
+ARPANET Managment
+
+Telephone: (202) 692-6175/6176 or (AV) 222-6175/6176.
+
+-------

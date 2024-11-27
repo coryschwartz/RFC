@@ -1,0 +1,2198 @@
+                    DCEC PROTOCOL LABORATORY
+                  FILE TRANSFER PROTOCOL (FTP)
+                          MIL-STD-1780
+                   CERTIFICATION TESTS INDEX
+
+This Certification Tests Index provides information on the
+derivation, organization, and function of tests specified for FTP
+within the DCEC Protocol Laboratory.
+
+This document is divided into five sections:
+
+     FTP TRACEABILITY INDEX;
+     FTP TESTS INDEX;
+     FTP CODES INDEX;
+     FTP TEST SCENARIOS INDEX;
+     and FTP SCENARIOS AND TESTS DESCRIPTIONS.
+
+                            --------
+
+FTP TRACEABILITY INDEX: FTP TEST NUMBERS versus FTP MIL-STD-1780
+References...
+
+The table shows, for MIL-STD-1780, the FTP Test Numbers which may
+be regarded as the "principal tests" of each required function,
+operation, option, mode, response, or state.
+
+                            --------
+
+FTP TESTS INDEX: FTP TEST NUMBERS versus FTP Commands/
+Primitives/Options/Modes...
+
+The table shows the FTP Test Numbers which may be regarded as the "principal
+tests" of each FTP Command or Primitive and/or Option or Mode.
+
+                            --------
+
+FTP CODES INDEX: FTP TEST NUMBERS versus FTP Response Codes...
+
+The table shows the FTP Test Numbers which may be regarded as the
+"principal tests" of each FTP Response (or State, etc.) Code to/
+for/of the indicated FTP Commands or Primitives.
+
+                            --------
+
+FTP TEST SCENARIOS INDEX: FTP TEST SCENARIO FILES versus FTP
+TEST NUMBERS...
+
+The table shows, for each FTP Test Number, the UNIX filenames of
+the FTP test Scenario Files in which it may be regarded as a
+"principal test objective".
+
+                            --------
+
+FTP SCENARIOS AND TESTS DESCRIPTIONS...
+
+This section provides a brief narrative of the scope and
+objectives of each FTP test Scenario File and a narrative or
+graphic operational description of each FTP Test Number.
+
+                            FTP -1-
+              FTP TRACEABILITY INDEX
+
+FTP TEST NUMBERS
+    versus
+        FTP MIL-STD-1780 References
+
+The following table shows, for MIL-STD-????, the FTP Test Numbers
+which may be regarded as the "principal tests" of each required
+function, operation, option, mode, response, or state.  Test
+Numbers not indicated here may be used to establish necessary
+predecessor conditions for these tests.
+
+Reference                                                  Test Number
+---------                                                  --------------------
+
+5.7.1.1.1                                                  1, 60, 117
+5.7.1.1.2                                                  1, 61, 117
+5.7.1.1.3                                                  1, 62, 117
+5.7.1.1.4                                                  3, 63, 108
+5.7.1.1.5                                                  2, 64
+5.7.2.1                                                    32, 65
+5.7.2.2                                                    31, 65, 116
+5.7.2.3, 5.7.2.4, 5.7.2.5                                  18, 19, 20, 50, 51,
+                                                           52, 53, 54, 55, 112,
+                                                           113, 114
+5.7.3.1, 5.7.3.2                                           9, 66, 115
+5.7.3.3                                                    24, 67, 118
+5.7.3.4                                                    10, 68
+5.7.3.6                                                    25, 69, 107
+5.7.3.7                                                    26, 70, 107
+5.7.3.8                                                    4, 71, 105
+5.7.3.10                                                   20, 72, 102
+5.7.3.11                                                   21, 73, 106
+5.7.3.12                                                   22, 74, 110
+5.7.3.13                                                   23, 75, 111
+5.7.3.14                                                   7, 76, 101
+5.7.3.15                                                   6, 77 104
+5.7.3.16                                                   5, 78, 103
+5.7.3.17                                                   8, 79, 200
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            FTP -2-
+                             FTP TESTS INDEX
+
+FTP TEST NUMBERS
+    versus
+	FTP Commands/Primitives/Options/Modes
+
+The following table shows the FTP test numbers which may be
+regarded as the "principal tests" of each FTP command or
+primitive and/or option or mode.  Test numbers not indicated here
+may be used to establish necessary predecessor conditions for
+these tests.
+
+Command or Primitive     Option or Mode     Test Number
+--------------------     --------------     --------------------
+
+USER                                        1
+PASS                                        1
+ACCT                                        1
+REIN                                        3
+QUIT                                        2
+PORT                                        32
+PASV                                        31
+RETR                                        9
+STOR                                        9
+MODE                     BLOCK              18
+MODE                     COMPRESSED         19
+MODE                     STREAM             20
+TYPE                     ASCII              18, 19, 20
+TYPE                     EBCDIC             18, 19, 20
+TYPE                     IMAGE              18, 19, 20
+STRU                     FILE               18, 19, 20
+STRU                     RECORD             18, 19, 20
+APPE                                        24
+ALLO                                        10
+RNFR                                        25
+RNTO                                        26
+ABOR                                        4
+DELE                                        20
+CWD                                         21
+LIST                                        22
+NLST                                        23
+SITE                                        7
+STAT                                        6
+HELP                                        5
+NOOP                                        8
+
+
+
+
+
+
+
+
+
+
+
+
+                            FTP -3-
+                       FTP CODES INDEX
+
+FTP Test Numbers
+    versus
+	FTP Response Codes
+
+The following table shows the FTP test numbers which may be
+regarded as the "principal tests" of each FTP response (or state,
+etc.) code to/for/of the indicated FTP commands or primitives.
+Test numbers not indicated here may be used to establish
+necessary predecessor conditions for these tests.
+
+Response Code       Command or Primitive       Test Number
+-------------       --------------------       -----------
+
+120                 REIN                       63
+(125/150)6(226/250) RETR, STOR, APPE, LIST, NLST
+                                               66, 67, 74, 75
+200                 PORT                       65
+                    ALLO                       68
+                    RNTO                       70
+                    DELE                       72
+                    CWD                        73
+                    SITE                       76
+                    NOOP                       79
+                    TYPE, STRU, MODE           50, 51, 52, 53, 54, 55
+202                 SITE                       101
+211                 STAT                       77
+                    HELP                       78
+212                 STAT                       77
+213                 STAT                       77
+214                 HELP                       78
+220                 REIN                       63
+221                 QUIT                       64
+225                 ABOR                       71
+226                 ABOR                       71
+227                 PASV                       65
+230                 USER                       60
+                    PASS                       61
+                    ACCT                       62
+250                 RNTO                       70
+                    DELE                       72
+                    CWD                        73
+331                 USER                       60
+332                 PASS                       61
+350                 RNFR                       69
+425                 RETR                       120
+                    STOR                       120
+                    APPE                       118
+                    LIST                       110
+                    NLST                       111
+450                 RNFR                       107
+
+
+
+
+
+                            FTP -4-
+
+500                 NOOP                       200
+                    NLST                       111
+501                 LIST                       110
+                    NLST                       111
+502                 REIN                       108
+                    PASV                       116
+                    ABOR                       105
+                    STAT                       104
+                    SITE                       101
+503                 PASS                       117
+                    ACCT                       117
+                    RNTO                       107
+504                 HELP                       103
+                    TYPE, MODE, STRU           112, 113, 114
+                    SITE                       101
+530                 USER                       117
+                    PASS                       117
+                    ACCT                       117
+                    STOR                       201
+550                 RETR                       115
+                    APPE                       118
+                    RNFR                       107
+                    DELE                       102
+                    CWD                        106
+                    LIST                       110
+                    NLST                       111
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            FTP -5-
+                     FTP TEST SCENARIOS INDEX
+
+FTP TEST SCENARIO FILES
+    versus
+	FTP TEST NUMBERS
+
+Within the PROTOLAB VAX-11/750 Test Master System, all FTP test
+Scenario Files may be found in the following UNIX directory:
+
+     /usr/users/TSL/test/scripts/ftp.
+
+The following table shows, for each FTP Test Number, the UNIX
+filenames of the FTP test Scenario Files in which it may be
+regarded as a "principal test objective".  A Test Number may be
+used, to establish necessary predecessor conditions for other
+Test Numbers, in Scenario Files not indicated here.
+
+Test Number               Scenario File
+--------------------      --------------------------------------------------
+
+                          u_logquit
+1
+2
+9                         u_basic
+18
+19
+20
+24                        u_fileserv
+10
+25
+26
+22
+23
+21
+20
+3                         u_connserv
+4
+31                        u_conn3
+32
+60                        s_logquit
+61
+62
+64
+66                        s_basic
+50
+51
+52
+53
+54
+55
+79
+
+
+
+
+
+
+                            FTP -6-
+67                        g_fileserv
+68
+69
+70
+74
+75
+73
+72
+63                        s_connserv
+71
+77
+76
+78                        s_connserv
+65                        s_conn3
+200                       n_generr
+201                       n_notlog
+117
+120                       n_basic
+114
+112
+113
+118
+107                       n_fileserv
+110
+111
+106
+102
+108                       n_connserv
+105
+104
+101
+103
+116                       n_conn3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            FTP -7-
+          FTP SCENARIOS AND TESTS DESCRIPTIONS
+
+The following scenario files test the ability of the User FTP
+Implementation Under Test to issue commands according to the
+MIL-STD specification.
+
+Scenario File u_logquit:
+          - Establish FTP Command Connection.
+          - Login Sequence.
+          - Close Command Connection.
+
+Test 1  Establish Connection
+        Issue USER, PASS, and ACCT Commands
+
+Test 2  Issue QUIT Command
+
+-------------------------------------------------------
+
+Test 1
+
+       - Can the implementation under test (IUT) establish
+         a connection to the reference (REF)?
+
+       - Can the IUT issue correct command formats for the
+         USER, PASS, and ACCT commands?
+
+    Establish Connection
+
+       - Action: Instruct the IUT to open a connection to the
+         REF: If successful, issue login sequence, else abort the
+         scenario.
+
+       - Verification: IUT receives a correct response from REF
+         indicating that a connection is established.
+
+       Success: Positive response received by IUT.  Connection
+       opened.
+
+       Failure: Negative response received.  No connection
+       available.  Abort Scenario.
+
+Login Sequence
+
+       - Action: Instruct the IUT to issue the USER command.  If
+         the USER command is successful, the IUT is instructed to
+         issue the PASS command.  If the PASS command is
+         successful, the IUT is instructed to issue the ACCT
+         command.
+
+       - Verification: REF compares char string received from
+         IUT to the correct command format as specified by
+         MIL-STD-1780.
+
+       Success: REF receives correct command format for each the
+       USER, PASS, and ACCT commands within the specified time
+       interval for each command.
+
+
+                            FTP -8-
+       Failure: If either an incorrect command is received or
+       timeout occurs for any command, failure is logged and the
+       test exited.
+
+Test 2
+
+       - Can a connection between the IUT and REF be closed by
+         issuing a QUIT command?
+
+       - Action: The IUT is instructed to send the QUIT command.
+
+       The REF waits 30 seconds to receive the command before
+       timing-out.
+
+       - Verification: REF receives character string and
+         compares it to the MIL-STD specification for QUIT command.
+
+       Success: IUT sent correct command format.  Connection is
+       closed.
+
+       Failure: REF times-out before receiving the correct
+       command format.  Test is completed and connection is
+       closed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            FTP -9-
+Scenario File u_basic:
+          - Issue Transfer Commands.
+          - Test for correct file transfer.
+          - Issue and test all possible combinations of the File
+            Transfer Parameters.
+
+Test 9  Issue RETR and STOR commands
+
+????A
+????B
+
+         Transfer a file and compare byte-by-byte for alteration of data
+
+Test 18, 19, 20   Issue all combinations of TYPE, MODE, and STRU
+                  transfer parameters.
+                  For each combination, transfer a file and
+                  compare byte-by-byte for alteration of data
+
+Test 8   Issue NOOP Command
+
+--------------------------------------------------------------------------
+
+Test 9
+
+       - Can the IUT issue correct command formats for the RETR
+         and STOR commands?
+
+       - Can the IUT correctly transfer a file under the default
+         transfer parameters?
+
+       - Action: Instruct IUT to issue the RETR command so that
+         a test file is transferred from the REF to IUT.  If REF
+         receives correct command format within 30 seconds, ensure
+         file transfer is complete by checking response code.  When
+         file transfer has completed, instruct IUT to issue the
+         STOR command so that the test file is transferred back to
+         the REF.  If REF receives correct command format within 30
+         seconds, ensure file transfer is complete by checking
+         response code.  When file transfer has completed compare
+         the original REF test file to the file just received by IUT.
+
+       - Verification: Check the command format for MIL-STD
+         conformance.  Compare file to ensure that the file data
+         was not destroyed or altered while being transferred to
+         and from the IUT.
+
+       Success: REF receives correct command format for RETR and
+         STOR commands.  Successful file comparison to ensure
+         correct file transfer.
+
+       Failure: Timeout occurs before receiving correct command
+         format for either RETR or STOR commands or unsuccessful
+         comparison of transferred files.
+
+
+
+                            FTP -10-
+Tests 18, 19, 20
+
+       - Can the IUT issue all the possible values for the
+         transfer parameter commands?
+
+       - Can the IUT transfer a file using all the different
+         combinations of the transfer parameters?
+
+       - Action: These tests cover each possible combination of
+         the transfer parameters.  After each combination, there is
+         a test for command format.  If that test is successful, a
+         file is transferred from the IUT to the REF and compared
+         to the original file on the REF.
+
+       - Verification: Check the MIL-STD for command format
+         conformance.  Compare file to ensure correct data and file
+         representation.
+
+       Success: For each test, a correct command format is
+         received by REF and file comparison is successful.
+
+       Failure: For each test, if a timeout occurs before
+         receiving correct command format or an unsuccessful file
+         comparison.
+
+Test 8
+
+       - Can the IUT issue the correct command format for the
+         NOOP command?
+
+       - Action: Instruct IUT to issue the NOOP command.  REF
+         waits 30 seconds to receive correct command format from
+         IUT.
+
+       - Verification: REF checks that string received conforms
+         to MIL-STD specifications.
+
+       Success: REF receives correct command format within 30
+         seconds.
+
+       Failure: REF timed-out before receiving correct command
+         format from the IUT.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            FTP -11-
+Scenario File u_fileserv: Test command formats for the following
+          functions:
+          - Append.
+          - Allocate.
+          - Rename file.
+          - List files.
+          - List files by name.
+          - Change working directory.
+          - Delete.
+
+Test 24:  Issue APPE Command
+Test 10:  Issue ALLO Command
+Test 25:  Issue RNFR Command
+Test 26:  Issue RNTO Command
+Test 22:  Issue LIST Command
+Test 23:  Issue NLST Command
+Test 21:  Issue CWD Command
+Test 20:  Issue DELE Command
+
+
+-----------------------------------------------------------------
+
+Test 24
+
+       - Can the IUT issue an APPE command?
+
+       - Action: IUT is instructed to issue an APPE command.
+
+       - Verification: REF receives char string within 30 second
+         time interval and checks it for MIL-STD specification.
+
+       Success: IUT sends correct command format.
+
+       Failure: REF does not receive correct command format
+         within 30 seconds.
+
+
+Test 10
+
+       - Can the IUT issue an ALLO command?
+
+       - Action: IUT is instructed to issue an ALLO command.
+
+       - Verification: REF receives char string within 30 second
+           time interval and checks it for MIL-STD specification.
+
+       Success: IUT sends correct command format.
+
+       Failure: REF does not receive correct command format
+         within 30 seconds.
+
+
+
+
+
+
+                            FTP -12-
+Test 25
+
+       - Can the IUT issue a RNFR command?
+
+       - Action: IUT is instructed to issue a RNFR command.
+
+       - Verification: REF receives char string within 30 second
+           time interval and checks it for MIL-STD specification.
+
+       Success: IUT sends correct command format.
+
+       Failure: REF does not receive correct command format
+         within 30 seconds.
+
+
+Test 26
+
+       - Can the IUT issue a RNTO command?
+
+       - Action: IUT is instructed to issue a RNTO command.
+
+       - Verification: REF receives char string within 30 second
+           time interval and checks it for MIL-STD specification.
+
+       Success: IUT sends correct command format.
+
+       Failure: REF does not receive correct command format
+         within 30 seconds.
+
+
+Test 22
+
+       - Can the IUT issue a LIST command?
+
+       - Action: IUT is instructed to issue a LIST command.
+
+       - Verification: REF receives char string within 30 second
+           time interval and checks it for MIL-STD specification.
+
+       Success: IUT sends correct command format.
+
+       Failure: REF does not receive correct command format
+         within 30 seconds.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            FTP -13-
+Test 23
+
+       - Can the IUT issue a NLST command?
+
+       - Action: IUT is instructed to issue a NLST command.
+
+       - Verification: REF receives char string within 30 second
+         time interval and checks it for MIL-STD specification.
+
+       Success: IUT sends correct command format.
+
+       Failure: REF does not receive correct command format
+         within 30 seconds.
+
+
+Test 21
+
+       - Can the IUT issue a CWD command?
+
+       - Action: IUT is instructed to issue a CWD command.
+
+       - Verification: REF receives char string within 30 second
+           time interval and checks it for MIL-STD specification.
+
+       Success: IUT sends correct command format.
+
+       Failure: REF does not receive correct command format
+         within 30 seconds.
+
+
+Test 20
+
+       - Can the IUT issue a DELE command?
+
+       - Action: IUT is instructed to issue a DELE command.
+
+       - Verification: REF receives char string within 30 second
+           time interval end checks it for MIL-STD specification.
+
+       Success: IUT sends correct command format.
+
+       Failure: REF does not receive correct command format
+         within 30 seconds.
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            FTP -14-
+Scenario File u_connserv: Test command formats for the following
+          functions:
+           - Reinitialize connection.
+           - Abort connection.
+           - Status connection.
+           - Site command.
+           - Remote help information.
+
+Test 3  Issue REIN command
+Test 4  Issue ABOR command
+Test 6  Issue STAT command
+Test 7  Issue SITE command
+Test 5  Issue HELP command
+
+-------------------------------------------------------------
+
+Test 3
+
+       - Can the IUT issue a REIN command?
+
+       - Action: IUT is instructed to issue a REIN command.
+
+       - Verification: REF receives char string within 30 second
+           time interval and checks it for MIL-STD specification.
+
+       Success: IUT sends correct command format.
+
+       Failure: REF does not receive correct command format
+         within 30 seconds.
+
+
+Test 4
+
+       - Can the IUT issue a ABOR command?
+
+       - Action: IUT is instructed to issue a ABOR command.
+
+       - Verification: REF receives char string within 30 second
+           time interval and checks it for MIL-STD specification.
+
+       Success: IUT sends correct command format.
+
+       Failure: REF does not receive correct command format
+         within 30 seconds.
+
+
+
+
+
+
+
+
+
+
+
+
+                            FTP -15-
+Test 6
+
+       - Can the IUT issue a STAT command?
+
+       - Action: IUT is instructed to issue a STAT command.
+
+       - Verification: REF receives char string within 30 second
+           time interval and checks it for MIL-STD specification.
+
+       Success: IUT sends correct command format.
+
+       Failure: REF does not receive correct command format
+         within 30 seconds.
+
+
+Test 7
+
+       - Can the IUT issue a SITE command?
+
+       - Action: IUT is instructed to issue a SITE command.
+
+       - Verification: REF receives char string within 30 second
+           time interval and checks it for MIL-STD specification.
+
+       Success: IUT sends correct command format.
+
+       Failure: REF does not receive correct command format
+         within 30 seconds.
+
+
+Test 5
+
+       - Can the IUT issue a HELP command?
+
+       - Action: IUT is instructed to issue a HELP command.
+
+       - Verification: REF receives char string within 30 second
+           time interval and checks it for MIL-STD specification.
+
+       Success: IUT sends correct command format.
+
+       Failure: REF does not receive correct command format
+         within 30 seconds.
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            FTP -16-
+Scenario File u_conn3:
+         - This scenario tests the ability of the User FTP
+           process to communicate with two servers at once.
+         - It also tests its ability issue the PASV and PORT
+           commands.
+
+Test 31  Issue PASV command
+Test 32  Issue PORT command
+
+
+-----------------------------------------------------------------------------
+
+
+Test 31
+
+       - Can the IUT issue a PASV command?
+
+       - Action: IUT is instructed to issue a PASV command.
+
+       - Verification: REF receives char string within 30 second
+           time interval and checks it for MIL-STD specification.
+
+       Success: IUT sends correct command format.
+
+       Failure: REF does not receive correct command format
+         within 30 seconds.
+
+
+Test 32
+
+       - Can the IUT issue a PORT command?
+
+       - Action: IUT is instructed to issue a PORT command.
+
+       - Verification: REF receives char string within 30 second
+           time interval and checks it for MIL-STD specification.
+
+       Success: IUT sends correct command format.
+
+       Failure: REF does not receive correct command format
+         within 30 seconds.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            FTP -17-
+The following scenario files test the ability of the Server FTP
+Implementation Under Test to respond to commands issued by the
+Reference User Implementation in accordance to the MIL-STD
+specification.
+
+Scenario File s_logquit:
+         - Establish FTP Command Connection.
+         - Login Sequence.
+         - Close Command Connection.
+
+Test 1   Open connection to IUT
+Test 60  Test response to USER command
+Test 61  Test response to PASS command
+Test 62  Test response to ACCT command
+Test 64  Test response to QUIT command
+
+--------------------------------------------------
+
+Test 1
+
+       - Can the implementation under test (IUT) establish a
+           connection with the reference implementation (REF)?
+
+       - Action: REF tries opening a connection to IUT.
+
+       - Verification: REF receives a 220 response within 30
+           seconds indicating that command channel is open.
+
+       Success: REF receives response code of 220.  Connection
+       is established.
+
+       Failure: REF times-out waiting for correct response code
+         from IUT.  Connection cannot be established, scenario is
+         aborted.
+
+
+Test 60
+
+       - Does the IUT correctly implement the USER command?
+
+       - Action: REF sends the IUT the USER command and waits 30
+           seconds for IUT to respond.
+
+       - Verification: REF checks for valid codes of 230, 331,
+           or 332.
+
+       Success: REF receives one of the valid response codes.
+
+       Failure: REF times-out waiting for IUT to respond with a
+         valid response code.  Scenario is aborted and all
+         connections are closed.
+
+
+Test 61
+
+       - Does the IUT correctly implement the PASS command?
+
+                            FTP -18-
+       - Action: REF sends the IUT the PASS command and waits 30
+           seconds for IUT to respond.
+
+       - Verification: REF checks for valid codes of 230 or 332.
+
+       If the response code 202 or 503 is received, the command
+       is not implemented and the test is not evaluated for
+       success or failure.
+
+       Success: REF receives one of the valid response codes.
+
+       Failure: REF times-out waiting for IUT to respond with a
+         valid response code.
+
+
+Test 62
+
+       - Does the IUT correctly implement the ACCT command?
+
+       - Action: REF sends the IUT the ACCT command and waits 30
+           seconds for IUT to respond.
+
+       - Verification: REF checks for valid code of 230.
+
+       If the response code 202 is received, the command is not
+       implemented and the test is not evaluated for success or
+       failure.
+
+       Success: REF receives a valid response codes.
+
+       Failure: REF times-out waiting for IUT to respond with a
+         valid response code.
+
+
+Test 64
+
+       - Does the IUT correctly implement the QUIT command?
+
+       - Action: REF sends the IUT the ACCT command and waits 30
+           seconds for IUT to respond.
+
+       - Verification: REF checks for valid code of 221.
+
+       Success: REF receives a valid response code.
+
+       Failure: REF times-out waiting for IUT to respond with a
+         valid response code.  All connections are closed and test
+         ends.
+
+
+
+
+
+
+
+
+                            FTP -19-
+Scenario File s_basic:
+         - Test transfer commands.
+         - Test for correct file transfer.
+         - Issue and test all possible combinations of the file
+             transfer parameters.
+
+Test 66  REF test responses to RETR and STOR commands and the
+         IUT's capability to transfer a file.
+
+Tests 50-55  REF tests the response codes for all possible
+             combinations of transfer parameters TYPE, MODE, and
+             STRU and the IUT's capability to transfer a file for
+             each combination.
+
+Test 79  Test response to NOOP command.
+
+---------------------------------------------------------------------
+
+Test 66
+
+       - Can the IUT correctly respond to the RETR and STOR
+           commands?
+
+       - Does the IUT correctly implement the RETR and STOR
+           commands?
+
+       - Action: REF sends the IUT the STOR command so that a
+           file is transferred from the REF to the IUT and waits 30
+           seconds for IUT to respond.  The following are valid
+           responses: 150 and 226, 125 and 226, 150 and 250, or 125
+           and 250.  If the REF does not receive a valid response
+           from the IUT, the entire scenario is aborted.  However, if
+           the REF receives a valid response, it will then send the
+           RETR command to transfer the test file back from the IUT.
+           If the REF receives a valid response from the IUT to the
+           RETR command, the file transfer has completed.  To ensure
+           the IUT performed the file transfer function correctly,
+           the test file received from the IUT is compared to the
+           original test file on the REF.
+
+       - Verification: REF checks for valid response codes for
+           RETR and STOR commands.  File comparison ensures that the
+           file data was not destroyed or altered while being
+           transferred by or stored on the IUT.
+
+       Success: REF receives correct response codes for RETR and
+           STOR commands.  Successful file comparison to ensure
+           correct file transfer.
+
+       Failure: Timeout occurs before receiving correct response
+           codes for either RETR or STOR commands or unsuccessful
+           comparison of files.
+
+
+
+
+
+                            FTP -20-
+Tests 50-55
+
+       - Can the IUT respond to all possible values of transfer
+           parameter commands.
+
+       - Can the IUT transfer a file for each different
+           combination of the transfer parameters.
+
+       - Action: These tests cover each possible combination of
+           the transfer parameters.  For each combination there is a
+           test for a valid response code of 200.  A response code of
+           502 or 504 indicates the specified value for that transfer
+           parameter command is not implemented and does neither
+           succeed or fail.  For each test that meets the valid
+           response, a file is transferred from the IUT to REF and
+           compared to the original file on the REF.
+
+       - Verification: REF checks for valid response code and
+           compares file to ensure correct data and file
+           representation.
+
+       Success: For each test, a valid response is received by
+         REF and file comparison is successful.
+
+       Failure: For each test, if a timeout occurs before
+         receiving a valid response or an unsuccessful file
+         comparison.
+
+
+Test 79
+
+       - Can the IUT correctly respond to the NOOP command?
+
+       - Action: REF sends the IUT the NOOP command.
+
+       - Verification: REF checks for a valid response code of
+           200 within 30 seconds.
+
+       Success: REF receives valid response code.
+
+       Failure: REF times-out before receiving a valid code.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            FTP -21-
+Scenario File s_fileserv:  Test responses and functional ability
+           of the following file-related commands:
+           - Append.
+           - Allocate.
+           - Rename From.
+           - Rename To.
+           - List file information.
+           - List file names.
+           - Change working directory.
+           - Delete a file.
+
+Test 67  Test response to APPE command
+Test 68  Test response to ALLO command
+Test 69  Test response to RNFR command
+Test 70  Test response to RNTO command
+Test 74  Test response to LIST command
+Test 75  Test response to NLST command
+Test 73  Test response to CWD command
+Test 72  Test response to DELE command
+
+--------------------------------------------------------
+
+Test 67
+
+       - Does the IUT correctly respond to and implement the APPE command?
+
+       - Action: REF sends the IUT the APPE command and waits 60
+           seconds for the IUT to respond.  The first part of the test
+           is for appending onto an already existing file.  The second
+           part of the test is for appending onto a non-existing file,
+           thereby creating a new file.  The second part of the test
+           checks that a new file is created.
+
+       - Verification: REF checks for a valid code of 150 and
+           226, 125 and 226, 150 and 250, 125 and 250.  A response
+           code of 502 indicates the command is not implemented and
+           the test is not evaluated for success or failure.
+
+       Success: REF receives valid response codes and
+         successfully creates new file for the second part of the
+         test.
+
+       Failure: REF times-out before receiving valid response or
+         does not create file for second part of test.
+
+
+Test 68
+
+       - Does the IUT correctly respond to and implement the ALLO command?
+
+       - Action: REF sends the IUT the ALLO command and waits 60
+           seconds for the IUT to respond.  The first part of the test
+           is for allocating an additional number of bytes of storage
+           for a file to be stored on the recipient's host.  The
+           second part of the test is for allocating enough records
+           for a file that will be stored as records.
+
+                            FTP -22-
+       - Verification: REF checks for a valid code of 200.  A
+           response code of 202 or 504 indicates the command is not
+           implemented and the test is not evaluated for success or
+           failure.
+
+       Success: REF receives a valid response code.
+
+       Failure: REF times-out before receiving a valid response.
+
+
+Test 69
+
+       - Does the IUT correctly respond to and implement the RNFR
+           command?
+
+       - Action: REF sends the IUT the RNFR command and waits 30
+           seconds for the IUT to respond.
+
+       - Verification: REF checks for a valid code of 350.  A
+           response code of 502 indicates the command is not
+           implemented and the test is not evaluated for success or
+           failure.
+
+       Success: REF receives a valid response code.
+
+       Failure: REF times-out before receiving a valid response.
+
+
+Test 70
+
+       - Does the IUT correctly respond to and implement the RNTO command?
+
+       - Action: REF sends the IUT the RNTO command and waits 30
+           seconds for the IUT to respond.
+
+       - Verification: REF checks for a valid code of 250 or 200.
+           A response code of 502 indicates the command is not
+           implemented and the test is not evaluated for success or
+           failure.
+
+       Success: REF receives a valid response code.
+
+       Failure: REF times-out before receiving a valid response.
+
+
+Test 74
+
+       - Does the IUT correctly respond to and implement the LIST command?
+
+       - Action: REF sends the IUT the LIST command and waits 60
+           seconds for the IUT to respond.
+
+       - Verification: REF checks for a valid code of 125 and
+           226, 125 and 250, 150 and 226, or 150 and 250.  A response
+           code of 502 indicates the command is not implemented and
+           the test is not evaluated for success or failure.
+
+                            FTP -23-
+       Success: REF receives a valid response code.
+
+       Failure: REF times-out before receiving a valid response.
+
+
+Test 75
+
+       - Does the IUT correctly respond to and implement the NLST command?
+
+       - Action: REF sends the IUT the NLST command and waits 60
+           seconds for the IUT to respond.
+
+       - Verification: REF checks for a valid code of 125 and
+           226, 125 and 250, 150 and 226, or 150 and 250.  A response
+           code of 502 indicates the command is not implemented and
+           the test is not evaluated for success or failure.
+
+       Success: REF receives a valid response code.
+
+       Failure: REF times-out before receiving a valid response.
+
+
+Test 73
+
+       - Does the IUT correctly respond to and implement the CWD command?
+
+       - Action: REF sends the IUT the CWD command and waits 30
+           seconds for the IUT to respond.
+
+       - Verification: REF checks for a valid code of 250 or 200.
+           A response code of 502 indicates the command is not
+           implemented and the test is not evaluated for success or
+           failure.
+
+       Success: REF receives a valid response code.
+
+       Failure: REF times-out before receiving a valid response.
+
+
+Test 72
+
+       - Does the IUT correctly respond to and implement the DELE command?
+
+       - Action: REF sends the IUT the DELE command and waits 30
+           seconds for the IUT to respond.
+
+       -Verification: REF checks for a valid code of 250 or 200.
+           A response code of 502 indicates the command is not
+           implemented and the test is not evaluated for success or
+           failure.  If a valid response is received, the REF tries to
+           retrieve the same file to ensure it was deleted.
+
+       Success: REF receives a valid response code.
+
+       Failure: REF times-out before receiving a valid response.
+
+                            FTP -24-
+Scenario File s_connserv: Test IUT's response for the following
+           functions:
+           - Reinitialize Connection.
+           - Abort Connection.
+           - Status of connection.
+           - Site Command.
+           - Remote Help information.
+
+Test 63  Test response to REIN Command
+Test 71  Test response to ABOR Command
+Test 77  Test response to STAT Command
+Test 76  Test response to SITE Command
+Test 78  Test response to HELP Command
+
+-----------------------------------------------------------------------------
+
+
+Test 63
+
+       - Does the IUT correctly respond to the REIN command?
+
+       - Action: REF sends the REIN command and waits 30 seconds
+           for the IUT to respond.
+
+       - Verification: REF checks for a valid response code of
+           120 or 220.  A response code of 502 indicates the command
+           is not implemented and the test is not evaluated for
+           success or failure.
+
+       Success: REF receives valid response code.
+
+       Failure: REF times-out before receiving valid response.
+
+
+Test 71
+
+       - Does the IUT correctly respond to the ABOR command?
+
+       - Action: REF sends the ABOR command and waits 30 seconds
+           for the IUT to respond.
+
+       - Verification: REF checks for a valid response code of
+           225 or 226.  A response code of 502 indicates the command
+           is not implemented and the test is not evaluated for
+           success or failure.
+
+       Success: REF receives valid response code.
+
+       Failure: REF times-out before receiving valid response.
+
+
+
+
+
+
+
+
+                            FTP -25-
+Test 77
+
+       - Does the IUT correctly respond to the STAT command?
+
+       - Action: REF sends the STAT command and waits 30 seconds
+           for the IUT to respond.
+
+       - Verification: REF checks for a valid response code of
+           211, 212, or 213 (depending on the parameter sent with the
+           STAT command).  A response code of 502 indicates the
+           command is not implemented and the test is not evaluated
+           for success or failure.
+
+       Success: REF receives valid response code.
+
+       Failure: REF times-out before receiving valid response.
+
+
+Test 76
+
+       - Does the IUT correctly respond to the SITE command?
+
+       - Action: REF sends the SITE command and waits 30 seconds
+           for the IUT to respond.
+
+       - Verification: REF checks for a valid response code of
+           200.  A response code of 202 or 502 indicates the command
+           is not implemented and the test is not evaluated for
+           success or failure.
+
+       Success: REF receives valid response code.
+
+       Failure: REF times-out before receiving valid response.
+
+
+Test 78
+
+       - Does the IUT correctly respond to the HELP command?
+
+       - Action: REF sends the HELP command and waits 30 seconds
+           for the IUT to respond.
+
+       - Verification: REF checks for a valid response code of
+           211 or 214.  A response code of 502 indicates the command
+           is not implemented and the test is not evaluated for
+           success or failure.
+
+       Success: REF receives valid response code.
+
+       Failure: REF times-out before receiving valid response.
+
+
+
+
+
+
+                            FTP -26-
+Scenario File s_conn3:
+           - This scenario exercises the ability of the IUT
+             server to communicate and transfer files in a 3-party
+             transfer.
+           - The third party, other than the REF User and IUT
+             Server, is the REF Server.
+
+Test 65  Conduct file transfer activity between User and both
+         Servers by using PASV and PORT commands.
+
+---------------------------------------------------------------------
+
+Test 65
+
+       - Can the IUT respond to commands necessary for a 3-party
+           file transfer?
+
+       - Does the IUT function properly as a server within a 3
+           party file transfer?
+
+       - Action: A command connection is established between REF
+           User and REF Server.  Then a connection is established
+           between REF User and IUT Server.  If either of these
+           connections cannot be established, the scenario is aborted
+           (REF User has the ability to switch between the two
+           connections).  The test begins by sending the PASV command
+           to the REF Server.  It should respond with the response
+           code 227 to indicate that it is listening for a data
+           connection to be established to it, along with the data
+           port number to which the other server should connect.
+           Next, the REF User issues the RETR command to the REF
+           Server so it knows its function when the data connection is
+           established.  It should respond with a code of 150.  After
+           the REF User receives this response, it switches to its
+           connection with the IUT Server and issues the PORT command
+           specifying the data port number received on the PASV
+           response.  The IUT should respond with the valid response
+           code of 200.  When the REF receives this code, it issues
+           the IUT the STOR command so that a test file may be
+           transferred from the REF site to the IUT site.  This test
+           completes one file transfer, but in order to verify that
+           data was not destroyed or altered by the IUT server, the
+           test file is transferred back to the REF and compared to
+           the initial file.
+
+       - Verification: REF checks for valid response codes from
+           the IUT for the PORT command and the transfer commands and
+           compares the transferred file with the original file to
+           ensure data and file representation.
+
+       Success: REF receives correct response codes and
+           successful comparison of files.
+
+       Failure: REF does not receive correct response codes or
+           unsuccessful comparison of files.
+
+
+                            FTP -27-
+The following scenarios test the ability of the IUT Server to
+correctly respond to erroneous situations.  Each test will set up
+an error for a given command and check that the IUT responds
+appropriately.
+
+Scenario File n_notlog:
+         - Test issuing a command before the user is logged in.
+         - Test USER command given an unknown username.
+         - Test login sequence giving a bad sequence of
+           commands.
+         - Test PASS command given a known user but an
+           incorrect password.
+
+Test 201  Test negative response for user not logged in.
+Test 117  Test negative response for unknown user, bad login
+            sequence, and an incorrect password.
+
+-------------------------------------------------------------------
+
+
+Test 201
+
+       - Can the IUT respond correctly to the STOR command before
+           the user has logged in?
+
+       - Action: REF User establishes a connection with the IUT
+           but does not log in.  The REF User issues a STOR command
+           and waits 30 seconds for the IUT to respond.
+
+       - Verification: REF checks for valid response of 530 from
+           the IUT.
+
+       Success: REF receives valid response code.
+
+       Failure: REF times-out before receiving.
+
+
+Test 117a
+
+       - Can the IUT respond correctly to an unknown username?
+
+       - Action: REF issues a USER command to the IUT with an
+           invalid username and waits 30 seconds for the IUT to
+           respond.
+
+       - Verification: REF checks for valid response of 530 from
+           the IUT.
+
+       Success: REF receives valid response code.
+
+       Failure: REF times-out before receiving.
+
+
+Test 117b
+
+       - Can the IUT respond correctly to a bad sequence of
+           commands giving the ACCT command?
+
+                            FTP -28-
+       - Action: REF issues an ACCT command out of sequence to
+           the IUT and waits 30 seconds for the IUT to respond.
+
+       - Verification: REF checks for valid response of 503 from
+           the IUT.  A response code of 502 indicates the ACCT
+           command is not implemented and the test is not evaluated
+           for success or failure.
+
+       Success: REF receives valid response code.
+
+       Failure: REF times-out before receiving.
+
+
+Test 117c
+
+       - Can the IUT respond correctly to a bad sequence of
+           commands giving the PASS command?
+
+       - Action: REF issues an PASS command out of sequence to
+           the IUT and waits 30 seconds for the IUT to respond.
+
+       - Verification: REF checks for valid response of 503 from
+           the IUT.
+
+       Success: REF receives valid response code.
+
+       Failure: REF times-out before receiving.
+
+
+Test 117d
+
+       - Can the IUT respond correctly to a correct username
+           ising the USER command, but an invalid password using the
+           PASS command?
+
+       - Action: REF issues a USER command with a valid username
+           and if the IUT responds correctly, REF then issues a PASS
+           command with an invalid password.  REF waits 30 seconds
+           for the IUT to respond.
+
+       - Verification: REF checks for valid response of 530 from
+           the IUT indicating user has not logged in correctly.  User
+           must then re-initiate login sequence.
+
+       Success: REF receives valid response code.
+
+       Failure: REF times-out before receiving.
+
+
+
+
+
+
+
+
+
+
+
+                            FTP -29-
+
+Scenario File n_generr:
+         - Test a command for general syntax error.
+
+Test 200  Test for correct response to an incorrectly spelled NOOP Command
+
+----------------------------------------------------------------------------
+
+Test 200
+
+       - Can the IUT respond correctly to a syntax error on
+           command line?
+
+       - Action: REF issues a misspelled NOOP command and waits
+           30 seconds for IUT to respond.
+
+       - Verification: REF checks for a valid response of 500
+           indicating a syntax error.
+
+       Success: REF receives valid response from IUT.
+
+       Failure: REF times-out waiting for response from IUT.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            FTP -30-
+Scenario File n_basic:
+         Test IUT to respond correctly to errors when issuing
+           transfer commands and transfer parameter commands.
+
+Test 120  Test IUT responds correctly to RETR and STOR commands
+            which cannot open data connections.
+          Test responses to transfer commands for non-existent file.
+
+Test 114  Test IUT response to a STRU command with an
+            unimplemented value.
+
+Test 112  Test IUT response to a TYPE command with an
+            unimplemented value.
+
+Test 113  Test IUT response to a MODE command with an
+            unimplemented value.
+
+-------------------------------------------------------------------
+
+Test 120a
+
+       - Does the IUT respond correctly to a STOR command which
+           cannot open a data connection?
+
+       - Action: REF issues a STOR command for which a data
+           connection cannot be opened and waits 10 seconds for the
+           IUT to respond.
+
+       - Verification: REF checks that a valid response of 425
+           is received indicating that a connection cannot be opened.
+
+         Success: REF receives correct response code.
+
+         Failure: REF times-out before receiving correct response code.
+
+
+Test 120b
+
+       - Does the IUT respond correctly to a RETR command which
+           cannot open a data connection?
+
+       - Action: REF issues a RETR command for which a data
+           connection cannot be opened and waits 10 seconds for the
+           IUT to respond.
+
+       - Verification: REF checks that a valid response of 425
+           is received indicating that a connection cannot be opened.
+
+       Success: REF receives correct response code.
+
+       Failure: REF times-out before receiving correct response code.
+
+
+Test 120c
+
+       - Does IUT respond correctly when asked to retrieve a non
+           existent file.
+
+                            FTP -31-
+       - Action: REF issues a RETR command giving a non-existent
+           filename and waits 10 seconds for a valid response from the IUT.
+
+       - Verification: REF checks that a valid response of 550 is received
+           from IUT indicating that the file specified does not exist.
+
+       Success: REF receives a valid response code.
+
+       Failure: REF times-out before receiving correct response code.
+
+Test 114
+
+       - Can the IUT respond correctly to the STRU command given
+           an unimplemented value?
+
+       - Action: REF issues STRU command giving an unimplemented
+           value and waits 10 seconds for a valid response from IUT.
+
+       - Verification: REF checks for a valid response of 502 or
+           504 indicating that command is not implemented for that
+           parameter value.
+
+       Success: REF receives correct response code.
+
+       Failure: REF times-out before receiving valid response code.
+
+Test 112
+
+       - Can the IUT respond correctly to the TYPE command given
+           an unimplemented value?
+
+       - Action: REF issues TYPE command giving an unimplemented
+           value and waits 10 seconds for a valid response from IUT.
+
+       - Verification: REF checks for a valid response of 502 or
+           504 indicating that command is not implemented for that
+           parameter value.
+
+       Success: REF receives correct response code.
+
+       Failure: REF times-out before receiving valid response code.
+
+Test 113
+
+       - Can the IUT respond correctly to the MODE command given
+           an unimplemented value?
+
+       - Action: REF issues MODE command giving an unimplemented
+           value and waits 10 seconds for a valid response from IUT.
+
+       - Verification: REF checks for a valid response of 502 or
+           504 indicating that command is not implemented for that
+           parameter value.
+
+       Success: REF receives correct response code.
+
+       Failure: REF times-out before receiving valid response code.
+
+                            FTP -32-
+Scenario File n_fileserv:  Test error responses for the following
+         functions:
+           - Append.
+           - Rename From.
+           - Rename To.
+           - List File Information.
+           - List Files by Name.
+           - Change Working Directory.
+           - Delete File.
+
+Test 118  Test response to APPE command which cannot open a data
+          connection.
+
+Test 107  Test the response to RNTO and RNFR commands.  One part
+          of the test tries to rename a non-existent filename.
+          The other part of the test issues the RNTO command out
+          of sequence.
+
+Test 110  Test response to LIST command which cannot open a data connection.
+
+Test 111  Test response to NLST command which cannot open a data connection.
+
+Test 106  Test response to CWD command for a non-existent directory.
+
+Test 102  Test response to DELE command for a non-existent file.
+
+--------------------------------------------------------------------
+
+Test 118
+
+       - Does the IUT respond correctly to an APPE command which
+           cannot open a data connection?
+
+       - Action: REF issues an APPE command for which a data
+           connection may not be opened and waits 10 seconds for the
+           IUT to respond.
+
+       - Verification: REF checks for a valid response code of
+           425 indicating it cannot open a data connection.
+
+       Success: REF receives valid response code.
+
+       Failure: REF times-out before receiving valid response code.
+
+
+Test 107a
+
+       - Can the IUT respond correctly to the RNFR command which
+           tries to rename a non-existent file?
+
+       - Action: REF issues a RNFR command with a non-existent
+           filename and waits for a valid response from the IUT.
+
+       - Verification: REF checks for a valid response code of
+           450 or 550 indicating that the file is unavailable.
+
+
+                            FTP -33-
+       Success: REF receives valid response code.
+
+       Failure: REF times-out waiting for a valid response code.
+
+
+Test 107b
+
+       - Can the IUT respond correctly to the RNTO command which
+           is out of sequence.
+
+       - Action: REF issues a RNTO command which is out of
+           sequence and waits for a valid response from the IUT.
+
+       - Verification: REF checks for a valid response code of
+           503 indicating a bad sequence of commands.
+
+       Success: REF receives valid response code.
+
+       Failure: REF times-out waiting for a valid response code.
+
+
+Test 110
+
+       - Does the IUT respond correctly to an LIST command which
+           cannot open a data connection?
+
+       - Action: REF issues an LIST command for which a data
+           connection may not be opened and waits 10 seconds for the
+           IUT to respond.
+
+       - Verification: REF checks for a valid response code of
+           425 or 501 indicating it cannot open a data connection.
+
+       Success: REF receives valid response code.
+
+       Failure: REF times-out before receiving valid response code.
+
+
+Test 111
+
+       - Does the IUT respond correctly to an NLST command which
+           cannot open a data connection?
+
+       - Action: REF issues an LIST command for which a data
+           connection may not be opened and waits 10 seconds for the
+           IUT to respond.
+
+       - Verification: REF checks for a valid response code of
+           500, 425, or 501 indicating it cannot open a data
+           connection.
+
+       Success: REF receives valid response code.
+
+       Failure: REF times-out before receiving valid response code.
+
+
+
+                            FTP -34-
+Test 106
+
+       - Can the IUT respond correctly to the CWD command which
+           tries to change to a non-existent directory?
+
+       - Action: REF issues a CWD command with a non-existent
+           directory and waits for a valid response from the IUT.
+
+       - Verification: REF checks for a valid response code of
+           550 indicating that the file is unavailable.
+
+       Success: REF receives valid response code.
+
+       Failure: REF times-out waiting for a valid response code.
+
+
+Test 102
+
+       - Can the IUT respond correctly to the DELE command which
+           tries to delete a non-existent file?
+
+       - Action: REF issues a DELE command with a non-existent
+           filename and waits for a valid response from the IUT.
+
+       - Verification: REF checks for a valid response code of
+           550 indicating that the file is unavailable.
+
+       Success: REF receives valid response code.
+
+       Failure: REF times-out waiting for a valid response code.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            FTP -35-
+Scenario File n_connserv: Test IUT s_response
+         functions:
+           - Reinitialize connection.
+           - Abort connection.
+           - Status of connection.
+           - Site command.
+           - Remote help information.
+
+Test 108  Test negative response to REIN command.
+Test 105  Test negative response to ABOR command.
+Test 104  Test negative response to STAT command.
+Test 101  Test negative response to SITE command.
+Test 103  Test negative response to HELP command.
+
+-------------------------------------------------------------
+
+Test 108
+
+       - Does the IUT respond correctly if the REIN command is
+           not implemented?
+
+       - Action: REF issues REIN command and waits 30 seconds
+           for a valid response.
+
+       - Verification: REF checks for a valid response of 502
+           indicating command is not implemented.
+
+       Success: REF receives valid response code.
+
+       Failure: REF times-out waiting for a valid response code.
+
+
+Test 105
+
+       - Does the IUT respond correctly if the ABOR command is
+           not implemented?
+
+       - Action: REF issues ABOR command and waits 30 seconds
+           for a valid response.
+
+       - Verification: REF checks for a valid response of 502
+           indicating command is not implemented.
+
+       Success: REF receives valid response code.
+
+       Failure: REF times-out waiting for a valid response code.
+
+
+Test 104
+
+       - Does the IUT respond correctly if the STAT command is
+           not implemented?
+
+       - Action: REF issues STAT command and waits 30 seconds
+           for a valid response.
+
+
+                            FTP -36-
+       - Verification: REF checks for a valid response of 502
+           indicating command is not implemented.
+
+       Success: REF receives valid response code.
+
+       Failure: REF times-out waiting for a valid response code.
+
+
+Test 101
+
+       - Does the IUT respond correctly if the SITE command is
+           not implemented?
+
+       - Action: REF issues SITE command and waits 30 seconds
+           for a valid response.
+
+       - Verification: REF checks for a valid response of 202,
+           502, or 504 indicating command is not implemented.
+
+       Success: REF receives valid response code.
+
+       Failure: REF times-out waiting for a valid response code.
+
+
+Test 103
+
+       - Does the IUT respond correctly if the HELP command
+           giving an unknown parameter?
+
+       - Action: REF issues HELP command with an unknown
+           parameter and waits 30 seconds for a valid response.
+
+       - Verification: REF checks for a valid response of 504
+           indicating command is not implemented for that parameter.
+
+       Success: REF receives valid response code.
+
+       Failure: REF times-out waiting for a valid response code.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            FTP -37
+Scenario File n_conn3:
+         - Test if IUT responds correctly to an unimplemented
+           PASV command.
+
+Test 116  Test that IUT's ability to respond correctly to an
+            unimplemented PASV command.
+
+-----------------------------------------------------------------------------
+
+Test 116
+
+       - Does the IUT respond correctly if the PASV command is
+           not implemented?
+
+       - Action: REF issues PASV command and waits 30 seconds
+           for a valid response.
+
+       - Verification: REF checks for a valid response of 502
+           indicating command is not implemented.
+
+       Success: REF receives valid response code.
+
+       Failure: REF times-out waiting for a valid response code.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            FTP -38-

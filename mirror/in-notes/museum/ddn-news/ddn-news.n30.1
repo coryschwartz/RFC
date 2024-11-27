@@ -1,0 +1,502 @@
+31-Aug-83 10:57:37-PDT,19245;000000000000  
+Return-Path: <NIC@SRI-NIC.ARPA>
+Received: FROM SRI-NIC BY USC-ISIF.ARPA WITH TCP ; 30 Aug 83 10:04:31 PDT
+Date: Tue 30 Aug 83 09:18:18-PDT
+From: NIC@SRI-NIC.ARPA
+Subject: DDN Newsletter No. 30
+To: DDN-NEWS-LIST4: ;
+
+======================================================================
+DDN-NEWS 30                                    NETWORK INFO CENTER for
+30 Aug 1983                                DCA DDN Program Mgmt Office
+NIC@SRI-NIC                                             (415) 859-3695
+
+
+
+                  DEFENSE DATA NETWORK NEWSLETTER
+
+(Maximum Distribution Requested.  The  DDN Newsletter is published  by
+the Network Information Center under DCA contract.  For  subscription,
+contact NIC@SRI-NIC.  Back issues obtainable by FTP from the directory
+<DDN-NEWS> at SRI-NIC  [10.0.0.73].)
+======================================================================
+
+Section I. OFFICIAL
+
+            Topic:  TCP/IP Host Implementations - Results of
+                      Testing for Upcoming Network Split
+
+======================================================================
+
+The following report was  prepared by BBN  after extensive testing  of
+host implementations of  TCP/IP.  The manner  of testing is  described
+herein.  While the results are not conclusive, they indicate that some
+hosts and the users of those  hosts will be adversely affected by  the
+October  4th  split  of  the  ARPANET  into  the  MILNET/ARPANET.   In
+particular, hosts that  currently communicate on  a regular basis  may
+find themselves in different networks  on October 4.  Thus, they  will
+have to use  a gateway  to reach  each other.   If either  host has  a
+faulty implementation of TCP/IP, this may be impossible.
+
+Two things need to be stressed:
+
+1.   Only  communication  to  or  from  a  host  with  a  bad   TCP/IP
+implementation should be affected in any way.
+
+2.  Communication through  gateways (mail bridges)  may be  impossible
+for hosts with bad TCP/IP implementations.
+
+
+-----------------------------------------------------------------------
+
+Over the last month, several experiments were run at BBN to  determine
+the correctness of ARPANET host TCP/IP implementations.  Each test was
+run several times  to minimize the  probability that a  host was  down
+during each test; however, it is possible that some hosts scored lower
+than they deserved because they were off the network during all tests.
+
+The first experiment was conducted  entirely within the ARPANET.   The
+second  and  third  experiments,  however,  required  another  network
+attached to the ARPANET by more than one gateway (since the purpose of
+the experiments was to test hosts' abilities to talk through gateways;
+see below).  BBN has its own ARPANET-like network called the  "BBNNET"
+which is currently connected to the ARPANET by three gateways.  One of
+these gateways, the BBN-GATEWAY, is known to the rest of the internet;
+it is the gateway which is normally used by traffic between the BBNNET
+and the ARPANET.  The combination of the ARPANET, the BBNNET, and  the
+three gateways  was  used  as  the  testbed  for  these  inter-network
+experiments.
+
+There were three experiments.  The purpose of the first, Experiment A,
+was to  determine which  hosts are  unable  to talk  TCP even  in  the
+simplest circumstances.  From an ARPANET  host, an FTP connection  was
+opened to every ARPANET host (not including TACs, gateways, or  secure
+hosts).  The remote FTP server was then asked for "help", which causes
+half a screen or  so of text to  be sent from the  remote host to  the
+testing host.   The purpose  of  this was  simply  to cause  a  little
+traffic to  flow  on the  FTP  connection.  Then  the  connection  was
+closed.  This  test is  the  simplest possible  in  that it  does  not
+require the hosts  to talk through  a gateway or  to use ICMP.   Hosts
+which failed this test are labelled "4" in the following list.   These
+hosts were excluded from other experiments.
+
+The purpose of Experiment B was to determine which hosts are unable to
+talk TCP to a host in another  network.  From a BBNNET host, the  same
+FTP experiment  was  repeated.   Hosts  failing  to  sustain  the  FTP
+conversation required by this test  are labelled "3" in the  following
+list.  These hosts can talk to hosts in their own network, but not  to
+hosts in other networks.  These hosts were excluded from Experiment C.
+
+The purpose  of  Experiment  C  was  to  determine  which  hosts  deal
+incorrectly with  redirect messages.   This experiment  was just  like
+Experiment B,  with one  complication.  The  BBN gateway  was told  to
+redirect all ARPANET  hosts to  another gateway,  "Bridge", that  also
+connects the ARPANET  and the  BBNNET.  A program  called "HTM"  (Host
+Traffic Matrix) was  run in  the Bridge during  this experiment.   HTM
+records the  source  and destination  of  every datagram  that  passes
+through the  gateway.   Thus,  after running  Experiment  C,  the  HTM
+results in the  Bridge listed  every host that  obeyed the  redirects.
+HTM was also run  in the BBN gateway  during this experiment, and  the
+results were used  as further  proof that some  hosts disregarded  the
+redirects altogether.  Some hosts failed this test because even though
+they did not "choke" on the redirects and could carry the FTP exchange
+to completion, they did not pass any traffic through the Bridge  (they
+ignored the redirects).   Other hosts  failed this  test because  they
+died or hung the FTP connection after receiving one or more redirects.
+Hosts failing this  experiment are labelled  "2".  Hosts passing  this
+experiment are labelled "1".
+
+In summary, of 190  hosts tested, 98 scored  "1" (51%), 28 scored  "2"
+(15%), 23 scored  "3" (12%),  and 41  scored "4"  (22%).  Since  these
+tests were very simple  and did not exercise  all capabilities of  TCP
+(for example, retransmission of lost  datagrams) these results are  in
+no  way  proof  that  all   "1"  hosts  have  perfectly  correct   TCP
+implementations.
+
+
+   
+10.0.0.1    UCLA-CS        VAX-11/750       LOCUS               1
+
+10.1.0.1    UCLA-CCN       IBM-370/3033     OS/MVS              1
+
+10.2.0.1    UCLA-LOCUS     VAX-11/750       LOCUS               1
+
+10.3.0.1    UCLA-ATS       VAX-11/750       LOCUS               1
+
+10.0.0.2    SRI-NSC11      PDP-11/40        UNIX                4
+
+10.1.0.2    SRI-KL         DEC-1090T        TOPS20              1
+
+10.2.0.2    SRI-CSL        FOONLY-F2        TENEX               1
+
+10.3.0.2    SRI-TSC        PDP-11/44        UNIX                2
+
+10.0.0.3    NOSC-CC        VAX-11/750       UNIX                1
+
+10.2.0.3    LOGICON        PDP-11/45        UNIX                4
+
+10.3.0.3    NPRDC          VAX-11/780       UNIX                1
+
+10.0.0.4    UTAH-CS        VAX-11/750       UNIX                2
+
+10.3.0.4    UTAH-20        DEC-2060T        TOPS20              1
+
+10.0.0.5    BBNF           DEC-2040T        TOPS20              1
+
+10.1.0.5    BBNG           DEC-2060T        TOPS20              1
+
+10.3.0.5    BBNA           DEC-2050T        TOPS20              1
+
+10.0.0.6    MIT-MULTICS    HONEYWELL-DPS    MULTICS             1
+
+10.1.0.6    MIT-DMS        DEC-1040         ITS                 1
+
+10.2.0.6    MIT-AI-RESERVED                                     4
+
+10.3.0.6    MIT-ML         DEC-10           ITS                 1
+
+10.1.0.7    RAND-RELAY     VAX-11/750       UNIX                1
+
+10.3.0.7    RAND-UNIX      VAX-11/750       UNIX                1
+
+10.0.0.8    NRL            VAX-11/750       UNIX                2
+
+10.1.0.8    NRL-AIC        VAX-11/780       UNIX                1
+
+10.2.0.8    NSWC-WO        VAX-11/750       UNIX                1
+
+10.3.0.8    NRL-TOPS10     DEC-10           TOPS10              4
+
+10.6.0.8    NRL-ARCTAN     PDP-11/40        RSX11               4
+
+10.7.0.8    NRL-CSS        VAX-11/780       UNIX                1
+
+10.0.0.9    HARV-10        DEC-10           TOPS10              1
+
+10.2.0.9    YALE           VAX-11/750       UNIX                1
+
+10.0.0.10   LL             PDP-11/44        UNIX                1
+
+10.1.0.10   LL-VLSI        VAX-11/780       UNIX                1
+
+10.2.0.10   LL-XN          PDP-11/70        UNIX                3
+
+10.3.0.10   LL-11          PDP-11/45        UNIX                4
+
+10.4.0.10   LL-EN          PDP-11/44        UNIX                2
+
+10.0.0.11   SU-AI          DEC-1080         WAITS               1
+
+10.3.0.11   SU-SCORE       DEC-2060         TOPS20              1
+
+10.0.0.12   COMPION-VMS    VAX-11/750       VMS                 2
+
+10.1.0.13   GUNTER-ADAM    DEC-2060         TOPS20              1
+
+10.0.0.14   CMU-CS-B       DEC-1050         TOPS10              1
+
+10.1.0.14   CMU-CS-A       DEC-1080         TOPS10              1
+
+10.3.0.14   CMU-CS-C       DEC-2060         TOPS20              1
+
+10.0.0.15   ROCHESTER      VAX-11/750       UNIX                3
+
+10.0.0.16   AMES-TSS       IBM-360/67       TSS/360             2
+
+10.2.0.16   AMES-VMSA      VAX-11/780       VMS                 2
+
+10.3.0.16   AMES-VMSB      VAX-11/780       VMS                 2
+
+10.4.0.16   AMES-UNIXA     VAX-11/780       UNIX                4
+
+10.5.0.16   AMES-UNIXB     VAX-11/780       UNIX                4
+
+10.0.0.17   MITRE          BBN-C/70         UNIX                1
+
+10.4.0.17   MITRE-LAN                                           3
+
+10.0.0.18   RADC-MULTICS   HONEYWELL-DPS    MULTICS             1
+
+10.3.0.18   RADC-TOPS20    DEC-2040T        TOPS20              1
+
+10.5.0.18   RADC-UNIX      PDP-11/45        UNIX                4
+
+10.0.0.19   NBS-VMS        VAX-11/780       VMS                 2
+
+10.1.0.19   NBS-SDC        VAX-11/780       VMS                 2
+
+10.2.0.19   NBS-UNIX       PDP-11/45        UNIX                4
+
+10.3.0.19   NBS-PL         PDP-11/70        UNIX                4
+
+10.0.0.20   CCTC           PDP-11/70        UNIX                4
+
+10.3.0.20   EDN-UNIX       PDP-11/70        UNIX                2
+
+10.4.0.20   DCA-EMS        BBN-C/70         UNIX                1
+
+10.0.0.21   LLL-TIS        PDP-11/70        UNIX                4
+
+10.1.0.21   LLL-MFE        DEC-1090         TOPS10              1
+
+10.2.0.21   LLL-ZDIVISION                                       4
+
+10.0.0.22   ISI-SPEECH11   PDP-11/45        EPOS                4
+
+10.1.0.22   USC-ISI        DEC-1090T        TOPS20              1
+
+10.2.0.22   USC-ISIC       DEC-2060         TOPS20              1
+
+10.0.0.23   USC-ECLB       DEC-1090B        TOPS20              1
+
+10.1.0.23   USC-ECLC       DEC-1090B        TOPS20              1
+
+10.3.0.23   USC-ECL        DEC-1090B        TOPS20              1
+
+10.0.0.24   NADC           VAX-11/780       UNIX                1
+
+10.3.0.24   WHARTON-10     PLURIBUS         VDA                 4
+
+10.0.0.25   SEISMO         VAX-11/780       UNIX                2
+
+10.0.0.27   USC-ISID       DEC-2060T        TOPS20              1
+
+10.1.0.27   ISI-PNG11      PDP-11/40        ELF                 4
+
+10.2.0.27   ISI-VAXA       VAX-11/780       UNIX                1
+
+10.0.0.28   ARPA-DMS       LSI-11/3         MOS                 2
+
+10.3.0.28   ARPA-PNG11     PDP-11/34        EPOS                4
+
+10.0.0.29   BRL            PDP-11/70        UNIX                2
+
+10.1.0.29   APG-1          BBN-C/70         UNIX                1
+
+10.0.0.31   CCA-UNIX       VAX-11/780       UNIX                3
+
+10.1.0.31   CCA-VMS        VAX-11/780       VMS                 3
+
+10.0.0.32   PARC-MAXC      MAXC             TENEX               1
+
+10.3.0.32   KESTREL        FOONLY-F3        TENEX               3
+
+10.0.0.34   LBL-NMM        VAX-11/780       VMS                 2
+
+10.1.0.34   LBL-CSAM       VAX-11/780       UNIX                2
+
+10.1.0.35   NOSC-TECR      VAX-11/780       VMS/EUNICE          4
+
+10.4.0.35   NOSC-F4        FOONLY-F4        FOONEX              4
+
+10.0.0.37   PURDUE         VAX-11/780       UNIX                1
+
+10.1.0.38   BRAGG-STA1     PDP-11/34        ELF                 4
+
+10.0.0.43   OFFICE-1       FOONLY-F4        TENEX               1
+
+10.1.0.43   OFFICE-2       FOONLY-F4        TENEX               1
+
+10.2.0.43   OFFICE-3       FOONLY-F3        TENEX               3
+
+10.3.0.43   OFFICE-7       FOONLY-F3        TENEX               3
+
+10.0.0.44   MIT-XX         DEC-2060T        TOPS20              1
+
+10.2.0.44   MIT-TSTGW      PDP-11           MOS                 4
+
+10.3.0.44   MIT-MC         DEC-1080         ITS                 1
+
+10.1.0.45   PICA           VAX-11/780       UNIX                2
+
+10.0.0.46   COLLINS-PR     PDP-11/34        ELF                 4
+
+10.3.0.46   OKC-UNIX       PDP-11/70        UNIX                4
+
+10.0.0.47   WPAFB          PDP-11/50        RSX11M              3
+
+10.1.0.47   WPAFB-AFWAL    PLURIBUS         VDA                 1
+
+10.1.0.48   AFWL           PDP-11/50        RSX11M              3
+
+10.0.0.49   BBNB           DEC-10           TENEX               1
+
+10.3.0.49   BBNC           DEC-10           TENEX               1
+
+10.4.0.49   BBN-CLXX       BBN-C/70         UNIX                1
+
+10.2.0.51   SRI-UNIX       PDP-11/70        UNIX                2
+
+10.0.0.52   ADA-VAX        VAX-11/780       VMS                 3
+
+10.1.0.52   USC-ISIE       DEC-1090T        TOPS20              1
+
+10.2.0.52   USC-ISIF       DEC-1090T        TOPS20              1
+
+10.3.0.52   USC-ISIB       DEC-1090T        TOPS20              1
+
+10.0.0.53   AFSC-AD        PDP-11/45        RSX11M              3
+
+10.2.0.53   AFSC-DEV       PDP-11/44        RSX11M              3
+
+10.4.0.53   NCSC           VAX-11/780       UNIX                3
+
+10.5.0.53   MARTIN         PDP-11/45        RSX                 4
+
+10.0.0.54   CIT-20         DEC-2060         TOPS20              1
+
+10.1.0.54   CIT-VAX        VAX-11/780       UNIX                1
+
+10.2.0.54   ACC            PDP-11/70        UNIX                4
+
+10.3.0.54   JPL-VAX        VAX-11/780       VMS                 2
+
+10.1.0.55   ANL-MCS        VAX-11/780       UNIX                3
+
+10.0.0.56   SUMEX-AIM      DEC-2060         TOPS20              1
+
+10.1.0.56   SU-DSN         VAX-11/780       UNIX                4
+
+10.2.0.56   AIDS-UNIX      VAX-11/750       UNIX                1
+
+10.0.0.57   TYCHO          PDP-11/34        UNIX                4
+
+10.0.0.58   NYU            VAX-11/780       UNIX                1
+
+10.1.0.58   BNL            PDP-11/44        UNIX                2
+
+10.2.0.58   RUTGERS        DEC-2060T        TOPS20              1
+
+10.0.0.61   STL-HOST1      DEC-2040         TOPS20              1
+
+10.1.0.61   ALMSA-1        VAX-11/750       UNIX                4
+
+10.0.0.62   UTEXAS-11      PDP-11/70        UNIX                2
+
+10.1.0.62   UTEXAS-20      DEC-2060         TOPS20              1
+
+10.2.0.62   UTEXAS-780     VAX-11/780                           4
+
+10.1.0.64   MARTIN-B       VAX-11/750       VMS                 3
+
+10.3.0.64   ROBINS-UNIX    PDP-11/45        UNIX                4
+
+10.0.0.65   AFSC-SD        DEC-2020T        TOPS20              4
+
+10.2.0.65   AEROSPACE      VAX-11/780       UNIX                1
+
+10.1.0.66   AFGL           PDP-11/50        RSX11M              3
+
+10.3.0.66   MITRE-BEDFORD  VAX-11/780       UNIX                1
+
+10.0.0.67   AFSC-HQ        DEC-2040T        TOPS20              1
+
+10.0.0.68   USGS1-MULTICS  H-60/68          MULTICS             1
+
+10.2.0.68   USGS1-AMDAHL   AMDAHL-V7        IBM/VMS             4
+
+10.0.0.69   USGS2-MULTICS  H-60/68          MULTICS             2
+
+10.0.0.70   USGS3-MULTICS  H-6880           MULTICS             4
+
+10.2.0.70   USGS3-VMS      VAX-11/780       VMS                 4
+
+10.1.0.72   BBN-UNIX       BBN-C/70         UNIX                1
+
+10.0.0.73   SRI-NIC        FOONLY-F4        TENEX               1
+
+10.2.0.73   SRI-AI         DEC-2060         TOPS20              1
+
+10.3.0.73   SRI-IU         VAX-11/780       VMS                 2
+
+10.4.0.73   SRI-SPAM-TEST  VAX-11/780       UNIX                4
+
+10.0.0.74   SIMTEL20       DEC-2040T        TOPS20              1
+
+10.1.0.74   WSMR70A        BBN-C/70         UNIX                1
+
+10.3.0.74   WSMR70B        BBN-C/70         UNIX                1
+
+10.3.0.75   YUMA                                                1
+
+10.1.0.77   MIT-DEVMULTICS H-68/80          MULTICS             2
+
+10.3.0.77   MIT-OZ         DEC-2060         TOPS20              4
+
+10.0.0.78   UCB-ARPA       VAX-11/780       UNIX                1
+
+10.2.0.78   UCB-VAX        VAX-11/750       UNIX                1
+
+10.3.0.78   MCCLELLAN      PDP-11/70        UNIX                4
+
+10.0.0.79   DEC-2136       DEC-2060T        TOPS20              2
+
+10.1.0.79   DEC-MARLBORO   DEC-2060T        TOPS20              1
+
+10.0.0.80   HI-MULTICS     H68/80           MULTICS             2
+
+10.0.0.81   NEMS           VAX-11/750       UNIX                1
+
+10.1.0.81   NALCON         VAX-11/750       UNIX                1
+
+10.3.0.81   NSRDCOA        VAX-11/780       UNIX                1
+
+10.0.0.82   BBNT           BBN-C/70         UNIX                1
+
+10.1.0.82   BBN-VAX        VAX-11/780       UNIX                1
+
+10.3.0.82   DDN1           BBN-C/70         UNIX                1
+
+10.6.0.82   BBN-NOC2       BBN-C/70         UNIX                1
+
+10.0.0.83   MINET-LON      BBN-C/70         UNIX                1
+
+10.0.0.84   NSWC-DL        PDP-11/40        RSX11M              3
+
+10.1.0.84   NSWC-G         VAX-11/750       UNIX                3
+
+10.0.0.85   NWC-387A       VAX-11/750       VMS                 2
+
+10.3.0.85   NWC-387B       VAX-11/780       VMS                 2
+
+10.0.0.87   SANDIA         DEC-2060T        TOPS20              1
+
+10.0.0.88   NLM-MCS        DEC-2060T        TOPS20              1
+
+10.0.0.90   LANL           VAX-11/750       UNIX                1
+
+10.0.0.91   WASHINGTON     DEC-2060         TOPS20              1
+
+10.3.0.91   UW-VLSI        VAX-11/780       UNIX                1
+
+10.2.0.92   NUSC-NPT       PDP-11/70        UNIX                4
+
+10.3.0.92   NUSC           PDP-11/40        ELF                 3
+
+10.0.0.93   OFFICE-8       FOONLY-F4        TENEX               3
+
+10.1.0.93   OFFICE-10      FOONLY-F3        TENEX               1
+
+10.2.0.93   OFFICE-15      FOONLY-F4        TENEX               1
+
+10.1.0.94   UWISC          VAX-11/750       UNIX                1
+
+10.1.0.95   S1-A           FOONLY-F2        WAITS               1
+
+10.2.0.95   S1-B           VAX-11/750       UNIX                4
+
+10.3.0.95   S1-C           VAX-11/750       UNIX                1
+
+10.0.0.96   UDEL-RELAY     VAX-11/750       UNIX                1
+
+10.1.0.96   UDEL-TCP       VAX-11/750       UNIX                4
+
+10.2.0.96   UDEL-EE        VAX-11/780       UNIX                3
+
+10.3.0.96   CORNELL        VAX-11/780       UNIX                3
+
+
+
+
+
+-------

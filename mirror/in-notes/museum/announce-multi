@@ -1,0 +1,74 @@
+
+New Request for Comments are now available in online RFC libraries:
+
+	RFC 1306:
+
+        Title:      Experiences Supporting By-Request 
+                    Circuit-Switched T3 Networks
+       	Author:     A. Nicholson & J. Young
+	Mailbox:    droid@cray.com, jsy@cray.com
+	Pages:      10
+	Characters: 25,788 
+	Obsoletes/Updates:  none
+
+
+This memo describes the experiences of a project team at Cray
+Research, Inc., in implementing support for circuit-switched T3
+services.  While the issues discussed may not be directly relevant to
+the research problems of the Internet, they may be interesting to a
+number of researchers and implementers.
+
+This RFC provides information for the Internet community.  It does not
+specify an Internet standard.  Distribution of this memo is unlimited.
+
+
+	RFC 1307:
+
+        Title:      Dynamically Switched Link Control Protocol
+       	Author:     J. Young & A. Nicholson
+	Mailbox:    jsy@cray.com, droid@cray.com
+	Pages:      13
+	Characters: 24,145
+	Obsoletes/Updates:  none
+
+
+This memo describes an experimental protocol developed by a project
+team at Cray Research, Inc., in implementing support for circuit-
+switched T3 services.  The protocol is used for the control of network
+connections external to a host, but known to the host.  It is
+documented here for the benefit of others who may wish to perform
+further research.
+
+This memo defines an Experimental Protocol for the Internet community.
+Discussion and suggestions for improvement are requested.  Please
+refer to the current edition of the "IAB Official Protocol Standards"
+for the standardization state and status of this protocol.
+Distribution of this memo is unlimited.
+
+This announcement is sent to the IETF list and the RFC-DIST list.
+Requests to be added to or deleted from the IETF distribution list
+should be sent to IETF-REQUEST@NRI.RESTON.VA.US.  Requests to be added
+to or deleted from the RFC-DIST distribution list should be sent to
+RFC-REQUEST@NIC.DDN.MIL.
+
+Details on obtaining RFCs via FTP or EMAIL may be obtained by sending
+an EMAIL message to "rfc-info@ISI.EDU" with the message body
+"help: ways_to_get_rfcs".  For example:
+
+        To: rfc-info@ISI.EDU
+        Subject: getting rfcs
+
+        help: ways_to_get_rfcs
+
+Requests for special distribution should be addressed to either the
+author of the RFC in question, or to NIC@NIC.DDN.MIL.  Unless
+specifically noted otherwise on the RFC itself, all RFCs are for
+unlimited distribution.
+
+Submissions for Requests for Comments should be sent to
+RFC-EDITOR@ISI.EDU.  Please consult RFC 1111, "Instructions to RFC
+Authors", for further information.
+
+
+Joyce K. Reynolds
+USC/Information Sciences Institute

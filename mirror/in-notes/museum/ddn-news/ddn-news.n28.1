@@ -1,0 +1,223 @@
+24-Aug-83 14:18:26-PDT,9615;000000000001   
+Return-Path: <NIC@SRI-NIC>
+Received: FROM SRI-NIC BY USC-ISIF.ARPA WITH TCP ; 14 Jul 83 18:55:48 PDT
+Date: 14 Jul 1983 1750-PDT
+From: NIC at SRI-NIC
+Subject: DDN Newsletter No. 28
+To: DDN-NEWS-LIST4: ;
+cc: nic at SRI-NIC
+
+=======================================================================
+DDN-NEWS 28                                     NETWORK INFO CENTER for
+14 July 1983                                DCA DDN Program Mgmt Office
+(415) 859-3695                                            (NIC@SRI-NIC)
+
+
+
+
+                   DEFENSE DATA NETWORK NEWSLETTER
+
+(Maximum Distribution Requested.  The DDN Newsletter  is published  by
+the  Network  Information  Center  under  DCA  contract.  For  on-line
+subscription, contact NIC@SRI-NIC.  Back issues obtainable by FTP from
+the directory <DDN-NEWS> at SRI-NIC  [10.0.0.73].)
+======================================================================
+
+Section I.  OFFICIAL
+
+              Topic: - MORE ON THE MILNET/ARPANET SPLIT
+
+Section II. UNOFFICIAL
+
+              Topic: - QUESTION AND ANSWER ABOUT ICMP
+
+----------------------------------------------------------------------
+
+                               SECTION I
+
+                FURTHER DETAILS ON THE MILNET/ARPANET SPLIT
+
+Introduction
+
+This   newsletter   continues   the   discussion   of   the   upcoming
+ARPANET/MILNET split started in DDN Newsletter 26 and continued in DDN
+Newsletter 27.  If you have not yet read these, you are encouraged  to
+do so.  Most hosts keep a publicly accessible local copy, and they can
+also   be    found    at    SRI-NIC   [10.0.0.73]    in    the    file
+<DDN-NEWS>DDN-NEWS-X.TXT, where "x" is the newsletter number.  SRI-NIC
+allows FTP login with the username "anonymous" and password "guest".
+
+Testing the Logical Split
+
+The logical  split  of  the existing  ARPANET  into  the  Experimental
+ARPANET and the MILNET  is a major  change which requires  substantual
+testing to insure it will be accomplished as an orderly process.
+
+ALL HOSTS AND USERS will be impacted. The ARPANET will change from one
+network into two, and communications with hosts on the other net  will
+require a knowledge of internet procedures.  MILNET  hosts will use  a
+new network number (Network  26).  (Details of procuring  updated host
+tables from the Network Information Center will be covered in a forth-
+coming newsletter.)
+
+The MILNET and the ARPANET will remain connected via five mail bridges
+(internet gateways augmented  with a load-splitting  mechanism and  an
+access control filter). The load-splitting mechanism works as follows.
+Each bridge will contain  a table assigning  the "default" bridge  for
+each host to use in sending traffic  to the other network.  If a  host
+sends a  message  via the  wrong  bridge  and its  default  bridge  is
+operational, the host will receive an ICMP redirect message telling it
+which alternate gateway (i.e., default bridge) to use.  This mechanism
+allows the five gateways to  balance the internet traffic.  After  the
+initial default  assignment, if  one of  the bridges  is found  to  be
+carrying  a  disproportionate  share  of  the  load,  then  the   host
+assignment table will  be modified.  No changes to  host software  are
+required.  As  long  as a  host  supports  ICMP,  the  host-to-gateway
+protocol, it can  make full  use of  the bridges  without knowing  its
+default bridge assignment in advance.
+
+A schedule has been developed for  testing prior to the actual  split.
+The goals of this testing are to:
+
+     o Verify the mail bridge load-splitting mechanism and
+       access control filter.
+
+     o Test host TCP/IP and ICMP implementations.
+
+     o Test the entire system networkwide.
+
+Initial testing will use the testbed environment already available  at
+BBN.  BBN has a local  ARPANET-clone network, the BBNNET (Network  8),
+which is connected to the ARPANET via a gateway.  During daytime hours
+the BBNNET passes about 50% as much traffic as does the ARPANET,  with
+the existing gateway passing about 1,000,000 packets during an average
+day, with about 80,000 packets per hour passing through it during peak
+hours.  This represents  a significantly heavier  load than will  pass
+through any  of  the five  mail  bridges, therefore  the  BBNNET  will
+provide a realistic test environment.
+
+The testing schedule is:
+
+15 June:  Two additional gateways between the ARPANET and the BBNNET
+          are installed.
+
+30 June:  The gateway load-splitting mechanism is operational.
+
+15 June to 15 August:  Gateway load-splitting and routing between
+          the ARPANET and the BBNNET are verified.
+
+To aid users in verifying  their capabilities to communicate with  the
+MILNET, the  first MILNET  host to  receive net  number 26  will be  a
+public news host  implemented  on a C/70,  which will allow  anonymous
+logins and  will  contain  information  of  general  interest  to  the
+ARPANET/MILNET community.
+
+In addition, to assist TAC users, a TACNEWS service will be  provided.
+By typing "@n" to the TAC, a TAC user will automatically be  connected
+to the public news host wherever  it may exist without having to  know
+its actual internet address.
+
+Following are some of the major milestones of the Split.
+
+1 July - 1 September:  The mail bridges between ARPANET and MILNET
+          are installed.
+
+15 July:  The C70 public news host is installed as the first host in
+          the  MILNET COI.  Also, a  second MILNET interface will be 
+          added to SRI-NIC.  Host managers  and  technical personnel
+          should now  try to connect to the  C/70 news host  via the
+          mail bridges in order to test their  ICMP implementations.
+
+28 July - 2 August:  Network technical liaison meetings in:
+          Los Angeles and San Francisco, Cambridge and Washington DC
+
+1 September - 1 October:  The NIC  maintains the old  (ARPANET-only)
+          and  the new  (ARPANET/MILNET)  host tables  in  parallel.
+          During  this period  MILNET hosts may  voluntarily  change
+          to Network No. 26 provided their changeover is coordinated
+          with the NIC to permit timely update of the official  host
+          tables.  Two full day  tests will occur, during which  the
+          network will enforce the split, and hosts must use the new
+          host tables.
+
+4 October:  The logical split occurs.  Network IMPs will enforce the
+          proper COI for each host, and network addressing   will be
+          updated to reflect the split.
+
+1 Febuary 1984:  Access control filters  are implemented in the mail
+          bridges.  Although  this capability has  existed  for some
+          time, its implementation is deferred to reduce the problems
+          associated with the logical split on 4 October.
+
+____________________________________________________________________
+
+                            Section II.
+
+QUESTION:
+
+From: Brian McCune <mccune@aids-unix>
+To: nic@nic
+Subject: ICMP
+
+Your latest newsletter seemed to imply that without ICMP running
+in our machine (AIDS-UNIX), we couldn't send mail to a host on
+MILNET (e.g., RADC-TOPS20).  Is this so, or couldn't we
+send a message to another ARPANET host that knows how to
+relay the message on in the right format?  (This other host might not
+be an actual gateway, just an intermediate translator.)
+
+	Brian McCune
+
+-------
+ANSWER:
+
+From: Andrew Malis <malis@bbns>
+Subject: Re: ICMP
+To: mccune@aids-unix
+Cc: nic@sri-nic, malis@bbns
+
+Brian,
+
+It is true that you could send mail through such a forwarding
+host, but using such a scheme has many problems, including: 
+
+- you couldn't receive any return mail without including in all
+  of your mail a return path back through the forwarding host. 
+
+- You would need the official permission from the administators
+  of your forwarding host before using it in this manner. 
+
+- You would be unable to participate in any TELNET or FTP
+  transactions with hosts on the other net (or on ANY other
+  network besides your own).  This is going to become
+  increasingly important as many current ARPANET hosts are being
+  moved to local networks at their sites, and then communicating
+  with the ARPANET via gateways.  Here at BBN, for instance, we
+  have about 30 hosts on various local networks that access the
+  ARPANET via gateways - the host that I am typing on at this
+  moment falls into this category.  We are able to save many
+  thousands of dollars a month that we would otherwise have to
+  pay to provide each of these hosts with a direct ARPANET host
+  port.  I understand the ISI has even more local hosts behind
+  gateways. 
+
+- In the future, DCA may "cut off" hosts that do not fully
+  support TCP/IP, including ICMP, in the same manner that
+  NCP-only hosts have been removed from the net.  Any
+  implementation of IP that does not include ICMP is incomplete
+  (read the IP spec if you don't believe me). 
+
+In the end, you will be saving yourself much long-term grief by
+bringing up ICMP.  You are a UNIX site; there are at least 10
+different UNIX implementations of IP that include ICMP.  I'm sure
+that you could do a lot of copying of existing code, if you
+couldn't just install one of these outright.
+
+Regards,
+Andy Malis
+For the Network Operations Center, BBN
+_________________________________________________________________
+
+The next newsletter in this series will describe how network users
+and host software maintainers may prepare for the split.
+-------

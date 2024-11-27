@@ -1,0 +1,217 @@
+18-May-82 06:43:19-PDT,9580;000000000001
+Mail-from: ARPANET host BRL rcvd at 18-May-82 0641-PDT
+UUCP-From: decvax!duke!unc!brl-bmd!tcp-ip
+Sender:    Mike Muuss <TCP-IP@BRL>
+From:      TCP-IP at BRL
+To:        TCP-IP at BRL
+Date:      18 May 1982
+Subject:   TCP-IP Digest, Vol 1 #20
+Via:  Brl-Bmd; 18 May 82 4:40-EDT
+
+TCP/IP Digest            Tuesday, 18 May 1982      Volume 1 : Issue 20
+
+Today's Topics:
+                  BBN VAX TCP Release for 4.1 BSD UNIX
+              Preliminary Stub Gateway Availible for VAX IP
+                  Plans for 6502 TCP/IP Implementation
+                 "Starting From Scratch" -vs- Front Ends
+                     More on Service Specifications
+----------------------------------------------------------------------
+                         LIMITED DISTRIBUTION
+          For Research Use Only --- Not for Public Distribution
+----------------------------------------------------------------------
+
+Date:  7 May 1982 11:27:03 EDT (Friday)
+From: Rob Gurwitz <gurwitz@Bbn-Unix>
+Subject: BBN VAX TCP release
+To: tcp-ip at BRL
+
+BBN has developed an implementation of TCP/IP for DEC's VAX(TM) family of
+processors, that runs under the Berkeley 4.1BSD version of UNIX(TM).  The
+development effort was funded by DARPA.  
+
+Some important features of the BBN VAX TCP/IP are that it runs in the UNIX 
+kernel for enhanced performance, it is a complete implementation of the TCP 
+and IP protocols, and provides facilities for direct user access to the IP 
+and underlying network protocols.  The IP module supports checksums, option
+interpretation, fragmentation and reassembly, extended internet address
+support, gateway communication with ICMP, and support of multi-homing
+(multiple interfaces and addresses on the same or different networks).  The
+TCP supports checksums, sequencing, the ability to pass options through to
+the IP level, and advanced windowing and adaptive retransmission algorithms.
+Support is also provided for the User Datagram Protocol (UDP).
+
+In addition to the TCP/IP software for the VAX, BBN has developed 
+implementations of the TELNET Virtual Terminal Protocol, File Transfer Protocol
+(FTP), and Simple Mail Transfer Protocol (SMTP), for use with TCP.  These 
+protocols are operated as user level programs.  Also provided are network 
+programming support tools, such as network name/address manipulation
+libraries, status, tracing, and debugging tools.
+
+The TCP/IP and higher level protocol software are now available direct from 
+BBN.  The software is distributed on a 1600 bpi tar format tape, containing 
+the sources and binaries for a 4 .1BSD UNIX kernel containing the network
+modifications and the sources and binaries for the higher level protocols and
+support software.  Documentation is provided in the form of a set of UNIX
+manual pages for the network access device, user programs, and libraries.
+In addition, a detailed installation document is provided.  Device drivers
+are supplied for the ACC LH/DH-11 IMP interface and the Proteon Assoc. PRONET
+Local Network Interface.
+
+The tape is available for a $300.00 duplication fee to Berkeley 4.1BSD
+licensees.  To order the tape, contact:
+
+		Ms. Judy Gordon
+		Bolt Beranek and Newman, Inc.
+		10 Moulton St.
+		Cambridge, MA 02238
+		617-497-3827
+		jgordon@bbn-unix
+
+You will then receive a copy of the licensing agreement.  Tapes will be
+mailed upon receipt of a completed agreeement and the distribution fee.
+
+This tape is supplied as-is to 4.1BSD licensees, with no warranties or
+support expressed or implied.  BBN would be pleased to arrange separate
+agreements for providing installation assistance and/or software support
+services, if desired.
+
+UNIX is a trademark of Bell Laboratories.  VAX is a trademark of Digital
+Equipment Corporation.
+
+------------------------------
+
+Date: 10 May 1982 20:57:12-EST
+From: Chris Kent <cak@Purdue>
+To: tcp-ip at BRL
+Subject: Preliminary Stub Gateway
+
+Hello,
+
+Just a quick note to let you all know that I have implemented an 'ad
+hoc' stub (i.e., non-routing) gateway inside the BBN (Rob Gurwitz)
+TCP/IP for the VAX. I say 'ad hoc' because the actual specifications of
+a \real/ stub gateway are still up in the air; the functionality of my
+code is derived from lengthy discussions with Rob and Dave Mills.  The
+'gateway' provides rerouting of IP datagrams to and from a local
+network, and is transparent to user programs (as any gateway should
+be).
+
+My code is installed in the beta-test version of Rob's code -- whenever
+the final release becomes available, I'll update it.
+
+All this will probably be obsoleted by Berkeley's next VMUNIX release;
+but we need it now, and 4.2 isn't due till at least Fall. I expect
+there are other people that would like to connect their local nets to
+the internet, so I'm making this code available for the interim.
+
+If an official spec for the stub gateways appears before Berkeley's
+code, I'll probably update my code to meet it.
+
+Cheers, 
+Chris
+
+------------------------------
+
+Date: 20 Apr 1982 0038-PST
+From: Mark Crispin
+Reply-To: Admin.MRC at Su-Score
+Subject: 6502 implementation of TCP/IP
+To: TCP-IP at Brl
+Postal-Address: 725 Mariposa Ave. #103; Mountain View, CA 94041
+Phone: (415) 497-1407 (Stanford); (415) 968-1052 (residence)
+
+     I am considering implementing TCP/IP on the 6502 microprocessor.
+I have a 6502-based system (an ATARI) and I know of at least one other
+person who would like to run TCP/IP on a 6502 system (an APPLE).  I'd
+like to make sure nobody else is doing this before I start.  My
+implementation (if I do it) will be assembly coded, and will be modular
+so that all operating system dependent code would be in a separate
+module with clearly-defined hooks.  I am assuming a TCP/IP link to a
+6502 system would be on a modem, although I won't preclude some other
+hardware implementation.
+
+     I guess what I'd like to know is how much interest there would be
+for this.  I would do a considerably different implementation if it had
+commercial potential than if it were just something shared by two or
+three people...
+
+------------------------------
+
+Date: 23 Apr 1982 1444-PST
+From: PADLIPSKY at Usc-Isi
+Subject: Staring from Scratch
+To:   wancho at BRL
+cc:   tcp-ip at BRL
+
+It occurs to me that rather than start from scratch on an "inboard"
+implementation of TCP/IP for a new Host type, you might be better off
+choosing to use an "outboard" implementation (i.e., in a "network
+front-end" which employs a compact Host-Front End Protocol to attach
+to the Host rather than limiting your functionality by attaching in
+an emultated known device fashion).  In a recent visit to another of
+the Old Network Boys, I discovered that there is at least one firm
+doing such a product at present.  As it's not clear to me whether it's
+even an announced product yet (and knowing that at least one
+other firm would like an excuse to build such a gadget), and not being
+able to vouch for their particular H-FP (not meant as a warning; I
+simply didn't look at it--it was supposed to be a social visit), I won't
+thrust the name upon you, but would be glad to pass it on if you're
+at all interested.
+
+(If, by the way, somewhere late in your message to the Digest you
+asked for such info, please excuse my over-scrupulousness; I only
+looked at the first paragraph or three before deleting
+the file and then thought of the NFE suggestion later.)
+
+(If, for that matter, the references to NFE's and H-FP's are
+unfamiliar to you and came off rather cryptic, I'd be glad to go
+on at length on the topic.)
+
+cheers, map
+
+------------------------------
+
+Date: 14 Apr 1982 23:05:25-PST
+FROM: s r kleiman <??? at Berkeley>
+TO: ucbvax!TCP-IP at Brl
+SUBJECT: Service Specifications
+
+In regard to Walt Hass' response:
+
+I agree that the response primitive in the three arrow model
+is virtually useless. In this context, its only value is as
+a sort of flow control (i.e.  L_CONNECT.response means; you
+can begin sending data primitives now).  In fact, I have
+been lobbying to try and have all responses removed from the
+spec.  However, I don't think this will happen.
+
+I disagree with your points about layering.  When the
+serving layer receives an L_CONNECT.request, sets up a
+connection, and passes an CONNECT.indication and
+CONNECT.response, the local user layer knows that the
+SERVING layer has enough resources for the connection.  It
+does not know whether the remote user layer has enough
+resources, but I don't believe it is the business of the
+serving layer to tell it this.  This is a job for a peer
+layer protocol between the USER layers.  This is my
+understanding of the intent of the OSI model.
+
+As an example, let us assume, for now, the four arrow model
+and that the serving layer is the link layer.  First the
+link layer receives a L_CONNECT.request and sends a
+connection setup request to its remote peer.  The remote
+peer then passes an L_CONNECT.indication to its network
+layer.  The link layer is now stopped until the network
+layer responds.  Note that this response MAY involve even
+higher layers.  The link layer has no way to know how long
+to wait for a response, unless some timing information about
+the upper layer(s) is built into it.  This is undesirable
+from a layer independence viewpoint.  Also note that there
+is no machinery in both LLC or LAPB to wait longer than
+T1*N2.  Peer protocols, on the other hand, are designed to
+have this information.
+
+END OF TCP-IP DIGEST
+********************
+

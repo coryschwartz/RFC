@@ -1,0 +1,2757 @@
+
+
+                         ODS Second Generation MIB Document
+
+                                   Revision: 1.0
+
+                                 September 17, 1990
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            ODS Second Generation MIB Document           Page 2
+            ____________________________________________________________
+
+                         ODS Second Generation MIB Document
+
+            This document specifies the Management Information Base
+            (MIB) for SNMP agents residing in local area network
+            equipment manufactured by Optical Data Systems.  As
+            indicated by the title, the MIB described here is the second
+            generation of SNMP implemented at ODS.  The second
+            generation MIB retains compatibility with the first
+            generation MIB while greatly expanding the information
+            available within ODS equipment for network management.
+
+            The specification that follows includes only the enterprise
+            branch of the MIB.  However, the MIB does include full
+            support of the applicable groups in the SNMP standard MIB.
+            This includes the following groups: system, interfaces,
+            address translation, ip, icmp, udp.  The TCP and EGP
+            protocols are not included in ODS SNMP agents and therefore,
+            the tcp group and the egp group are not supported in the ODS
+            MIB.
+
+            The enterprise branch includes branches to manage ethernet
+            concentrators (enc), ethernet bridges (enBridge), token ring
+            concentrators (tokenRing), and token ring bridges
+            (trBridge).  Currently, only the ethernet concentrators
+            branch is fully specified.  The other branches will be
+            specified as the SNMP agents become available.
+
+            The MIB described here conforms to RFC 1156 (also known as
+            "MIB 1").  Support for the additions found in the newly
+            released RFC 1158 ("MIB 2") will be available shortly.
+
+
+
+            1.        Object Definitions
+
+            ODS-MIB        { iso(1) org(3) dod(6) internet(1) private(4)
+                           enterprises(1) 50 }
+
+            DEFINITIONS ::= BEGIN
+            IMPORTS        NetworkAddress, IpAddress, Counter, Gauge,
+                           TimeTicks FROM RFC1158-SMI;
+
+            ods            OBJECT IDENTIFIER ::= { enterprises 50 }
+
+            enc            OBJECT IDENTIFIER ::= { ods 1 }
+            enBridge       OBJECT IDENTIFIER ::= { ods 2 }
+            tokenRing      OBJECT IDENTIFIER ::= { ods 3 }
+            trBridge       OBJECT IDENTIFIER ::= { ods 4 }
+
+            encMib1        OBJECT IDENTIFIER ::= { enc 1 }
+            e1Interface    OBJECT IDENTIFIER ::= { encMib1 1 }
+            e1AddressGroup OBJECT IDENTIFIER ::= { encMib1 2 }
+
+            encMib2        OBJECT IDENTIFIER ::= { enc 2 }
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 3
+            ____________________________________________________________
+
+            encInterfaces  OBJECT IDENTIFIER ::= { encMib2 1 }
+            encBox         OBJECT IDENTIFIER ::= { encInterfaces 1 }
+            encCards       OBJECT IDENTIFIER ::= { encInterfaces 2 }
+            encPorts       OBJECT IDENTIFIER ::= { encInterfaces 3 }
+            encAdmin       OBJECT IDENTIFIER ::= { encMib2 2 }
+
+            END
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 4
+            ____________________________________________________________
+
+            2.        ODS First Generation Mib
+
+            The ODS first generation mib is presented here for the sake
+            of completeness.  It should be treated as obsolete and all
+            SNMP management of an ODS agent should be performed on the
+            second generation mib (section 3).
+
+
+
+            2.1       Interfaces Group
+
+            The interface group contains information pertaining to the
+            box's physical connections including global box
+            configuration and specific port information.  This
+            information is available more clearly and completely as a
+            subset of the second generation mib in section 3.
+
+            Object:        e1TotalCRC { e1Interface 1 }
+
+            Syntax:        Counter
+
+            Definition:    Total number of CRC failures that have been
+                           detected by the star.
+
+            Access:        read-only
+
+            Status:        obsolete
+
+
+            Object:        e1CRCSec { e1Interface 2 }
+
+            Syntax:        Guage
+
+            Definition:    Maximum number of CRC failures per second
+                           that can occur before an alarm is sent to the
+                           manager.  A value of 0 disables reporting of
+                           this trap.
+
+            Access:        read-write
+
+            Status:        obsolete
+
+
+            Object:        e1TotalFAE { e1Interface 3 }
+
+            Syntax:        Counter
+
+            Definition:    Total number of frame alignment errors that
+                           have been detected by the star.
+
+            Access:        read-only
+
+            Status:        obsolete
+
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 5
+            ____________________________________________________________
+
+            Object:        e1FAESec { e1Interface 4 }
+
+            Syntax:        Guage
+
+            Definition:    Maximum number of frame alignment errors per
+                           second that can occur before an alarm is sent
+                           to the manager.  A value of 0 disables
+                           reporting of this trap.
+
+            Access:        read-write
+
+            Status:        obsolete
+
+
+            Object:        e1PortMask { e1Interface 5 }
+
+            Syntax:        INTEGER
+
+            Definition:    Each bit of this integer represents the
+                           enable for one of the star's user ports.  Bit
+                           0 maps to user port 1, bit 1 maps to user
+                           port 2, and so on.  A bit value of 1 enables
+                           the port, 0 disables the port.  The upper 8
+                           bits are ignored for eight-port stars.
+
+            Access:        read-write
+
+            Status:        obsolete
+
+
+            Object:        e1Index { e1Interface 6 }
+
+            Syntax:        INTEGER
+
+            Definition:    Value describing the network/local
+                           configuration of the star.  For eight-port
+                           stars, the index value is 8 for local mode
+                           and 9 for network mode.  For sixteen-port
+                           stars, the index value is 16 for local mode
+                           and 17 for network mode.
+
+            Access:        read-write
+
+            Status:        obsolete
+
+
+            Object:        e1BoxCode { e1Interface 7 }
+
+            Syntax:        INTEGER
+
+            Definition:    This value is a box id code.
+
+            Access:        read-only
+
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 6
+            ____________________________________________________________
+
+            Status:        obsolete
+
+
+            Object:        e1SystemTime { e1Interface 8 }
+
+            Syntax:        TimeTicks
+
+            Definition:    The current absolute time at the star.
+
+            Access:        read-only
+
+            Status:        obsolete
+
+
+            Object:        e1SoftwareVersion { e1Interface 9 }
+
+            Syntax:        INTEGER
+
+            Definition:    The version number of the star firmware.
+
+            Access:        read-only
+
+            Status:        obsolete
+
+
+            Object:        e1MgrFlag { e1Interface 10 }
+
+            Syntax:        INTEGER
+
+            Definition:    A flag indicating the presence of an SNMP
+                           manager on the network.
+
+            Access:        read-write
+
+            Status:        obsolete
+
+
+            Object:        e1AddrTrapFlag { e1Interface 11 }
+
+            Syntax:        INTEGER
+
+            Definition:    A flag indicating if address traps should be
+                           sent to the SNMP manager.
+
+            Access:        read-write
+
+            Status:        obsolete
+
+
+
+
+
+
+
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 7
+            ____________________________________________________________
+
+            2.2       Address Group
+
+            The address group consists of the information pertaining to
+            the traffic on the network as seen by the concentrator.
+
+            Object:        e1AddressTable { e1AddressGroup 1 }
+
+            Syntax:        SEQUENCE {
+                                e1PhysicalAddress   OCTET STRING,
+                                e1PortNumber        INTEGER,
+                                e1FirstPacketTime   TimeTicks,
+                                e1LastPacketTime    TimeTicks,
+                                e1Packets           Counter,
+                                e1Frags             Counter,
+                                e1FragsSec          Gauge,
+                                e1PcktsSec          Gauge
+                           }
+
+            Definition:    There is one entry in the table for every
+                           physical address seen in a packet transmitted
+                           through the concentrator.
+
+            Access:        read-write
+
+            Status:        obsolete
+
+
+            Object:        e1PhysicalAddress { e1AddressTable 1 }
+
+            Syntax:        OCTET STRING
+
+            Definition:    The physical address seen in the source
+                           address field of an ethernet packet.
+
+            Access:        read-only
+
+            Status:        obsolete
+
+
+            Object:        e1PortNumber { e1AddressTable 2 }
+
+            Syntax:        INTEGER
+
+            Definition:    The port number on the concentrator that the
+                           physical address was seen on.
+
+            Access:        read-only
+
+            Status:        obsolete
+
+
+            Object:        e1FirstPacketTime { e1AddressTable 3 }
+
+            Syntax:        TimeTicks
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 8
+            ____________________________________________________________
+
+            Definition:    The time stamp from the concentrator's real-
+                           time clock at the time the physical address
+                           was first seen.
+
+            Access:        read-only
+
+            Status:        obsolete
+
+
+            Object:        e1LastPacketTime { e1AddressTable 4 }
+
+            Syntax:        TimeTicks
+
+            Definition:    The time stamp from the concentrator's real-
+                           time clock at the time the physical address
+                           was last seen.
+
+            Access:        read-only
+
+            Status:        obsolete
+
+
+            Object:        e1Packets { e1AddressTable 5 }
+
+            Syntax:        Counter
+
+            Definition:    The number of packets seen with this physical
+                           address.
+
+            Access:        read-only
+
+            Status:        obsolete
+
+
+            Object:        e1Frags { e1AddressTable 6 }
+
+            Syntax:        Counter
+
+            Definition:    The number of fragments (packets less than 64
+                           bytes in length) seen with this physical
+                           address.
+
+            Access:        read-only
+
+            Status:        obsolete
+
+
+            Object:        e1FragsSec { e1AddressTable 7 }
+
+            Syntax:        Gauge
+
+            Definition:    The number of fragments per second from this
+                           physical address that will trigger an SNMP
+                           trap.
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 9
+            ____________________________________________________________
+
+            Access:        read-write
+
+            Status:        obsolete
+
+
+            Object:        e1PktsSec { e1AddressTable 8 }
+
+            Syntax:        Gauge
+
+            Definition:    The number of packets per second from this
+                           physical address that will trigger an SNMP
+                           trap.
+
+            Access:        read-write
+
+            Status:        obsolete
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 10
+            ____________________________________________________________
+
+            3.0       ODS Second Generation MIB
+
+            The second generation MIB includes two major groups of
+            objects divided between "interfaces" and "administration".
+            The interfaces objects contain information for controlling
+            the configuration of the concentrator and monitoring the
+            traffic passing through it.  The administration objects
+            contain management-related configuration information for the
+            concentrator.
+
+
+
+            3.1       Interfaces
+
+            The interfaces on an ODS concentrator are divided in three
+            groups: the box group, the card group, and the port group.
+            The box group contains objects of information and control
+            that are global to the concentrator.  The card group
+            contains objects specific to a particular card in the
+            concentrator.  The port group contains objects specific to a
+            particular port on a card in the concentrator.
+
+
+
+            3.1.1     Box Group
+
+            The box group contains information specific to the entire
+            concentrator.  It differs from the card and port groups by
+            presenting information independant of where in the
+            concentrator the events are occurring.  Contained in the box
+            interfaces section are counters that keep statistics on the
+            traffic and errors occurring throughout the concentrator.
+            Also, there are gauges that are used to trigger global
+            concentrator alarms.  In the box address table section, the
+            entire address database is available for monitoring.
+
+
+
+            3.1.1.1   Box Interfaces
+
+            The box interfaces section contains counters and gauges used
+            in traffic and error monitoring.  Also included are
+            variables that identify the type of concentrator hardware
+            and its general configuration.
+
+            Object:  boxId { encBox 1 }
+
+            Syntax:        INTEGER {
+                                ods241(1),  -- single card, 16-port
+            fiber optic
+                                ods251(2),  -- single card, 16-port AUI
+                                ods261(3),  -- single card, 16-port
+            twisted pair
+                                ods243(4),  -- single card,  8-port
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 11
+            ____________________________________________________________
+
+            fiber optic
+                                ods263(5),  -- single card,  8-port
+            twisted pair
+                                ods290(9)   -- multi-card system
+                           }
+
+            Definition:    This value is a box identification code.  In
+                           single card systems, the boxId is the same as
+                           the cardId for the card in slot 1 (which is
+                           the only card in a single-slot system).  In
+                           multi-slot systems, the boxId is a chasis id
+                           code and the box's hardware is further
+                           defined by the cardId's found in the
+                           cardTable.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        boxDescr { encBox 2 }
+
+            Syntax:        OCTET STRING
+
+            Definition:    This is a "human readable" text string
+                           corresponding to the boxId and describes the
+                           box's hardware.  In single-slot systems, the
+                           boxDescr is the same as the cardDescr for the
+                           card in slot 1.  In multi-slot systems, the
+                           box's hardware is further described by the
+                           cardDescr's found in the cardTable.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        boxMode { encBox 3 }
+
+            Syntax:        INTEGER {
+                                local(1),
+                                network(2)
+                           }
+
+            Definition:    This value indicates the connection mode of
+                           the network interface on the concentrator.
+                           In general, this indicates if the network
+                           port in the box is connected to the network.
+                           More specifically, if in network mode, this
+                           box is cascaded off of another ODS
+                           concentrator.  In local mode, this box is
+                           either the top of a cascaded configuration or
+                           the only ODS concentrator in the
+                           configuration.
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 12
+            ____________________________________________________________
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        boxHashSelect { encBox 4 }
+
+            Syntax:        INTEGER {
+                                default(1)
+                           }
+
+            Definition:    This value is an identification code for the
+                           current hashing algorithm used in accessing
+                           the address table database within the
+                           concentrator.  Variations in hashing
+                           algorithms can improve performance depending
+                           on the variation in addresses present on the
+                           network.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        boxPktsThru { encBox 5 }
+
+            Syntax:        Counter
+
+            Definition:    This counter holds the total number of
+                           packets that have passed through the
+                           concentrator.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        boxOctetsThru { encBox 6 }
+
+            Syntax:        Counter
+
+            Definition:    This counter holds the total number of bytes
+                           contained in non-errored packets that have
+                           passed through the concentrator.  This value
+                           will reset to zero when the firmware is re-
+                           booted.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        boxAddrsThru { encBox 7 }
+
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 13
+            ____________________________________________________________
+
+            Syntax:        Counter
+
+            Definition:    This counter holds the total number of
+                           different physical source addresses contained
+                           in non-errored packets that have passed
+                           through the concentrator.    This counter has
+                           a maximum value indicated by the
+                           boxAddressCapacity object defined below.
+                           Once this counter has reached its maximum
+                           value, it will not change unless the firmware
+                           is re-booted or addresses are deleted from
+                           the database by a network manager.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        boxPktsLost { encBox 8 }
+
+            Syntax:        Counter
+
+            Definition:    This counter contains the number of packets
+                           that passed through the concentrator but
+                           could not be attributed to a concentrator
+                           card/port connection.  This value will reset
+                           to zero when the firmware is re-booted.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        boxPktsMissed { encBox 9 }
+
+            Syntax:        Counter
+
+            Definition:    This counter contains the number of packets
+                           that passed through the concentrator but
+                           could not be processed due to the network
+                           traffic load exceeding the processing
+                           capacity of the agent.  This value will reset
+                           to zero when the firmware is re-booted.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        boxCrcs { encBox 10 }
+
+            Syntax:        Counter
+
+
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 14
+            ____________________________________________________________
+
+            Definition:    This counter contains the number of packets
+                           with crc errors that passed through the
+                           concentrator.  This value is a total of the
+                           crc error counters associated with each port
+                           of the concentrator.  This value will reset
+                           to zero when the firmware is re-booted.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        boxFaes { encBox 11 }
+
+            Syntax:        Counter
+
+            Definition:    This counter contains the number of packets
+                           with frame alignment errors that passed
+                           through the concentrator.  This value is a
+                           total of the fae counters associated with
+                           each port of the concentrator.  This value
+                           will reset to zero when the firmware is re-
+                           booted.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        boxFrags { encBox 12 }
+
+            Syntax:        Counter
+
+            Definition:    This counter contains the number of packets
+                           containing fewer than 64 bytes that passed
+                           through the concentrator.  This value is a
+                           total of the fragment counters associated
+                           with each port of the concentrator.  This
+                           value will reset to zero when the firmware is
+                           re-booted.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        boxPktThresh { encBox 13 }
+
+            Syntax:        Gauge
+
+            Definition:    This gauge contains the threshold value for
+                           monitoring excessive packets per second
+                           passing through the concentrator.  If at any
+                           time the agent detects that the rate of
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 15
+            ____________________________________________________________
+
+                           packets exceeds this gauge, a box-level alarm
+                           will be sent to the network manager(s) via an
+                           SNMP trap indicating excessive packets.  If
+                           this gauge is set to zero, alarming on this
+                           statistic is disabled.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        boxCrcThresh { encBox 14 }
+
+            Syntax:        Gauge
+
+            Definition:    This gauge contains the threshold value for
+                           monitoring excessive crc errors per second
+                           passing through the concentrator.  If at any
+                           time the agent detects that the rate of crc
+                           errors exceeds this gauge, a box-level alarm
+                           will be sent to the network manager(s) via an
+                           SNMP trap indicating excessive crc errors.
+                           If this gauge is set to zero, alarming on
+                           this statistic is disabled.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        boxFaeThresh { encBox 15 }
+
+            Syntax:        Gauge
+
+            Definition:    This gauge contains the threshold value for
+                           monitoring excessive frame alignment errors
+                           per second passing through the concentrator.
+                           If at any time the agent detects that the
+                           rate of fae's exceeds this gauge, a box-level
+                           alarm will be sent to the network manager(s)
+                           via an SNMP trap indicating excessive fae's.
+                           If this gauge is set to zero, alarming on
+                           this statistic is disabled.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        boxFragThresh { encBox 16 }
+
+            Syntax:        Gauge
+
+
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 16
+            ____________________________________________________________
+
+            Definition:    This gauge contains the threshold value for
+                           monitoring excessive fragments per second
+                           passing through the concentrator.  If at any
+                           time the agent detects that the rate of
+                           fragments exceeds this gauge, a box-level
+                           alarm will be sent to the network manager(s)
+                           via an SNMP trap indicating excessive
+                           fragments.  If this gauge is set to zero,
+                           alarming on this statistic is disabled.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        boxAddressCapacity { encBox 17 }
+
+            Syntax:        INTEGER
+
+            Definition:    This value is the maximum number of entries
+                           that can be contained within the agent's
+                           address database.  Each database entry
+                           corresponds to a different physical source
+                           address seen in a packet that passed through
+                           the concentrator.  This value is the maximum
+                           value that can be assumed by the boxAddrsThru
+                           counter, the maximum value of the total of
+                           the cardAddrsThru counters, and the maximum
+                           value of the total of all the portAddrsThru
+                           counters.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+
+
+            3.1.1.2   Box Address Table
+
+            The box address table is a table of address-related data
+            accessed by physical source address.  This table represents
+            the global database of traffic history aquired by the agent.
+            There is an entry in the table for every physical source
+            address seen by the agent in a packet that passed through
+            the concentrator.  The maximum size of the table is given by
+            boxAddressCapacity.  The current size of the table is given
+            by boxAddrsThru.  The database always reflects the most
+            current addresses, i.e. when the table contains the maximum
+            number of addresses and a new address is seen, the entry in
+            the table that has seen the least recent activity is deleted
+            to make room for the new address entry.
+
+            Object:        boxAddressTable { encBox 18 }
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 17
+            ____________________________________________________________
+
+            Syntax:        SEQUENCE OF BoxatEntry
+
+            Definition:    This is a table of address-related data
+                           accessed by physical source address.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        boxatEntry { boxAddressTable 1 }
+
+            Syntax:        BoxatEntry ::= SEQUENCE {
+                                boxatPhysAddr       OCTET STRING,
+                                boxatOldest         TimeTicks,
+                                boxatNewest         Timeticks,
+                                boxatPkts           Counter,
+                                boxatOctets         Counter,
+                                boxatSlot           INTEGER,
+                                boxatPort           INTEGER
+                           }
+
+            Definition:    This is the record type for each entry in the
+                           boxAdressTable.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        boxatPhysAddr { boxatEntry 1 }
+
+            Syntax:        OCTET STRING
+
+            Definition:    This is the ethernet physical source address
+                           seen by the agent in a packet(s) that passed
+                           through the concentrator.  This is the object
+                           used to access (instantiate) a table record.
+                           Using the SNMP "getnext" operation, the table
+                           can be accessed in increasing address order.
+                           The rest of the fields in a table entry
+                           indicate information pertaining to this
+                           address.  Assigning a value of NULL (via the
+                           SNMP "set" operation) to this object will
+                           delete the record from the database.  The
+                           first time that this address is seen by the
+                           agent, a NewAddressAlarm will be sent to the
+                           network manager(s) via an SNMP trap.  (This
+                           alarm is only reported to a manager if it has
+                           enabled this type of alarm in the
+                           adminTrapTable.)
+
+            Access:        read-write
+
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 18
+            ____________________________________________________________
+
+            Status:        mandatory
+
+
+            Object:        boxatOldest { boxatEntry 2 }
+
+            Syntax:        TimeTicks
+
+            Definition:    This value is a time stamp to mark the first
+                           time that a packet with boxatPhysAddr was
+                           seen by the agent.  This value is referenced
+                           from the last time the firmware was booted
+                           and should be resolved by the network manager
+                           with sysUptime ( from the system group of the
+                           standard portion of the MIB ) to get a "real
+                           time" value.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        boxatNewest { boxatEntry 3 }
+
+            Syntax:        TimeTicks
+
+            Definition:    This value is a time stamp to mark the most
+                           recent time that a packet with boxatPhysAddr
+                           was seen by the agent.  This value is
+                           referenced from the last time the firmware
+                           was booted and should be resolved by the
+                           network manager with sysUptime ( from the
+                           system group of the standard portion of the
+                           MIB ) to get a "real time" value.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        boxatPkts { boxatEntry 4 }
+
+            Syntax:        Counter
+
+            Definition:    This counter contains the number of packets
+                           that have been seen by the agent with
+                           boxatPhysAddr as the physical source address.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        boxatOctets { boxatEntry 5 }
+
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 19
+            ____________________________________________________________
+
+            Syntax:        Counter
+
+            Definition:    This counter contains the total number of
+                           bytes contained within the packets seen by
+                           the agent with boxatPhysAddr as the physical
+                           source address.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        boxatSlot { boxatEntry 6 }
+
+            Syntax:        INTEGER
+
+            Definition:    This value is the slot number that the packet
+                           containing boxatPhysAddr was seen on.  If
+                           boxatPhysAddr is seen on a slot that is
+                           different from the last recorded value, the
+                           value will be updated and a
+                           ChangedAddressAlarm will be sent to the
+                           network manager(s) via an SNMP trap.  (This
+                           alarm is only reported to a manager if it has
+                           enabled this type of alarm in the
+                           adminTrapTable.)
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        boxatPort { boxatEntry 7 }
+
+            Syntax:        INTEGER
+
+            Definition:    This value is the port number that the packet
+                           containing boxatPhysAddr was seen on.  If
+                           boxatPhysAddr is seen on a port that is
+                           different from the last recorded value, the
+                           value will be updated and a
+                           ChangedAddressAlarm will be sent to the
+                           network manager(s) via an SNMP trap.  (This
+                           alarm is only reported to a manager if it has
+                           enabled this type of alarm in the
+                           adminTrapTable.)
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+
+
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 20
+            ____________________________________________________________
+
+            3.1.2     Card Group
+
+            The card group presents much of the same information that is
+            available in the box group but sub-divides the information
+            by which card it pertains to.  The card group contains a
+            card interfaces section and no card address table. (A card
+            address table is not presented here since the box address
+            table is also presented in the port group subdivided by card
+            and port.)
+
+
+
+            3.1.2.1   Card Interfaces
+
+            The card interfaces section includes a few variables
+            describing the sizing (number) of the cards in the
+            concentrator and a card table presenting information on each
+            specific card in the concentrator.
+
+
+
+            3.1.2.1.1 Card Sizing
+
+            The sizing information presented here includes the size of
+            the chasis in slots and the current number of slots that are
+            populated.
+
+            Object:        cardCapacity { encCards 1 }
+
+            Syntax:        INTEGER
+
+            Definition:    This value is the number of slots in the
+                           chasis.  For single-slot systems, this value
+                           will be one.  For multi-slot systems, this
+                           value will indicate the maximum number of
+                           cards than be populated in the chasis.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        cardIOCount { encCards 2 }
+
+            Syntax:        INTEGER
+
+            Definition:    This value is the number of I/O cards that
+                           are populated in the concentrator chasis.
+                           For single-slot systems, this value will
+                           always be one.  For multi-slot systems, this
+                           value will indicate the number of slots that
+                           are populated with I/O cards.  This value can
+                           be zero since the network management card and
+
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 21
+            ____________________________________________________________
+
+                           the network interface card are not considered
+                           I/O cards.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+
+
+            3.1.2.1.2 Card Table
+
+            The card table contains information for each possible slot
+            in the concentrator chasis.  The table is indexed by slot
+            number using cardIndex.  Unpopulated slots will still have
+            an entry in the table, and all information associated with
+            that slot will reflect its empty state.
+
+            Object:        cardTable { encCards 3 }
+
+            Syntax:        SEQUENCE OF CardtEntry
+
+            Definition:    The card table contains an entry for each
+                           slot in the concentrator chasis and is
+                           accessed by cardIndex.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        cardtEntry { cardTable 1 }
+
+            Syntax:        CardtEntry ::= {
+                                cardIndex           INTEGER,
+                                cardId              INTEGER,
+                                cardDescr           OCTET STRING,
+                                cardOperStatus      INTEGER,
+                                cardAdminStatus     INTEGER,
+                                cardPktsThru        Counter,
+                                cardOctetsThru      Counter,
+                                cardAddrsThru       Counter,
+                                cardCrcs            Counter,
+                                cardFaes            Counter,
+                                cardFrags           Counter,
+                                cardPktThresh       Guage,
+                                cardCrcThresh       Guage,
+                                cardFaeThresh       Guage,
+                                cardFragThresh      Guage,
+                                cardPortCount       INTEGER
+                           }
+
+            Definition:    This is the record type for each entry in the
+                           cardTable.
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 22
+            ____________________________________________________________
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        cardIndex { cardtEntry 1 }
+
+            Syntax:        INTEGER
+
+            Definition:    This is the slot number used to index the
+                           cardTable.  The first entry in the table
+                           corresponds to slot one and a cardIndex value
+                           of 1.  The last entry in the table
+                           corresponds to the last slot in the chasis
+                           and a cardIndex value equal to cardCapacity.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        cardId { cardtEntry 2 }
+
+            Syntax:        INTEGER {
+                                empty(1),     -- empty slot
+                                time(2),      -- timing card
+                                enc(3),       -- enc managment card
+                                fiber12(4),   -- 12-port fiber optic
+            card
+                                aui12(5),     -- 12-port aui card
+                                twisted12(6), -- 12-port twisted pair
+            card
+                                base12(7),    -- 12-port 10 base T card
+                                thin8(8)      -- 8-port thin net card
+                           }
+
+            Definition:    This value is a card identification code.  It
+                           uniquely identifies the type of card
+                           populated in the slot given by cardIndex.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        cardDescr { cardtEntry 3 }
+
+            Syntax:        OCTET STRING
+
+            Definition:    This is a "human readable" text string
+                           corresponding to the cardId and describes the
+                           type of card populated in the slot given by
+                           cardIndex.
+
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 23
+            ____________________________________________________________
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        cardOperStatus { cardtEntry 4 }
+
+            Syntax:        INTEGER {
+                                up(1)
+                           }
+
+            Definition:    This value is the "reported" operational
+                           state of the card.  The state of the card is
+                           changed by writing the requested state to
+                           cardAdminStatus.  The state of the card will
+                           change to the requested state if possible.
+                           The cardOperStatus should be read after a
+                           requested change of state to see if the state
+                           actually changed.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        cardAdminStatus { cardtEntry 5 }
+
+            Syntax:        INTEGER {
+                                up(1)
+                           }
+
+            Definition:    This value is the "requested" state of the
+                           card in the slot given by cardIndex.  A
+                           network manager sets this value using an SNMP
+                           set request.  To verify the state of the card
+                           after the request has been made, the
+                           cardOperStatus should be read.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        cardPktsThru { cardtEntry 6 }
+
+            Syntax:        Counter
+
+            Definition:    This counter holds the total number of non-
+                           errored packets that have passed through the
+                           card in the concentrator given by cardIndex.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 24
+            ____________________________________________________________
+
+            Object:        cardOctetsThru { cardtEntry 7 }
+
+            Syntax:        Counter
+
+            Definition:    This counter holds the total number of bytes
+                           contained in non-errored packets that have
+                           passed through the card in the concentrator
+                           given by cardIndex.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        cardAddrsThru { cardtEntry 8 }
+
+            Syntax:        Counter
+
+            Definition:    This counter holds the total number of
+                           physical source addresses contained in non-
+                           errored packets that have passed through the
+                           card in the concentrator given by cardIndex.
+                           This value will decrement as addresses are
+                           deleted from the database by a network
+                           manager and will reset to zero when the
+                           firmware is rebooted.  The sum of the
+                           cardAddrsThru values from all of the cards in
+                           the concentrator will not exceed the maximum
+                           size of the address database given by
+                           boxAddressCapacity.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        cardCrcs { cardtEntry 9 }
+
+            Syntax:        Counter
+
+            Definition:    This counter contains the number of packets
+                           with crc errors that passed through the card
+                           in the concentrator given by cardIndex.  This
+                           value is the total of the crc error counters
+                           associated with each port on the card.  This
+                           value will reset to zero when the firmware is
+                           re-booted.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        cardFaes { cardtEntry 10 }
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 25
+            ____________________________________________________________
+
+            Syntax:        Counter
+
+            Definition:    This counter contains the number of packets
+                           with frame alignment errors that passed
+                           through the card in the concentrator given by
+                           cardIndex.  This value is the total of the
+                           fae counters associated with each port on the
+                           card.  This value will reset to zero when the
+                           firmware is re-booted.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        cardFrags { cardtEntry 11 }
+
+            Syntax:        Counter
+
+            Definition:    This counter contains the number of fragments
+                           (packets less than 64 bytes in length) that
+                           passed through the card in the concentrator
+                           given by cardIndex.  This value is the total
+                           of the fragment counters associated with each
+                           port on the card.  This value will reset to
+                           zero when the firmware is re-booted.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        cardPktThresh { cardtEntry 12 }
+
+            Syntax:        Gauge
+
+            Definition:    This gauge contains the threshold value for
+                           monitoring excessive packets per second
+                           passing through the card in the concentrator
+                           given by cardIndex.  If at any time the agent
+                           detects that the rate of the packets exceeds
+                           this gauge, a card-level alarm will be sent
+                           to the network manager(s) via an SNMP trap
+                           indicating excessive packets.  If this gauge
+                           is set to zero, alarming on this statistic is
+                           disabled.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        cardCrcThresh { cardtEntry 13 }
+
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 26
+            ____________________________________________________________
+
+            Syntax:        Gauge
+
+            Definition:    This gauge contains the threshold value for
+                           monitoring excessive crc errors per second
+                           passing through the card in the concentrator
+                           given by cardIndex.  If at any time the agent
+                           detects that the rate of the crc errors
+                           exceeds this gauge, a card-level alarm will
+                           be sent to the network manager(s) via an SNMP
+                           trap indicating excessive crc errors.  If
+                           this gauge is set to zero, alarming on this
+                           statistic is disabled.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        cardFaeThresh { cardtEntry 14 }
+
+            Syntax:        Gauge
+
+            Definition:    This gauge contains the threshold value for
+                           monitoring excessive frame alignment errors
+                           per second passing through the card in the
+                           concentrator given by cardIndex.  If at any
+                           time the agent detects that the rate of the
+                           fae's exceeds this gauge, a card-level alarm
+                           will be sent to the network manager(s) via an
+                           SNMP trap indicating excessive frame
+                           alignment errors.  If this gauge is set to
+                           zero, alarming on this statistic is disabled.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        cardFragThresh { cardtEntry 15 }
+
+            Syntax:        Gauge
+
+            Definition:    This gauge contains the threshold value for
+                           monitoring excessive fragments per second
+                           passing through the card in the concentrator
+                           given by cardIndex.  If at any time the agent
+                           detects that the rate of the fragments
+                           exceeds this gauge, a card-level alarm will
+                           be sent to the network manager(s) via an SNMP
+                           trap indicating excessive fragments.  If this
+                           gauge is set to zero, alarming on this
+                           statistic is disabled.
+
+            Access:        read-write
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 27
+            ____________________________________________________________
+
+            Status:        mandatory
+
+
+            Object:        cardPortCount { cardtEntry 16 }
+
+            Syntax:        INTEGER
+
+            Definition:    This value is a count of the number of ports
+                           on the card in the concentrator given by
+                           cardIndex.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+
+
+            3.1.3     Port Group
+
+            The port group is a further division of the global
+            concentrator information into groups of information specific
+            to a card/port combination.  It contains interface
+            information similar to the card interface information but at
+            a port level.  The port group also includes another
+            representation of the address database in the form of the
+            port address table.  The important distinction in this table
+            is the capability to view the traffic history specific to a
+            single port or combination of ports.
+
+
+
+            3.1.3.1   Port Interfaces
+
+            The port interfaces information is presented in the form of
+            the port table.  This table includes counters and gauges
+            similar to those found in the box and card groups with the
+            added capability of disabling any port.
+
+
+
+            3.1.3.1.1 Port Table
+
+            The port table contains an entry for every port on every
+            card in the concentrator.  It is indexed by a slot/port
+            combination given by portSlot and portIndex.
+
+            Object:        portTable { encPorts 1 }
+
+            Syntax:        SEQUENCE OF PorttEntry
+
+            Definition:    The port table contains an entry for each
+                           port on each card in the concentrator chasis
+
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 28
+            ____________________________________________________________
+
+                           and is accessed by a combination of portSlot
+                           and portIndex.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        porttEntry { portTable 1 }
+
+            Syntax:        PorttEntry ::= {
+                                portSlot            INTEGER,
+                                portIndex           INTEGER,
+                                portOperStatus      INTEGER,
+                                portAdminStatus     INTEGER,
+                                portPktsThru        Counter,
+                                portOctetsThru      Counter,
+                                portAddrsThru       Counter,
+                                portCrcs            Counter,
+                                portFaes            Counter,
+                                portFrags           Counter,
+                                portPktThresh       Counter,
+                                portCrcThresh       Gauge,
+                                portFaeThresh       INTEGER,
+                                portFragThresh      Gauge
+                           }
+
+            Definition:    This is the record type for each entry in the
+                           portTable.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        portSlot { porttEntry 1 }
+
+            Syntax:        INTEGER
+
+            Definition:    This value is the slot number to which the
+                           related information in the record applies.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        portIndex { porttEntry 2 }
+
+            Syntax:        INTEGER
+
+            Definition:    This value is the port number to which the
+                           related information in the record applies.
+
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 29
+            ____________________________________________________________
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        portOperStatus { porttEntry 3 }
+
+            Syntax:        INTEGER {
+                                up(1),
+                                down(2)
+                           }
+
+            Definition:    This value is the current operational state
+                           of the port specified by portSlot and
+                           portIndex.  The state of the port is changed
+                           by performing an SNMP set request to
+                           portAdminStatus.  When the portOperStatus is
+                           "down", no data will pass to or from any
+                           network nodes connected to the concentrator
+                           via the specified port.  When the
+                           portOperStatus is "up", any data will pass to
+                           or from any network nodes connected to the
+                           concentrator via the specified port.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        portAdminStatus { porttEntry 4 }
+
+            Syntax:        INTEGER {
+                                up(1),
+                                down(2)
+                           }
+
+            Definition:    This value is the current "requested"
+                           operational state of the port specified by
+                           the portSlot and portIndex.  The actual
+                           operational state of the port is queried by
+                           reading portOperStatus.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        portPktsThru { porttEntry 5 }
+
+            Syntax:        Counter
+
+            Definition:    This counter holds the total number of non-
+                           errored packets that have passed through the
+
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 30
+            ____________________________________________________________
+
+                           port in the concentrator given by portSlot
+                           and portIndex.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        portOctetsThru { porttEntry 6 }
+
+            Syntax:        Counter
+
+            Definition:    This counter holds the total number of bytes
+                           contained in non-errored packets that have
+                           passed through the port in the concentrator
+                           given by portSlot and portIndex.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        portAddrsThru { porttEntry 7 }
+
+            Syntax:        Counter
+
+            Definition:    This counter holds the total number of
+                           physical source addresses contained in non-
+                           errored packets that have passed through the
+                           port in the concentrator given by portSlot
+                           and portIndex.  This value will decrement as
+                           addresses are deleted from the database by a
+                           network manager and will reset to zero when
+                           the firmware is rebooted.  The sum of the
+                           portAddrsThru values from all of the ports on
+                           all of the cards in the concentrator will not
+                           exceed the maximum size of the address
+                           database given by boxAddressCapacity.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        portCrcs { porttEntry 8 }
+
+            Syntax:        Counter
+
+            Definition:    This counter contains the number of packets
+                           with crc errors that passed through the port
+                           in the concentrator given by portSlot and
+                           portIndex.  This value will reset to zero
+                           when the firmware is re-booted.
+
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 31
+            ____________________________________________________________
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        portFaes { porttEntry 9 }
+
+            Syntax:        Counter
+
+            Definition:    This counter contains the number of packets
+                           with frame alignment errors that passed
+                           through the port in the concentrator given by
+                           portSlot and portIndex.  This value will
+                           reset to zero when the firmware is re-booted.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        portFrags { porttEntry 10 }
+
+            Syntax:        Counter
+
+            Definition:    This counter contains the number of fragments
+                           (packets less than 64 bytes in length) that
+                           passed through the port in the concentrator
+                           given by portSlot and portIndex.  This value
+                           will reset to zero when the firmware is re-
+                           booted.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+            Object:        portPktThresh { porttEntry 11 }
+
+            Syntax:        Gauge
+
+            Definition:    This gauge contains the threshold value for
+                           monitoring excessive packets per second
+                           passing through the port in the concentrator
+                           given by portSlot and portIndex.  If at any
+                           time the agent detects that the rate of the
+                           packets exceeds this gauge, a port-level
+                           alarm will be sent to the network manager(s)
+                           via an SNMP trap indicating excessive
+                           packets.  If this gauge is set to zero,
+                           alarming on this statistic is disabled.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 32
+            ____________________________________________________________
+
+            Object:        portCrcThresh { porttEntry 12 }
+
+            Syntax:        Gauge
+
+            Definition:    This gauge contains the threshold value for
+                           monitoring excessive crc errors per second
+                           passing through the port in the concentrator
+                           given by portSlot and portIndex.  If at any
+                           time the agent detects that the rate of the
+                           crc errors exceeds this gauge, a port-level
+                           alarm will be sent to the network manager(s)
+                           via an SNMP trap indicating excessive crc
+                           errors.  If this gauge is set to zero,
+                           alarming on this statistic is disabled.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        portFaeThresh { porttEntry 13 }
+
+            Syntax:        Gauge
+
+            Definition:    This gauge contains the threshold value for
+                           monitoring excessive frame alignment errors
+                           per second passing through the port in the
+                           concentrator given by portSlot and portIndex.
+                           If at any time the agent detects that the
+                           rate of the fae's exceeds this gauge, a port-
+                           level alarm will be sent to the network
+                           manager(s) via an SNMP trap indicating
+                           excessive frame alignment errors.  If this
+                           gauge is set to zero, alarming on this
+                           statistic is disabled.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        portFragThresh { porttEntry 14 }
+
+            Syntax:        Gauge
+
+            Definition:    This gauge contains the threshold value for
+                           monitoring excessive fragments per second
+                           passing through the port in the concentrator
+                           given by portSlot and portIndex.  If at any
+                           time the agent detects that the rate of the
+                           fragments exceeds this gauge, a port-level
+                           alarm will be sent to the network manager(s)
+                           via an SNMP trap indicating excessive
+
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 33
+            ____________________________________________________________
+
+                           fragments.  If this gauge is set to zero,
+                           alarming on this statistic is disabled.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+
+
+            3.1.3.2   Port Address Table
+
+            The port address table is a table of address-related data
+            accessed by a combination of card, port, and physical source
+            address.  This table represents the global database of
+            traffic history aquired by the agent divided by slot and
+            port.  In each division of the table (specified by slot and
+            port), there is an entry in the table for every physical
+            source address seen by the agent in a packet that passed
+            through the specified port of the concentrator.  The maximum
+            size of the table is given by boxAddressCapacity.  The size
+            of all of the divisions of the table combined is equal to
+            the size of the entire table.  The current size of each
+            slot/port division of the table is given by the
+            portAddrsThru value for the specified slot/port.  The
+            database always reflects the most current addresses, i.e.
+            when the table contains the maximum number of addresses and
+            a new address is seen, the entry in the table that has seen
+            the least recent activity is deleted to make room for the
+            new address entry.  Because of this, a new address seen on
+            one port of the concentrator can cause an entry to be
+            deleted from a division of the database associated with a
+            different port.
+
+            Object:        portAddressTable { encPorts 2 }
+
+            Syntax:        SEQUENCE OF PortatEntry
+
+            Definition:    This is a table of address-related data
+                           accessed by a combination of slot
+                           (portatSlot), port (portatPort), and physical
+                           source address (portatPhysAddr).
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        portatEntry { portAddressTable 1 }
+
+            Syntax:        PortatEntry ::= {
+                                portatPhysAddr      OCTET STRING,
+                                portatOldest        TimeTicks,
+                                portatNewest        Timeticks,
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 34
+            ____________________________________________________________
+
+                                portatPkts          Counter,
+                                portatOctets        Counter,
+                                portatSlot          INTEGER,
+                                portatPort          INTEGER
+                           }
+
+            Definition:    This is the record type for each entry in the
+                           portAddressTable.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        portatPhysAddr { portatEntry 1 }
+
+            Syntax:        OCTET STRING
+
+            Definition:    This is the ethernet physical source address
+                           seen by the agent in a packet(s) that passed
+                           through the port of the concentrator given by
+                           portatSlot and portatPort.  This is the third
+                           object used to access (instantiate) a table
+                           record.  Using the SNMP "getnext" operation,
+                           the address database can be accessed in
+                           increasing address order retreiving only
+                           those records matching the specified slot and
+                           port.  The rest of the fields in a table
+                           entry indicate information pertaining to this
+                           address.  Assigning a value of NULL (via the
+                           SNMP "set" operation) to this object will
+                           delete the record from the database.  The
+                           first time that this address is seen by the
+                           agent, a NewAddressAlarm will be sent to the
+                           network manager(s) via an SNMP trap.  (This
+                           alarm is only reported to a manager if it has
+                           enabled this type of alarm in the
+                           adminTrapTable.)
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        portatOldest { portatEntry 2 }
+
+            Syntax:        TimeTicks
+
+            Definition:    This value is a time stamp to mark the first
+                           time that a packet with portatPhysAddr was
+                           seen by the agent on the specified slot and
+                           port.  This value is referenced from the last
+                           time the firmware was booted and should be
+                           resolved by the network manager with
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 35
+            ____________________________________________________________
+
+                           sysUptime ( from the system group of the
+                           standard portion of the MIB ) to get a "real
+                           time" value.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        portatNewest { portatEntry 3 }
+
+            Syntax:        TimeTicks
+
+            Definition:    This value is a time stamp to mark the most
+                           recent time that a packet with portatPhysAddr
+                           was seen by the agent on the specified slot
+                           and port.  This value is referenced from the
+                           last time the firmware was booted and should
+                           be resolved by the network manager with
+                           sysUptime ( from the system group of the
+                           standard portion of the MIB ) to get a "real
+                           time" value.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        portatPkts { portatEntry 4 }
+
+            Syntax:        Counter
+
+            Definition:    This counter contains the number of packets
+                           that have been seen by the agent on the
+                           specified slot and port with portatPhysAddr
+                           as the packet's physical source address.
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        portatOctets { portatEntry 5 }
+
+            Syntax:        Counter
+
+            Definition:    This counter contains the total number of
+                           bytes contained within the packets seen by
+                           the agent on the specified slot and port with
+                           portatPhysAddr as the packet's physical
+                           source address.
+
+            Access:        read-only
+
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 36
+            ____________________________________________________________
+
+            Status:        mandatory
+
+
+            Object:        portatSlot { portatEntry 6 }
+
+            Syntax:        INTEGER
+
+            Definition:    This value is the slot number that the packet
+                           containing portatPhysAddr was seen on.  If
+                           portatPhysAddr is seen on a slot that is
+                           different from the last recorded value, the
+                           value will be updated and a
+                           ChangedAddressAlarm will be sent to the
+                           network manager(s) via an SNMP trap.  (This
+                           alarm is only reported to a manager if it has
+                           enabled this type of alarm in the
+                           adminTrapTable.)
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+            Object:        portatPort { portatEntry 7 }
+
+            Syntax:        INTEGER
+
+            Definition:    This value is the port number that the packet
+                           containing portatPhysAddr was seen on.  If
+                           portatPhysAddr is seen on a port that is
+                           different from the last recorded value, the
+                           value will be updated and a
+                           ChangedAddressAlarm will be sent to the
+                           network manager(s) via an SNMP trap.  (This
+                           alarm is only reported to a manager if it has
+                           enabled this type of alarm in the
+                           adminTrapTable.)
+
+            Access:        read-only
+
+            Status:        mandatory
+
+
+
+
+            3.2       Administration
+
+            The administration group contains objects used to configure
+            out-of-band management of the concentrator and two tables
+            used to manage community strings and trap reporting.
+
+
+
+
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 37
+            ____________________________________________________________
+
+            3.2.1     Out-of-band Configuration
+
+            The out-of-band configuration objects are used to determine
+            the specifics of the serial connection.  Also, the time and
+            date objects are used to set the real-time-clock used by the
+            agent when reporting statistics through the serial
+            connection.
+
+            Object:        adminTime { encAdmin 1 }
+
+            Syntax:        OCTET STRING
+
+            Definition:    This string represents the real time of day
+                           at the concentrator.  Its format is HHMMSSss
+                           where HH is hours (24 hour format), MM is
+                           minutes, SS is seconds, and ss is hundredths
+                           of seconds.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        adminDate { encAdmin 2 }
+
+            Syntax:        OCTET STRING
+
+            Definition:    This string represents the real date at the
+                           concentrator.  Its format is YYMMDD where YY
+                           is year, MM is month, and DD is day.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        adminSerialBaud { encAdmin 3 }
+
+            Syntax:        INTEGER {
+                                b9600(1)
+                           }
+
+            Definition:    This value is the baud rate used to
+                           communicate through the serial port of the
+                           concentrator for out-of-band management.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        adminSerialPerson { encAdmin 4 }
+
+
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 38
+            ____________________________________________________________
+
+            Syntax:        INTEGER {
+                                vt100(1)
+                           }
+
+            Definition:    This value is the terminal emulation
+                           personality mode used through the serial port
+                           for out-of-band management.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+
+
+            3.2.2     Community Strings Table
+
+            The community strings table is used to restrict different
+            levels of access to a concentrator agent by a network
+            manager(s).  Different community strings can be entered into
+            the table with assigned access priveleges.  By restricting
+            the knowledge of these community strings, a network
+            administrator can control which management stations can
+            manage the concentrator.  There are five levels of privelege
+            that can be assigned to a community string: none - no access
+            to the concentrator agent is allowed, read-only - monitoring
+            of the concentrator agent is permitted, read-write -
+            monitoring and control of the concentrator agent is
+            permitted, super - read/write access to restricted areas of
+            the MIB are permitted.  The restricted areas of the MIB
+            include the community string table and the trap table.
+            Without super priveleges, neither reading or writing of
+            these objects is permitted.
+
+            Object:        adminCommTable { encAdmin 5 }
+
+            Syntax:        SEQUENCE OF AdctEntry
+
+            Definition:    This is a table of community string
+                           information accessed by ctIndex.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        adctEntry { adminCommTable 1 }
+
+            Syntax:        AdctEntry ::= {
+                                ctIndex             INTEGER,
+                                ctCommStr           OCTET STRING,
+                                ctPrivelege         INTEGER
+                           }
+
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 39
+            ____________________________________________________________
+
+            Definition:    This is the record type for each entry in the
+                           adminCommTable.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        ctIndex { adctEntry 1 }
+
+            Syntax:        INTEGER
+
+            Definition:    This is the index into the community string
+                           table.  This is the object used to access
+                           (instantiate) a table record.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        ctCommStr { adctEntry 2 }
+
+            Syntax:        OCTET STRING
+
+            Definition:    This is a "human readable" text string used
+                           to restrict access priveleges to the
+                           concentrator agent.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        ctPrivelege { adctEntry 3 }
+
+            Syntax:        INTEGER {
+                                none(1),
+                                read-only(2),
+                                read-write(3),
+                                super(4)
+                           }
+
+            Definition:    This value represents the access privelege
+                           assigned to the community string given by
+                           ctCommStr.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+
+
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 40
+            ____________________________________________________________
+
+            3.2.3     Trap Table
+
+            The trap table is used to assign trap receiving levels and
+            their associated community strings to network managers.  A
+            table record includes the IP address to report traps to, the
+            community string used when reporting the trap, and several
+            enables that can be used to selectively filter which types
+            of traps are reported to that IP address using that
+            community string.  This provides the capability for the same
+            network manager or different network managers to receive
+            different types of traps using whatever community strings
+            they might require.
+
+            Object:        adminTrapTable { encAdmin 6 }
+
+            Syntax:        SEQUENCE OF AdttEntry
+
+            Definition:    This is a table of trap reporting information
+                           accessed by ttIndex.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        adttEntry { adminTrapTable 1 }
+
+            Syntax:        AdttEntry ::= {
+                                ttIndex             INTEGER,
+                                ttCommStr           OCTET STRING,
+                                ttMgrAddr           IpAddress,
+                                ttTrapEnBox         INTEGER,
+                                ttTrapEnCard        INTEGER,
+                                ttTrapEnPort        INTEGER,
+                                ttTrapEnAddr        INTEGER
+                           }
+
+            Definition:    This is the record type for each entry in the
+                           adminTrapTable.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        ttIndex { adttEntry 1 }
+
+            Syntax:        INTEGER
+
+            Definition:    This is the index into the trap table.  This
+                           is the object used to access (instantiate) a
+                           table record.
+
+            Access:        read-write
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 41
+            ____________________________________________________________
+
+            Status:        mandatory
+
+
+            Object:        ttCommStr { adttEntry 2 }
+
+            Syntax:        OCTET STRING
+
+            Definition:    This is a "human readable" text string used
+                           when reporting traps to the manager whose
+                           network address is ttMgrAddr.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        ttMgrAddr { adttEntry 3 }
+
+            Syntax:        IpAddress
+
+            Definition:    This is the ip address of the manager that
+                           will receive traps using the associated
+                           community string.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        ttTrapEnBox { adttEntry 4 }
+
+            Syntax:        INTEGER {
+                                enable(1)
+                                disable(2)
+                           }
+
+            Definition:    This object is used to enable and disable the
+                           reporting of box-level traps to the manager
+                           whose network address is ttMgrAddr.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        ttTrapEnCard { adttEntry 5 }
+
+            Syntax:        INTEGER {
+                                enable(1)
+                                disable(2)
+                           }
+
+
+
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+
+
+
+            ODS Second Generation MIB Document           Page 42
+            ____________________________________________________________
+
+            Definition:    This object is used to enable and disable the
+                           reporting of card-level traps to the manager
+                           whose network address is ttMgrAddr.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        ttTrapEnPort { adttEntry 6 }
+
+            Syntax:        INTEGER {
+                                enable(1)
+                                disable(2)
+                           }
+
+            Definition:    This object is used to enable and disable the
+                           reporting of port-level traps to the manager
+                           whose network address is ttMgrAddr.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+            Object:        ttTrapEnAddr { adttEntry 7 }
+
+            Syntax:        INTEGER {
+                                enable(1)
+                                disable(2)
+                           }
+
+            Definition:    This object is used to enable and disable the
+                           reporting of address-level traps to the
+                           manager whose network address is ttMgrAddr.
+
+            Access:        read-write
+
+            Status:        mandatory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            ____________________________________________________________
+                                                           Revision: 1.0
+
+

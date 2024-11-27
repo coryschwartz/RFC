@@ -1,0 +1,526 @@
+
+
+   Timeplex TIME/LAN 100                                 Enterprise-Specific Traps
+                                                                   August 26, 1991
+
+
+
+                                  Table of Contents
+
+
+
+   1. INTRODUCTION . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .   2
+
+   2. GENERIC TRAPS  . . . . . . . . . . . . . . . . . . . . . . . . . . . . .   2
+
+   3. SPECIFIC TRAPS . . . . . . . . . . . . . . . . . . . . . . . . . . . . .   3
+        3.1. FDDI Traps  . . . . . . . . . . . . . . . . . . . . . . . . . . .   3
+        3.2. OSPF Traps  . . . . . . . . . . . . . . . . . . . . . . . . . . .   5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                          1
+
+
+
+
+
+
+
+
+
+
+
+
+   Timeplex TIME/LAN 100                                 Enterprise-Specific Traps
+                                                                   August 26, 1991
+
+
+
+
+
+   1. INTRODUCTION
+
+
+
+
+
+    This document describes the SNMP Trap messages that are currently being
+    sent by TIME/LAN network devices to a Network Management Station (NMS).
+    The SNMP Trap messages are divided into 2 groups: generic and specific.
+    Generic traps are those defined in RFC 1157. TIME/LAN network devices 
+    comply with the standard as well as providing additional information 
+    to further clarify the generic traps. Specific traps are used to identify
+    events that are germane to TIME/LAN network devices. Here again, 
+    additional information is provided to clarify the specific traps.
+        
+
+
+    2. GENERIC TRAPS
+
+
+                
+    An SNMP Trap message as defined in RFC 1157 contains a field named 
+    'generic'. The value of this field indicates the type of generic 
+    trap. TIME/LAN network devices convey additional information through
+    the 'variable binding list' (VBL).
+
+
+    COLDSTART TRAP 
+        Cause: issued upon power-up or reset.
+        Generic field:   0
+        VBL: NULL
+
+
+    WARMSTART TRAP 
+        Cause: issued after a network device has reset due to 
+                some unrecoverable error condition.
+        Generic field: 1
+        VBL: TL1 MIB variable 'tl1snmpLastTrapMessage'
+
+
+
+
+
+
+
+
+                                          2
+
+
+
+
+
+
+
+
+
+
+
+
+   Timeplex TIME/LAN 100                                 Enterprise-Specific Traps
+                                                                   August 26, 1991
+
+
+    LINKDOWN TRAP 
+        Cause: issued after a network link interface has 
+                been declared down.
+        Generic field: 2
+        VBL: MIB II variable 'ifIndex'          
+
+
+    LINKUP TRAP 
+        Cause: issued after a network link interface 
+                has been declared up.
+        Generic field: 3
+        VBL: MIB II variable 'ifIndex'          
+
+
+    AUTHENTICATION FAILURE TRAP
+        Cause: issued whenever SNMP receives an SNMP request
+                message that is not from a valid NMS or has
+                an invalid community name.
+        Generic type: 4
+        VBL: TL1 MIB variable 'tl1snmpLastTrapMessage'
+
+
+    EGP NEIGHBOR LOSS TRAP
+        Cause: issued whenever EGP detects that one of his neighbors 
+                is no longer responding.
+        Generic type:  5
+        VBL:  MIB II variable 'egpNeighAddr'     
+
+
+    3. SPECIFIC TRAPS
+
+
+
+    The specific trap type is meaningful only when the generic trap type 
+    is SPECIFIC (=6). In other words, if an SNMP Trap message contains a
+    'generic' value of 6, them the 'specific' value identifies the specific
+    trap type. The following defines the specific trap types:
+
+
+    3.1. FDDI Traps
+
+
+    PC TRACE FDDI RESET 
+     Cause: issued when the FDDI interface is reset as
+                part of the 'ring trace' recovery process.
+        Specific field: 150
+        VBL: MIB II variable 'ifIndex'
+
+
+                                          3
+
+
+
+
+
+
+
+
+
+
+
+
+   Timeplex TIME/LAN 100                                 Enterprise-Specific Traps
+                                                                   August 26, 1991
+
+
+    FDDI SCM STATE CHANGE TRAP
+     Cause: issued when a station wraps or unwraps.
+     Specific field: 151
+        VBL: TL1 MIB variable 'tl1fddiSMTDasScmState'
+
+
+    FDDI UPSTREAM NEIGHBOR CHANGE TRAP
+     Cause: issued when a station detects a new upstream neighbor
+             has been connected to the ring.
+     Specific field: 152
+        VBL: TL1 MIB variable 'tl1fddiSMTStationUpstreamNeighbor 
+
+
+    FDDI DOWNSTREAM NEIGHBOR CHANGE TRAP
+     Cause: issued when a station detects that a new downstream neighbor
+            has been connected to the ring.
+        Specific field: 153
+        VBL: TL1 MIB variable 'tl1fddiSMTStationDownstreamNeighbor
+
+
+    FDDI CONNECT REJECTED TRAP
+     Cause: issued when the station PHY rejects a neighbor PHY connection.
+     Specific field: 154
+        VBL: MIB II variable 'ifIndex',
+          TL1 MIB variable 'tl1snmpLastTrapMessage'
+
+
+    DUPLICATE MAC ADDRESS
+     Cause: issued when a station detects that another station on
+             the ring has the same physical(MAC) address as the this
+             issuing station.
+     Specific field: 155
+        VBL: MIB II variable 'ifIndex'
+
+
+    UNA DUPLICATE MAC ADDRESS
+     Cause: issued when this station's upstream neighbor station
+             detects that it has a duplicate MAC address.
+     Specific field: 156
+        VBL: MIB II variable 'ifIndex'
+
+
+    FDDI TWISTED RING
+     Cause: issued when a station detects that its PHY A/B is
+             connected to a matching PHY A/B causing the ring
+                to twist back on itself.
+     Specific field: 157
+        VBL: MIB II variable 'ifIndex'
+
+                                          4
+
+
+
+
+
+
+
+
+
+
+
+
+   Timeplex TIME/LAN 100                                 Enterprise-Specific Traps
+                                                                   August 26, 1991
+
+
+
+
+    SLAVE LINK ERROR TRAP
+     Cause: issued when a concentrator detects that one of its slave
+             links has exceeded its CRC error rate threshold.
+     Specific field: 158
+        VBL: MIB II variable 'ifIndex',
+             TL1 MIB variable 'tl1snmpLastTrapMessage'
+
+
+    LEM PORT ALARM             
+     Cause: issued when the bit error rate exceeds an alarm threshold.
+        Specific field: 159
+        VBL: MIB II variable 'ifIndex',
+             TL1 MIB variable 'tl1snmpLastTrapMessage'
+
+
+     3.2. OSPF Traps
+
+
+    T1 IF CHANGE
+     Cause: issued when OSPF detects the state of a router
+                interface has changed which will result in new
+                link state advertisements.
+     Specific field: 190
+        VBL: TL1 MIB variable 'tl1snmpLastTrapMessage'
+
+
+    T2 NBR CHANGE                  
+     Cause: issued when OSPF detects the state of a neighbor
+                has changed.
+     Specific field: 191
+        VBL: TL1 MIB variable 'tl1snmpLastTrapMessage'
+
+
+    T3 DR CHANGE                   
+     Cause: issued when OSPF detects that the (Backup) Dedicated
+                Router has changed on one of the attached interfaces.
+     Specific field: 192
+        VBL: TL1 MIB variable 'tl1snmpLastTrapMessage'
+
+
+    T4 NEW LSA SENT                
+     Cause: issued when OSPF originates a new instantiation of a
+                link state advertisement.                        
+     Specific field: 193
+        VBL: TL1 MIB variable 'tl1snmpLastTrapMessage'
+
+
+                                          5
+
+
+
+
+
+
+
+
+
+
+
+
+   Timeplex TIME/LAN 100                                 Enterprise-Specific Traps
+                                                                   August 26, 1991
+
+
+    T5 NEW LSA RECEIVED            
+     Cause: issued when OSPF detects the receipt of a new 
+                instantiation of a link state advertisement.
+     Specific field: 194
+        VBL: TL1 MIB variable 'tl1snmpLastTrapMessage'
+
+
+    T6 ROUTING TABLE CHANGE        
+     Cause: issued when OSPF detects that an entry in the routing
+                table has changed.
+     Specific field: 195
+        VBL: TL1 MIB variable 'tl1snmpLastTrapMessage'
+
+
+    C1 PACKET HDR ERROR            
+     Cause: issued when OSPF discards an incoming packet due to 
+                an error in the IP/OSPF header.
+     Specific field: 196
+        VBL: TL1 MIB variable 'tl1snmpLastTrapMessage'
+
+
+    C2 HELLO PARM MISMATCH         
+     Cause: issued when OSPF discards an incoming Hello packet due
+                to mismatches in the Hello's parameters and those
+                configured for the receiving interface.
+     Specific field: 197
+        VBL: TL1 MIB variable 'tl1snmpLastTrapMessage'
+
+
+    C3 WRONG NBR STATE             
+     Cause: issued when OSPF discards an incomiong Database Description
+                packet, Link State Request packet, Link State Acknowledgement
+                packet, or Link State Update packet due to the source
+                neighbor being in the wrong state.
+     Specific field: 198
+        VBL: TL1 MIB variable 'tl1snmpLastTrapMessage'
+
+
+    C4 DB DESCRIPT RXMIT           
+     Cause: issued when OSPF retransmits a Database Description packet.
+     Specific field: 199
+        VBL: TL1 MIB variable 'tl1snmpLastTrapMessage'
+
+
+
+
+
+
+
+                                          6
+
+
+
+
+
+
+
+
+
+
+
+
+   Timeplex TIME/LAN 100                                 Enterprise-Specific Traps
+                                                                   August 26, 1991
+
+
+
+    C5 UNKNOWN NBR         
+     Cause: issued when OSPF detects a nonbroadcast multi-access
+                (NBMA) message from an unknown neighbor.
+     Specific field: 200
+        VBL: TL1 MIB variable 'tl1snmpLastTrapMessage'
+
+
+    E1 RCV LSA CHKSUM              
+     Cause: issued when OSPF detects a checksum error in a
+                link state advertisement.
+     Specific field: 201
+        VBL: TL1 MIB variable 'tl1snmpLastTrapMessage'
+
+
+    E2 AGED LSA CHKSUM             
+     Cause: issued when OSPF discovers, during the aging process,
+                that one of the link state advertisements in the
+                database has a checksum error.
+     Specific field: 202
+        VBL: TL1 MIB variable 'tl1snmpLastTrapMessage'
+
+
+    R1 LSA NEW CHKSUM              
+     Cause: issued when OSPF has seen two link state advertisements,
+                whose LS type, Link State ID, Advertising Router, and LS
+                sequence number are the same, yet with differing LS 
+                checksums.
+     Specific field: 203
+        VBL: TL1 MIB variable 'tl1snmpLastTrapMessage'
+
+
+    R2 LSA NEW AGE                 
+     Cause: issued when OSPF has seen two link state advertisements,
+                whose LS type, Link State ID, Advertising Router, LS
+                sequence number, and LS checksum are the same, yet can
+                be distinguished by their LS age fields. 
+     Specific field: 204
+        VBL: TL1 MIB variable 'tl1snmpLastTrapMessage'
+
+
+    R3 MORE RECENT SELF LSA        
+     Cause: issued when OSPF has received an instantiation of one of
+                its self-originated advertisements that is considered to
+                be more recent.                        
+     Specific field: 205
+        VBL: TL1 MIB variable 'tl1snmpLastTrapMessage'
+
+
+                                          7
+
+
+
+
+
+
+
+
+
+
+
+
+   Timeplex TIME/LAN 100                                 Enterprise-Specific Traps
+                                                                   August 26, 1991
+
+
+    R4 NO LSA FOR ACK              
+     Cause: issued when OSPF has received an acknowledgement for an
+                instantiation of an advertisement that is not currently 
+                contained in the router's database.
+     Specific field: 206
+        VBL: TL1 MIB variable 'tl1snmpLastTrapMessage'
+
+
+    R5 LESS RECENT LSA             
+     Cause: issued when OSPF has received an advertisement through
+                the flooding procedure that is less recent than the
+                router's current database copy.
+     Specific field: 207
+        VBL: TL1 MIB variable 'tl1snmpLastTrapMessage'
+
+
+    N1 LSA REFRESH FIRED           
+     Cause: issued when OSPF detects that the Link state refresh
+                timer has fired for one of the router's self-originated
+                advertisements.
+     Specific field: 208
+        VBL: TL1 MIB variable 'tl1snmpLastTrapMessage'
+
+
+    N2 MAXAGE LSA FLOOD            
+     Cause: issued when OSPF detects that one of the advertisements
+                in the router's link state database has aged to MaxAge.
+     Specific field: 209
+        VBL: TL1 MIB variable 'tl1snmpLastTrapMessage'
+
+
+    N3 MAXAGE LSA REMOVED  
+     Cause: issued when OSPF detects that an advertisement of age MaxAge 
+                has been flushed from the router's database.
+     Specific field: 210
+        VBL: TL1 MIB variable 'tl1snmpLastTrapMessage'
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                          8
+
+
+
+
+
+
+
+

@@ -1,0 +1,288 @@
+15-Feb-82 17:21:09-PST,13722;000000000001
+Mail-from: ARPANET host BRL rcvd at 15-Feb-82 1720-PST
+Sender:    Mike Muuss <TCP-IP@BRL>
+From:      TCP-IP at BRL
+To:        TCP-IP at BRL
+Date:      15 Feb 1982
+Subject:   TCP-IP Digest, Vol 1 #15
+Via:  Brl; 15 Feb 82 14:04-EDT
+
+TCP/IP Digest             Monday, 15 Feb 1982      Volume 1 : Issue 15
+
+Today's Topics:
+                   ArpaNet LINK -vs- Message-ID Fields
+                           SMTP Abort Answered
+                   Escape Character in SMTP Addresses?
+                   Validation of Reverse Path in SMTP?
+                Documentation of TCP/IP as a DoD Standard
+                        TCP/IP on Univac Systems?
+----------------------------------------------------------------------
+                         LIMITED DISTRIBUTION
+          For Research Use Only --- Not for Public Distribution
+----------------------------------------------------------------------
+
+From: POSTEL at USC-ISIF
+Subject: re: ARPANET "link" vs. "message-id"
+To:   George at AFSC-HQ
+cc:   TCP-IP at BRL
+
+C. K. Norris:
+
+The link field is defined to be the high-order eight bits of the twelve 
+bit message-id field defined in the 1822 protocol.  The link field is 
+used to distinguish between different host level protocols used in the 
+ARPANET (e.g., NCP, IP, NVP; see RFC 790 page 10).  IP uses link 155 
+(decimal).  
+
+In the normal case the the low-order four bits of the message-id field 
+are sent as zeros and are ignored on reception.  Several times in the 
+past the idea of using those bits to identify specific messages has been
+put forward (e.g., RFC 534, RFC 663), but there has not been a real 
+requirement for that level of error control (the ARPANET is very 
+reliable).
+
+There is a misconception in your message about the "IMP Blocking".  The 
+IMP will block the transmission of a message to a destination host when 
+ever there are eight messages in transit to that particular host.  That 
+is, the blocking is on a source host to destination host pair basis, and
+independent of what links or message-ids or higher level protocols are 
+used.  Also, please note, that the eight messages in transit is an upper
+bound, and that the IMP may block the host at a lower number if 
+resources are not available.  Once a host is blocked, it can't send 
+messages to any destination.  The block is cleared when one of the in 
+transit messages is delivered and the RFNM (or other response) is 
+returned, or more IMP resouces become available.
+
+A proposal for a more flexible interface called "1822L" has been 
+circulated as RFC 802 (Nov-81).  The 1822L interface provides for a 
+"short-blocking" operation, and for logical addressing in the ARPANET.  
+My understanding is that BBN is currently implementing this proposal, so
+any comments should be sent to the author (Malis@BBN-UNIX) at once.
+
+RFCs may be copied from the Network Information Center online library at
+SRI-NIC via FTP using the FTP username ANONYMOUS and password GUEST.  
+The file pathnames are of the form <NETINFO>RFC802.TXT.  Unfortunately, 
+some old RFCs are not online any more and some old old RFCs never were. 
+If you really need a RFC that is not online send a message to 
+NIC@SRI-NIC requesting what you need.
+
+--jon.
+
+------------------------------
+
+From: POSTEL at USC-ISIF
+Subject: re: SMTP Abort
+To:   lwa.INP at MIT-MULTICS
+cc:   TCP-IP at BRL
+
+Larry Allen:
+
+You are correct.  There is no way in SMTP to cancel the message once the
+DATA command is issued.  The only way out is to break the connection.
+
+This is true in the current ARPANET mail system, and I am not aware that
+any serious problems occur brcause of it.
+
+--jon.
+
+------------------------------
+
+From:  Greenwald.INP at MIT-Multics
+Subject:  SMTP
+
+	There was recently a discussion about the problems of "@"'s and
+"."s in SMTP addresses and routes, and it was considered bad, because some
+hosts have special meanings for those characters in user-names or mailboxes.
+	Well, no matter what character we pick, some joker will always want
+to use it on his system for something special. It seems to me this problem is
+understood. Anything in an SMTP route or address is to be interpreted only by
+SMTP. If we want SMTP to pass it on to the local system, then we have an SMTP
+special character that says just that: quote the next charcetr.
+	What is wrong with introducing a quote character into SMTP? In
+order for something to be interpreted by a host with  any meaning local to his
+system, it must be preceded by the quote symbol. (That includes the quote
+symbol!)
+	Comments?
+	- Mike
+
+------------------------------
+
+Date:  7 February 1982 18:26 est
+From:  Greenwald.INP at MIT-Multics
+Subject:  Validation of reverse path in SMTP
+
+	I think that SMTP servers should validate the reverse-path before
+accepting the MAIL command. Right now there is not really a Reply Code for
+that that MAIL expects (501 is sort of right, but we want to give something
+that says "Mailbox Syntax Incorrect". Maybe a 553?)
+	Anyway, it is useful to check this because you may have to use that
+reverse-path, (I mean that's the idea of it, isn't it?), and if it doesn't
+mean anything to you then it is useless. The time to check it is when you get
+it.
+	And yes, I think it possible that you can get badly formed
+reverse-paths. I already have. Hosts tack on a local name for themselves at
+the end, that we don't understand.
+	Any comments?
+	- Mike
+
+------------------------------
+
+[ A number of people have enquired about documentation of the fact that
+  TCP/IP is a DoD Standard.  Vint Cerf quickly came to the rescue, and
+  provided a copy of IEN 152, which contains (in part) two letters which
+  give TCP/IP it's official status.  They are reproduced herein (by permission)
+  for all to see.  -Mike ]
+
+IEN 152                                                        Vint Cerf
+                                                              DARPA/IPTO
+                                                               1 July 80
+                      DoD Protocol Standardization
+
+The attached memoranda from the Principal Deputy Undersecretary of
+Defense for Research and Engineering and from the Assistant Secretary of
+Defense (Communications, Command, Control and Intelligence) describe the
+DoD plans for standardizing internet protocols.  The first two are the
+Internet Protocol and the Transmnission Control Protocol.
+
+The DARPA Internet project will continue to provide technical support
+for the DoD standardization effort, including the test and evaluation of
+selected proposed standards.
+
+			- - - - - - - - - - - - -
+
+                     THE UNDER SECRETARY OF DEFENSE         23 Dec 78
+                         WASHINGTON, D.C. 20301
+
+MEMORANDUM FOR SECRETARY OF THE ARMY
+	       SECRETARY OF THE NAVY
+	       SECRETARY OF THE AIR FORCE
+	       CHAIRMAN, JOINT CHIEFS OF STAFF
+	       DIRECTOR, DEFENSE ADVANCED RESEARCH PROJECTS AGENCY
+	       DIRECTOR, DEFENSE COMMUNICATIONS AGENCY
+	       DIRECTOR, DEFENSE INTELLIGENCE AGENCY
+	       DIRECTOR, DEFENSE LOGISTICS AGENCY
+	       DIRECTOR, NATIONAL SECURITY AGENCY
+
+SUBJECT:  Host-to-Host Protocols for Data Communications Networks
+
+A number of data communications networks are operating or under
+development within DoD, without adequate provisions for
+interoperability.  AUTODIN II is expected to become operational during
+FY 1980, to provide common-user data communications service for DoD
+computer systems and permit a reduction in the number of specialized
+data networks.  Plans are under way to incorporate within AUTODIN II
+networks such as the WWMCCS Intercomputer Network (WIN), Intelligence
+Data Handling System Communications (IDHSC) and the SAC Digital Network
+(SACDIN), among others.  Local networks such as the Community On-Line
+Intelligence Network System (COINS) and certain tactical networks must
+have effective AUTODIN II interfaces.
+
+AUTODIN II will provide connectivity for a wide range of systems, but
+the potential for information exchange beyond narrowly defined
+communities will be limited without appropriate standards for internet,
+host-to-host, terminal-to-host and other protocols.  As the need to
+exchange information across network boundaries increases, lack of common
+protocols standards will become a formidable barrier to
+interoperability.  Techniques in which the protocols of one network are
+translated into the protocols of another will become increasingly
+unworkable as the number of protocols and networks requiring
+interoperation increases.
+
+To insure interoperability of future data networking, I am directing the
+adoption of a set of DoD standard host-to-host protocols based on the
+Transmission Control and Internet Protocols (TCP/IP version 4) developed
+in the DARPA/DCA internetwork community.  DoD requirements for
+precedence, security, and community of interest controls will be
+incorporated within the standard protocol set.  Use of these protocols
+will be MANDATORY for all packet-oriented data networks where there is a
+potential for host-to-host connectivity across network or subnetwork
+boundaries.  Case-by-case exceptions will be granted only for networks
+that can be shown to have no future requirements for interoperability.
+Because the host-to-host protocol being developed for AUTODIN II evolved
+from an early version of TCP and is unsuitable for internetwork
+operation, the AUTODIN II TCP will have to be upgraded to the standard
+protocol set.  Recognizing that there may be cost and schedule impacts
+on the AUTODIN II program, the Defense Communications Agency should
+perform a cost tradeoff analysis to determine the optimum time for this
+transition.  DCA should provide the results of this analysis by April
+1979.
+
+To address these and future protocol issues and promulgate appropriate
+standards, I am forming an OSD Protocol Standards Working Group chaired
+by the Director, Information Systems.  I ask each addressee to nominate
+a representative.  Names should be provided by 8 January 1979 to LTC
+Wilcox (695-3287).  The first task of this group will be to finalize
+details of the standard host-to-host protocol set.  Draft specifications
+for these protocols will be available in January 1979.  Final
+specifications should be distributed by April 1979 following review by
+the working group and testing by DCA and DARPA.  At that time, I expect
+to promulgate these standards and set dates for their adoption.
+
+The Defense Communications Agency is designated as DoD Executive Agent
+for computer communications protocols and will manage the implementation
+and development and evolution of standard host-to-host protocols, as
+designated by the Protocol Standards Working Group.  The DCA will
+forward to this office within 120 days a management plan for carrying
+out this role.
+                                                       Gerald P. Dinneen
+                                                        Principal Deputy
+
+			- - - - - - - - - - - - -
+
+                     ASSISTANT SECRETARY OF DEFENSE             3 Apr 80
+                         Washington, D.C. 20301
+
+MEMORANDUM FOR SECRETARY OF THE ARMY
+               SECRETARY OF THE NAVY
+               SECRETARY OF THE AIR FORCE
+               CHAIRMAN, JOINT CHEIFS OF STAFF
+               DIRECTOR, DEFENSE ADVANCED RESEARCH PROJECTS AGENCY
+               DIRECTOR, DEFENSE COMMUNICATIONS AGENCY
+               DIRECTOR, DEFENSE INTELLIGENCE AGENCY
+               DIRECTOR, DEFENSE LOGISTICS AGENCY
+               DIRECTOR, NATIONAL SECURITY AGENCY
+
+SUBJECT:  Host-to-Host Data Communications Protocols
+
+The revised Management Plan for Standardizatioan of Host-to-Host Data
+Communications Protocols (enclosure 1) is approved.  The plan has been
+modified to emphasize DCA's direct responsibilities as Executive Agent.
+
+The DoD Standard Transmission Control Protocol and Internet Protocol
+Specifications (enclosure 2) are hereby ratified.  Use of these
+protocols is MANDATORY for all packet-oriented data networks where there
+is a potential for host-to-host connectivity across network or
+subnetwork boundaries.  In order to facilitate rapid implementation of
+these protocols on DoD networks, the Defense Communications Agency, as
+part of its Executive Agent role, will prepare a series of
+workshop/seminars and implementation support documents to assist the DoD
+activities in implementing these protocols.  The AUTODIN II
+implementation of these protocol standards will take place as soon after
+AUTODIN II IOC as possible.
+
+I would like to thank all those who participated in the OSD Protocol
+Standards Working Group during the past year.  That Working Group is
+hereby disestablished and its responsibilities are transferred to the
+various DCA panels as defined in the Executive Agent Charter.
+
+                                                       Gerald P. Dinneen
+------------------------------
+
+Subject: Sperry Univac TCP-IP Implementation
+From: TMPL at BBNG
+To: TCP-IP at BRL
+
+I have just learned that we are in the  process  of  implementing
+TCP-IP  on  the  Sperry Univac DCP-40 Communications Processor on
+behalf  of  NUSC,  for  connection  to  the  ARPAnet,  completion
+approximately  January  1983.  I was called by George Blankenship
+of our Federal Systems operations in McLean, Va.,  who  has  been
+reading  the  Digest.  He would like me to ask the Digest readers
+if  anyone  knows  of  anyone  else  (outside  Univac)   who   is
+implementing TCP-IP for Sperry Univac systems.
+
+Ted Lee
+
+END OF TCP-IP DIGEST
+********************
+

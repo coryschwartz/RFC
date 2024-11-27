@@ -1,0 +1,148 @@
+17-Jun-83 21:55:06-PDT,6428;000000000001
+Return-path: <NIC@SRI-NIC>
+Mail-From: SMTP created at 17-Jun-83 21:53:10
+Received: FROM SRI-NIC BY USC-ISIF.ARPA WITH TCP ; 17 Jun 83 21:53:15 PDT
+Date: 17 Jun 1983 2014-PDT
+From: NIC at SRI-NIC
+Subject: DDN Newsletter No. 27
+To: DDN-MGT-LIST4: ;
+cc: NIC at SRI-NIC
+
+======================================================================
+DDN-NEWS 27                                    NETWORK INFO CENTER for
+17 June 1983                               DCA DDN Program Mgmt Office
+(415) 859-3695                                           (NIC@SRI-NIC)
+
+
+                   DEFENSE DATA NETWORK NEWSLETTER
+
+(Maximum Distribution Requested.  The DDN Newsletter  is published  by
+the  Network  Information  Center  under  DCA  contract.  For  on-line
+subscription, contact NIC@SRI-NIC. Back issues obtainable by FTP  from
+the directory <DDN-NEWS> at SRI-NIC [10.0.0.73].)
+======================================================================
+
+Section I. OFFICIAL
+
+   Topic: - More Details on the MILNET/ARPANET Split
+
+----------------------------------------------------------------------
+
+           FURTHER DETAILS ON THE ARPANET/MILNET SPLIT
+
+Introduction
+
+As previously discussed  in DDN  Newsletter 26,  the existing  ARPANET
+will soon  be split  into  two separate  networks -  the  experimental
+ARPANET and the operational  MILNET.  Hosts on  the two networks  will
+intercommunicate  via  mail  bridges,   using  the  internet   gateway
+mechanisms to pass  mail traffic  between hosts on  the two  networks.
+The mail bridges will,  on a controlled  basis, provide full  internet
+gateway services for MILNET hosts that request it.
+
+The Logical Split
+
+Because it takes a large amount of time and effort to physically split
+a network  in a  coherent manner,  the ARPANET  will initially,  on  4
+October  1983,  be  logically  partitioned  by  the  use  of  existing
+mechanisms in the IMPs to enforce  segregation of hosts and TACs  into
+separate communities of  interest.  Each community  of interest  (COI)
+becomes a virtual network,  i.e., hosts (including  TACS) in the  same
+community can fully interoperate as is currently the case, while hosts
+in different communities  cannot directly  intercommunicate. This,  in
+effect, transforms the ARPANET  into an Internet  in which the  MILNET
+will assume  a new  class  A network  number,  network 26,  while  the
+ARPANET  remains  network  10.   (Details  of  the  host   renumbering
+procedures will  be covered  in a  later newsletter  from the  Network
+Information Center (NIC).)
+
+Intercommunication between the MILNET and ARPANET is via mail  bridges
+which use  standard internet  protocols and  mechanisms to  pass  data
+between hosts in the  two networks.  This is  why the conversion  from
+NCP to TCP/IP is  so important; any host  with a fully working  TCP/IP
+implementation (including ICMP, the host-gateway protocol), should see
+no loss  in  service  because  of  the  split.  However,  hosts  using
+incomplete TCP/IP implementations (those that do not include ICMP as a
+part of  IP,  or  have  no  provision  for  using  gateways)  will  be
+restricted to  communicating  with  other TCP/IP  hosts  in  the  same
+network.  In particular, this means that they will not be able to send
+(or receive) mail traffic  through the bridges to  hosts in the  other
+network.
+
+THERE CAN BE NO EXEMPTIONS TO THE SPLIT!!
+
+Unlike the NCP-to-TCP  conversion which  is still underway  for a  few
+hosts, once the  split occurs, there  is nothing that  can be done  to
+allow a host with an incomplete TCP/IP to fully intercommunicate  with
+the other  network other  than  helping them  to  convert to  a  fully
+working TCP/IP as soon as possible.
+
+Future DDN Newsletters will  discuss in greater  detail how the  split
+affects the users  and host  software maintainers, and  how the  split
+will be tested before it is finally implemented in October.
+
+The Physical Split
+
+Concurrent with  the logical  split the  network is  being  physically
+split as  well.  Many  new  trunks are  being  added to  support  each
+network, and  a  number of  trunks  will eventually  be  removed  once
+replacement trunks have been installed.  The first quarter of CY  1984
+has been established as the goal for completion of the physical split,
+but this is dependent upon delivery  of new circuits from the  TELCOs,
+some of which have very long lead times (over a year in some cases).
+
+To complete the physical split, hosts and terminals which are homed on
+the wrong IMP or TAC must be rehomed.  In some cases, a new IMP on the
+proper network will be used;  in other cases, a  host may need to  use
+HDH (the HDLC-based replacement  for VDH) in order  to gain access  to
+its network via a  remote IMP.  In either  case, the host must  change
+its network address,  and the TAC  users of these  hosts must be  made
+aware of the change. Both host  and terminal rehoming will be kept  to
+the absolute minimum possible.
+
+Sources of Additional Information
+
+To obtain additional copies of this or previous newsletters,
+
+- Invoke FTP at your local host
+- Connect to SRI-NIC (the NIC host, 10.0.0.73)
+- Login as 'anonymous', password = 'guest'
+- Do a 'get' on files with pathnames
+
+   <DDN-NEWS>DDN-NEWS-27.TXT
+   <DDN-NEWS>DDN-MGT-BULLETIN-3.TXT
+             or
+   <DDN-NEWS>DDN-NEWS-n.TXT
+   <DDN-NEWS>DDN-MGT-BULLETIN-n.TXT
+
+where 'n' = the number of the newsletter or bulletin desired
+
+NOTE: Only those  newsletters since  issue 20 pertain  to the  network
+after the cutover to the TCP/IP protocols, or to the new Defense  Data
+Network and the  MILNET/ARPANET split.   Most readers  will no  longer
+need the information contained in issues 1-19.
+
+A list outlining which IMPs and hosts will be on MILNET and which will
+be on ARPANET may be FTPed as outlined above using the pathname
+
+   <NETINFO>MILNET-ARPANET.LIST
+
+A list of network liaison for each host may be FTPed with pathname
+
+   <NETINFO>LIAISON.TXT
+
+
+The Network Information Center (NIC) at SRI International will be  the
+primary repository for information  concerning MILNET/ARPANET and  the
+upcoming split.  For further information contact
+
+   NIC@SRI-NIC    or   (415) 859-3695
+
+   Network Information Center
+   SRI International
+   Room EJ232
+   333 Ravenswood Avenue
+   Menlo Park, CA 94025
+
+
+-------

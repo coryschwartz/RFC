@@ -1,0 +1,228 @@
+25-Oct-81 23:23:43-PST,9918;000000000001
+Mail-from: ARPANET host BRL rcvd at 25-Oct-81 2322-PST
+Date:      25 Oct 81 23:22:48-EDT (Sun)
+From:      Mike Muuss <tcp-ip@brl>
+To:        tcp-ip at Brl
+Subject:   TCP-IP Digest, Vol 1 #4
+
+TCP/IP Digest             Sunday, 25 Oct 1981      Volume 1 : Issue 4
+
+Today's Topics:
+           Mail Reflectors and An Online Archive of the Digest
+                       PARC Universal Packet (PUP)
+                     More on TOPS-20 TCP/IP Lossage
+             How to Force the Transition from NCP to TCP/IP
+                     Correction of Address for CERF
+               InterNet Mail, Hostname Tables, and Routing
+                          FYI:  HDH Anouncement
+
+----------------------------------------------------------------------
+
+From:     Mike Muuss
+Reply-to: tcp-ip@BRL
+Subject:  Administrative Notes
+
+For those of you who have trouble remembering where the list originates from,
+I have (with the graceous help of JSol) added mail reflectors for TCP-IP and
+TCP-IP-REQUEST on both AI and MC.
+
+People wishing to get back issues can now FTP them from Utah-20 (see letter
+below), or they can write to TCP-IP-REQUEST.  Again, I regret our inability
+to allow anonymous logins.  If there is a high demand for back issues, other
+archive sites may be set up.
+
+------------------------------
+
+From: Jay Lepreau <Lepreau at UTAH-20>
+Subject: Online Archive
+
+We are keeping an online archive, of at least recent stuff.  Will probably
+archive it (to tape) after it gets old, whatever that means (probably a
+function of disk space and interest and list content).  Anyway, people are
+welcome to ftp it from here-- it's <bboard>tcp-ip.txt, in chronological
+order, MM format.
+
+------------------------------
+
+From: nowicki@Diablo at Sumex-Aim
+Subject: PUP
+
+PUP stands for Parc Universal Packet.  It is the network architecture
+used in the Xerox internet for several years, which has several hundred
+computers on various kinds of networks throughout the world.  A good
+overview is in April 1980 IEEE Transactions on Communication.  To
+summarize its features, it is a datagram-based very simple family of
+protocols, from which IP borrows many of its ideas.  Because it was one
+of the first working "network architectures," there are some
+unresolvable problems, like limited address space.  Stanford did Unix
+implementations of PUP because we got all sorts of equipment from Xerox
+that used it.  Ethernet has always supported multiple "network-level"
+protocols, so there is no problem encapsulating IP at the same time.
+
+Does that clear up some confusion?
+
+	-- Bill
+
+------------------------------
+
+From: Chris Ryland <RYLAND at SRI-KL>
+Subject: Re:   TCP-IP Digest, Vol 1 #3
+
+If anyone is interested in more detail concerning the problems with
+TOPS-20 TCP/IP, I wrote a long-winded document about said topic.
+It needs some polishing up to reflect feedback from the people who
+did the work, but if there's enough interest (how do we gauge it?)
+I'll make it available.
+
+Mark Crispin hit on some of the high points, but if you're a TOPS-20
+type and are worried about what TCP is going to mean to you if DEC
+continues its current course, then it should be useful.
+
+I can only second Mark's prediction that this current BBN/DEC TOPS-20
+implementation is going to be basically useless because of its poor
+performance.  There is some hope that there is something grossly wrong
+with it that can be tuned away, but we're grasping at straws.  Does
+anyone at ISI involved in looking at this implementation have any new
+data?
+
+------------------------------
+
+Subject: Suggestions to make the NCP ==> TCP Transition happen.
+From: the tty of Geoffrey S. Goodfellow
+Reply-To: Geoff at SRI-CSL
+
+Here are some suggestions to help/force people implement TCP/IP
+by "the deadline", Jan 1, '83:
+
+1) Removal of NCP from TIPS -- When your out of town and away
+from your host, and can't login to read your mail, you'll want to
+have it implemented.
+
+2) When your Principle Investigator (i.e.  high level bureaucrat)
+can't send mail to other hosts which only support TCP or login
+remotely from a TIP, you'll want to have TCP/IP implemented.
+
+3) I believe it is DARPA's intention to put AS MANY services as
+possible onto the Internet (i.e.  only accessable via TCP/IP)
+that users will REALLY WANT to implement the Internet Protocols
+in order to have access to them.  It might be nice for a
+"Directory Of Services" (like the VAN-Gateway for example) to be
+published to show availalbe Internet services.  [I guess this
+would be the current ARPANET RESOURCES HANDBOOK covering the
+entire Internet as opposed to just ARPANET Resources, and perhaps
+becoming the INTERNET RESOURCES HANDBOOK?]
+
+and lastly (this one is my favorite), 4) Have such hosts as the
+various ISI-* systems, where most of the Network Sponsors have
+their mailboxs who provide many a funded $$$ to us all,
+de-install NCP on the transition date.  Therefore, causing anyone
+who has *NOT* impelemented Internet by that time, be unable to
+communicate with their Sponsor, and hence, they won't get funded.
+
+------------------------------
+
+Subject: RECENT CORRESPONDENCE
+From: CERF at USC-ISI
+
+MIKE,
+RECENTLY I SENT YOU A NOTE WHICH
+YOU PUBLISHED AS PART OF YOUR NEWSLETTER.
+
+WHEN I SAW THE NOTE, I REALIZED THERE
+MIGHT BE SOME CONFUSION CAUSED BY THE
+FACT THAT IT WAS SENT FROM MY SECRETARY'S
+MAILBOX (DUCKETT@ISIE) AND NOT FROM
+MINE (CERF@ISIA). JUST WANTED TO
+ALERT YOU TO THIS (AND YOUR READERS).
+
+THE ODDLY FORMATTED MESSAGE BEFORE YOU
+COMES FROM AN APPLE COMPUTER WITH
+SMALL DISPLAY SCREEN (15 USABLE LINES)
+AND 40 CHARACTERS ACROSS AND UPPER CASE
+ONLY. THE ONLY SAVING GRACE IS THAT
+THE COLOR GRAPHICS AND SHOOTING 
+GALLERY GAMES LOOK GOOD IN COLOR...
+
+VINT CERF
+DARPA/IPTO
+
+------------------------------
+
+From: ihnss!cbosg!cbosgd!mark at Berkeley
+To: cbosg!ihnss!ucbvax!tcp-ip@Berkeley
+Subject: Re:  REM's gripes about internet mail
+
+I found REM's comments interesting but not very well based in reality.
+First note that the internet mail standard is essentially
+	"user.host@network"
+where user, host, and network are character strings.  There is no
+assumption that the "host@network" pair can be mapped into a pair
+of integers from some table somewhere, unless you actually intend
+to send packets and simulate things like telnet.  Of course, for
+sending mail you don't need this.
+
+PCnet is not the only network that provides el-cheapo service at
+el-cheapo prices (e.g. over dialup telephone lines).  The UUCP net
+has been around for some years and does this (with no internal
+numbering of hosts) and the new CSNET PhoneNet is the same idea.
+
+Only the network has to be able to translate "host" into enough
+information to route the message there, not the whole internet.  This
+requires ONE SITE on each network to keep an up to date list of sites
+and routes.  Other sites have the option of sending the mail to the
+smart site to forward.  The alternative to this is what UUCP does now:
+you explicitly route messages through all the hosts that forward the
+message, e.g. decvax!duke!unc!smb@Berkeley gets forwarded through the
+three UUCP sites decvax, duke, and unc to user smb.  The advantages to
+this are (1) to add a site, all you have to do is inform its
+neighbor(s) that it exists, and (2) the software doesn't have to worry
+about routing.  The disadvantages are (1) it's a pain for people to
+manually route stuff, and, more importantly, (2) your address varies
+depending on the place the mail is sent from.  Thus the current custom
+of specifying a UUCP address relative to a well known host such as
+ucbvax or duke.  Not very pleasant.
+
+If a net like PCnet wants to avoid keeping tables anywhere, all that's
+necessary is to put info such as phone number and other connection info
+in the host field.  (I don't recall a limit on how long these names
+can be, although most implementations will probably assume one, so some
+large upper limit ought to be documented.)  This makes even UUCP look
+luxurious - you get to refer to a site by NAME! REM's latitude/longditude/telno
+scheme seems kind of useless to me - within one square minute can often
+be found a large number of computers.  Often they are on a switch front
+end, so even the phone number is the same.  Maybe this will work for
+personal home computers, but if everybody in a large office building has
+their own personal computer...  In any case, it seems that such conventions
+ought to be up to the individual network to specify, so long as they
+fit the user.host@network syntax.
+
+	Mark Horton
+	Mark@Berkeley
+
+--------------------------------
+
+From: NIC at SRI-NIC
+Subject: ANEWS-9
+ 
+There is a new alternative host interface for the ARPANET C/30 IMPs
+called HDH (HDLC Host).  This interface method is similar to the
+existing VDH (Very Distant Host) interface in that it provides for
+reliable transmission of messages between the host and its IMP over a
+communication circuit of arbitrary length.  As with VDH, the HDH
+interface can be used with communication circuits that range in speed
+from 9.6KB to 56KB. 
+ 
+HDH is superior to the VDH interface in that it uses as a reliable
+transmission protocol the HDLC protocol which is the link level control
+procedure of the CCITT international standard X.25.  HDLC is supported
+by a much wider range of vendor equipment than the special ARPANET VDH
+protocol.  It is also technically superior to VDH in that it provides
+for a window of up to seven outstanding frames instead of the two
+allowed by VDH, thus increasing the potential throughput.  The HDH
+interface is also capable of accepting a full-length ARPANET host/IMP
+message in a single frame, where VDH always requires fragmentation into
+buffer-sized frames.
+
+END OF TCP-IP DIGEST
+********************
+

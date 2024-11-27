@@ -1,0 +1,222 @@
+14-Oct-81 02:17:54-PDT,9234;000000000001
+Mail-from: ARPANET host BRL rcvd at 14-Oct-81 0217-PDT
+Date:      14 Oct 81 2:47:30-EDT (Wed)
+From:      Mike Muuss <tcp-ip@brl>
+To:        tcp-ip at Brl
+Subject:   TCP-IP Digest, Vol 1 #2
+
+TCP/IP Digest          Wednesday, 14 Oct 1981      Volume 1 : Issue 2
+
+Today's Topics:
+                          Administrative Trivia
+                    NCP-to-TCP Transition Deadline!!
+             Performance of 3Com "UNET" UNIX TCP/IP Software
+                Behind the sceens at 3Com & Stanford PUP
+             Final word on BBN PDP-11 TCP/IP Implementation
+                  RFCs and IENs  --  How to get to NIC
+                            Gateway questions
+----------------------------------------------------------------------
+
+From:      Michael Muuss <mike@bmd70>
+Subject:   TCP-IP Digest, Plans, etc.
+
+	At this point, everybody who has requested to be added to the
+TCP-IP discussion list has been added.  In addition, Jon Postel had a
+list for distributing notices about Internetworking changes.  At his
+suggestion, I have incorporated that list into the Digest list.  If you
+are reading this, and don't want to see any more of these Digests,
+please sent a note to TCP-IP-REQUEST@BRL.
+
+	The scope of the Digest will probably exceed the rather specific
+"TCP-IP Digest" title, but that is OK by me.  I see this as a forum for
+discussing implementation and design problems relating to large scale
+networks, and internetworking.  Anything too practical for HUMAN-NETS
+is fair game here (at least for now).  But I would hope that discussion
+will focus on IP and TCP, because this is where much of the real action
+seems to be.
+
+	At the present, I expect to be able to issue one digest per week,
+with each issue being (hopefully) 15000 to 30000 characters long,
+depending on submissions.  No more mamouth 55K digests (OOPS!).  If the
+interest picks up, I can see being able to do as many as 3 per week.
+More than that, and I will have to get help, but it will be no problem.
+
+	Already, some people have mentioned that mailing stuff to
+"TCP-IP@BRL" might be hard to remember or type.  I will be glad to set
+up as many aliases for the list as seem useful.  Everybody:  please
+suggest some mnemonic, short aliases!
+
+	I am keeping an archive here on BRL (0/29), and hope to announce
+the method by which they can be retrieved, sometime soon.  (However,
+we can't permit anonymous login, so it will probably be strange).  If
+other sites wish to keep an online copy that can be FTP'ed, please let
+me know, and I will summarize for the list.
+
+				Cheers!
+				-Mike
+
+------------------------------
+
+From: POSTEL at USC-ISIF
+Subject: NCP-to-TCP Transition
+
+It is really very important for everyone to notice the deadline for
+completing the cutover to IP/TCP and the elimination of NCP from use
+in the ARPANET.
+
+The deadline is:  1 January 1983.
+
+That is 14 and a half months from now.  Really not much more than a year.
+
+--jon.
+
+------------------------------
+
+From: croft at SRI-UNIX
+Subject: UNET at SRI
+
+The SRI Telecommunications Sciences Center has been running the 3COM
+UNET software (release 1.5) on two 11/44's for the past few months
+and we have been quite pleased.  This is contrary to the false rumor
+circulated in the last TCP/IP digest (V1N1).  Both machines run a standard
+V7;  installation was very smooth and straightforward, requiring no
+hacking of the kernel.  We chose the 3COM software over BBN's "free"
+V6 TCP for just this reason.  One of 11/44's is on the ARPANET as
+SRI-PRMH (packet radio measurement host).  A locally written device
+driver for UNET provides TCP/NCP multiplexing of the single 1822
+interface.  The other 11/44 is currently being used in a packet radio
+experimental network at Fort Sill, Oklahoma.  The device driver in the
+latter case speaks CAP5 protocol over an 1822 interface to the radio.
+
+Throughput of the ARPANET version seems to be quite good (compared to
+the V6 BBN):  20K bits/second on an FTP to ourselves with the packets
+looping all the way out the 1822 and back in again.  Of course UNET
+is doing twice as much work here as normal and one would expect
+perhaps 40K bps if two UNETs were FTPing thru the same IMP.
+
+Although UNET is certainly the fastest PDP11 TCP around, it still has
+the thruput constraints inherent in any TCP.  (See the excellent
+article by Bunch and Day of DTI: "Control Structure Overhead in
+TCP").  3COM claims 100K bps max thruput for their TCP on DEC hardware.
+I think a previous digest entry mentioned 50 to 60K average thruput on
+DA11 hardware (DA's are about 8Mbps devices).  My beef is that with
+simpler protocols one should be able to do much better.  As an example
+I mention the UNIX network at Purdue University EE department.  
+It uses 1M bps DMC and DMR link hardware and achieves 400K end to
+end process usable bandwidth.  Perhaps TCP's on a fast local network
+should support some simpler subset of the protocol as an option to
+allow improved thruput.
+
+	--Bill Croft (croft@sri-unix)
+
+------------------------------
+
+From: Bill Nowicki <CSD.NOWICKI at SU-SCORE>
+Subject: Re:   Re:  TCP/IP for UNIX
+
+I know Bob Metcalfe, Ron Crane, Bruce Borden, and Greg Shaw either directly
+or indirectly; these are the main movers behind 3COM.  Bob invented Ethernet
+at Xerox, with Ron designing some of their controllers.  Bruce and Greg are
+Unix wizards, so between them there is a lot of expertise.  3COM has been
+targetting their marketing to small systems (11s and even Onyxes), and since 
+we (Stanford) have mostly Vaxes and 20s, we are pressured into going with
+BBN's implementation because it was Arpa-sponsored.
+
+By the way, we are currently using the PUP Internetwork architecture at
+Stanford, which Metcalfe had a hand in designing.  It was quite a step
+for him to adopt the DOD Internetwork architecture for the sake of
+standardization.  A welcome change from the "not invented here"
+syndrome.
+	-- Bill
+
+------------------------------
+
+From: Michael A. Wingfield <wingfiel at BBN-RSM>
+Subject: TCP/IP
+
+Mike,
+I have a report which documents the [BBN] unix tcp/ip which I can 
+send you.  If you want it, send me your mailing address.
+
+We have not done any work on the software for about 2 years,
+so it is probably the same as your 115 tape.  We have no
+plans to do anything else to the 11/70 version of tcp/ip.
+
+Thanks,
+Mike
+
+------------------------------
+
+From: Zellich at OFFICE-3 (Rich Zellich)
+Subject: Please add me...
+
+ ...to the TCP-IP distribution.  Are you aware of all the stuff on TCP
+and IP in the IEN documents maintained by the NIC (similar to the RFC's,
+but relating to the Internetwork Experiment funded primarily by DARPA and
+taking place primarily on the ARPANET)?  I suggest that at least some mention
+of the IEN's be made in an early issue/message for anyone who is interested
+but may not yet know about them.  I don't know of any general distribution
+list for notice of new IEN's (I'm on distribution for the IN Experiment group,
+though not participating), so many people may not yet be aware of them.
+
+Cheers,
+Rich <ZELLICH at OFFICE-3>
+
+
+------------------------------
+[ Here is a repeat of a letter from the V1#1 which describes some RFCs
+  availible at SRI-NIC.  -MJM ]
+
+From:  Postel at USC-ISIF
+
+ RFCs 791, 792, and 793 define IP and TCP.  The ARPANET already
+supports these protocols.  Many TOPS20s, Unix-es (including VAX)
+and MIT-Multics, and UCLAs IBM system, already have these protocols
+in use.  Work is in progress to replace all TIPs with TACs that
+use IP and TCP.  There are about 10 internet gateways in service
+already.  ARPA has set a goal for the complete switchover to IP
+and TCP by January 1983.
+
+------------------------------
+
+From: James.Gosling at CMU-10A (C410JG40)
+
+The mail standards are documented in RFCs (Requests For Comment) from
+the network information center at ISI.  To get a copy of an RFC just ftp
+to NIC, log in as user "anonymous", password "guest" and retrieve the file
+<NETINFO>RFCnnn.TXT .  nnn is the RFC number, some useful ones are:
+
+	RFC733	Mail message format standard
+	RFC754/RFC799	Discussions of internet addressing
+	RFC759	Internet mail transfer protocol
+	RFC780	Mail transfer protocol
+
+					James.
+
+------------------------------
+
+From: lou at UCLA-Security (Lou Nelson)
+Subject: New List
+
+I would very much like to be on the TCP/IP mailing list.
+I think a good first entry would be the report you compiled
+that everyone wanted to see. If it is not available, perhaps
+you could do a short summary if it's not too much work.
+I'm getting a VAX up at Aerospace Corp. that will run UNIX
+in December and currently the only good prospect for getting
+it on the net is the BBN TCP/IP that Berkeley is pounding on
+as a final debugging measure. I don't understand the way
+(which sites) I get to an NCP host from the TCP VAX yet.
+Pointers to any RFC or other document that explains that will
+be appreciated.
+
+Regards,
+Lou Nelson
+
+[ Please reply to TCP-IP@BRL, so all can benefit from any answers  -MJM ]
+
+------------------------------
+
+End of TCP-IP Digest
+********************
+

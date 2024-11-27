@@ -1,0 +1,439 @@
+14-Jan-82 12:03:42-PST,19376;000000000001
+Mail-from: ARPANET host BRL rcvd at 14-Jan-82 1202-PST
+Date:      14 Jan 82 6:38:28-EST (Thu)
+From:      Mike Muuss <tcp-ip@brl>
+To:        list: 
+Subject:   TCP-IP Digest, Vol 1 #12
+Bcc:       
+
+TCP/IP Digest           Thursday, 14 Jan 1982      Volume 1 : Issue 12
+
+Today's Topics:
+       Administrivia: Republication, Distribution, and Recipients
+                        The Effect of Copyrights?
+                Comments on the Article in ComputerWorld
+                Comments on New Addition to the Masthead
+                              TCP in RatFOR
+            TCP/IP Installation Report from Purdue University
+                          To TCP or Not To TCP?
+              Continued Future for MIT ITS on the ArpaNet?
+                UK Joint Network Team Mail Specification
+                   "Standard" Network Mail Addressing?
+                      Multiple Networks and RFC733
+----------------------------------------------------------------------
+                         LIMITED DISTRIBUTION
+          For Research Use Only --- Not for Public Distribution
+----------------------------------------------------------------------
+
+From:      Mike Muuss <tcp-ip@brl>
+Subject:   Administrivia
+
+Folks -
+	You probably noticed the new banner on the front of this issue
+of the digest.  While a copyright would be even better, the Government
+can not hold a copyright, and the mechanics of having somebody else
+copyright the Digest were just too much.  So, the notice on the front.
+The intention here is to warn readers of the digest that the material
+contained herein is not for publication or other forms of public
+distribution.  At least this will ensure that if copies get to
+the outside world (and they undoubtably will), at least they will think
+twice before printing it.  Authors of letters to the digest who want to
+make a public statement may mark their submissions accordingly.
+If this seems unnecessary, we can always be more informal later.
+
+	In addition, I intend to try and filter submissions from
+unexpected sources, such as the copy of the InterNet Monthly which
+I published pieces of several issues back.  The intentions were all
+good, but things didn't work out so well.  Politics.  Alas.
+
+	In summary, then, I hope to wrap up discussion of the administrative
+side of the digest in the next issue or two, and resume our devoted
+discussion of Networking!
+
+	I am interested in hearing from each USENET site which is
+presently receiving the digest, to try and judge the size of the
+readership.  (Also from any other "multi-level indirect" network
+which may be distributing the digest).  Let's start hearing more
+about networking concerns from the non-ArpaNet sites, too.
+
+	It seems that there has been some trouble with Digests sent to
+one site being truncated.  Each digest ends with "END OF TCP-IP DIGEST"
+and a row of asterisks.  Please let me know of any transmission problems.
+
+			A Happy New Year to All!!
+				-Mike
+
+				...!menlo70!hao!brl-bmd!tcp-ip
+				...!duke!brl-bmd!tcp-ip
+				TCP-IP@BRL
+
+------------------------------
+
+From: Bob Clements <CLEMENTS@BBNA>
+Subject:   TCP-IP Digest, Vol 1 #11
+
+No, a copyright would not stop a news journal from printing anything
+they consider "news", and rightly so, per the first amendment.
+The moral is that whoever put that large section of a private
+working discussion onto this journal made a serious error, and that
+includes both the editor and the person who gave it to him.
+
+Hopefully, they have learned from the error and won't repeat it.
+/Rcc
+
+------------------------------
+
+From:      Michael Muuss <mike@BMD70>
+Subject:   Comments on ComputerWorld
+
+Here is a comment from the person who released the Digest to
+Brad Schultz of ComputerWorld.
+
+------ Forwarded Message #1:
+
+BTW, I talked with Brad Schultz today, and he is aware now of the
+potential impacts of his "quoting" from what is actually an off
+the record source.  He now regards it as such, and also he is not
+getting any more information from the Digest, nor has he passed
+on what his sources were.
+
+He would be interested in conveying to the Digest participants
+his concern over any inhibitions he may have initiated.  In our
+discussion today, we decided that you should head each issue of
+the Digest with a statement saying that it is an off the record
+publication, as far as use by the press is concerned.  Perhaps we
+should discuss with him exactly what the mast head disclaimer
+should say so as to make very clear to anyone who sees it that it
+is off the record and not to be used for quoting or direct
+attribution by any member of the press.
+
+----- End of forwarded messages
+
+------------------------------
+
+From: Christopher C. Stacy <CStacy at MIT-AI>
+Subject: For Research Use Only --- Not for Public Distribution
+
+The problem of ensuring that ARPAnet mail is not distributed outside
+of the network community is a perpetual one, because many of the users
+on the network are unaware of the restrictions on the material.
+
+I beleive that the best solution is to educate the network community
+to the problems which tend to arise when material is distributed
+off the network.
+
+There are several problems with people distributing material from the
+network to the outside world.
+
+There is always the threat of official or public accusations of misuse
+of the network for certain mailing lists.  This actually happened with
+a list called WINE-LOVERS and Datamation, which was just a hint of the
+magnitude of SFL.  The fiasco nearly resulted in MIT being removed from
+the network, and cost us several months of research time while we
+fought legal battles to show why our machines should not be removed
+from the ARPAnet.  Of course, with a mailing list such as TCP-IP that
+particular sort of problem is very unlikely to occur. 
+
+But there are still other problems.  One of the problems involves legal
+liability for statements and opinions published on ARPAnet mailing
+lists.  One of the classic scenarios of this sort of liability involves
+the INFO-TERMS mailing list, which discusses and evaluates the
+characteristics of various terminal devices.
+
+Suppose someone were to state that Terminal Foo is better than Terminal
+Bar, and that you should not bother with Terminal Bar.  Imagine now
+that the message is republished or even casually redistributed outside
+the ARPAnet.  The president of Bar Terminals Corporation sees the
+message and writes to his Congressional representative for an
+explanation as to why Government money from the taxpayer's pocket is
+being used to induce people to buy his competitors product and not his.
+
+Still further problems involve such issues as copyright and propriety.
+The originator of a message to a mailing list does not expect that his
+words will end up in Computerworld or elsewhere.
+
+The Defense Communications Agency (DCA), which is responsible for
+managing the ARPAnet has set down regulations and policies which are
+designed to protect the network from some of these problems.  Naturally,
+most people who use the ARPAnet are unaware of the reasons behind the
+policies (or even that such policies exist!).  Here is a section from
+a recent DCA memo on the subject:
+
+       "Files should not be FTPed by anyone unless they are files
+        that have been announced as ARPANET-public or unless
+        permission has been obtained from the owner.  Public files
+        on the ARPANET are not to be considered public files outside
+        of the ARPANET, and should not be transferred, or their
+        contents given or sold to the general public without
+        permission of DCA or the ARPANET sponsors.  Hosts which use
+        a "guest" or "anonymous" FTP login convention should inform
+        their local users about the ramifications of this convention
+        with respect to unprotected files, as the users are not
+        always aware that their files can be FTPed."
+
+But "laying down the law" is a fairly useless way of solving this sort
+of problem.  The problem is one of awareness, cooperation and trust.
+Only if people understand and care, will they take steps to protect a
+fragile institution like the ARPAnet.
+
+For the most part, the problem is that people are simply unsure about
+releasing the material.  Frequently a subscriber will ask before trying
+to redistribute material, sometimes they only come forward after it is
+too late.  The only thing which a moderator can do is explain to people
+individually, in the detail required by the particular situation, why
+republishing the material is a bad idea.
+
+I think that the explicit banner on the masthead of the Digest is a bad
+idea, because this will cause many people to think that if such a banner
+is NOT present (ie., on any other Digests or on future TCP Digests)
+that it is alright to redistribute the material.
+
+In short, we are all in the hands of our neighbors.  The best thing to
+do is to ensure that we are all educated as to how to take care of each
+other and ourselves.
+
+Cheers,
+Chris
+
+------------------------------
+
+From: Jeffrey P. Golden <JPG at MIT-MC>
+Subject: For Research Use Only etc.
+
+   Date: 14 January 1982 00:48-EST
+   From: Christopher C. Stacy <CStacy at MIT-AI>
+   Subject: For Research Use Only --- Not for Public Distribution
+   To: Tcp-IP at BRL, Mike at BRL
+   cc: DIGEST-PEOPLE at MIT-AI
+   ...
+   I think that the explicit banner on the masthead of the Digest is a bad
+   idea, because this will cause many people to think that if such a banner
+   is NOT present (ie., on any other Digests or on future TCP Digests)
+   that it is alright to redistribute the material.
+
+I don't agree.  If SOMEONE uses the banner, then at least those people 
+who see it may stop and think about the issue, and other digests may 
+choose to use such a banner as well.  If NO ONE uses it, then I think we 
+are more likely to perpetuate the kinds of problems CStacy mentioned 
+earlier in his note.  I think elucidating by example is a fine thing, 
+and one usually doesn't wait for others to be consistent with one's 
+good idea.
+
+------------------------------
+
+From: Bob Amsler <AMSLER at SRI-AI>
+
+That's acceptable to me, [The new addition to the Digest Masthead,
+starting this issue -Mike] though it might be toned down a little after
+a while. Another approach might be to just include a copyright notice...
+though that smacks of assuming official standing. (By "toned down" I
+mean explicitly the double row of -----'s might be eliminated or
+reduced in size). 
+
+------------------------------
+
+From: mo at LBL-UNIX (Mike O'Dell [system])
+Subject: TCP in Ratfor
+
+Tek Labs has done a TCP for the Cybers which is done in Ratfor.
+If Clem Cole doesn't chime in with details, I can probably find
+them.
+	-Mike
+
+------------------------------
+
+From: cak at PURDUE
+
+Just a quick note to let you all know that the department of
+Computer Science at Purdue University has brought Rob Gurwitz's
+VAX TCP/IP implementation up on our Research VAX, as a beta-test effort.
+(This is the VAX implementation from BBN. The work was done
+as part of the CSNET effort here at Purdue.)
+We are apparently the first site to come up straight off the tape.
+There were some problems, both hardware and software, but Rob was
+very helpful in solving these. 
+The implementation looks very clean, the distribution was very good,
+and we are in general satisfied.
+
+Rob mentioned the measurements he made on our system a couple of
+issues ago, but I'll repeat them here:
+	Loopback through the IMP: 120Kbps
+	Transmission to BBN-VAX: 9.2Kbps
+Please note that these are data rates only; add about 5% in each
+direction for headers.
+The first number measures DMA to and from the IMP; there is no
+involvement with the net. 
+The second number should be considered with the fact that our 
+net links are 9.6Kbps lines.
+We see about an order of magnitude increase in throughput over our
+Greep 11/34 NCP front-end. (Not really surprising, though, since
+it talks to the VAX via a 9600 baud line.) These numbers were
+obtained on a 11/780.
+
+We plan to bring up ProNet and Ethernet under this software in the
+future for our own local use, as well as to continue to beta-test
+future releases of the software.
+Please direct inquiries about availability to Rob as gurwitz@bbn-unix;
+I can't give it out.
+
+You may not have Purdue in your host tables yet....we are host 0 on
+imp 37 (decimal).
+
+Looking forward to 56Kbps lines,
+Chris
+
+------------------------------
+
+[ The following letter I wrote in response to a letter that I got
+  suggesting that SMTP will be too far away to help sites that transmit
+  to large mailing lists, and that the TCP/IP may never happen anyway.
+  -Mike ]
+
+From:      Michael Muuss <mike@BRL>
+Subject:   To TCP or not to TCP?
+
+	After having just about gotten over the 3-month mad dash to
+switch to long leader LAST winter, I am not really looking forwards
+to rushing into the conversion to TCP/IP, because of the work involved.
+However, all up and down the line within the ranks of DoD management
+inside both the Army and the Navy, everybody is backing up the decision
+to stand firm with 1-Jan-83 for the conversion.  This is putting the
+heat on those of us who actually try to make these things happen, and
+the pressure is uncomfortable, but we will probably be able to make it.
+
+	This type of edict is not uncommon when working for the DoD;
+some manager will stipulate that something will happen "absolutely" by
+a certain date.  All the technical people start worrying, and screaming,
+and carying on, claiming that "it can't be done in time".  Management
+usually dumps some enormous amount of money onto the project, and
+wait and see.  By this time, all the tech people have lost about
+20 lbs (all brown), and are running around going crazy.  Management
+usually gets what it wants.  Of course, there are the occasional
+projects where things got cut just a bit too tight, and eveything falls
+down in flames....
+
+	I happen to feel that TCP and IP are *good* protocols, and
+certainly much better than what we are using now.  It seems something
+of a miracle that they have been adopted as a standard;  usually
+standards are things like COBOL that people go out of their way to
+avoid.  It is merely unfortunate that the conversion timetable is
+so optimistic.
+
+	There exists AT LEAST one choice of software for UNIX systems
+(all machines), T(w)enexes, Multics, and IBMs, so the majority of the
+"ordinary" systems will at least be able to talk, even if not convieniently.
+How we will get to MACSYMA on MIT-MC remains a mystery, unless some
+briliant MIT student with a lot of time on his hands decides to power-code
+a TCP/IP implementation for the ITS machines....
+							-Mike
+
+------------------------------
+
+From: Christopher C. Stacy <CStacy at MIT-AI>
+Subject: To TCP or not to TCP?
+
+    -----
+    How we will get to MACSYMA on MIT-MC remains a mystery, 
+    unless some briliant MIT student with a lot of time on
+    his hands decides to power-code a TCP/IP implementation 
+    for the ITS machines....
+    -----
+
+It is pretty clear that all the ITS machines will go off the ARPAnet
+when TCP/IP is implemented, as we are not interested in investing any
+time in developing new network software for those machines.
+
+------------------------------
+
+From: lauren at UCLA-Security (Lauren Weinstein)
+Subject: To TCP or not to TCP?
+
+Is there some good reason that the ITS machines cannot be 
+gatewayed through a supported machine?  Even little 11's like
+the 24 should be able to run some sort of existing TCP/IP
+implementation.  Rand-Unix currently talks to the ARPANET over
+a 9600 baud tty line via an 11/34 running the NCP.
+
+--Lauren--
+
+------------------------------
+
+[ The remainder of this digest is devoted to a discussion of mail and
+  mail addressing in a multiple network / InterNet environment.  Because
+  I mentioned that the British were adopting RFC733, it seems
+  appropriate to pass along this anouncement.  -Mike ]
+
+Date:  6 Jan 1982 1307-PST
+From: UKSAT at USC-ISIE
+Subject: JNT Mail Protocol spec available
+
+A document describing the mail protocol which has been adopted as an
+interim standard by the UK Joint Network Team (JNT) is online at ISIE.
+   <ucl-netwiz>usjnt.txt
+
+This file may be copied using FTP with login to anonymous with password guest.
+
+Steve Kille and Bob Braden
+
+------------------------------
+
+From: decvax!watmath!bstempleton at Berkeley
+Subject: standard net address
+
+Excuse me if I enter a little late in the discussion, but I only heard
+of these plans of late.
+
+It seems to me that userid@site.forwarder is much more sensible than
+userid.site@forwarder.  (this is a simple change that had better not
+take more than 1 minute to implement in any already written code - or
+else the code was badly done)
+
+at sign is found rarely in userids, and almost never on the arpanet, if
+at all.  Dot is found commonly.  It seems to make sense to say, you want
+to join our net, here is a format for your site name, instead of "here
+is a format for your userid names"
+
+Aside from all that userid@location is much more readable than userid.location
+if you ask me.  Here, our plan is not to have explicit site names given
+for waterloo computers, but rather have a mail-server figure out who
+is where.
+
+Where can I get details on the syntax of the internet mail systems?
+
+------------------------------
+
+From: Robert W. Kerns <RWK at MIT-MC>
+Subject: RFC733 mistatement
+
+   [ I believe that the CSNET usage of User.Host@Forwarder is the RFC733
+     approved addressing format for sites which can't take User@Host@Forwarder.
+     The choice of the dot does seem rather unfortunate.  The British have
+     adopted RF733 for their mail standard, but selected the percentage symbol
+     "%" rather than the dot ".".  -Mike ]
+
+RFC733 does not endorse this interpretation at all.  USER.HOST@FORWARDER
+(or USER.HOST@FORWARDER as used by Berkeley) is a legal RFC733 recipient
+by virtue of the fact that "USER.HOST" is a legal RFC733 personid ("."
+is not a special character at all) and FORWARDER is the host to send it
+to.  I know of no standard (other than local to one forwarder or
+network) which officially adopts this syntax.  I am not sure, but I
+believe that the addresses of the form CSVAX.drb@BERKELY are simply
+TOPS-20 login directory names which happen to have their mail forwarded
+to CSVAX.  [ Berkeley runs UNIX;  syntax is LocHost.User@Berkeley  -Mike]
+
+On the other hand, see the description of host-indicator in RFC733 for
+the FOO@BAR-HOST@BAZ-HOST syntax.  If mailers stripping off the hostname
+do their search from right-to-left and treat the rest as the string to
+be passed to the FTP server, this syntax is trivially supported and
+uniformly extensible.
+
+Being new to this group, I don't know why this was brought up here, but
+I hope you're not duplicating discussions which belong in MSGGROUP or
+HEADER-PEOPLE.
+
+[ I am asking around for pointers to earlier discussions about message
+  addressing, and will report the results here.  -Mike ]
+
+END OF TCP-IP DIGEST
+********************
+

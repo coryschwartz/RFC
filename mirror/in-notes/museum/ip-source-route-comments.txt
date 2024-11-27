@@ -1,0 +1,1011 @@
+
+
+
+
+
+
+Network Working Group                                          J. Postel
+Request for Comments: DRAFT                                  J. Reynolds
+                                                                     ISI
+                                                              mmmmm 1987
+
+
+                 Comments on the IP Source Route Option
+
+
+Status of this Memo
+
+   This RFC discusses a feature of the Internet Protocol (IP) used in
+   the ARPA-Internet community, and requests discussion and suggestions
+   for improvements of the description of this feature.  Distribution of
+   this memo is unlimited.
+
+Introduction
+
+   The purpose of this memo is to expand the discussion of the IP Source
+   Route Option and to give some examples of its use.
+
+Overview
+
+   The IP Source Route option allows the originator (source host) of an
+   IP datagram to specify a number of specific gateways the datagram
+   must pass though in sequence before being delivered to the
+   destination host.
+
+The Source Route Concept
+
+   The concept of the Source Route Option is to let the originator (or
+   source) of the datagram specify a list of points (gateways) the
+   datagram is to pass through on the way to its destination.
+
+   This type of explicit routing is usually not necessary since the
+   Internet gateways exchange routing information and route datagrams
+   based only on the destination address (and possibly other factors
+   such as type of service).
+
+   One reason for using source routing might be to reach some part of
+   the Internet via a path that the gateways somehow don't know about
+   via their normal routing information exchange.  Another reason may be
+   to explicitly use or avoid certain networks for performance, or
+   administrative reasons (such as privacy, access policy, or billing).
+   A reason for using source routing that has been exercised with good
+   results already is testing.  Source routing allows sending datagrams
+   that transit particular Internet paths testing either particular
+   networks or particuar gateways (or both) from a remote monitoring
+
+
+
+Postel & Reynolds                                               [Page 1]
+
+RFC DRAFT                                                     mmmmm 1987
+
+
+   host.
+
+   The source route is implemented by including an option in the IP
+   header that lists additional addresses.  That is, a source routed
+   datagram starts out with the address of the first stop on the route
+   in the IP header destination address field, and the addresses of
+   subsequent stops as elements in the option list.  At each stop, an
+   address is taken from an element of the list in the option and placed
+   in the destination address field and that element of the list is
+   replaced by the address of that stop.
+
+   There are three IP options:  Strict Source Route (SSR), Loose Source
+   Route (LSR) and Record Route (RR).  Both SSR and LSR also record the
+   route as well.  The difference between SSR and LSR is that in SSR the
+   route must specify gateway separated by only one network, but in LSR
+   the path between stops on the specified route maybe any length and
+   determined by normal gateway routing.
+
+   The information in a source route is a list of 32-bit IP addresses
+   and a pointer that indicates which address in the list is to be used
+   next.
+
+The following example shows the working of the option in simplified
+form.
+
+   Example 1:
+
+      Suppose that the source is host A, the destination is host E and
+      the gateways to be explicitly passed through are B, C, and D.
+
+      +-----+     +-----+     +-----+     +-----+     +-----+
+      |     |     |     |     |     |     |     |     |     |
+      |  A  |-----|  B  |-----|  C  |-----|  D  |-----|  E  |
+      |     |     |     |     |     |     |     |     |     |
+      +-----+     +-----+     +-----+     +-----+     +-----+
+
+      When the datagram is sent from the source host (A) into the
+      Internet the Source Address (SA), Destination Address (DA), Source
+      Route List (SRL) and Source Route Pointer (SRP) the fields are:
+
+               SA:  A
+               DA:  B
+               SRL: C,D,E
+               SRP: 0
+
+      After the datagram arrives at gateway B, the gateway notices the
+      source route option and transposes the address from the
+      destination field and the next element of the source route list
+
+
+
+Postel & Reynolds                                               [Page 2]
+
+RFC DRAFT                                                     mmmmm 1987
+
+
+      and increments the source route pointer.  As the datagram leaves
+      gateway B, the fields are:
+
+               SA:  A
+               DA:  C
+               SRL: B,D,E
+               SRP: 1
+
+      At gateway C, the processing is similar.  The datagram leaves
+      gateway C with its fields appearing:
+
+               SA:  A
+               DA:  D
+               SRL: B,C,E
+               SRP: 2
+
+      At gateway D, the processing is similar.  The datagram leaves
+      gateway D with its fields appearing:
+
+               SA:  A
+               DA:  E
+               SRL: B,C,D
+               SRP: 3
+
+      Finally, the datagram arrives at host E.  Even though the source
+      route option is still present, host E knows it is the final
+      destination because the source route pointer now indicates that
+      the source route list is exhausted.
+
+   Example 1 was simplified to present the general concept.  One detail
+   that was omitted is that each gateway really has two (or more)
+   addresses.  When the option is processed, the address that must be
+   stored back into the option field is the address for going in the
+   reverse direction.
+
+   Example 2:
+
+      Suppose that the source is host A, with address IA on net I.  The
+      destination is host E, with address LE on net L.  The gateways to
+      be explicitly passed through are B, C, and D.  Each gateway has
+      two addresses, one on each directly connected network.
+
+      +-----+       +-----+       +-----+       +-----+       +-----+
+      |     |IA   IB|     |JB   JC|     |KC   KD|     |LD   LE|     |
+      |  A  |-------|  B  |-------|  C  |-------|  D  |-------|  E  |
+      |     | net I |     | net J |     | net K |     | net L |     |
+      +-----+       +-----+       +-----+       +-----+       +-----+
+
+
+
+
+Postel & Reynolds                                               [Page 3]
+
+RFC DRAFT                                                     mmmmm 1987
+
+
+      When the datagram is sent from the source host (A) into the
+      Internet, the Source Address (SA), Destination Address (DA),
+      Source Route List (SRL), and Source Route Pointer (SRP) the fields
+      are:
+
+               SA:  IA
+               DA:  IB
+               SRL: JC,KD,LE
+               SRP: 0
+
+      After the datagram arrives at gateway B, the gateway notices the
+      source route option and moves the address from the next element of
+      the source route list to the destination field, places its own
+      reverse direction address in the that element of the source route
+      list, and increments the source route pointer.  As the datagram
+      leaves gateway B, the fields are:
+
+               SA:  IA
+               DA:  JC
+               SRL: JB,KD,LE
+               SRP: 1
+
+      At gateway C, the processing is similar.  The datagram leaves
+      gateway C with its fields appearing:
+
+               SA:  IA
+               DA:  KD
+               SRL: JB,KC,LE
+               SRP: 2
+
+      At gateway D, the processing is similar.  The datagram leaves
+      gateway D with its fields appearing:
+
+               SA:  IA
+               DA:  LE
+               SRL: JB,KC,LD
+               SRP: 3
+
+      Finally, the datagram arrives at host E.  Even though the source
+      route option is still present, host E knows it is the final
+      destination, because the source route pointer now indicates that
+      the source route list is exhausted.
+
+
+
+
+
+
+
+
+
+Postel & Reynolds                                               [Page 4]
+
+RFC DRAFT                                                     mmmmm 1987
+
+
+An Explicit Detailed Example
+
+   Recall the format of the IP header:
+
+     0                   1                   2                   3
+     0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |Version|  IHL  |Type of Service|          Total Length         |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |         Identification        |Flags|      Fragment Offset    |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |  Time to Live |    Protocol   |         Header Checksum       |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |                       Source Address                          |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |                    Destination Address                        |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |                    Options                    |    Padding    |
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+The format of the the source route option is shown in the extract from
+RFC-791 in Appendix A.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Postel & Reynolds                                               [Page 5]
+
+RFC DRAFT                                                     mmmmm 1987
+
+
+   Example 3:
+
+      Suppose that the source is host ISI-ARK, with address 128.9.0.12
+      on ISI-NET, the destination is host DMC-CRC, with address
+      128.43.0.1 on DRENET and the gateways to be explicitly passed
+      through are ISI-WB-GW, LL-GW, and CRC-GW.  Each gateway has two
+      addresses, one on each directly connected network.
+
+      +-----+
+      |     | 128.9.0.12
+      |ISI  |-------
+      |  ARK|     /ISI-NET
+      +-----+    /
+                /
+               /
+              /     +-----+
+             /      |ISI  | 28.45.0.0
+             -------|  WB |-------
+         128.9.0.25 |   GW|     /WBNET
+                    +-----+    /
+                              /
+                             /    +-----+
+                            /     |     | 10.5.0.10
+                           -------|LL-GW|-------
+                        28.19.0.0 |     |     /ARPANET
+                                  +-----+    /
+                                            /
+                                           /    +-----+
+                                          /     |     | 128.43.1.1
+                                         -------|CRC  |-------
+                                      10.1.0.15 |   GW|     /DRENET
+                                                +-----+    /
+                                                          /
+                                                         /    +-----+
+                                                        /     |     |
+                                                       -------|DMC  |
+                                                   128.43.0.1 |  CRC|
+                                                              +-----+
+
+      When the datagram is sent from the source host (ISI-ARK) into the
+      Internet the Source Address (SA), Destination Address (DA), Source
+      Route List (SRL), and Source Route Pointer (SRP) the fields are:
+
+               SA:  128.9.0.12
+               DA:  128.9.0.25
+               SRL: 28.19.0.0, 10.1.0.15, 128.43.0.1
+               SRP: 0
+
+
+
+
+Postel & Reynolds                                               [Page 6]
+
+RFC DRAFT                                                     mmmmm 1987
+
+
+    0                   1                   2                   3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |Version|  IHL  |Type of Service|          Total Length         |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |         Identification        |Flags|      Fragment Offset    |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |  Time to Live |    Protocol   |         Header Checksum       |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |       128     |       9       |       0       |      12       |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |       128     |       9       |       0       |      25       |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |       137     |      15       |       4       |      28       |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |        19     |       0       |       0       |      10       |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |         1     |       0       |      15       |     128       |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |        43     |       0       |       1       |    Padding    |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+      After the datagram arrives at gateway ISI-WB-GW, the gateway,
+      notices the source route option and moves the address from the
+      next element of the source route list to the destination field,
+      places its own reverse direction address in the that element of
+      the source route list, and increments the source route pointer.
+      As the datagram leaves gateway ISI-WB-GW, the fields are:
+
+               SA:  128.9.0.12
+               DA:  28.19.0.0
+               SRL: 28.45.0.0, 10.1.0.15, 128.43.0.1
+               SRP: 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Postel & Reynolds                                               [Page 7]
+
+RFC DRAFT                                                     mmmmm 1987
+
+
+    0                   1                   2                   3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |Version|  IHL  |Type of Service|          Total Length         |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |         Identification        |Flags|      Fragment Offset    |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |  Time to Live |    Protocol   |         Header Checksum       |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |       128     |       9       |       0       |      12       |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |        28     |      19       |       0       |       0       |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |       137     |      15       |       8       |      28       |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |        45     |       0       |       0       |      10       |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |         1     |       0       |      15       |     128       |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |        43     |       0       |       1       |    Padding    |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Postel & Reynolds                                               [Page 8]
+
+RFC DRAFT                                                     mmmmm 1987
+
+
+      At gateway LL-GW, the processing is similar.  The datagram leaves
+      gateway LL-GW with its fields appearing:
+
+               SA:  128.9.0.12
+               DA:  10.1.0.15,
+               SRL: 28.45.0.0, 10.5.0.10, 128.43.0.1
+               SRP: 2
+
+    0                   1                   2                   3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |Version|  IHL  |Type of Service|          Total Length         |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |         Identification        |Flags|      Fragment Offset    |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |  Time to Live |    Protocol   |         Header Checksum       |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |       128     |       9       |       0       |      12       |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |        10     |       1       |       0       |      15       |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |       137     |      15       |      12       |      28       |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |        45     |       0       |       0       |      10       |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |         5     |       0       |      10       |     128       |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |        43     |       0       |       1       |    Padding    |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+      At gateway CRC-GW, the processing is similar.  The datagram leaves
+      gateway CRC-GW with its fields appearing:
+
+               SA:  128.9.0.12
+               DA:  128.43.0.1
+               SRL: 28.45.0.0, 10.5.0.10, 128.43.1.1
+               SRP: 3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Postel & Reynolds                                               [Page 9]
+
+RFC DRAFT                                                     mmmmm 1987
+
+
+    0                   1                   2                   3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |Version|  IHL  |Type of Service|          Total Length         |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |         Identification        |Flags|      Fragment Offset    |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |  Time to Live |    Protocol   |         Header Checksum       |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |       128     |       9       |       0       |      12       |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |       128     |      43       |       0       |       1       |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |       137     |      15       |      16       |      28       |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |        45     |       0       |       0       |      10       |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |         5     |       0       |      10       |     128       |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |        43     |       1       |       1       |    Padding    |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+      Finally, the datagram arrives at host DMC-CRC.  Even though the
+      source route option is still present, host DMC-CRC knows it is the
+      final destination because the source route pointer now indicates
+      that the source route list is exhausted.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Postel & Reynolds                                              [Page 10]
+
+RFC DRAFT                                                     mmmmm 1987
+
+
+Summary *****-----> [words here]
+
+References
+
+   [1]   Postel, J. (ed.), "Internet Protocol - DARPA Internet Program
+         Protocol Specification," RFC 791, USC/Information Sciences
+         Institute, September 1981.
+
+   [2]   DoD Military Standard, "Internet Protocol", MIL-STD-1777,
+         Department of Defense, August 1983.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Postel & Reynolds                                              [Page 11]
+
+RFC DRAFT                                                     mmmmm 1987
+
+
+Appendix A -- Extracts from RFC-791
+
+   Note:  Editors notes and corrections are enclosed in angle brackets
+   ("<", ">"), and text that should be deleted is enclosed in braces
+   ("{","}").
+
+   Loose Source and Record Route
+
+         +--------+--------+--------+---------//--------+
+         |10000011| length | pointer|     route data    |
+         +--------+--------+--------+---------//--------+
+          Type=131
+
+      The loose source and record route (LSRR) option provides a means
+      for the source of an internet datagram to supply routing
+      information to be used by the gateways in forwarding the datagram
+      to the destination, and to record the route information.
+
+      The option begins with the option type code.  The second octet is
+      the option length which includes the option type code and the
+      length octet, the pointer octet, and length-3 octets of route
+      data.  The third octet is the pointer into the route data
+      indicating the octet which begins the next source address to be
+      processed.  The pointer is relative to this option, and the
+      smallest legal value for the pointer is 4.
+
+      A route data is composed of a series of internet addresses.  Each
+      internet address is 32 bits or 4 octets.  If the pointer is
+      greater than the length, the source route is empty (and the
+      recorded route full) and the routing is to be based on the
+      destination address field.
+
+      If the address in destination address field has been reached and
+      the pointer is not greater than the length, the next address in
+      the source route replaces the address in the destination address
+      field, and the recorded route address replaces the source <route>
+      address just used, and pointer is increased by four.
+
+      The recorded route address is the internet module's own internet
+      address as known in the environment into which this datagram is
+      being forwarded.
+
+      This procedure of replacing the source route with the recorded
+      route (though it is in the reverse of the order, it must be in to
+      be used as a source route) means the option (and the IP header as
+      a whole) remains a constant length as the datagram progresses
+      through the internet.
+
+
+
+
+Postel & Reynolds                                              [Page 12]
+
+RFC DRAFT                                                     mmmmm 1987
+
+
+      This option is a loose source route because the gateway or host IP
+      is allowed to use any route of any number of other intermediate
+      gateways to reach the next address in the route.
+
+      Must be copied on fragmentation.  Appears at most once in a
+      datagram.
+
+   Strict Source and Record Route
+
+         +--------+--------+--------+---------//--------+
+         |10001001| length | pointer|     route data    |
+         +--------+--------+--------+---------//--------+
+          Type=137
+
+      The strict source and record route (SSRR) option provides a means
+      for the source of an internet datagram to supply routing
+      information to be used by the gateways in forwarding the datagram
+      to the destination, and to record the route information.
+
+      The option begins with the option type code.  The second octet is
+      the option length which includes the option type code and the
+      length octet, the pointer octet, and length-3 octets of route
+      dAata.  The third octet is the pointer into the route data
+      indicating the octet which begins the next source address to be
+      processed.  The pointer is relative to this option, and the
+      smallest legal value for the pointer is 4.
+
+      A route data is composed of a series of internet addresses.  Each
+      internet address is 32 bits or 4 octets.  If the pointer is
+      greater than the length, the source route is empty (and the
+      recorded route full) and the routing is to be based on the
+      destination address field.
+
+      If the address in the destination address field has been reached
+      and the pointer is not greater than the length, the next address
+      in the source route replaces the address in the destination
+      address field, and the recorded route address replaces the source
+      <route> address just used, and pointer is increased by four.
+
+      The recorded route address is the internet module's own internet
+      address as known in the environment into which this datagram is
+      being forwarded.
+
+      This procedure of replacing the source route with the recorded
+      route (though it is in the reverse of the order, it must be in to
+      be used as a source route) means the option (and the IP header as
+      a whole) remains a constant length as the datagram progresses
+      through the internet.
+
+
+
+Postel & Reynolds                                              [Page 13]
+
+RFC DRAFT                                                     mmmmm 1987
+
+
+      This option is a strict source route because the gateway or host
+      IP must send the datagram directly to the next address in the
+      source route through only the directly connected network indicated
+      in the next address to reach the next gateway or host specified in
+      the route.
+
+      Must be copied on fragmentation.  Appears at most once in a
+      datagram.
+
+   Record Route
+
+         +--------+--------+--------+---------//--------+
+         |00000111| length | pointer|     route data    |
+         +--------+--------+--------+---------//--------+
+           Type=7
+
+      The record route option provides a means to record the route of an
+      internet datagram.
+
+      The option begins with the option type code.  The second octet is
+      the option length which includes the option type code and the
+      length octet, the pointer octet, and length-3 octets of route
+      data.  The third octet is the pointer into the route data
+      indicating the octet which begins the next area to store a route
+      address.  The pointer is relative to this option, and the smallest
+      legal value for the pointer is 4.
+
+      A recorded route is composed of a series of internet addresses.
+      Each internet address is 32 bits or 4 octets.  If the pointer is
+      greater than the length, the recorded route data area is full.
+      The originating host must compose this option with a large enough
+      route data area to hold all the address expected.  The size of the
+      option does not change due to adding addresses.  The intitial
+       contents of the route data area must be zero.
+
+      When an internet module routes a datagram it checks to see if the
+      record route option is present.  If it is, it inserts its own
+      internet address as known in the environment into which this
+      datagram is being forwarded into the recorded route beginning at
+      the octet indicated by the pointer, and increments the pointer by
+      four.
+
+      If the route data area is already full (the pointer exceeds the
+      length) the datagram is forwarded without inserting the address
+      into the recorded route.  If there is some room but not enough
+      room for a full address to be inserted, the original datagram is
+      considered to be in error and is discarded.  In either case, an
+      ICMP parameter problem message may be sent to the source host [3].
+
+
+
+Postel & Reynolds                                              [Page 14]
+
+RFC DRAFT                                                     mmmmm 1987
+
+
+      Not copied on fragmentation, goes in first fragment only.  Appears
+      at most once in a datagram.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Postel & Reynolds                                              [Page 15]
+
+RFC DRAFT                                                     mmmmm 1987
+
+
+Appendix B -- Extracts from MIL-STD-1777
+
+   Note:  Editors notes and corrections are enclosed in angle brackets
+   ("<", ">"), and text that should be deleted is enclosed in braces
+   ("{","}").
+
+   9.2.1.2  Routing options.
+
+      IP provides a mechanism, called source routing, to supplement the
+      gateway's independent routing decisions.  This mechanism allows an
+      upper layer protocol to influence the gateway route in which a
+      datagram traverses.  The UPL can pass a list of internet
+      addresses, called a source route list, as one of the SEND service
+      request parameters.  Each address in the list, except for the
+      last, is an intermediate gateway destination.  The last address on
+      the list is the final destination.  The source IP module uses its
+      normal routing mechanism to transmit the datagram to the first
+      address in the source route list.  Then the gateway IP replaces
+      source route list entry with its own address as known in the
+      environment into which it is forwarding the datagram.  Thus, the
+      datagram follows the source route while recording its "inverse" or
+      recorded route.
+
+   9.2.1.2.1 Routing types.
+
+      Two kinds of source routing are proviced by IP: loose and strict.
+      With loose source routing, the host and gateway IP modules along
+      the route may use any number of other intermediate gateways to
+      reach the addresses in the source list.  With strict source
+      routing, the datagram must travel directly (i.e., through only the
+      directly connected subnetwork indicated by each address) to each
+      address on the source list.  When the source route cannot be
+      followed, the source host IP is notified with an error message.
+      For testing or diagnostic purposes, a ULP can acquire a datagram's
+      record route (independent of the source route option) by using the
+      record route mechanism.  The sending ULP supplies an empty record
+      route list and indicates that the gateway route is to be recorded
+      in transit.  Then, as each gateway IP module on the gateway route
+      relays the datagram, it adds its address as known in the
+      succeeding environment to the record route list.  The destination
+      ULP receives the original datagram along with the record route
+      list which, if reversed, provides a source route to the sending
+      ULP.  If more gateways are traversed than can be recorded in the
+      list, the additional gateway addresses are not recorded.  Problems
+      with the record route option discovered in transit are reported to
+      the source host IP.  When using a routing otion, the source ULP
+      must provide a large enough route list to accommodate all the
+      routing information expected.  The size of a routing option does
+
+
+
+Postel & Reynolds                                              [Page 16]
+
+RFC DRAFT                                                     mmmmm 1987
+
+
+      not change due to adding addresses.
+
+   9.3.15.4 Loose source and record route.
+
+      option type:  131   option length:  variable
+
+      The loose source route option provides a way for the source ULP of
+      a datagram to supply routing information to be used by IP modules
+      along the gateway route.  At the same time, the "inverse" route is
+      recorded in the option field.  This option {is not} <must be>
+      copied on fragmentation.  It appears at most once in a datagram.
+      The option begins with the option type code.  The second octet is
+      the option length which includes the option type octet, the length
+      octet, the pointer octet, and the source route list.  The third
+      octet is a pointer into the route data indicating the octet which
+      begins the next source address to be processed.  The pointer is
+      relative to this option, and its smallest legal value is 4.  A
+      loose source route list is composed of one or more internet
+      addresses identifying intermediate gateways to be visited in
+      transit.  Each internet address is 4 octets long.  When a gateway
+      in the source route list is visited, the gateway address (as known
+      in the environment into which the datagram is being forwarded)
+      replaces that list entry <while that list entry replaces the
+      destination address>.  The size of this option is fixed by the
+      source.  It cannot change to accommodate additional information.
+      The routing options are described in section {9.2.1.1} <9.2.1.2>.
+
+   9.3.15.5 Strict source and record route.
+
+      option type:  137   option length:  variable
+
+      The strict source route option provides a way for the source ULP
+      of a datagram to name the exact set of IP modules to be visited
+      along the gateway route.  At the same time, the "inverse" route is
+      recorded in the option field.  This option must be copied on
+      fragmentation.  It appears at most once in a datagram.  The option
+      begins with the option type code.  The second octet is the option
+      length which includes the option type octet, the length octet, the
+      pointer octet, and the source route list.  The third octet is a
+      pointer into the route data indicating the octet which begins the
+      next source address to be processed.  The pointer is relative to
+      this option, and its smallest legal value is 4.  A strict source
+      route list is composed of one or more internet addresses
+      identifying the gateways to be visited in transit.  The datagram
+      must visit exactly the gateways listed, traversing only the
+      directly connected subnetworks indicated in the route list
+      addresses.  When a gateway in the source route list is visited,
+      the gateway address (as known in the environment into which the
+
+
+
+Postel & Reynolds                                              [Page 17]
+
+RFC DRAFT                                                     mmmmm 1987
+
+
+      datagram is being forwarded) replaces that list entry <while that
+      list entry replaces the destination address>.  The size of this
+      option is fixed by the source.  It cannot change to accommodate
+      additional information.  Routing options are described in section
+      {9.2.1.1} <9.2.1.2>.
+
+   9.3.15.6 Record route.
+
+      option type:  7   option length:  variable
+
+      The record route option provides a way to record a datagram's
+      gateway route.  This option is not copied on fragmentation.  It
+      appears at most once in a datagram.  The option begins with the
+      option type code.  The second octet is the option length which
+      includes the option type code, the length octet, and the return
+      route list.  The third octet is a pointer into the route data
+      indicating the octet which begins the next area to store a route
+      address.  The pointer is relative to this option, and the smallest
+      legal value for the pointer is 4.  A record route list is composed
+      of a series of internet addresses.  Each internet address is 4
+      octets long.  The source ULP provides a route list with zero value
+      entries.  As each gateway is visited in transit, it registers its
+      address in the next free entry (indicated by the pointer).  When
+      the pointer is greater than the length, the record route list is
+      full.  No additional addresses are recorded, even if more are
+      visited before arriving at the destination.  The size of this
+      option is fixed by the source.  It cannot cnange to accommodate
+      additional information.  The routing options are described in
+      section {9.2.1.1} <9.2.1.2>.
+
+   9.4.6.3.13 Route.
+
+Editors' Notes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Postel & Reynolds                                              [Page 18]
+

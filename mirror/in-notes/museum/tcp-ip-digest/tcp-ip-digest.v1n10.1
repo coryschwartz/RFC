@@ -1,0 +1,241 @@
+ 5-Jan-82 03:40:43-PST,10378;000000000001
+Mail-from: ARPANET host BRL rcvd at 5-Jan-82 0340-PST
+Date:      5 Jan 82 3:07:55-EST (Tue)
+From:      Mike Muuss <tcp-ip@brl>
+To:        list: 
+Subject:   TCP-IP Digest, Vol 1 #10
+Bcc:       
+
+TCP/IP Digest             Tuesday, 5 Jan 1981      Volume 1 : Issue 10
+
+Today's Topics:
+                              Administrivia
+                   ComputerWorld on the TCP/IP Cutover
+                   Amateur Packet Radio using InterNet
+                      Overloading the Poor Dot (.)
+----------------------------------------------------------------------
+
+From:      Mike Muuss <Mike@BRL>
+Subject:   Administrivia
+
+Folks -
+
+	It looks like somebody on this list is feeding copies of the TCP/IP
+Digest to ComputerWorld magazine, which seems delighted with this
+newfound source of "inside" information.  While it is my intention that
+this list receive as broad a distribution as possible, several
+tightropes must be carefully traversed:
+
+	Networking plays a vital part in the Mission of the Ballistic Research
+Laboratory (BRL), which fully supports the distribution of the TCP/IP
+Digest.  However, the ArpaNet is intended for U.S. Government business,
+and is not supposed to compete with commercial packet networks.  This
+has a rather limiting effect on the group of people who can freely use
+the ArpaNet.
+
+	More importantly, though, is a question of content.  If it becomes
+known that contributions to the TCP/IP Digest will appear in ComputerWorld,
+possibly verbatim, or perhaps cast in the wrong light, then I suspect that
+there will be a marked decrease in the quantity of information that is offered.
+Few of us expect our net mail to wind up published in the commercial press,
+and only the brave will knowingly open themselves up to this kind of direct,
+external exposure.  And the cost?  Those readers who desperately need the 
+information on what is happening may find their information sources again
+reduced to RFC's and official notices, carefully worded for public scrutiny.
+
+	This digest was intended as an open forum?  Is a direct pipeline
+to the outside world too open?  I solicit discussion on this matter.
+Maybe we can reach a consensus?
+					Happy New Year!
+					  -Mike Muuss
+
+------------------------------
+
+From: chico!duke!unc!grumpy.smb at Berkeley
+Subject: Computerworld on the TCP/IP cutover
+
+Well, they're at it again.  Here are some excerpts from the December 14
+issue:
+
+	Arpanet, the Pentagon-sponsored packet network that supports U.S.
+	computing research, is slated for Jan. 1, 1983 cutover to two
+	protocols that some experts predict will revolutionize
+	commercial data communications.
+
+	Considered the world's first packet network, Arpanet is expected
+	to become an internet -- a network of networks -- ... said an
+	informed source, who revealed the cutover date.
+
+It was secret?
+
+	...  Arpanet was not built to support wartime communications
+	among the military, but the planned cutover to TCP/IP -- roughly
+	a year away -- suggests that computer scientists have a lot of
+	confidence in the protocol pair.  An Arpanet crash would
+	seriously disrupt American research and development in many
+	fields of science and technology, one expert maintained.
+
+	...  A number of TCP/IP developers seem to believe that Arpanet
+	will be ready Jan. 1, 1983 cutover [sic] -- but not all of them,
+	Arpanet correspondence revealed.
+
+	Available to all Arpanet subscribers, electronic mail files on
+	TCP/IP include the following dispatch by a Stanford University
+	researcher:
+
+	"Some people [believe] that TCP work on [Digital Equipment
+	Corp.'s] Tops-20 [operating system] is 'done.'... I believe
+	the 1983 deadline for TCP conversion will not be met.  I have
+	worked on BBN's TCP at the user program level; specifically, I
+	have implemented general user Telnet for TCP as part of a
+	general multiple-network Telnet for Tops-20.
+
+	"Briefly, the Tops-20 TCP implementation in its present form is
+	unacceptable to Stanford and many othe Tops-20 sites.  It is sad
+	that so many bright people at BBN have had to maintain this dog
+	instead of working on a complete rewrite."
+
+	This critic wrote, in his Arpanet communique, that "the TCP
+	process consumes between 40% and 60% of the CPU.  We simply
+	cannot sacrifice that much of an already-loaded CPU to implement
+	a network ."
+
+[ I suppose that the TCP Digest quoting ComputerWorld quoting the TCP Digest
+  is only fair!  -Mike ]
+
+------------------------------
+
+From: John C. Gilmore <GNU at MIT-AI>
+Subject:  Amateur Packet Radio using Internet
+To: CERF at USC-ISI
+cc: Tcp-ip at BRL
+
+    From: CERF at USC-ISI
+
+    Your TCP-IP digest entry caught my attention concerning
+    addressing capability in the IP protocol. I'd like to know
+    more about your "internet packet radio" since it isn't
+    one of the projects ARPA is supporting. Is this something
+    you are pursuing as a graduate or undergraduate effort
+    or supported by another funding agency?
+
+    Vint Cerf
+    DARPA/IPTO
+
+Amateur Packet Radio is an experimental networking implementation
+among Amateur Radio Operators under the regulation of the FCC.  It
+is a group of "hams" creating a network for digital communication
+among citizens.  It is not supported by ARPA or any government agency
+(although AMRAD hosted an "Amateur Radio Computer Networking
+Conference" in conjunction with NBS in October).
+
+We currently favor the Internet Protocols, with minimal modifications,
+to encourage timely comprehension, software development, and
+extramural connection.  Our network has two constraints that we hope
+are not unique, which is why I sent my query to TCP-IP, hoping for
+known solutions.  They are:
+
+	There is no underlying software protocol; IP Datagrams are
+	transmitted without enclosure at the lowest level. (This
+	is not, so far, a problem, but we're wondering if anyone else
+	is doing similarly.)  The medium is broadcast and there are 
+	contention problems.
+
+	There is no central authority; no user sign-up; no fixed
+	connectivity or user location.  Each terminal node runs the
+	same program with a small number of variables different (at
+	least one unique).  Nodes can appear, disappear, and move at
+	any time; connectivity depends on electromagnetic weather.
+	We had trouble with 24-bit addresses in this environment,
+	since we have no way to create unique addresses that short.
+
+If the TCP-IP mailing list is for Official U. S. Government users
+only, rather than for the clarification, distribution, evolution, and
+improvement of the standard among all who are gaining experience with
+it, then please excuse my assumption and have me removed from it.
+
+[ Nope, you are in the right place.  -Mike ]
+
+------------------------------
+
+Subject: Re:  Amateur Packet Radio using Internet
+From: CERF at USC-ISI
+To: GNU at MIT-AI
+Cc: Tcp-ip at BRL
+In-Reply-To: Your message of 30 December 1981 05:51-EST
+
+1. TCP-IP Digest is an open forum and your entry was perfectly
+valid - just caught my attention since I didn't know about the
+internet protocol choice by the Amatuer Packet Radio group. I did
+know a little about the private Packet Radio work.
+
+2. Use of raw IP formats could cause you some trouble. The current
+  architectural assumptions are that a gateway can "direct" an
+  IP THROUGH another gateway, but to do this, it uses a lower
+  layer of addressing (encapsulation philosophy). This seemed
+  quite natural to us during design of IP since all the nets we
+  were concerned with or knew about had a lower layer format with
+ local addressing - even Ethernets.
+
+  In a single network architecture, populated with a blizzard
+  of private packet radios, you are faced with a number of
+  challenges. First, the generation of unique identifiers.
+  Second, the use of these identifiers to aid in routing
+  decisions.  I am not entirely convinced that a geographic
+  basis is necessarily helpful - in the ARPA packet radio net,
+  for example, the actual location of a radio is not always a
+  good indicator of its radio connectivity into the system.
+  Routing towards its geophysical location may in fact fail
+  while routing "away" toward the high mountain peak which is
+  in LOS may help.  
+
+  In your case, some geographic knowledge may help to structure
+  the system hierarchically - this is sometimes used to effect
+  "area routing."
+
+3. As long as you stay within the confines of a single net,
+   24 bits allows some 16 million destination identifiers
+   which seem to me to be quite a few for a respectable amateur
+   packet radio network. One might artificially use up several
+   network numbers if it appeared that 16 million wasn't enough.
+   The harder problem is to make these numbers useful for routing
+   purposes and to do this, one obviously needs to bind the
+   identifiers to some location.  Clearly you have attempted to
+  do this with the lat/long strategy.
+
+4. Quite frankly, we didn't envision this particular use when
+   we designed IP - and your trick of using an option format
+   to provide more detailed information is certainly the kind
+  of extension we designed options for - even if it does strain
+  your esthetic senses.
+
+5. As to handling true internetting and providing for routing
+  THROUGH gateways without losing track of the final net/destination,
+   either the amateur packet radio network needs to define a lower
+  level addressing structure, or you need to consider another option
+  which identifies not only the source and destination but also
+  the "next" gateway.  This is really just a form of source
+  routing.
+
+6. The hardest problem, really, is going to be handling the
+  area routing and dissemination of routing information
+  throughout the system. If connectivity changes frequently
+  for physical reasons (propagation effects) or because repeaters
+  go up and down whimsically, then managing the routing problem
+  is going to be quite a challenge.
+
+Vint Cerf
+
+------------------------------
+
+From:  Schauble.Multics at MIT-Multics
+Subject:  Overloading the .
+
+Tops-20 isn't the only system that has problems with that use of the
+period. Multics does also. Notice, for instance, the sender of this
+message.
+			Paul
+
+END OF TCP-IP DIGEST
+********************
+

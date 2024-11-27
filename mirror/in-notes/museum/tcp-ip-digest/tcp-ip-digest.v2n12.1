@@ -1,0 +1,498 @@
+5-Jul-83 09:42:38-PDT,21051;000000000001  
+Return-Path: <tcp-ip@brl-vgr>
+Received: FROM BRL-VGR BY USC-ISIF.ARPA WITH TCP ; 30 Jun 83 09:50:10 PDT
+Received: From Brl-Vgr.ARPA by BRL-VGR via smtp;  30 Jun 83 7:17 EDT
+Sender:    Mike Muuss <TCP-IP@brl>
+From:      TCP-IP@brl
+To:        TCP-IP@brl
+Date:      30 June 1983 00:00 EST
+Subject:   TCP-IP Digest, Vol 2 #12
+
+TCP/IP Digest          Thursday, 30 June 1983      Volume 2 : Issue 12
+
+Today's Topics:
+                 IBM VM TCP/IP Implementation Now Exists
+               Contacts within IBM for TCP/IP Information
+                      Hooking IBMs to an Ethernet?
+    Gateways: When should I ping, When should I purge, Who should I have?
+                  Program to print TOPS20's Ping Table
+               Security Problem with Mail?  Probably not.
+----------------------------------------------------------------------
+                  TCP/IP Digest --- The InterNet Digest
+                         LIMITED DISTRIBUTION
+          For Research Use Only --- Not for Public Distribution
+----------------------------------------------------------------------
+
+Date: 22 Jun 1983 13:22:04-CDT
+From: L.H. Landweber <lhl@uwisc>
+Reply-to: ibm-project@uwisc
+To: tcp-ip@brl
+Subject:  IBM VM TCP/IP IMPLEMENTATION
+
+                  TCP/IP IBM VM IMPLEMENTATION
+
+
+We are implementating of the Internet protocols (FTP/SMTP/Telnet/TCP/IP) for
+IBM VM Systems under contract with IBM.  The TCP and IP have been running for
+some time now under VM/SP on an IBM 4331 at Wisconsin and we are currently
+putting the finishing touches on the higher-level protocols.  In addition, a 
+software interface between IP and an X.25 implementation running on a
+Series/1 (RPS operating system) has been completed.  The complete package
+will enable CSNET IBM VM hosts to connect to the Darpa Internet via Telenet.
+
+The 4300 software is written almost entirely in Pascal, with a small amount
+of assembler-language support.  Some assembler code running on the Series/1
+interfaces with the X.25 code, which is a standard IBM product.  Standard IBM
+released software is used throughout (i.e., no modified or unreleased system
+software has been employed).
+
+The software will be ready for initial distribution to test sites in mid-July.
+We hope to have production versions available by the end of August. 
+Distribution will be controlled by IBM.  We encourage interested parties to
+contact:
+
+          Mr. Carl VanWinter
+          IBM  Corporation
+          Rochester, MN
+          507-286-3378
+
+to express an interest or request information on distribution
+plans.
+
+
+ADDITIONAL DETAILS
+
+TCP/IP runs in a separate disconnected virtual machine.  Similarly, SMTP,
+server FTP, and server Telnet each occupies a dedicated virtual machine. 
+User FTP and user Telnet run within a user's virtual machine under CMS. 
+Communication between virtual machines is done through the IBM Virtual
+Machine Communication Facility (VMCF).  A detailed preliminary design
+document is available by contacting one of the individuals listed below.
+(Some details have changed since it was written, but it is still mostly
+accurate.)
+
+Over the Summer we expect to implement a Pronet driver to enable
+our IP/TCP to use the PRONET 10 megabit/sec token ring LAN.  The hardware
+interface will be via a DACU (Device Access Control Unit) provided by IBM.
+The DACU enables connection of UNIBUS devices to an IBM channel.  We expect
+other university groups to provide a driver for Ethernet.  We estimate that
+each of these projects will take 2-4 man-months to complete.
+
+Direct connection to a C/30 IMP will require implementation of a software
+driver in conjunction with a suitable hardware interface (e.g., DACU--LH/DH
+or Series/1--HDH).
+
+For further technical information contact:
+
+          David DeWitt, Larry Landweber, or Marvin Solomon
+          Computer Science Department
+          University of Wisconsin
+          1210 W. Dayton St.
+          Madison, WI 53706
+          608-262-1204
+
+		  ibm-project@uwisc
+
+------------------------------
+
+Date: Thu 23 Jun 83 09:08:37-PDT
+From: Suzanne Johnson <JOHNSON@SUMEX-AIM.ARPA>
+Subject: tcp/ip ibm info
+To: tcp-ip@BRL.ARPA
+
+It turns out that if you give your IBM rep VERY specific information on
+WHO and WHERE within IBM the tcp/ip work goes on, they can follow up for
+you.  
+
+The tcp/ip work is evidently being done by IBM's Federal Systems Division
+in Gaithersburg, Maryland.  The person doing the work is Doug McKay.
+
+Our rep was able to confirm this, given the above info.  Since he is
+somewhat up-to-date on status, you might have your rep contact
+our IBM rep.  His name is Waymon Lee, and phone # is 415-855-0519.
+
+Let us know what you find out.
+
+Suzanne Johnson
+
+------------------------------
+
+Date: 23 Jun 1983 at 1527-PDT
+From: dan@sri-tsc
+To: Suzanne Johnson <JOHNSON@SUMEX-AIM.ARPA>
+cc: tcp-ip@brl
+Subject: Re: ibm tcp/ip
+
+Doug McKay is indeed working on TCP/IP for the Series I.  He is porting
+the SRI TCP/IP for PDP11/44's (which is itself a port of the 4.1b BSD
+VAX UNIX TCP/IP).  It was my understanding that it is being integrated
+into the version of UNIX they have running on the Series I and whatever
+other IBM systems are running UNIX.  I don't know if his group is also
+working on TCP/IP for non-unix operating systems, but I got the
+impression from talking to him that they were not.
+
+	-Dan Chernikoff (dan@sri-tsc)
+	SRI International
+
+------------------------------
+
+Date: 23 Jun 1983 0:57-EDT
+From: Lee.Moore@Rochester.ARPA
+Subject: Re: TCP-IP Digest, Vol 2 #11
+To: tcp-ip@brl-vgr.ARPA
+Origin: Filter-Queen
+
+RE: hooking IBM's to an ethernet
+
+I recently got a glossy brochure describing an IBM channel interface
+for ethernet from ACC.  Does anybody know anything about this?
+
+=lee
+
+------------------------------
+
+Date: 22 Jun 1983 0209-PDT
+Sender: GEOFF@sri-csl
+Subject: Gateways- When should I ping, When should I purge, Who should I have?
+From: the tty of Geoffrey S. Goodfellow
+Reply-To: Geoff@sri-csl
+To: POSTEL@usc-isif, HEDRICK@rutgers, MRC@su-score
+To: snelson@office-1, bhitson@bbn-unix, tcp-ip@brl
+
+So far we have heard that pinging gateways in a hosts gateway
+cache every 37 seconds is too often and that very likely every
+TENEX and TOPS-20 site on the ARPANET is currently doing this.
+We had a suggestion that it might not be necessary to ping
+gateways at all.  However, it was also suggested pinging gateways
+periodically might be a good idea.
+
+It was suggested that entries in a hosts dynamic gateway table
+should be aged and deleted after about an hours time.
+
+A number of informed parties suggested that each site configure
+the contents of their INTERNET.GATEWAYS file very carefully and
+some very helpful guidelines for choosing the initial contents of
+your INTERNET.GATEWAYS file was given.
+
+What I would like to see explored, discussed and hopefully
+resolved by this group is:
+
+1) What is the ideal interval with which to PING and under what
+circumstances should I PING?
+
+2) What is the ideal time a gateway entry should remain in a
+given hosts gateway table before it is aged and flushed?
+
+I think how one should configure the contents of their initial
+INTERNET.GATEWAYS file was pretty well explained by Charlie Lynn,
+but I still have not heard anything concrete enough on the
+subject of when to PING and when to purge to make me dash to my
+TENEX sources and stick the code in.
+
+Could we hear from other operating system wizards on how
+FUZZBALLS, TAC's, UNIX, Multics, VMS, IBM hosts, TIU's and so
+forth have done it and from the Internet Holy Water Sprinklers on
+what the ideal values would be?
+
+------------------------------
+
+Date: 22 Jun 1983 0329-PDT
+From: Henry W. Miller <Miller@sri-nic>
+Subject: Re: Gateways- When should I ping, When should I purge, Who should I have?
+To: Geoff@sri-csl, POSTEL@usc-isif, HEDRICK@rutgers, MRC@su-score, 
+    tcp-ip@brl, tcp-ip@sri-nic, tcp-ip-tops20@sri-nic, tops-20@su-score
+cc: Miller@sri-nic
+
+1)	Jon sez that it is not necessary to ping; that ICMP
+redirects will handle it.  OK, seems reasonable, depending
+on your net traffic.  Knowing a probable path, and trying
+it first, and recovering from it in case of error seems
+more efficient than probing J. Random Prime Gateway, hoping
+for a win.  (This is why I'm in favor of rich gateway tables;
+it gives you more initial options.)
+
+2)	If you choose to ping, to keep up with the state of the
+network, 37 seconds is clearly too short of a period to get a
+snapshot of the net.  A couple of un-ACKED probes could lead one
+to believe that a gate is down, when in fact, it might not be.
+If pinging is desired, then an interval that is suffcently long
+should be used, say 5-10 minutes.  (Personal opinion: A ping
+from a host coming back on the air COULD/SHOULD be interpreted
+as an "I'm Alive" message.  The gateways, in their infinte
+wisdom, could spread the good news across the networks, so the
+various hosts could update their routing tables.  Likewise, the
+hosts should be able to poll the gateway of their dreams on
+occaision and receive, in return, the latest routing poop.
+A maxi ping, fer surre, but would help eliminate senseless
+probings...)
+
+3)	Updating routing tables: again, depending upon your
+internet needs, 30 minutes at the max.  (Smallest interval...)
+The current default, I believe is 6 hours.
+
+
+4)	Another thot:  put a timer block in for each gateway:
+when to ping next.  This would allow pinging on a selective
+basis.
+
+-HWM
+
+------------------------------
+
+Date: 22 Jun 1983  9:08:55 EDT (Wednesday)
+From: Dennis Rockwell <drockwel@bbn-vax>
+Subject: Re: Gateways- When should I ping, When should I purge, Who should I have?
+To: Geoff@sri-csl
+Cc: POSTEL@usc-isif, HEDRICK@rutgers, MRC@su-score, RLL.TYM@office-2, 
+    DAB2.GVT@office-2, snelson@office-1, bhitson@bbn-unix, tcp-ip@brl
+
+BBN UNIX hosts ping all gateways that are currently in use (defined as
+having an open connection which has as its local-net destination a
+gateway) constantly, at a rate of once every few seconds.
+
+We have thought about fancy schemes involving only pinging when TCP
+has to retransmit, but this leaves users of non-TCP services out
+in the cold.  The rapid rate of pinging is for detection of a dead
+first-hop gateway.  Unless one assumes an 1822 net, there is very likely
+no feedback as to whether a packet is delivered or not (as was previously
+noted, ethernet in particular has no such feedback).
+
+Since we only ping active gateways, our hosts' gateway table contains
+all the gateways we can find out about that are connected to whatever
+local net(s) we are connected to.
+
+------------------------------
+
+Date: 22 Jun 1983 1433-EDT
+From: Geoffrey H. Cooper <GEOF@mit-xx>
+Subject: RE: Sending Pings to Gateways
+To: TCP-IP@brl
+cc: clynn@bbnc, geof@mit-xx
+
+CLYNN's message describing the way in which TOPS-20 uses its list of
+internet gateways brings up a more general problem with ICMP.  As
+mentioned by Postel (in the last digest), every host implementation of
+internet routing maintains a cache of <net,gateway_to_use> pairs, and a
+list of "prime" internet gateways.  When a packet is routed the Internet
+implementation first searches the cache for an appropriate gateway to
+use.  If this search fails, the packet is sent to a "default intelligent
+(prime) gateway" which will send a redirect back to the host IF A BETTER
+GATEWAY EXISTS FOR THAT NET, so that subsequent packets to the same net
+will hit the host's cache.  Note that the prime gateway can not be
+relied upon to send a packet back (this is a necessary part of the way
+internet routing works, since otherwise a prime gateway would have to
+send back a redirect to itself for EVERY packet it forwards).
+
+The question that arises is to which of the default gateways that are
+known to the host should a "defaulted" packet be sent?  The answer is,
+of course, to the least-loaded, working (up), closest default gateway.
+Unfortunately, none of those attributes is determinable by the host.
+
+If the host is on the Arpanet, it would be possible to make use of the
+arpanet's "host dead" messages to determine that a particular prime
+gateway doesn't seem to be working (either because it is too busy or
+crashed).  Thus, it would be possible to order the prime gateways that a
+host knows about in order of "usefulness to the host" (or perhaps
+closeness on the network is the best static measure to use).  The best
+gateway (earliest on the list) is always used, and the network status
+messages are used to declare that gateway's entry temporarily invalid
+when packets sent to it result in "host dead" messages.
+
+If the host is on a network other than the Arpanet, the problem is more
+severe, since the network will generally not take the responsibility to
+tell the host that a packet it sent was not received by the gateway to
+which it was sent (the Ethernet is the best example of such a network).
+If all packets are sent by default to a single "best" gateway and that
+gateway is down, then all the packets will fall into a "black hole" and
+a section of the internet will become inaccessible to the host.
+
+One way to deal with this situation is what is done by Tops-20:
+Explicitly and regularly find out what prime gateways are up, and always
+send your packets to the best prime gateway that is up.  The last issue
+of the digest described some of the problems with this approach.
+
+Another approach is to use the telephone company's ''linefinder''
+algorithm: Keep the N prime gateways that a host knows about in an
+ordered table, and cycle through the table (i.e., always use the
+''next''
+gateway after the one that you last used).  The host maintains no
+information on the state of the prime gateways in its tables.  Some
+packets will indeed be sent to the "black hole" of a crashed prime
+gateway; higher level protocols can be counted upon to retransmit these
+packets, and will hit other gateways on the retransmissions.
+
+One advantage of this scheme is that it ``load shares'' the burden of
+sending redirects among all of the prime gateways that a host knows
+about, rather than placing undue burden on one particular gateway that
+it considers to be the "best."
+
+Another advantage is that it leaves a host implementation open to the
+add the identities of new prime gateways to its tables.  Consider the
+following algorithm: when a host receives a redirect to a gateway, it
+place a ``dubious'' entry for that gateway into its prime gateway table.
+The entry is dubious because the host knows that the gateway exists, but
+does not know if it is a prime gateway.  A count is kept of the number
+of times a packet is sent to that gateway.  If, say, five packets are
+sent to the gateway, and no redirect is ever seen from it, then the
+gateway is deleted from the host's prime gateway table.  If a redirect
+is seen from the gateway in question, the gateway's entry may be
+upgraded from "dubious" to "certain." In this way, a host can slowly
+accumulate information about the gateways that are of most use to it in
+the internet.
+
+Although I am biased (since the above scheme is of my own design), I
+believe that the idea of cycling through the list of known gateways is
+the "way to go." The advantages I see are, once more:
+
+	1. Solves "black hole" disease
+	2. Shares the "redirect" load among many gateways
+	3. Allows a host to dynamically learn about new prime gateways
+
+- Geof Cooper
+  MIT
+
+------------------------------
+
+Date: 22 Jun 1983 1132-PDT
+Subject: Re: Warning, TCP-4 problems
+From: Craig Milo Rogers <ROGERS@usc-isib>
+To: David Roode <ROODE@sri-nic>, HEDRICK@rutgers, MRC@su-score
+cc: RLL.TYM@office-2, tharris@ddn1, jmayersohn@bbn-unix, ddnsr@bbn-unix, 
+    tcp-ip@brl, tcp-ip@sri-nic, tcp-ip-tops20@sri-nic, tops-20@su-score
+
+	The programs <PRVSYS>IGGSTS.EXE and <PRVSYS>IGWSTS.EXE on ISIA,B,D-F
+will print TOPS20's Ping table and network routing table, respectively.
+(The names are holdovers from the GGP days).  However, I don't expect
+these programs to work outside ISI, because they use an ISI-specific (I
+think) JSYS to map monitor pages (GTMPG).  The sources are in BLISS-10.
+There are help files in <PRVSYS>.  You need the Wheel privelege to run
+the programs.
+					Craig Milo Rogers
+
+------------------------------
+
+Date:     Tue, 28 Jun 83 21:45:37 EDT
+From:     Ron Natalie <ron@brl-bmd>
+To:       tcp-ip@brl-bmd, unix-wizards@brl-bmd
+cc:       msggroup@brl-bmd
+Subject:  Security Problem?
+
+I have noticed that many sites have taken the precaution of
+having their login programs (and their FTP servers) not make
+a distinction between an invalid user name and an invalid
+password.  The reasoning behind this is that if a user could
+tell, he could sit there hacking a user name until he got a
+valid one and then start hacking its password.  While trying
+to figure out a user name that I had written down rather illegibly,
+I found this is a rather effective deterrent to those guessing
+at user name.
+
+Until I got the following idea.  I connected to the site's
+SMTP server and did the following:
+
+	220 HOST-OF-HOSTS SERVER SMTP
+	HELO HACKER
+	250 HOST-OF-HOSTS
+	MAIL FROM: <HACKER@ARPALAND>
+	250 OK
+	RCPT TO: <ROT@HOST-OF-HOSTS>
+	550 We have no "ROT" here.
+	RCPT TO: <ROOT@HOST-OF-HOSTS>
+	250 Recipient accepted.
+
+Since most machines have mailboxes that are the same as the valid
+login names, this may prove an effective way of hacking the names.
+In addition, the easiest way to get user names at valid hosts is
+to just subscribe to one of the busy mailing lists and use the ones
+of those sending mail.
+
+-Ron
+
+------------------------------
+
+Date: 29 Jun 1983 09:10-PDT
+Sender: GEOFF@sri-csl
+Subject: Re:  Security Problem?
+From: the tty of Geoffrey S. Goodfellow
+Reply-To: Geoff@sri-csl
+To: ron@brl-bmd
+Cc: tcp-ip@brl-bmd, unix-wizards@brl-bmd
+Cc: msggroup@brl-bmd
+
+A real easy way of "hacking names" on a host is to just connect
+up with TELNET and do a SYSTAT or FINGER.  Big Deal.
+
+A gourmet "name hacker" would use the NIC's informative "WHOIS"
+Server.  Just give the name of your favorite host preceded with a
+star `*' (i.e.  try `*brl' for example) and a nicely formatted
+list, replete with full name, initials(nic id), mailbox and phone
+number will promptly be displayed.
+
+Happy Hacking.
+
+------------------------------
+
+Date: Wednesday, 29 Jun 1983 12:41-PDT
+To: Ron Natalie <ron@brl-bmd>
+Cc: tcp-ip@brl-bmd, unix-wizards@brl-bmd, msggroup@brl-bmd
+Subject: Re:  Security Problem?
+From: greep@su-dsn
+
+Other tactics include looking in the Arpanet directory or just trying
+common names.  In addition, many Unix sites have a "who" login that
+runs the "who" or "finger" program, and most tops-20 sites let you
+run "finger" or "systat" without being logged in.  In fact, you can
+(at least with some dec-20's) run finger with a null argument and
+get a list of every user (not just those logged in).  It is generally
+agreed that keeping user names secret is not a reasonable thing to
+do -- that's what passwords are for.
+
+------------------------------
+
+Date: Tue 28 Jun 83 23:17:08-PDT
+From: Mark Crispin <MRC@SU-SCORE.ARPA>
+Subject: Re: Security Problem?
+To: ron@BRL-BMD.ARPA
+cc: tcp-ip@BRL-BMD.ARPA, unix-wizards@BRL-BMD.ARPA, msggroup@BRL-BMD.ARPA
+
+     One thing you could do would be to not validate mailboxes in the
+SMTP server, but that only delays the error message unless you "black
+hole" mail to invalid mailboxes.  It's a trade-off between security and
+friendliness.
+
+------------------------------
+
+Date: 28 Jun 1983 2357-PDT
+Subject: Re: Security Problem?
+From: Einar Stefferud <msggroup-request@brl>
+To: ron@brl-bmd
+Cc: tcp-ip@brl-bmd, unix-wizards@brl-bmd
+Cc: msggroup@brl-bmd
+
+[ Comments to MSGGROUP readers deleted here -Mike ]
+
+Rather than trying to shut down the ability to extract login names
+from mail servers, I think attention should be focused on other
+security techniques.
+
+Like, making the penalty higher for failing to login correctly, and
+making the user start over at the beginning of the whole process when
+an error occurs before completion.  One thing to do is force a delay
+following any failure, like an extra 5 or 10 seconds, which slows down
+the hacking rate to less than 6 tries per minute.  Then, I think that
+too many failures in a row should cause a disconnect, which further
+slows down serious password hackers.
+
+Seems to me that it is too easy to put obstacles in the way to let
+ourselves get sidetracked into trying to conceal names.  Whither goest
+the whole idea of name-servers if we try to close the mail gap?
+
+So, lets just chase this issue back to the other lists, unless a more
+genuine mail connection can be conjured up.
+
+Cheers - Stef
+
+------------------------------
+
+END OF TCP-IP DIGEST
+********************

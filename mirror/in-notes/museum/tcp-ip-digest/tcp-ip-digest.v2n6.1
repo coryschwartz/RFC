@@ -1,0 +1,443 @@
+20-Jun-83 10:41:22-PDT,21180;000000000001  
+Return-path: <tcp-ip@brl-vgr>
+Mail-From: SMTP created at 24-May-83 03:56:39
+Received: FROM BRL-VGR BY USC-ISIF.ARPA WITH TCP ; 24 May 83 03:56:47 PDT
+Received: From Brl-Vgr.ARPA by BRL-VGR via smtp;  24 May 83 4:44 EDT
+Sender:    Mike Muuss <TCP-IP@brl>
+From:      TCP-IP@brl
+To:        TCP-IP@brl
+Date:      24 May 1983 00:00 EST
+Subject:   TCP-IP Digest, Vol 2 #6
+
+TCP/IP Digest            Tuesday, 24 May 1983      Volume 2 : Issue 6
+
+Today's Topics:
+        Intent of TELNET RFCs && Intent of "Little Servers" RFCs
+                    Communication with Strange Hosts?
+                    Using gateways on BBN 4.1 TCP/IP?
+                Developing Security Protocols for TCP/IP?
+    DIALOG on Subnet Routing -vs- IP Routing for "Campus Area Networks"
+----------------------------------------------------------------------
+                  TCP/IP Digest --- The InterNet Digest
+                         LIMITED DISTRIBUTION
+          For Research Use Only --- Not for Public Distribution
+----------------------------------------------------------------------
+
+Date: 10 May 1983 1320-PDT
+From: POSTEL@Usc-Isif.ARPA
+Subject: TELNET RFCs
+To:   TCP-IP@Brl.ARPA
+
+Hi!
+
+The intent of the new RFCs on Telnet (854-861) is to clean up the 
+documents on the basic Telnet protocol and to make available current
+specifications of the most used Telnet Options.  There is no intent to
+change the Telnet protocol at this time.
+
+--jon.
+
+------------------------------
+
+Date: 10 May 1983 1323-PDT
+From: POSTEL@Usc-Isif.ARPA
+Subject: "Little Servers" RFCs
+To:   TCP-IP@Brl.ARPA
+
+Hi!
+
+The intent of the new RFCs 862 - 868 is to document a set of little
+service protocols that have existed for many years.  Each of the
+protocols is a very simple service, and most are used only for debugging.
+In these RFCs, each protocol is defined for use with either TCP or UDP.
+
+--jon.
+
+------------------------------
+
+Date:     3 May 83 22:51:46-EDT (Tue)
+From: Robert Morris <ram.umass-boston@Udel-Relay.ARPA>
+Subject:  communication with strange hosts
+To: unix-wizards@Sri-Unix.ARPA, tcp-ip@Brl.ARPA
+
+In order to evaluate proposals for a central computing facility,
+I need to gather information about the ability of competing vendors
+to communicate with our departmental UNIX systems running 4.2bsd.  Many
+vendors support HASP and I gather with work one can  do something with this.
+I also have the impression that TCP/IP is avaialable for VAX VMS
+
+For the following systems I solicit information about 
+known versions of TCP/IP. I would also welcom comments
+about the suitabilty of a HASP interface, especially for non-IBM
+systems.  Our needs are principally remote login and file transfer
+with the alien (non unix) host , secondarily  mail transfer.
+
+Please reply directly to me, not the list. I will summarize unless someone
+tells me that such summaries have already appeared.
+
+thanks
+bob morris
+ram.umass-boston@udel-relay
+
+vendor		system		os
+~~~~~~		~~~~~~		~~
+dec		vax 11/780	VMS
+prime (2)	prime 850	PRIMOS
+cdc		cyber 170-81	NOS
+ibm		4341		VM/SP, supporting CMS, MUSIC
+harris(2)	H800/2C		VOS (Vulcan)
+honeywell 	DPS 8/49C	CP6 (?)
+burroughs  (2) 	B-6925		MCP
+sperry		1100/62		?
+
+
+------------------------------
+
+From: Alan Parker <parker@Nrl-Css.ARPA>
+Date: Wed, 27 Apr 83 22:49:38 EDT
+To: tcp-ip@Brl.ARPA
+Subject: bbn 4.1 tcp/ip and Gateways
+
+We are running the bbn tcp/ip on a 4.1bsd vax unix.   What is the
+trick to get the user programs (telnet, ftp, and smtp) to recognize
+hosts that are reached through a gateway.   For example host uw-beaver
+is on net 192.   If I attempt to connect to them I get 'unknown host'
+from the user programs.  I can in fact reach them by giving the full
+internet address on the telnet command.   I have checked my host, net,
+and gateway tables.   mkgate runs without any errors.   Thanks.
+
+------------------------------
+
+Date: 19 May 1983 1242-CDT
+From: CMP.HAMBERGER@Utexas-20.ARPA
+Subject: TCP/IP
+
+      FIRST LET ME IDENTIFY MYSELF.
+            HUGH HAMBERGER
+            HARRIS CORP.
+            GDCD
+            PO BOX 37
+            MELBOURNE FL 32901
+     tel    305 727 6673
+     NET    CMP.HAMBERGER @ UTEXAS
+
+     MY PRIMARY FUNCTION IS  RESEARCH ON COMPUTER NETWORK SECURITY.
+PRESENTLY, I AM INVESTIGATING TCP/IP FOR INCORPORATION OF ADDITIONAL
+SECURITY PROTOCOLS. I AM IN NEED OF A SOURCE LISTING OF
+TCP/IP IN A HIGH ORDER LANGUAGE SUCH AS C PASCAL ETC. FOR INVESTIGATION.
+ALSO, I WOULD LIKE TO KNOW OF ANY STUDIES OR RESEARCH BEING PERFORMED
+ON THE OVERHEAD AND THROUGHPUT DEGRADATION IMPOSED BY TCP/IP.
+
+THANKS FOR YOUR HELP. 
+                                HUGH HAMBERGER
+
+[ Anybody with information for Hugh should reply directly to him, and CC
+  the list.  -Mike ]
+
+------------------------------
+
+Date: 4 May 1983 03:33:34-EST
+From: Christopher A Kent <cak@purdue.arpa>
+Reply-to: cak@purdue.arpa
+To: mike@Brl.ARPA
+Subject: an interesting dialogue
+Cc: Thomas.Rodeheffer@Cmu-Cs-A.ARPA
+
+Mike,
+
+Tom and I have been having an interesting discussion about the
+expansion of the internet and how it is going to impact gateways and
+protocols. Tom suggested we open up the discussion to a larger forum
+and I agree with him; perhaps TCP-IP Digest is the right place. I'll
+forward the transcript so far (in a separate note) and you can decide.
+
+Cheers,
+chris
+
+[ The remainder of this issue is devoted to the discussion between Tom
+  and Chris.  Each message is broken out separately.  -Mike ]
+
+------------------------------
+
+Date:	26 April 1983 0208-EDT (Tuesday)
+From:	Thomas Rodeheffer@CMU-CS-A
+To:	cak@PURDUE
+Subject: Re: grabbing a bunch of class C numbers
+
+From your recent message to Header-People:
+
+    Along the same lines, there seems to be a recent trend for groups that
+    are bringing up private internets to grab a bunch of class C numbers,
+    rather than one class B number that they manage privately. I think this
+    is wrong. The Internet is cluttered enough with routing packets between
+    gateways; why should the rest of the world know that you have, say, an
+    10Mb Ethernet, 3Mb Ethernet, Proteon ring, serial line IP, fiber
+    optics, and back-to-back parallel interfaces? I certainly don't care.
+    It should all be invisible to the outside world. 
+
+It is interesting to me that you think this is happening.  I'd like to
+examine what it would mean to manage a class B number privately.  There
+are two points of view from which the allocation of Internet network
+numbers can be approached:  the point of view of the site that is
+bringing up a private internet, and the point of view of the
+administrators of the Internet as a whole.
+
+First, the point of view of the site that is bringing up a private
+internet.  The site probably already has more than one
+local-area-network (LAN) technology:  I would suspect generally you
+would find 10mb Ethernet plus some other technology.  The site is
+looking for internet as the solution to their local networking problem.
+They can get Internet support for lots of their local machines.  Now
+part of the Internet support they will get extends down into what
+Internet calls the local network interface (LNI).  The local network
+interface plugs down into the physical characteristics of the
+local-area-network and determines how things such as address resolution
+work.  It determines how what Internet calls a local network maps onto
+the physical local-area-network technology.  The local network interface
+may or may not be modifiable.
+
+Now in all cases I have seen, the local network interface maps the
+Internet concept of local network onto the obvious addressing structure
+supported by the local-area-network technology.  For example, IPs
+running on top of the 10mb Ethernet see an Internet local network which
+consists of those stations connected to the 10mb Ethernet cable.  This
+is really a reasonable thing to do.  It lets the local network interface
+use the hardware directly to fulfill its contract to deliver packets on
+the Internet local network, and it lets the IP module worry about
+inter-network routing.
+
+So we can expect that a site with several local-area-networks will want
+to set up each LAN as an Internet network, with Internet gateways
+between them.  This is the most straightforward application of existing
+IP implementations.
+
+Second, the point of view of the administrators of the Internet as a
+whole.  These people have got to be concerned with the growth in the
+number of Internet networks.  If things keep on as they are going at
+present, soon we will see the day of 10000 networks.  Jolly-Roger
+Flea-Net gateway is going to be displeased when it EGP dials up its
+friendly BBN neighbor gateway and gets the list of best-next-step
+gateways.  I don't see anything being done about this problem.
+
+So much for the points of view.  What ought to be happening?  As you
+point out in your note, the local network structure of a site ought to
+be invisible to the rest of the Internet world.  Certainly, the internal
+structure of any site that is connected to the rest of the world via
+one gateway is irrelevant to the rest of the world.  The trouble is that
+the only way to express this irrelevance in IP is to make the entire
+site one Internet network; for example, a class B network, as you
+suggest.  But then, internal to the site, IP becomes useless as a tool
+for tying together all of their different local-area-networks.  The site
+will have to implement its own inter-local-area-network routing so that
+the Internet local network interfaces can preserve the appearance of
+one connected class B network.  This might be difficult keep up as new
+machines are introduced.  (Our SUN terminal supports IP on the 10mb
+Ethernet!--its version of a local network interface with a certain
+encapsulation onto the 10mb Ethernet, of course.)
+
+If an IP/LNI implementation for a local-area-network is designed under
+the assumption that the local-area-network directly implements the
+Internet local network (as far as I know, this is the case for all
+existing implementations), then it will not work if you want the LAN to
+be only one component in the Internet local network.  The only
+possibility, other than modifying the IP/LNI implementation, is to
+attach "leeches" to each LAN.  These leeches suck up raw packets,
+encapsulate them up into an inter-LAN protocol, route them around
+though some backbone network to the destination LAN, then spit them
+back out as raw packets again.  Even this possibility only works where
+the LANs have enough addressing space individually to cover the entire
+Internet local network and where the leeches can arrange to receive
+packets that are addressed to many different destinations.  There are
+lots of subtleties involved in the implementation of the leeches, as
+well.
+
+I say, this is complicated.  It may, however, be the only way to go.  For
+hosts that come ready to plug into a LAN, there may be no possibility
+of dividing an IP/LNI implementation--a site will have to take what
+comes out on the LAN as a given.  There is nothing in Internet between
+the concept of a connected Internet local network and the concatenation
+of all Internet networks--either you are at the level of implementing
+an Internet local network or you are implementing the entire Internet.
+
+If I were in charge of bringing Internet to Carnegie-Mellon, the use of
+many class C network numbers would be one definite alternative.  It
+seems more in the "spirit" of IP to map the existing mechanisms in
+Internet onto the structure of the problem.  Lots of people are working
+on Internet gateways; I'd have natural encapsulations on all of my
+LANs; there'd be lots of software to help me out.  I'd also be
+contributing to the Internet network number explosion.  The second real
+alternative would be to use the "leech" scheme I've outlined.  Even it
+wouldn't work in all places--our 3mb Ethernet, for example--so I'd still
+have to have either multiple Internet network numbers or modified LNIs
+for these cases.  And of course now I'm all alone implementing leeches
+with their own routing and updating algorithms to get right.  It would
+be lots of fun, to be sure, but one wonders how many times the same
+problem has to be solved.
+
+		-Tom Rodeheffer
+
+------------------------------
+
+Date: 28 Apr 1983 1640-EST (Thursday)
+From: cak
+To: Thomas.Rodeheffer@CMU-CS-A
+Cc: cak@purdue
+Subject: Re: grabbing a bunch of class C numbers
+
+I agree with your interpretations of the two points of view; but I
+think that your choices of solutions are shortsighted.
+
+Organizations (I use this here to mean groupings of private networks
+that wish to communicate with the Internet via core gateways) will have
+to perform some form of internal routing, no matter whether each of
+their wires has a distinct class C network or not. They will have to do
+this because of the way EGP is structured; the simplest solution is, of
+course, to have one EGP gateway which touches the Arpanet and all the
+local wires. This will clearly have severe performance penalties, so
+there will be a move to multiple internal gateways and some
+gateway-to-gateway protocol, including the EGP gateway.
+
+Yes, most LNIs perform some mapping of Internet addresses to local
+network addresses (viz David Plummer's Ethernet address resolution
+protocol). That has nothing to do with the way subnets are managed; it
+merely describes a mechanism for mapping 32-bit Internet addresses onto
+(in this case) 48-bit addresses. How those 32-bit addresses are
+organized is strictly arbitrary, as far as the protocol is concerned.
+
+Indeed, the *current* specification of IP does not indicate how one
+should manage a subnet. There are clearly several straightforward
+extensions to the addressing structure that make this possible; I have
+outline and implemented one of them locally; others exist at CMU and
+LBL and Linkabit and ... and yes, they all require the ability to
+modify the IP implementation(s) at hand.. So far, this has not been a
+problem. As the IP catches on and begins appearing in binary form
+inside products, there will be problems. That is why I am making a lot
+of noise NOW to have extensions made to the IP specifications to cover
+these cases.
+
+Specifically, what I propose is that there be added to the
+implementation another level of hierarchy, which fits completely within
+the 16-bit local portion of a class B address. Sites that wished to use
+another mechanism internally could do so; but there should be a default
+that appears within the specification, so that different vendors of IP
+software could have common ground. My particular implementation of
+subaddressing is fairly convoluted because I can't modify my Arpanet gateway.
+
+I don't think that IP need be "useless as a tool for tying together all
+of their different local-area-networks", IF A STANDARD IS PROPOSED AND
+ACCEPTED. That's the point of all these lists that flood my mailbox and
+yours; to discuss and modify and improve our networking environment. I
+believe that my proposal is a straightforward, logical, and upward
+compatible extension of the current standard.
+
+You will notice that I have ignored your idea of leech machines. To be
+honest, I find the idea rather distasteful. I don't like the idea of
+promiscuous receivers on my networks. It sounds like it is very subtle,
+tricky, and error-prone. 
+
+These are probably religious issues; I hope that I have presented my
+views in a scientific and logical, rather than fanatical, manner. Your
+comments are welcome, as always.
+
+Cheers,
+chris
+
+------------------------------
+
+Date: 28 April 1983 2011-EDT (Thursday)
+From: Thomas Rodeheffer at CMU-CS-A (C410TR30)
+To: cak at PURDUE
+Subject: Re: grabbing a bunch of class C numbers
+
+Currently, a site either has to set up each of its local-area-networks
+as a separate IP network, or it has to cobble together a single IP
+network through some conspiracy of local network interfaces and
+inter-LAN bridges.  The first alternative contributes to the IP network
+number explosion and consequently is distasteful from the point of view
+of the IP administrators.  The second alternative requires
+implementation at a second level of routing algorithms essentially
+identical to those of IP and consequently is distasteful from the point
+of view of the site administrators.  In sum, IP as currently defined is
+not really a useful tool in solving a multi-LAN site's fundamental
+problem of intermachine datagram transport.
+
+I fully agree with your statement that IP could become a useful tool
+for solving this problem if a new standard were proposed and adopted.  I
+guess that I am less optimistic than you are about the chances of this
+coming to pass.  (Although I will admit that the Apranet conversion went
+fantastically better than I had expected.)
+
+In order for IP to assist in the solution of a multi-LAN site's machine
+interconnection problem without contributing to the IP network number
+explosion, the concepts of IP network and local delivery area must be
+separated.  Currently it is the case that an IP implementation assumes
+that all IP addresses on the same IP network are in the local delivery
+area, which is to say that the local network interface takes the
+responsibility of delivering datagrams to and from hosts at these
+addresses without the need of any further concern from the IP level.
+The problem is that information about every IP network has to appear at
+every IP gateway.  This would not be necessary if there were some kind
+of hierarchy of networks--similar to what has been proposed for name
+server domains.  In this case a site could subdivide its campus-wide IP
+network into subnetworks corresponding to the physical implementation,
+and get local inter-subnetwork IP routing without having to burden the
+outside world with knowledge of the subnetwork structure.  This sounds
+like a general statement of what you are proposing ought to be done.
+
+I should state that it is possible to conceive of IP implementations
+managing the IP network number explosion by deducing clusters of class
+C network numbers that had similar routing parameters.  Tricks like this
+would have to appear at least in every IP gateway, if not in every
+host, and consequently seem very unlikely to come to pass.  Also, as far
+as I can tell, it seems that the Internet administration is passing out
+IP network numbers in sequence, which means geographically at random,
+so eventually I would expect entrophy to catch up with any kind of
+smart clustering heuristic.
+
+Now it seems that currently sites are taking one of two approaches to
+solving their multi-LAN networking problem.  Some sites are getting a
+separate IP network number for each of their local-area-networks.  We
+all agree that this in not a desirable solution from the point of view
+of the Internet as a whole.  Other sites are locally amending the IP
+specification to provide some sort of local subnetwork structure
+understood by their local IP implementations.  This approach runs the
+risk of setting up all kinds of incompatibilities.
+
+The opinion I have from Postel is that he thinks that all of the
+problems of subnetwork structure should be hid inside the local network
+interface.  Besides the potential problem this presents to a site of
+reimplementing routing in the LNI, there is also the difficulty that no
+specification exists for how the local network interface should perform
+its duties on popular local-area-networks such as the Ethernet.
+Consequently, there is no guarantee that products from two vendors both
+claiming to support IP on the Ethernet will even talk to one another.
+So far we've been getting by because there exists a pretty obvious
+encapsulation for the case that the Ethernet LAN implements one IP
+network.
+
+As you point out, any irregularities in local implementations of IP on
+a given kind of physical link will increasingly become problems as IP
+catches on and real vendor products start to appear.  The question is
+whether or not it is too late to amend the IP specification to allow a
+subnetwork level in the hierarchy.  My impression is that it is too late
+even to amend the implicit agreement on how the LNI uses the Ethernet,
+but I have been wrong before.  Anyway, I'm really worried about the
+short term problems that will start to come to roost in the next year
+or so.
+
+It occurs to me that perhaps the general interest would be better
+served if our exchange were published in, say TCP-Digest.  I generally
+don't dive into hot debate on the net, but as I have seen virtually no
+discussion of this topic, perhaps some interest needs to be kindled.
+Your responces are welcome.
+
+		-Tom Rodeheffer
+
+[ As this topic is of vital importance to us all, I have published these
+  letters in full.  Please direct discussion to <TCP-IP@BRL>.  -Mike]
+
+------------------------------
+
+END OF TCP-IP DIGEST
+********************
+

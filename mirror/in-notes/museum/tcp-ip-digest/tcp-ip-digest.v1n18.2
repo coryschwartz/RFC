@@ -1,0 +1,334 @@
+ 3-Apr-82 03:54:47-PST,11617;000000000001
+Mail-from: ARPANET host BRL rcvd at 3-Apr-82 0353-PST
+Sender:    Mike Muuss <TCP-IP@Brl>
+From:      TCP-IP at Brl
+To:        TCP-IP at Brl
+Date:      3 Apr 1982
+Subject:   TCP-IP Digest, Vol 1 #18
+Via:  Brl; 3 Apr 82 1:51-EST
+
+TCP/IP Digest            Saturday, 3 Apr 1982      Volume 1 : Issue 18
+
+Today's Topics:
+                   Implementation of TCP/IP for UNIX?
+                        VDH Code for UNIX TCP/IP?
+                  Info on 3 UNIX TCP/IP Implementations
+                 TCP/IP for VAX/VMS Report ("ACCESS-T")
+       Xerox Internet Transport Protocol Specifications availible
+                       1-Apr ComputerWhirled Extra
+----------------------------------------------------------------------
+                         LIMITED DISTRIBUTION
+          For Research Use Only --- Not for Public Distribution
+----------------------------------------------------------------------
+
+Subject: TCP/IP for Unix v7
+From: BNL at BBNC
+To: TCP-IP at BRL
+
+Two independent requests:
+
+1) Does anyone have a public domain implementation of TCP/IP for
+Unix v7? (Don't laugh, conventional wisdom to the contrary I have
+not been able to locate one!)
+
+2) Does there exist VDH code for the above, or that is adaptable to it?
+
+Graham Campbell
+
+------------------------------
+
+From:    Nathaniel Mishkin <Mishkin at YALE>
+Subject: VDH (Gasp!)
+To:      Tcp-Ip at BRL
+
+I have just finished perusing the archive of the TCP-IP list and have
+not gotten any clues about whether anyone has or will have a UNIX
+IP/TCP implementation that runs VDH.  Yale is connected VDH to the
+IMP at Harvard so we are very interested in the status of any VDH
+work.
+
+Does anyone have any information on the subject?
+
+------------------------------
+
+From:      Mike Muuss <Mike@BRL>
+To:        Dreifus at Wharton-10, Tcp-IP at Brl
+Subject:   Re:  PDP11/45 UNIX IP/TCP
+
+I know of three TCP/IP implementations for UNIX, all of which could
+potentially fit on an 11/45:
+
+1)  BBN all-user-mode TCP/IP.  Requires many BBN kernel hacks for
+asynchronous I/O, etc.  Best price:  free.  Seems to be fairly slow.
+Also reputed to be somewhat buggy.  Not used by BBN for some time.
+
+2)  3Com's UNET package.  Kernel mode IP, user mode TCP.  Supposed to
+"drop in" to V7 kernels.  Price $5K, performance believed to be very
+good, in excess of 200Kbits/sec user-user throughput in early
+benchmarks.  May not track ArpaNet version of protocols though.
+
+3)  MIT LCS ringnet project.  Kernel IP, user TCP.  Status and
+availibility uncertain.  Progressing fast, but just now
+getting TCP running at all.  Speed at least 50Kbits/sec user-user,
+full potential rather better than that, but not measured yet.
+
+For your information the NAVY and SRI are (jointly) taking path #1,
+BRL is taking paths #2 and #3 simultaneously, and other parts of
+the ARMY are taking path #2.  I will report on BRL's results with
+the 3Com and MIT software as soon as we have anything to say.
+
+			Best,
+			 -Mike
+
+------------------------------
+
+From: grg at DTI (Gary Grossman)
+To: tcp-ip@brl
+Subject: TCP/IP for VAX/VMS
+
+Mike,
+
+	Here, at last, is the information you requested about
+our TCP/IP-based "ACCESS-T" product:
+
+DTI VAX/VMS
+
+ Date:	12 Mar 1982
+ From:	John Schur <schur at dti-vms>
+
+This TCP implementation is written in C for the VMS operating
+system. It uses ACP's for the TCP and IP processes, and supports
+user level interfaces to these ACP's.
+
+The implementation fully conforms to the TCP and IP specifications
+(RFC 791, 793)  and ICMP (RFC 792). Higher level protocol 
+services include user and server TELNET, FTP, and SMTP.
+
+1. Hardware - VAX 11/780 or 11/750 running VMS 2.2 or later,
+	and ACC LH/DH-11 interface (other devices will be
+	supported in future according to user interest).
+
+2. Software - written in mostly C and some MACRO. Supports a 
+	user-definable number of connections.
+
+3. Status - TCP/IP ACP's are currently in testing stages,
+	with field test sites to begin use in April.
+
+4. Protocol Features Supported:
+	IP:
+	    Fragmentation/Reassembly: reassembly is supported,
+		but fragmentation is not implemented.
+
+	    Options: all options are generated and interpreted.
+
+	    Reassembly timeout: fixed value. Oldest fragments
+		are discarded first when buffers fill up.
+
+	TCP:
+	    Options: All defined options are implemented.
+
+	    Urgent, Push: Supported as per specifications.
+
+	    Retransmission: Timeouts employ exponential backoff
+		until a limit is reached, at which time user is
+		notified.
+
+	    Window strategy: Window size is larger than the actual
+		available buffer space by the maximum size of an
+		internal buffer.
+
+Please contact DTI for further information.
+
+------------------------------
+
+From: Taft at PARC-MAXC
+Subject: Re: Xerox protocol query
+To: Roy Marantz <MARANTZ at RUTGERS>
+cc: tcp-ip at BRL
+
+Copies of the Xerox Internet Transport Protocols specification may be obtained
+from:
+
+	Xerox Corporation
+	Office Products Division
+	Network Systems Administration Office
+	3333 Coyote Hill Road
+	Palo Alto, California 94304
+
+	Attention: Stan Suk (Arpanet mail address: Suk@PARC-MAXC)
+
+------------------------------
+
+Subject: Xerox NS protocol documents
+To: TCP-IP at BRL
+From: (Larry) Kluger at PARC-MAXC
+
+The address for requesting copies of the Xerox NS protocol documents is:
+
+Xerox Corporation
+Office Products Division
+Network Systems Administrative Office
+3333 Coyote Hill Road
+Palo Alto, CA  94304
+
+Two protocol documents have been released so far.  Request copies of:
+
+"Internet Transport Protocols", doc. # XSIS028112 and
+"Courier: The Remote Procedure Call Protocol", doc. # XSIS038112
+
+Larry
+
+------------------------------
+
+From: RENTSCH at USC-ECL
+Subject: Re: Xerox Network Protocols
+To:   Marantz at RUTGERS
+cc:   TCP-IP at BRL
+
+Xerox Network Systems protocols can be obtained  by writing to:
+
+   Xerox Corporation
+   Office Products Division
+   Network Systems Administration Office
+   3333 Coyote Hill Road
+   Palo Alto, California  94304
+
+I have two such protocol manuals.  They are:
+  
+   1)  Internet Transport Protocols  XSIS 028112
+   2)  Courier:  The Remote Procedure Call Protocol    XSIS 038112
+
+Both of which are dated December, 1981.  (Probably hence the xx8112 in the
+title, which suggests there is an XSIS 018112, but I don't know.)  In any
+case, there probably are other publications on the protocols, get the info
+from the Network Systems Administration Office.
+
+For more details, Bob Printis at the Palo Alto facility ( (415) 494-4000 )
+is involved in the actual implementation.  DO NOT call him just to request
+information, but if you have a detailed technical question . . .
+
+Tim Rentsch
+
+------------------------------
+
+FROM: s.r.kleiman
+TO: ucbvax!tcp-ip@Berkeley
+SUBJECT: Service Specifications
+Via:  Ucb-C70; 1 Apr 82 2:09-EDT
+
+       I am a member of	the IEEE project 802 High Level	Interface
+       subcommittee (HILI).  One of our	concerns is a specification
+       of the service provided by the link layer to the	network
+       layer.  Our model of interface interaction is based on
+       primitives.  These are discrete,	instantaneous interface
+       events which convey the information required in order to
+       provide a particular service.  This is the same as the model
+       that ISO	uses in	their service specifications.  However,	we
+       differ from ISO in several important ways, and I	would like
+       to solicit comments from	the newsgroup about them.
+
+       The ISO (ISO/TC 97/SC 16	N697) transport	service
+       specification uses the "four arrow model" of service
+       primitive interaction.  For example, the	user layer passes a
+       "CONNECT.request" primitive to the serving layer	to request
+       that a connection be set	up.  The serving layer then passes
+       an "CONNECT.indication" primitive to the	remote user layer
+       to indicate the connection attempt.  The	remote user layer
+       evaluates this and then passes a	"CONNECT.response"
+       primitive to the	serving	layer to accept	or deny	the
+       connection.  The	serving	then passes a "CONNECT.confirm"
+       primitive to the	original user layer to convey the results
+       of the connection attempt.
+
+	  local	    |	serving	   |   remote
+	user layer  |	 layer	   | user layer
+		    |		   |
+	  --------->|		   |
+	   request  |		   |
+		    |		   |------------>
+		    |		   | indication
+		    |		   |
+		    |		   |<------------
+		    |		   | response
+	  <---------|		   |
+	   confirm  |		   |
+		    |		   |
+
+       The HILI	committee uses a "three	arrow model".  For example,
+       the "CONNECT.request" and "CONNECT.indication" are the same
+       as above.  However, after the "CONNECT.indication" is passed
+       to the remote user layer, the serving layer passes a
+       "CONNECT.response" to the original user layer.  Thus the
+       purpose of the response primitive is convey to the original
+       user layer whether or not an indication primitive was sent
+       to its peer.  (The name "response" is unfortunate since it
+       conflicts with the ISO primitive, but we	couldn't think of a
+       better one)
+
+	  local	    |	serving	   |   remote
+	user layer  |	 layer	   | user layer
+		    |		   |
+	  --------->|		   |
+	   request  |		   |
+		    |		   |------------>
+		    |		   | indication
+	  <---------|		   |
+	   response |		   |
+		    |		   |
+
+       The HILI	committee feels	that the three arrow model is more
+       appropriate because:
+
+	 1.  It	makes the layers more independent, because the
+	     serving layer does	not have to depend on or wait for
+	     the remote	user layer to respond to an indication
+	     primitive.
+
+	 2.  The "four arrow model" interaction	is actually a user
+	     layer protocol and	should not be the business of the
+	     serving layer.  In	the example the	acceptance or
+	     rejection of a peer connection is a user layer
+	     protocol.	If the remote peer wishes to reject the
+	     connection	it should do so	with a user layer PDU
+	     and/or disconnect the serving layer connection.  The
+	     purpose of	the serving layer should be to set up a
+	     communication pipe	between	the "bottoms" of the two
+	     user layers.  It should not say whether the user of
+	     the pipe accepted the data	or not.
+
+If people want to discuss this on the net thats fine,
+otherwise sent comments to me:
+
+   Steven Kleiman
+   Bell Labs
+   Neptune, N.J. 07753
+   (201) 922-7276
+   npois!srk
+   ihnss!npois!srk@berkeley (from Arpanet)
+
+------------------------------
+
+From:    Zellich at OFFICE-3 (Rich Zellich)
+Subject: APRIL FIRST Bulletin from INFOCOM '82 in Las Vegas
+To:      TCP-IP at BRL
+Value:   Humor
+
+The following news bulletin appeared in stacks all over the INFOCOM '82
+coffee break and registration areas this week:
+
+          COMPUTERWHIRLED EXTRA
+
+IBM ADOPTS TCP
+"Tired of Trying to Physicalize Virtual Resources"
+
+4/1/82. Old Teddybear, N.Y. (AFP)  In an unprecedented bout of
+corporate clarity, SNA was publicly renounced by the entire
+IBM Board of Directors, clad in off-blue sackcloth.  "What a gas,"
+said a spokesman for the Ethernet Consortium, while a DECNET
+representative was still looking for a few extra cards.  DOD
+spokesmen declined immediate comment, indicating that they wanted
+time to reassess their position in light of IBM's new posture.
+
+END OF TCP-IP DIGEST
+********************
+

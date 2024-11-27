@@ -1,0 +1,1100 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   TCP Jsys Calling Sequences
+
+
+
+                      Charles W. Lynn, Jr.
+
+
+                  Bolt Beranek and Newman, Inc.
+                        50 Moulton Street
+                      Cambridge MA   02238
+
+
+                           March 1982
+
+
+
+
+                   TCP Jsys Calling Sequences
+Jsys Flags                                             March 1982
+
+
+                   TCP Jsys Calling Sequences
+
+   This memo describes the TOPS-20 and TENEX TCP  Jsyses.   These
+jsyses  use  a  Job Connection Number or "JCN" for connections in
+much the same way file manipulating jsyses use a Job File  Number
+or  "JFN"  for  files.   Typically  a  small number, the JCN is a
+handle on a connection; it is assigned by the OPEN Jsys and  used
+with the others.
+
+                             WARNING
+
+   The  User-TCP  interface  is in the process of being extended.
+All jsys calls and argument blocks should use the symbolic  names
+given  in  this  document  in  order  to  reduce  the  impact  of
+subsequent  changes.   Programs  which  use  literal  "constants"
+instead of the symbols will probably break later on.
+
+
+   The  jsyses  have  flags in the left half of AC 1.  All jsyses
+and Flags are defined in  MONSYM  and  may  be  referenced  in  a
+program  after  a  SEARCH MONSYM pseudo-op.  All unspecified bits
+should be zero.  The flag bits are summarized  in  the  following
+table.
+
+                Jsys Flags
+
+TCP%JS  RH has JCN (rather than a pointer to the connection
+        block).  (All but OPEN).
+TCP%WT  Wait for the function to complete.
+        (CLOSE, OPEN, RECV, SEND).
+
+TCP%FS  ForceSync -- cause SYN to be sent (OPEN).
+TCP%PS  Persist --reinitiate OPEN upon a connection failure
+        or rejection (OPEN).
+TCP%VT  Virtual Terminal (OPEN) (reserved, must be 0).
+
+TCP%HP  High priority (OPEN, SEND).
+TCP%SC  Secure connection (OPEN, SEND).
+
+TCP%IX  Connection index supplied (STAT).
+TCP%NI  Return AOBJN counter for connections (STAT).
+TCP%NT  Return AOBJN counter for TVTs (STAT).
+TCP%SD  Return LDB pointers for symbols instead of values (STAT).
+TCP%ST  Return statistics (STAT).
+TCP%SY  Symbol names have been supplied instead of offsets (STAT).
+TCP%TV  TVT supplied (STAT).
+
+
+
+
+                              - 1 -
+
+
+
+
+                   TCP Jsys Calling Sequences
+Jsys Flags                                             March 1982
+
+
+TCP%ET  Reserved, must be 0.
+TCP%PT  Reserved, must be 0.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                              - 2 -
+
+
+
+
+                   TCP Jsys Calling Sequences
+Buffer Headers                                         March 1982
+
+
+   The SEND and RECV jsyses use data buffers which have (possibly
+separate)   control  blocks.   These  blocks  are  called  Buffer
+Headers.  The each Buffer  Header  is  .TCPBS  words  long.   The
+format is:
+
+
+                Buffer Header Offsets
+ Offset Usage
+
+ .TCPBF Buffer Header Flags (RH is unused by TCP (typically a
+        pointer to next buffer header).
+
+ .TCPBA Address of data buffer.
+
+ .TCPBC Word/Byte count for this buffer (actual count for SEND,
+        maximum count for RECV;  set to number of bytes not sent
+        by SEND (e.g. 0) or not used by RECV).
+
+ .TCPBO Reserved, must be 0.
+
+
+                Buffer Header Flags
+
+TCP%ER  Error:  This buffer has an error associated with it.
+
+TCP%LE  The error is at the local end, not the foreign end.
+
+TCP%PE  The error is permanent, not temporary.
+
+TCP%EC  Error number.  See the "Error Returns" section.
+
+TCP%DN  Done.   Cleared when TCP receives this buffer.
+                Set when TCP has finished with it.
+
+TCP%UR  Urgent  This buffer contains Urgent Data.
+
+TCP%PU  Push    SEND: Deliver any buffered data to receiving user.
+                RECV: Sender requested data in this buffer to be
+                delivered immediately, even if the buffer is not
+                full.
+
+TCP%WM  WordMode  Buffer is formatted as 36-bit bytes.  Off if
+                buffer has four 8-bit bytes left justified per
+                word.  (Not Yet Implemented, 36-bit mode is not
+                supported.)
+
+All unspecified flag bits should be zero.
+
+
+
+                              - 3 -
+
+
+
+
+                   TCP Jsys Calling Sequences
+Retransmission Parameter Word                          March 1982
+
+
+   The  OPEN  and  SEND jsyses take a "Retransmission Parameters"
+word.  This controls the retransmission function.  When  zero,  a
+dynamic  retransmission  algorithm  based  on measured round-trip
+time is used.
+
+   If not zero, the right  half  is  the  Initial  Retransmission
+Interval,  in seconds, which is to be used.  If the right half is
+0, the Initial Retransmission Interval will be computed based  on
+the  measured  round  trip time.  The left half of the parameters
+word has two 9-bit  quantities,  called  the  Numerator  and  the
+Denominator.   In computing the Next Retransmission Interval from
+the previous one, the  TCP  multiplies  the  Last  Retransmission
+Interval  by  the  Numerator  and then divides by the Denominator
+using integer arithmetic.  The Numerator must be greater than  or
+equal  to  the Denominator.  The default values are 3 seconds for
+the Initial Retransmission Interval and 1 for both the  Numerator
+and Denominator.
+
+      Next Interval = (Last Interval *  Numerator) / Denominator
+
+Common retransmission functions were:
+
+
+SRI PR demo:  Numerator=1, Denominator=1, Initial Interval=3.
+
+   3 seconds constant retransmission interval with no backoff.
+
+
+BBN (vanilla):  Numerator=3, Denominator=2, Initial interval=0.
+
+   Used in "average" conditions involving congested gateways and
+   few dropped packets.  150% backoff from best guess initial
+   interval.
+
+
+BBN (old):  Numerator=4, Denominator=2, Initial interval=0.
+
+   Same as above but 200% backoff.  Quickly hits the 1 minute
+   maximum interval and turns into slow, constant period
+   retransmission.
+
+
+
+
+
+
+
+
+
+
+                              - 4 -
+
+
+
+
+                   TCP Jsys Calling Sequences
+Error Returns                                          March 1982
+
+
+Error Returns
+
+   When  a  jsys does an error return (returns +1 instead of +2),
+AC 1 contains an error code.  This code is an 8-bit number (right
+justified in the 36-bit word) composed as follows:
+
+                Meaning
+
+Bit 28      Set if an error was detected, zero otherwise.
+Bit 29      Set if the error was detected locally, zero if the
+            error was detected by the foreign TCP.
+Bit 30      Set if the error is "Permanent", zero if the error is
+            "Temporary".  Temporary errors are usually associated
+            with resource shortages;  repeating the request later
+            is encouraged.  Permanent errors should not be retried.
+Bits 31-35  Error Numbers are:
+
+
+   0    No Error.
+   1    Argument Error in jsys (no access, bad JCN, no TCB, etc.).
+   3    Connection Not Open.
+   4    Temporarily Out of Resources (JCNs, free storage).
+   5    Wild foreign host/port only allowed if listening.
+   6    Connection Already Exists (or use of TCP%JS with OPEN).
+   7    Connection Error or Rejected (No such TCB either here or
+        there).
+   9    Transmission Timeout.
+  12    Connection Closed or Closing (Closed remotely, cannot
+        activate TCB).
+  13    Wild local port is illegal (OPEN).
+  14    Connection Reset.
+  15    Bad Buffer Argument.
+  16    No space right now.
+  17    Bad Argument to CHANL.
+  20    Funny pointer to STAT (wraps around memory, etc).
+  21    Bad Transfer Size to STAT.
+  22    Invalid symbolic name given to STAT.
+  29    Cannot change security level (SCSLV).
+  30    Only internet fork can run TVTs (OPEN with TCP%VT).
+  31    TCP Not Available (not on or initialized).
+
+   The Error bit indicates if an error occured, for example error
+number 12 might not have the Error bit set in response to a CLOSE
+call.  The Local bit indicates if the situation is local to  this
+host  or  is due to the remote host.  The Permanent Bit indicates
+if the situation is permanent, or temporary.
+
+
+
+
+                              - 5 -
+
+
+
+
+                   TCP Jsys Calling Sequences
+OPEN                                                   March 1982
+
+
+Open a TCP connection.
+
+1/      Flags ! Pointer-to-Connection-Block
+2/      Connection Synchronization Timeout, in seconds
+        (5 minute max)
+3/      Retransmission Parameter Word
+
+        OPEN    (JSYS 742)
+
+Ret+1:   Failed. Error code in AC 1.
+Ret+2:  Success. JCN (Job Connection Number) in AC 1 with TCP%JS
+        set.
+
+   The OPEN jsys requires a  Connection  Block.   The  Connection
+Block contains .TCPCS words of right justified data:
+
+                Connection Block Format
+ Offset Usage
+
+ .TCPLP 16-bit Local Port.
+ .TCPFH 32-bit Internet Address of Foreign Host.
+ .TCPFP 16-bit Foreign Port.
+ .TCPLH 32-bit Internet Address of Local Host.
+ .TCPOP Reserved, must be 0.
+
+
+   Flags:
+
+TCP%FS  ForceSync:  On to initiate synchronization ("Active Open")
+
+TCP%WT  Wait:  Don't return until either the connection has been
+        synchronized or an error occurs.
+
+TCP%PS  Persistent:  If the connection attempt results in a failure,
+        (wait a couple seconds and) restart the connection procedure.
+
+TCP%VT  Virtual terminal:  Used only by JOB 0 to OPEN a network
+        virtual terminal connection.
+
+
+
+
+
+
+
+
+
+
+
+
+                              - 6 -
+
+
+
+
+                   TCP Jsys Calling Sequences
+OPEN                                                   March 1982
+
+
+   There  are  several  ways  to OPEN a connection.  They use the
+concepts of a (fully specified) ACTIVE OPEN, or a (possibly Wild)
+PASSIVE OPEN ("listening" connection).
+
+   An ACTIVE OPEN is used when the foreign end of the  connection
+is known and data is available for transmission either locally or
+at  the foreign host.  In this case the connection block contains
+a 16-bit local port, the foreign host's 32-bit Internet  address,
+and  the 16-bit foreign port.  The TCP%FS flag must be set for an
+ACTIVE OPEN.  The desired connection must  be  unique.   This  is
+guaranteed   by   your   selection   of   a   Local  Port  value.
+Unfortunately there is no easy  way  to  find  which  values  are
+available  other  than  by  trial  and  error.  Use of Local Port
+values less than 256 are discouraged as they have  been  reserved
+for "well known" functions.  A suggested Local Port value is your
+job  number  in  the  leftmost  8  bits  and anything else in the
+rightmost 8 bits.  If the connection  is  not  unique  OPEN  will
+return  with  an  error  and  another  Local Port value should be
+selected  and  tried.   The  Connection  Synchronization  Timeout
+should be set to the number of seconds to wait before reporting a
+failure.   The maximum is 300 seconds (5 minutes); a zero implies
+the maximum; other values are invalid.  If zero is specified  for
+the  Retransmission  Parameters  Word,  a  dynamic retransmission
+algorithm based on measured round-trip times is used.   Otherwise
+it  is  interpreted  as  a  Numerator,  Denominator,  and Initial
+Interval  (in   seconds)   as   previously   described   in   the
+Retransmission Parameters section.
+
+   When  the  OPEN is executed the TCP%FS bit causes a SYN packet
+to be sent to the foreign host/port specified in  the  connection
+block.  If the TCP%WT flag was not specified, control immediately
+returns to your program.  If the SYN packet is acknowledged and a
+SYN   is  received  from  the  foreign  TCP,  the  connection  is
+synchronized (and if the TCP%WT bit was set control  will  return
+to  your program).  If no response is received within the Initial
+Retransmission time, the SYN packet is retransmitted and  a  Next
+Retransmission  Time computed.  Retransmissions continue until an
+Acknowledgement/SYN  is   received   (and   the   connection   is
+synchronized),  the Connection Synchronization Timeout has passed
+(error 9, transmission timeout), or a  Reset  pcket  is  received
+(error  14,  connection  reset).  If the TCP%PS flag is set and a
+Reset packet is received, the connection attempt will be  started
+over  (after  a short delay to allow the foreign TCP to recover).
+
+
+
+
+
+
+
+                              - 7 -
+
+
+
+
+                   TCP Jsys Calling Sequences
+OPEN                                                   March 1982
+
+
+   A Passive Open is used to wait for a connection request from a
+foreign TCP.  If a connection with a specific  foreign  host  and
+port  is  desired,  the Connection Block specifies your choice of
+Local Port, Foreign Host, and Foreign Port.  The TCP%FS  flag  is
+not  set.  In this case, no SYN packet will be sent.  Things will
+wait (including the OPEN if TCP%WT  was  specified)  indefinitely
+until  a  SYN (or RESET) packet is received from the foreign TCP.
+
+   Once a  SYN  is  received  an  acknowledgement/SYN  packet  is
+returned   to   the   foreign   TCP;   the   retransmission   and
+synchronization timers are then  started.   Retransmissions  will
+occur  until  either synchronization occurs, a RESET is received,
+or the Synchronization Timeout has passed.
+
+   A Wild Passive Open is used to wait for a  connection  request
+from  one  of  a set of possible foreign hosts and ports.  If the
+Foreign  Port  is  zero,  any  foreign  port  will  be  accepted.
+Similarly, if the network field and/or host fields in the foreign
+Internet  address  are  zero, a connection request by any foreign
+network and/or host will be accepted.  A typical example  is  the
+local host's Login responder which accepts connection requests to
+local port 23 from anywhere; Local Port is 23, Foreign Net, Host,
+and Port are 0.
+
+   A  successful  OPEN  jsys returns in the right half of 1 a Job
+Connection Number and the TCP%JS flag in the left half.  This JCN
+should be used in other jsyses to refer to this connection.
+
+Possible errors:
+
+ELT+04
+ELP+06
+ELP+12
+ELP+13
+ELP+30
+ELT+31
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                              - 8 -
+
+
+
+
+                   TCP Jsys Calling Sequences
+CLOSE                                                  March 1982
+
+
+Close a TCP connection.
+
+1/      TCP%JS ! Flags ! JCN
+
+        CLOSE   (JSYS 743)
+
+Ret+1:   Failed. Error code in AC 1.
+Ret+2:  Success. Connection fully closed.
+
+
+   Flags:
+
+TCP%JS  JCNSupplied:  Must be set since RH of AC 1 has a JCN.
+
+TCP%WT  Wait:  Wait for close to happen in both directions or
+        for an error to occur.
+
+   The CLOSE jsys causes any data in TCP's buffers to be sent  to
+the  receiver.  A FIN is also sent to notify the receiver that no
+more data will be sent to it.  After a CLOSE, SENDs are  illegal.
+
+   Note  that  if the TCP%WT flag is not set, the JCN will remain
+valid, allowing more RECVs.  RECVs should  be  repeated  until  a
+Connection  Closed  error  is  returned.   ABORT  is then used to
+release the JCN.
+
+   If the TCP%WT bit is set, the CLOSE jsys will hang until  FINs
+have been exchanged to fully close the connection, or an error is
+detected.
+
+Possible errors:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                              - 9 -
+
+
+
+
+                   TCP Jsys Calling Sequences
+SEND                                                   March 1982
+
+
+Send a buffer of data over a TCP connection.
+
+1/      TCP%JS ! Flags ! JCN
+2/      Address of Buffer header
+3/      Send Timeout in Seconds (0 for infinite)
+4/      Retransmission Parameters
+
+        SEND    (JSYS 740)
+
+Ret+1:   Failed. Error code in AC 1.
+Ret+2:  Success. JCN in AC 1.
+
+
+                Buffer Header Format
+ Offset Usage
+
+ .TCPBF Flags,,Unused by TCP
+ .TCPBA Address of Data
+ .TCPBC Count of Data Octets in Buffer
+ .TCPBO Reserved, must be 0
+
+
+   Flags:
+
+TCP%JS  JCNSupplied:  Must be set since RH of AC 1 has a JCN.
+
+TCP%WT  Wait:  Wait for data buffer to be sent or for an error.
+
+
+   The  Urgent,  TCP%UR, and/or Push, TCP%PU, flags may be set in
+the Buffer Header.  If set, they apply to the last byte  of  data
+in  the buffer.  The count word must contain the number of octets
+to be sent.
+
+   When TCP accepts the Buffer Header the Error Field and  TCP%DN
+flag are cleared.  Retransmissions will occur as specified by the
+Retransmission  Parameters Word, if necessary, until the data has
+been accepted by the receiver, the Send Timeout has passed, or an
+error  is  detected.   When  processing  of  the  data  has  been
+completed  the  TCP%DN  flag is set, an error code is placed into
+the error field, and the count word is changed to the  number  of
+octets not sent (or 0).
+
+   If  the  TCP%WT  flag is not specified with the SEND jsys, the
+SEND will return immediately.  The buffer is then  in  use  until
+the TCP%DN flag is set.
+
+
+
+
+                             - 10 -
+
+
+
+
+                   TCP Jsys Calling Sequences
+SEND                                                   March 1982
+
+
+Possible errors:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             - 11 -
+
+
+
+
+                   TCP Jsys Calling Sequences
+RECV                                                   March 1982
+
+
+Receive a buffer of data from a TCP connection.
+
+1/      TCP%JS ! Flags ! JCN
+2/      0,,Address of Buffer Header
+
+        RECV     (JSYS 741)
+
+Ret+1:   Failed. Error code in AC 1.
+Ret+2:  Success. JCN in AC 1.
+
+
+                Buffer Header Format
+ Offset Usage
+
+ .TCPBF Flags,,Unused by TCP
+ .TCPBA Address for Data
+ .TCPBC Maximum number of octets buffer will hold
+ .TCPBO Reserved, must be 0
+
+
+   Flags:
+
+TCP%JS  JCNSupplied:  Must be set since RH of AC 1 has a JCN.
+
+TCP%WT  Wait:  Wait for data buffer to be filled, or for an error.
+
+
+   The  count  word should contain the (maximum) number of octets
+the data buffer will hold.  When TCP accepts the  buffer  header,
+the Error Field and TCP%UR, TCP%PU, and TCP%DN flags are cleared.
+Data  received  will be placed into the buffer until it is either
+full or a Push is received.  When TCP is finished with the buffer
+the Error Field and TCP%DN flag  will  be  set.   If  the  buffer
+contains  Urgent data the TCP%UP flag will be set.  If the buffer
+was returned due to the presence of a Push, the TCP%PU flag  will
+be  set.   The  count  word  will  be set to the number of unused
+octets remaining in the buffer.
+
+   If the TCP%WT flag is not specified with the  RECV  jsys,  the
+RECV  will  return  immediately.  The buffer is then in use until
+the TCP%DN flag is set.
+
+Possible errors:
+
+
+
+
+
+
+
+                             - 12 -
+
+
+
+
+                   TCP Jsys Calling Sequences
+STAT                                                   March 1982
+
+
+Read information from either the Transmission Control Block (TCB)
+of the connection specified by the JCN or from the TCP statistics
+area.
+
+1/      Flags ! (JCN or 0 or TVT number or connection index)
+2/      -N,,Offset into TCB or Statistics area or symbol name list
+3/      -M,,Address in user's space
+
+        STAT    (JSYS 745)
+
+Ret+1:   Failed. Error code in AC 1.
+Ret+2:  Success. Data copied to user specified area, counts and
+        pointers in 2 and 3 updated.
+
+
+   Flags:
+
+TCP%JS  JCNSupplied:  Off if RH of 1 is zero because TCP statistics
+        are desired (TCP%ST is set), or set if RH of 1 contains the
+        JCN for which TCB information is desired.
+
+TCP%IX  Connection index:  Return information about connection
+        specified in 2.  The index is a system-wide identifier
+        whose binding may change without warning.
+
+TCP%NI  Return AOBJN connection counter:  Return an AOBJN counter so
+        that all connections may be examined (see TCP%IX).
+
+TCP%NT  Return AOBJN TVT counter:  Return an AOBJN counter so that
+        all TVTs may be examined (see TCP%TV).
+
+TCP%SD  Return LDB pointers for symbols:  A LDB pointer is returned
+        for each of the specified symbols.  AC 13 is assumed to point
+        to a user TCB image.  Requires TCP%SY.
+
+TCP%ST  Returns statistics:  This flag causes words to be copied
+        from the statistics area rather than the TCB associated
+        with a JCN.  The Source and Destination ACs are updated.
+        The entries in the statistics area are defined in STG.MAC
+        (TOPS-20) or STORAG.MAC (TENEX) between STAT0 and STATZZ.
+        (Beware: the order/entries may be site dependent).
+
+TCP%SY  Symbol names:  The RH of 2 is the address of a list of
+        ASCII (1 word only) TCB or Statistics variables whose
+        value(s) (or pointers, see TCP%SD) is(are) to be returned
+        into the area designated by 3.
+
+
+
+
+                             - 13 -
+
+
+
+
+                   TCP Jsys Calling Sequences
+STAT                                                   March 1982
+
+
+TCP%TV  TVT number:  The RH of 1 contains a TVT number instead of
+        a JCN.
+
+   The TCB offset identifies where the transfer  starts  and  the
+Address  in  user  space  identifies the start of the destination
+area.  If successful, min(M,N) words have been  transferred  from
+the TCB (or statistics area) to the caller's space.
+
+Possible errors:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             - 14 -
+
+
+
+
+                   TCP Jsys Calling Sequences
+CHANL                                                  March 1982
+
+
+Specify PSI channels for TCP interrupts.
+
+1/      TCP%JS ! JCN
+2/      Six 6-bit bytes (channel numbers)
+
+        CHANL   (JSYS 746)
+
+Ret+1:   Failed. Error code in AC 1.
+Ret+2:  Success. This fork will receive TCP PSIs.
+
+
+   Flags:
+
+TCP%JS  JCNSupplied:  Must be set since RH of AC 1 has a JCN.
+
+
+   Each  of  the 6-bit bytes may be either a channel number or 77
+(octal) if no change is desired for the corresponding event.
+
+      Bits  0- 5:   INTRP channel (there is urgent data)
+      Bits  6-11:   RECV buffer done
+      Bits 12-17:   SEND buffer done
+      Bits 18-23:   Error
+      Bits 24-29:   State change (open or close)
+      Bits 30-35:   Reserved
+
+   PSIs for the above may be dropped or be VERY tardy on  heavily
+loaded  systems.  Some defensive programming is required to guard
+against these problems.
+
+Possible errors:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             - 15 -
+
+
+
+
+                   TCP Jsys Calling Sequences
+ABORT                                                  March 1982
+
+
+Abort a TCP connection.
+
+1/      TCP%JS ! JCN
+
+        ABORT    (JSYS 747)
+
+Ret+1:   Failed. Error code in AC 1.
+Ret+2:  Success. Connection deleted.
+
+
+   Flags:
+
+TCP%JS  JCNSupplied:  Must be set since RH of AC 1 has a JCN.
+
+
+   The local end of the connection is forgotten.  An  attempt  to
+notify  the  remote  end is made by sending a RST packet.  Should
+this not be delivered, the other end will discover its half  open
+connection the next time it attempts to use it.
+
+Possible errors:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             - 16 -
+
+
+
+
+                   TCP Jsys Calling Sequences
+SCSLV                                                  March 1982
+
+
+Set the security level for a TCP connection.
+
+1/      TCP%JS ! JCN
+2/      36 bit security value
+
+        SCSLV   (JSYS 744)
+
+Ret+1:   Failed. Error code in AC 1.
+Ret+2:  Success. The security value has been associated with the
+        connection.
+
+
+   Flags:
+
+TCP%JS  JCNSupplied:  Must be set since RH of AC 1 has a JCN.
+
+   The  security  value  is not interpreted by the TCP (except to
+see that it matches).  The number of bits of the  security  value
+actually  used  varies depending on the actual security procedure
+being in use.  In all cases the rightmost bits of  the  word  are
+used.
+
+Possible errors:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             - 17 -
+
+
+
+
+                   TCP Jsys Calling Sequences
+ATNVT                                                  March 1982
+
+
+Attach a Network Virtual Terminal to a TCP connection.
+
+1/      AN%TCP ! AN%NTP ! JCN
+
+        ATNVT   (JSYS 274)
+
+Ret+1:   Failed. Error code in AC 1.
+Ret+2:  Success. The terminal designator specific to this NVT is
+        in AC1.
+
+   Flags:
+
+AN%TCP  This bit is set to indicate that the RH of AC 1 has a JCN
+        (instead of a JFN).
+
+AN%NTP  This bit is ASSUMED since TCP connections only support the
+        "new" TELNET protocol.
+
+   The  caller  must  first  OPEN  a TCP connection, as described
+above.  The connection must be synchronized with  no  intervening
+SENDs  or RECVs before the ATNVT call.  If successful, the JCN is
+released and the connection is transferred to the Network Virtual
+Terminal  whose  TTY  designator  is   returned   in   AC1.    If
+unsuccessful, one of the error codes listed below is returned and
+the JCN remains valid (it should probably be ABORTed).
+
+Possible errors:
+
+ATNX1   Invalid JCN
+ATNX2   Receive side not SYNCED
+ATNX3   User CLOSEd/ABORTed connection
+ATNX5   Receive side has been used (RECVs)
+ATNX6   Connection has been closed, or has errors
+ATNX8   Send side not SYNCED
+ATNX11  Send side has been used (SENDs)
+ATNX13  No free TVTs (or TCP not Initialized ??)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             - 18 -
+

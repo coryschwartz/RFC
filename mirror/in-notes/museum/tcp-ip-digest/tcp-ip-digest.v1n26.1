@@ -1,0 +1,441 @@
+30-Nov-82 01:07:32-PST,15006;000000000001
+Mail-from: ARPANET host BRL rcvd at 30-Nov-82 0104-PST
+UUCP-From: decvax!brl-bmd!tcp-ip
+Sender:    Mike Muuss <TCP-IP@BRL>
+From:      TCP-IP at BRL
+To:        TCP-IP at BRL
+Date:      29 Nov 1982
+Subject:   TCP-IP Digest, Vol 1 #26
+Via:  Brl-Bmd; 29 Nov 82 20:31-EST
+
+TCP/IP Digest		  Monday, 29 Nov 1982      Volume 1 : Issue 26
+
+Today's Topics:
+              Request for TCP-IP above X.25 implementation?
+                    Implementation Information Source
+            Host Throughput Results for 15-Nov TCP Only Tests
+----------------------------------------------------------------------
+                         LIMITED DISTRIBUTION
+          For Research Use Only --- Not for Public Distribution
+----------------------------------------------------------------------
+
+Date: 29 Nov 1982 0651-EST
+From: Marc Shapiro <Shapiro@Mit-Xx>
+Subject: X25 / Request for information
+To: tcp-ip at BRL
+
+Are there any usable implemetations of either TCP-IP or just TCP above
+X.25 for the following systems:
+    DEC-20 (Tops-20)
+    Vax (unix)
+    Multics
+
+Reply to shapiro@mit-xx
+
+PS. I am not on the Tcp-IP list.
+
+[ Such an implementation has been done by the CSNET folks for VAX UNIX.
+  Try Chris Kent <CAK @ Purdue>.  -Mike ]
+
+------------------------------
+
+Date: 26 Nov 1982 1155-PST
+From: POSTEL at Usc-Isif
+Subject: Information about Implementations
+To:   Murthy at Cmu-Cs-C
+cc:   TCp-IP at BRL
+
+Sesh:
+
+The Network Information Center keeps a file of such information.  It
+is <NETINFO>TCP-IP-STATUS.TXT on the SRI-NIC host. Please copy it
+via FTP.
+
+--jon.
+
+------------------------------
+
+Date: 25 Nov 1982  9:25:11 EST (Thursday)
+From: Andrew Malis <malis@Bbn-Unix>
+Subject: Host throughput results for 11/15/82 TCP-only test
+To: tcp-ip at BRL
+
+As you all must know, the ARPANET had a 24-hour TCP only test on
+11/15.  On that day, The total ARPANET throughput was 9,466,256
+packets.  This is 62% of the total throughput for the previous
+Monday, 11/8, when 15,283,672 packets were passed by the net. 
+
+The following data presents the host-by-host throughput breakdown
+for the 15th.  Note that the starting time for the data is 00:48
+EST; since the IMPs weren't completely disabled for NCP until
+00:10 or so, the first recording interval for the data has been
+discarded. 
+
+Hosts that were only running NCP (or were down for the period)
+will have zeros in both columns.  Also note that IMPs 33, 35, and
+36 had NCP enabled during the test, for a Navy exercise. 
+
+Regards,
+Andy Malis
+For the NOC
+
+----------------------------------------------------------------
+
+Host Throughput   From Mon Nov 15 00:48:56 1982
+                  To   Tue Nov 16 00:00:03 1982
+
+Host Name      {node/         Packets Sent
+                host}    Inter-Node  Intra-Node
+
+UCLA-ATS       { 1/0}          0           0
+UCLA-CCN       { 1/1}        522        1587
+UCLA-SECURITY  { 1/2}          0           0
+UCLA-LOCUS     { 1/3}        648           0
+
+SRI-NSC11      { 2/0}          0           0
+SRI-KL         { 2/1}          0           0
+SRI-CSL        { 2/2}          0           0
+SRI-TSC        { 2/3}          0           0
+
+NOSC-CC        { 3/0}          0           0
+NOSC-SPEL      { 3/1}          0           0
+LOGICON        { 3/2}          0           0
+NPRDC          { 3/3}          0           0
+
+UTAH-CS        { 4/0}          0           0
+UTAH-TAC       { 4/2}        470           0
+UTAH-20        { 4/3}          0           0
+
+BBNF           { 5/0}       8698       31577
+BBNG           { 5/1}      55864       12195
+BBN-PTIP       { 5/2}      49579       68004
+BBNA           { 5/3}       5504       13730
+
+MIT-MULTICS    { 6/0}      32083           0
+MIT-DMS        { 6/1}          0           0
+MIT-AI         { 6/2}          0           0
+MIT-ML         { 6/3}          0           0
+
+RAND-AI        { 7/0}          0           0
+RAND-RELAY     { 7/1}          0           0
+RAND-TAC       { 7/2}       5174           0
+RAND-UNIX      { 7/3}          0           0
+
+NRL0           { 8/0}          0           0
+NSWC-WO        { 8/2}          0           0
+NRL-TOPS10     { 8/3}          0           0
+NRL-ARCTAN     { 8/6}          0           0
+NRL-CSS        { 8/7}          0           0
+
+HARV-10        { 9/0}          0           0
+YALE           { 9/2}          0           0
+
+LL             {10/0}          0           0
+LL-TCP         {10/1}        107           0
+LL-XN          {10/2}          0           0
+LL-11          {10/3}       1717           0
+
+SU-AI          {11/0}          0           0
+STAN-TAC       {11/2}      63961          16
+SU-SCORE       {11/3}          0           0
+
+DTI-VMS        {12/0}       2810         199
+DTI0           {12/1}          0           0
+
+GUNTER-UNIX    {13/0}          0           0
+GUNTER-ADM     {13/1}      32378      231372
+GUNTER-TAC     {13/2}       5862      207057
+
+CMU-10B        {14/0}          0           0
+CMU-10A        {14/1}         19        6049
+CMU-GATEWAY    {14/2}       7078        1362
+CMU-20C        {14/3}          0           0
+
+AMES-67        {16/0}          0           0
+AMES-TIP       {16/2}          0           0
+AMES-11        {16/3}          0           0
+
+MITRE0         {17/0}          0           0
+MITRE-GATEWAY  {17/1}          0     1558012
+MITRE-TAC      {17/2}     140271         125
+COMSAT-MTR     {17/3}      97678        4568
+
+RADC-MULTICS   {18/0}       2833        1132
+RADC-XPER      {18/1}          0           0
+RADC-TAC       {18/2}      50250        1662
+RADC-TOPS20    {18/3}          0           0
+ROCHESTER      {18/4}          0           0
+RADC-UNIX      {18/5}          0           0
+RADC-XMULTICS  {18/6}          0           0
+
+NBS-VMS        {19/0}          0           0
+NBS-SDC        {19/1}          0           0
+NBS-PL         {19/3}          0          10
+
+CCTC           {20/0}          0           0
+DCEC-GATEWAY   {20/1}      93684        8915
+DCEC-TAC       {20/2}      91842        1907
+EDN-UNIX       {20/3}      11148        5692
+
+LLL-UNIX       {21/0}          0           0
+LLL-MFE        {21/1}          0           0
+
+ISI-SPEECH11   {22/0}         50           0
+USC-ISI        {22/1}     414792           0
+USC-ISIC       {22/2}          0           0
+ISI-PSAT       {22/3}       8178           0
+
+USC-ECLB       {23/0}     382543        1899
+USC-ECLC       {23/1}     103443         879
+USC-TAC        {23/2}      10242         138
+USC-ECL        {23/3}     147923         131
+
+NADC           {24/2}          0           0
+WHARTON-10     {24/3}          0           0
+
+SEISMO         {25/0}       9891        3200
+
+PENTAGON-TIP   {26/2}          0           0
+
+USC-ISID       {27/0}     674435        2273
+ISI-PNG11      {27/1}      22960        2121
+ISI-VAXA       {27/2}     145453         123
+RAND-RELAY     {27/3}          0           0
+
+ARPA-DMS       {28/0}          0           0
+ARPA1-TAC      {28/1}      31555          17
+ARPA2-TAC      {28/2}     113513          20
+ARPA-PENGUIN   {28/3}       3181           0
+
+BRL            {29/0}          0           0
+ABER-TAC       {29/2}       3359          94
+BRL-BMD        {29/3}        294           3
+
+BROOKS-TAC     {30/0}        467           0
+
+CCA-UNIX       {31/0}          0           0
+CCA-VMS        {31/1}         95           0
+CCA-TAC        {31/2}        465           0
+MIT-DEVMULTICS {31/3}        153           0
+
+PARC-MAXC      {32/0}          0           0
+KESTREL        {32/3}         11           0
+
+NPS0           {33/0}       4777          99
+FNOC           {33/1}          0           0
+NPS-TAC        {33/2}      27393           0
+FNOC-SECURE    {33/3}      13284         103
+
+LBL0           {34/0}          0           0
+LBL-UNIX       {34/1}      15283        4467
+
+NOSC-SECURE2   {35/0}     116068          19
+NOSC-SDL       {35/1}        428        3322
+ACCAT-TAC      {35/2}     215438           3
+NOSC-SECURE3   {35/3}       4151          19
+
+COINS-TAS      {36/0}         24        1019
+CINCPACFLT-WM  {36/1}      59237         465
+ALOHA-TAC      {36/2}      19133           0
+
+PURDUE         {37/0}          0           0
+CSNET-PURDUE   {37/2}      13660           0
+
+BRAGG-GWY1     {38/0}      97935        5593
+BRAGG-STA1     {38/1}          0           0
+BRAGG-TAC      {38/2}     263600           0
+
+NCC-TAC        {40/0}     135210        9858
+PSAT-GATEWAY   {40/1}          0           0
+HP-3000        {40/2}          0           0
+SATNET-GATEWAY {40/3}     204826       11934
+
+REDST-TAC      {41/2}          0           0
+
+OFFICE-1       {43/0}          0           0
+OFFICE-2       {43/1}          0           0
+OFFICE-3       {43/2}          6           0
+OFFICE-7       {43/3}       2831           0
+
+MIT-XX         {44/0}     162779           0
+LL-ASG         {44/1}          0           0
+MIT-TSTGW      {44/2}          0           0
+MIT-MC         {44/3}          0           0
+
+COLLINS-PR     {46/0}          0           0
+COLLNS-TAC     {46/2}      12519           0
+OKC-UNIX       {46/3}       1848           0
+
+WPAFB0         {47/0}          0           0
+WPAFB-AFWAL    {47/1}          0           0
+WPAFB-TIP      {47/2}          0           0
+
+AFWL0          {48/0}          0           0
+AFWL-TIP       {48/2}          0           0
+
+BBNB           {49/0}      87318           0
+CRONUS-GATEW   {49/1}      27909        5535
+BBNC           {49/3}      97118           0
+
+DARCOM-TAC     {50/2}      40687           0
+
+SRI-C3PO       {51/1}      72141       17734
+SRI-UNIX       {51/2}          0           0
+SRI-R2D2       {51/3}      86299       14832
+
+ISI-VAXB       {52/0}          0           0
+USC-ISIE       {52/1}     279258       17223
+USC-ISIF       {52/2}      89846       37614
+USC-ISIB       {52/3}      66886       38943
+
+AFSC-AD        {53/0}      16193         875
+NCSC           {53/1}          0           0
+AFSC-DEV       {53/2}          1         979
+MARTIN         {53/3}          0           0
+
+CIT-20         {54/0}       9424       18957
+CIT-VAX        {54/1}        941       26514 
+ACC            {54/2}          0           0
+JPL-VAX        {54/3}        258         160
+
+ANL0           {55/0}          0           0
+ANL-MCS        {55/1}          0           0
+
+SUMEX-AIM      {56/0}          0           0
+SU-DSN         {56/1}          0           0
+
+TYCHO          {57/0}          0           0
+COINS-GATEWAY  {57/1}          0           0
+
+NYU0           {58/0}          0           0
+BNL            {58/1}          0           0
+RUTGERS        {58/2}          0           0
+NUSC-NL        {58/3}          0           0
+
+ETAC           {59/0}          0           0
+
+CENTACS-MMP    {60/0}          0           0
+CORADCOM-TIP   {60/2}          0           0
+CENTACS-TF     {60/3}          0           0
+
+STLA-TAC       {61/2}      44088           0
+
+UTEXAS-11      {62/0}          0           0
+UTEXAS-20      {62/1}          0           0
+
+BBN-RSM        {63/0}       4162           0
+BBN-TAC        {63/1}      14272          18
+11/40-TESTGATE {63/3}          0           0
+TIU-TEST-GATE  {63/5}          0           0
+VAN-TEST-GATE  {63/6}          0           0
+
+MARTIN-B       {64/1}          0           0
+ROBINS-TAC     {64/2}        711           0
+ROBINS-UNIX    {64/3}          0           0
+
+AFSC-SD        {65/0}          0           0
+AFSD-TAC       {65/1}      29836        1143
+AEROSPACE      {65/2}       2534         894
+
+MITRE-BEDFORD  {66/0}          0           0
+AFGL1          {66/1}          0           0
+AFGL-TAC       {66/2}      16212          10
+
+AFSC-HQ        {67/0}          0           0
+ANDRWS-TAC     {67/1}       1072          41
+
+USGS1-MULTICS  {68/0}          0           0
+USGS1-AMDAHL   {68/2}          0           0
+USGS1-TAC      {68/3}        356           0
+
+USGS2-MULTICS  {69/0}          0           0
+USGS2-TAC      {69/1}      12911           0
+USAFA-GW       {69/2}          0           0
+
+USGS3-MULTICS  {70/0}          0           0
+USGS3-TAC      {70/1}        468           2
+
+CLARK-IG       {71/1}       7251           0
+BBN-CLXX       {71/2}      66404           0
+
+BBN-NOC        {72/0}      21178         394
+BBN-UNIX       {72/1}          0           0
+BBNP           {72/2}      97348      146938
+RCCGW          {72/3}     298733      134756
+
+SRI-NIC        {73/0}      46241        1406
+SRI-WARF       {73/1}       7296         150
+SRI-AI         {73/2}          0           0
+SRI-IU         {73/3}         70          43
+
+WSMR-TAC       {74/2}        953           0
+
+YUMA-TAC       {75/2}        463           0
+
+MIT-GW         {77/0}      82354        3236
+MIT-TAC        {77/2}      73190        1924
+
+UCB-ARPA       {78/0}       4472           0
+UCB-C70        {78/1}          0           0
+UCB-INGVAX     {78/2}          0           0
+MCCLELLAN      {78/3}        871           0
+
+DEC-2136       {79/0}          0           0
+DEC-MARLBORO   {79/1}          0           0
+
+HI-MULTICS     {80/0}        278          24
+SAC-TAC2       {80/1}          0           0
+SAC-TAC        {80/2}     165960           0
+SAC-GW         {80/3}          0           0
+
+NALCON         {81/0}          0           0
+DTNSRDC        {81/1}          0           0
+DAVID-TAC      {81/2}      10288         110
+NEMS           {81/3}          0           0
+
+BBNT           {82/0}          0           0
+BBN-VAX        {82/1}      48074         211
+BBN-INOC       {82/2}       9125           0
+BBNS           {82/3}     203973        2972
+BBN-NOC2       {82/6}       2029        2590
+
+NSWC-DL        {84/0}          0           0
+NSWC-TAC       {84/2}       3072           3
+
+NWC-387A       {85/0}          0           0
+NWC-ELF        {85/1}          0           0
+CHINA-TAC      {85/2}        340           0
+NWC-387B       {85/3}          0           0
+
+SANDIA0        {87/0}          0           0
+
+NLM-MCS        {88/0}          0           0
+
+WASHINGTON0    {91/0}          0           0
+WASH-TAC       {91/2}       1713          23
+UW-VLSI        {91/3}       1990          34
+
+NUSC-NPT       {92/2}          0           0
+
+OFFICE-8       {93/0}          0           0
+OFFICE-10      {93/1}          0           0
+
+UWISC0         {94/0}          0           0
+CSNET-SH       {94/1}          0           0
+
+S1-GATEWAY     {95/0}          3           0
+S1-A           {95/1}          0           0
+S1-B           {95/2}          0           0
+S1-C           {95/3}          0           0
+
+UDEL-RELAY     {96/0}          0           0
+UDEL-TCP       {96/1}       5577         174
+UDEL-EE        {96/2}       8763         173
+
+PAXRV-TAC      {97/3}        466           0
+
+------------------------------
+
+END OF TCP-IP DIGEST
+********************
+

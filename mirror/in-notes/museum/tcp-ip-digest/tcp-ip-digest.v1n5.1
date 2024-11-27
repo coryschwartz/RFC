@@ -1,0 +1,163 @@
+ 1-Nov-81 22:38:30-PST,7374;000000000001
+Mail-from: ARPANET host BRL rcvd at 1-Nov-81 2238-PST
+Date:      1 Nov 81 23:18:56-EDT (Sun)
+From:      Mike Muuss <tcp-ip@brl>
+To:        tcp-ip at Brl
+Subject:   TCP-IP Digest, Vol 1 #5
+
+TCP/IP Digest          Sunday, 1 November 1981     Volume 1 : Issue 5
+
+Today's Topics:
+                   Solicitation for More Contributions
+                       More on BBN TCP for TOPS-20
+                Z8000 based TCP and IP Front End Machine
+----------------------------------------------------------------------
+
+From:     Mike Muuss
+Reply-to: tcp-ip@brl
+Subject:  More Contributions?
+
+Nearly a week has passed since the last issue, so I am publishing the
+three letters that have arrived in the interim .  Considering the size of
+the mailing list, I can hardly immagine that we have heard from
+everybody who is working on networking implementations.  C'mon!  Lets
+hear from everybody.
+					Cheers,
+					-Mike
+
+------------------------------
+
+Date: 27 Oct 1981 1810-EST
+From: Jonathan Alan Solomon <JSol at RUTGERS>
+Subject: List maintainence
+
+You can announce [Rutgers]<TCP>MAIL.TXT as an archive point if you like.
+
+------------------------------
+
+Date: 26 Oct 1981 0013-PST
+From: Mark Crispin <Admin.MRC at SU-SCORE>
+Postal-Address: 725 Mariposa Ave. #103; Mountain View, CA 94041
+Phone: (415) 497-1407 (Stanford); (415) 968-1052 (residence)
+Subject: Re:   TCP-IP Digest, Vol 1 #4
+
+     I'd like to answer a few confusions about my position
+regarding the TOPS-20 implementation of TCP available from BBN.
+I am not, nor have I ever been, opposed to the TCP protocol.  I
+was very impressed with the work done at the DoD Protocol
+Standards conference a year ago.  I've been urging the managers
+of the Stanford local network effort to adopt TCP/IP as the local
+network protocol for the past two years now.  It is the software
+that is presently available for TOPS-20 that I find distasteful.
+
+     I have had some preliminary discussions with various people
+at DEC about this issue, and I have determined that they are
+addressing at least some of the objections.  If the product DEC
+releases is less than what we would like, it is because of their
+rush to meet the deadline.  It's a safe assumption that there is
+no way that DEC can possibly have a rewritten TCP implementation
+for TOPS-20 out in the field by the deadline date.  I believe
+that DEC is doing its best.  DEC's customers are probably best
+off encouraging the current project but being firm in stating
+that we must have a rewrite which addresses the performance
+problems of BBN's TCP.
+
+     So far as the comments on how to "help/force people [to]
+implement TCP/IP" go:
+ (1) There are those of us who would feel that not being able to
+reach our systems from a TIP is a feature, and not a problem at
+all!  Entirely too many high school kids abuse the network from
+TIPs.
+ (2) "Getting the mail through" can be accomplished by other
+means than implementing TCP.
+ (3) Services only accessible via TCP/IP are a good reason for
+implementing TCP/IP.  The example given was not a good one, but I
+can see other valuable resources being TCP/IP only.  I hope by
+the time such resources exist there will be a better
+implementation of TCP/IP available.
+ (4) The last point is patently ridiculous.  US mail existed
+before electronic mail, and is still a commonly used method for
+communication between Investigators and their Sponsors.
+
+     The whole tone of "forcing" is itself inane.  The intent of
+my message was to discuss getting things moving towards solving
+the software situation, not to create an anti-TCP/IP lobby.  The
+present TCP/IP software for TOPS-20 is unpalatable for most
+sites; if "forced" to implement TCP/IP on our systems we will
+probably have to write the software ourselves.  Of course that
+would keep us from completing the projects our Network Sponsors
+are supporting us to do...
+
+-- Mark --
+
+------------------------------
+
+Date: Mon, 26 Oct 1981 2236-EST
+From: steve at MITRE
+Subject: Z8000 TCP and IP
+
+Mike,
+        I have been watching your digest with great interest.  We
+have produced a micro-based  TCP/IP  here  at  MITRE  which  your
+readers may find useful.
+
+        We have been involved in a series of projects whose focus
+was  to  make  network  access  (both  local  and  long  haul) as
+straightforward as using common computer peripherals.   The  idea
+was that just as hardware controllers handle the particulars of a
+disk cylinder centerline or an end of tape sensor,  some  of  the
+new  microprocessors, in our case the Zilog Z8000, should make it
+possible to construct a "network controller" to handle  the  par-
+ticulars  of packet ordering and flow control.  To a large extent
+we have succeeded with a TCP/IP network controller supported by a
+Z8000 microprocessor box.  The box is currently interfaced to our
+UNIX system via a UMC-Z80.  It is accessed from the  users  point
+of view as a set of I/O like management calls (open, close, read,
+write, and special) which are transported via  a  network  access
+protocol to the outboard box.
+
+        The box has 64K bytes of Ram, 32K bytes of Rom,  a  Z8002
+micro,  and  a  serial Usart (880K BPS max).  All of the software
+was written in C using a locally brewed version of the portable C
+compiler.   The  interesting  aspect of the box is that it inter-
+faces as easily to a local network (in our case a  the  MITRE  RF
+cable  backbone) as it does to the ARPA network.  Other than dif-
+ferent round trip delays, host user-level software sees  no  dis-
+tinction  between  the two networks.  The long haul metamorphosis
+involves a new device driver in the Z8000 and the addition of  an
+ACC  1822 hardware interface (yes, ACC makes one).  The resulting
+set of building blocks allows us to interface a host, a  terminal
+concentrator  version  and  other units to a local net and have a
+gateway to the arpanet.
+
+        While  a custom protocol would be faster, we believe that
+the longer term interoperability of TCP/IP  will  be  well  worth
+some short term overhead.  The performance even with TCP/IP isn't
+that bad in that we have measured two user processes talking  via
+TCP/IP  over  the  cable  at 350K BPS.  We have measured rates as
+high at 450K BPS when user I/O buffer sizes are set at  8K  bytes
+per  I/O.   The  Internet  Protocol  contains our lowest level of
+addressing.  This allows us to address local units  in  the  same
+way  we address remote units two or three networks away.  We have
+been experimenting with a version  of  TCP/IP  which  allows  the
+optional  specification of some TCP and IP mechanisms.  The basic
+conclusion is that cable signalling rates are so  fast  that  the
+effect of 300 bit TCP/IP headers has negligible impact on perfor-
+mance.
+
+        Our  work  this  year involves constructing a new version
+10M BPS controller with  multi-microprocessor  capabilities.   We
+believe  the  resulting  effective  TCP/IP  communications  rates
+should be well above 1M BPS  and  that  the  multi-microprocessor
+capabilities  should make for an interesting distributed process-
+ing base.
+
+        There  a  couple  of  reports available if people are in-
+terested.
+
+        Regards
+        Steve Holmgren
+
+END OF TCP-IP DIGEST
+********************
+

@@ -1,0 +1,142 @@
+
+                             RFC Copyrights 
+                            17 February 2004
+
+________________________________
+File: "ftp://ftp.rfc-editor.org/in-notes/rfc-editor/copyright.17Feb04"
+
+This updated previous version (file:
+"ftp://ftp.rfc-editor.org/in-notes/rfc-editor/copyright.23Jan01") to
+coordinate with to RFC 3667/BCP 78 and RFC 3668/BCP 79.  It was
+intended to leave unchanged the historical copyright rules for
+independent submissions.
+
+The HTML version of this document is at:
+http://www.rfc-editor.org/copyright.17Feb04
+
+[Note Added 1 March 2005]
+_______________________________ 
+
+
+This document summarizes the current rules governing RFC copyrights and
+disclaimers for intellectual property rights, effective February 17,
+2004.
+
+It is derived from the IETF documents "IETF Rights in Contributions",
+BCP 78 (RFC 3667) and "Intellectual Property Rights in IETF
+Technology", BCP 79 (RFC 3668).  These documents are the result of a
+recent effort by an IETF working group to clarify the IPR rules for the
+IETF.
+
+Topics:
+
+o  Copyright and Reproduction Rules
+
+o  Intellectual Property Rights (IPR) on RFC Content
+
+o  Boilerplate within RFCs
+____________________________
+
+
+                 Copyright and Reproduction Rules
+
+BCP 78 (RFC 3667) specifies the copyright rules applicable to RFCs,
+aligning these rules with modern copyright law.  The rules are
+generally intended to continue the historical policy of maximal freedom
+for distribution of RFCs.  It adds safeguards for the integrity, future
+availability, and usefulness of published RFCs but otherwise preserves
+author rights.
+
+Since many Internet Drafts (I-Ds) represent work in progress, I-D
+authors sometimes want to prevent preparation of derivative works.
+Section 5.2a of BCP 78 (RFC 3667) specifies "no derivative works" (NDW)
+boilerplate that may be included in an I-D.  However, IETF rules
+generally do not allow NDW boilerplate in documents used in the
+Internet Standards process (see Section 7.3 of BCP 78).
+
+Similarly, the RFC Editor will not generally publish an independent
+submission with a NDW boilerplate.  The exceptions are the publication
+of proprietary protocols and the publication of specifications
+developed by other standards organizations, as discussed in Section 7.3
+of BCP 78.
+
+The following rules control the reproduction of RFCs.
+
+1. Copying and distributing an entire RFC [1] without changes:
+
+    1a. Copying for free redistribution is allowed and encouraged. [2]
+
+    1b. Inclusion of RFC copies within other documents or collections
+	that are distributed for a fee is allowed. [3]
+
+	Note: In case (1b), it is a courtesy to ask the RFC author(s) and
+	to provide a copy of the final document or collection.
+
+2. Translating RFCs into other languages:
+
+	Translation and publication of an entire RFC into another language
+	is allowed.
+
+	It is courtesy to inform the RFC author(s) of such translation.
+
+3. Copying and distributing an entire RFC with changes in format,
+   font, etc.:
+
+      Changing format, font, etc. is allowed only with permission of
+      the author(s).  With this permission, rule 1. applies.
+
+4. Copying and distributing portions of an RFC:
+
+	This is what the lawyers call "preparation of derivative works".
+	It is allowed under conditions that differ depending upon the
+	source of the RFC (see BCP 78 for details and definitions.)
+
+    4a. Preparation of derivative works from an RFC that was an IETF
+	contribution is allowed, but only for use within the IETF
+	standards process.  Proper credit and citations must be provided
+	(BCP 78 Section 3.4(a)).
+
+    4b. Preparation of derivative works from an RFC that was an RFC
+	Editor contribution is allowed.  Proper credit and citations
+	must be provided (BCP 78 Section 3.4(a)).
+
+________
+NOTES:
+
+[1] "Entire" includes all the copyright and IPR boilerplate.
+
+[2]  This validates the present wide mirroring of RFCs on various
+	web sites.
+
+[3]  Anyone can take some RFCs, put them in a book, copyright the
+        book, and sell it.  This in no way inhibits anyone else from
+        doing the same thing, or inhibits any other distribution of
+        the RFCs.
+
+
+                 Intellectual Property Rights (IPR)
+
+BCP 79 governs issues concerning possible intellectual property
+described in RFCs.  The RFC Editor's reponsibility is limited to
+including a "Disclaimer of validity" (Section 5. of BCP 79) in all IETF
+submissions and in most independent submissions. The RFC Editor will
+omit this Disclaimer statement from independent submissions when only
+it is clear that there are no claimed intellectual property rights on
+the RFC contents, and only when including the Disclaimer would make
+little sense.
+
+Note also that an RFC should not contain a notice of the existence of
+specific relevant intellectual property (patents, etc.).
+
+
+                      Boilerplate Within RFCs
+
+"ftp://ftp.rfc-editor.org/in-notes/rfc-editor/boilerplate17Feb04.txt"
+contains the normal last-page boilerplate in an RFC (including
+"Disclaimer of validity" of IPR).  The RFC Editor will insert this
+boilerplate if it is not already in a submission.
+
+_____________________
+
+Last modified 21Jul04.
+

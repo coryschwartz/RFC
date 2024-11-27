@@ -1,0 +1,500 @@
+
+
+	CTRON-OIDS DEFINITIONS ::= BEGIN
+
+	--  This module provides authoritative definitions for part
+	--  of the naming tree below:
+	--
+	--		cabletron { enterprises 52 }
+	--
+	--  This module will be extended, as additional sub-sections
+	--  of this naming tree are defined.
+	--
+	--  Revision	Author		Date		Comments
+	--
+	--  1.00	Manu Kaycee	12/23/91	Initial draft
+	--
+	--  1.01	Manu Kaycee	01/06/92	Added OIDs for
+	--						components and
+	--						busses
+	--
+	--  1.02	Manu Kaycee	02/14/92	Added RMON comp.
+	--						and type codes
+	--						for additional
+	--						modules
+	--
+	--  1.03	Manu Kaycee	04/29/92	Updated list of
+	--						components and
+	--						modules
+	--
+	--  1.04	Manu Kaycee	06/19/92	Update to include
+	--						new RIC MIMs, etc.
+	--
+	--  1.05	Kim Hobbs	06/25/92	Update to include
+	--						new MRXI device types,
+	--						EPIM types
+	--
+	--  1.06	Kim Hobbs	07/01/92	Update to take out
+	--						 MRXI device types
+
+	IMPORTS
+		enterprises	FROM RFC1155-SMI;
+
+
+
+	-- Formal definitions
+
+	cabletron		OBJECT IDENTIFIER ::= { enterprises 52 }
+
+	namingTree		OBJECT IDENTIFIER ::= { cabletron 3 }
+
+	mibs			OBJECT IDENTIFIER ::= { cabletron 4 }
+
+	--  Chassis type definitions
+
+	chassisType		OBJECT IDENTIFIER ::= { namingTree 1 }
+
+	ctUnknown		OBJECT IDENTIFIER ::= { chassisType 1 }
+
+	ctMMAC8			OBJECT IDENTIFIER ::= { chassisType 2 }
+
+	ctMMAC5			OBJECT IDENTIFIER ::= { chassisType 3 }
+
+	ctMMAC3			OBJECT IDENTIFIER ::= { chassisType 4 }
+
+	ctMINIMMAC		OBJECT IDENTIFIER ::= { chassisType 5 }
+
+	ctMRXI			OBJECT IDENTIFIER ::= { chassisType 6 }
+
+	ctTRXI			OBJECT IDENTIFIER ::= { chassisType 7 }
+
+	--  Module type definitions
+	--  As with the chassis types, the OID suffix(a value obtained
+	--  by reading a hardware module), along with the following OID
+	--  prefix, uniquely determines a specific module.
+
+	moduleType		OBJECT IDENTIFIER ::= { namingTree 2 }
+
+	--  mtUnknown		OBJECT IDENTIFIER ::= { moduleType x }
+
+	--  Old Slot-1 Management Modules
+
+	mtIRM			OBJECT IDENTIFIER ::= { moduleType 1 }
+
+	mtNB2x			OBJECT IDENTIFIER ::= { moduleType 2 }
+
+	mtNB35			OBJECT IDENTIFIER ::= { moduleType 3 }
+
+	--  Thin MIM
+
+	mtThinMim1		OBJECT IDENTIFIER ::= { moduleType 16 }
+
+	--  FDDI Modules
+
+	mtFDMMIM26		OBJECT IDENTIFIER ::= { moduleType 32 }
+
+	mtFDMMIM16		OBJECT IDENTIFIER ::= { moduleType 33 }
+
+	mtFDMMIM04		OBJECT IDENTIFIER ::= { moduleType 34 }
+
+	mtFDMMIM00		OBJECT IDENTIFIER ::= { moduleType 35 }
+
+	mtFDMMIM26S		OBJECT IDENTIFIER ::= { moduleType 36 }
+
+	mtFDMMIM16S		OBJECT IDENTIFIER ::= { moduleType 37 }
+
+	mtFDMMIM04S		OBJECT IDENTIFIER ::= { moduleType 38 }
+
+	mtFDMMIM00S		OBJECT IDENTIFIER ::= { moduleType 39 }
+
+	mtFDCMIM22		OBJECT IDENTIFIER ::= { moduleType 40 }
+
+	mtFDCMIM08		OBJECT IDENTIFIER ::= { moduleType 42 }
+
+	mtFDCMIM04		OBJECT IDENTIFIER ::= { moduleType 43 }
+
+	mtFDCMIM26		OBJECT IDENTIFIER ::= { moduleType 44 }
+
+	mtFDCMIM12		OBJECT IDENTIFIER ::= { moduleType 45 }
+
+	mtFDCMIM16		OBJECT IDENTIFIER ::= { moduleType 47 }
+
+	--  Token Ring Modules
+
+	mtTRMIM12		OBJECT IDENTIFIER ::= { moduleType 48 }
+
+	mtTRMIM10R		OBJECT IDENTIFIER ::= { moduleType 49 }
+
+	mtTRMIM22P		OBJECT IDENTIFIER ::= { moduleType 50 }
+
+	mtTRMIM20PR		OBJECT IDENTIFIER ::= { moduleType 51 }
+
+	mtTRRMIM16		OBJECT IDENTIFIER ::= { moduleType 52 }
+
+	mtTRRMIM26		OBJECT IDENTIFIER ::= { moduleType 53 }
+
+	mtTRMIM24A		OBJECT IDENTIFIER ::= { moduleType 54 }
+
+	mtTRMIM22A		OBJECT IDENTIFIER ::= { moduleType 55 }
+
+	mtTRMIM2To4AR		OBJECT IDENTIFIER ::= { moduleType 56 }
+
+	mtFTRMIM22		OBJECT IDENTIFIER ::= { moduleType 57 }
+
+	mtTRRMIM2To4A		OBJECT IDENTIFIER ::= { moduleType 58 }
+
+	mtFTRMIM26		OBJECT IDENTIFIER ::= { moduleType 59 }
+
+	mtTRMIM34A		OBJECT IDENTIFIER ::= { moduleType 60 }
+
+	mtTRMIM32A		OBJECT IDENTIFIER ::= { moduleType 61 }
+
+	mtTRMIM44A		OBJECT IDENTIFIER ::= { moduleType 62 }
+
+	mtTRMIM42A		OBJECT IDENTIFIER ::= { moduleType 63 }
+
+	--  Chip based 10Base-T Modules
+
+	mtTPMIMT1		OBJECT IDENTIFIER ::= { moduleType 65 }
+
+	mtTPMIMT		OBJECT IDENTIFIER ::= { moduleType 66 }
+
+	mtTPMIMT3		OBJECT IDENTIFIER ::= { moduleType 67 }
+
+	--  Thin MIM
+
+	mtThinMim2		OBJECT IDENTIFIER ::= { moduleType 80 }
+
+	--  10Base-T Modules
+
+	mtTPMIM24		OBJECT IDENTIFIER ::= { moduleType 96 }
+
+	mtTPMIM22		OBJECT IDENTIFIER ::= { moduleType 97 }
+
+	mtTPMIM34		OBJECT IDENTIFIER ::= { moduleType 98 }
+
+	mtTPMIM32		OBJECT IDENTIFIER ::= { moduleType 99 }
+
+	-- TPR MIMs
+
+	mtTPRMIM33		OBJECT IDENTIFIER ::= { moduleType 112 }
+
+	mtTPRMIM36		OBJECT IDENTIFIER ::= { moduleType 113 }
+
+	mtCRXMIM		OBJECT IDENTIFIER ::= { moduleType 114 }
+
+	mtFORMIM22		OBJECT IDENTIFIER ::= { moduleType 115 }
+
+	mtTPRMIM22		OBJECT IDENTIFIER ::= { moduleType 116 }
+
+	mtTPRMIM24		OBJECT IDENTIFIER ::= { moduleType 117 }
+
+	--  FOMIM (FOIRL) Modules
+
+	mtFOMIM18		OBJECT IDENTIFIER ::= { moduleType 144 }
+
+	mtFOMIM12		OBJECT IDENTIFIER ::= { moduleType 146 }
+
+	mtFOMIM16		OBJECT IDENTIFIER ::= { moduleType 147 }
+
+	mtFOMIM28		OBJECT IDENTIFIER ::= { moduleType 148 }
+
+	mtFOMIM22		OBJECT IDENTIFIER ::= { moduleType 150 }
+
+	mtFOMIM26		OBJECT IDENTIFIER ::= { moduleType 151 }
+
+	mtFOMIM38		OBJECT IDENTIFIER ::= { moduleType 152 }
+
+	mtFOMIM32		OBJECT IDENTIFIER ::= { moduleType 154 }
+
+	--  Management Bridge Modules
+
+	mt8MIM			OBJECT IDENTIFIER ::= { moduleType 160 }
+
+	mtIRM2			OBJECT IDENTIFIER ::= { moduleType 176 }
+
+	mtIRBM			OBJECT IDENTIFIER ::= { moduleType 177 }
+
+	mtIRM3			OBJECT IDENTIFIER ::= { moduleType 178 }
+
+	mtTRMBMR		OBJECT IDENTIFIER ::= { moduleType 180 }
+
+	mtTRMBMS		OBJECT IDENTIFIER ::= { moduleType 181 }
+
+	--  Management and Relay Device and MIM Modules
+
+	mtEFDMIM		OBJECT IDENTIFIER ::= { moduleType 182 }
+
+	mtETBMIM		OBJECT IDENTIFIER ::= { moduleType 183 }
+
+	mtTRBMIM		OBJECT IDENTIFIER ::= { moduleType 184 }
+
+	mtEMME			OBJECT IDENTIFIER ::= { moduleType 185 }
+
+	mtTFDMIM		OBJECT IDENTIFIER ::= { moduleType 186 }
+
+	mtTRMM			OBJECT IDENTIFIER ::= { moduleType 187 }
+
+	mtETWMIM		OBJECT IDENTIFIER ::= { moduleType 189 }
+
+	--
+
+	mtFOT12			OBJECT IDENTIFIER ::= { moduleType 192 }
+
+	mtTPTMIM		OBJECT IDENTIFIER ::= { moduleType 208 }
+
+	--
+
+	mtFOT06			OBJECT IDENTIFIER ::= { moduleType 224 }
+
+	--
+
+	mtNull			OBJECT IDENTIFIER ::= { moduleType 255 }
+
+	--  Uninterruptible Power Supplies
+
+	mtPSM370		OBJECT IDENTIFIER ::= { moduleType 257 }
+
+	mtPSM400		OBJECT IDENTIFIER ::= { moduleType 258 }
+
+	mtPSM600		OBJECT IDENTIFIER ::= { moduleType 259 }
+
+	mtPSM900		OBJECT IDENTIFIER ::= { moduleType 260 }
+
+	mtPSM1250		OBJECT IDENTIFIER ::= { moduleType 261 }
+
+	mtPSM2000		OBJECT IDENTIFIER ::= { moduleType 262 }
+
+	--  (More) Token Ring MIMs
+
+	mtTRMMIM		OBJECT IDENTIFIER ::= { moduleType 48898 }
+
+	--  Multi-Port Interfaces Modules
+
+	mtMPIMX			OBJECT IDENTIFIER ::= { moduleType 65536 }
+
+	mtMPIMA			OBJECT IDENTIFIER ::= { moduleType 65537 }
+
+	mtMPIMC			OBJECT IDENTIFIER ::= { moduleType 65538 }
+
+	mtMPIMT			OBJECT IDENTIFIER ::= { moduleType 65539 }
+
+	mtMPIMF2		OBJECT IDENTIFIER ::= { moduleType 65540 }
+
+	mtMPIMF1		OBJECT IDENTIFIER ::= { moduleType 65541 }
+
+	mtMPIMT1		OBJECT IDENTIFIER ::= { moduleType 65542 }
+
+	mtMPIMB			OBJECT IDENTIFIER ::= { moduleType 65543 }
+
+	--  Single-Port Interface Modules
+
+	mtSPIMA			OBJECT IDENTIFIER ::= { moduleType 131073 }
+
+	mtSPIMC			OBJECT IDENTIFIER ::= { moduleType 131074 }
+
+	mtSPIMT			OBJECT IDENTIFIER ::= { moduleType 131075 }
+
+	mtSPIMF2		OBJECT IDENTIFIER ::= { moduleType 131076 }
+
+	mtSPIMF1		OBJECT IDENTIFIER ::= { moduleType 131077 }
+
+	mtSPIMT1		OBJECT IDENTIFIER ::= { moduleType 131078 }
+
+	mtSPIMB			OBJECT IDENTIFIER ::= { moduleType 131079 }
+
+	--  Ethernet -Port Interface Modules
+
+	mtEPIMB			OBJECT IDENTIFIER ::= { moduleType 196608 }
+
+	mtEPIMA			OBJECT IDENTIFIER ::= { moduleType 196609 }
+
+	mtEPIMC			OBJECT IDENTIFIER ::= { moduleType 196610 }
+
+	mtEPIMT			OBJECT IDENTIFIER ::= { moduleType 196611 }
+
+	mtEPIMF2		OBJECT IDENTIFIER ::= { moduleType 196612 }
+
+	mtEPIMF1		OBJECT IDENTIFIER ::= { moduleType 196613 }
+
+	mtEPIMT1		OBJECT IDENTIFIER ::= { moduleType 196614 }
+
+	mtEPIMF3		OBJECT IDENTIFIER ::= { moduleType 196615 }
+
+	mtEPIMFIXED		OBJECT IDENTIFIER ::= { moduleType 196623 }
+
+	--  Slot class definitions
+
+	slotClass		OBJECT IDENTIFIER ::= { namingTree 3 }
+
+	csUnknown		OBJECT IDENTIFIER ::= { slotClass 1 }
+
+	csPwrSup		OBJECT IDENTIFIER ::= { slotClass 2 }
+
+	csMgmt			OBJECT IDENTIFIER ::= { slotClass 3 }
+
+	csMgmtRelay		OBJECT IDENTIFIER ::= { slotClass 4 }
+
+	csMIM			OBJECT IDENTIFIER ::= { slotClass 5 }
+
+	--  Backplane type definitions
+
+	backplaneType		OBJECT IDENTIFIER ::= { namingTree 4 }
+
+	btUnknown		OBJECT IDENTIFIER ::= { backplaneType 1 }
+
+	btBusA			OBJECT IDENTIFIER ::= { backplaneType 2 }
+
+	btBusB			OBJECT IDENTIFIER ::= { backplaneType 3 }
+
+	btBusC			OBJECT IDENTIFIER ::= { backplaneType 4 }
+
+	--  Component type definitions
+
+	componentType		OBJECT IDENTIFIER ::= { namingTree 5 }
+
+	cptUnknown		OBJECT IDENTIFIER ::= { componentType 1 }
+
+	cptRepeater		OBJECT IDENTIFIER ::= { componentType 2 }
+
+	cptMau			OBJECT IDENTIFIER ::= { componentType 3 }
+
+	cptBridge		OBJECT IDENTIFIER ::= { componentType 4 }
+
+	cptRouter		OBJECT IDENTIFIER ::= { componentType 5 }
+
+	cptRmon			OBJECT IDENTIFIER ::= { componentType 6 }
+
+	cptAgent		OBJECT IDENTIFIER ::= { componentType 7 }
+
+	cptLim			OBJECT IDENTIFIER ::= { componentType 8 }
+
+	cptHostSvcs		OBJECT IDENTIFIER ::= { componentType 9 }
+
+	cptIngtMIM		OBJECT IDENTIFIER ::= { componentType 10 }
+
+	cptExHostSvcs		OBJECT IDENTIFIER ::= { componentType 11 }
+
+	--  Third Party Module type definitions
+	--  As with the chassis types, the OID suffix(a value obtained
+	--  by reading a hardware module), along with the following OID
+	--  prefix, uniquely determines a specific module.
+
+	thrPtyModType		OBJECT IDENTIFIER ::= { namingTree 6 }
+
+	-- tpMtUnknown		OBJECT IDENTIFIER ::= { thrPtyModType x }
+
+	tpMtCiscoMIM		OBJECT IDENTIFIER ::= { thrPtyModType 1 }
+
+	tpMtXyplexETSMIM	OBJECT IDENTIFIER ::= { thrPtyModType 2 }
+
+	tpMtSGICPUMIM		OBJECT IDENTIFIER ::= { thrPtyModType 3 }
+
+	tpMtCaymanGatorMIM	OBJECT IDENTIFIER ::= { thrPtyModType 4 }
+
+	tpMtNovellLanternMIM	OBJECT IDENTIFIER ::= { thrPtyModType 5 }
+
+	tpMtCiscoCRM1		OBJECT IDENTIFIER ::= { thrPtyModType 6 }
+
+	tpMtCiscoCRM		OBJECT IDENTIFIER ::= { thrPtyModType 7 }
+
+	tpMtCaymanRptrMIM25	OBJECT IDENTIFIER ::= { thrPtyModType 8 }
+
+	tpMtCaymanRptrMIM13	OBJECT IDENTIFIER ::= { thrPtyModType 9 }
+
+	tpMtCaymanRouterMIM12	OBJECT IDENTIFIER ::= { thrPtyModType 10 }
+
+	--  Network class definitions
+	--  Assigned to Kurt Dobbins, who is the respective naming
+	--  authority
+
+	networkType		OBJECT IDENTIFIER ::= { namingTree 7 }
+
+	--  Physical class definitions
+	--  Naming authority:  Manu Kaycee and/or Dave Arneson
+
+	physicalType		OBJECT IDENTIFIER ::= { namingTree 8 }
+
+
+	-- There are two different port types, EPIM (portEpim) and non
+	-- EPIM (portOther).
+
+	portType	OBJECT IDENTIFIER ::= { physicalType 1 }
+
+	portEpim	OBJECT IDENTIFIER ::= { portType 1 }
+	portOther	OBJECT IDENTIFIER ::= { portType 2 }
+
+	-- EPIM port types
+
+	portEpimUnk	OBJECT IDENTIFIER ::= { portEpim 1 }
+	portEpimAUI	OBJECT IDENTIFIER ::= { portEpim 2 }
+	portEpimcoax	OBJECT IDENTIFIER ::= { portEpim 3 }
+	portEpimRJ45	OBJECT IDENTIFIER ::= { portEpim 4 }
+	portEpimFoST	OBJECT IDENTIFIER ::= { portEpim 5 }
+	portEpimFoSMA	OBJECT IDENTIFIER ::= { portEpim 6 }
+	portEpimDB9	OBJECT IDENTIFIER ::= { portEpim 7 }
+	portEpimSFo	OBJECT IDENTIFIER ::= { portEpim 8 }
+	portEpimHWAUI	OBJECT IDENTIFIER ::= { portEpim 16 }
+
+	-- Non EPIM port types
+
+	portInternal	OBJECT IDENTIFIER ::= { portOther 1 }
+	portBNC		OBJECT IDENTIFIER ::= { portOther 2 }
+	portAUI		OBJECT IDENTIFIER ::= { portOther 3 }
+	portTP		OBJECT IDENTIFIER ::= { portOther 4 }
+	portTenBT	OBJECT IDENTIFIER ::= { portOther 5 }
+	portFOT		OBJECT IDENTIFIER ::= { portOther 6 }
+	portLaser	OBJECT IDENTIFIER ::= { portOther 7 }
+	portSTP		OBJECT IDENTIFIER ::= { portOther 8 }
+	portUTP		OBJECT IDENTIFIER ::= { portOther 9 }
+	portFO		OBJECT IDENTIFIER ::= { portOther 10 }
+	portUnk		OBJECT IDENTIFIER ::= { portOther 11 }
+
+	--  MIB hierarchy
+
+	--  Cabletron enterprise MIBs reside here
+
+	ctron			OBJECT IDENTIFIER ::= { mibs 1 }
+
+	ctPhysical		OBJECT IDENTIFIER ::= { ctron 1 }
+
+	--  Description of assignments within ctphysical
+	--  rrev4 is { ctPhysical 1 }  -  Kim Hobbs
+	--  chassis is { ctPhysical 2 }  -  Manu Kaycee
+
+	ctDatalink		OBJECT IDENTIFIER ::= { ctron 2 }
+
+	--  Description of assignments within ctdatalink
+	--  dot5-mib is { ctDatalink 1 }  -  Dave Hammond
+	--  fdm-mib is { ctDatalink 2 }  -  Andy Manglik
+	--  ctron-bridge-mib is { ctDatalink 3 } - Ron Presti
+
+	ctNetwork		OBJECT IDENTIFIER ::= { ctron 3 }
+
+	--  Description of assigments within ctnetwork
+	--  nwDiagnostics is { ctNetwork 1 }  -  Kurt Dobbins
+
+	ctApplication		OBJECT IDENTIFIER ::= { ctron 4 }
+
+	--  ctDLM-mib is { ctApplication 1 } - Kurt Dobbins
+
+
+	ctSystem		OBJECT IDENTIFIER ::= { ctron 5 }
+
+	--  Description of system and device related MIBs and entities
+	--  ctSystemPOMIB is { ctSystem 1 }  -  Kurt Dobbins
+	--  ctSystemErrLog is { ctSystem 2 }  -  Kurt Dobbins
+
+	--  Description of assignments within ctapplication
+
+	--  MIBs for experimental use are deployed here
+
+	ctronExp		OBJECT IDENTIFIER ::= { mibs 2 }
+
+	--  Extensions to Internet standard MIBs are defined here
+
+	ctronExtn		OBJECT IDENTIFIER ::= { mibs 3 }
+
+
+	END
+

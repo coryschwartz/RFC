@@ -1,0 +1,2839 @@
+
+                        AT&T Version 1.0 SmartHUB
+                 Management Information Base Specification
+                               July 22, 1991
+
+
+1. Introduction
+
+This MIB specification is for remotely managing AT&T 10BASE-T
+multiport repeaters (aka, SmartHUBs).  Objects are accessed via SNMP.
+
+
+1.1 MIB Structure
+
+All of AT&T's SNMP and CMOT related management information definitions
+are defined and registered under the AT&T enterprise sub-tree 
+(1.3.6.1.4.1.74). 
+
+Below "AT&T" are "products" and "management".
+
+The products branch is included for support of the SNMP MIB sysObjectId
+function. If one of the managed devices receives a Get-Request on sysObjectID,
+the Get-Response indicates what the managed device is by conveying the object
+identifier that corresponds to the managed device. For example, the AT&T
+Version 1.0 SmartHUB is indicated by the object ID of 1.3.6.1.4.1.74.1.1.
+The sysObjectID value is included in every Trap in the enterprise field.
+
+The management leg contains the objects to be managed on a per product
+basis. SmartHUB MIB objects are contained within seven capability groups:
+
+   - Basic Control Group
+   - Self Test Group
+   - Performance Monitoring Group
+   - Address Tracking Group
+   - Enhanced Control Group
+   - Download Group
+   - Security Group
+
+The above is formally defined in the following:
+
+      SH-ATT-MIB { iso org(3) dod(6) internet(1) private(4)
+                   enterprises(1) att(74) }
+      
+      DEFINITIONS ::= BEGIN
+      
+      IMPORTS
+           enterprises, OBJECT-TYPE, IpAddress, Counter, TimeTicks
+           FROM RFC1065-SMI
+           DisplayString FROM RFC1158-MIB;
+      
+      att-2				OBJECT IDENTIFIER ::= { enterprises 74 }
+      att-products			OBJECT IDENTIFIER ::= { att-2 1 }
+      att-mgmt				OBJECT IDENTIFIER ::= { att-2 2 }
+      att-hubmgtProd			OBJECT IDENTIFIER ::= { att-products 1 }
+      att-hubmgt			OBJECT IDENTIFIER ::= { att-mgmt 1 }
+      
+      sh1BasicCtrlCapability		OBJECT IDENTIFIER ::= { att-hubmgt 1 }
+      sh1SelfTestCapability		OBJECT IDENTIFIER ::= { att-hubmgt 2 }
+      sh1PerfMonCapability		OBJECT IDENTIFIER ::= { att-hubmgt 3 }
+      sh1DownloadCapability		OBJECT IDENTIFIER ::= { att-hubmgt 4 }
+      sh1AddrTrackCapability		OBJECT IDENTIFIER ::= { att-hubmgt 5 }
+      sh1EnhancedCtrlCapability		OBJECT IDENTIFIER ::= { att-hubmgt 6 }
+      sh1SecurityCapability		OBJECT IDENTIFIER ::= { att-hubmgt 7 }
+
+      END
+
+
+1.2 Syntax
+
+As per the SNMP MIB structure specification (RFC 1155), ASN.1 syntax types
+permitted are INTEGER, OCTET STRING, OBJECT IDENTIFIER, and NULL.
+Several defined types have been defined for the TCP/IP community.
+Those that apply to the SmartHUB are COUNTER, TIMETICKS, and IpAddress.
+The MIB II specification allows DisplayString.
+
+
+1.3 Traps
+
+The AT&T SmartHUB sends the SNMP-defined Cold Start Trap whenever it is
+powered on or reset.
+
+The Trap packet's generic-trap field (INTEGER) is encoded either as coldStart(0)
+or enterpriseSpecific(6).  When enterpriseSpecific is indicated, the
+specific-trap field (INTEGER) is used to indicate the "type" of proprietary
+Trap.  A description of trap types is as follows:
+
+
+                          AT&T SmartHUB Trap Types
+-------------------------------------------------------------------------------
+Nomenclature   Trap                 Description
+               Code
+===============================================================================
+trap(cs)       n/a  Cold start trap. Sent upon booting.
+
+trap(count)     1   Parameter counters trap. Sent periodically.
+
+trap(state)     2   Control state change trap.  Sent at the completion
+                    of a SET.
+
+trap(intrusion) 3   Intrusion violation trap.  Sent upon detection of intrusion.
+
+trap(alarm)     4   General alarm trap.  Sent upon state change of the alarm
+                    condition.
+
+trap(health)    5   Hub health trap.  Sent upon completion of a self-test or
+                    whenever the health of the hub changes.
+
+trap(sqe)       6   SQE Test Not Disabled notification.  Indicates that an
+                    external MAU attached to a repeater AUI port has SQE
+                    test enabled.
+
+trap(pwd)       7   Bad password notification. Indicates that a Set with a bad
+                    password has been attempted.
+
+trap(config)    8   Conveys hub configuration information. Sent as a result of
+                    a Set being done on sh1EnhCtrlSendTrapConfig.
+
+
+Note: RFC 1065 allows the Access: part of the object definition to be one of
+read-only, read-write, write-only, or not-accessible.  Since this file is not
+intended to be machine readable, this specification extends the Access: field
+to also state in what Traps the object may be included. The corresponding
+machine readable file does not have these extensions.
+
+At the end of this file are Trap definitions in RFC 1215 format.
+
+
+1.4 Acknowledgement
+
+This MIB specification follows an IEEE 802.3 Hub Management draft (IEEE 802.3,
+HM #90/89, "Draft Supplement to ANSI/IEEE STD 802.3, Layer Management for Hub
+Devices Section 18", 9/5/90, Unapproved Draft).  Most objects from that
+specification are implemented herein.
+
+2.0 System Group
+
+The SmartHUB implements the MIB-I System group.
+
+OBJECT:
+   sysDescr  { system 1 }
+
+Syntax:
+   DisplayString
+
+Definition:
+   A textual description of the entity. This value should include
+   the full name and version identification of the system's hardware
+   type, software operating-system, and networking software. It is mandatory
+   that this only contain printable ASCII characters.
+   For the initial release SmartHUB, the value is encoded:
+
+   AT&T StarLAN 10 SmartHUB HW V: 1.0, ROM V: 1.0, SW V: 1.0
+
+Access:
+   read-only
+
+Status:
+   mandatory
+
+
+
+OBJECT:
+   sysObjectID  { system 2 }
+
+Syntax:
+   OBJECT IDENTIFIER
+
+Definition:
+   The vendor's authoritative identification of the network management
+   subsystem contained in the entity. This value provides an easy and
+   unambiguous means for determining "what kind of box" is being managed.
+   The Release 1 SmartHUB returns a data field of type OBJECT IDENTIFIER
+   and the value 1.3.6.1.4.1.74.1.1.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+
+
+
+OBJECT:
+   sysUpTime  { system 3 }
+
+Syntax:
+   TIMETICKS (4)
+
+Definition:
+   The time (in hundredths of a second) since the network management portion
+   of the system was last re-initialized.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+
+3. Basic Control Group
+
+   
+OBJECT:
+   sh1BasicCtrlHubID  { sh1BasicCtrlCapability 1 }
+
+Syntax:
+   OCTET STRING (6)
+
+Definition:
+   The SmartHUB's MAC address.  This object is included in all Traps
+   to allow the manager to ascertain the hub's MAC address (unique identifier).
+   This is required for UDP/IP communications across an internet since the
+   source MAC address is not preserved end-to-end.
+
+Access:
+   read-only, trap(cs), trap(count), trap(alarm), trap(intrusion), trap(state),
+   trap(health), trap(sqe), trap(pwd), trap(config)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1BasicCtrlHubGroupCapacity  { sh1BasicCtrlCapability 2 }
+
+Syntax:
+   INTEGER (4)
+
+Definition:
+   Indicates the number of groups that can be contained within the hub.
+   Valid range is 1-255. Within each managed hub, the groups are uniquely
+   numbered in the range from 1 to sh1BasicCtrlHubGroupCapacity.
+   The initial release SmartHUB encodes the value as 1.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1BasicCtrlGroupMap  { sh1BasicCtrlCapability 3 }
+
+Syntax:
+   OCTET STRING (1)
+
+Definition:
+   A string of bits which reflects the current configuration of units
+   which are viewed by group managed objects. These units may be field
+   replaceable units (FRU).  The initial release SmartHUB encodes the value
+   as 0x01 to indicate a single group.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1BasicCtrlGroupID  { sh1BasicCtrlCapability 4 }
+
+Syntax:
+   INTEGER (1)
+
+Definition:
+   An 8 bit value unique within the hub.
+   It is assumed, but not mandatory that "Groups" have
+   a relationship to physically replaceable units.
+   For the initial release SmartHUB, the value is 1.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1BasicCtrlNumberOfPorts  { sh1BasicCtrlCapability 5 }
+
+Syntax:
+   INTEGER (1)
+
+Definition:
+   The number of ports is an 8 bit integer whose value points to the port
+   address of the highest numbered port.
+   For the initial release SmartHUB, the value is 13.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1BasicCtrlPortTable  { sh1BasicCtrlCapability 6 }
+
+Syntax:
+   SEQUENCE OF BasicCtrlPortEntry (1)
+
+Definition:
+   The port table for the basic capabilities.
+
+Access:
+   not-accessible
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1BasicCtrlPortEntry  { sh1BasicCtrlPortTable 1 }
+
+Syntax:
+   BasicCtrlPortEntry ::= SEQUENCE {
+      sh1BasicCtrlPortID
+           INTEGER,
+      sh1BasicCtrlPortType
+           INTEGER,
+      sh1BasicCtrlPortCtrl
+           INTEGER,
+      sh1BasicCtrlAutoPartitionState
+           INTEGER
+   }
+
+Definition:
+   A port table entry for the basic capabilities.
+
+Access:
+   not-accessible
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1BasicCtrlPortID  { sh1BasicCtrlPortEntry 1 }
+
+Syntax:yntax:
+   INTEGER (1)
+
+Definition:
+   The index into the basic control port table.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1BasicCtrlPortType  { sh1BasicCtrlPortEntry 2 }
+
+Syntax:
+   INTEGER (1) {
+        other (1),
+        repeater (2),
+        10BASE-F Async (3),
+        10BASE-F Synch (4)
+   }
+
+Definition:
+   The type of port. All ports on a repeater are of the same type at this layer.
+   Different port types have different delay characteristics and
+   topological implications.  The initial release SmartHUB returns the value 2.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1BasicCtrlPortCtrl  { sh1BasicCtrlPortEntry 3 }
+
+Syntax:
+   INTEGER (1) {
+        other (1),
+        disabled (2),
+        enabled (3)
+   }
+
+Definition:
+   The administrator settable state of this port.  Indicates whether a
+   port has been administratively disabled or whether it is in the normal,
+   enabled state. This allows a network operator to disable a problem port
+   or to deny the port access to network resources for administrative reasons.
+   A disabled port neither transmits nor receives.
+
+   sh1BasicCtrlPortCtrl takes precedence over auto partition. The auto
+   partion/reconnection mechanism may or may not continue to function while
+   a port is disabled.
+
+Access:
+   read-write, trap(state), trap(cs)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1BasicCtrlAutoPartitionState  { sh1BasicCtrlPortEntry 4 }
+
+Syntax:
+   INTEGER (1) {
+        other (1),
+        not auto-partitioned (2),
+        auto-partitioned (3)
+   }
+
+Definition:
+   Indicates whether the port is currently partitioned by the hub's
+   auto-partition protection. (The Hub automatically partitions a port if it
+   is signaling continuous collision, or greater than 30 consecutive
+   collisions). It is the same as jab indication.
+
+Access:
+   read-only, trap(alarm)
+
+Status:
+   mandatory
+   
+
+4. Self Test Group
+   
+   
+OBJECT:
+   sh1SelfTestHubResetTimeStamp  { sh1SelfTestCapability 1 }
+
+Syntax:
+   TIMETICKS (4)
+
+Definition:
+   Not a counter. This attribute provides the value of sysUpTime
+   when the hub was last reset. This value is recorded whenever the hub
+   enters the START state of Fig 9-2 in the 802.3 repeater standard.
+   Though the time stamp is reported in tens of milliseconds, the required
+   resolution is to the nearest 100 milliseconds.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1SelfTestResetHubSystem { sh1SelfTestCapability 2 }
+
+Syntax:
+   INTEGER (1)  {
+        perform reset (1)
+   }
+
+Definition:
+   This action initializes all resettable management counters and also
+   initializes the hub. All hub parameters are reset to defaults.
+   The value of non-resettable counters may change as a result of this action.
+   This action may result in the loss of packets.
+
+Access:
+   write-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1SelfTestResetHub { sh1SelfTestCapability 3 }
+
+Syntax:
+   INTEGER (1)  {
+        perform reset (1)
+   }
+   
+Definition:
+   This action initializes the relay, and the port counters and flags in
+   a repeater that are related to the auto-partition function.
+   This action does not reset the hub management counters nor does it
+   affect the sh1BasicCtrlPortCtrl parameters.  This action may result in
+   the loss of packets.  It also updates the sh1SelfTestHubResetTimeStamp
+   object.  Essentially, this resets only the MPR chip.
+
+Access:
+   write-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1SelfTestExecuteSelfTest1 { sh1SelfTestCapability 4 }
+
+Syntax:
+   INTEGER (1) {
+        perform test (1)
+   }
+   
+Definition:
+   Causes the SmartHUB to initiate the non-disruptive self-test function.
+   The hub performs a non-disruptive self-test that has the following
+   characteristics:
+
+   - The test changes neither the state of the hub nor management information
+   about the hub.
+   - The test does not inject packets onto any segment.
+   - The test does not prevent the relay of any packets.
+   
+   Test results are conveyed by the hubHealth objects.
+
+Access:
+   write-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1SelfTestExecuteSelfTest2 { sh1SelfTestCapability 5 }
+
+Syntax:
+   INTEGER (1) {
+        perform test (1)
+   }
+   
+Definition:
+   Causes the SmartHUB to initiate the disruptive self-test function. The hub
+   performs a disruptive self-test that has the following characteristics:
+
+   - The test resets the hub without affecting management information about
+   the hub.
+   - The test does not inject packets onto any segment.
+   - Packets sent during the test may or may not be relayed.
+   
+   Test results are conveyed by the hubHealth objects.
+
+Access:
+   write-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1SelfTestHubHealthState  { sh1SelfTestCapability 6 }
+
+Syntax:
+   INTEGER (1) {
+        other (1),
+        ok (2),
+        failed (3)
+   }
+   
+Definition:
+   Indicates whether there is a known operational failure in the hub.
+   When a failure condition exists, the sh1SelfTestHubHealthData
+   object may be consulted for more specific information about the problem.
+   
+   Upon completing a "performSelfTest", the SmartHUB sends a trap(health)
+   with this object and sh1SelfTestHubHealthData in it.
+
+Access:
+   read-only, trap(cs), trap(health)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1SelfTestHubHealthData  { selfTestCapability 7 }
+
+Syntax:
+   OCTET STRING (21)
+
+Definition:
+   Health and related information about the hub's hardware and software status.
+   It is a block of data octets that provides information relevant to the
+   operational state of the hub. The encoding of this data
+   block is vendor-dependent. Hub vendors may use this mechanism to provide
+   detailed failure information or instructions for problem resolution.
+   
+   For the initial release AT&T SmartHUB, information is encoded as follows:
+
+     Field         Position                  Description
+   ==========================================================================
+   Xmit Reason         1       Indicates why the trap was sent.
+                                  1 = Results of last non-disruptive tests.
+                                  2 = Results of last disruptive tests.
+                                  3 = Deadman timer expired.
+                                  4 = Software panic occurred.
+                                  5 = Sanity reset occurred.
+                                  6 = Temperature condition.
+                                  7 = Configuration checksum condition.
+
+   Temperature        2        Hub temperature indicator (0 = ok, 1 = high).
+
+   Non-disruptive    3-4       Bit value indicates diagnostics failed (1) or
+    test result                passed (0).  Bit position indicates diagnostic:
+                                  0 = RAM R/W
+                                  1 = FLASH ROM Read
+                                  2 = FLASH ROM Checksum
+                                  3 = Config EAROM Checksum
+                                  4 = NAU I/O Port
+                                  5 = NAU RAM R/W
+                                  6-15 = Reserved
+
+   Disruptive test   5-6       Bit value indicates diagnostics failed (1) or
+     result                    passed (0).  Bit position indicates diagnostic:
+                                  0 = RAM R/W
+                                  1 = RAM Address
+                                  2 = Security EAROM R/W
+                                  3 = Config EAROM R/W
+                                  4 = MPR Registers R/W
+                                  5 = NAU RAM R/W
+                                  6 = NAU RAM Address
+                                  7 = NAU IRQ
+                                  8 = NAU Self Test
+                                  9 = NAU Loopback
+                                  10 = Registers R/W
+                                  11-15 = Reserved
+
+   SW panic counter     7-8    Software panic counter.
+
+   Last panic module    9-10   Identifier of last module that paniced.
+
+   Last panic line #   11-12   Line number of last panic.
+
+   DMT counter         13-16   82586 dead man timer counter.
+
+   Sanity reset counter    17-20    Sanity reset counter.
+
+   Configuration checksum  21  NVRAM configuration checksum (0 = good, 1 = bad).
+   
+   Upon completing a "performSelfTest", the SmartHUB transmits a trap(health)
+   with this object and the the sh1SelfTestHubHealthState object in it.
+   Whenever the state of one of the reported parameters changes, the
+   trap(health) is sent. For example, when the hub temperature changes from
+   "high" to "normal", the trap is sent with the sh1SelfTestHubHealthData reason
+   field set to "temperature" and the temperature field set to "normal".
+
+Access:
+   read-only, trap(cs), trap(health)
+
+Status:
+   mandatory
+
+5. Performance Monitoring Group
+   
+   
+OBJECT:
+   sh1PerfMonFrameSize1Bound  { sh1PerfMonCapability 1 }
+
+Syntax:
+   INTEGER (2)
+
+Definition:
+   The upper boundary for the first quantization band.
+   This boundary applies to both sh1PerfMonTotalBand1Frames
+   and sh1PerfMonBand1Frames.
+
+Access:
+   read-write, trap(cs), trap(state)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonFrameSize2Bound  { sh1PerfMonCapability 2 }
+
+Syntax:
+   INTEGER (2)
+
+Definition:
+   The upper boundary for the first quantization band.
+   This boundary applies to both sh1PerfMonTotalBand2Frames
+   and sh1PerfMonBand2Frames.
+
+Access:
+   read-write, trap(cs), trap(state)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonFrameSize3Bound  { sh1PerfMonCapability 3 }
+
+Syntax:
+   INTEGER (2)
+
+Definition:
+   The upper boundary for the first quantization band.
+   This boundary applies to both sh1PerfMonTotalBand3Frames
+   and sh1PerfMonBand3Frames.
+
+Access:
+   read-write, trap(cs), trap(state)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonFrameSize4Bound  { sh1PerfMonCapability 4 }
+
+Syntax:
+   INTEGER (2)
+
+Definition:
+   The upper boundary for the first quantization band.
+   This boundary applies to both sh1PerfMonTotalBand4Frames
+   and sh1PerfMonBand4Frames.
+
+Access:
+   read-write, trap(cs), trap(state)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonRelayCounts  { sh1PerfMonCapability 5 }
+
+Syntax:
+   OCTET STRING (56)
+
+Definition:
+   Statistics counts for this relay. The octet string is positionally
+   encoded in four octet increments as follows:
+
+      Object                  Octet Position
+   __________________________________________
+   totalFramesReceivedOk             1-4
+   totalOctetsReceivedOk             5-8
+   totalCollisions                   9-12
+   totalLateCollisions              13-16
+   totalRunts                       17-20
+   totalPgymys                      21-24
+   totalFrameTooLongs               25-28
+   totalAutoPartitions              29-32
+   totalLongFragments               33-36
+   totalBadClockFifoErrors          37-40
+   totalFramesTransmittedOk         41-44
+   totalOctetsTransmittedOk         45-48
+   totalErrorEnergy                 49-52
+   totalManchesterCodeViolations    53-56
+
+   Specifications for the values contained in this MIB object can
+   be found in the specifications for the individual objects.
+   
+   The relayCount structure is defined to more efficiently pack data
+   within the protocol.
+
+Access:
+   read-only, trap(count)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonTotalFramesReceivedOk  { sh1PerfMonCapability 6 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   The number of valid frames received by the hub.
+   It does not include frames received with frame-too-long, FCS,
+   length, or alignment errors, or frames lost due to internal errors.
+   The approximate minimum time for counter rollover is 73 hours.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonTotalOctetsReceivedOk  { sh1PerfMonCapability 7 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   The total number of octets received by the hub.
+   Octets counted are the number of data and padding octets
+   in frames that are successfully received.
+   The approximate minimum time for counter rollover is 58 minutes.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonTotalCollisions  { sh1PerfMonCapability 8 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   The counter increments once for each time the transmit collision
+   state is entered, no matter how many ports are involved. The counter
+   is not incremented for receive collisions.
+   The approximate minimum time for counter rollover is 16 hours.
+   
+   This object allows a single reading of collisions/hub rather
+   than polling each of the ports.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonTotalLateCollisions  { sh1PerfMonCapability 9 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   Counts the number of times that a collision has been detected on
+   this port later than 512 bit times into the transmitted packet.
+   A late collision is counted twice, as both a collision and as a late
+   collision.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonTotalRunts { sh1PerfMonCapability 10 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   Counts the number of collision fragments longer
+   than 96 bits and shorter than a legal packet, detected on this port.
+   (Runts do not indicate a problem in the network).
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonTotalShortEvents { sh1PerfMonCapability 11 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   Counts the number of fragments received on
+   this port. These fragments, less than [96-n or 32-n for older
+   controllers that aren't quite conformant] bits long,
+   indicate an external noise hit (a problem on the network).
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonTotalFrameTooLongs  { sh1PerfMonCapability 12 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   Counts the number of frames received through this port
+   that are greater than 1518 bytes long.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonTotalAutoPartitions  { sh1PerfMonCapability 13 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   Counts the number of times that the repeater
+   has automatically partitioned this port.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonTotalLongFragments  { sh1PerfMonCapability 14 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   The total number of fragments received by this hub.
+   LongFragments are any frames greater or equal to 96 bits
+   but less than 512 bits (which includes runt frames).
+   The fragment count also includes any other length frames
+   in which the start of frame delimiter is not present.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonTotalFifoErrors { sh1PerfMonCapability 15 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   Counts the total number of times that a packet has been
+   received by this hub with the transmission frequency (data rate)
+   detectably out of spec.
+   
+   This information is also included in sh1PerfMonRelayCounts.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonTotalFramesTransmittedOk  { sh1PerfMonCapability 16 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   Transmitted frames are the total number of valid frames transmitted by the 
+   hub.  (This includes both authorized and non-authorized frames.)
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonTotalOctetsTransmittedOk  { sh1PerfMonCapability 17 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   Transmitted octets are the total number of octets in valid
+   frames transmitted by the hub.  Octets counted are the number of data
+   and padding octets in frames that are successfully received.
+   The approximate minimum time for counter rollover is 58 minutes.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonTotalErrorEnergy  { sh1PerfMonCapability 18 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   The total length (bytes) of all error energy. Used to calculate
+   network utilization.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonTotalManchesterCodeViolations  { sh1PerfMonCapability 19 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   The number of manchester code violations.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonTotalBand1Frames  { sh1PerfMonCapability 20 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   The number of frames transmitted from this hub summarized into packet size
+   bands.  The sizes are with respect to LLC data.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonTotalBand2Frames  { sh1PerfMonCapability 21 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   The number of frames transmitted from this hub summarized into packet size
+   bands.  The sizes are with respect to LLC data.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonTotalBand3Frames  { sh1PerfMonCapability 22 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   The number of frames transmitted from this hub summarized into packet
+   size bands.  The sizes are with respect to LLC data.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonTotalBand4Frames  { sh1PerfMonCapability 23 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   The number of frames transmitted from this hub summarized into packet
+   size bands.  The sizes are with respect to LLC data.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonTotalBand5Frames  { sh1PerfMonCapability 24 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   The number of frames transmitted from this hub summarized into packet
+   size bands.  The sizes are with respect to LLC data.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonPortTable  { sh1PerfMonCapability 25 }
+
+Syntax:
+   SEQUENCE OF PerfMonPortEntry
+
+Definition:
+   The port table for the performance monitoring capabilities.
+
+Access:
+   not-accessible
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   PerfMonPortEntry  { sh1PerfMonPortTable 1 }
+
+Syntax:
+   sh1PerfMonPortEntry ::= SEQUENCE {
+      sh1PerfMonPortID
+           INTEGER,
+      sh1PerfMonPortCounts
+           OCTET STRING,
+      sh1PerfMonFramesReceivedOk
+           COUNTER,
+      sh1PerfMonOctetsReceivedOk
+           COUNTER,
+      sh1PerfMonCollisions
+           COUNTER,
+      sh1PerfMonLateCollisions
+           COUNTER,
+      sh1PerfMonRunts
+           COUNTER,
+      sh1PerfMonShortEvents
+           COUNTER,
+      sh1PerfMonFrameTooLongs
+           COUNTER,
+      sh1PerfMonAutoPartitions
+           COUNTER,
+      sh1PerfMonLongFragments
+           COUNTER,
+      sh1PerfMonFramesTransmittedOk
+           COUNTER,
+      sh1PerfMonOctetsTransmittedOk
+           COUNTER,
+      sh1PerfMonErrorEnergy
+           COUNTER,
+      sh1PerfMonManchesterCodeViolations
+           COUNTER,
+      sh1PerfMonBand1Frames
+           COUNTER,
+      sh1PerfMonBand2Frames
+           COUNTER,
+      sh1PerfMonBand3Frames
+           COUNTER,
+      sh1PerfMonBand4Frames
+           COUNTER,
+      sh1PerfMonBand5Frames
+           COUNTER
+   }
+   
+Definition:
+   This object is used to create an entry in the performance monitor
+   capability port table.
+
+Access:
+   not-accessible
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonPortID  { sh1PerfMonPortEntry 1 }
+
+Syntax:
+   INTEGER (1)
+
+Definition:
+   An index into the performance monitoring port table.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonPortCounts  { sh1PerfMonPortEntry 2 }
+
+Syntax:
+   OCTET STRING (56)
+
+Definition:
+   Statistics counts for this port. The octet string is positionally
+   encoded in four octet increments as follows:
+
+       Object             Octet Position
+   -----------------------------------
+   framesReceivedOk             1-4
+   octetsReceivedOk             5-8
+   collisions                   9-12
+   lateCollisions              13-16
+   runts                       17-20
+   shortEvents                 21-24
+   frameTooLongs               25-28
+   autoPartitions              29-32
+   fragments                   33-36
+   badClockFifoErrors          37-40
+   framesTransmittedOk         41-44
+   octetsTransmittedOk         45-48
+   errorEnergy                 49-52
+   manchesterCodeViolations    53-56
+
+Access:
+   read-only, trap(count)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonFramesReceivedOk  { sh1PerfMonPortEntry 3 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   A representation of the total frames of legal length that have not been
+   corrupted in transmission. These frames can be encoded and decoded by
+   commonly available MACs and provides a measure of network bandwidth
+   being used. This count is equal to the sum of framesReceivedOk
+   and outOfRangeLengthFieldFrames. It does not include frames received
+   with frames-too-long, alignment errors, frames lost due to internal
+   MAC sublayer errors, runts, or shortEvents.
+   The approximate minimum time to rollover is 81 hours.
+   
+   This information is also included in sh1PerfMonPortCounts.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonOctetsReceivedOk  { sh1PerfMonPortEntry 4 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   The number of octets received on this port.  Octets counted are the number
+   of data and padding octets in frames that are successfully received.
+   The approximate minimum time for counter rollover is 58 minutes.
+   
+   This information is also included in sh1PerfMonPortCounts.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonCollisions  { sh1PerfMonPortEntry 5 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   The counter increments once for each time the transmit collision
+   state is entered, no matter how many ports are involved. The counter
+   is not incremented for receive collisions.
+   
+   This information is also included in sh1PerfMonPortCounts.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonLateCollisions  { sh1PerfMonPortEntry 6 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   Counts the number of times that a collision has been detected on this
+   port later than 512 bit times into the transmitted packet. A late collision
+   is counted twice, as both a collision and as a late collision.
+   
+   This information is also included in sh1PerfMonPortCounts.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonRunts { sh1PerfMonPortEntry 7 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   Counts the number of collision fragments longer
+   than a shortEvent and shorter than a legal packet, detected on this port.
+   (Runts do not indicate a problem in the network).
+   
+   This information is also included in sh1PerfMonPortCounts.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonShortEvents { sh1PerfMonPortEntry 8 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   Counts the number of fragments received on
+   this port. These fragments, less than 64 +/- 10 bits long,
+   indicate an external noise hit (a problem on the network).
+   
+   This information is also included in sh1PerfMonPortCounts.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonFrameTooLongs  { sh1PerfMonPortEntry 9 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   Counts the number of frames received through this port
+   that are greater than 1518 octets long.
+   
+   This information is also included in sh1PerfMonPortCounts.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonAutoPartitions  { sh1PerfMonPortEntry 10 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   Counts the number of times that the repeater has automatically partitioned
+   this port.
+   
+   This information is also included in sh1PerfMonPortCounts.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonLongFragments  { sh1PerfMonPortEntry 11 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   The total number of fragments received by this hub.
+   LongFragments are any frames greater or equal to 96 bits
+   but less than 512 bits (which includes runt frames).
+   The fragment count also includes any other length frames
+   in which the start of frame delimiter is not present.
+   
+   This information is also included in sh1PerfMonPortCounts.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonFifoErrors { sh1PerfMonPortEntry 12 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   Counts the number of times that a packet has been
+   received by this port with the transmission frequency (data rate)
+   detectably out of spec. The exact degree is unspecified and vendor
+   specific. This object is also referred to as "number of FIFO errors".
+   
+   This information is also included in sh1PerfMonPortCounts.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonFramesTransmittedOk  { sh1PerfMonPortEntry 13 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   Transmitted frames are the number of valid "authorized" frames
+   transmitted out the port.  Authorized frames are those for which:
+   
+   1) port authorized type equals "single" and the destination address
+      equals the port authorized mac address
+   
+                    (or)
+   
+   2) port authorized type equals "multiple" or "hub".
+   
+   If the port authorized type equals "none", no frames are counted as
+   "authorized", and are therefore not counted as "transmitted" frames.
+   
+   The approximate minimum time for counter rollover is 73 hours.
+   This information is also included in sh1PerfMonPortCounts.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonOctetsTransmittedOk  { sh1PerfMonPortEntry 14 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   The number of octets transmitted from the hub on this port.  Octets counted
+   are the number of data and padding octets in frames that are successfully
+   received.  The approximate minimum time for counter rollover is 58 minutes.
+   
+   This information is also included in sh1PerfMonPortCounts.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonErrorEnergy  { sh1PerfMonPortEntry 15 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   The total length (bytes) of all error energy. Used to calculate
+   network utilization.
+   
+   This information is also included in sh1PerfMonPortCounts.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonManchesterCodeViolations  { sh1PerfMonPortEntry 16 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   The number of manchester code violations.
+   This information is also included in sh1PerfMonPortCounts.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonBand1Frames  { sh1PerfMonPortEntry 17 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   The number of frames transmitted from this port (e.g., to a workstation)
+   summarized into packet size bands.  The sizes are with respect to LLC data.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonBand2Frames  { sh1PerfMonPortEntry 18 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   The number of frames transmitted from this port (e.g., to a workstation)
+   summarized into packet size bands.  The sizes are with respect to LLC data.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonBand3Frames  { sh1PerfMonPortEntry 19 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   The number of frames transmitted from this port (e.g., to a workstation)
+   summarized into packet size bands.  The sizes are with respect to LLC data.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonBand4Frames  { sh1PerfMonPortEntry 20 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   The number of frames transmitted from this port (e.g., to a workstation)
+   summarized into packet size bands.  The sizes are with respect to LLC data.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1PerfMonBand5Frames  { sh1PerfMonPortEntry 21 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   The number of frames transmitted from this port (e.g., to a workstation)
+   summarized into packet size bands.  The sizes are with respect to LLC data.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+
+6. Address Tracking Group
+   
+   
+OBJECT:
+   sh1AddrTrackSendHubLearn { sh1AddrTrackCapability 1 }
+
+Syntax:
+   INTEGER (1) {
+        send map learn packet (1)
+   }
+   
+Definition:
+   Used to cause the special map learn frame to be sent.
+
+Access:
+   write-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1AddrTrackPortTable  { sh1AddrTrackCapability 2 }
+
+Syntax:
+   SEQUENCE OF AddrTrackPortEntry (1)
+
+Definition:
+   The port table for the basic capabilities.
+
+Access:
+   not-accessible
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1AddrTrackPortEntry  { sh1AddrTrackPortTable 1 }
+
+Syntax:
+   AddrTrackPortEntry ::= SEQUENCE {
+      sh1AddrTrackAddressTrackPortID
+           INTEGER,
+      sh1AddrTrackDetectedMacAddr
+           OCTET STRING,
+      sh1AddrTrackDetectedAddrType
+           INTEGER,
+      sh1AddrTrackAuthMacAddr
+           OCTET STRING,
+      sh1AddrTrackAuthAddrType
+           INTEGER,
+      sh1AddrTrackNewHubAddr
+           OCTET STRING
+   }
+
+Definition:
+   A port table entry for the address tracking capabilities.
+
+Access:
+   not-accessible
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1AddrTrackAddressTrackPortID  { sh1AddrTrackPortEntry 1 }
+
+Syntax:
+   INTEGER (1)
+
+Definition:
+   An index into the address tracking port table.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1AddrTrackDetectedMacAddr  { sh1AddrTrackPortEntry 2 }
+
+Syntax:
+   OCTET STRING (6)
+
+Definition:
+   The MAC address that the SmartHUB has detected on this port.
+   
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1AddrTrackDetectedAddrType  { sh1AddrTrackPortEntry 3 }
+
+Syntax:
+   INTEGER (1) {
+        none (1),
+        singly connected (2),
+        connected to another hub (3),
+        multiply connected (4)
+   }
+   
+Definition:
+   The detected connectivity associated with this port.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1AddrTrackAuthMacAddr  { sh1AddrTrackPortEntry 4 }
+
+Syntax:
+   OCTET STRING (6)
+
+Definition:
+   This is the authorized MAC address the hub was configured with
+   for this port.  The value is settable to allow the management station
+   to establish a source address for security reasons.
+
+Access:
+   read-write, trap(cs)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1AddrTrackAuthAddrType  { sh1AddrTrackPortEntry 5 }
+
+Syntax:
+   INTEGER (1) {
+        none (1),
+        singly connected (2),
+        connected to another hub (3),
+        multiply connected (4)
+   }
+
+Definition:
+   The authorized connectivity associated with this port.
+
+Access:
+   read-write, trap(cs)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1AddrTrackNewHubAddr  { sh1AddrTrackPortEntry 6 }
+
+Syntax:
+   OCTET STRING (6)
+
+Definition:
+   Indicates that a new, adjacent hub has been detected.  The MAC address
+   of that hub is included.
+
+Access:
+   trap(alarm)
+
+Status:
+   mandatory
+
+7. Enhanced Control Group
+   
+   
+OBJECT:
+   sh1EnhCtrlResetFirmwareConfig { sh1EnhCtrlCapability 1 }
+
+Syntax:
+   INTEGER (1)  {
+        perform reset (1)
+   }
+   
+Definition:
+   This action resets the hub configuration data to be equal
+   to the default values stored in hub firmware.
+
+Access:
+   write-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1EnhCtrlHubVersion  { sh1EnhCtrlCapability 2 }
+
+Syntax:
+   OCTET STRING (8)
+
+Definition:
+   The CPU hardware, MPR hardware, ROM, and software version of the hub.
+   The first two octets are the major and minor release numbers for the CPU
+   hardware, the second two octets are the major and minor release numbers for
+   the MPR hardware, the third two octets are the major and minor release
+   numbers for the hub ROM, and the fourth two octets are the major and minor
+   release numbers for the hub software that is currently running in the hub.
+   The major release numbers are 1 and the minor are 0 for the initial release.
+
+Access:
+   read-only, trap(cs)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1EnhCtrlTrapMacAddr  { sh1EnhCtrlCapability 3 }
+
+Syntax:
+   OCTET STRING (6)
+
+Definition:
+   The multicast MAC address to which hubs send Trap packets.  That address
+   might be changed from the default in order to create multiple logical
+   subnetworks each handled with a different management station.
+
+Access:
+   read-write, trap(state)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1EnhCtrlTrapIpAddr  { sh1EnhCtrlCapability 4 }
+
+Syntax:
+   IpAddress
+
+Definition:
+   The IP address to which hubs send Trap packets.
+
+Access:
+   read-write, trap(cs)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1EnhCtrlGatewayIpAddr  { sh1EnhCtrlCapability 5 }
+
+Syntax:
+   IpAddress
+
+Definition:
+   The IP address of a gateway server to which all IP packets will be sent
+   whose destination network is not the local network.
+
+Access:
+   read-write
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1EnhCtrlNetworkMask  { sh1EnhCtrlCapability 6 }
+
+Syntax:
+   IpAddress
+
+Definition:
+   The subnet mask that is used in the comparison of the hub IP address
+   to the destination IP address to determine whether or not the destination
+   IP address is on the local subnetwork. If it is not, and if a gateway
+   IP address has been administered, then the gateway will be used to deliver
+   the packet.
+
+Access:
+   read-write
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1EnhCtrlHubIpAddr  { sh1EnhCtrlCapability 7 }
+
+Syntax:
+   IpAddress
+
+Definition:
+   The hub's IP address. This object's value is the IP address in dot notation.
+
+Access:
+   read-write, trap(cs)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1EnhCtrlHubAlias  { sh1EnhCtrlCapability 8 }
+
+Syntax:
+   DisplayString (8)
+
+Definition:
+   The hub's name. This object's value is the name of the hub as assigned
+   by the administrator.
+
+Access:
+   read-write, trap(cs)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1EnhCtrlRs232State  { sh1EnhCtrlCapability 9 }
+
+Syntax:
+   INTEGER (1) {
+        DTE not connected (1),
+        DTE connected - not logged in (2),
+        DTE connected - logged in (3)
+   }
+   
+Definition:
+   Indicates whether the RS-232 hub port is active (i.e., something connected)
+   and if active, whether the user is currently logged in.
+
+Access:
+   read-only, trap(state)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1EnhCtrlRs232DataRate  { sh1EnhCtrlCapability 10 }
+
+Syntax:
+   INTEGER (1) {
+         300 (1),
+        1200 (2),
+        2400 (3),
+        4800 (4),
+        9600 (5)
+   }
+   
+Definition:
+   Indicates the data rate the hub's RS-232 port is set at.
+
+Access:
+   read-write, trap(state), trap(cs)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1EnhCtrlTrapCountPeriodCtrl  { sh1EnhCtrlCapability 11 }
+
+Syntax:
+   INTEGER (2)
+
+Definition:
+   The transmission period (seconds) of the trap(count) packet. The valid
+   range of timer values is 1 through 3,600 (1 hour).
+   A value of all 0's causes the packet to never be sent.
+   
+   Periodic transmission of the trap(count) packet can be disabled. To use
+   the trap(count) for a purely keepalive function, a control is specified
+   (see next object) such that only the sh1BasicCtrlHubID and sh1EnhCtrlHubAlias
+   objects are included. The hub default is to send the packet with only these
+   two objects in it.
+
+Access:
+   read-write, trap(cs), trap(count)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1EnhCtrlTrapCountContentsCtrl  { sh1EnhCtrlCapability 12 }
+
+Syntax:
+   INTEGER (1) {
+        other (1),
+        minimum contents (2),
+        full contents (3)
+   }
+   
+Definition:
+   To use the trap(count) for a purely keepalive function, a control is
+   specified such that only the sh1BasicCtrlHubID and sh1EnhCtrlHubAlias
+   objects are included. The hub default is to send the packet with only
+   these two objects in it.
+
+Access:
+   read-write, trap(cs)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1EnhCtrlSendTrapConfig  { sh1EnhCtrlCapability 13 }
+
+Syntax:
+   INTEGER (1) {
+        send trap(config) (1)
+   }
+
+Definition:
+   Causes the trap(config) packet to be sent.
+
+Access:
+   write-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1EnhCtrlPortTable  { sh1EnhCtrlCapability 14 }
+
+Syntax:
+   SEQUENCE OF EnhancedCtrlPortEntry (1)
+
+Definition:
+   The port table for the basic capabilities.
+
+Access:
+   not-accessible
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1EnhCtrlPortEntry  { sh1EnhCtrlPortTable 1 }
+
+Syntax:
+   EnhancedCtrlPortEntry ::= SEQUENCE {
+      sh1EnhCtrlPortID
+        INTEGER,
+      sh1EnhCtrlLinkIntegrityCtrl
+        INTEGER,
+      sh1EnhCtrlLinkIntegrityAlarmingCtrl
+        INTEGER,
+      sh1EnhCtrlLinkIntegrityState
+        INTEGER,
+      sh1EnhCtrlExtendedDistanceCtrl
+        INTEGER,
+      sh1EnhCtrlPortConfig
+        OCTET STRING
+   }
+
+Definition:
+   A port table entry for the basic capabilities.
+
+Access:
+   not-accessible
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1EnhCtrlPortID  { sh1EnhCtrlPortEntry 1 }
+
+Syntax:
+   INTEGER (1)
+
+Definition:
+   An index into the enhanced control port table.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1EnhCtrlLinkIntegrityCtrl  { sh1EnhCtrlPortEntry 2 }
+
+Syntax:
+   INTEGER (1) {
+        other (1),
+        disabled (2),
+        enabled (3)
+   }
+   
+Definition:
+   Link integrity checking is enabled/disabled on a per port basis.
+
+Access:
+   read-write, trap(state), trap(cs)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1EnhCtrlLinkIntegrityAlarmCtrl  { sh1EnhCtrlPortEntry 3 }
+
+Syntax:
+   INTEGER (1) {
+        other (1),
+        disabled (2),
+        enabled (3)
+   }
+   
+Definition:
+   Enables/disables alarming (i.e., trap(alarm)) on a port basis for
+   the link integrity alarming feature.
+   
+Access:
+   read-write, trap(state), trap(cs)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1EnhCtrlLinkIntegrityState  { sh1EnhCtrlPortEntry 4 }
+
+Syntax:
+   INTEGER (1) {
+        not applicable (1),
+        connected (2),
+        failed (3)
+   }
+
+Definition:
+   Indicates whether the link is good or not.  If the port or link integrity
+   is disabled, the value is "not applicable".
+   
+   A Trap(alarm) is generated whenever the state transitions from
+   connected -> broken or from broken -> connected.
+
+Access:
+   read-only, trap(alarm)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1EnhCtrlExtendedDistanceCtrl  { sh1EnhCtrlPortEntry 5 }
+
+Syntax:
+   INTEGER (1) {
+        other (1),
+        disabled (2),
+        enabled (3)
+   }
+   
+Definition:
+   Enables/disables the extended distance option.
+
+Access:
+   read-write, trap(state), trap(cs)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1EnhCtrlPortConfig  { sh1EnhCtrlPortEntry 6 }
+
+Syntax:
+   OCTET STRING (11)
+
+Definition:
+   A collection of configuration information for a specific port.
+   The data value of this object contains the data values associated
+   with the following objects.  Since the object identifiers and length
+   indicators for the individual objects are not included, the octet string
+   is positionally encoded. This object has been defined for efficiency reasons.
+
+           Object Value             Octet Position
+   -------------------------------  --------------
+   sh1BasicCtrlPortCtrl                   1
+   sh1AddrTrackAuthMacAddr               2-7
+   sh1AddrTrackAuthAddrType               8
+   sh1EnhCtrlLinkIntegrityCtrl            9
+   sh1EnhCtrlLinkIntegrityAlarmCtrl      10
+   sh1EnhCtrlExtendedDistanceCtrl        11
+
+Access:
+   read-only
+
+Status:
+   mandatory
+
+8. Security Group
+   
+   
+OBJECT:
+   sh1SecEavesdroppingCtrl  { sh1SecurityCapability 1 }
+
+Syntax:
+   INTEGER (1) {
+        other (1),
+        disabled (2),
+        enabled (3)
+   }
+   
+Definition:
+   Enables/disables jamming of frames to non-destination ports.
+   This is enabled/disabled on a hub basis.
+
+Access:
+   read-write, trap(state), trap(cs)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1SecIntrusionCtrl  { sh1SecurityCapability 2 }
+
+Syntax:
+   INTEGER (1) {
+        other (1),
+        disabled (2),
+        enabled (3)
+   }
+
+Definition:
+   Enables/disables filtering on a hub basis.
+
+Access:
+   read-write, trap(state), trap(cs)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1SecIntrusionAlarmCtrl  { sh1SecurityCapability 3 }
+
+Syntax:
+   INTEGER (1) {
+        other (1),
+        disabled (2),
+        enabled (3)
+   }
+   
+Definition:
+   Enables/disables alarming (i.e., trap(intrusion)) on a hub basis for
+   the intrusion protection security feature.
+
+Access:
+   read-write, trap(state), trap(cs)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1SecPassword  { sh1SecurityCapability 4 }
+
+Syntax:
+   OCTET STRING (8)
+
+Definition:
+   The community string (password) for which the SmartHUB will allow SETs.
+   This object is defined for setting/changing the password.  The password
+   sent in SET packets is sent in the Community Name field which is in the
+   packet's header (i.e., it is not sent as an object).
+
+Access:
+   write-only, trap(state)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1SecBadPasswords  { sh1SecurityCapability 5 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   Indicates a SET was received over the network or from the hub's
+   COM port with a bad password.
+   
+Access:
+   read-only, trap(pwd)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1SecSettingAdminMacAddr  { sh1SecurityCapability 6 }
+
+Syntax:
+   OCTET STRING (6)
+
+Definition:
+   The source MAC address of the last SNMP Set packet processed by the hub. 
+   Also, if the state of the hub is changed via the RS-232 interface,
+   this object is sent. In that case, the object's value is encoded all 0's.
+
+Access:
+   read-only, trap(state), trap(pwd)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1SecSettingAdminIpAddr  { sh1SecurityCapability 7 }
+
+Syntax:
+   IpAddress
+
+Definition:
+   The source IP address of the last SNMP Set packet processed by the hub. 
+
+Access:
+   read-only, trap(state), trap(pwd)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1SecInbandSetsState  { sh1SecurityCapability 8 }
+
+Syntax:
+   INTEGER (1) {
+        other (1),
+        disabled (2),
+        enabled (3)
+   }
+
+Definition:
+   Indicates whether the hub will permit SNMP SETs received on the network.
+   SETs can only be disabled or enabled via the RS-232 port.
+
+Access:
+   read-only, trap(state), trap(cs)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1SecPortTable  { sh1SecurityCapability 9 }
+
+Syntax:
+   SEQUENCE OF SecurityPortEntry (1)
+
+Definition:
+   The port table for the basic capabilities.
+
+Access:
+   not-accessible
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1SecPortEntry  { sh1SecPortTable 1 }
+
+Syntax:
+   SecurityPortEntry ::= SEQUENCE {
+      sh1SecPortID
+           INTEGER,
+      sh1SecIntrusionAddr
+           OCTET STRING,
+      sh1SecIntrusionTimeStamp
+           TimeTicks,
+      sh1SecIntrusions
+           COUNTER
+   }
+
+Definition:
+   A port table entry for the security capabilities.
+
+Access:
+   not-accessible
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1SecPortID  { sh1SecPortEntry 1 }
+
+Syntax:
+   INTEGER (1)
+
+Definition:
+   An index into the security port table.
+
+Access:
+   read-only
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1SecIntrusionAddr  { sh1SecPortEntry 2 }
+
+Syntax:
+   OCTET STRING (6)
+
+Definition:
+   If an intruder has been detected on this port, the value of this object
+   is the source address of the intruder.  If the value is all 0's, no
+   intrusion is detected.
+
+Access:
+   read-only, trap(intrusion)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1SecIntrusionTimeStamp  { sh1SecPortEntry 3 }
+
+Syntax:
+   TIMESTAMP (4)
+
+Definition:
+   The timestamp of the last intrusion.  It is a snapshot of sysUpTime.
+
+Access:
+   read-only, trap(intrusion)
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1SecIntrusions  { sh1SecPortEntry 4 }
+
+Syntax:
+   COUNTER (4)
+
+Definition:
+   Indicates the number of times intrusion has been detected on this port.
+   If the value is all 0's, no intrusion is detected.
+
+Access:
+   read-only, trap(intrusion)
+
+Status:
+   mandatory
+
+9. Download Group
+   
+   
+OBJECT:
+   sh1DownloadImageFile  { sh1DownloadCapability 1 }
+
+Syntax:
+   OCTET STRING (64)
+
+Definition:
+   The file that the SmartHUB requests to be downloaded from the server.
+   This object's value is the full or relative path of the file on the
+   TFTP server containing the image to be downloaded. The syntax of the
+   string depends upon the operating system of the TFTP host.
+   (Forward slashes, backslashes, MS-DOS drive indicators, and "at" signs
+   may be in the string.)
+
+Access:
+   read-write
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1DownloadIpAddr  { sh1DownloadCapability 2 }
+
+Syntax:
+   IpAddress
+
+Definition:
+   The IP address the SmartHUB sends the download request to.
+   A zero value indicates that it has not been set.
+
+Access:
+   read-write
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1DownloadMacAddr  { sh1DownloadCapability 3 }
+
+Syntax:
+   OCTET STRING (6)
+
+Definition:
+   The MAC address of a non-UDP/IP download server. If the hub has no
+   administered IP address or the IP address of the download server
+   has not been administered, then this address will be used to
+   download using TFTP over Ethernet.
+
+Access:
+   read-write
+
+Status:
+   mandatory
+   
+   
+
+OBJECT:
+   sh1DownloadExecute  { sh1DownloadCapability 4 }
+
+Syntax:
+   INTEGER {
+        perform download (1)
+   }
+
+Definition:
+   Setting the value to 1 causes the hub to initiate a download
+   request to the Download Server.
+
+Access:
+   write-only
+
+Status:
+   mandatory
+
+10. Trap Definitions
+   
+-- More than one optional object can be included in a trap except where noted.
+
+
+count TRAP-TYPE
+     ENTERPRISE  att-hubmgtProd
+     VARIABLES   { sh1BasicCtrlHubID,
+               sh1EnhCtrlHubAlias,
+               sh1EnhCtrlTrapCountPeriodCtrl,  -- optional
+               sh1PerfMonRelayCounts,          -- optional
+               sh1PerfMonPortCounts }          -- optional
+     DESCRIPTION
+               "Statistics counters trap. Sent periodically."
+     :: = 1
+
+
+state TRAP-TYPE
+     ENTERPRISE  att-hubmgtProd
+     VARIABLES   { sh1BasicCtrlHubID,
+               sh1EnhCtrlHubAlias,
+               -- only 1 of the following 2 objects must be included
+               sh1SecSettingAdminMacAddr,
+               sh1SecSettingAdminIpAddr,
+               sh1SecEavesdroppingCtrl,           -- optional
+               sh1SecIntrusionCtrl,               -- optional
+               sh1SecIntrusionAlarmCtrl,          -- optional
+               sh1SecPassword,                    -- optional
+               sh1SecInbandSetsState,             -- optional
+               sh1BasicCtrlPortCtrl,              -- optional
+               sh1EnhCtrlTrapMacAddr,             -- optional
+               sh1EnhCtrlTrapIpAddr,              -- optional
+               sh1EnhCtrlGatewayIpAddr,           -- optional
+               sh1EnhCtrlNetworkMask,             -- optional
+               sh1EnhCtrlHupIpAddr,               -- optional
+               sh1EnhCtrlHubAlias,                -- optional
+               sh1EnhCtrlRs232State,              -- optional
+               sh1EnhCtrlRs232DataRate,           -- optional
+               sh1EnhCtrlTrapCountPeriodCtrl,     -- optional
+               sh1EnhCtrlTrapCountContentsCtrl,   -- optional
+               sh1EnhCtrlLinkIntegrityCtrl,       -- optional
+               sh1EnhCtrlLinkIntegrityAlarmCtrl,  -- optional
+               sh1EnhCtrlExtendedDistanceCtrl,    -- optional
+               sh1AddrTrackAuthMacAddr,           -- optional
+               sh1AddrTrackAuthAddrType,          -- optional
+               sh1PerfMonFrameSize1Bound,         -- optional
+               sh1PerfMonFrameSize2Bound,         -- optional
+               sh1PerfMonFrameSize3Bound,         -- optional
+               sh1PerfMonFrameSize4Bound }        -- optional
+     DESCRIPTION
+               "Control state change trap.  Sent at the completion of a SET."
+     :: = 2
+
+
+intrusion TRAP-TYPE
+     ENTERPRISE  att-hubmgtProd
+     VARIABLES   { sh1BasicCtrlHubID,
+               sh1EnhCtrlHubAlias,
+               sh1SecIntrusionAddr,
+               sh1SecIntrusions,
+               sh1SecIntrusionTimeStamp }
+     DESCRIPTION
+               "Intrusion violation trap.  Sent upon detection of intrusion."
+     :: = 3
+   
+
+alarm TRAP-TYPE
+     ENTERPRISE  att-hubmgtProd
+     VARIABLES   { sh1BasicCtrlHubID,
+               sh1EnhCtrlHubAlias,
+               sh1AddrTrackNewHubAddr,         -- optional
+               sh1EnhCtrlLinkIntegrityState,   -- optional
+               sh1BasicCtrlAutoPartitionState } -- optional
+     DESCRIPTION
+               "General alarm trap.  Sent upon state change of the alarm
+                condition."
+     :: = 4
+
+
+health TRAP-TYPE
+     ENTERPRISE  att-hubmgtProd
+     VARIABLES   { sh1BasicCtrlHubID,
+               sh1EnhCtrlHubAlias,
+               sh1SelfTestHubHealthState,
+               sh1SelfTestHubHealthData }
+     DESCRIPTION
+               "Hub health trap.  Sent upon completion of a self-test or
+                whenever the health of the hub changes."
+     :: = 5
+
+
+sqe TRAP-TYPE
+     ENTERPRISE  att-hubmgtProd
+     VARIABLES   { sh1BasicCtrlHubID,
+               sh1EnhCtrlHubAlias,
+               sh1BasicCtrlPortID }
+     DESCRIPTION
+               "SQE Test Not Disabled notification.  Indicates that an
+               external MAU attached to a repeater AUI port has SQE test
+               enabled."
+     :: = 6
+
+
+password TRAP-TYPE
+     ENTERPRISE  att-hubmgtProd
+     VARIABLES   { sh1BasicCtrlHubID,
+               sh1EnhCtrlHubAlias,
+               sh1SecBadPasswords,
+               -- only 1 of the following 2 objects must be included
+               sh1SecSettingAdminMacAddr, 
+               sh1SecSettingAdminIpAddr }
+     DESCRIPTION
+               "Bad password notification. Indicates that a Set with a bad
+                password has been attempted."
+     :: = 7
+   
+
+config TRAP-TYPE
+     ENTERPRISE  att-hubmgtProd
+     VARIABLES   { sh1BasicCtrlHubID,
+                 sh1EnhCtrlHubAlias,
+                 sh1EnhCtrlHubIpAddr,
+                 sh1EnhCtrlTrapIpAddr,
+                 sh1EnhCtrlGatewayIpAddr,
+                 sh1EnhCtrlNetworkMask,
+                 sh1EnhCtrlTrapMacAddr,
+                 sh1SelfTestHubHealthState,
+                 sh1SelfTestHubHealthData,
+                 sh1EnhCtrlHubVersion,
+                 sh1SecEavesdroppingCtrl,
+                 sh1SecIntrusionCtrl,
+                 sh1SecIntrusionAlarmCtrl,
+                 sh1EnhCtrlTrapCountContentsCtrl,
+                 sh1EnhCtrlTrapCountPeriodCtrl,
+                 sh1EnhCtrlRs232DataRate,
+                 sh1SecInbandSetsState,
+                 sh1PerfMonFrameSize1Bound,
+                 sh1PerfMonFrameSize2Bound,
+                 sh1PerfMonFrameSize3Bound,
+                 sh1PerfMonFrameSize4Bound,
+                 sh1EnhCtrlPortConfig }
+     DESCRIPTION
+                 "Conveys hub configuration information. Sent as a result of
+                  a Set being done on sh1EnhCtrlSendTrapConfig."
+     :: = 8
+
+
+coldStart TRAP-TYPE
+     ENTERPRISE  snmp
+     VARIABLES   { sh1BasicCtrlHubID,
+                 sh1EnhCtrlHubAlias,
+                 sh1EnhCtrlHubIpAddr,
+                 sh1EnhCtrlTrapIpAddr,
+                 sh1EnhCtrlGatewayIpAddr,
+                 sh1EnhCtrlNetworkMask,
+                 sh1EnhCtrlTrapMacAddr,
+                 sh1SelfTestHubHealthState,
+                 sh1SelfTestHubHealthData,
+                 sh1EnhCtrlHubVersion,
+                 sh1SecEavesdroppingCtrl,
+                 sh1SecIntrusionCtrl,
+                 sh1SecIntrusionAlarmCtrl,
+                 sh1EnhCtrlTrapCountContentsCtrl,
+                 sh1EnhCtrlTrapCountPeriodCtrl,
+                 sh1EnhCtrlRs232DataRate,
+                 sh1SecInbandSetsState,
+                 sh1PerfMonFrameSize1Bound,
+                 sh1PerfMonFrameSize2Bound,
+                 sh1PerfMonFrameSize3Bound,
+                 sh1PerfMonFrameSize4Bound,
+                 sh1EnhCtrlPortConfig }
+     DESCRIPTION
+                 "Signifies that the sending protocol entity is reinitializing
+                  itself such that the agent's configuration or the protocol
+                  entity implementation may be altered. Sent at boot time."
+     :: = 0
+
+

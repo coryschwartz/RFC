@@ -1,0 +1,315 @@
+11-Mar-85 08:49:59-PST,13073;000000000001    
+Return-Path: <NIC@SRI-NIC.ARPA>
+Received: FROM SRI-NIC.ARPA BY USC-ISIF.ARPA WITH TCP ; 8 Mar 85 18:07:30 PST
+Date: Fri 8 Mar 85 14:56:12-PST
+From: DDN Reference <NIC@SRI-NIC.ARPA>
+Subject: DDN Newsletter # 38
+To: DDN-NEWS: ;
+cc: nic@SRI-NIC.ARPA
+
+======================================================================
+DDN NEWS 38                                 DCA DDN Program Mgt Office    
+8 Mar 85                             Published by: Network Info Center
+                                    (NIC@SRI-NIC.ARPA)  1-800-235-3155
+
+
+                       DEFENSE  DATA  NETWORK
+
+                             NEWSLETTER
+
+
+Maximum Distribution Requested.  The  DDN NEWSLETTER is distributed by
+the  Network Information Center under  DCA contract.  For  addition to
+the online mailing list, contact NIC@SRI-NIC.ARPA.  Back issues may be
+obtained by FTP from the directory DDN-NEWS: at SRI-NIC [26.0.0.73 and
+10.0.0.51]  using the filename format  DDN-NEWS:DDN-NEWS-xx.TXT (where
+"xx" is the newsletter number.)
+======================================================================
+ 
+
+     Topic:  NETWORK PROTOCOLS - WHAT THEY ARE AND HOW TO FIND THEM
+
+         1.  2ND EDITION TCP/IP IMPLEMENTATIONS AND VENDORS GUIDE
+	     AVAILABLE
+         2.  X.25 COMPATIBLE INTERFACE PRODUCTS ON THE WAY
+             FOR POPULAR MAINFRAMES
+         3.  DDN X.25 PROTOCOL ONLINE AT THE NIC
+	 4.  RFCS--A FORUM FOR PROTOCOL DISCUSSION
+	 5.  OFFICIAL LIST OF ARPANET PROTOCOLS AVAILABLE 
+	     AS RFC 924
+         6.  IENS MERGED WITH RFCS
+	 7.  OFFICIAL DOD STANDARDS AVAILABLE FROM NAV PUBS
+	 8.  IEEE SPECIAL ISSUE ON TELECOMMUNICATIONS STANDARDS
+             JUST ISSUED
+	 9.  CCITT X.400 MESSAGE HANDLING PROTOCOL NOW IN PRINT
+        10.  QUESTIONS FROM THE DDN "HOTLINE" AT THE NIC
+
+----------------------------------------------------------------------
+
+		           Introduction
+
+Most of you are aware that protocols are rules used to control data
+transfer in a computer communications system.  Some of you may not be
+aware of the process by which proposal ideas develop into network
+protocols.  We hope that this newsletter gives you an overview of this
+process and indicates how to find copies of network protocols.  The
+NIC welcomes comments and suggestions for this and future newsletter
+topics.
+
+	          *******************************
+								
+1.  2ND EDITION TCP/IP IMPLEMENTATIONS AND VENDORS GUIDE AVAILABLE
+
+     The TCP/IP IMPLEMENTATIONS AND VENDORS GUIDE has just been updated
+and is available from the NIC.  This document lists hardware and
+software products which implement or are compatible with the TCP and
+IP protocols in use on the DDN.  Each entry describes the operating
+system with which the product or implementation is compatible, the
+language in which it is written and the features provided.  Contacts
+are listed for further information about obtaining public-domain
+software or purchasing a product.
+
+     The document has been reorganized into two major divisions,
+hardware products and software products.  Within each division, the
+material is arranged in alpha order by manufacturer.
+
+     Some new additions to the list are Spartacus products, including
+the KNET PC which implements the network standard protocols for
+certain microcomputers, and the IBM PC. Six products contained in the
+guide indicate that they are DDN X.25 compatible, as well as compatible
+with TCP and IP.  This reflects the January 1984 decision by DDN that
+all new systems must be compatible with DDN X.25.
+
+Inclusion of a vendor's product in this guide does not mean that a
+vendor has obtained this code; nor does it imply endorsement by the
+NIC or the DDN PMO.  The guide is for information purposes only.  It is
+available online on the SRI-NIC machine in the file named
+NETINFO:TCP-IP-IMPLEMENTATIONS.TXT and may be FTP'd by online users.
+A hardcopy is also available from the NIC.  Call 1-800-235-3155 to
+obtain a copy or send an online request to NIC@SRI-NIC.ARPA.
+
+
+                   **********************************
+
+2.  X.25 COMPATIBLE INTERFACE PRODUCTS ON THE WAY FOR POPULAR MAINFRAMES
+
+      DDN has  contracted  with 5  major  companies to  produce  TCP/IP
+interfaces.  These are the companies and products:
+
+Company			Hardware		Operating System		
+*******                 ********                ****************
+
+CDC			Cyber 170/xxx		NOS
+Gould Software		VAX 11/xxx		VAX/VMS
+Honeywell		LEVEL 6, DPS 6		GCOS 6 MOD 400
+Network Solutions	IBM370,303x,43xx,308x	MVS
+Internet Systems	Sperry 1100/xx		OSD/1100
+
+     Contracts are being processed as well for the Honeywell DPS8
+GCOS8 operating system, the IBM 370 VM system and for the DEC PDP 11
+RSX-11M system.
+
+     The RFP included the following requirements: 1) Each product must
+include the DoD standard for TCP and IP and the ARPANET application
+tools of TELNET, FTP and SMTP; 2) the TELNET application is required
+to support asynchronous terminals; 3) the product must implement the
+ARPANET network access protocols or DDN X.25.
+
+
+                   **********************************
+
+3.  DDN X.25 PROTOCOL ONLINE AT THE NIC
+
+     The NIC has the DDN X.25 Specification online in the file
+
+			NETINFO:X25.DOC
+
+     This document describes the specific options and features of
+CCITT Recommendation X.25 (1980) and the Federal Information
+Processing Standard (FIPS) 100/Federal Standard (Fed. Std.) 1041 (July
+1983) required of a host X.25 implementation to enable that host to
+communicate with a DDN X.25 Interface Message Processor ("IMP").  The
+document describes the X.25 interface as it pertains to the DDN.  In
+several areas where X.25 allows a choice, a single choice appropriate
+for DDN is specified; in areas which X.25 leaves unspecified,
+(addressing in particular), conventions are specified that are
+consistent with the overall architecture of DDN and its
+interoperability goals.  A copy of the FIPS 100/Fed. Std. 1041 is
+attached as Appendix C in this online document.
+
+
+                   ******************************			
+
+4.  RFCs--A FORUM FOR PROTOCOL DISCUSSION
+
+     A proposal for a new protocol often begins as an RFC (Request For
+Comments), a document submitted to the network community for the
+purpose of wide dissemination and discussion.  RFCs are maintained
+online on the SRI-NIC machine, in the directory RFC: with pathnames
+RFC:RFCnnn.txt, where "nnn" equals the RFC number.  An RFC may
+eventually become an official ARPANET standard, and, after appropriate
+review, a DoD standard to be implemented netwide on the DDN.  On the
+other hand, it may remain just an idea or a suggestion which may or
+may not develop into a full blown protocol.  If you are interested in
+the development of protocols you may wish to be on distribution for
+announcements of new RFCs.  To be added to the online distribution
+list, send a message to NIC@SRI-NIC.ARPA.  If an RFC is not very long,
+we can also send it to you in a mail message.  38 RFCs have been
+issued since June of last year.  Those of you without FTP capability
+may request hardcopies from NIC@SRI-NIC.ARPA.
+
+
+                   ********************************
+
+5.  OFFICIAL LIST OF ARPANET PROTOCOLS NOW AVAILABLE AS RFC 924
+
+     RFC 924 contains the most recent review of RFCs that have been
+adopted by the Internet community as official ARPANET protocols.  This
+file may be FTP'd from the NIC machine, SRI-NIC, with the filename
+          	
+		 RFC:RFC924.TXT
+
+Entitled "Official ARPA-Internet Protocols", this RFC was released in
+October of 1984 by Jon Postel.  It updates the last status report
+which was RFC 901 and contains the official ARPANET Protocols
+organized by level of network function, e.g., network, host or
+application level.
+
+
+		************************************
+
+6.  IENS MERGED WITH RFCS
+
+   The Internet Experimental Notes, IENs, are no longer being issued
+as a separate technical note series.  Instead, items which used to be
+issued as IENs will now be issued as RFCs.  This consolidation will
+bring the technical notes into one place, thus making them easier for
+users to find.  All IENs are still available from SRI-NIC.  They cover
+a time span from 1977 to 1982, during which time, 209 IENs were issued.
+
+
+		************************************
+
+7.  OFFICIAL DOD STANDARDS AVAILABLE FROM NAV PUBS
+
+     Protocols that have been adopted as official DoD standards are
+issued as MIL STDs.  Below is a list of network protocols now
+available as official MIL STDs.  We have included a table of
+corresponding RFCs.  Please note that the MIL STDs are the official
+DoD versions and are the ones that should be used for implementation
+on the DDN.  The RFC versions may differ slightly and are more
+descriptive in nature.
+
+		    MILSTD/RFC NUMBER CHART 	
+		    -----------------------
+
+    Protocol Name		       MILSTD. No.        RFC No.
+    -------------		       -----------        -------
+
+Internet Protocol (IP)                MIL-STD-1777     791, 814-817
+
+Transmission Control Protocol (TCP)   MIL-STD-1778     813-814, 816-17  
+							879, 889, 896
+
+File Transfer Protocol (FTP)	      MIL-STD-1780      678, 765
+
+Simple Mail Transfer Protocol (SMTP)  MIL-STD-1781	821, 822
+
+Telnet Protocol and Options (TELNET)  MIL-STD-1782        854
+
+
+ Military standards may be ordered from
+
+	Naval Publication and Forms Center, Code 3015
+	5801 Tabor Ave.
+	Philadelphia, PA  19120
+	215-697-3321
+
+
+		************************************
+
+8.  IEEE SPECIAL ISSUE ON TELECOMMUNICATIONS STANDARDS JUST PUBLISHED
+
+     To learn more about the review process for protocols and military
+standards, we recommend the article "The Development of Communication
+     Standards in the DoD" written by Philip S. Selvaggi of the Defense
+Communications Engineering Center (DCEC).  This article appears in
+IEEE Communications Magazine, Vol. 23 No. 1, (Jan. 1985).  The article
+gives a detailed overview of procedures in the military standards-
+making process.  Also included in the issue are articles on CCITT,
+ISO, IEC, and other standards bodies.  It is an excellent review of
+the U.S. and international protocol standardization process.
+
+	
+        	********************************
+
+9.  CCITT X.400 MESSAGE HANDLING PROTOCOL NOW IN PRINT
+
+     Many of you will be interested to know that the CCITT X.400
+Message Handling Systems protocol is now available in print.  Copies
+of this standard, which includes eight parts, may be ordered as Data
+Communication Networks X.400-X.430, ISBN 92-61-02361-4.  It is Vol.
+VIII.7 of the CCITT RED BOOK, Malaga-Torre Molinos 1984, is 270 pages,
+and costs $36.00.
+
+     Please note that this is NOT an official DoD protocol; however,
+many people are interested in its functionality.  To order from the
+source, send your request to:
+
+		International Telecommunication Union
+		General Secretariat - Sales Section
+		Place des Nations / CH - 1211 GENEVA 20
+			SWITZERLAND
+
+Alternately, it is available from
+
+		Omnicom, Incorporated
+	        501 Church St., NE.  Suite 206
+		Vienna, VA  22180  USA
+		TEL:  703-281-1135
+	        TELEX:  904059 WSH
+
+		*********************************
+
+
+10.  QUESTIONS FROM THE DDN "HOTLINE" AT THE NIC
+
+ How do I get a list of all the RFCs?
+
+     All protocols are listed in a file entitled RFC:RFC-INDEX.TXT
+     by date, author, number and title.  If you FTP the file to 
+     your site, you could do a search on the term 'gateways'
+     to find which RFCs apply to this subject and then FTP those
+     specific RFCs to your facility.  Or you could choose to order
+     them in hardcopy from the NIC by sending your request to
+     NIC@SRI-NIC.ARPA or calling the NIC hotline number,
+     1-800-235-3155.	
+
+ How do I get on the RFC distribution list?
+
+     To receive online announcements of new RFCs as they become
+     available send a message to NIC@SRI-NIC.ARPA.  User mailbox
+     addresses are added to the distribution list as requests are
+     received.  Announcements of new RFCs are mailed to the
+     distribution list and include a brief summary of the topic.
+
+ How do I get on an online distribution list for the discussion of TCP
+ and IP protocol standards and products? 
+
+     To join an online exchange among TCP developers and maintainers,
+     send requests to be added to the TCP-IP mailing list to
+     TCP-IP-REQUEST@SRI-NIC.ARPA.  TCP-IP is an unmoderated,
+     unedited mailing list and you will receive all messages at the
+     time contributors mail them.
+
+ How do I find RFCs on gateways?
+
+     The latest protocols issued on the gateway implementation are
+     RFC904 and RFC911.  Check the RFC Index for other related
+     protocols.
+
+                   ***************************
+                    *************************
+                     **********************
+                      ********************
+-------

@@ -1,0 +1,302 @@
+(Message inbox:2)
+Return-Path: @C.ISI.EDU:DDN-NEWS-LIST-RELAY@SRI-NIC.ARPA
+Posted-Date: Fri, 4 Sep 87 07:16:49 PDT
+Received-Date: Fri, 4 Sep 87 17:45:44 PDT
+Received: from C.ISI.EDU by venera.isi.edu (5.54/5.51)
+	id AA05340; Fri, 4 Sep 87 17:45:44 PDT
+Received: FROM SRI-NIC.ARPA BY C.ISI.EDU WITH TCP ; 4 Sep 87 17:40:25 PDT
+Date: Fri, 4 Sep 87 07:16:49 PDT
+From: DDN Reference <NIC@SRI-NIC.ARPA>
+Subject: DDN News #54
+To: DDN-NEWS:;
+Cc: nic@SRI-NIC.ARPA
+Message-Id: <12331934028.15.NIC@SRI-NIC.ARPA>
+
+======================================================================
+DDN NEWS 54                      DCA DDN Defense Communications System
+4 Sep 87                         Published by: DDN Network Info Center
+SUPERSEDES DDN NEWS 49              (NIC@SRI-NIC.ARPA)  (800) 235-3155
+
+
+                        DEFENSE  DATA  NETWORK
+
+                              NEWSLETTER
+
+
+Maximum Distribution Requested.  The DDN NEWSLETTER is distributed
+online by the DDN Network Information Center under DCA contract.  For
+addition to the online mailing list, contact NIC@SRI-NIC.ARPA.  Back
+issues may be read through the TACNEWS server ("@n" command at the
+TAC) or may be obtained via FTP (or Kermit) from the SRI-NIC host
+[26.0.0.73 or 10.0.0.51] using login="anonymous" and password="guest".
+The pathname for newsletters is DDN-NEWS:DDN-NEWS-nn.TXT (where "nn"
+is the newsletter number).
+======================================================================
+
+
+           B600 -  DCS DATA SYSTEMS & DDN PMO ORGANIZATION
+           -----------------------------------------------
+
+
+
+Following is the current organization for the Deputy Director, Defense
+Communications System Data Systems (DCSDS) and Defense Data Network
+Program Management Office (DDN PMO), of the Defense Communications System
+Organization (DCSO), Defense Communications Agency (DCA).
+
+
+TELEPHONE:  COMMERCIAL       AUTOVON    LOCATION      
+            ----------       -------    --------      
+            (202) 692-XXXX   222-XXXX   ARLINGTON, VA
+            (202) 393-1839   XXXXXXXX   WASHINGTON - FORT DETRICK TIE LINE
+            (205) 279-XXXX   446-XXXX   GUNTER AFS, AL
+            (301) 663-XXXX   343-XXXX   FORT DETRICK, MD
+            (703) 285-XXXX   356-XXXX   MCLEAN, VA
+            (703) 437-XXXX   364-XXXX   RESTON, VA
+
+    CODE    TITLE     NAME                TELEPHONE     EM MAILBOX
+    ----    -----     ----                ---------     ---------- 
+
+    B600  DCS DATA SYSTEMS & PROGRAM MANAGER, DEFENSE DATA NETWORK
+    --------------------------------------------------------------
+DEPDIR/PROG MGR   HERRICK, THOMAS M COL    285-5010  DCAB600@DDN1.ARPA
+SECY              BURGESS, LINDA K         285-5010  BURGESS@DDN1.ARPA
+
+
+                   B601  ASSISTANT DEPUTY DIRECTOR
+                   -------------------------------
+ASST DEP DIR      SCHONBORN, EDUARDO JR    285-5022  DCAB601@DDN1.ARPA
+SECY              JOHNSON, PATRICIA C      285-5022
+
+
+                      B603  EXECUTIVE ASSISTANT
+                      -------------------------
+EXEC ASST         MURRAY, MARGARET A MAJ   285-5010  DCAB603@DDN1.ARPA
+ADMIN ASST        DARBY, LINDA G YN2       285-5010
+
+
+              B602  TECHNICAL MANAGER, DCS DATA SYSTEMS
+              -----------------------------------------
+TECH MGR          TABACCHI, LEONARD A      285-5033  DCAB602@DDN1.ARPA
+SECY              TAYLOR, CHARLOTTE A      285-5333
+    
+
+        B602A DCS DATA SYSTEMS PLANNING & ARCHITECTURE BRANCH
+        -----------------------------------------------------
+CHIEF             MUNDY, GEORGE R LTCOL    285-5481  DCAB602A@DDN1.ARPA    
+COMM STAFF OFF    GAMBLE, KEITH C LTC      285-5206  GAMBLE@DDN1.ARPA
+COMM STAFF OFF    ROMANIK, BERNARD J JR LTC285-5206  ROMANIK@DDN1.ARPA
+AUTOCOMMSYS ANAL  CARTER, GLEN MAJ         285-5482  GCARTER@DDN1.ARPA
+ELEC ENGR         MCGOWAN, JAMES E         285-5219  MCGOWAN@DDN1.ARPA
+COMP SCI          ZMUDZINSKI, THOMAS E     285-5578  ZMUDZINSKI@DDN1.ARPA
+
+
+                B602B CONFIGURATION MANAGEMENT BRANCH
+                -------------------------------------
+CHIEF             CLAITOR, JOHN H          285-5017  DCAB602B@DDN1.ARPA     
+PROG ANAL         LINK, BARBARA S          285-5234  LINK@DDN1.ARPA
+COMP SPEC         SANDERS, LUCILLE K       285-5220  LSANDERS@DDN1.ARPA
+COMM SPEC         CLEM, JEFFREY L RM1      285-5342  JCLEM@DDN1.ARPA
+
+
+          B604  DCS DATA SYSTEMS LIAISON OFFICE (GUNTER AFS)
+          -------------------------------------------------
+CHIEF             CLARKE, THOMAS W JR      279-3508  DCALNO@GUNTER-ADAM.ARPA
+COMP SCI          PRICE, RICHARD W         279-3213  DCALNO@GUNTER-ADAM.ARPA
+COMM STAFF OFF    GRANT, PAUL D MAJ        279-3213  DCALNO@GUNTER-ADAM.ARPA
+COMP SYS ANAL     FLEIT, MERLE E           285-5131  MERLE@DDN1.ARPA
+COMM SPEC         GOVE, MAXINE T           279-3213  DCALNO@GUNTER-ADAM.ARPA
+COMM SPEC         ARNOLD, BENJAMIN T MSGT  279-3213  DCALNO@GUNTER-ADAM.ARPA
+PROG ANAL         PELLIN, JULIA L          285-5392  PELLIN@DDN1.ARPA
+
+
+               B610  DEVELOPMENT & ENGINEERING DIVISION
+               ----------------------------------------
+CHIEF             GRINDLE, WAYNE W         285-5039  DCAB610@DDN1.ARPA
+SECY              LIGHTNER, VICTORIA L     285-5033
+
+
+           B611  HARDWARE & TRANSMISSION ENGINEERING BRANCH
+           ------------------------------------------------
+CHIEF             FONTZ, CHARLES R CDR     285-5130  DCAB611@DDN1.ARPA
+COMM MGT SPEC     HENRY, DARRYL W          285-5038  DHENRY@DDN1.ARPA  
+COMM STAFF OFF    LEONARD, ROBERT G MAJ    285-5020  LEONARD@DDN1.ARPA        
+COMM SPEC         RUSSELL, CHARLES F       285-5102  CRUSSELL@DDN1.ARPA
+COMM MGT SPEC     CARTER, DONALD L         285-5692  CARTER@DDN1.ARPA      
+COMM SPEC         TSO, ANN J               285-5014  ANNTSO@DDN1.ARPA
+COMM SPEC         YAUGER, KEITH B RM1      285-5344  YAUGER@DDN1.ARPA
+COMM SPEC         SCHAEFFER, WARREN W      285-5344  WSCHAEFFER@DDN1.ARPA
+COMM TECH         TORRES, PEDRO G TSGT     285-5334  TORRES@DDN1.ARPA
+COMM TECH         CROCHRAN, BRYAN E        285-5224  CROCHRAN@DDN1.ARPA
+
+
+                  B612  SOFTWARE ENGINEERING BRANCH
+                  ---------------------------------
+
+CHIEF             MALLORY, JUNE E          285-5045  DCAB612@DDN1.ARPA
+SECY                                       285-5034
+COMP SPEC         MORRIS, DENNIS C         285-5221  DMORRIS@DDN1.ARPA     
+COMM STAFF OFF    ST JOHNS, MICHAEL C CAPT 285-5133  STJOHNS@DDN1.ARPA        
+COMP SPEC         ROBINSON, JAMIE A        285-5103  JAMIE@DDN1.ARPA
+COMP SPEC         VEST, SANDRA A           285-5223  SVEST@DDN1.ARPA
+COMM TECH         KEELER, QUINN SSGT       285-5029  KEELER@DDN1.ARPA
+COMM TECH         ROUSE, DARRYL            285-5218  DROUSE@DDN1.ARPA
+
+
+                    B613  TEST & EVALUATION BRANCH
+                    ------------------------------            
+CHIEF             ROSE, STEPHEN R LTCOL    285-5445  DCAB613@DDN1.ARPA      
+SECY              HANSHAW, BARBARA P       285-5575                      
+COMP SCI          ELY, CHARLES A           285-5337  CELY@DDN1.ARPA
+COMM STAFF OFF    WINCHELL, DENNIS E MAJ   285-5217  WINCHELL@DDN1.ARPA
+COMP SPEC         BAUMAN, ANNETTE C        285-5459  ABAUMAN@DDN1.ARPA
+COMP SPEC         WHITE, DONALD M          285-5306  DWHITE@DDN1.ARPA
+COMM SPEC         SHAFFER, CLARENCE F      285-5455  SHAFFER@DDN1.ARPA
+COMM STAFF OFF    FREEMAN, JOHN E MAJ      285-5488  FREEMAN@DDN1.ARPA
+RADIOMAN          OBERT, JAMES S RM2       285-5128  OBERT@DDN1.ARPA
+COMM MGT SPEC     JOHNS, JEFFREY W         285-5134  JJOHNS@DDN1.ARPA
+COMM TECH         WALKER, WILBERT L SSG    285-5034  WWALKER@DDN1.ARPA
+
+
+           B620  RESOURCE & ACQUISITION MANAGEMENT DIVISION
+           ------------------------------------------------
+CHIEF             POWELL, JAMES A          285-5101  DCAB620@DDN1.ARPA
+SECY              OLERTA, MITZI G          285-5015                    
+
+
+                   B621  RESOURCE MANAGEMENT BRANCH
+                   --------------------------------
+CHIEF             CHARSKE, ELLEN M         285-5012  DCAB621@DDN1.ARPA
+PROG ANAL         HART, CHARLOTTE A        285-5031  CHART@DDN1.ARPA
+COMM STAFF OFF    SIMONSON, MARTIN A MAJ   285-5326  SIMONSON@DDN1.ARPA
+PROG ANAL         SPELLMAN, GLORIA P       285-5396  SPELLMAN@DDN1.ARPA
+SPT SVS ASST      ALBERT, MONICA R         285-5325  ALBERT@DDN1.ARPA
+
+
+                 B622  ACQUISITION MANAGEMENT BRANCH
+               	 -----------------------------------
+CHIEF             MAUGHAN, ALLAN M LTC     285-5019  DCAB622@DDN1.ARPA
+SECY              TUCKER, JANICE M         285-5016
+COMM SPEC         OLSON, ROBERT O          285-5135  ROLSON@DDN1.ARPA
+COMP SYS ANAL     HYRKAS, RONALD J         285-5105  HYRKAS@DDN1.ARPA
+COMM MGT SPEC     WALKER, JOHN R           285-5449  JWALKER@DDN1.ARPA
+COMM MGT SPEC     COX, JANICE P            285-5104  JCOX@DDN1.ARPA
+COMM MGT SPEC     HELBRINGER, DONALD R     285-5612  HELBRINGER@DDN1.ARPA
+COMP SPEC         SMALLWOOD, TYRONE G      285-5238  SMALLWOOD@DDN1.ARPA
+COMP SYS ANAL     O'NEILL, MARY A          285-5450  ONEILL@DDN1.ARPA
+COMM MGT SPEC     TAGGART, JIMMY L         285-5458  JTAGGART@DDN1.ARPA
+
+
+          B630  DEPUTY PROGRAM MANAGER FOR LOGISTICS (DPML)
+          -------------------------------------------------
+DPML	          HOLLAND, CHAZ M LTCOL    285-5473  DCAB630@DDN1.ARPA
+SECY              MOYER, SUSAN J           285-5447
+LOG MGT SPEC      JASPER, JOHN W           285-5444  JJASPER@DDN1.ARPA  
+LOG MGT SPEC      MATSON, ERIC A           285-5443  EMATSON@DDN1.ARPA
+
+
+             B640  DATA COMMUNICATIONS SERVICES DIVISION
+             -------------------------------------------
+CHIEF		  SCHREINER, DAVID M LTC   285-5592  DCAB640@DDN1.ARPA
+SECY              SMITH, MARGARET E        285-5024
+
+
+         B641  SUBSCRIBER REQUIREMENTS AND INTEGRATION BRANCH
+         ----------------------------------------------------
+CHIEF             TALLENT, MICHAEL E LTCOL 285-5035  DCAB641@DDN1.ARPA
+SECY              ZURAF, KATHERINE M       285-5023
+COMM SYS ENGR     PUCHON, CHARLES A MAJ    285-5026  DDN-ARMY@DDN1.ARPA
+COMM STAFF OFF    GREEN, JAMES C           285-5025  DDN-USAF@DDN1.ARPA
+ADP STAFF OFF     HOWARD, RONALD G CAPT    285-5335  HOWARD@DDN1.ARPA
+COMM MGT SPEC     JACK, JAMES E MAJ (TEMP) 285-5028  DDN-DOD@DDN1.ARPA
+COMM MGT SPEC     YOUNG, JACKIE R          285-5137  DDN-NAVY@DDN1.ARPA
+COMM SPEC         HARRISON, ROYCE L        285-5216  RHARRISON@DDN1.ARPA
+COMP SPEC         CONWELL, MURIEL M        285-5476  MCONWELL@DDN1.ARPA
+NSF               JACK, JAMES E MAJ        285-5037  JACK@DDN1.ARPA
+COMM SPEC         BREWER, ANTHONY W        285-5106  TBREWER@DDN1.ARPA
+COMM SPEC         PHILLIPS, DEBORAH L      285-5036  PHILLIPS@DDN1.ARPA
+COMM SPEC         RYAN, JAMES P JR         285-5332  RYAN@DDN1.ARPA
+COMM TECH         SAMORA, TONY SFC         285-5051  SAMORA@DDN1.ARPA
+COMM TECH         GRAVES, ROGER K TSGT     285-5335  GRAVES@DDN1.ARPA
+
+
+                 B642  INSTALLATION MANAGEMENT BRANCH
+                 ------------------------------------
+CHIEF             TOLAND, RAY B LTC        285-5007  DCAB642@DDN1.ARPA
+SECY              JOBSON, ANITA B          285-5591  JOBSON@DDN1.ARPA
+COMM STAFF OFF    KRAUSSMAN, JAMES P MAJ   285-5328  MAMURRAY@DDN1.ARPA
+COMM STAFF OFF    KRAUSE, RANDY H MAJ      285-5341  KRAUSE@DDN1.ARPA 
+COMM TECH         SCANTLEBURY, AURBAN J SFC285-5398  SCANTLEBURY@DDN1.ARPA
+COMM ELEC         MCFADDEN, ANTHONY W MSG  285-5479  MCFADDEN@DDN1.ARPA
+COMM SPEC         OWEN, MELVIN R           285-5018  MOWEN@DDN1.ARPA
+COMM SPEC         LINK, DAVID L            285-5395  DLINK@DDN1.ARPA
+COMM TECH         YEAGER, WILLIAM A MSGT   285-5480  YEAGER@DDN1.ARPA
+COMM TECH         FOX, CHARLES F SGT       285-5340  CFOX@DDN1.ARPA
+
+
+            B643  TELECOMMUNICATIONS CERTIFICATION OFFICE
+            ---------------------------------------------
+CHIEF             GUTSCHMIDT, RONALD E     285-5100  DCAB643@DDN1.ARPA
+COMM SPEC         GEURRANDENO, FRANK J     285-5339  DDNTCO@DDN1.ARPA
+COMM OPR          MCDONALD, TOMMIE SSGT    285-5343  MCDONALD@DDN1.ARPA
+COMM TECH         MCCLOUD, DEBORAH N       285-5571  MCCLOUD@DDN1.ARPA 
+
+
+                    B650  DATA OPERATIONS DIVISION
+                    ------------------------------
+CHIEF             MILTON, JOHN W           285-5226  DCAB650@DDN1.ARPA
+SECY              SABO, PATRICIA K         285-5226
+SECY (PART TIME)  NELMS, LYNDEE J          285-5226
+
+               B651  DATA OPERATIONS MANAGEMENT BRANCH
+               ---------------------------------------
+CHIEF             DAMON, TERRY M           692-7582  DCAB651@DDN1.ARPA
+SECY              MCIVER, VERONICA S       692-1325   
+AUTODIN TECH      PENNEY, DAVID M MSGT     692-7582
+COMM SPEC         GUIBERSON, GERALD E      692-7583  DISNETMGR@DDN1.ARPA
+COMM SPEC         LETSCHE, CHARLES F       692-7582
+COMM SPEC         ATHERTON, RICKY D        692-9034
+COMM SPEC         MOUNTJOY, JAMES B        692-7582  MOUNTJOY@DDN1.ARPA
+COMP SPEC         ROCK, JEFFERSON R        692-9034  ROCK@DDN1.ARPA
+COMM MGT SPEC     HOGAN, ANDREW L JR       692-7581  WINCSMGR@DDN1.ARPA
+						     SCINETMGR@DDN1.ARPA
+						     TCONETMGR@DDN1.ARPA
+COMM STAFF OFF    FENNIG, CHRISTOPHER G LT 692-7580  MILNETMGR@DDN1.ARPA
+COMM STAFF OFF    HARRELL, REBECCA L CAPT  692-7580  ARPANETMGR@DDN1.ARPA
+COMM SPEC         JORDAN, LOUIS A JR       692-7580
+COMM MGT SPEC     BENZ, FRANK D            692-7582  BENZ@DDN1.ARPA
+
+
+                 B652  DATA OPERATIONS SUPPORT BRANCH
+                 ------------------------------------
+CHIEF             NIELSEN, WADE L LTCOL    285-5225  DCAB652@DDN1.ARPA
+SECY              BURKHARDT, ELIZABETH A   285-5345
+COMM MGT SPEC     PHILBROOK, ROBERT M      285-5236  PHILBROOK@DDN1.ARPA
+COMM MGT SPEC     SNIVELY, JACKIE L        285-5227  SNIVELY@DDN1.ARPA
+COMP SPEC         CURRAN, RICHARD J        285-5132  CURRAN@DDN1.ARPA
+COMP SCI          POWELL, BOBBY J          285-5228  BPOWELL@DDN1.ARPA
+COMM ENGR         SCOFIELD, LINDA W        285-5230                         
+COMM SPEC         FORAND, ROLAND J         285-5661  FORAND@DDN1.ARPA
+COMM SPEC         BUSH, WALTER K           285-5129  BUSH@DDN1.ARPA
+COMM SPEC         CASTRO, CARLOS F         285-5032  CASTRO@DDN1.ARPA
+COMM SPEC         ROBINSON, LARRY O SMSGT  285-5231                     
+COMM SPEC         FRAZIER, GREGORY C       285-5235                       
+COMM TECH         THEOS, ROBERT F SFC      285-5232  THEOS@DDN1.ARPA
+COMM TECH         WINSTON, LARRY J SFC     285-5662  WINSTON@DDN1.ARPA
+
+
+       B670  OPERATIONAL SOFTWARE SUPPORT DIVISION (FT DETRICK)
+       -------------------------------------------------------
+CHIEF             PERKINS, HARRY D         663-2124  DCAB670@DDN1.ARPA
+SECY              STOUTER, DEBRA M         663-2124  STOUTER@DDN1.ARPA
+DIN DIG SW TECH   BARNABY, MARY P SSGT     663-2124  BARNABY@DDN1.ARPA
+COMP PROG/ANAL    KEENAN, JAMES E          663-2124  KEENAN@DDN1.ARPA
+COMP PROG/ANAL    KING, JOHN W             663-2124  KING@DDN1.ARPA
+COMP PROG/ANAL    DENNIS, MARTHA A         663-2124  DENNIS@DDN1.ARPA
+COMP PROG/ANAL    WHITE, DANIEL J          663-2124  WHITE@DDN1.ARPA
+COMP PROG/ANAL    MASSER, CONNIE M         663-2124  MASSER@DDN1.ARPA
+COMP PROG/ANAL    DEENER, DONALD J         663-2124  DCAB670@DDN1.ARPA
+
+                     -------END-OF-MESSAGE-------
+	
+-------

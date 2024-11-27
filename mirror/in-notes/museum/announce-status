@@ -1,0 +1,43 @@
+
+Two previously published RFCs have changed status.
+
+	RFC:	1212
+	Title:	Concise MIB Definitions
+	Author:	M. Rose and K. McCloghrie, Editors
+	Date:	March 1991
+
+		Old Status:	Proposed Standard
+		New Status:	Draft Standard
+	
+
+	RFC:    1213
+        Title:  Management Information Base for Network Management of
+		TCP/IP-based internets: MIB-II
+        Author: K. McCloghrie and M. Rose, Editors
+        Date:   March 1991
+
+	        Old Status:     Draft Standard
+        	New Status:     Standard 
+
+RFCs can be obtained via FTP from NIC.DDN.MIL, FTP.NISC.SRI.COM,
+NIS.NSF.NET, NISC.JVNC.NET, VENERA.ISI.EDU, or WUARCHIVE.WUSTL.EDU.
+
+Instructions for retrieving RFCs may be found in the file
+"in-notes/rfc-retrieval.txt" on VENERA.ISI.EDU.
+
+Requests for special distribution should be addressed to either the
+author of the RFC in question, or to NIC@NIC.DDN.MIL.  Unless
+specifically noted otherwise on the RFC itself, all RFCs are for
+unlimited distribution.
+
+Submissions for Requests for Comments should be sent to
+RFC-EDITOR@ISI.EDU.  Please consult RFC 1111, "Instructions to RFC
+Authors", for further information.
+
+Requests to be added to or deleted from this distribution list should
+be sent to RFC-REQUEST@NIC.DDN.MIL.
+
+
+Joyce K. Reynolds
+USC/Information Sciences Institute
+

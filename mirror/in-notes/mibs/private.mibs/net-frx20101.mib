@@ -1,0 +1,2672 @@
+
+
+-- This is the enterprise specific MIB for NET's Frame Relay Exchange (FRX)
+-- Copyright Network Equipment Technologies, Redwood City, CA 94026.
+-- Written by Todd E. Enersen, Dale Francisco, David E. Swanson; January 1993.
+-- This is a SNMP-V1 MIB.  The SNMP-V2 MIB is forthcoming.
+
+FRX-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+	Counter, enterprises,
+	Gauge, IpAddress				FROM RFC1155-SMI
+	OBJECT-TYPE				FROM RFC-1212
+	DisplayString				FROM RFC1213-MIB
+	TRAP-TYPE				FROM RFC-1215;
+
+net		OBJECT IDENTIFIER			::= { enterprises 177 }
+spx		OBJECT IDENTIFIER			::= { net 1 }
+lwx		OBJECT IDENTIFIER			::= { net 2 }
+frx		OBJECT IDENTIFIER			::= { net 3 }
+adaptive		OBJECT IDENTIFIER			::= { net 4 }
+idnx		OBJECT IDENTIFIER			::= { net 5 }
+
+globals		OBJECT IDENTIFIER			::= { frx 1 }
+node		OBJECT IDENTIFIER			::= { frx 2 }
+port		OBJECT IDENTIFIER			::= { frx 3 }
+circuit		OBJECT IDENTIFIER			::= { frx 4 }
+operator		OBJECT IDENTIFIER			::= { frx 5 }
+event		OBJECT IDENTIFIER			::= { frx 6 }
+network		OBJECT IDENTIFIER			::= { frx 7 }
+management		OBJECT IDENTIFIER			::= { frx 8 }
+gateway		OBJECT IDENTIFIER			::= { frx 9 }
+
+
+--
+-- global variables
+--
+
+mibVersion			OBJECT-TYPE
+	SYNTAX	INTEGER
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The version number of this FRX MIB."
+	::= { globals 1 }
+
+mibEditVersion			OBJECT-TYPE
+	SYNTAX	INTEGER
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The edit version (sub version) number of this FRX MIB."
+	::= { globals 2 }
+--
+-- The node parameters and status.
+--
+nodeIdnxAddress			OBJECT-TYPE
+	SYNTAX DisplayString (SIZE(0..16))
+	ACCESS read-only
+	STATUS mandatory
+	DESCRIPTION
+		"The IDNX Address of this PX card, e.g. NxCy."
+	::= { node 1 }
+
+nodeSoftwareRelease			OBJECT-TYPE
+	SYNTAX DisplayString (SIZE(0..80))
+	ACCESS read-only
+	STATUS mandatory 
+	DESCRIPTION 
+		"The release of FRX code running on this PX card,
+		 e.g. Release 2.01.01 Version 81.01."
+	::= { node 2 }
+
+nodeSoftwareReleaseDate			OBJECT-TYPE
+	SYNTAX DisplayString (SIZE(0..80))
+	ACCESS read-only
+	STATUS mandatory
+	DESCRIPTION 
+		"The date the FRX code was built, e.g. 
+		 Wed Feb 10 14:12:24 PST 1993 by tee."
+	::= { node 3 }
+
+nodeBootVersion 			OBJECT-TYPE
+	SYNTAX DisplayString (SIZE(0..80))
+	ACCESS read-only
+	STATUS mandatory
+	DESCRIPTION 
+		"The version of boot prom on the PX card."
+	::= { node 4 }
+
+nodeCardType			OBJECT-TYPE
+	SYNTAX DisplayString (SIZE(0..80))
+	ACCESS read-only
+	STATUS mandatory
+	DESCRIPTION 
+		"The type of PX card running the FRX code."
+	::= { node 5 }
+
+nodeUpTime			OBJECT-TYPE
+	SYNTAX DisplayString (SIZE(0..80))
+	ACCESS read-only
+	STATUS mandatory
+	DESCRIPTION 
+		"The amount of time the FRX has been alive."
+	::= { node 6 }
+
+nodeCongestionLevel			OBJECT-TYPE
+	SYNTAX  INTEGER {
+	    	notCongested(1), 
+		approachingCongestion(2),
+		congested(3),
+		fullyCongested(4)
+		}
+	ACCESS read-only
+	STATUS mandatory
+	DESCRIPTION 
+		"The current state of congestion for the FRX node. 
+		The valid values 		are notCongested (normal operation),
+		approachingCongestion (FECN and 		BECN are being set),
+		congested (DE frames are being dropped), and fullyCongested
+		(normal data frames are being dropped)."
+	::= { node 7 }
+
+nodeBuffersUsed			OBJECT-TYPE
+	SYNTAX	INTEGER (0..500)
+	ACCESS 	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The number of system buffers being used."
+	::= { node 8 }
+
+nodeNumberHDLCPorts			OBJECT-TYPE
+	SYNTAX 	INTEGER (4..32)
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The number of HDLC ports the hardware supports."
+	::= { node 9 }
+
+nodeIPAddress			OBJECT-TYPE	
+	SYNTAX	IpAddress
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"The IP Address of this FRX Node."
+	::= { node 10 }
+
+nodeNetworkMask			OBJECT-TYPE
+	SYNTAX	IpAddress
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"The IP network mask for this FRX Node."
+	::= { node 11 }
+
+nodeBackcard			OBJECT-TYPE
+	SYNTAX	INTEGER{
+		disabled(1),
+		enabled(2)
+		}
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"Enables or disables the backcard on the FRX node.
+		The backcard must be enabled for gateway functionality."
+	::= { node 12 }
+	
+nodeBackcardType			OBJECT-TYPE
+	SYNTAX	INTEGER {
+		ethernet(1),
+		unknown-invalid(2)
+		}
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The type of backcard interface installed."
+	::= { node 13 }
+
+nodeBackcardSerialNumber				OBJECT-TYPE
+	SYNTAX	DisplayString (SIZE(1..25))
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The serial number and revision of the backcard interface."
+	::= { node 14 }
+	
+nodeBillingDownloads			OBJECT-TYPE
+	SYNTAX	INTEGER {
+		disabled(1),
+		enabled(2)
+		}
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"Enables or disables billing record downloads
+		 to an NMS workstation from this FRX node."
+	::= { node 15 }
+
+nodeConfigurationDownloads				OBJECT-TYPE
+	SYNTAX	INTEGER {
+		disabled(1),
+		enabled(2)
+		}
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"Enables or disables configuration record 
+		 downloads to an NMS workstation from this
+		 FRX node."
+	::= { node 16 }
+		
+nodeFrameCounterThreshold				OBJECT-TYPE
+	SYNTAX	INTEGER
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"A threshold that causes a billing record
+		 to be downloaded when a frame counter exceeds
+		 its value."
+	::= { node 17 }
+
+nodeByteCounterThreshold 				OBJECT-TYPE
+	SYNTAX	INTEGER
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"A threshold that causes a billing record
+		 to be downloaded when a byte counter exceeds
+		 its value."
+	::= { node 18 }
+
+nodeBillingTimeTable				OBJECT-TYPE
+	SYNTAX SEQUENCE OF NodeBillingTimeEntry
+	ACCESS	not-accessible
+	STATUS	mandatory
+	DESCRIPTION
+		"The list of times to download billing
+	 	 records to an NMS workstation."
+	::= { node 19 }
+
+nodeNMSWorkstationTable				OBJECT-TYPE
+	SYNTAX SEQUENCE OF NodeNMSWorkstationEntry
+	ACCESS	not-accessible
+	STATUS	mandatory
+	DESCRIPTION
+		"The list of workstations that are downloaded
+		 with billing and configuration records."
+	::= { node 20 }
+nodeBillingTimeEntry				OBJECT-TYPE
+	SYNTAX	NodeBillingTimeEntry
+	ACCESS	not-accessible
+	STATUS	mandatory
+	DESCRIPTION
+		"A row from the billing download time table."
+	INDEX	{ downloadTimeIndex }
+	::= { nodeBillingTimeTable 1 }
+
+NodeBillingTimeEntry ::= 
+	SEQUENCE { 
+		downloadTime			OCTET STRING,
+		downloadTimeRowStatus			INTEGER,
+		downloadTimeIndex			INTEGER (0..86399)
+	}
+
+downloadTime			OBJECT-TYPE
+	SYNTAX	OCTET STRING
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"A time of day at which billing records
+	  	 for the node are sent to an NMS workstation."
+	::= { nodeBillingTimeEntry 1 }
+
+downloadTimeRowStatus			OBJECT-TYPE
+	SYNTAX	INTEGER {
+		invalid(1),
+		valid(2)
+		}
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"Controls row deletion for this table. Setting to 
+		 invalid deletes the row from the table."
+	::= { nodeBillingTimeEntry 2 }
+
+downloadTimeIndex			OBJECT-TYPE
+	SYNTAX	INTEGER (0..86399)
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The index into the billing time table."
+	::= { nodeBillingTimeEntry 3 }
+
+nodeNMSWorkstationEntry 			OBJECT-TYPE
+	SYNTAX	NodeNMSWorkstationEntry
+	ACCESS	not-accessible
+	STATUS	mandatory	
+	DESCRIPTION
+		"A row from the NMS workstation download 
+		 target list."
+	INDEX	{ nmsWorkstationIndex }
+	::= { nodeNMSWorkstationTable 1 }
+
+NodeNMSWorkstationEntry ::=
+	SEQUENCE {
+		nmsWorkstationAddress			IpAddress,
+		nmsWorkstationInetPort			INTEGER,
+		nmsWorkstationRowStatus			INTEGER,
+		nmsWorkstationIndex			INTEGER (0..999)
+	}
+
+nmsWorkstationAddress 			OBJECT-TYPE
+	SYNTAX	IpAddress
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"The IP address of an NMS workstation that billing
+		 and configuration records get downloaded to."
+	::= { nodeNMSWorkstationEntry 1 }
+
+nmsWorkstationInetPort 			OBJECT-TYPE
+	SYNTAX	INTEGER
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"The internet port on which the special TFTP server on an NMS 
+		 workstation will listen for requests to download billing
+		 and configuration records."
+	::= { nodeNMSWorkstationEntry 2 }
+
+nmsWorkstationRowStatus 			OBJECT-TYPE
+	SYNTAX	INTEGER {
+		invalid(1),
+		valid(2)
+		}
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"Controls row deletion for this table. Setting to
+		 invalid deletes the row from the table."
+	::= { nodeNMSWorkstationEntry 3 }
+
+nmsWorkstationIndex			OBJECT-TYPE
+	SYNTAX	INTEGER (0..999)
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The index into the NMS workstation list table."
+	::= { nodeNMSWorkstationEntry 4 }
+
+portConfTable				OBJECT-TYPE
+	SYNTAX SEQUENCE OF PortConfEntry
+	ACCESS	not-accessible
+	STATUS	mandatory
+	DESCRIPTION 
+		"A table of this FRX's port configuration."
+	::= { port 1 }
+
+portConfEntry 			OBJECT-TYPE
+	SYNTAX	PortConfEntry
+	ACCESS	not-accessible
+	STATUS	mandatory		
+	DESCRIPTION 
+		"An entry (conceptual row) in the port configuration table."
+	INDEX   { portConfEntryId }
+	::= { portConfTable 1 }
+
+PortConfEntry ::=
+	SEQUENCE {
+		portConfEntryId			INTEGER (0..31),
+		portConfState			INTEGER,
+		portInterfaceProtocol			INTEGER,
+		portKeepaliveVerif			INTEGER,
+		portBackupInterNodal			INTEGER,
+		portExternalFrTrunk			INTEGER,
+		portUniExternalFrTrunk			INTEGER,
+		portDlciExternalFrTrunk			INTEGER (0..1023),
+		portLinkIntegVerif			INTEGER,
+		portAsyncPVCStatus			INTEGER,
+		portN391Counter			INTEGER,
+		portN392Counter			INTEGER,
+		portN393Counter			INTEGER,
+		portT391Timer			INTEGER,
+		portT392Timer			INTEGER,
+		portSdlcEncapMode			INTEGER,
+		portSdlcEncapDefaultDlci			INTEGER (0..1023),
+		portAddrMapDefaultDlci			INTEGER (0..1023),
+		portPriorityQueuing			INTEGER,
+		portAccountingPerDlci			INTEGER
+		}
+
+portConfEntryId		OBJECT-TYPE
+	SYNTAX	INTEGER (0..31)
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The port identifier (number) for this port."
+	::= { portConfEntry 1 }
+
+portConfState			OBJECT-TYPE
+	SYNTAX	INTEGER {
+		delete(1),
+		install(2),
+		disable(3),
+		activate(4)
+		}
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"Performs the enumerated action on the port.
+		 That is to say, setting the value to delete 
+		 will cause the port to be deleted, etc."
+	::= { portConfEntry 2 }
+
+portInterfaceProtocol			OBJECT-TYPE
+	SYNTAX	INTEGER	{
+		ansiNetwork(1),
+		ansiUser(2),
+		ansiNNI(3),
+		ccittNetwork(4),
+		ccittUser(5),
+		ccittNNI(6),
+		lmiNetwork(7),
+		lmiUser(8),
+		none(9),
+		interNode(10),
+		sdlcHdlcEncap(11)
+		}
+	ACCESS read-write
+	STATUS mandatory
+	DESCRIPTION 
+		"Determines the function of the port, including which
+		UNI protocol is to be used. All values except interNode
+		are for ports at access points into the network. InterNode
+		is for ports internal to the network. AnsiNetwork,
+		ansiUser, and ansiNNI conform to procedures specified in
+		the ANSI T1.617 Annex D specification. ccittNetwork,
+		ccittUser, and ccittNNI conform to procedures specified in
+		the CCITT Q.933 Annex A specification. lmiNetwork,
+		lmiUser, and lmiNNI conform to procedures specified in
+		the DEC, Northern Telecom, StratCom specification."
+	::= { portConfEntry 3 }
+
+portKeepaliveVerif			OBJECT-TYPE
+	SYNTAX	INTEGER {
+		disabled(1),
+		enabled(2)
+		}
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"Enables or disables keepalive verification. This parameter is
+		applicable when the portInterfaceProtocol is interNode."
+	::= { portConfEntry 4 }
+
+
+portBackupInterNodal			OBJECT-TYPE
+	SYNTAX	INTEGER {
+		disabled(1),
+		enabled(2)
+		}
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"Enables or disables using this port as a
+		backup Inter-Nodal port. This parameter is
+		applicable when the portInterfaceProtocol is
+		interNode."
+	::= { portConfEntry 5 }
+
+portExternalFrTrunk			OBJECT-TYPE
+	SYNTAX	INTEGER {
+		disabled(1),
+		enabled(2)
+		}
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"Enables or disables the External Frame Relay
+		Trunk feature."
+	::= { portConfEntry 6 }
+
+portUniExternalFrTrunk			OBJECT-TYPE
+	SYNTAX	INTEGER {
+		ansiUser(2),
+		ccittUser(5),
+		lmiUser(8),
+		none(9)
+		}
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"The UNI protocol to use when the External Frame
+		Relay Trunk feature is enabled."
+	::= { portConfEntry 7 }
+
+portDlciExternalFrTrunk			OBJECT-TYPE
+	SYNTAX	INTEGER (0..1023)
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"The DLCI of the PVC that is in use at the UNI
+		when the External Frame Relay Trunk feature is
+		enabled."
+	::= { portConfEntry 8 }
+
+portLinkIntegVerif 			OBJECT-TYPE
+	SYNTAX	INTEGER {
+		disabled(1),
+		enabled(2)
+		}
+	ACCESS read-write
+	STATUS mandatory
+	DESCRIPTION 
+		"Determines whether this port will react to problems
+		detected by a UNI protocol. This parameter is
+		applicable if the portInterfaceProtocol is ansi*,
+		ccitt*, or lmi*."
+	::= { portConfEntry 9 }
+
+portAsyncPVCStatus			OBJECT-TYPE
+	SYNTAX	INTEGER {
+		disabled(1),
+		enabled(2)
+		}
+	ACCESS read-write
+	STATUS mandatory
+	DESCRIPTION 
+		"Determines whether this port should send Asynchronous
+		PVC status messages. This parameter is applicable if the
+		portInterfaceProtocol is ansiNetwork, ansiNNI, ccittNetwork,
+		or ccittNNI."
+	::= { portConfEntry 10 }
+	
+portN391Counter			OBJECT-TYPE
+	SYNTAX	INTEGER (1..255)
+	ACCESS  read-write
+	STATUS	mandatory
+	DESCRIPTION 
+		"The value for N391, the full status polling counter."
+	::= { portConfEntry 11 }
+
+portN392Counter			OBJECT-TYPE
+	SYNTAX	INTEGER (1..10)
+	ACCESS  read-write
+	STATUS	mandatory
+	DESCRIPTION 
+		"The value for N392, the error threshold counter."
+	::= { portConfEntry 12 }
+
+portN393Counter			OBJECT-TYPE
+	SYNTAX	INTEGER (1..10)
+	ACCESS  read-write
+	STATUS	mandatory
+	DESCRIPTION 
+		"The value for N393, the monitored events counter."
+	::= { portConfEntry 13 }
+
+portT391Timer			OBJECT-TYPE
+	SYNTAX	INTEGER (5..30)
+	ACCESS  read-write
+	STATUS	mandatory
+	DESCRIPTION 
+		"The value for T391, the link integrity polling timer."
+	::= { portConfEntry 14 }
+
+portT392Timer			OBJECT-TYPE
+	SYNTAX	INTEGER (5..30)
+	ACCESS  read-write
+	STATUS	mandatory
+	DESCRIPTION 
+		"The value for T392, the polling verification timer."
+	::= { portConfEntry 15 }
+
+portSdlcEncapMode			OBJECT-TYPE
+	SYNTAX	INTEGER {
+		transparent(1),
+		addressMapped(2)
+		}
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"Selects which encapsulation mode to be used when
+		the portInterfacePrococol is sdlcHdlcEncap."
+	::= { portConfEntry 16 }
+
+portSdlcEncapDefaultDlci			OBJECT-TYPE
+	SYNTAX	INTEGER (0..1023)
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"Specifies which DLCI will be used to encapsulate
+		received SDLC/HDLC frames at the entry to the
+		network. This parameter is applicable if the
+		portInterfaceProtocol is sdlcHdlcEncap and the
+		encapsulation type is transparent."
+	::= { portConfEntry 17 }
+
+
+portAddrMapDefaultDlci			OBJECT-TYPE
+	SYNTAX	INTEGER (0..1023)
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"Specifies which DLCI will be used to encapsulate
+		received SDLC/HDLC frames at the entry to the
+		network. This parameter is applicable if the
+		portInterfaceProtocol is sdlcHdlcEncap and the
+		encapsulation type is address-mapped."
+	::= { portConfEntry 18 }
+
+portPriorityQueuing			OBJECT-TYPE
+	SYNTAX	INTEGER {
+		disabled(1),
+		enabled(2)	
+		}
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"Enables or disables priority queuing on a port."
+	::= { portConfEntry 19 }
+
+portAccountingPerDlci			OBJECT-TYPE
+	SYNTAX	INTEGER {
+		disabled(1),
+		enabled(2)	
+		}
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"Enables or disables accounting per DLCI on a port.
+		 Enabling this feature may seriously degrade performance
+		 in systems with high speed (greater than 1.024 Mbps)
+		 ports. Frames may be lost."
+	::= { portConfEntry 20 }
+
+portStatusTable			OBJECT-TYPE
+	SYNTAX SEQUENCE OF PortStatusEntry
+	ACCESS	not-accessible
+	STATUS	mandatory
+	DESCRIPTION 
+		"A table of this node's port status and statistics."
+	::= { port 2 }
+
+portStatusEntry		OBJECT-TYPE
+	SYNTAX	PortStatusEntry
+	ACCESS	not-accessible
+	STATUS	mandatory
+	DESCRIPTION 
+		"The port status and statistics table."
+	INDEX   { portStatusEntryId }
+	::= { portStatusTable 1 }
+
+PortStatusEntry ::=
+	SEQUENCE {
+		portDataBaseState			INTEGER,
+		portTBusState			INTEGER,
+		portUNIState			INTEGER,
+		portNumberCircuits			INTEGER,
+		portRxCongestState			INTEGER,
+		portTxCongestState			INTEGER,
+		portAccessRate			INTEGER,
+		portCIR			INTEGER,
+		portNeighbor			DisplayString,
+		portInFrames			Counter,
+		portOutFrames			Counter,
+		portInBytes			Counter,
+		portOutBytes			Counter,
+		portDroppedFrames			Counter,
+		portDroppedDEFrames			Counter,
+		portUnknownDLCIFrames			Counter,
+		portLastUnknownDLCI			INTEGER (0..1023),
+		portDEInFrames			Counter,
+		portDEOutFrames			Counter,
+		portDEInBytes			Counter,
+		portDEOutBytes			Counter,
+		portBECNInFrames			Counter,
+		portBECNOutFrames			Counter,
+		portFECNInFrames 			Counter,
+		portFECNOutFrames			Counter,
+		portFrameRateIn			Gauge,
+		portFrameRateOut			Gauge,
+		portByteRateIn			Gauge,
+		portByteRateOut			Gauge,
+		portAverageRxQueue			Gauge,
+		portAverageTxQueue			Gauge,
+		portMaxFrameRateIn			Gauge,
+		portMaxFrameRateOut			Gauge,
+		portMaxByteRateIn			Gauge,
+		portMaxByteRateOut			Gauge,
+		portMaxQueueDepthIn			Gauge,
+		portMaxQueueDepthOut			Gauge,
+		portBadFrames			Counter,
+		portShortFrames			Counter,
+		portMissedFrames			Counter,
+		portLongFrames			Counter,
+		portRxOverruns			Counter,
+		portTxUnderruns			Counter,
+		portStatusEntryId			INTEGER,		
+		portStatsClearedTime			DisplayString
+	}
+
+portDataBaseState			OBJECT-TYPE
+	SYNTAX	INTEGER {
+		installed(1),
+		active(2)
+		}
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The state of the port in the database. The 
+		 values are active and disabled."
+	::= { portStatusEntry 1 }
+
+portTBusState			OBJECT-TYPE
+	SYNTAX	INTEGER {
+		down(1),
+		up(2)
+		}
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The state of the TBus connection for this port. 
+		 The values are up and down."
+	::= { portStatusEntry 2 }
+
+portUNIState			OBJECT-TYPE
+	SYNTAX	INTEGER {
+		down(1),
+		up(2),
+		invalid(3)
+		}
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The state of the UNI for this port. The valid values are
+		 up and down	"
+	::= { portStatusEntry 3 }
+
+portNumberCircuits			OBJECT-TYPE
+	SYNTAX 	INTEGER
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The number of virtual circuits on this port."
+	::= { portStatusEntry 4 }
+
+portRxCongestState			OBJECT-TYPE
+	SYNTAX	INTEGER {
+		notCongested(1),
+		approachingCongestion(2),
+		congested(3),
+		fullyCongested(4)
+		}
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The congestion state of the port's receiver. The valid values are
+		notCongested (normal operation), approachingCongestion (FECN and BECN
+		are being set), congested (DE frames are being dropped), and fullyCongested
+		(normal data frames are being dropped)."
+	::= { portStatusEntry 5 }
+
+portTxCongestState			OBJECT-TYPE
+	SYNTAX	INTEGER {
+		notCongested(1),
+		approachingCongestion(2),
+		congested(3),
+		fullyCongested(4)
+		}
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The congestion state of the port's transmitter. The valid values are
+		notCongested (normal operation), approachingCongestion (FECN and BECN
+		are being set), congested (DE frames are being dropped), and fullyCongested
+		(normal data frames are being dropped)."
+	::= { portStatusEntry 6 }
+
+portAccessRate			OBJECT-TYPE 
+	SYNTAX	INTEGER 
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The access rate (speed) for this port in bits per second."
+	::= { portStatusEntry 7 }
+
+portCIR			OBJECT-TYPE
+	SYNTAX 	INTEGER
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The total allocated committed information rate for all virtual
+		circuits on this port."
+	::= { portStatusEntry 8 }
+
+portNeighbor			OBJECT-TYPE
+	SYNTAX 	DisplayString(SIZE(0..80))
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"Represents the IDNX domain-node-card of the adjacent FRX.
+		This field is valid for ports with the interface protocol set to
+		interNode. "
+	::= { portStatusEntry 9 }
+
+portInFrames			OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The number of frames received by this port."
+	::= { portStatusEntry 10 }
+
+portOutFrames			OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The number of frames transmitter by this port."
+	::= { portStatusEntry 11 }
+	
+portInBytes			OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The number of bytes received by this port."
+	::= { portStatusEntry 12 }
+
+portOutBytes			OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The number of bytes transmitted by this port."
+	::= { portStatusEntry 13 }
+
+portDroppedFrames			OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The number of frames dropped (for any reason) by the port."
+	::= { portStatusEntry 14 }
+
+portDroppedDEFrames			OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The number of frames with DE set dropped due to congestion."
+	::= { portStatusEntry 15 }
+
+portUnknownDLCIFrames			OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The number of frames received with unknown DLCIs."
+	::= { portStatusEntry 16 }
+
+portLastUnknownDLCI			OBJECT-TYPE
+	SYNTAX	INTEGER (0..1023)
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The DLCI number of the last frame with an unknown DLCI.
+		A value of -1 signifies that no unknown DLCI has yet
+		been received."
+	::= { portStatusEntry 17 }
+
+portDEInFrames			OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The number of DE frames received by a port."
+	::= { portStatusEntry 18 }
+
+portDEOutFrames		OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The number of DE frames transmitted by a port."
+	::= { portStatusEntry 19 }
+
+portDEInBytes		OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The number of bytes received in DE frames."
+	::= { portStatusEntry 20 }
+
+portDEOutBytes			OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The number of bytes transmitted in DE frames."
+	::= { portStatusEntry 21 }
+
+portBECNInFrames			OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The number of BECN frames received by a port."
+	::= { portStatusEntry 22 }
+
+portBECNOutFrames			OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The number BECN frames transmitted by a port."
+	::= { portStatusEntry 23 }
+
+portFECNInFrames			OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The number of FECN frames received by a port."
+	::= { portStatusEntry 24 }
+
+portFECNOutFrames			OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The number of FECN frames transmitted by a port."
+	::= { portStatusEntry 25 }
+
+portFrameRateIn			OBJECT-TYPE
+	SYNTAX	Gauge
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The rate in frames per second of frames received by the FRX. This number is a updated every minute and represents the last five minutes worth of traffic."
+	::= { portStatusEntry 26 }
+	
+portFrameRateOut			OBJECT-TYPE
+	SYNTAX	Gauge
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The rate in frames per second of frames transmitted by the FRX.
+		This number is a updated every minute and represents the last five
+		minutes worth of traffic."
+	::= { portStatusEntry 27 }
+
+portByteRateIn			OBJECT-TYPE
+	SYNTAX	Gauge
+	ACCESS 	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The rate in bytes per second received by the FRX.  This number
+		is updated every minute and represents the last five minutes worth
+		of traffic."
+	::= { portStatusEntry 28 }
+
+portByteRateOut		OBJECT-TYPE
+	SYNTAX	Gauge
+	ACCESS 	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The rate in bytes per second received by the FRX.  This number
+		is updated every minute and represents the last five minutes worth
+		of traffic."
+	::= { portStatusEntry 29}
+
+portAverageRxQueue			OBJECT-TYPE
+	SYNTAX	Gauge
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The average depth of the receiver's input queue."
+	::= { portStatusEntry 30 }
+
+portAverageTxQueue			OBJECT-TYPE
+	SYNTAX	Gauge
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The average depth of the transmitter's output queue."
+	::= { portStatusEntry 31 }
+
+portMaxFrameRateIn			OBJECT-TYPE
+	SYNTAX	Gauge
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The maximum frame rate for frames received by a port."
+	::= { portStatusEntry 32 }
+
+portMaxFrameRateOut			OBJECT-TYPE
+	SYNTAX 	Gauge
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The maximum frame rate for frames transmitted by a port."
+	::= { portStatusEntry 33 }
+
+portMaxByteRateIn			OBJECT-TYPE
+	SYNTAX	Gauge
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The maximum byte rate for frames received by a port."
+	::= { portStatusEntry 34 }
+
+portMaxByteRateOut			OBJECT-TYPE
+	SYNTAX	Gauge
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The maximum byte rate for frames transmitted by a port."
+	::= { portStatusEntry 35 }
+
+portMaxQueueDepthIn			OBJECT-TYPE
+	SYNTAX	Gauge
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The maximum length of a port's receive queue."
+	::= { portStatusEntry 36 }
+
+portMaxQueueDepthOut			OBJECT-TYPE
+	SYNTAX	Gauge
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The maximum length of a port's transmit queue."
+	::= { portStatusEntry 37 }
+
+portBadFrames			OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The number of frames dropped by the HDLC controller.
+		 Examples of reasons why frames are dropped include 
+		 receiving a bad CRC and non-octet alignment."
+	::= { portStatusEntry 38 }
+	
+portShortFrames			OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The number of frames received by the HDLC controller
+		 that don't meet the minimum length restriction."
+	::= { portStatusEntry 39 }
+	
+portMissedFrames			OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The number of receive frames missed by the HDLC controller.
+		This happens when the receiver's input queue is full."
+	::= { portStatusEntry 40 }
+
+portLongFrames			OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The number of frames received longer than the maximum length."
+	::= { portStatusEntry 41 }
+
+portRxOverruns			OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The number of receiver overruns the HDLC controller experiences."
+	::= { portStatusEntry 42 }
+	
+portTxUnderruns			OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The number of transmitter underruns the HDLC controller experiences."
+	::= { portStatusEntry 43 }
+	
+portStatusEntryId			OBJECT-TYPE
+	SYNTAX	INTEGER (0..7)
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The port identifier (number) for this port."
+	::= { portStatusEntry 44 }
+
+portStatsClearedTime			OBJECT-TYPE
+	SYNTAX	DisplayString
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The amount of time since the last time the statistics 
+		 were cleared for this port."
+	::= { portStatusEntry 45 }
+
+
+portSdlcEncapMapTable			OBJECT-TYPE
+	SYNTAX 	SEQUENCE OF PortSdlcEncapMapEntry
+	ACCESS	not-accessible
+	STATUS	mandatory
+	DESCRIPTION
+		"The table containing address map translations
+		between DLCIs and SDLC/HDLC addresses. This
+		table is applicable if the portInterfaceProtocol
+		is sdlcHdlcEncap and the portSdlcEncapMode is
+		addressMapped."
+	::= { port 3 }	
+
+portSdlcEncapMapEntry			OBJECT-TYPE
+	SYNTAX	PortSdlcEncapMapEntry
+	ACCESS	not-accessible
+	STATUS	mandatory
+	DESCRIPTION
+		"A row from the address map translation table."
+	INDEX	{ addressMapPortNumber, addressMapIndex }
+	::= { portSdlcEncapMapTable 1 }
+
+PortSdlcEncapMapEntry		 ::= SEQUENCE {
+		addressMapSdlcAddress				INTEGER,
+		addressMapDlci				INTEGER (0..1023),
+		addressMapRowStatus				INTEGER,
+		addressMapPortNumber				INTEGER (0..31),
+		addressMapIndex				INTEGER (0..999)
+	}
+
+addressMapSdlcAddress			OBJECT-TYPE
+	SYNTAX	INTEGER
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"The SDLC or HDLC address that is mapped
+		 to a DLCI when using SDLC/HDLC encapsulation."
+	::= { portSdlcEncapMapEntry 1 }
+
+addressMapDlci			OBJECT-TYPE
+	SYNTAX	INTEGER (0..1023)
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"The DLCI used when mapping an SCLC/HDLC 
+		 address when SLDC/HDLC encapsulation is 
+		 being used."
+	::= { portSdlcEncapMapEntry 2 }
+
+addressMapRowStatus			OBJECT-TYPE
+	SYNTAX	INTEGER {
+		invalid(1),
+		valid(2) 	
+		}
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"Used to create a row in the table."
+	::= { portSdlcEncapMapEntry 3 }
+
+addressMapPortNumber			OBJECT-TYPE
+	SYNTAX	INTEGER (0..31)
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The port number index for the address map table."
+	::= { portSdlcEncapMapEntry 4 }
+
+addressMapIndex			OBJECT-TYPE
+	SYNTAX	INTEGER (0..999)
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The row instance for the address map table."
+	::= { portSdlcEncapMapEntry 5 }
+
+	
+			
+
+
+circuitConfTable			OBJECT-TYPE
+	SYNTAX	SEQUENCE OF CircuitConfEntry
+	ACCESS	not-accessible
+	STATUS	mandatory
+	DESCRIPTION 
+		"A table containing configuration information for a circuit.
+		The objects in this table are always readable; they can only
+		be written (if accessible) only for the instance in which the
+		circuitConfPortNumber and circuitConfDLCI correspond to the
+		port number and DLCI at the source (originate). When creating
+		a new circuit, at a minimum the destination address must be
+		supplied."
+	::= { circuit 1 }
+
+	
+circuitConfEntry				OBJECT-TYPE
+	SYNTAX	CircuitConfEntry
+	ACCESS	not-accessible
+	STATUS	mandatory
+	DESCRIPTION
+		"Configuration information about a particular circuit."
+	INDEX	{ circuitConfPortNumber, circuitConfDLCI }
+	::= { circuitConfTable 1 }
+
+CircuitConfEntry ::= SEQUENCE {
+		circuitSourceAddress				DisplayString (SIZE(0..16)),
+		circuitSourceDLCI				INTEGER (0..1023),
+		circuitDestinationAddress				DisplayString (SIZE(0..16)),
+		circuitDestinationDLCI				INTEGER (0..1023),
+		circuitUserSelectedPath				DisplayString (SIZE(0..256)),
+		circuitAllowAlternatePath				INTEGER,
+		circuitBandwidthAdmission				INTEGER,
+		circuitCommittedInfoRate				INTEGER,
+		circuitBurstSize				INTEGER,
+		circuitExcessBurstSize				INTEGER,
+		circuitPriority				INTEGER,
+		circuitConfState				INTEGER,
+		circuitConfPortNumber				INTEGER (0..31),
+		circuitConfDLCI				INTEGER (0..1023)
+	}
+
+circuitSourceAddress				OBJECT-TYPE
+	SYNTAX	DisplayString (SIZE(0..16))
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The value of this object is the source (originate) address of
+		this circuit."
+	::= { circuitConfEntry 1 }
+circuitSourceDLCI				OBJECT-TYPE
+	SYNTAX	INTEGER (0..1023)
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION 
+		"The value of this object is the DLCI associated with the source
+		address of this circuit."
+	::= { circuitConfEntry 2 }
+
+circuitDestinationAddress				OBJECT-TYPE
+	SYNTAX	DisplayString (SIZE(0..16))
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"The value of this object is the destination (termination) address of
+		this circuit. The value must be consistent with the endpoint of the
+		user-selected path (if one exists). In the case of a manager that can
+		issue only single-varbind Set requests, clear the user-selected path 
+		(if one exists) before attempting to change this value."
+	::= { circuitConfEntry 3 }
+
+circuitDestinationDLCI				OBJECT-TYPE
+	SYNTAX	INTEGER (0..1023)
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION 
+		"The value of this object is the DLCI associated with the destination
+		address of this circuit."
+	::= { circuitConfEntry 4 }
+	
+circuitUserSelectedPath				OBJECT-TYPE
+	SYNTAX	DisplayString (SIZE(0..256))
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION 
+		"The value of this object is the required path through the FRX network
+		that this virtual circuit must take. The endpoints of this path must be
+		consistent with the configured source and destination addresses. The 
+		value 'None Selected' indicates that a user-selected path has not been 
+		configured. "
+	::= { circuitConfEntry 5 }
+
+circuitAllowAlternatePath				OBJECT-TYPE
+	SYNTAX	INTEGER {
+		disabled(1),
+		enabled(2),
+		unknown(3)
+		}
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"If enabled, allows the FRX to choose an alternate route through the
+		network if the user-selected path is unavailable."
+	::= { circuitConfEntry 6 }
+
+circuitBandwidthAdmission				OBJECT-TYPE
+	SYNTAX	INTEGER {
+		disabled(1),
+		enabled(2)
+		}
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION 
+		"The field reflects the status of bandwidth admission for this
+		virtual circuit. If enabled then CIR, Be, and Bc must be configured."
+	::= { circuitConfEntry 7 }
+
+circuitCommittedInfoRate				OBJECT-TYPE
+	SYNTAX	INTEGER
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION 
+		"The committed information rate (in bits per second) for this
+		virtual circuit."
+	::= { circuitConfEntry 8 }
+
+circuitBurstSize				OBJECT-TYPE
+	SYNTAX	INTEGER
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION 
+		"The burst size (Bc, expressed in bits) for this virtual circuit."
+	::= { circuitConfEntry 9 }
+	
+circuitExcessBurstSize				OBJECT-TYPE
+	SYNTAX	INTEGER
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"The excess burst size (Be, expressed in bits) for this virtual circuit."
+	::= { circuitConfEntry 10 }
+
+circuitPriority				OBJECT-TYPE
+	SYNTAX	INTEGER {
+		low(1),
+		normal(2),
+		high(3)
+		}
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"The priority value of this circuit. If prioritized circuits are
+		not enabled on the port then the circuit priority is normal. This
+		parameter can not be set unless Prioritize PVC is enabled for the
+		port (portPriorityQueueing)."
+	::= { circuitConfEntry 11 }
+
+circuitConfState				OBJECT-TYPE
+	SYNTAX	INTEGER {
+		delete(1),
+		install(2),
+		disable(3),
+		activate(4)
+		}
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION 
+		"The database state for this virtual circuit. Setting this field to
+		delete causes the virtual circuit to be deleted. Setting this field to
+		install either creates a new circuit, or disables an already existing
+		circuit. Activating the circuit builds the circuit across the network."
+	::= { circuitConfEntry 12 }
+
+circuitConfPortNumber				OBJECT-TYPE	
+	SYNTAX	INTEGER (0..31)
+	ACCESS	read-only
+	STATUS	mandatory	
+	DESCRIPTION
+		"The first index into the circuit configuration table."
+	::= { circuitConfEntry 13 }
+
+circuitConfDLCI				OBJECT-TYPE	
+	SYNTAX	INTEGER (0..1023)
+	ACCESS	read-only
+	STATUS	mandatory	
+	DESCRIPTION
+		"The second index into the circuit configuration table."
+	::= { circuitConfEntry 14 }
+circuitStatusTable			OBJECT-TYPE
+	SYNTAX 	SEQUENCE OF CircuitStatusEntry
+	ACCESS	not-accessible
+	STATUS	mandatory
+	DESCRIPTION
+		"A table containing virtual circuit status for this port"
+	::= { circuit 2 }
+
+circuitStatusEntry			OBJECT-TYPE
+	SYNTAX	CircuitStatusEntry
+	ACCESS	not-accessible
+	STATUS	mandatory
+	DESCRIPTION
+		"A status entry contains information about virtual circuits."
+	INDEX 	{ circuitStatusPortNumber, circuitStatusDLCI }
+	::= { circuitStatusTable 1 }
+
+CircuitStatusEntry ::= SEQUENCE {
+		circuitDataBaseState				INTEGER,
+		circuitState				INTEGER,
+		circuitSetupFailureReason				DisplayString,
+		circuitLastDisconnectReason				DisplayString,
+		circuitRoute				DisplayString (SIZE(0..256)),
+		circuitWindowLength				INTEGER,
+		circuitReceiveFrames				Counter,
+		circuitTransmitFrames				Counter,
+		circuitReceiveBytes				Counter,
+		circuitTransmitBytes				Counter,
+		circuitDroppedFrames				Counter,
+		circuitMarkedDEFrames				Counter,
+		circuitReceivedDEFrames				Counter,
+		circuitCurrentTcBurstBits				Counter,
+		circuitCurrentTcExcessBits				Counter,
+		circuitMaximumBcBits				Counter,
+		circuitMaximumBeBits				Counter,
+		circuitAverageBc				Gauge,
+		circuitAverageBe				Gauge,
+		circuitStatus				INTEGER,
+		circuitDownReason				DisplayString,
+		circuitBECNReceiveFrames				Counter,
+		circuitBECNTransmitFrames				Counter,
+		circuitFECNReceiveFrames				Counter,
+		circuitFECNTransmitFrames				Counter,
+		circuitStatusPortNumber				INTEGER (0..31),
+		circuitStatusDLCI				INTEGER (0..1023),
+		circuitThisPvcSegmentOtherPort				INTEGER,
+		circuitThisPvcSegmentOtherDLCI				INTEGER (0..1023)
+	}
+
+circuitDataBaseState				OBJECT-TYPE
+	SYNTAX	INTEGER {
+		installed(1),
+		active(2)
+		}
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The value of this object identifies the current database state of the PVC."
+	::= { circuitStatusEntry 1 }
+
+circuitState				OBJECT-TYPE
+	SYNTAX	INTEGER {
+		idle(1),
+		setup(2),
+		complete(3),
+		disconnect(4)
+		}
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"This field represents the status of the virtual circuit. The possible
+		values for the state are idle, setup, complete, and disconnect."
+	::= { circuitStatusEntry 2 }
+
+circuitSetupFailureReason				OBJECT-TYPE
+	SYNTAX	DisplayString (SIZE(0..80))
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"This field is valid when the call cannot be completed. The reason
+		the circuit setup failed is contained in this string."
+	::= { circuitStatusEntry 3 }
+
+circuitLastDisconnectReason				OBJECT-TYPE
+	SYNTAX	DisplayString (SIZE(0..80))
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"This field displays the reason for the last disconnect of this virtual
+		circuit, including normal termination."
+	::= { circuitStatusEntry 4 }
+
+circuitRoute				OBJECT-TYPE
+	SYNTAX	DisplayString (SIZE(0..256))
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"This field displays the route that the circuit has taken through the
+		FRX network."
+	::= { circuitStatusEntry 5 }
+
+circuitWindowLength				OBJECT-TYPE
+	SYNTAX	INTEGER
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The value of this object is the window length (Tc) used for bandwidth
+		admission procedures. The units are tenths-of-seconds. This object is
+		applicable only if bandwidth admission is enabled for the circuit."
+	::= { circuitStatusEntry 6 }
+
+circuitReceiveFrames				OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The number of frames received by this circuit."
+	::= { circuitStatusEntry 7 }
+
+circuitTransmitFrames				OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The number of frames transmitted by this circuit."
+	::= { circuitStatusEntry 8 }
+
+circuitReceiveBytes				OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The number of bytes received by this circuit."
+	::= { circuitStatusEntry 9 }
+
+circuitTransmitBytes				OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The number of bytes transmitted by this circuit."
+	::= { circuitStatusEntry 10 }
+
+circuitDroppedFrames				OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"This field represents the number of frames dropped for this DLCI
+		due to bandwidth admission procedures."
+	::= { circuitStatusEntry 11 }
+
+circuitMarkedDEFrames				OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"This field represents the number of frames in which the FRX set
+		the DE bit, due to bandwidth admission procedures."
+	::= { circuitStatusEntry 12 }
+
+circuitReceivedDEFrames				OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"This field represents the number of frames received with the DE bit set."
+	::= { circuitStatusEntry 13 }
+
+circuitCurrentTcBurstBits				OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The number of Bc bits received during the present Tc window."
+	::= { circuitStatusEntry 14 }
+
+circuitCurrentTcExcessBits				OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory		
+	DESCRIPTION 
+		"The number of Be bits received during the present Tc window."
+	::= { circuitStatusEntry 15 }
+
+circuitMaximumBcBits				OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The maximum number of Bc bits received for this virtual circuit."
+	::= { circuitStatusEntry 16 }
+
+circuitMaximumBeBits				OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The maximum number of Be bits received for this virtual circuit."
+	::= { circuitStatusEntry 17 }
+
+circuitAverageBc				OBJECT-TYPE
+	SYNTAX	Gauge
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The average number of Bc bits during the past five (5) Tc periods."
+	::= { circuitStatusEntry 18 }
+
+circuitAverageBe				OBJECT-TYPE
+	SYNTAX	Gauge
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The average number of Be bits during the past five (5) Tc periods."
+	::= { circuitStatusEntry 19 }
+
+circuitStatus				OBJECT-TYPE
+	SYNTAX	INTEGER {
+		inactive(1),
+		active(2)
+		}
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The status of virtual circuit. The valid values are Active or Inactive."
+	::= { circuitStatusEntry 20 }
+
+circuitDownReason				OBJECT-TYPE
+	SYNTAX	DisplayString (SIZE(0..80))
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"This field is a description of why the virtual circuit is down."
+	::= { circuitStatusEntry 21 }
+
+circuitBECNReceiveFrames				OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The number of BECN frames received by the circuit."
+	::= { circuitStatusEntry 22 }
+
+circuitBECNTransmitFrames				OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The number of BECN frames transmitted by the circuit."
+	::= { circuitStatusEntry 23 }
+
+circuitFECNReceiveFrames				OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The number of FECN frames received by the circuit."
+	::= { circuitStatusEntry 24 }
+
+circuitFECNTransmitFrames				OBJECT-TYPE
+	SYNTAX	Counter
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The number of FECN frames transmitted by the circuit."
+	::= { circuitStatusEntry 25 }
+
+circuitStatusPortNumber				OBJECT-TYPE
+	SYNTAX	INTEGER (0..31)
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The first index into the circuit table."
+	::= { circuitStatusEntry 26 }
+
+circuitStatusDLCI				OBJECT-TYPE	
+	SYNTAX	INTEGER (0..1023)
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The second index into the circuit table."
+	::= { circuitStatusEntry 27 }
+
+circuitThisPvcSegmentOtherPort				OBJECT-TYPE
+	SYNTAX	INTEGER
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"A circuit segment within an FRX node has two endpoints
+		identified by a port,DLCI pair. The value of circuitStatusPortNumber
+		is one port, the value of this object is the other port."
+	::= { circuitStatusEntry 28 }
+
+circuitThisPvcSegmentOtherDLCI				OBJECT-TYPE	
+	SYNTAX	INTEGER (0..1023)
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"A circuit segment within an FRX node has two endpoints
+		identified by a port,DLCI pair. The value of circuitStatusDLCI
+		is one DLCI, the value of this object is the other DLCI."
+	::= { circuitStatusEntry 29 }
+
+
+operatorCount			OBJECT-TYPE
+	SYNTAX	INTEGER
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The number of operators currently installed on this FRX."
+	::= { operator 1 }
+
+operatorTable			OBJECT-TYPE
+	SYNTAX	SEQUENCE OF OperatorTableEntry
+	ACCESS	not-accessible
+	STATUS	mandatory
+	DESCRIPTION
+		"The list of operators installed on this FRX. A row can be added to this
+		table using a set request that includes, at minimum, a valid value for
+		operatorIdentifier. A row can be deleted by setting operatorRowStatus to
+		invalid."
+	::= { operator 2 }
+
+operatorTableEntry			OBJECT-TYPE
+	SYNTAX	OperatorTableEntry
+	ACCESS	not-accessible
+	STATUS	mandatory
+	DESCRIPTION 
+		"An entry (conceptual row) in the operator table."
+	INDEX	{ operatorIndex }
+	::= { operatorTable 1 }
+
+OperatorTableEntry ::= SEQUENCE {
+		operatorIndex			INTEGER (0..999),
+		operatorIdentifier 			DisplayString,
+		operatorPrivilege			INTEGER,
+		operatorPassword			DisplayString,
+		operatorRowStatus			INTEGER
+	}
+
+operatorIndex			OBJECT-TYPE
+	SYNTAX	INTEGER (0..999)
+	ACCESS  read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The auxiliary variable used for identifying instances of the columnar
+		objects in the operator table."
+	::= { operatorTableEntry 1 }
+
+operatorIdentifier			OBJECT-TYPE
+	SYNTAX	DisplayString
+	ACCESS  read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"A textual string giving the name of this operator. Cannot be empty.
+		A name for a new operator cannot duplicate a name for an existing operator.
+		There is no default value, so a valid value for this column must be
+		included in any set request for row creation."
+	::= { operatorTableEntry 2 }
+
+operatorPrivilege			OBJECT-TYPE
+	SYNTAX	INTEGER {
+		queryOnly(1),
+		any(2)
+		}
+	ACCESS	read-write
+	STATUS  mandatory
+	DESCRIPTION 
+		"The privilege level for this operator."
+	DEFVAL	{ queryOnly }
+	::= { operatorTableEntry 3 }
+
+operatorPassword			OBJECT-TYPE
+	SYNTAX	DisplayString
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"The password for this operator. Can be empty."
+	DEFVAL	{ ''h }		-- the empty string
+	::= { operatorTableEntry 4 }
+
+operatorRowStatus			OBJECT-TYPE
+	SYNTAX	INTEGER {
+		invalid(1),
+		valid(2)
+		}
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"Setting this column to invalid will delete this operator.
+		Setting it to valid has no effect."
+	DEFVAL	{ valid }
+	::= { operatorTableEntry 5 }
+
+-- The event group.
+--
+-- The FRX event type table, with one entry per type of FRX event.
+-- Some field values can be set (trap enable/disable, forwarding
+-- enable/disable), but the number of rows (corresponding to the
+-- cardinality of the set of FRX events) cannot be changed by 
+-- the manager.
+
+eventTypeTable		OBJECT-TYPE
+	SYNTAX		SEQUENCE OF EventTypeEntry
+	ACCESS		not-accessible
+	STATUS		mandatory
+	DESCRIPTION	
+		"A table listing the types of real-time events on the FRX. The event types comprise two main categories: configuration changes (PVC installed, port activated, etc.), and status changes (port congested, node decongested, etc.). Though the types of events are static, some of their attributes, such as whether or not they trigger an SNMP trap, are configurable."
+	::= { event 1 }
+
+eventTypeEntry		OBJECT-TYPE
+	SYNTAX		EventTypeEntry
+	ACCESS		not-accessible
+	STATUS		mandatory
+	DESCRIPTION	
+		"Information about a particular event on the FRX. The event types comprise two main categories: configuration changes (PVC installed, port activated, etc.), and status changes (port congested, node decongested, etc.). Though the types of events are static, some of their attributes, such as whether or not they trigger an SNMP trap, are configurable."
+	INDEX		{ eventTypeIndex }
+	::= { eventTypeTable 1 }
+
+EventTypeEntry ::= SEQUENCE {
+		eventTypeIndex			INTEGER (0..99),
+		eventTypeLevel			INTEGER,
+		eventTypeDefaultLevel			INTEGER,
+		eventTypeNetworkSignificant				INTEGER,
+		eventTypeDefaultNetworkSignificant					INTEGER,
+		eventTypeForward			INTEGER,
+		eventTypeDefaultForward			INTEGER,
+		eventTypeLog			INTEGER,
+		eventTypeDefaultLog			INTEGER,
+		eventTypeTrap			INTEGER,
+		eventTypeDefaultTrap			INTEGER,
+		eventTypeTrapNumber			INTEGER}
+
+eventTypeIndex		OBJECT-TYPE
+	SYNTAX		INTEGER (0..99)
+	ACCESS		read-only
+	STATUS		mandatory
+	DESCRIPTION
+		"Auxiliary variable used to identify row instances in the eventTypeTable."
+	::= { eventTypeEntry 1 }
+
+eventTypeLevel		OBJECT-TYPE
+	SYNTAX		INTEGER {
+			noAlarm(1), 
+			fyiAlarm(2), 
+			minorAlarm(3), 
+			majorAlarm(4), 
+			criticalAlarm(5)
+			}
+	ACCESS		read-write
+	STATUS		mandatory
+	DESCRIPTION
+		"The IDNX alarm level of this FRX event; user configurable."
+	::= { eventTypeEntry 2 }
+
+eventTypeDefaultLevel			OBJECT-TYPE
+	SYNTAX		INTEGER {
+			noAlarm(1), 
+			fyiAlarm(2), 
+			minorAlarm(3), 
+			majorAlarm(4), 
+			criticalAlarm(5)
+			}
+	ACCESS		read-only
+	STATUS		mandatory
+	DESCRIPTION
+		"The default IDNX alarm level of this FRX event."
+	::= { eventTypeEntry 3 }
+
+eventTypeNetworkSignificant			OBJECT-TYPE
+	SYNTAX		INTEGER {
+			false(1),
+			true(2)
+			}
+	ACCESS		read-write
+	STATUS		mandatory
+	DESCRIPTION
+		"Determines whether or not this type of event is forwarded to the repository node for network-significant events."
+	::= { eventTypeEntry 4 }
+
+eventTypeDefaultNetworkSignificant			OBJECT-TYPE
+	SYNTAX		INTEGER {
+			false(1),
+			true(2)
+			}
+	ACCESS		read-only
+	STATUS		mandatory
+	DESCRIPTION
+		"Default determination of whether or not this type of event is forwarded to the repository node for network-significant events."
+	::= { eventTypeEntry 5 }
+
+eventTypeForward			OBJECT-TYPE
+	SYNTAX		INTEGER {
+			false(1),
+			true(2)
+			}
+	ACCESS		read-write
+	STATUS		mandatory
+	DESCRIPTION
+		"Determines whether or not this type of event is forwarded to the IDNX 
+event log; user configurable."
+	::= { eventTypeEntry 6 }
+
+eventTypeDefaultForward			OBJECT-TYPE
+	SYNTAX		INTEGER {
+			false(1),
+			true(2)
+			}
+	ACCESS		read-only
+	STATUS		mandatory
+	DESCRIPTION
+		"Default determination of whether or not this type of event is forwarded to 
+the IDNX event log."
+	::= { eventTypeEntry 7 }
+
+eventTypeLog			OBJECT-TYPE
+	SYNTAX		INTEGER {
+			false(1),
+			true(2)
+			}
+	ACCESS		read-write
+	STATUS		mandatory
+	DESCRIPTION
+		"Determines whether or not this type of event is logged to the FRX (local) event log; user configurable."
+	::= { eventTypeEntry 8 }
+
+eventTypeDefaultLog			OBJECT-TYPE
+	SYNTAX		INTEGER {
+			false(1),
+			true(2)
+			}
+	ACCESS		read-only
+	STATUS		mandatory
+	DESCRIPTION
+		"Default determination of whether or not this type of event is logged to the FRX (local) event log."
+	::= { eventTypeEntry 9 }
+
+eventTypeTrap			OBJECT-TYPE
+	SYNTAX		INTEGER {
+			false(1),
+			true(2)
+			}
+	ACCESS		read-write
+	STATUS		mandatory
+	DESCRIPTION
+		"Determines whether or not this type of event generates an SNMP trap; user configurable."
+	::= { eventTypeEntry 10 }
+
+eventTypeDefaultTrap			OBJECT-TYPE
+	SYNTAX		INTEGER {
+			false(1),
+			true(2)
+			}
+	ACCESS		read-only
+	STATUS		mandatory
+	DESCRIPTION
+		"Default determination of whether or not this type of event generates an SNMP trap."
+	::= { eventTypeEntry 11 }
+
+eventTypeTrapNumber			OBJECT-TYPE
+	SYNTAX		INTEGER {
+                        systemRestartTrap               (1),
+                        systemSyserrTrap                (2),
+                        configChangedTrap               (3),
+                        nodeCongestedTrap               (4),
+                        portInstalledTrap               (5),
+                        portDeletedTrap                 (6),
+                        portActivatedTrap               (7),
+                        portDisabledTrap                (8),
+                        portCongestedTrap               (9),
+                        pvcInstalledTrap                (10),
+                        pvcDeletedTrap                  (11),
+                        pvcActivatedTrap                (12),
+                        pvcDisabledTrap                 (13),
+                        pvcStatusActiveTrap             (14),
+                        pvcStatusInactiveTrap           (15),
+                        cbusUpTrap                      (16),
+                        cbusDownTrap                    (17),
+                        serialFailTrap                  (18),
+                        portUniActiveTrap               (19),
+                        portUniInactiveTrap             (20),
+                        portIDNXCallUpTrap              (21),
+                        portIDNXCallDownTrap            (22),
+                        nodeNotCongestedTrap            (23),
+                        portNotCongestedTrap            (24),
+                        operatorResetTrap               (25),
+                        eventLogClearedTrap             (26),
+                        configClearedTrap               (27),
+                        functionMismatchTrap            (28),
+                        eventLogErrorTrap               (29),
+                        encapActiveTrap                 (30),
+                        encapInactiveTrap               (31),
+                        altPathUsedTrap                 (32)
+			}
+	ACCESS		read-only
+	STATUS		mandatory
+	DESCRIPTION
+		"Enterprise-specific trap number associated with this event."
+	::= { eventTypeEntry 12 }
+
+-- do the network specific object here, basically the link state table 
+
+networkNodeCount			OBJECT-TYPE
+	SYNTAX	INTEGER (1..256)
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The number of nodes this FRX knows about in the FRX network."
+	::= { network 1 }
+
+networkTable			OBJECT-TYPE
+	SYNTAX	SEQUENCE OF NetworkTableEntry
+	ACCESS	not-accessible
+	STATUS	mandatory
+	DESCRIPTION
+		"The network table contains information on FRX nodes
+		that is known network wide. This information is distributed
+		via a link state algorithm."
+	::= { network 2 }
+
+networkLinkStateTable 			OBJECT-TYPE
+	SYNTAX	SEQUENCE OF NetworkLinkStateEntry
+	ACCESS	not-accessible
+	STATUS	mandatory
+	DESCRIPTION
+		"The link state table is a list of FRX nodes that are
+		neighbors to a given FRX node."
+	::= { network 3 }
+
+networkTableEntry			OBJECT-TYPE
+	SYNTAX	NetworkTableEntry
+	ACCESS	not-accessible
+	STATUS	mandatory
+	DESCRIPTION 
+		"A row in the network table. Each row contains information
+		on a different node in the network."
+	INDEX 	{ networkTableIndex }
+	::= { networkTable 1 }
+
+NetworkTableEntry ::= SEQUENCE {
+		networkNodeId			OCTET STRING,
+		networkTableIndex			INTEGER (0..4294967295),
+		networkNodeIpAddress			IpAddress,
+		networkNodeNetMask			IpAddress
+	}
+
+networkNodeId			OBJECT-TYPE
+	SYNTAX	OCTET STRING 
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The IDNX domain-node-card address of the FRX node."
+	::= { networkTableEntry 1 }
+
+networkTableIndex			OBJECT-TYPE
+	SYNTAX	INTEGER (0..4294967295)
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The index for a particular row in the network table.
+		The value of this index is the FRX node number that
+		corresponds to the networkNodeId address."
+	::= { networkTableEntry 2 }
+
+networkNodeIpAddress			OBJECT-TYPE
+	SYNTAX	IpAddress
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The IP address of the FRX node."
+	::= { networkTableEntry 3 }
+
+networkNodeNetMask			OBJECT-TYPE
+	SYNTAX	IpAddress
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The network mask of the FRX node."
+	::= { networkTableEntry 4 }
+
+networkLinkStateEntry			OBJECT-TYPE
+	SYNTAX	NetworkLinkStateEntry
+	ACCESS 	not-accessible
+	STATUS	mandatory
+	DESCRIPTION
+		"A row in the link state table. Each row contains information
+		on the neighbor nodes for the FRX node in the network table."
+	INDEX	{ linkStateNodeNumber, linkStateIndex }
+	::= { networkLinkStateTable 1 }
+
+NetworkLinkStateEntry ::= SEQUENCE {
+		linkStateNeighborId				OCTET STRING,	
+		linkStateNodeNumber				INTEGER (0..4294967295),
+		linkStateIndex				INTEGER
+	}
+
+linkStateNeighborId			OBJECT-TYPE
+	SYNTAX	OCTET STRING
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The IDNX domain-node-card address of a neighbor FRX node."
+	::= { networkLinkStateEntry 1 }
+
+linkStateNodeNumber			OBJECT-TYPE
+	SYNTAX 	INTEGER (0..4294967295)
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The first index into the link state table.
+		The value of this index is an FRX node number."
+	::= { networkLinkStateEntry 2 }
+
+linkStateIndex			OBJECT-TYPE
+	SYNTAX	INTEGER
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION
+		"The second index into the link state table."
+	::= { networkLinkStateEntry 3 }
+bufferCongestion 			OBJECT IDENTIFIER ::= { management 1 }
+portCongestion			OBJECT IDENTIFIER ::= { management 2 }
+routingParameters			OBJECT IDENTIFIER ::= { management 3 }
+clearObjects			OBJECT IDENTIFIER ::= { management 4 }
+accountingPerPVC			OBJECT IDENTIFIER ::= { management 5 }
+saveConfiguration			OBJECT IDENTIFIER ::= { management 6 }
+nmsDownloads			OBJECT IDENTIFIER ::= { management 7 }
+
+bufferMinimumThreshold			OBJECT-TYPE
+	SYNTAX	INTEGER (0..100)
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"The minimum percentage of buffer utilization to cause node congestion."
+	::= { bufferCongestion 1 }
+
+bufferDEFrameThreshold			OBJECT-TYPE
+	SYNTAX	INTEGER (0..100)
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"The minimum percentage of buffer utilization that causes DE frames to be dropped."
+	::= { bufferCongestion 2 }
+
+bufferNormalFrameThreshold				OBJECT-TYPE
+	SYNTAX	INTEGER(0..100)
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"The minimum percentage of buffer utilization that causes normal data frames to be dropped."
+	::= { bufferCongestion 3 }
+
+portCongestionTable				OBJECT-TYPE
+	SYNTAX 	SEQUENCE OF PortCongestionEntry
+	ACCESS	not-accessible
+	STATUS	mandatory
+	DESCRIPTION
+		"A list of the port congestion parameters, row for each port."
+	::= { portCongestion 1 }
+
+portCongestionEntry				OBJECT-TYPE
+	SYNTAX	PortCongestionEntry
+	ACCESS	not-accessible
+	STATUS	mandatory
+	DESCRIPTION
+		"A row from the port congestion parameters table."
+	INDEX 	{ portCongId }
+	::= { portCongestionTable 1 }
+
+PortCongestionEntry ::= SEQUENCE {
+		portCongId		 	INTEGER,
+		portCongFrameDropRate			INTEGER,
+		portCongUtilThreshold			INTEGER,
+		portCongMinThreshold			INTEGER,
+		portCongDEThreshold			INTEGER,
+		portCongNormalThreshold			INTEGER
+	}
+
+portCongId				OBJECT-TYPE
+	SYNTAX	INTEGER 
+	ACCESS	read-only
+	STATUS	mandatory
+	DESCRIPTION 
+		"The port number associated with this row in the table."
+	::= { portCongestionEntry 1 }
+
+portCongFrameDropRate				OBJECT-TYPE
+	SYNTAX	INTEGER	(0..100)
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"The rate at which normal frames are dropped during extreme congestion."
+	::= { portCongestionEntry 2 }
+
+portCongUtilThreshold				OBJECT-TYPE
+	SYNTAX	INTEGER (0..100)
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"The percentage of the port's access rate, at which time congestion avoidance procedures are started."
+	::= { portCongestionEntry 3 }
+
+portCongMinThreshold				OBJECT-TYPE
+	SYNTAX	INTEGER (0..20)
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"The number of seconds of port congestion before FECN and BECN begin to get set."
+	::= { portCongestionEntry 4 }
+
+portCongDEThreshold				OBJECT-TYPE
+	SYNTAX	INTEGER (0..20) 
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"The number of seconds of APPROACHINGCONGESTION before DE frames begin to get dropped."
+	::= { portCongestionEntry 5 }
+
+portCongNormalThreshold				OBJECT-TYPE
+	SYNTAX INTEGER (0..20)
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"The number of seconds of DECONGESTION before 
+		 normal data frames begin to get dropped."
+	::= { portCongestionEntry 6 }
+
+routingLongTimeout				OBJECT-TYPE
+	SYNTAX	INTEGER (10..600)
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"The amount of time between normal routing table 
+		 updates for this FRX node."
+	::= { routingParameters 1 }
+
+routingShortTimeout				OBJECT-TYPE
+	SYNTAX	INTEGER (1..30)
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"The amount of time to wait after a PVC has been
+		 added or deleted before distributing a new routing 
+		 table update for this FRX node."
+	::= { routingParameters 2 }
+
+routingCriticalStateness				OBJECT-TYPE
+	SYNTAX	INTEGER (1..10)
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"The number of minor changes or short timeouts
+		 that causes a routing table update to be distributed."
+	::= { routingParameters 3 }
+
+clearEventLog			OBJECT IDENTIFIER ::= { clearObjects 1 }
+clearPVCStats			OBJECT IDENTIFIER ::= { clearObjects 2 }
+clearPortStats			OBJECT IDENTIFIER ::= { clearObjects 3 }
+clearConfiguration			OBJECT IDENTIFIER ::= { clearObjects 4 }
+
+eventLogClear				OBJECT-TYPE
+	SYNTAX	INTEGER
+	ACCESS	read-write		
+	STATUS	mandatory
+	DESCRIPTION
+		"Writing to this object will cause the event log
+		 to be cleared."
+	::= { clearEventLog 1 }
+
+clearPVCStatsTable				OBJECT-TYPE
+	SYNTAX 	SEQUENCE OF ClearPVCStatsEntry
+	ACCESS	not-accessible
+	STATUS	mandatory
+	DESCRIPTION
+		"A virtual table which is used to clear PVC statistics."
+	::= { clearPVCStats 1 }
+clearPVCStatsEntry				OBJECT-TYPE
+	SYNTAX	ClearPVCStatsEntry
+	ACCESS	not-accessible
+	STATUS	mandatory
+	DESCRIPTION
+		"A row of parameters which are used to clear 
+		 PVC based statistics."
+	INDEX { clearPVCStatsPortId, clearPVCStatsPvcId }
+	::= { clearPVCStatsTable 1 }
+
+ClearPVCStatsEntry ::= SEQUENCE {
+	clearPVCStatsPortId			INTEGER,
+	clearPVCStatsPvcId			INTEGER (0..1023),
+	clearPVCStatsActivator			INTEGER
+}
+
+clearPVCStatsPortId				OBJECT-TYPE
+	SYNTAX  INTEGER (0..7)
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"The port number identifying a PVC whose statistics 	
+		 wish to be cleared."
+	::= { clearPVCStatsEntry 1 }
+	
+clearPVCStatsPvcId				OBJECT-TYPE
+	SYNTAX	INTEGER (0..1023)
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"The DLCI value identifying a PVC whose statistics wish to be cleared."
+	::= { clearPVCStatsEntry 2 }
+
+clearPVCStatsActivator				OBJECT-TYPE
+	SYNTAX	INTEGER
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"After setting up the clearPVCStatsPVCId and 
+		 clearPVCStatsPortId fields, writing to this field 
+		 will clear the identified PVCs counters."
+	::= { clearPVCStatsEntry 3 }
+
+clearPortStatsTable				OBJECT-TYPE
+	SYNTAX	SEQUENCE OF ClearPortStatsEntry
+	ACCESS	not-accessible
+	STATUS	mandatory
+	DESCRIPTION
+		"A virtual table for clearing port based statistics."
+	::= { clearPortStats 1 }
+
+clearPortStatsEntry				OBJECT-TYPE
+	SYNTAX	ClearPortStatsEntry
+	ACCESS	not-accessible
+	STATUS	mandatory
+	DESCRIPTION
+		"A virtual entry used to clear port statistics."
+	INDEX { clearPortStatsPortId }
+	::= { clearPortStatsTable 1 }
+
+ClearPortStatsEntry ::= SEQUENCE {
+	clearPortStatsPortId			INTEGER,
+	clearPortStatsActivator			INTEGER
+	}
+	
+clearPortStatsPortId				OBJECT-TYPE
+	SYNTAX	INTEGER 
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"Setting the field to a valid port number and then 
+		 writing to clearPortStatsActivator will clear a 
+		 port's statistics."
+	::= { clearPortStatsEntry 1 }
+
+clearPortStatsActivator				OBJECT-TYPE
+	SYNTAX	INTEGER
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"After setting the clearPortStatsPortId field with
+		 a valid port number, writing to this field will 
+		 clear a port's statistics."
+	::= { clearPortStatsEntry 2 }
+
+configurationClear				OBJECT-TYPE
+	SYNTAX	INTEGER
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"Writing anything to this field will clear a FRX 
+		 node's configuration.  This can be very dangerous."
+	::= { clearConfiguration 1 }
+
+configurationSave				OBJECT-TYPE
+	SYNTAX	INTEGER
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"Writing anything to this field will cause the 
+		 current configuration to be saved in the non-
+		 volatile store of the PX card."
+	::= { saveConfiguration		 1 }
+
+fullConfigDownload				OBJECT-TYPE
+	SYNTAX	INTEGER
+	ACCESS	read-write
+	STATUS	mandatory	
+	DESCRIPTION
+		"Writing anything to this field will cause the
+		 current PVC configuration to be downloaded to
+		 a NMS workstation."
+	::= { nmsDownloads 1 }
+
+
+gwIPAddress			OBJECT-TYPE
+	SYNTAX	IpAddress
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"The IP Address of the FRX backcard."
+	::= { gateway 1 }
+
+gwNetMask			OBJECT-TYPE
+	SYNTAX	IpAddress
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"The network mask of the FRX backcard."
+	::= { gateway 2 }
+
+gwRARP			OBJECT-TYPE
+	SYNTAX	INTEGER{
+		disabled(1),
+		enabled(2)
+		}
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"This parameter is not supported.
+		A get on this OID will return disabled.
+		A set on this OID will have no effect."
+	::= { gateway 3 }
+
+gwRIP			OBJECT-TYPE
+	SYNTAX	INTEGER{
+		disabled(1),
+		enabled(2)
+		}
+	ACCESS	read-write
+	STATUS	mandatory
+	DESCRIPTION
+		"Enable or disable the use of RIP (Routing Information Protocol). With RIP disabled, the user must install static routes on the attached workstation. Default state is disabled."
+	::= { gateway 4 }
+
+gwIPAccessTable			OBJECT-TYPE
+	SYNTAX		SEQUENCE OF GwIPAccessEntry
+	ACCESS		not-accessible
+	STATUS		mandatory
+	DESCRIPTION	
+		"A table of IP host or network addresses whose managers are allowed
+		to access the FRX gateway."
+	::= { gateway 5 }
+
+gwIPAccessEntry			OBJECT-TYPE
+	SYNTAX		GwIPAccessEntry
+	ACCESS		not-accessible
+	STATUS		mandatory
+	DESCRIPTION	
+		"An IP host or network addresses whose managers are allowed to 		access the FRX gateway."
+	INDEX		{ gwIPAccessIndex }
+	::= { gwIPAccessTable 1 }
+
+GwIPAccessEntry ::= SEQUENCE {
+		gwIPAccessIndex			INTEGER (0..999),
+		gwIPAccessRowStatus			INTEGER,
+		gwIPAccessAddress       		IpAddress }
+
+gwIPAccessIndex			OBJECT-TYPE
+	SYNTAX		INTEGER (0..999)
+	ACCESS		read-only
+	STATUS		mandatory
+	DESCRIPTION
+		"Auxiliary variable used to identify row instances in the gateway's IP address access table."
+	::= { gwIPAccessEntry 1 }
+
+gwIPAccessRowStatus			OBJECT-TYPE
+	SYNTAX	INTEGER {
+		invalid(1),
+		valid(2)
+		}
+	ACCESS		read-write
+	STATUS		mandatory
+	DESCRIPTION
+		"Auxiliary variable used to create or delete row instances in the gateway's IP address access table."
+	::= { gwIPAccessEntry 2 }
+
+gwIPAccessAddress			OBJECT-TYPE
+	SYNTAX		IpAddress
+	ACCESS		read-write
+	STATUS		mandatory
+	DESCRIPTION
+		"The IP address of a host or network that is allowed to access the FRX gateway."
+	::= { gwIPAccessEntry 3 }
+-- the trap definitions themselves 
+--
+
+systemRestartTrap				TRAP-TYPE
+	ENTERPRISE		frx
+	DESCRIPTION
+		"This trap is sent when the system restarts for any reason other than an operator requested restart."
+	::= 1
+
+systemSyserrTrap				TRAP-TYPE
+	ENTERPRISE		frx
+	DESCRIPTION
+		"This trap is sent when the system detects a inconsistency. This may cause a reset of the FRX node."
+	::= 2
+
+configChangedTrap				TRAP-TYPE
+	ENTERPRISE		frx
+	DESCRIPTION
+		"This trap is sent when a new configuration is saved in the non-volatile storage."
+	::= 3 
+
+nodeCongestedTrap				TRAP-TYPE
+	ENTERPRISE		frx
+	DESCRIPTION
+		"This trap is sent when the FRX node becomes congested."
+	::= 4
+
+portInstalledTrap				TRAP-TYPE
+	ENTERPRISE		frx
+	VARIABLES		{ portConfEntryId }
+	DESCRIPTION
+		"This trap is sent when a port is installed."
+	::= 5
+
+portDeletedTrap			TRAP-TYPE
+	ENTERPRISE		frx
+	VARIABLES		{ portConfEntryId }
+	DESCRIPTION
+		"This trap is sent when a port is deleted."
+	::= 6
+
+portActivatedTrap				TRAP-TYPE
+	ENTERPRISE		frx
+	VARIABLES		{ portConfEntryId }
+	DESCRIPTION
+		"This trap is sent when a port is activated."
+	::= 7
+
+portDisabledTrap				TRAP-TYPE
+	ENTERPRISE		frx
+	VARIABLES		{ portConfEntryId }
+	DESCRIPTION
+		"This trap is sent when a port is disabled."
+	::= 8
+
+portCongestedTrap				TRAP-TYPE
+	ENTERPRISE		frx
+	VARIABLES		{ portConfEntryId }
+	DESCRIPTION
+		"This trap is sent when a port is congested."
+	::= 9
+
+
+pvcInstalledTrap				TRAP-TYPE
+	ENTERPRISE		frx
+	VARIABLES		{ portConfEntryId,circuitConfDLCI }
+	DESCRIPTION
+		"This trap is sent when a virtual circuit is installed."
+	::= 10
+
+pvcDeletedTrap				TRAP-TYPE
+	ENTERPRISE		frx
+	VARIABLES		{ portConfEntryId, circuitConfDLCI }
+	DESCRIPTION
+		"This trap is sent when a virtual circuit is deleted."
+	::= 11
+
+pvcActivatedTrap				TRAP-TYPE
+	ENTERPRISE		frx
+	VARIABLES		{ portConfEntryId, circuitConfDLCI }
+	DESCRIPTION
+		"This trap is sent when a virtual circuit is activated."
+	::= 12
+
+pvcDisabledTrap				TRAP-TYPE
+	ENTERPRISE		frx
+	VARIABLES		{ portConfEntryId, circuitConfDLCI }
+	DESCRIPTION
+		"This trap is sent when a virtual circuit is disabled."
+	::= 13
+
+pvcStatusActiveTrap				TRAP-TYPE
+	ENTERPRISE		frx
+	VARIABLES		{ portConfEntryId, circuitConfDLCI }
+	DESCRIPTION
+		"This trap is sent when the status for a virtual circuit become active."
+	::= 14
+
+pvcStatusInactiveTrap				TRAP-TYPE
+	ENTERPRISE		frx
+	VARIABLES		{ portConfEntryId, circuitConfDLCI }
+	DESCRIPTION
+		"This trap is sent when the status for a virtual circuit become inactive."
+	::= 15
+
+cbusUpTrap				TRAP-TYPE
+	ENTERPRISE		frx
+	DESCRIPTION
+		"This trap is sent when the CBUS interface is ready for use."
+	::= 16
+
+cbusDownTrap				TRAP-TYPE
+	ENTERPRISE		frx
+	DESCRIPTION
+		"This trap is sent when the CBUS interface becomes invalid."
+	::= 17
+
+serialFailTrap				TRAP-TYPE
+	ENTERPRISE		frx
+	VARIABLES		{ portStatusEntryId }
+	DESCRIPTION
+		"This trap is sent when an HDLC port fails to initialize."
+	::= 18
+
+portUniActiveTrap					TRAP-TYPE
+	ENTERPRISE		frx
+	VARIABLES		{ portStatusEntryId }
+	DESCRIPTION
+		"This trap is sent when a port's UNI protocol becomes active."
+	::= 19
+
+portUniInactiveTrap					TRAP-TYPE
+	ENTERPRISE		frx
+	VARIABLES		{ portStatusEntryId }
+	DESCRIPTION
+		"This trap is sent when a port's UNI protocol becomes inactive."
+	::= 20
+
+portIDNXCallUpTrap					TRAP-TYPE
+	ENTERPRISE		frx
+	VARIABLES		{ portStatusEntryId }
+	DESCRIPTION
+		"This trap is sent when a port's IDNX call (bandwidth) is available."
+	::= 21
+
+portIDNXCallDownTrap					TRAP-TYPE
+	ENTERPRISE		frx
+	VARIABLES		{ portStatusEntryId }
+	DESCRIPTION
+		"This trap is sent when a port's IDNX call (bandwidth) becomes unavailable."
+	::= 22
+
+nodeNotCongestedTrap					TRAP-TYPE
+	ENTERPRISE		frx
+	DESCRIPTION
+		"This trap is sent when a FRX node goes from being congested to not being congested."
+	::= 23
+
+portNotCongestedTrap					TRAP-TYPE
+	ENTERPRISE		frx
+	VARIABLES		{ portStatusEntryId }
+	DESCRIPTION
+		"This trap is sent when a port goes from being congested to not being congested."
+	::= 24
+
+operatorResetTrap					TRAP-TYPE
+	ENTERPRISE		frx
+	DESCRIPTION
+		"This trap is sent when the operator requests a reset of the FRX."
+	::= 25
+
+eventLogClearedTrap					TRAP-TYPE
+	ENTERPRISE		frx
+	DESCRIPTION
+		"This trap is sent when the operator requests to clear the FRX event log."
+	::= 26
+
+configClearedTrap					TRAP-TYPE
+	ENTERPRISE		frx
+	DESCRIPTION
+		"This trap is sent when the operator requests to clear the configuration of an FRX."
+	::= 27
+
+functionMismatchTrap					TRAP-TYPE
+	ENTERPRISE		frx
+	DESCRIPTION
+		"This trap is sent when the code type (FRX) does not match the value stored in the IDNX database."
+	::= 28
+
+eventLogErrorTrap					TRAP-TYPE
+	ENTERPRISE		frx
+	DESCRIPTION
+		"This trap is sent when the FRX is unable to create an event log."
+	::= 29
+
+encapActiveTrap					TRAP-TYPE
+	ENTERPRISE		frx
+	DESCRIPTION
+		"This trap is sent when frame relay encapsulation is turned on on a pvc."
+	::= 30
+
+encapInactiveTrap					TRAP-TYPE
+	ENTERPRISE		frx
+	DESCRIPTION
+		"This trap is sent when frame relay encapsulation is turned off on a pvc."
+	::= 31
+
+altPathUsedTrap				TRAP-TYPE
+	ENTERPRISE		frx
+	DESCRIPTION
+		"This trap is sent when a path alternate to the preferred path is used to setup a pvc."
+	::= 32
+
+
+END
+
+

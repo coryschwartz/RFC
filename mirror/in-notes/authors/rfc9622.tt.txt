@@ -1,0 +1,133 @@
+<tt>_</tt>				√
+<tt>.</tt>				√
+<tt>(Enumeration, Preference)</tt>	√
+<tt>[]Type</tt>				√
+<tt>Abort</tt>				maybe mixed use
+<tt>AbortGroup</tt>			√
+<tt>Active</tt>				possible mixed use
+<tt>add</tt>				possible mixed use
+<tt>AddLocal</tt>			√
+<tt>AddRemote</tt>			√
+<tt>advertisesAltaddr</tt>		√
+<tt>Avoid</tt>				possible mixed use
+<tt>Cellular</tt>			possible mixed use
+<tt>clientCertificate</tt>		possible mixed use
+<tt>Clone</tt>				possible mixed use
+<tt>CloneError</tt>			√
+<tt>Close</tt>				possible mixed use
+<tt>Closed&lt;&gt;</tt>			√
+<tt>Closed</tt>				possible mixed use
+<tt>CloseGroup</tt>			√
+<tt>Closing</tt>			possible mixed use
+<tt>congestionControl</tt>		√
+<tt>connCapacityProfile</tt>		√
+<tt>ConnectionError&lt;&gt;</tt>	√
+<tt>ConnectionError</tt>		√
+<tt>connectionProperties</tt>		√
+<tt>ConnectionReceived&lt;&gt;</tt>	√
+<tt>ConnectionReceived</tt>		√
+<tt>connPriority</tt>			√
+<tt>connScheduler</tt>			√
+<tt>connTimeout</tt>			√
+<tt>direction</tt>			possible mixed use
+<tt>Disabled</tt>			possible mixed use
+<tt>Duration</tt>			possible mixed use
+<tt>ErrorCode</tt>			√
+<tt>Established</tt>			possible mixed use
+<tt>Establishing</tt>			possible mixed use
+<tt>EstablishmentError&lt;&gt;</tt>	√
+<tt>EstablishmentError</tt>		√
+<tt>example.com</tt>			possible mixed use
+<tt>Expired</tt>			possible mixed use
+<tt>false</tt>				√
+<tt>fe80::2001:db8%en0</tt>		√
+<tt>Final</tt>				possible mixed use
+<tt>final</tt>				possible mixed use
+<tt>framer</tt>				possible mixed use
+<tt>Full Coverage</tt>			√
+<tt>fullChecksumRecv</tt>		√
+<tt>fullChecksumSend</tt>		√
+<tt>GroupedConnections</tt>		√
+<tt>Initiate</tt>			possible mixed use
+<tt>InitiateWithSend</tt>		√
+<tt>int</tt>				√
+<tt>Interface Instance or Type</tt>	√
+<tt>interface</tt>	  		possible mixed use
+<tt>Listen</tt>				possible mixed use
+<tt>long</tt>				√
+<tt>Low Extra Delay Background Transfer</tt>	possible mixed use
+<tt>Low Latency/Interactive</tt>	√
+<tt>messageContext</tt>			possible mixed use
+<tt>messageData</tt>			√
+<tt>MP_CAPABLE</tt>			√
+<tt>msgCapacityProfile</tt>		possible mixed use
+<tt>msgChecksumLen</tt>			√
+<tt>msgLifetime</tt>			√
+<tt>msgOrdered</tt>			√
+<tt>msgPriority</tt>			√
+<tt>msgReliable</tt>			√
+<tt>multipath</tt>			possible mixed use
+<tt>multipathPolicy</tt>		√
+<tt>noFragmentation</tt>		possible mixed use
+<tt>None</tt>				√
+<tt>Not applicable</tt>			√
+<tt>PathChange&lt;&gt;</tt>		possible mixed use
+<tt>perMsgReliability</tt>		√
+<tt>Prefer</tt>				possible mixed use
+<tt>Preference</tt>			possible mixed use
+<tt>preserveOrder</tt>			possible mixed use
+<tt>Prohibit</tt>>			possible mixed use
+<tt>pvd</tt>				possible mixed use
+<tt>Ready&lt;&gt;</tt>			√
+<tt>Ready</tt>				√
+<tt>Receive</tt>			possible mixed use
+<tt>Received&lt;&gt;</tt>		√
+<tt>Received</tt>			possible mixed use
+<tt>ReceivedPartial</tt>		√
+<tt>ReceiveError</tt>			√
+<tt>recvChecksumLen</tt>		√
+<tt>recvMsgMaxLen</tt>			√
+<tt>reliability</tt>			possible mixed use
+<tt>RemoveLocal</tt>			√
+<tt>RemoveRemote</tt>			√
+<tt>Rendezvous</tt>			possible mixed use
+<tt>RendezvousDone&lt;&gt;</tt>		√
+<tt>Require</tt>			possible mixed use
+<tt>Resolve</tt>			possible mixed use
+<tt>safelyReplayable</tt>		√
+<tt>SecurityParameters</tt>		√
+<tt>Send</tt>				possible mixed use
+<tt>SendError</tt>			√
+<tt>sendMsgMaxLen</tt>			√
+<tt>Sent&lt;&gt;</tt>			√
+<tt>Sent</tt>				possible mixed use
+<tt>serverCertificate</tt>		√
+<tt>Set()</tt>				√
+<tt>set</tt>				possible mixed use
+<tt>SetNewConnectionLimit</tt>		√
+<tt>SetProperty</tt>			√
+<tt>singularTransmissionMsgMaxLen</tt>	√
+<tt>SoftError</tt>			√
+<tt>softErrorNotify</tt>		√
+<tt>std::set</tt>			√
+<tt>Stopped</tt>			possible mixed use
+<tt>struct timeval</tt>			√
+<tt>struct</tt>				√
+<tt>tcp.userTimeoutValue</tt>		√
+<tt>Timeout for aborting the Connection</tt>		possible mixed use
+<tt>timeout</tt>	     				possible mixed use
+<tt>TransportProperties.Avoid(some_property)</tt>	possible mixed use
+<tt>TransportProperties.Set(some_property, avoid)</tt>	possible mixed use
+<tt>true</tt>				possible mixed use
+<tt>tuple</tt>				possible mixed use
+<tt>unidirectional receive</tt>		√
+<tt>unidirectional send</tt>		√
+<tt>Unlimited</tt>			√
+<tt>User Timeout Enabled</tt>		√
+<tt>Wi-Fi</tt>	 			√
+<tt>WithHostName</tt>			√
+<tt>WithInterface </tt>			√
+<tt>WithIPAddress</tt>			√
+
+<em>establishing</em>			possible mixed use
+<em>proactive advertisement</em>	√		

@@ -1,0 +1,310 @@
+20-Jun-83 10:32:30-PDT,10785;000000000001  
+Return-path: <tcp-ip@brl-vgr>
+Mail-From: SMTP created at 14-Jun-83 21:52:47
+Received: FROM BRL-VGR BY USC-ISIF.ARPA WITH TCP ; 14 Jun 83 21:52:56 PDT
+Received: From Brl-Vgr.ARPA by BRL-VGR via smtp;  14 Jun 83 23:28 EDT
+Sender:    Mike Muuss <TCP-IP@brl>
+From:      TCP-IP@brl
+To:        TCP-IP@brl
+Date:      15 June 1983 00:00 EST
+Subject:   TCP-IP Digest, Vol 2 #9
+
+TCP/IP Digest          Wednesday, 15 June 1983     Volume 2 : Issue 9
+
+Today's Topics:
+              Pointer to Naming, Addressing, & Routing Memo
+             Routing of Routing Messages -vs- Data Messages
+                       Fix for BBN VAX TCP Problem
+                Comments on SMTP Design Flaw + Discussion
+              Request for TCP/IP Implementations on Micros
+                  Wanted:  Spooled FTP for BBN UNIX TCP
+----------------------------------------------------------------------
+                  TCP/IP Digest --- The InterNet Digest
+                         LIMITED DISTRIBUTION
+          For Research Use Only --- Not for Public Distribution
+----------------------------------------------------------------------
+
+Date:  7 Jun 1983 1419-PDT
+From: POSTEL@usc-isif
+Subject: IEN-19: Names, Addresses, and Routes
+To:   TCP-IP@brl
+
+The memo by John Shoch titled "Inter-Network Naming, Addressing, and
+Routing", issued as IEN 19 was produced using some fancy formating
+and printing facilities at Xerox PARC and was distributed only in hardcopy.
+
+The later (and improved) version of this memo with the same title was
+presented at COMPCON Fall 1987.  The order number from the IEEE
+Computer Society is CH1388-8/78-0000-0072.
+
+--jon.
+
+------------------------------
+
+Date:  7 Jun 1983 1435-PDT
+From: POSTEL@usc-isif
+Subject: Routing Messages vs. Data Messages
+To:   tcp-ip@brl
+
+Ed Taft's comments on routing information exchange being distinct from the
+actual routes that data traffic moves on are well taken.  One aspect of the
+development of the Exterior Gateway Protocol (RFC 827) is to allow testing
+of different routing procedures in subsets of gateways without interfering
+with the actual transmission of data datagrams.  The logical systems of
+gateways in EGP are independent of the actual network topology.
+
+--jon.
+
+------------------------------
+
+Date:  8 Jun 1983  9:32:11 EDT (Wednesday)
+From: Dennis Rockwell <drockwel@bbn-vax>
+Subject: TCP problem
+To: Rob Gurwitz <gurwitz@BBN-UNIX>, dpk@brl-vgr
+
+[ This message was forwarded to the Digest by Doug Kingston, and details
+  a particularly insidious bug in the BBN VAX TCP.  Hopefully, if any site
+  using that code has not heard of this problem yet, this message will
+  have served a purpose.  Note that Berkeley 4.1a and 4.1c code does
+  not have this bug.  -Mike ]
+
+The fix for this bug is as follows: (I'm afraid I have no
+familiarity whatsoever with the TCP variants, but the
+code should be fairly easy to find)
+
+In the routine rcv_text (in tcp_procs.c in our code), the routine
+that does the resequencing, there is the following code:
+
+			/* new overlaps at beginning of successor frags */
+
+			q = savq->t_next;
+			while ((q != (struct th *)tp) && (t->t_len != 0) && 
+			       SEQ_LEQ(q->t_seq, last))
+
+				/* complete cover */
+
+        			if (SEQ_LEQ(t_end(q), last)) {
+					p = q->t_next;
+					tcp_deq(q);
+					m_freem(dtom(q));
+					q = p;
+
+				} else {		/* overlap */
+
+In your code, the first SEQ_LEQ is probably a SEQ_LT.  This is the bug.
+There is an analogous bug in ip_input.c:
+
+			/* new overlaps at beginning of successor frags */
+
+				q = savq->ip_next;
+				while ((q != (struct ip *)fp) &&
+					(ip->ip_len != 0) && 
+					(q->ip_off <= ip->ip_end)) 
+
+					/* complete cover */
+
+					if (q->ip_end <= ip->ip_end) {
+						p = q->ip_next;
+						ip_deq(q);
+						m_freem(dtom(q));
+						q = p;
+
+Again, in your code the first <= is probably a <.
+
+This fix was made just last week, and is slowly percolating out to the
+other local BBN sites.  We are trying to spread this fix around, but
+that's difficult.  Please tell everybody you know who is running this
+code about the fix.
+
+Good luck!  Feel free to write or call me at (617) 497-2643.
+
+------------------------------
+
+Date:     8 Jun 83 5:39:10 EDT (Wed)
+From:     Doug Kingston  <dpk@BRL-VGR>
+To:       tcp-ip@BRL-VGR
+Subject:  SMTP Design Flaw
+
+	SMTP as it currently stands has a serious flaw from the
+point of view of fault-tolerant software.   The crux of the problem
+is that the reply codes reuse certain values in different contexts.
+This opens the possibility of of mis-interpreting replies in the
+case where the user-smtp or the transmission channel is generating
+spurious data.  A similiar problem exists if the smtp server
+generates spurious responses.
+
+	If both sides are bug-free, there will be no problems.
+But, the world of software is seldom if ever bug-free.  A prudent
+implementer plans for the inevitable error to be made by the
+hardware, his own software, or someone else's software.  Spurious
+commands or spurious responses can cause the server/user pair to
+get out of sync without either being able to conclusively detect
+the situation.
+
+	The worst problem exists for the 250 reply which is the
+affirmative reply from HELO, MAIL, RCPT, "final dot", and RSET
+to name only the most commonly used commands.  The 500, 501, and
+503 commands are also dangerously overloaded.
+
+	Senarios:
+			RCPT -->
+unknown to sender	junk -->
+			     <-- 250
+			DATA -->
+			     <-- 500  (actually reply to junk)
+		Result: Mail is returned wrongfully.
+
+		    ********************
+
+			RCPT -->
+unknown to sender      junk1 -->
+		       junk2 -->	(we are now off by two...)
+			     <-- 250
+			RCPT -->
+			     <-- 500  (actually reply to junk1)
+		<Mail is returned here wrongfully>
+			DATA -->
+			     <-- 500  (actually reply to junk2)
+we detect problem	RSET -->
+			     <-- 250  (actually reply to second RCPT !!!)
+			MAIL -->
+			     <-- 354  (bletch.) (Protocol errror)
+			RSET -->
+			     <-- 250  (reply to first RSET!!!!!)
+			MAIL -->
+			     <-- 250  (reply to first MAIL...
+			RCPT -->
+			     <-- 250  (reply to second RSET...
+			RCPT -->
+			     <-- 250  (reply to second MAIL...
+
+			... until we get to the DATA command again.
+			
+		Result: Mail is returned wrongfully.
+
+		    ********************
+
+			RCPT -->
+unknown to sender	junk -->
+			     <-- 250
+			RCPT -->
+			     <-- 500 (response to junk)
+		<mail is returned here>
+			RCPT -->
+			     <-- 250 (response to SECOND rcpt command!!!)
+
+		    ********************
+
+			RCPT -->
+unknown to sender	RCPT -->
+			     <-- 250
+			RCPT -->
+			     <-- 250 (response to Second RCPT !!!)
+			RCPT -->
+			     <-- 250 (response to Third RCPT !!!)
+			DATA -->
+			     <-- 250 (response to Fourth RCPT !!!)
+
+		    ***********************
+
+	As I see it, there are two things that can be done done to
+help out this situation.  First, the reply codes should be unique
+for each command.  This would give the USER SMTP the ability to
+detect sequencing errors from syntax or argument errors which
+some hosts give on hosts they don't know how to reach, but I wont
+drag the offenders out into public here.  They know who they are.
+
+	Second, and perhaps more radical, is to add a sequence number
+each command/reply pair.  Each command would be sent with a sequence
+number.  The reply to that command would have to contain the same
+sequence number.  This would allow both the server and user SMTP
+to detect sequenceing errors.  I feel that this would be the most
+prudent and reliable mechanism for detecting these faults.
+
+	This problem is not just a figment of my imagination. This
+very problem has plagued mail between out sites and sites running
+BBN based TCP implementations for about a month now.  The spurious
+input was probably induced by a bug in the BBN TCP's handling
+of the sequenceing and/or retransmission or large numbers of incoming
+1 character packets due to a bug in my mailer that caused it not to
+buffer its output.
+
+				Comments and Discussion are Welcomed
+						-Doug-
+
+------------------------------
+
+Date:  8 Jun 1983 1445-PDT
+From: POSTEL at USC-ISIF
+Subject: Re: SMTP Design Flaw
+To:   dpk at BRL-VGR, tcp-ip at BRL-VGR
+
+Doug:
+
+SMTP explicitly requires that it be operated on a reliable channel
+(such as provided by TCP).  The situation you suggest does not arise
+because of "junk" being inserted in the channel unknown to the sender.
+There was (still is?) a totally bogus "implementation" of SMTP that sent
+several commands in succession without even looking at the replies.  I
+suggest that it is better to assume a reliable channel than to reimplement
+TCP inside of SMTP, and to stomp out bad implementations of SMTP as soon
+as we see them.
+
+--jon.
+
+------------------------------
+
+Date:     8 Jun 83 18:13:50 EDT (Wed)
+From:     Doug Kingston  <dpk@BRL-VGR>
+To:       POSTEL@Usc-Isif
+cc:       dpk@BRL-VGR, tcp-ip@BRL-VGR
+Subject:  Re:  SMTP Design Flaw
+
+Jon,
+
+	I do not dispute that the problem is induced by a faulty
+SMTP or channel.  I am arguing for cheap enhancements the buy
+us a great deal of fault tolerance.  Obviously we're not going to
+change SMTP, but I think this should be kept in mind for later
+incarnations.  Faults will occur.  Mail software should make
+every effort to detect and deal with errors.  We need to give
+it a mechanism, and it doesn't have to be complicated.
+
+			The problem with bugs is
+			  that is they're so ingenious,
+					-Doug-
+
+------------------------------
+
+Date: 9 Jun 1983 17:53:43-PST
+From: ram.arizona@rand-relay
+Subject: TCP/IP on Micros?
+To: tcp-ip-request.brl@rand-relay
+
+[ Anybody having information about micro implementations, please feel
+  free to either contact Ralph directly, or to submit a message to the
+  digest for all to see.  -Mike ]
+
+I am interested in locating information on tcp/ip implementations on
+microcomputer systems.  Specifically, on the LSI-11/23, 68000, and 8086.
+I would like to know the language, operating system, and availability of
+such implementations (costs).  Thanks for passing on this request.
+
+----Ralph Martinez (ram.arizona@rand-relay)
+    University of Arizona
+
+------------------------------
+
+Date: 9 Jun 1983 8:36-PDT (Thursday)
+From: Jim Rees <jim@uw-beaver>
+Subject: Want spooled FTP for BBN Unix TCP
+To: tcp-ip@brl, bbn-tcp@bbn-vax
+
+I am running BBN's TCP on a Vax with 4.1bsd.  I want a spooled FTP,
+something like uucp, to run over the net between Unix machines.  Has
+anyone already done this?  Does anyone have bright ideas?
+
+------------------------------
+
+END OF TCP-IP DIGEST
+********************

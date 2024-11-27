@@ -1,0 +1,334 @@
+ 5-Dec-82 15:36:40-PST,14373;000000000000
+Mail-from: ARPANET host BRL rcvd at 5-Dec-82 1532-PST
+UUCP-From: decvax!brl-bmd!tcp-ip
+Sender:    Mike Muuss <TCP-IP@BRL>
+From:      TCP-IP at BRL
+To:        TCP-IP at BRL
+Date:      5 Dec 1982
+Subject:   TCP-IP Digest, Vol 1 #27
+Via:  Brl-Bmd; 5 Dec 82 12:04-EST
+
+TCP/IP Digest             Sunday, 5 Dec 1982       Volume 1 : Issue 27
+
+Today's Topics:
+                      IBM Rumored to Support TCP/IP
+                ArpaNet to Convert to TCP/IP on 1-Jan-83
+                    ArpaNet Split ==> MILNET + EXPNET
+         Transmitting For-Official-Use-Only Material on the Net
+                    DEC to Distribute TOPS-20 TCP/IP
+----------------------------------------------------------------------
+                         LIMITED DISTRIBUTION
+          For Research Use Only --- Not for Public Distribution
+----------------------------------------------------------------------
+
+Date:  1 Dec 1982 0811-PST
+From: Johnson at Sumex-Aim
+Subject: IBM and TCP/IP
+To:   tcp-ip at BRL
+
+Reliable information has it that IBM Federal Systems Division
+has developed a version of TCP/IP for one or more IBM operating
+systems.  IBM internally is evaluating the possibility of making
+a "real product" of the implementation.
+
+Persons or organizations interested in such a product should talk to 
+their IBM marketing reps (who may know nothing about the fact this is
+going on...or even what TCP/IP is) and make sure that the rep fills
+out a P.S.R.R. on their requirements.  This will help convince IBM
+officials that there is indeed a market for such a product.
+
+Suzanne Johnson
+
+------------------------------
+
+Date:     3 Dec 82 11:50:08-EST (Fri)
+From:     Michael Muuss <mike@brl-bmd>
+To:       tcp-ip at Brl-Bmd
+Subject:  TCP/IP Conversion Date
+
+Based on recent discussions with DCA about the ArpaNet, I offer these tidbits:
+
+Just as a reminder, the 1-Jan-83 date for conversion to TCP/IP only
+on the ArpaNet is **rock solid**.  Hosts which do not have the new
+protocols running will be unable to access the network.
+
+Also, those sites still running Honeywell H316s as TIPs (not TACs)
+will be unable to reach any hosts with those TIPs.
+
+All Honeywell equipment is supposed to be removed from the network
+by March 83;  some sites still have not ordered C/30 equipment.
+
+All Pluribus equipment was removed from the net in October of this year.
+				-Mike
+
+------------------------------
+
+Date:     3 Dec 82 11:45:55-EST (Fri)
+From:     Michael Muuss <mike@brl-bmd>
+To:       tcp-ip at Brl-Bmd
+Subject:  ArpaNet Split
+
+At the ArpaNet Sponsor's meeting yesterday, the following letter
+was distributed, with a list of host & IMP alignmets in the new
+networks.
+
+---
+
+B610					29 Oct 1982
+
+
+	The existing ARPANET will be split into a network for operational
+traffic (MILNET) and an experimental network which will retain the name
+ARPANET.  Current plans are to effect this split in late CY83.
+Communications between the two networks will be via mail-forwarding
+servers provided by DCA.  The IMP, TAC, and Host alignments on the MILNET
+or the Experimental Network are enclosed.
+
+	It is recognized that in some cases the alignment is not as
+originally requested by the sponsor.  Alignment decisions were made
+following careful consideration of inputs from sponsors, together with
+the desire of DARPA to reduce the size of the ARPANET to a more
+manageable size for continued network and internetwork experimentation.
+
+	Alignment reclamas should be submitted to DCA Code B610.  Those
+reclamas requesting IMP, TAC, or Host participation on the Experimental
+Network will be forwarded to DARPA for review and approval.  Reclamas
+will be accepted until 15 Jan 83.  Final network alignments and initial
+scheduling for the ARPANET split will be announced by 4 Feb 83.
+
+				Sincerely,
+
+				(initialed)
+				HEIDI B. HEINDEN
+				COL, USA
+				DDN Program Manager
+
+----
+
+For those sites unsure of their alignment, check with your
+ArpaNet sponsor.  Sites needing Host connections to both networks
+must submit an RFS (Request for Service) through regular channels
+for the additional connections.
+
+A two-stage approach to accomplishing the split will be employed.
+First will be a logical separation using the COI (community of interest)
+feature of the IMPs, to take place around July 83.
+
+At that time 4 "special" InterNet gateways will go into operation, 2 on
+each cost, at DCEC, BBN, ISI, and SRI.  These gateways will only forward
+InterNet packets for the SMTP protocol, permitting only a mail connection
+between the two networks.  TAC access control for the MILNET TACs will
+be added as soon as feasable after this partitioning.
+MILNET will be class A network number 26 (the old AUTODIN II number),
+while ARPANET will retain class A network number 10.
+
+The second stage will involve an actual reconfiguration of backbone
+circuits, making the separation of the networks a physical partitioning.
+This is targeted for Jan 84.  NCC and NIC services will be availible on
+both nets, with DCA running the MINET NOC and BBN running the ArpaNet NOC.
+
+At the time of the physical partitioning, DES encryption will be added to
+all MILNET trunks, and all MILNET IMPs will have to be relocated to
+"restricted" locaions.  DCA has defined a "restricted" location as
+(this is NOT an exact quote) an area which can be accessed by authorized
+personnel only, all others to be accompanied by an escort, in a
+controled access room with either locked doors (card or key access)
+or a guarded door with access lists and positive identification.
+All authorized personnel will be ADP.II cleared personnel only
+as per OPM directive CSC78.
+
+DISCUSSION.  (My own personal opinions).
+
+There are very good engineering reasons for partitioning the network
+into two separate pieces.  Simply from the point of view of adding
+more bandwidth to the existing network, the additional trunking
+provided by the split will improve performance greatly.  This will
+also permit expansion of the two networks to proceed without interfering
+with each other.  The planned growth for the ArpaNet is low, while
+the MILNET is expecting explosive growth.  Something like 50 new
+MILNET sites are already in the works.
+
+The InterNet concept makes this split an easily accomplished thing,
+thanks to the InterNet gateways.  However, the "special" gateway is
+a thing which tends to diminish the value of the split by only allowing
+mail traffic across it.  I invite the readers of the digest to
+discuss this issue.
+
+The reason for the existance of a restrictive gateway is, of course
+that old bugaboo, "security".  Seems like many of the military people
+are scared of having University students "at large" on their network.
+There are some serious loss-of-service issues which properly concern
+users of MILNET.  Discussion?
+
+As a straw-man counter proposal, what would people think about
+the following aproach:  when the logical split is performed,
+make the gateways FULL internet gateways, to allow the net to
+"shake itself down" after having half the host numbers change,
+and then add an intermediate step a month or two later where
+the gateways are restricted to "special" mail-forwarding gateways
+only.  This would, at least, allow the two shocks to the network
+to be separated slightly from each other, allowing some time to
+recover from any possible errors in net assignment before dropping
+service to anybody.
+					-Mike
+
+
+PS:  While on the subject of host numbers changing, Jon Postel pointed out
+that host numbering will be changing on almost a daily basis, the growth
+of the InterNet being what it is.  Hence, all implementors are urged to
+consider having your systems automatically fetch the latest table from
+the NIC each time the system is rebooted, and possibly more frequently.
+
+------------------------------
+
+Date:     5 Dec 82 10:23:16-EST (Sun)
+From:     Michael Muuss <mike@brl-bmd>
+To:       tcp-ip at Brl-Bmd
+Subject:  "Special" Gateways for Mail (SMTP)
+
+In my earlier message it may seem that I might not care for the
+way that the "Special" Gateways were to be implemented.  This
+is not true at all!  Given that there are going to be special (restrictive)
+interconnections between the networks, what better way to do it
+than with a simple modification to the existing InterNet gateway
+code?
+
+As the folks from BBN indicated at the meeting, using the InterNet
+Gateway is a nice, general solution, built on an evolving mechanism --
+rather than a special kludge thrown together just to solve this one
+problem.  This choice also admits of possibly increased cross-net
+servics as the construction of gateways becomes more developed.
+The Exterior Gateway Protocol (EGP) is a good step in this direction.
+
+Another neat benefit is that, for special purposes (demos, special
+projects, etc), an exception table can be wired into the "special"
+gateways to permit full access between the nets on a host-pair
+basis.  A nice safety-valve which will almost certainly be used
+to "fix up" the problems encountered by the MILNET/EXPNET separation
+this summer.
+
+All in all, a very nice design, assuming one agrees with the need for
+the formal separation of the nets.  And that would seem to be a
+political issue.
+				-Mike
+
+------------------------------
+
+Date:     3 Dec 82 11:08:58-EST (Fri)
+From:     Michael Muuss <mike@brl-bmd>
+To:       Gurus at Brl-Bmd, tcp-ip at Brl-Bmd
+Subject:  FOUO on the ArpaNet, MILNET, DDN
+
+Yesterday afternoon, at the ArpaNet Sponsor's meeting, Col Heiden
+(DDN Program Manager) indicated that it was completely acceptable
+to transmit FOUO and Privacy Act data across the ArpaNet, as long
+as the machines/terminals at either end were acredited for such use.
+
+It was also pointed out that the buzword FOUO has been decomissioned.
+Wonder what replaced it?
+				-Mike
+
+------------------------------
+
+Date: 30 Nov 1982 1144-EST
+From: Allan Titcomb <TITCOMB at DEC-MARLBORO>
+Subject: DEC's Distribution of TCP
+To: TOPS-20 at SU-SCORE
+cc: Paetzold at KL2102
+PHONE: (617) 467-4849
+Remailed-date: 30 Nov 1982 1602-PST
+Remailed-from: Henry W. Miller <Miller at SRI-NIC>
+Remailed-to: tcp-ip-tops20 at SRI-NIC
+
+[ The end of this message included a shortened form of the agreement DEC
+  is requesting everyboyd fill out.  I didn't feel that everybody wanted
+  to see all the fill-in-the-blank parts.  If you need a copy of the whole
+  thing, send a message to <Miller at SRI-NIC>.  -Mike ]
+
+The message below should be passed on to the appropriate
+person at each TOPS-20 site.  Software engineering is very
+close to releasing the software so some degree of haste in
+getting the signed forms into the U.S. Mail would be appreciated.
+We are in the process of providing a test version of TOPS-20 which
+has both a DEC developed interface and the BBN interface to TCP/IP.
+
+Before we can release the code to any site we must confirm that the
+site has a current TOPS-20 license, has a Support agreement, and
+understands that the support of this code during the test period
+will be limited.  To make this as easy as possible, we have placed 
+the text of the necessary paperwork on our system (DEC-MARLBORO).
+Also, it is provided below.
+
+All a licensed site has to do is to print out the form, sign it,
+and return it to :
+
+     Trish Wing          MR01/S43
+     Digital Equipment Corporation
+     200 Forest Street
+     Marlboro, MA. 01752
+
+     Attn. TCP
+
+Then notify LCG.TCP@DEC-MARLBORO via the net that your signed form
+is in the mail.
+
+The software engineering group will then arrange for distribution
+via the net.
+
+Using the net in this way should work to the benefit of the sites.
+It is the only way that we could think of to get the software to you
+with the minimum delay while meeting our requirements for protection.
+
+                                   ADDENDUM A
+                           TOPS-20 LICENSE AGREEMENT
+                     FOR ALPHA TEST of TOPS-20 WITH TCP/IP
+
+DISTRIBUTION AND SUPPORT/MAINTENANCE:
+ 
+     TCP/IP and related code in TOPS-20 are being made available to 
+     ARPAnet customers with Digital Support contracts and TOPS-20 licenses.  
+     The required software will be made available as source updates to the 
+     currently supported TOPS-20 monitor which (today is an Autopatched V5.0 
+     monitor).  Customers will receive support as follows:
+ 
+     1.  The initial TCP/IP update will be based on the latest Autopatch       
+         version of the V5.0 monitor.
+ 
+     2.  Updates will occur following any major releases (V5.1) and all     
+         Autopatch releases.
+ 
+     3.  No updates between releases are guaranteed.
+ 
+     4.  QARs should be sent on TCP/IP problems via ARPANET to:
+
+                   LCG.TCP@DEC-MARLBORO
+ 
+     5.  In general, updates in response to QARs will be made available thru   
+         the next release and not as a patch.
+ 
+     6.  Non-ARPA problems should be reported via the SPR mechanism.  DDT     
+         patches generated for these problems will be for the current field    
+         image TOPS-20 release and will not be available as TCP/IP source (or  
+         DDT) updates until the next source update.
+ 
+     Maintenance will continue in this way until the shipment of TOPS-20 V6.0. 
+     This interim availability and support of TCP/IP is to meet the 
+     requirements of ARPAnet.  The TCP/IP software is still very much in a 
+     test and evaluation status.  It may not have the quality of a field 
+     tested product.  Sites which do not have a requirement for features are 
+     encouraged to continue to utilize the supported field image release.
+ 
+TERMINATION OF THIS AGREEMENT:
+ 
+     This test will be terminated with the release of TOPS-20 V6.0.  TCP/IP 
+     will be made fully supported by this release.  It is expected that by 
+     this time, customers will have converted all their utilities to use the 
+     Digital JSYS interface and not the BB&N interface.  Thus the major 
+     modification will be that the BB&N JSYS interface will be removed.  This 
+     will make the product more reliable and easier to maintain.
+
+------------------------------
+
+END OF TCP-IP DIGEST
+********************
+

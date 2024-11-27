@@ -1,0 +1,341 @@
+13-Sep-83 11:18:36-PDT,15413;000000000001    
+Return-Path: <tcp-ip@brl-vgr>
+Received: FROM BRL-VGR BY USC-ISIF.ARPA WITH TCP ; 13 Sep 83 00:38:41 PDT
+Received: From Brl-Vgr.ARPA by BRL-VGR via smtp;  13 Sep 83 0:18 EDT
+Sender:    Mike Muuss <TCP-IP@brl>
+From:      TCP-IP@brl
+To:        TCP-IP@brl
+Date:      13 Sep 1983 00:00 EST
+Subject:   TCP-IP Digest, Vol 2 #16
+
+TCP/IP Digest            Tuesday, 13 Oct 1983      Volume 2 : Issue 16
+
+Today's Topics:
+                      Discussion on PRIME Gateways
+             Comments about first ARPA/MILNET Split Test Day
+----------------------------------------------------------------------
+                  TCP/IP Digest --- The InterNet Digest
+                         LIMITED DISTRIBUTION
+          For Research Use Only --- Not for Public Distribution
+----------------------------------------------------------------------
+
+Date: 7 Sep 83 16:53:01 EDT
+From: Charles Hedrick <HEDRICK@RUTGERS.ARPA>
+Subject: gateways, once again
+To: tcp-ip@SRI-NIC.ARPA
+
+Some time ago, the Authorities recommended that we should cut down our
+gateway files to include only a few prime gateways.  I tried this,
+together with a couple of other recommendations, and found that our
+Arpanet service totally disappeared.  I did not have time to figure out
+which thing I did caused the problem, so I just went back to normal
+(i.e. using the whole NIC INTERNET.GATEWAYS file, and removing the other
+things I had tried).  Recently I got a complaint from some folks at NYU
+that we could not talk to their local hosts because we didn't know about
+their gateway.  I just brought up a new gateway file that includes their
+gateway.  Immediately before doing this I could not talk to NYU-CMCL1.
+Immediately after, I could.  This casts serious doubt on the theory that
+prime gateways are enough. Some other authority recommended that people
+on the east coast might want to try the gateways file used at BBN.  I
+took one from BBNB. Sure enough, it includes only a few gateways, most
+of which are prime. I couldn't get through to NYU-CMCL1 with this one
+either.
+
+Once again, what gateways file should I be using?  If it is anything
+other than the full table from NIC, have you really verified that you
+can get to all the hosts?
+
+------------------------------
+
+Date: 7 Sep 1983 17:03:09-EST
+From: Christopher A Kent <cak@purdue.ARPA>
+Reply-to: cak@purdue.ARPA
+To: HEDRICK@rutgers, tcp-ip@SRI-NIC.ARPA
+Subject: Re:  gateways, once again
+
+Part of the problem seems to be that the prime gateways don't 
+learn about "new" networks and gateways for a long time after the
+nets come up. If they would be updated regularly, then using any
+prime gateway would be fine; this is the theory behind the advice
+you've received.
+
+The fact is that it sometimes takes months for prime gateways to learn
+about new networks, and if you don't explicitly know about the gateway
+to a particular gateway, you, ahem, can't get there from here. That's
+why you need a large gateway file.
+
+When all gateways speak EGP, this problem should go away. Funny, I haven't
+heard much about EGP lately. Does anyone know the status?
+
+Cheers,
+chris
+
+------------------------------
+
+Date:  7 Sep 1983 20:17:03 EDT (Wednesday)
+From: Mike Brescia <brescia@bbn-unix>
+Subject: Re:  gateways, once again
+To: cak@purdue.ARPA
+Cc: HEDRICK@rutgers, tcp-ip@SRI-NIC.ARPA, brescia@bbn-unix, hinden@bbn-unix, 
+    haverty@bbn-unix
+
+There seems to be an assumption in the air that the bbn gateways will
+automatically and often update the portion of the routing devoted to
+gateways which do not use Gateway Protocl (GGP).  The timing of the
+update is not often, and only when I notice changes in the GATEWAY
+lines of HOSTS.TXT (not HOST lines with more than one address),
+or upon receiving a call or msg from someone close to that gateway.
+
+Non-routing gateways have been handled rather informally in the past,
+but I would appreciate information from people about their gateways and
+software contacts (mail and telephone numbers).
+
+As the MILNET split approaches, hosts on one side of the split will not
+be able to reach nets on the other side if the mailbridges do not know
+directly or indirectly about the gateways which reach those nets.
+
+Mike Brescia
+
+------------------------------
+
+Date:  7 Sep 1983 17:48:28 PDT
+From: MILLS@usc-isid
+Subject: Re:  gateways, once again
+To:   cak@purdue, HEDRICK@rutgers, tcp-ip@sri-nic
+cc:   MILLS@usc-isid
+
+Chris,
+
+EGP gateways are running now at BBN, MIT and Linkabit. Speaking for
+those of us who are rummaging around in the innards, it is probably
+premature to proliferate any of these three implementations. ALthough
+the EGP model seems simple enough, it has turned out to be surprisingly
+hard to put into practice, with all the operational constraints and
+lackadasical toplogy we have come to expect. Our own implementation
+(DCN-GATEWAY) os [art pf the Fuzzball code and probably is not useful in
+other systems. Liza Martin's version (MIT-GW?)  is written in C and may
+be readily portable. Mike Brescia's version (BBN-TEST) is part of the
+standard core-gateway code and may represent what all the rest of f to
+talk to.
+
+I think a fair summation of the progress is that a lot of details
+important to implementors, such as packet formats, protocol functions,
+etc., have been stabilized; however, the "meaning" of some of the packet
+fields is yet in dispute, as is the express or implied topological
+constraints.
+
+Regards,
+Dave
+
+------------------------------
+
+Date: 7 Sep 83 21:15:01 EDT
+From: Charles Hedrick <HEDRICK@RUTGERS.ARPA>
+Subject: Re:  gateways, once again
+To: brescia@BBN-UNIX.ARPA
+cc: cak@PURDUE.ARPA, tcp-ip@SRI-NIC.ARPA, hinden@BBN-UNIX.ARPA, 
+    haverty@BBN-UNIX.ARPA
+
+I made no particular assumption about BBN.  Some expert or other
+took a number of Tops-20 sites to task for using the entire NIC
+gateway table.  It was asserted by a number of expets that every
+prime gateway knew about every other gateway.  There was no
+suggestion that this was done by informal hand updating.  I got
+the impression that somehow the low-level protocols were such that
+whenever a site came on the net all the prime gateways heard about
+it.  Anyway, the proposal was that instead of using the NIC gateway
+table, Tops-20 sites should use a short list of prime gateways, and
+that this would be sufficient to let us find any other gateway.
+There are serious performance reasons for wanting Tops-20 sites
+to start with a short list of gateways.  The only way BBN came into
+it specifically was a suggestion that BBN's Tops-20 systems had
+list of prime gateways that might be useful for East-coast Tops-20
+systems.  Unless somebody can point me to some prime gateways whose
+management policies involve automatic updating from the NIC tables,
+it looks like I will stick with using the full NIC table myself.
+
+------------------------------
+
+Date: Thu 8 Sep 83 07:01:02-EDT
+From: Dan Tappan <Tappan@BBNG.ARPA>
+Subject: Re: gateways, once again
+To: HEDRICK@RUTGERS.ARPA
+cc: tcp-ip@SRI-NIC.ARPA, Tappan@BBNG.ARPA
+
+The crucial question here is whether the "gateway system" knows about
+the NYU gateway. Prime gateways sufficent only if gateways communicate
+with each other. Prime gateways are not sufficent for finding "dumb"
+gateways that the core gateways don't know about.
+
+When I try connecting to "NYU-CMCL1" I get a "network unreachable"
+message back.  Assuming the NYU gateways is dumb, the right short term
+solution was for you to add ONLY that gateway to your file. The right
+long term solution is either for them to bring up a GGP|EGP gateway,
+or to tell the core gateway maintainers how to get to their net
+(although I've heard a rumor that eventually the core gateways will
+not support routing through "dumb" gateways).
+
+This doesn't change any of what was said before about gateways files.
+To repeat Charlie Lynn's earlier message: you should have a file with
+a few prime gateways PLUS any dumb gateways you need to communicate
+through.
+
+Dan
+
+------------------------------
+
+Date:  8 Sep 83 1306 EDT (Thursday)
+From: don.provan@cmu-cs-a
+To: tcp-ip@sri-nic
+Subject: Re: gateways, once again
+
+Well, this all is a surprise.  I've been led to believe that all I
+have to do to get something anywhere is to pass it off to a prime gateway.
+I'm so convinced of this that the tops-10 implementation does no
+routing whatsoever outside its own network.  Now, from what I'm hearing,
+not only do I have to do routing for networks with dumb gateways, I
+have to provide a source route option on the IP packets if the dumb
+gateway is on another network (as of today, no longer a hypothetical
+situation).
+
+	It's a cinch my users won't be talking to any dumb networks
+any time soon.
+
+------------------------------
+
+Date: 9 Sep 83 02:06:47 EDT
+From: Charles Hedrick <HEDRICK@RUTGERS.ARPA>
+Subject: my conclusions from the discussion
+To: tcp-ip@SRI-NIC.ARPA
+
+I have read all of your replies very carefully, and read back over the
+original discussions from a few months ago.  Let me tell you what I have
+concluded about pinging from all of this.  Then somebody can correct me
+if I am wrong.  These comments apply only to Tops-20.  The Unix
+approach, where they only ping gateways when connections actually  are
+using them, seems much better and gets around these problems.
+
+1) Claim: on Tops-20, it is never necessary to ping.
+
+I conclude that this is false.  If the monitor uses a gateway that
+happens to be down, there seems to be no way for it to know that without
+pinging.  It may continue to use that gateway forever.  I conclude that
+it is only necessary to ping gateways where there is an alternate
+gateway that could be used to get to the same place.  If a gateway is
+the only gateway and it goes down, you might as well continue trying to
+use it.  Also, unless you are using source routing, it seems not to
+do any good to ping gateways that are not directly attached to the
+same network you are on.  It is the first gateway's job to keep track of
+the rest of the route.
+
+2) Claim: 37 sec is too often.
+
+Well, this is a matter of taste.  However if it takes 4 times this long
+to discover that a gateway is down, and if you want dynamic recovery
+to occur, it does seem that this is about as long as one should ask
+people to wait.  After this, programs will start timing out.
+
+3) Claim: You only need to put prime gateways in your table.
+
+This seems to be false.  We got responses from one manager of a prime
+gateway, and he does not seem to update his tables from the NIC
+tables on a regular basis.  Also our own experience suggests that
+this is not happening.  Until we hear from a prime gateway that
+guarantees to keep its tables up to date, we conclude that prime
+gateways are only guaranteed to know about each other.
+
+4) Claim: People on the East Coast should copy BBN's gateway
+file and those on the West Coast should copy ISI's.
+
+This is a matter of taste. The only thing is, BBN's lists only BBN
+gateways and ISI's lists only ISI's gateways.  What I want is about 3
+gateways scattered around the country, that are known to be reliable.
+This doesn't seem a very promising start.
+
+I conclude therefore that on Tops-20, my gateway table should
+include the following:
+
+ - a selection of prime gateways.  The others are safe to omit because
+	prime gateways know about each other through GGP.  Is this
+	really true?
+ - all dumb and host gateways.  However it is safe to treat most of
+	them as always-up (i.e. not to ping them - from the code it
+	appears that the only different between dumb, host, and
+	always-up is that always-up does not ping).  You only need to
+	ping where there are alternate gateways, and the gateway
+	involved is directly connected to your network. If you have no
+	choice, you might as well not ping, since there is nothing you
+	can do if you find out the gateways is down.
+ - all always-up gateways
+
+I have just written a program that traces the topology of the network
+and changes gateways to always-up if there is no alternative gateway
+going to the same place, or if the gateway is not directly
+attached to the Arpanet.  It also purges Arpanet/Milnet gateways other
+than our designated gateway, (The theory is that the others won't talk
+to us.) and all prime gateways other than our designated Milnet gateway
+and 2 other selected gateways. (I am using BBN-C and SRI-R2D2, for no
+particular reason.  Note that I have chosen gateways that have
+alternates, so that my algorithm treats them as really being prime.) The
+result is that we are pinging 3 prime, 4 dumb, and 1 host  gateway,
+rather than the 38 that we would do with the unaltered host table.
+Furthermore, all of them are directly on the Arpanet.  This number will
+go up temporarily by one when we go back to the old topology.
+
+------------------------------
+
+Date: Thu 8 Sep 83 23:45:11-PDT
+From: David Roode <ROODE@sri-nic>
+Subject: Re: my conclusions from the discussion
+To: HEDRICK@rutgers, tcp-ip@sri-nic
+
+I have one point to make prompted by a peripheral issue in your message.
+Someone correct me if I am wrong, but I believe even after we revert to
+the old topology, it will be safe to continue to use the new TOPS-20
+INTERNET.GATEWAYS file. The world has gained 5 more BBN-maintained PRIME
+gateways for this test day, but they are planned to be around from now
+on. Naturally connections to net 26 will fail, but use of other
+functions of the gateway will succeed.
+
+I would appreciate a list of which PRIME gateways are maintained from
+BBN, besides the new ARPANET/MILNET Gateways.
+
+------------------------------
+
+Date:     Fri, 9 Sep 83 0:20:38 EDT
+From:     Ron Natalie  <ron@BRL-VGR>
+To:       tcp-ip@BRL-VGR, support@BRL-VGR
+cc:       postel@Usc-Isif, brescia@Bbn-Unix
+Subject:  MILNET/ARPANET SPLIT
+
+Network service to the local nets BRLNET (128.20.x.x) and BRLNET1
+(192.5.21.x) was unavailable during the ARPANET/MILNET split test.
+Despite planning made to switch over the BRL-GATEWAY to do the
+proper things we could not pass traffic to a majority of the hosts
+on the net.  The reason for this problem was that even though the
+gateway was prepared to be moved to MILNET (net 26) and the host port
+on the imp was assigned to that COI, the BBN gateways continued to
+route the subnets to the old ARPANET (net 10) address.  When BBN was
+informed that the gateway was switched to the MILNET, they switched
+it back for the interim.  This didn't help much because the network
+topology no longer corresponded to the HOST/GATEWAY tables available
+from NIC.  Hosts who derived explicit routing to the BRL-GATEWAY (or
+would have liked to PING it for whatever routing) from the tables,
+had their traffic turned back with the "administratively prohibitted"
+message.
+
+This demonstrates that the network split may not be transparent even to
+those who load host tables regularly and fully support the Internet
+Protocols.
+
+-Ron
+
+[ Ron informes me that as of this writing, BBN has been alerted to the
+  error.  However, if there are any other dual-homed hosts or Gateways
+  on the MILNET side of the split, you need to talk to Mike Brescia
+  of BBN *quickly*.  -Mike]
+
+------------------------------
+
+END OF TCP-IP DIGEST
+********************

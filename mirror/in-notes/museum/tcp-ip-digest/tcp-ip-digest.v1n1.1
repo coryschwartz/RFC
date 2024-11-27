@@ -1,0 +1,1226 @@
+Date:      8 Oct 81 1:51:19-EDT (Thu)
+From:      Michael Muuss <mike@brl>
+Subject:   TCP/IP Digest, V1 #1
+
+TCP/IP Digest            Thursday, 8 Oct 1981      Volume 1 : Issue 1
+
+Today's Topics:
+                         A new Discussion Group
+      Gateway Connection Policy -- TCP and IP Protocol Definitions
+       Comments on TCP4 from BBN -- SRI Networks Development Group
+              EDN-UNIX TCP/IP Notes -- 3Com TCP/IP Troubles
+      NALCON Conversion Meeting -- BRL TCP/IP Environment (Planned)
+       BBN VMUNIX (4.1BSD) TCP/IP -- BBNCC C/30 Features & Futures
+          UTexas TCP4 (BBN) Mods -- 3Com TCP/IP:  A Happy User
+  Internet Gateway & Computer List -- TCP/IP Implementation Status Overview
+            Are PDP-11's Dead? -- 3Com TCP/IP:  More comments
+                    BBN TCP/IP for VAX:  Manual Page
+----------------------------------------------------------------------
+
+From: Michael Muuss <Mike @ BRL>
+Subject: A New Discussion Group
+
+Greetings Earthlings!
+	This is the first issue of a new digest which purports to discuss
+TCP and IP, the "DoD Standard Networking Protocols for the Eighties". 
+Comments will probably center around UNIX implementations, but any
+technical networking or implementation discussions too specific for
+HUMAN-NETS is fair game here.  Please send submissions to "TCP-IP @ BRL",
+requests to "TCP-REQUEST @ BRL" or "TCP-IP-REQUEST @ BRL".
+
+	This is sort of a spur-of-the-moment thing;  it started with our
+trying to find out about TCP/IP iplementations, and wound up with dozens
+of letters asking for a report of what I found.  This list may die
+stillborn, or it may flurish.  Only time will tell!
+				Cheers,
+				 -Mike
+
+------------------------------
+
+Date: 1 Oct 1981 1022-PDT
+Sender: WESTINE at USC-ISIF
+From: Postel@isif
+
+1)  The question about connection policy should be directed to
+DCA or your site's ARPANET sponsor.  But my guess at an answer
+is "For a site with a host on the ARPANET (properly authorized)
+there should be no additional policy issues in connecting a local
+network to the ARPA Internet when the purpose and use of the local
+net is the same as for the existing host."
+
+2)  The question about IP and TCP is correctly addressed to me.
+ RFCs 791, 792, and 793 define IP and TCP.  The ARPANET already
+supports these protocols.  Many TOPS20s, Unix-es (including VAX)
+and MIT-Multics, and UCLAs IBM system, already have these protocols
+in use.  Work is in progress to replace all TIPs with TACs that
+use IP and TCP.  There are about 10 internet gateways in service
+already.  ARPA has set a goal for the complete switchover to IP
+and TCP by January 1983.
+
+--jon.
+
+------------------------------
+
+Date:  2 Oct 1981 0520-PDT
+From: DEDWARDS at USC-ISI
+
+BBN (of course) has a TCP 4 up and running written in C.  Its slow
+and large (mainly due to the fact that it is entirely outside
+the kernelrunning as a user pgm with only a device driver in the
+kernel.  Jack Haverty (JHAVERTY at BBN) or Mike Wingfield
+(wingfield at BBN-UNIX or BBN-RSM) can say lots more.
+
+Howard Weiss
+
+------------------------------
+
+Date:  2 Oct 1981 0702-PDT
+From: NRL at USC-ISIE
+
+	For you information the below message was
+received by us in late September 1981; you may find in useful.
+
+Regards,
+Doug Shannon - ARPAnet mailbox - NRL@ISIE
+
+			- - - - - - - - -
+
+The Networks Development group at SRI can offer assistance in the
+development or operations support of one or more of ollowing:
+
+ - modernizing the NALCON sites UNIX from Version 6 to Version 7 (the
+   current release from BTL);
+ - 96-bit leader NCP software required to address all hosts on the ARPANET; 
+ - DoD standard TCP/IP network software with Version 7 UNIX and 
+   associated user software such as TCP-FTP, MTP (Mail Transfer Protocol),
+   TELNET, etc.;
+ - TCP/NCP mail gateway software to facilitate transition from NCP to TCP;
+ - a VDH Front-End which would remove the overhead associated with
+   the Very Distant Host protocol off of UNIX; 
+ - other areas related to UNIX and network systems.
+
+The Networks Development group at SRI specializes in the development 
+of local and long-haul network software, hardware, and protocols.
+There are currently 8 UNIX systems in operation at SRI, most of which are 
+attached to our local area network and/or the ARPANET.
+
+If you would like to discuss your needs and how we can assist you in any of
+the mentioned areas, please contact me at:
+
+Geoff Goodfellow
+333 Ravenswood Ave.
+Menlo Park, CA. 94025
+(415) 859-3098
+ARPANET: Geoff@SRI-CSL
+
+------------------------------
+
+Date:  2 Oct 1981 13:38:33 EDT
+From: Edward A. Cain <cain@EDN-UNIX>
+
+Our TCP/IP is an extension of the one on the 11/70 at BBN, in case you
+have already heard from them. It runs on V6 here, and on V7 at BBN.
+Both machines support two interprocess communication mods to UNIX in
+order to allow the tcp/ip to work: (a) Rand "ports", with supporting
+"await" and "capacity" system calls, or (b) shared memory. The user-to-
+tcp interface can employ either of these techniques.
+
+Our extensions to that work include: (a) handling GGP or ICMP packets,
+and (b) reassembly of fragments within IP.
+
+You're welcome to the sources, manual pages, and UNIX hacks needed to
+make them work -- if you are using an 11/70. If you have some other
+machine like the C/70 or a vax, better get in touch with someone at
+BBN. Their active work on tcp/ip has centered around those 2 machines
+over the past couple of years. Jack Haverty is one point of contact
+(haverty at bbn-unix).
+
+I recall an SRI status report on the 3-com stuff just last week. Seems
+the 3-com tcp/ip is full of bugs, and 3-com is under no obligation to
+fix things under the license agreement. However, SRI (one of 3-com's
+customers) has been able to get some fixes out of 3-com. Sounds kind of
+risky.
+
+Ed Cain
+
+------------------------------
+
+Date: Fri, 2 Oct 81 16:31-PDT
+From: Greg at NPRDC
+
+Indeed, we all are [Converting to TCP/IP] in a year or so.  Geoff@SRI-CSL
+has offered to help the NALCON sites convert; maybe we can all get
+together and reduce our mutual costs.  We're trying to set up a meeting
+to talk about it, probabally in the DC area; would you be interested in it?
+
+------------------------------
+
+Date:      2 Oct 81 20:45:01-EDT (Fri)
+From:      Michael Muuss <mike@bmd70>
+To:        Greg at NPRDC
+
+We will probably be building an extensive local network which will
+initially include such varried systems as a CDC 7600 (SCOPE), CDC 173 (NOS),
+40 MIPS HEP (UNIX, probably!), zillions of 11/70s and 11/34s, PE 3240s, C/70s,
+etc, and using Hyperchannels, PCL-11Bs, DQ-11s, UMC-11s, .... for
+communications.  In my opinion, only a "standard" protocol like TCP
+will permit a plan like this to succeed (!).
+
+			Networking forever!
+			     -Mike
+
+------------------------------
+
+Date:  5 Oct 1981  9:24:30 EDT (Monday)
+From: Rob Gurwitz <gurwitz at BBN-RSM>
+
+Jack Haverty passed your inquiry about TCP/IP along to me.  In addition to the
+experimental TCP/IP that was done for the 11's (which you may or may not
+already have), we have been developing a version for the VAX running Berkeley
+4.1BSD UNIX.  This software is a full implementation of the protocols and is 
+completely independent of any of the old U of I NCP code (including the RMI).
+It allows access at the TCP, IP, or local network access levels.  The software
+is currently running and under test at several sites, including Berkeley.  When
+it is generally released (probably around the first of the year), it will be
+available through Berkeley and will be included as part of a future 4.xbsd
+distribution.  The configuration currently supports ARPANET 1822 local net
+protocol and a driver for the ACC LH/DH-11 IMP i/f, but work is also going on
+to develop other local net drivers (i.e., ETHERNET) for it.
+
+Rob Gurwitz
+
+------------------------------
+
+Date:      2 Oct 81 18:48:08-EDT (Fri)
+From:      Michael Muuss <mike@bmd70>
+To:        Paul Santos <Santos@bbne>
+Subject:   C/30 Features & Futures
+
+Just out of curiosity, I have some questions about our nice shiney new C/30.
+
+1)  How difficult is it to change a DISTANT host interface to a LOCAL
+host interface.  It it a switch, a board, or a big deal?  Could you
+estimate the cost of doing this?  Our liason's crystal ball must have
+been a little cloudy...
+
+2)  Just for kicks, is it possible for a C/30 to support either (a) more
+than 4 modem lines, and/or (b) run the trunk lines at more than 50Kb?
+
+3)  Is there any provision for more than one trunk to connect between two
+C/30's to improve transmission between them?
+
+	We are doing a lot of planning here on networking, and are
+strongly considering using TCP/IP.  What can you tell me about (or point
+me to) how BBN plans to proceed with TCP, and how will this affect
+the ArpaNet?
+
+				Cheers,
+				 -Mike
+------------------------------
+
+Date:  4 Oct 1981 16:10:25 EDT (Sunday)
+From: Paul Santos <santos at BBN-UNIX>
+To: Michael Muuss <mike.bmd70 at BRL>
+
+Mike,
+
+I have forwarded your message to Nancy Mimno, who is the primary point
+of contact for ARPANET users.  I believe the answers are in brief:
+1) Easy, 2)(a) in progress, 2)(b) already exists, and 3) has been
+thought of but not currently planned.  As for TCP/IP, it is a host
+isssue, and does not directly affect the subnetwork;  however, DCA
+and ARPA (and DoD in general) are pushing on TCP and plan to outlaw
+NCP someday.
+
+Paul
+
+------------------------------
+
+Date:  5 Oct 1981 at 0945-CDT
+From: roya at UTEXAS-11 (roya)
+
+	I have been working on TCP/IP BBN version 4 in our PWB-UNIX
+System. There were and are some problems that I'm trying to fix in
+it.  Let me know if I can be any help to you.
+
+						Roya
+------------------------------
+
+Date: 7 Oct 1981 11:38:55-PDT
+From: menlo70!sytek!zehntel!billn at Berkeley
+
+We have been running it [3Com] for a short time between two 70's hooked up via
+an able da-11.  With unloaded systems we get about 60kb during file
+transfer.  With one heavily loaded system and one lightly loaded one
+we get about 45kb.  We run 2.?bsd and had a few problems, not many,
+during installation.  Our problems were due to the fact that, as the
+previous msg said, it IS big.  They have tried v. hard to make it a 
+"drop in" product, and have done a good job, but the 2.?bsd systems
+are just too huge, as normally run, to avoid some hacking during
+installation.  (3com is now more experienced in 2.?bsd-ese than they
+were...)  It seems relatively bug free and robust.  Our general users have
+not been unleashed on it yet -- that'l be the really telling blow.
+/b
+
+------------------------------
+
+Date:  5 Oct 1981 1358-PDT
+From: POSTEL at USC-ISIF
+To:   mike.bmd70 at BRL
+
+< INC-PROJECT, IN-HOST-TABLE.NLS.25, >, 27-May-81 16:52 JBP ;;;;
+ADDRESSES
+   The internet addresses in this memo are stated as four 8-bit fields 
+   with the value of each field given in decimal.
+GATEWAYS
+   Name             Addresses
+   ---------------  --- --- --- ---  --- --- --- ---
+   DCEC-EDN/ARPA     21   0   0   2   10   3   0  20
+   MIT-LCS/ARPA      18   8   0   4   10   0   0  77
+   BBN-RCC/ARPA       3   2   0   5   10   2   0   5
+   BBN-SAT/ARPA       4   0   0  61   10   3   0  40
+   NDRE-SAT/ARPA      4   0   0  38   10   3   0  41
+   COMSAT-SAT/COMSAT  4   0   0  39   29   0   2   2
+   UCL-SAT/UCL        4   0   0  60   11   3   0  42
+   UCL-SAT/NULL       4   0   0  60   35   7   0   0
+   UCL-UCL/RSRE      11   3   2  42   25   6   0   0
+   RSRE-NULL/PPSN    35   6   0   0   25   6   0   0
+   RSRE-NULL/PPSN    35   6   0   0   25  13   0   0
+   SRI-PR1/ARPA       2   0   0  11   10   3   0  51
+   SRI-PR2/ARPA       6   0   0  11   10   1   0  51
+   BBN-BBNPR/ARPA     1   0   0  11    3   0   0  62
+   Bragg-BraggPR/ARPA 9   0   0  11   10   0   0  38
+COMPUTERS
+   Name            Address
+   --------------- --- --- --- ---
+   ALTA-COMA         3   1   0  50
+   BBN-UNIX         10   0   0  63
+   BBN-VAX          10   2   0  82
+   BBNA             10   3   0   5
+   BBNB             10   0   0  49
+   BBNC             10   3   0  49
+   BBND             10   1   0  49
+   BBNE             10   0   0   5
+   BBNF              3   2   0  51
+   BBNG             10   1   0   5
+   EDN-HOST1        21   1   0   1
+   EDN-HOST3        21   0   0   3
+   EDN-UNIX         10   3   0  20
+   ISIB             10   3   0  52
+   ISIC             10   2   0  22
+   ISID             10   0   0  27
+   ISIE             10   1   0  52
+   ISIF             10   2   0  52
+   MIT-DevMultics   10   4   0  31
+   MIT-Multics      10   0   0   6
+   UCLA-CCN 3033    10   1   0   1
+
+------------------------------
+
+Date:  5 Oct 1981 1544-PDT
+From: POSTEL at USC-ISIF
+
+BBN C/70 UNIX
+
+   Date:  14 May 1981 
+   From:  Jack Haverty <haverty@BBN-UNIX>
+
+   The C/70 processor is a BBN-designed system using C as its native 
+   mode.  It supports Version 7 of UNIX, and provides for user processes
+   with 20-bit address spaces.  The TCP/IP for this machine is in 
+   development; the BBN VAX-11/780 UNIX implementation will be ported to
+   the C/70 UNIX system.  This work is expected to be complete in summer
+   '81.
+
+BBN GATEWAYS
+
+   Date:  8 May 1981
+   From:  Ginny Strazisar <Strazisar@BBNA>
+
+   This is a status report on the implementation of the Internet 
+   Protocol in these gateways:
+
+      the ARPANET/SATNET gateway at BBN (10.3.0.40),
+      the ARPANET/SATNET gateway at NDRE (10.3.0.41),
+      the Comsat DCN Net/SATNET gateway at COMSAT (4.0.0.39),
+      the SATNET/UCL Net/RSRE Net gateway at UCL (4.0.0.60),
+      the PR Net/RCC Net gateway at BBN (3.0.0.62),
+      the PR Net/ARPANET gateways at SRI (10.3.0.51, 10.1.0.51),
+      and the PR Net/ARPANET gateway at Ft. Bragg (10.0.0.38).
+
+   The gateways forward packets with internet header formats as 
+   specified in the DoD Standard Internet Protocol, January, 1980.  The 
+   gateways implement this Internet Protocol with the following 
+   exceptions:
+
+   1.  The type of service field is ignored, i.e., the gateways use the 
+   same type of service in each network regardless of the value of the 
+   internet type of service field.
+
+   2.  No options are implemented.  Packets containing options are 
+   forwarded by the gateways, subject to the specified constraints, 
+   i.e., correct checksum, correct length, non-zero time to live field, 
+   but the gateways do not process any options.  Packets with options 
+   are not fragmented.  If a packet is too large to be sent through the 
+   next network on the route to its destination and it contains options,
+   then the packet is discarded.
+
+BBN H316 and C/30 TAC
+
+   Date:  14 May 1981
+   From:  Bob Hinden <Hinden@BBNE>
+
+   The Terminal Access Controller (TAC) is user Telnet host that 
+   supports TCP/IP and NCP host to host protocols.  It runs in 32K H-316
+   and 64K C/30 computers.  It supports up to 63 terminal ports.  It 
+   connects to a network via an 1822 host interface.
+
+   The TAC's TCP/IP is intended to conform with the IEN-128 and IEN-129 
+   specifications with the following exceptions: 1) IP options are 
+   accepted but ignored. 2) TCP options are not accepted. 3) Precedence,
+   Security, etc. are ignored.
+
+   The TAC also supports Packet core, TAC Monitoring, Internet Control, 
+   and a subset of the Gateway-Gateway protocols.
+
+   For more information on the TAC's design, see IEN-166.
+
+   Currently, TAC's TCP/IP has been tested with several other 
+   implementations. This includes TOPS20 (BBND, BBNC, BBNA, ISID), 
+   Multics (MIT-Multics), IBM (UCLA), 11/70 Unix (BBN-Unix,EDN-Unix), 
+   and VAX Unix (BBN-VAX). All major features have been implemented 
+   except IP reassembly and TCP Urgent handling.  These will be done in 
+   the near future.
+
+BBN HP-3000
+
+   Date:  14 May 1981
+   From:  Jack Sax <sax@BBN-UNIX>
+
+   The HP3000 TCP code is in its final testing stages.  The code 
+   includes under the MPE IV operating system as a special high priority
+   process.  It is not a part of the operating system kernel because MPE
+   IV has no kernel.  The protocol process includes TCP, IP, 1822 and a 
+   new protocol called HDH which allows 1822 messages to be sent over 
+   HDLC links.  The protocol process has about 8k bytes of code and at 
+   least 20k bytes of data depending on the number of buffers allocated.
+
+   The TCP code is believed to support all features except rubber EOL.  
+   The IP code currently supports fragment reassembly but not 
+   fragmentation.  In addition provisions have been made to allow the IP
+   layer to accept and act on routing and source quench messages.  These
+   features will be added sometime this summer.  Security and precedence
+   are currently ignored.
+
+   In addition to the TCP the HP3000 has user and server TELNET as well 
+   as user FTP.  A server FTP may be added later.
+
+   A complete description of the implementation software can be found in
+   IEN167.
+
+BBN PDP 11/70 UNIX
+
+   Date:  14 May 1981
+   From:  Jack Haverty <haverty@BBN-UNIX>
+
+   This TCP implementation was written in C.  It runs as a user process 
+   in version 6 UNIX, with modifications added by BBN for network 
+   access.  It does not perform reassembly, or rubber eol, and has no 
+   separate IP user interface.  It supports user and server Telnet.
+
+   This implementation was done under contract to DCEC.  It is installed
+   currently on several PDP-11/70s and PDP-11/44s. Contact Ed Cain at 
+   DCEC <cain@EDN-UNIX> for details of further development.
+
+BBN TENEX & TOPS20
+
+   Date:  13 May 1981
+   From:  Charles Lynn <CLynn@BBNA>
+
+   TCP4 and IP4 are available for use with the TENEX operating system 
+   running on a Digital KA10 processor with BBN pager.  TCP4 and IP4 are
+   also available as part of TOPS20 Release 3A and Release 4 for the 
+   Digital KL10 and KL20 processors.
+
+   Above the IP layer, there are two Internet protocols within the 
+   monitor itself (TCP4 and GGP).  In addition up to eight (actually a 
+   monitor assembly parameter) protocols may be implemented by user-mode
+   programs via the "Internet User Queue" interface. The GGP or 
+   Gateway-Gateway Protocol is used to receive advice from Internet 
+   Gateways in order to control message flow.  The GGP code is in the 
+   process of being changed.
+
+   TCP4 is the other monitor-supplied protocol and it has two types of 
+   connections -- normal data connections and "TCP Virtual Terminal" 
+   (TVT) connections.  The former are used for bulk data transfers while
+   the latter provide terminal access for remote terminals.
+
+   Note that TVTs use the standard ("New") TELNET protocol.  This is 
+   identical to that used on the ARPANET with NCP and in fact, is 
+   largely implemented by the same code.
+
+   At the IP level, fragmentation and reassembly are not currently 
+   supported.  The Autodin II Security related option can be parsed, but
+   no code for doing preemption of resources has been writen. Certain 
+   other security-related options are implemented.
+
+   User and Server FTP processes above the TCP layer are under active 
+   development.
+
+BBN UNIX
+
+   Date:  1 May 1981
+   From:  Mike Wingfield <Wingfield@BBND>
+
+   1. Hardware - PDP-11 running UNIX version 7, with BBN IPC additions.
+
+   2. Software - written in C, requiring 22K instruction space, 15K data
+   space.  Supports 10 connections.
+
+   3. Status - TCP has been essentially completed since March, 1979, and
+   no additional work has been done on it since then.
+
+   4. Unimplemented protocol features
+
+      A. TCP
+         Does not support Rubber EOL
+         Ignores options except S/P/T
+         Discards out-of-order segments
+
+      B. IP
+         Does not support fragmentation or reassembly.
+         Ignores options
+
+   5. Documentation - "TCP/PSIP Development Report", and "TCP Software 
+   Documentation", both BBN reports.
+
+BBN VAX
+
+   Date:  7 May 1981
+   From:  Rob Gurwitz <Gurwitz@BBN-UNIX>
+
+   The VAX TCP/IP implementation is written in C for Berkeley/VMUNIX.  
+   It is described in detail in IEN168.  It is currently operational 
+   experimentally and is undergoing further development.
+
+   The implementation is believed to conform to the specification with 
+   the following exceptions:
+
+   1) All internet options are currently ignored.
+
+   2) Security, precedence, etc. are ignored.
+
+   The TCP/IP is implemented within the kernel.  It supports all aspects
+   of the protocol, and provides a separate user interface at the IP 
+   level.
+
+   Continuing development includes implementation of handling internet 
+   routing messages, hosts on multiple networks, and performance 
+   improvement.  Tools are available on the VAX for monitoring and 
+   recording net traffic.
+
+COMSAT
+
+   Date:  30 Apr 1980
+   From:  Dave Mills <Mills@ISIE>
+   
+
+   1. The TCP/IP implementation here runs in an LSI-11 with a homegrown 
+   operating system compatible in most respects to RT-11. Besides the 
+   TCP/IP levels the system includes many of the common high-level 
+   protocols used in the ARPANET community, such as TELNET, FTP and 
+   XNET.
+
+   2. Connections have been verified with the following other 
+   implementations:
+
+      TOPS-20 (BBNF, ISID, ISIE and ISIF)
+      Unix (BBN, NPL and EDN)
+      Multics (MIT-Multics)
+      IBM 3033 (CCN)
+      Packet Radio TIU (UCL, RSRE)
+      and the several hosts on the COMSAT local net (DCNET) running the 
+      the same software.
+
+   3. The TCP implementation is believed to conform to the specification
+   in all aspects except:
+
+      a. It does not implement the rubber-EOL mechanism. All buffers 
+      appear a single octed in length.
+
+      b. It does not implement the urgent mechanism.
+
+   4. The IP implementation is believed to conform to the specification 
+   in all respects except:
+
+      a. Fragmentation and reassembly is not implemented.
+
+      b. All options, including security, timestamping, etc., are 
+      ignored by the IP layer. Timestamping is handled by the protocol 
+      and user layers. Other options can be specified by the protocol 
+      and user layers and checked by the protocol layer.
+
+   Our plans for the remainder of the FY80 and FY81 years are to upgrade
+   the implementation to conform to the full specification in all 
+   practicable respects and, especially, to evaluate overall performance
+   in systems involving both high-performance and limited-performance 
+   hosts and nets.
+
+DTI VAX
+
+   Date:  15 May 1981
+   From:  Gary Grossman <grg@DTI)>
+
+   Digital Technology Incorporated (DTI) IP/TCP for VAX/VMS
+
+   The following describes the IP and TCP implemenation that DTI plans 
+   to begin marketing in 4th Quarter 1981 as part of its VAX/VMS network
+   software package.
+
+   Hardware:  VAX-11/780 or /750.
+
+   Operating System:  DEC standard VAX/VMS Release 2.0 and above.
+
+   Implementation Language:   Mostly C, with some MACRO.
+
+   Protocol Features Supported:
+
+      IP:
+
+         Fragementation/Reassembly:  Does not fragment, but does 
+         reassemble.
+
+         Options:  Security option is both generated and interpreted.
+
+         Packet identifier:  Can be specified by user, but will generate
+         a unique identifier if user does not supply one.
+
+         Reassembly timeout:  Fixed value.  If buffers fill up, oldest 
+         fragment is discarded first.
+
+         Gateway functions:  All necessary GGP functions will be 
+         implemented. (GGP functions are not implemented in current NFE 
+         IP.)
+
+         Type of Service:  As for Gateway functions.
+
+         Support of protocols other than TCP:  Yes, simultaneously with 
+         TCP.
+
+      TCP:
+
+         Precedence and security fields:  Both generated and 
+         interpreted.
+
+         TCP options:  All defined options are implemented.
+
+         Urgent:  Implemented as per specification.
+
+         EOL:  As per specification.
+
+         Buffer size:  Option implemented; user may specify buffer size 
+         within limits.
+
+         Retransimission:  Timeouts employ exponential backoff until a 
+         limit is reached, at which time user is signalled. Transmits 
+         empty packets into a zero window.
+
+         Initial sequence number:  Derived from 32-bit system clock with
+         10 us. resolution.
+
+         Window strategy:  Window size is larger than the actual buffer 
+         space available by the size of the maximum size internal 
+         buffer.
+
+         ACK generation:  ACK is sent as soon as data has been placed in
+         sequence into user buffer.
+
+   Code size:
+
+      IP (Includes BBN 1822 interface code, about 30%):
+
+         Object code:            14K bytes.
+         Buffer and table space: 24K bytes.
+         Source:                  7K lines of C code with commentary.
+
+      TCP:
+
+         Object code:            27K bytes.
+         Buffer and table space: 46K bytes.
+         Source:                 15K lines of C code with commentary.
+
+   Fixed table space:  See above.
+
+   Connections supported:  Maximum of 64.
+
+   User level protocols available:  TELNET, FTP, and MTP will be 
+   available. (The NFE version uses AUTODIN II protocols.)
+
+MIT MULTICS
+
+   Date:  13 May 1981
+   From:  Dave Clark <Clark@MIT-Multics>
+
+   Multics TCP/IP is implemented in PL/1 for the HISI 68/80. It has been
+   in experimental operation for about 18 months; it can be distributed 
+   informally as soon as certain modifications to the system are 
+   released by Honeywell.  The TCP and IP package are currently being 
+   tuned for performance, especially high throughput data transfer.
+
+   It is believed that the implementation fully conforms to the DOD 
+   standard.  It also supports most relevant features of GGP, including 
+   redirect packets. The IP layer is a gateway, and supports 
+   fragmantation as well as reassembly.
+
+   Higher level services include user and server telnet, and a full 
+   function MTP mail forwarding package.
+
+   The TCP and IP contain good logging and debugging facilities, which 
+   have proved useful in the checkout of other implementations. Please 
+   contact us for further information.
+
+SRI LSI-11
+
+   Date:  15 May 1981
+   From:  Jim Mathis <mathis.tscb@Sri-Unix>
+
+   The IP/TCP implementation for the Packet Radio terminal interface 
+   unit is intended to run on an LSI-11 under the MOS real-time 
+   operating system.  The TCP is written in MACRO-11 assembler language.
+   The IP is currently written in assembler language; but is being 
+   converted into C. There are no plans to convert the TCP from 
+   assembler into C.
+
+   The TCP implements the full specification, although the current user 
+   interface lacks a mechanism to communicate URGENT pointer information
+   between the TCP and the higher-level software.  The code for 
+   rubber-EOL has been removed in anticipation of a change to the 
+   specification.  The TCP appears to be functionally compatible with 
+   all other major implementations.  In particular, it is used on a 
+   daily basis to provide communications between users on the Ft. Bragg 
+   PRNET and ISID on the ARPANET.
+
+   The IP implementation is reasonably complete, providing fragmentation
+   and reassembly; routing to the first gateway; and a complete 
+   host-side GGP process.  Currently the source quench message is 
+   ignored. No IP options are generated and all received options are 
+   ignored.
+
+   A measurement collection mechanism is currently under development to 
+   collect TCP and IP statistics and deliver them to a measurement host 
+   for data reduction.
+
+    
+
+UCLA  IBM
+
+   Date:  13 May 1981
+   From:  Bob Braden <Braden@ISIA>
+
+   Implementation Status -- IP/TCP for IBM 360/370 under OS/MVT. May 12,
+   1981
+
+   1. Hardware
+
+      IBM 360 or 370, with a "Santa Barbara" interface to the IMP.
+
+   2. Operating System
+
+      OS/MVS with ACF/VTAM.  An OS/MVT version is also available.
+
+      The UCLA NCP operates as a user job, with its own internal 
+      multiprogramming and resource management mechanisms.
+
+   3. Implementation Language
+
+      BAL (IBM's macro assembly language)
+
+   4. Protocol features supported:
+
+      A. IP PROTOCOL:
+
+         (1) Fragmentation/reassembly: performs reassembly.  Does not 
+         fragment, assuming that higher-level protocol (TCP) will create
+         suitable size segments during packetizing.
+
+         (2) Options: all internet options accepted but ignored.  None 
+         are sent (in particular, no error options).
+
+         (3) Identifier selection: uses globally-unique identifiers for 
+         transmitted segments, independent of destination.
+
+         (4) Reassembly timeout:  fixed value (30-60 seconds), 
+         independent of time-to-live field.  Packets are discarded if 
+         time-to-live field is zero.
+
+         (5) Gateway functions:  Unable to select an alternate route 
+         (gateway) if the original route fails.  Does accept GGP, and 
+         acts on Redirect, Destination Unreachable, and Echo packets.  
+         Source Quench is ignored.
+
+         (6) Type of Service: default Type of Service set, may cause 
+         either Subtype 0 or Subtype 3 (Uncontrolled) packets to be 
+         sent.
+
+      B. TCP PROTOCOL:
+
+         (1) Precedence, security fields: not set or tested.
+
+         (2) TCP Options: no options generated.  All options received 
+         but only Buffer Size is acted upon.
+
+         (3) Urgent: may be sent and received by user process.
+
+         (4) EOL: may be sent by user process, but received EOL's are 
+         not passed to user process.
+
+         (5) Buffer Size: will transmit according to specified buffer 
+         size.  Uses circular buffer for received data, so never 
+         specifies a buffer size to remote TCP.
+
+         (6) Retransmission: successive retransmissions use exponential 
+         backoff.  Base time is 2 times observed weighted-average 
+         round-trip time.  Round-trip time is measured by initial packet
+         transmission to complete acknowledgment. Retransmits slowly 
+         into zero window.
+
+         (7) Initial Sequence Number: derived from system clock.
+
+         (8) Window strategy: uses conservative strategy, never adver- 
+         tising a receive window larger than the space available in the 
+         circular buffer.
+
+         (9) ACK generation: always sends <ACK> in response to receipt 
+         of a non-empty packet.  As user process removes bytes from 
+         buffer,  optimizing algorithm determines when to generate <ACK>
+         to inform sender of larger window.
+
+   5. Code Size (addition to existing NCP code)
+
+      Resident Control Process:          4K bytes.
+
+      Internet Protocol Layer:          10K bytes. (transient)
+
+      TCP Protocol Layer:               10K bytes. (transient)
+
+   6. Fixed Table Space
+
+      The limited fixed table space is included in the code (above).
+
+   7. Connections Supported:
+
+      Only practical limitation is amount of memory available in NCP 
+      region for buffers and per-connection control blocks; requirements
+      are:
+
+         For each connection, the internet and TCP layers require 
+         control blocks totalling 256 bytes.
+
+      (*) Receive:
+
+         Segment reassembly buffer=
+         max segment size - min internet header length + 16= 572 bytes 
+         per buffer.
+
+      (*) Send:
+
+         128 bytes per unacknowledged segment.
+
+         Note: the actual data being sent is not counted here, as it 
+         occupies buffer space belonging to the appropriate user-level 
+         protocol module.
+
+            (*)Note: there is a pool of these objects, shared among all 
+            active connections.  The pool grows and shrinks dynamically 
+            with the number of connections; it is probably reasonable to
+            expect an average of one segment reassembly buffer and one 
+            unacknowledged segment (total of 700 bytes) per TCP 
+            connection.
+
+      In addition to this TCP-specific memory, there is the memory to 
+      support the user-level protocol.  For example, a server-Telnet 
+      session to TSO requires control blocks and buffers totalling about
+      1800 bytes; this is identical for TCP and for the ARPANET 
+      Host-Host ("NCP") protocol.
+
+   8. User-Level Protocols Available
+
+      User and Server Telnet
+
+   9. Philosophical Remarks
+
+      This implementation of the Internet and TCP protocols is designed 
+      to meet the following general objectives:
+
+         (a) operate within the existing NCP system job, sharing code 
+         and control-block formats wherever possible;
+
+         (b) be compatible at the system-call level with the existing 
+         user-level protocol modules;
+
+         (c) implement the Internet protocol as a distinct layer, with 
+         interfaces designed to expedite the implementation of other 
+         higher-level internet protocols in addition to TCP;
+
+         (d) require minimum NCP resources when internet protocol is not
+         in use.
+
+------------------------------
+
+Date:      5 Oct 81 20:09:53-EDT (Mon)
+From:      Michael Muuss <mike@bmd70>
+To:        Rob Gurwitz <gurwitz@bbn-rsm>
+
+Rob -
+	Thanks very much for the information about the 4.1 BSD TCP/IP
+implementation.  Sounds like a very nice job!  What is the feasibility
+of moving it to a PDP-11 UNIX system?  There are some of us who can not
+afford to subscribe to the Berkeley "PDP-11s are dead" philosophy...
+
+	Can you feed me any handy dribbles of documentation or overview
+information?
+				Cheers,
+				 -Mike
+------------------------------
+
+Date: 3 Oct 1981 00:13:28-PDT
+From: ESVAX.clemc at Berkeley
+To: csvax.unix-wizards at Berkeley
+
+The 3Com version for the 11 is fairly good.  It is like the old
+U of I NCP in that it is not all kernel resident (like the BBN Version).
+It IS large.  Tektronix has been using it will 2.8 BSD for a few months
+but they have had lots of trouble.  It has been a conbination of sparse
+comments in the 3Com code, 2.8 BSD and trying to Talk TCP to a CDC Cyber
+on the other end.  They are using Network System's Corp "HYPERchannel"
+gear for the physical medium, which is very fast but the 11/70 can not
+keep up with it (niether can the cyber when running TCP).
+
+Both BBN and 3Com have used Psuedo TTY's for the Virtual Terminal Protocol.
+This has both advantages and disadvantages.   3Com wants to make their
+code portable to other UNIX versions.  They are working on/have made to work
+a version that runs on an 11/34 with overlays. As far as I know, BBN has
+punted the 11's.
+
+Clem
+
+------------------------------
+
+Date:  6 Oct 1981 11:32:45 EDT (Tuesday)
+From: Rob Gurwitz <gurwitz at BBN-RSM>
+To: Michael Muuss <mike.bmd70 at BRL>
+
+There is a note describing the internals of the TCP/IP for the VAX available
+from the ARPANET NIC as IEN 168.  In addition, I have manual pages for
+the lowest level TCP/IP/local net i/f, if you want them.  The TELNET
+and FTP are ports of software that has been around for awhile, so manual
+pages for them are probably generally available (you probably already
+have them if you're running NCP on an 11).  MTP mail is new, but we have
+no manual pages ready yet.
+
+Rob.
+
+------------------------------
+
+Date:  7 Oct 1981  9:21:34 EDT (Wednesday)
+From: Rob Gurwitz <gurwitz at BBN-RSM>
+To: Michael Muuss <mike.bmd70 at BRL>
+
+Here is the manual page for low level TCP access.  I hope it's useful.
+Feel free to include info about the implementation in your 
+summary.
+			Rob.
+
+NET(5)              UNIX Programmer's Manual              NET(5)
+
+
+
+NAME
+     tcp, ip, rawnet - internet networking software
+
+SYNOPSIS
+     open ("/dev/net/net", ncon);
+
+     struct con *ncon;
+
+     struct lhost {                  /* net library format internet address */
+            unsigned char l_hoi;            /* host on imp */
+            unsigned char l_net;            /* network */
+            n_short l_imp;                  /* imp */
+     };
+                                        /* c_mode field definitions */
+     struct con {                    /* user connection structure */
+            unsigned char c_mode;           /* mode 0-passive 1-active (see flags) */
+            unsigned char c_sbufs;          /* # send buffers to use */
+            unsigned char c_rbufs;          /* # rcv buffers to use */
+            unsigned char c_prec;           /* precedence */
+     #define c_lo c_prec                     /* low raw link or proto # */
+            unsigned char c_sec;            /* security level */
+     #define c_hi c_sec                      /* hi raw link or proto # */
+            unsigned char c_compt;          /* compartment */
+            unsigned char c_timeo;          /* tcp open timeout */
+            unsigned char c_x;              /* (unused) */
+            unsigned short c_lport;         /* local port */
+            unsigned short c_fport;         /* foreign port */
+            struct lhost c_con;             /* foreign socket */
+     };
+
+     struct netstate {               /* network status structure */
+            unsigned char n_lolink;         /* low link no. in range (IP, RAW) */
+            unsigned char n_hilink;         /* high link no. in range (IP, RAW) */
+            unsigned char n_snd;            /* # send bufs allocated */
+            unsigned char n_rcv;            /* # receive bufs allocated */
+            unsigned char n_ssize;          /* # bufs on send buffer */
+            unsigned char n_rsize;          /* # bufs on receive buffer */
+            unsigned char n_state;          /* state of this connection */
+            unsigned char n_flags;          /* misc. flags (see below) */
+            unsigned short n_lport;         /* local port */
+            unsigned short n_fport;         /* foreign port */
+            struct lhost n_con;             /* foreign socket */
+     };
+
+     #define CONACT  1                       /* active connection */
+     #define CONTCP  2                       /* open a tcp connection */
+     #define CONIP   4                       /* open a raw ip connection */
+     #define CONRAW  8                       /* open a raw local net connection */
+     #define CONDEBUG 128               /* turn on debugging info */
+
+                                        /* net ioctl definitions */
+     #define NETGETS 1                       /* get status */
+     #define NETSETD 2                       /* set debugging info */
+     #define NETSETU 3                       /* set urgent mode */
+     #define NETRSETU 4                      /* reset urgent mode */
+     #define NETSETE 5                       /* set EOL mode */
+     #define NETRSETE 6                      /* reset EOL mode */
+     #define NETCLOSE 7                      /* initiate tcp close */
+     #define NETABO           /* initiate tcp abort */
+
+     #define SIGURG 16               /* urgent signal */
+
+     #ifndef KERNEL                           /* n_flags field definitions */
+
+     #define UEOL    0001                    /* EOL sent */
+     #define UURG    0002                    /* urgent data sent */
+     #define UDEBUG  0004                    /* turn ongging info recording */
+     #define ULOCK   0010                    /* receive buffer locked */
+     #define UTCP    0020                    /* this is a TCP connection */
+     #define UIP     0040                    /* this is a raw IP connection */
+     #define URAW    0100                    /* this is a raw 1822 connection */
+     #define ULISTEN 0200                    /* awaiting a connection */
+
+                                        /* n_state field definitions */
+     #define UCLOSED 0000                    /* connection closed */
+     #define UCLSERR 0001                    /* error -- connection closing */
+     #define UABORT  0002                    /* connection aborted */
+     #define UINTIMO 0004                    /* open failed -- init timeout */
+     #define URXTIMO 0010                    /* retransmit too long timeout */
+     #define URESET  0020                    /* connection aborted due to reset */
+     #define UOPERR  0040                    /* open failed -- not enough buffers */
+     #define UURGENT 0100                    /* urgent data received */
+     #define UNETDWN 0200                    /* connection aborted due to net */
+
+     #endif KERNEL
+
+DESCRIPTION
+     The special file /dev/net/net is used to access ARPANET type
+     packet-switched  networks  via  the  DoD  standard host-host
+     Internetworking   Protocols,   TCP   (Transmission   Control
+     Protocol),  and  IP  (Internet  Protocol).   It  also allows
+     communication over the local network(s) to which the  system
+     is  connected  with "raw" packets, enabling user software to
+     do its own communications processing.  Access to the network
+     at this level is the most direct form of use.  It is assumed
+     that most users will use  higher  level  protocol  programs,
+     like  ftp(1)  and telnet(1) to communicate over the network.
+     (This  description  assumes  the  reader  is  familiar  with
+     ARPANET type communications protocols.)
+
+ESTABLISHING CONNECTIONS
+     To establish a connection via TCP or IP, or  to  communicate
+     with  raw packets, the open(2) call is given, with the usual
+     mode  argument  replaced  by  a  pointer  to  a   connection
+     structure,  defined  in /usr/include/con.h. The c_mode field
+     of this structure  specifies  what  type  of  connection  is
+     desired (TCP, IP, or RAW), and whether or not the connection
+     is  to  be  active  (specifying  a  specific  foreign   host
+     address), or passive (with no foreign address, implying that
+     the connection will be established when any foreign  process
+     tries to communicate with the opener).
+
+     The c_sbufs and c_rbufs fields  specify  buffer  allocations
+     for   the   send   and  receive  sides  of  the  connection,
+     respectively.   If  either  value  is  zero,   the   default
+     allocation  will  be  used  for that direction (currently 1K
+     bytes).  The user can request up to 4K bytes each  for  send
+     and receive directions by varying these parameters between 1
+     and 4.
+
+     The c_prec, c_sec, and  c_compt  fields  specify  values  of
+     precedence, security level, and compartmentalization for TCP
+     connections.   (N.B.   This   feature   is   currently   not
+     implemented).  For IP and RAW connections, the c_hi and c_lo
+     fields specify a range of IP protocol numbers or  local  net
+     dispatch  numbers (e.g., ARPANET link numbers) to watch for.
+     Messages falling into this range are queued  for  the  user.
+     The  end of the range is used in sending messages.  Low
+     must be less than or equal to high, and numbers in the range
+     must not be in use in any other connection.
+
+     The c_timeo parameter specifies a length of time in  seconds
+     to  wait  for connection establishment before aborting (this
+     does not apply to passive opens).  If the field is zero, the
+     default of 30 seconds is used.
+
+     The remaining fields specify local, and  foreign  ports  for
+     TCP,  and  the  foreign host address in net long format (see
+     libn(3)). The local port may be  zero,  in  which  case  TCP
+     assigns a unique port number to the connection.  The foreign
+     port and host address may only be zero for a passive open.
+
+READING AND WRITING
+     If the open succeeds, a file descriptor  is  returned  which
+     may  be  used  in subsequent reads and writes (see, read(2),
+     write(2)). Reads  and  writes  work  as  usual  with  a  few
+     exceptions.    A   read  may  return  with  error  condition
+     ENETSTAT, which indicates that  some  exceptional  condition
+     has been detected.  In this case, a 16 bit value is returned
+     to the read buffer, which give the status of the  connection
+     that  caused  the  return.  Further status may be determined
+     with ioctl(2). (see, NETWORK STATUS).  If the  condition  is
+     non-fatal, the read may be re-issued.  Reads may return less
+     data than requested if a TCP EOL was detected.   Reads  will
+     block if there is no data for the user.  Writes block if the
+     amount of  send  buffer  resources  for  the  connection  is
+     exceeded.   IP and RAW reads return the appropriate protocol
+     leaders along with any data received.  Only one  IP  or  RAW
+     message may be received or sent per call.
+
+     In addition to normal TCP reads and  writes,  the  user  may
+     wish  to  indicate EOL and URGENT data on writes and receive
+     notification of URGENT data sent by the foreign  peer.   EOL
+     and  URGENT  are  enabled by issueing the NETSETE or NETSETU
+     ioctl calls.  Once set, EOL is sent at the last byte of each
+     subsequent  write.   Similarly, the URGENT pointer is set to
+     start at the first byte of the next write, and ends with the
+     first  byte sent after URGENT mode is disabled.  These modes
+     are disabled by  the  NETRSETE  and  NETRSETU  ioctl  calls.
+     URGENT  data  is  indicated  by signal SIGURG when the first
+     byte is received.  This  signal  is  normally  ignored.   (A
+     status flag is also set in the presence of urgent data.)
+
+CLOSING CONNECTIONS
+     Normally, the close(2) call is used to close a TCP,  IP,  or
+     RAW  connection.   In  each case, it indicates that the user
+     will send or receive no more  data.   For  TCP  connections,
+     close  initiates  the connection closing protocol, though it
+     returns  immediately.    Thus,   the   internal   connection
+     structures  persist  until  the  connection  has reached the
+     CLOSED state.  For IP and  RAW  connections,  the  close  is
+     immediate and deletes all internal structures.
+
+     In addition to close for TCP connections, there is an  ioctl
+     call,  NETCLOSE,  which  indicates that the local connection
+     will send no more data, but is still able  to  receive  data
+     from  the foreign peer.  In this case, subsequent writes are
+     illegal and will terminate with errors, but subsequent reads
+     will  work  until  the  connection  is closed by the foreign
+     peer.
+
+NETWORK STATUS
+     There are several ioctl(2)  calls  available  for  receiving
+     network  status  information  or initiating certain modes or
+     functions.  Most of these calls have been  described  above.
+     The  status  call,  NETGETS,  takes a status buffer pointer,
+     which points to a  netstate  structure,  illustrated  above,
+     which is filled in by the call.
+
+     To summarize, the various ioctl calls are:
+
+     NETGETS   Return network status information to the structure
+               pointed at by third argument of ioctl.
+
+     NETSETD   Reset the debugging log to the file  name  pointed
+               at  by  the third argument.  The file must already
+               exist.  If the argument is zero,  turn  off  debug
+               logging (see, DEBUGGING).
+
+     NETSETU   Set urgent mode starting at next byte written (TCP
+               only).
+
+     NETRSETU  Reset urgent mode, urgent  pointer  ends  at  last
+               byte written (TCP only).
+
+     NETSETE   Set EOL mode,  send  EOL  at  last  byte  of  each
+               subsequent write (TCP only).
+
+     NETRSETE  Terminate EOL mode (TCP only).
+
+     NETCLOSE  Start TCP connection close.  User can continue  to
+               receive data (TCP only).
+
+     NETABORT  Abort TCP connection.  Foreign peer is  reset  and
+               no more data may be sent or received (TCP only).
+
+DEBUGGING
+     The network software enables certain trace information to be
+     recorded for TCP connections.  This information is logged in
+     a single debugging log file.  To enable  this  feature,  the
+     CONDEBUG  bit  in  the  c_mode  field of the open connection
+     parameter structure must be set.  The default debugging  log
+     is /etc/net/tcpdebug. This may be changed or the feature may
+     be disabled system wide with the NETSETD ioctl  call.   Only
+     the  super-user  may  do  this.  The format of the debugging
+     information  is  several  bytes  of  binary  data  per   TCP
+     transaction.   The  log may be printed in readable form with
+     trpt(1).
+
+DIAGNOSTICS
+     The following system error codes may be returned by  network
+     system calls:
+
+     ENETSTAT  (35) Network status available (not a fatal  error,
+               see READS AND WRITES).
+
+     ENETDWN   (36) Open failed  because  network  connection  is
+               unavailable.
+
+     ENETCON   (37) Open  failed  because  there  were  too  many
+               connections.
+
+     ENETBUF   (38) No more network buffer space.
+
+     ENETERR   (39) Fatal error from network protocol processor.
+
+     ENETRNG   (40) IP or RAW open failed because the protocol or
+               dispatch  number  was  out  of range or already in
+               use.  TCP open failed because the  user  tried  to
+               open  an  already  existing  connection (i.e., one
+               with the identical foreign host address and  local
+               and foreign ports).
+
+FILES
+     /dev/net/net
+     /etc/net/tcpdebug
+
+SEE ALSO
+     ftp(1),  telnet(1),  trpt(1),  read(2),  write(2),  open(2),
+     close(2), ioctl(2), libn(3)
+
+     R.F.   Gurwitz,   VAX-UNIX   Networking   Support    Project
+     Implementation  Description,  DARPA  Information  Processing
+     Techniques Office, IEN 168, January, 1981.
+
+     J. Postel  (ed.),  DoD  Standard  Internet  Protocol,  DARPA
+     Information  Processing Techniques Office, IEN 128, January,
+     1980.
+
+     J. Postel (ed.), DoD Standard Transmission Control Protocol,
+     DARPA  Information  Processing  Techniques  Office, IEN 129,
+     January, 1980.
+
+------------------------------
+
+End of TCP-IP Digest
+********************
+
+

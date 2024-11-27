@@ -1,0 +1,740 @@
+From mrose@cheetah.ca.psi.com Mon Sep 24 10:38:42 1990
+To: iana@ISI.EDU
+Subject: fibermux.txt
+Date: Mon, 24 Sep 90 10:35:15 -0700
+From: mrose@cheetah.ca.psi.com
+
+FIBERMUX MIB Definition (9/14/90)
+
+The information in this document is subject to change without notice.
+
+
+
+4. CROSSBOW Definition
+
+4.1 CROSSBOW Group
+
+
+OBJECT:
+	fmxHubHwVer	{ fmxSystemGrp 1 }
+
+Syntax:
+	OCTET STRING
+
+Definition:
+
+Access:
+	read-only
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxHubFwVer	{ fmxSystemGrp 2 }
+
+Syntax:
+	OCTET STRING
+
+Definition:
+
+Access:
+	read-only
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxHubAddress	{ fmxSystemGrp 3 }
+
+Syntax:
+	OCTET STRING
+
+Definition:
+
+Access:
+	read-only
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxHubDate	{ fmxSystemGrp 4 }
+
+Syntax:
+	OBJECT IDENTIFIER
+
+Definition:
+
+Access:
+	read-write
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxHubElapsetick	{ fmxSystemGrp 5 }
+
+Syntax:
+	TimeTicks
+
+Definition:
+
+Access:
+	read-write
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxHubSamplingRate	{ fmxSystemGrp 6 }
+
+Syntax:
+	Gauge
+
+Definition:
+
+Access:
+	read-write
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxHubPeakTraffic	{ fmxSystemGrp 7 }
+
+Syntax:
+	Gauge
+
+Definition:
+
+Access:
+	read-only
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxHubAverageTraffic	{ fmxSystemGrp 8 }
+
+Syntax:
+	Gauge
+
+Definition:
+
+Access:
+	read-only
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxHubCurrentTraffic	{ fmxSystemGrp 9 }
+
+Syntax:
+	Gauge
+
+Definition:
+
+Access:
+	read-only
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxHubTotalFrameRx	{ fmxSystemGrp 10 }
+
+Syntax:
+	Counter
+
+Definition:
+
+Access:
+	read-only
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxHubAverageByte	{ fmxSystemGrp 11 }
+
+Syntax:
+	Gauge
+
+Definition:
+
+Access:
+	read-only
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxHubCRCErrors 	{ fmxSystemGrp 12 }
+
+Syntax:
+	Counter
+
+Definition:
+
+Access:
+	read-only
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxHubAlignErrors	{ fmxSystemGrp 13 }
+
+Syntax:
+	Counter
+
+Definition:
+
+Access:
+	read-only
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxHubMissedErrors	{ fmxSystemGrp 14 }
+
+Syntax:
+	Counter
+
+Definition:
+
+Access:
+	read-only
+
+Status:
+	mandatory
+
+OBJECT:
+	fmxHubStatus	{ fmxSystemGrp 15 }
+
+Syntax:
+	INTEGER {
+			pwrAB-bad(0),
+			pwrB-OK(1),
+			pwrA-OK(2),
+			pwrAB-OK(3)
+	}
+
+Definition:
+
+Access:
+	read-only
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxHubClear ::= { fmxSystemGrp 16 }
+
+Syntax:
+	INTEGER {
+		on(1)
+	}
+
+Definition:
+
+Access:
+	write-only
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxHubCleardate { fmxSystemGrp 17 }
+
+Syntax:
+	OBJECT IDENTIFIER
+
+Definition:
+
+Access:
+	read-write
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxCbCardTable	{ fmxCrossbowGrp 1 }
+
+Syntax:
+	SEQUENCE OF FmxCbCardEntry
+
+Definition:
+	If you want to find the Enable/Disable state of an entry in
+	the fmxCbCardTable associated with card 3.  'fmxCbCEnable.3'
+	would identify the desired instance.
+
+Access:
+	read-write
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxCbCardEntry	{ fmxCbCardTable 1 }
+
+Syntax:
+	FmxCbCardEntry ::= SEQUENCE {
+		fmxCbCIndex
+			INTEGER,
+		fmxCbCType
+			INTEGER,
+		fmxCbCReset
+			INTEGER,
+		fmxCbCEnable
+			INTEGER,
+		fmxCbCFIFOError
+			INTEGER,
+		fmxCbCJabberError
+			INTEGER,
+		fmxCbCLockup
+			INTEGER,
+		fmxCbCTraffic
+			INTEGER,
+		fmxCbCTimeslot
+			INTEGER,
+		fmxCbCAddress
+			INTEGER
+	}
+
+Definition:
+
+Access:
+	read-write
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxCbCIndex ::= { fmxCbCardEntry 1 }
+
+Syntax:
+	INTEGER
+
+ACCESS:
+	read-only
+
+STATUS:
+	mandatory
+
+
+OBJECT:
+	fmxCbCType	{ fmxCbCardEntry 2 }
+
+Syntax:
+	INTEGER
+
+Definition:
+
+Access:
+	read-only
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxCbCReset ::= { fmxCbCardEntry 3 }
+
+Syntax:
+	INTEGER {
+		on(1)
+	}
+
+Definition:
+
+Access:
+	write-only
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxCbCEnable	{ fmxCbCardEntry 4 }
+
+Syntax:
+	INTEGER {
+		off(0),
+		on(1)
+	}
+
+Definition:
+
+Access:
+	read-only
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxCbCFIFOError { fmxCbCardEntry 5 }
+
+Syntax:
+	INTEGER {
+		off(0),
+		on(1)
+	}
+
+Definition:
+
+Access:
+	read-only
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxCbCJabberError	{ fmxCbCardEntry 6 }
+
+Syntax:
+	INTEGER {
+		off(0),
+		on(1)
+	}
+
+Definition:
+
+Access:
+	read-only
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxCbCLockup	{ fmxCbCardEntry 7 }
+
+Syntax:
+	INTEGER {
+		off(0),
+		on(1)
+	}
+
+Definition:
+
+Access:
+	read-only
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxCbCTraffic	{ fmxCbCardEntry 8 }
+
+Syntax:
+	INTEGER {
+		off(0),
+		on(1)
+	}
+
+Definition:
+
+Access:
+	read-only
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxCbCTimeslot	{ fmxCbCardEntry 9 }
+
+Syntax:
+	INTEGER
+
+Definition:
+
+Access:
+	read-write
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxCbCAddress	{ fmxCbCardEntry 10 }
+
+Syntax:
+	INTEGER
+
+Definition:
+
+Access:
+	read-only
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxCbCPortTable { fmxCrossbowGrp 2 }
+
+Syntax:
+	SEQUENCE of FmxCbCPortEntry
+
+Definition:
+	If you want to find the Enable/Disable state of an entry in
+	the fmxCbCPortTable associated with port 4 in card 3.
+	Then, fmxCbCPEnable.3.4 would identify the desired
+	instance.
+
+Access:
+	read-write
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxCbCPortEntry { fmxCbCPortTable 1 }
+
+Syntax:
+	FmxCbCPortEntry ::= SEQUENCE {
+		fmxCbCPIndex
+		INTEGER,
+		fmxCbCPEnable
+		INTEGER,
+		fmxCbCPIntegrity
+		INTEGER,
+		fmxCbCPJabberError
+		INTEGER,
+		fmxCbCPRedundCtrl
+		INTEGER,
+		fmxCbCPRedundPrimary
+		INTEGER,
+		fmxCbCPRedundActive
+		INTEGER,
+		fmxCbCPRedundPort
+		INTEGER,
+		fmxCbCPRedundCard
+		INTEGER,
+		fmxCbCPRedundErrors
+		Counter,
+		fmxCbCPRedundErrorLimit
+		Gauge
+	}
+
+Definition:
+
+Access:
+	read-write
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxCbCPIndex	{ fmxCbCPortEntry 1 }
+
+Syntax:
+	INTEGER
+
+Definition:
+
+Access:
+	read-only
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxCbCPEnable	{ fmxCbCPortEntry 2 }
+
+Syntax:
+	INTEGER
+		off(0),
+		on(1)
+	}
+
+Definition:
+
+Access:
+	read-write
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxCbCPIntegrity	{ fmxCbCPortEntry 3 }
+
+Syntax:
+	INTEGER {
+		off(0),
+		on(1)
+	}
+
+Definition:
+
+Access:
+	read-only
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxCbCPJabberError	{ fmxCbCPortEntry 4 }
+
+Syntax:
+	INTEGER
+		off(0),
+		on(1)
+	}
+
+Definition:
+
+Access:
+	read-only
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxCbCPRedundCtrl	{ fmxCbCPortEntry 5 }
+
+Syntax:
+	INTEGER
+		off(0),
+		on(1)
+	}
+
+Definition:
+
+Access:
+	read-write
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxCbCPRedundPrimary	{ fmxCbCPortEntry 6 }
+
+Syntax:
+	INTEGER
+		off(0),
+		on(1)
+	}
+
+Definition:
+
+Access:
+	read-write
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxCbCPRedundActive	{ fmxCbCPortEntry 7 }
+
+Syntax:
+	INTEGER
+		off(0),
+		on(1)
+	}
+
+Definition:
+
+Access:
+	read-write
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxCbCPRedundPort	{ fmxCbCPortEntry 8 }
+
+Syntax:
+	INTEGER
+
+Definition:
+
+Access:
+	read-write
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxCbCPRedundCard	{ fmxCbCPortEntry 9 }
+
+Syntax:
+	INTEGER
+
+Definition:
+
+Access:
+	read-write
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxCbCPRedundErrors	{ fmxCbCPortEntry 10 }
+
+Syntax:
+	Counter
+
+Definition:
+
+Access:
+	read-write
+
+Status:
+	mandatory
+
+
+OBJECT:
+	fmxCbCPRedundErrorLimit { fmxCbCPortEntry 11 }
+
+Syntax:
+	Gauge
+
+Definition:
+
+Access:
+	read-write
+
+Status:
+	mandatory
+
+
+
+
+

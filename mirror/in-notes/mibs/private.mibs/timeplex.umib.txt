@@ -1,0 +1,3456 @@
+
+
+"INTRODUCTION"                                          March 5, 1991
+
+
+	This document provides the initial version of the Timeplex Management
+        Information Base (UMIB) for use with network management protocols
+        over TCP/IP-based internets. This document does not include those
+        managed objects identified in RFC 1066; however, those objects are
+	supported. The presentation roughly follows the format found in
+	RFC 1066. One field has been added; namely, 'Action`. This defines
+	the action to be initiated by the Simple Network Management Protocol
+	(SNMP) whenever the particular read-write object is written. The
+	'Action' field does not apply to read-only objects.
+
+"OBJECTS"
+
+
+        The objects are arranged into the following groups:
+
+          -- Timeplex System Group 
+          -- Timeplex Interfaces Group 
+          -- Timeplex IP Group 
+          -- Timeplex TCP Group 
+          -- Timeplex EGP Group 
+	  -- Timeplex GGP Group
+          -- Timeplex SNMP Group 
+          -- Timeplex HFP Group 
+          -- Timeplex DDN Group 
+          -- Timeplex X25 Group 
+          -- Timeplex FDDI Group 
+          -- Timeplex TLIP Group 
+
+        The following groups have been reserved (see Object Definitions),
+        but no objects have yet been identified within these groups:
+
+          -- Timeplex AT (Address Translation) Group 
+          -- Timeplex ICMP Group 
+          -- Timeplex RIP Group
+          -- Timeplex UDP Group
+
+"Object Definitions"
+
+
+
+               enterprises      see RFC 1066
+
+               timeplex        OBJECT IDENTIFIER ::= { enterprises 16 }
+
+               umgmt           OBJECT IDENTIFIER ::= { timeplex 2 }
+
+               umib            OBJECT IDENTIFIER ::= { umgmt 1 }
+
+               usystem         OBJECT IDENTIFIER ::= { umib 1 }
+               uinterfaces     OBJECT IDENTIFIER ::= { umib 2 }
+               uat             OBJECT IDENTIFIER ::= { umib 3 }
+               uip             OBJECT IDENTIFIER ::= { umib 4 }
+               uicmp           OBJECT IDENTIFIER ::= { umib 5 }
+               utcp            OBJECT IDENTIFIER ::= { umib 6 }
+               uudp            OBJECT IDENTIFIER ::= { umib 7 }
+               uegp            OBJECT IDENTIFIER ::= { umib 8 }
+               uggp            OBJECT IDENTIFIER ::= { umib 12 }
+               urip            OBJECT IDENTIFIER ::= { umib 13 }
+               usnmp           OBJECT IDENTIFIER ::= { umib 14 }
+               uhfp            OBJECT IDENTIFIER ::= { umib 15 }
+               uddn            OBJECT IDENTIFIER ::= { umib 16 }
+               ux25            OBJECT IDENTIFIER ::= { umib 17 }
+               ufddi           OBJECT IDENTIFIER ::= { umib 18 }
+               tlip            OBJECT IDENTIFIER ::= { umib 19 }
+
+"Timeplex System Group"
+
+
+   OBJECT: 
+   -------
+        usystemAction { usystem 1 }
+
+   Syntax: 
+        INTEGER {
+		normal(0),
+                reset(1),
+                shutdown(2)
+            }
+
+   Definition: 
+        This is the system action flag. 'Reset' causes the network 
+        device to reinitialize itself; 'shutdown' sets the network
+        device to a state where it can be restarted only by manually
+        resetting the device.
+
+   Access: 
+        read-write.
+   
+   Status: 
+        mandatory.
+
+   Default: 
+        0
+
+
+   OBJECT: 
+   -------
+        usystemReboots { usystem 2 }
+
+   Syntax: 
+        INTEGER
+
+   Definition: 
+        This is the number of times the system has rebooted due to 
+	an unrecoverable error condition. If initialized to -1,
+	the system will not reboot following an unrecoverable error.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        usystemErrorCode { usystem 3 }
+
+   Syntax: 
+        INTEGER
+
+   Definition: 
+        This is the error code for the last system reboot. It is a
+	16-bit value, where the upper 8 bits contain the process ID 
+	and the lower 8 bits contain the error code.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+"Timeplex Interfaces Group"
+
+   All objects in the Interfaces group are instantiated by an interface
+   number (1-based). For example, if one were interested in the object
+   uifEthernetArpWait for physical interface 2, he would identify the
+   object by specifying uifEthernetArpWait.2.
+
+
+   OBJECT: 
+   -------
+        uifTable { uinterfaces 1 }
+
+   Syntax: 
+        SEQUENCE OF uifEntry
+
+   Definition: 
+        This is a list of the Timeplex interface entries. Each entry
+	is instantiated by a physical interface number (1-based).
+	The number of physical interfaces is a function of the
+	particular network device. For example, suppose a device
+	supports three physical interfaces and physical interface 2
+	and physical interface 3 are Ethernet and FDDI respectively.
+	Then, to access the 'ArpWait' variable on each interface, one
+	specifies 'uifEthernetArpWait.2' and 'uifFddiArpWait.3',
+	respecitively.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        uifEntry { uifTable 1 }
+
+   Syntax: 
+        uifEntry ::= SEQUENCE (
+		uifEthernetArpWait
+                        INTEGER,
+                uifIpAddr
+                        IpAddress,
+                uifSubnetMask
+                        IpAddress,
+                uifHdlcBaudRate
+                        INTEGER,
+                uifHdlcRto
+                        INTEGER,
+                uifHdlcAckTo
+                        INTEGER,
+                uifHdlcSabmInterval
+                        INTEGER,
+                uifHdlcRnrInterval
+                        INTEGER.
+                uifHdlcClockType 
+                        INTEGER,
+                uifHdlcDCE 
+                        INTEGER,
+                uifHdlcThrowaway
+                        INTEGER,
+                uifHdlcAckCount 
+                        INTEGER,
+		uifFddiArpWait
+                        INTEGER
+           )
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        uifEthernetArpWait { uifEntry 1 }
+
+   Syntax: 
+        INTEGER (1..65535)
+
+   Definition: 
+        This is the number of seconds to wait for an ARP reply before
+	dropping the data message destined for the specified Ethernet interface.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        10
+
+
+   OBJECT: 
+   -------
+        uifIpAddr { uifEntry 2 }
+
+   Syntax: 
+        IpAddress
+
+   Definition: 
+        This is the Internet address for the specified interface.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Action: 
+        reset the device.
+
+
+   OBJECT: 
+   -------
+        uifSubnetMask { uifEntry 3 }
+
+   Syntax: 
+        IpAddress
+
+   Definition: 
+        This is the Internet address subnet mask for the specified 
+        interface.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Action: 
+        reset the device.
+
+
+   OBJECT: 
+   -------
+        uifHdlcBaudRate { uifEntry 4 }
+
+   Syntax: 
+        INTEGER (0..16384)
+
+   Definition: 
+        This is the HDLC baud rate constant. The following formula is
+        used to convert the baud rate constant to a baud rate:
+	baud rate = 5000000 / (baud rate constant + 2).
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Action: 
+        reset the device.
+
+   Default: 
+        111Kb(43)
+
+
+   OBJECT: 
+   -------
+        uifHdlcRto { uifEntry 5 }
+
+   Syntax: 
+        INTEGER (1..16384)
+
+   Definition: 
+        This is the HDLC retransmission interval in milliseconds.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Action: 
+        reset the device.
+
+   Default: 
+        500
+
+
+   OBJECT: 
+   -------
+        uifHdlcAckTo { uifEntry 6 }
+
+   Syntax: 
+        INTEGER (1..16384) 
+
+   Definition: 
+        This is the HDLC acknowledgement interval in milliseconds.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Action: 
+        reset the device.
+
+   Default: 
+        250
+
+
+   OBJECT: 
+   -------
+        uifHdlcSabmInterval { uifEntry 7 }
+
+   Syntax: 
+        INTEGER (1..16384)
+
+   Definition: 
+        This is the HDLC SABM interval in milliseconds.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Action: 
+        reset the device.
+
+   Default: 
+        3000
+
+
+   OBJECT: 
+   -------
+        uifHdlcRnrInterval { uifEntry 8 }
+
+   Syntax: 
+        INTEGER (1..16384)
+
+   Definition: 
+        This is the HDLC receiver not ready interval in milliseconds.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Action: 
+        reset the device.
+
+   Default: 
+        1000
+
+
+   OBJECT: 
+   -------
+        uifHdlcClockType { uifEntry 9 }
+
+   Syntax: 
+        INTEGER {
+                 DTE-accepts-tx-and-rx-clocks(3),
+                 DCE-generates-tx-and-rx-clocks(4)
+           }
+
+   Definition: 
+        This is the HDLC accept/generate receiver and transmitter
+        signal flag for HDLC.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Action: 
+        reset the device.
+
+   Default: 
+        4
+
+
+   OBJECT: 
+   -------
+        uifHdlcDCE { uifEntry 10 }
+
+   Syntax: 
+        INTEGER 
+
+   Definition: 
+        This flag indicates that HDLC is a DCE.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Action: 
+        reset the device.
+
+   Default: 
+        TRUE(1)
+
+
+   OBJECT: 
+   -------
+        uifHdlcThrowaway { uifEntry 11 }
+
+   Syntax: 
+        INTEGER 
+
+   Definition: 
+        This flag directs the discarding of messages when HDLC is 
+        down.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Action: 
+        reset the device.
+
+   Default: 
+        FALSE(0)
+
+
+   OBJECT: 
+   -------
+        uifHdlcAckCount { uifEntry 12 }
+
+   Syntax: 
+        INTEGER (1..255)
+
+   Definition: 
+        This is the number of messages received by HDLC before 
+        spontaneous acknowledgement generation.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Action: 
+        reset the device.
+
+   Default: 
+        2
+
+
+   OBJECT: 
+   -------
+        uifFddiArpWait { uifEntry 13 }
+
+   Syntax: 
+        INTEGER (1..255)
+
+   Definition: 
+        This is the number of seconds to wait for an ARP reply before
+	dropping the data message destined for the specified FDDI interface.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Action: 
+        reset the device.
+
+   Default: 
+        10
+
+
+"Timeplex U_IP Group"
+
+
+   OBJECT: 
+   -------
+        uipLogicalDisconnect { uip 1 }
+
+   Syntax: 
+        INTEGER 
+
+   Definition: 
+        This flag tells IP to discard all incoming and outgoing
+        datagrams except for those destined for SNMP.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        FALSE(0)
+
+
+   OBJECT: 
+   -------
+        uipLoopback { uip 2 }
+
+   Syntax: 
+        INTEGER 
+
+   Definition: 
+        This flag indicates that the PSN is to loop back.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        FALSE(0)
+
+
+   OBJECT: 
+   -------
+        uipRemoteg1 { uip 3 }
+
+   Syntax: 
+        INTEGER 
+
+   Definition: 
+        This flag indicates that the interface 1 is an 
+        intersite gateway link.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        FALSE(0)
+
+
+   OBJECT: 
+   -------
+        uipRemoteg2 { uip 4 }
+
+   Syntax: 
+        INTEGER 
+
+   Definition: 
+        This flag indicates that the interface 2 is an 
+        intersite gateway link.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        FALSE(0)
+
+
+   OBJECT: 
+   -------
+        uipNet1MaxPkt { uip 5 }
+
+   Syntax: 
+        INTEGER (65..65535)
+
+   Definition: 
+        This is the maximum subnet packet size for the interface 1.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        FDDI-interface(4479)
+        LAPB-interface(1500)
+        Ethernet-1(1492)
+        Ethernet-2(1500)
+
+
+   OBJECT: 
+   -------
+        uipNet2MaxPkt { uip 6 }
+
+   Syntax: 
+        INTEGER (65..65535)
+
+   Definition: 
+        This is the maximum subnet packet size for the interface 2.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        FDDI-interface(4479)
+        LAPB-interface(1500)
+        Ethernet-1(1492)
+        Ethernet-2(1500)
+
+
+   OBJECT: 
+   -------
+        uipRedirectTo { uip 7 }
+
+   Syntax: 
+        INTEGER (1..65535)
+
+   Definition: 
+        This is the interval in seconds between the clearing of
+        the redirect tables.
+
+   Access: 
+        read-write.     
+
+   Status: 
+        mandatory.
+
+   Default: 
+        1800
+
+
+   OBJECT: 
+   -------
+        uipMasker { uip 8 }
+
+   Syntax: 
+        INTEGER 
+
+   Definition: 
+        This flag indicates the device should emulate a gateway and
+        respond to the receipt of a MASK request.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        FALSE(0)
+
+
+   OBJECT: 
+   -------
+        uipWellKnownGateway { uip 9 }
+
+   Syntax: 
+        IpAddress
+
+   Definition: 
+        This is the well known gateway address.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        uipMaxRoutePids { uip 10 }
+
+   Syntax: 
+        INTEGER
+
+   Definition: 
+        This is the maximum number of processes that perform routing.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        uipRoutePidsTable { uip 11 }
+
+   Syntax: 
+        SEQUENCE OF uipRoutePidsEntry
+
+   Definition: 
+        This is a list of process IDs that determine the order in 
+        which to search the routing protocol processes' routing 
+        tables. For example, the value of 'uipRoutePid.1" identifies
+        the process ID whose routing table is searched first. The
+        maximum number of entries in the list is given by 'uipMaxRoutePids'.
+
+   Access: 
+        read-write
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        uipRoutePidsEntry { uipRoutePidsTable 1 }
+
+   Syntax: 
+        uipRoutePidsEntry ::= SEQUENCE (
+        	uipRoutePid
+                	INTEGER 
+	   )
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   OBJECT: 
+   -------
+        uipRoutePid { uipRoutePidsEntry 1 }
+
+   Syntax: 
+        INTEGER {
+                Gateway-to-Gateway-protocol(3),
+                Routing-Information-protocol(7),
+		Exterior-Gateway-Protocol(8),
+		Internet-Protocol(1)
+           }
+
+   Definition: 
+        This is an entry in the list of process IDs. A value of 255
+        indicates that the entry is not used.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: uipRoutePidsEntry.1(3)
+	    uipRoutePidsEntry.2(7)
+	    uipRoutePidsEntry.3(8)
+	    uipRoutePidsEntry.4(1)
+
+
+   OBJECT: 
+   -------
+        uipNbrStaticRoutes { uip 12 }
+
+   Syntax: 
+        INTEGER
+
+   Definition: 
+        This is the number of static routes currently maintained in
+        non-volatile RAM.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        uipStaticRouteTable { uip 13 }
+
+   Syntax: 
+        SEQUENCE OF uipStaticRouteEntry
+
+   Definition: 
+        This is the static routing table. Each variable is 
+        instantiated by network address. For example, if the user
+        wishes to know the cost to route to network address
+        128.170.0.0, he requests the value of uipStaticRouteCost
+        for network address 128.170.0.0,
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   OBJECT: 
+   -------
+        uipStaticRouteEntry { uipStaticRouteTable 1 }
+
+   Syntax: 
+        uipStaticRouteEntry ::= SEQUENCE (
+	        uipStaticRouteNetwork
+	       	        IpAddress,
+        	uipStaticRouteGateway
+                	IpAddress,
+	        uipStaticRouteCost
+        	        INTEGER,
+	        uipStaticRouteOverride
+        	        INTEGER 
+	   )
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        uipStaticRouteNetwork { uipStaticRouteEntry 1 }
+
+   Syntax: 
+        IpAddress
+
+   Definition: 
+        This is the network address of the destination.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        uipStaticRouteGateway { uipStaticRouteEntry 2 }
+
+   Syntax: 
+        IpAddress
+
+   Definition: 
+        This is the gateway used to route to the network address.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        uipStaticRouteCost { uipStaticRouteEntry 3 }
+
+   Syntax: 
+        INTEGER (0..255)
+
+   Definition: 
+        This is the cost to route to the network address.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        uipStaticRouteOverride { uipStaticRouteEntry 4 }
+
+   Syntax: 
+        INTEGER 
+
+   Definition: 
+        This flag indicates that this route should override the
+        dynamic route.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+
+"Timeplex TCP Group"
+
+
+   OBJECT: 
+   -------
+        utcpRetransTo { utcp 1 }
+
+   Syntax: 
+        INTEGER (1..65535)
+
+   Definition: 
+        This is the initial message retransmission timeout in 
+        milliseconds.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        300
+
+
+   OBJECT: 
+   -------
+        utcpRtoMin { utcp 2 }
+
+   Syntax: 
+        INTEGER (1..65535)
+
+   Definition: 
+        This is the minimum allowable retransmission timeout value in
+        millisecons.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        50
+
+
+   OBJECT: 
+   -------
+        utcpRtoMax { utcp 3 }
+
+   Syntax: 
+        INTEGER (1..65635)
+
+   Definition: 
+        This is the maximum allowable retransmission timeout value in 
+        milliseconds.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        60000
+
+
+   OBJECT: 
+   -------
+        utcpWakeup { utcp 4 }
+
+   Syntax: 
+        INTEGER (1..16384)
+
+   Definition: 
+        This is the periodic processing interval in milliseconds.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        100
+
+
+   OBJECT: 
+   -------
+        utcpAckTime { utcp 5 }
+
+   Syntax: 
+        INTEGER (1..16384)
+
+   Definition: 
+        This is the mandatory acknowledgement period in milliseconds.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        200
+
+
+   OBJECT: 
+   -------
+        utcpTimeToLive { utcp 6 }
+
+   Syntax: 
+        INTEGER (1..255)
+
+   Definition: 
+        This is the time to live in seconds provided to IP.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Action: 
+        reset the device.
+
+   Default: 
+        60
+
+
+   OBJECT: 
+   -------
+        utcpThruput { utcp 7 }
+
+   Syntax: 
+        INTEGER (1..255)
+
+   Definition: 
+        This is the maximum number of outstanding messages per
+        connection.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default:
+        8
+
+
+   OBJECT: 
+   -------
+        utcpFlowAck { utcp 8 }
+
+   Syntax: 
+        INTEGER (1..utcpThruput)
+
+   Definition: 
+        This is the number of messages received before sending an
+        acknowledgement.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        2
+
+
+"Timeplex EGP Group"
+
+
+   OBJECT: 
+   -------
+        uegpMaxNeighbors { uegp 1 }
+
+   Syntax: 
+        INTEGER
+
+   Definition: 
+        This is the maximum number of EGP neighbors permitted for 
+        this gateway.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        uegpNumberTrustedNeighbors { uegp 2 }
+
+   Syntax: 
+        INTEGER (0..uegpMaxNeighbors)
+
+   Definition: 
+        This is the maximum number of neighbors to be acquired.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        0
+
+
+   OBJECT: 
+   -------
+        uegpNumberNeighbors { uegp 3 }
+
+   Syntax: 
+        INTEGER (0..uegpNumberTrustedNeighbors)
+
+   Definition: 
+        This is the number of neighbors recommended.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        0
+
+
+   OBJECT: 
+   -------
+        uegpNeighborTable { uegp 4 }
+
+   Syntax: 
+        SEQUENCE OF uegpNeighborEntry
+
+   Definition: 
+        This is the EGP gateway neighbor list. The first entry
+        in the list is entry number 1; the last entry is defined
+        by 'uegpNumberTrustedNeighbors'.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        uegpNeighborEntry { uegpNeighborTable 1 }
+
+   Syntax: 
+        uegpNeighborEntry ::= SEQUENCE (
+	        uegpNeighbor
+        	        IpAddress
+	   )
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        uegpNeighbor { uegpNeighborEntry 1 }
+
+   Syntax: 
+        IpAddress
+
+   Definition: 
+        This is the IP address of its EGP neighbor. This variable is
+        instantiated by its index (1-based) in the list of EGP 
+        neighbors.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        uegpAutoSysNumber { uegp 5 }
+
+   Syntax: 
+        INTEGER (0..65535)
+
+   Definition: 
+        This is the autonomous system number.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        10
+
+
+   OBJECT: 
+   -------
+        uegpMinHelloInterval { uegp 6 }
+
+   Syntax: 
+        INTEGER (15..65535)
+
+   Definition: 
+        This is the EGP gateway minimum hello interval in seconds.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        30
+
+
+   OBJECT: 
+   -------
+        uegpMinPollInterval { uegp 7 }
+
+   Syntax: 
+        INTEGER (30..65535)
+
+   Definition: 
+        This is the EGP gateway minimum poll interval in seconds.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        60
+
+
+   OBJECT: 
+   -------
+        uegpRequestCeaseInterval { uegp 8 }
+
+   Syntax: 
+        INTEGER (15..65535)
+
+   Definition: 
+        This the EGP gateway request/cease transmit interval in
+        seconds.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        30
+
+
+   OBJECT: 
+   -------
+        uegpDeclareDownInterval { uegp 9 }
+
+   Syntax: 
+        INTEGER (1800..65535)
+
+   Definition: 
+        This is the EGP gateway interval in seconds before dropping 
+        down neighbor.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        3600
+
+
+   OBJECT: 
+   -------
+        uegpAcquireCeaseInterval { uegp 10 }
+
+   Syntax: 
+        INTEGER (30..240)
+
+   Definition: 
+        This is the EGP gateway acquire/cease actions interval in 
+        seconds.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        60
+
+
+   OBJECT: 
+   -------
+        uegpEnoughInterval { uegp 11 }
+
+   Syntax: 
+        INTEGER (60..65535)
+
+   Definition: 
+        This is the EGP gateway interval in seconds that provides an
+	elapsed time prior to checking that enough neighbors have 
+        been acquired.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        120
+
+
+   OBJECT: 
+   -------
+        uegpPurgeInterval { uegp 12 }
+
+   Syntax: 
+        INTEGER (0..600)
+
+   Definition: 
+        
+        This is the EGP gateway interval in seconds between purging
+        old routes.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        240
+
+
+   OBJECT: 
+   -------
+        uegpMode { uegp 13 }
+
+   Syntax: 
+        INTEGER {
+                active-and-passive(0)
+                active(1)
+                passive(2)
+           }
+
+   Definition: 
+        This is the EGP gateway mode of operation.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        0
+
+
+   OBJECT: 
+   -------
+        uegpErrorTreatment { uegp 14 }
+
+   Syntax: 
+        INTEGER (0..255) 
+
+   Definition: 
+        This is the EGP error treatment flag. When EGP detects an 
+        error from an EGP neighbor, it right shifts the error 
+        treatment flag by the value of the error code. If the result
+        has the least significant bit set, a CEASE command is sent 
+        to the EGP neighbor and timers are reset. A value of 255 
+        ensures that all errors detected from a neighbor will cause a
+        CEASE command to be sent.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        0
+
+
+   OBJECT: 
+   -------
+        uegpSharedNetwork { uegp 15 }
+
+   Syntax: 
+        IpAddress
+
+   Definition: 
+        This is the EGP gateway network address that is shared by all 
+        its EGP neighbors.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+
+"Timeplex GGP Group"
+
+
+   OBJECT: 
+   -------
+        uggpEchoInterval { uggp 1 }
+
+   Syntax: 
+        INTEGER (1..65535)
+
+   Definition: 
+        This is the number of seconds between GGP ECHO messages.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        15
+
+
+   OBJECT: 
+   -------
+        uggpMaxNeighbors { uggp 2 }
+
+   Syntax: 
+        INTEGER
+
+   Definition: 
+        This is the maximum number of GGP neighbors permitted for 
+        this gateway.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        uggpNumberNeighbors { uggp 3 }
+
+   Syntax: 
+        INTEGER (0..uggpMaxNeighbors)
+
+   Definition: 
+        This is the current number of GGP neighbors for this gateway.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        0
+
+
+   OBJECT: 
+   -------
+        uggpNeighborTable { uggp 4 }
+
+   Syntax: 
+        SEQUENCE OF uggpNeighborEntry
+
+   Definition: 
+        This is the GGP gateway neighbor list. The first entry
+        in the list is entry number 1; the last entry is defined
+        by 'uggpNumberNeighbors'.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        uggpNeighborEntry { uggpNeighborTable 1 }
+
+   Syntax: 
+        uggpNeighborEntry ::= SEQUENCE (
+	        uggpNeighbor
+        	        IpAddress 
+	   )
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        uggpNeighbor { uggpNeighborEntry 1 }
+
+   Syntax: 
+        IpAddress
+
+   Definition: 
+        This is IP address of its GGP neighbor. This variable is
+        instantiated by its index (1-based) in the list of GGP 
+        neighbors.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+
+"Timeplex SNMP Group"
+
+
+   OBJECT: 
+   -------
+         usnmpVersion { usnmp 1 }
+
+   Syntax: 
+        INTEGER
+
+   Definition: 
+        This is the SNMP version number.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        usnmpCommunity { usnmp 2 }
+
+   Syntax: 
+        OCTET STRING
+
+   Definition: 
+        This is the SNMP community name.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        empty string
+
+
+   OBJECT: 
+   -------
+        usnmpRequests { usnmp 3 }
+
+   Syntax: 
+        COUNTER
+
+   Definition: 
+        This is the total number of SNMP request messages received.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        usnmpTraps { usnmp 4 }
+
+   Syntax: 
+        COUNTER
+
+   Definition: 
+        This is the total number of SNMP Trap messages sent.    
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        usnmpForwardTraps { usnmp 5 }
+
+   Syntax: 
+        INTEGER 
+
+   Definition: 
+        This flag tells SNMP to send SNMP Trap messages.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        TRUE(1)
+
+
+"Timeplex HFP Group"
+
+
+   OBJECT: 
+   -------
+        uhfpMaxMsg { uhfp 1 }
+
+   Syntax: 
+        INTEGER (9..1420)
+
+   Definition: 
+        This is the maximum message size in bytes that this site
+        can handle.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        1536
+
+
+   OBJECT: 
+   -------
+        uhfpPad { uhfp 2 }
+
+   Syntax: 
+        INTEGER (0..6)
+
+   Definition: 
+        This is the number of bytes of pad.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        0
+
+
+   OBJECT: 
+   -------
+        uhfpSwap { uhfp 3 }
+
+   Syntax: 
+        INTEGER 
+
+   Definition: 
+        This flag indicates TCP, IP, and HFP headers should be 
+        swapped.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        TRUE(1)
+
+
+"Timeplex DDN Group"
+
+
+   OBJECT: 
+   -------
+        uddnTimeout { uddn 1 }
+
+   Syntax: 
+        INTEGER (1..65535)
+
+   Definition: 
+        This is the number of seconds to wait before clearing idle 
+        connections.
+
+   Access: 
+        read-write
+
+   Status: 
+        mandatory.
+
+   Default: 
+        600
+
+
+   OBJECT: 
+   -------
+        uddnMsgout { uddn 2 }
+
+   Syntax: 
+        INTEGER (1..8)
+
+   Definition: 
+        This is the maximum number of messages outstanding per
+        connection. 
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        8
+
+
+   OBJECT: 
+   -------
+        uddnHipUp { uddn 3 }
+
+   Syntax: 
+        INTEGER 
+
+   Definition: 
+        This flag indicates HIP is up.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        uddnHdhUp { uddn 4 }
+
+   Syntax: 
+        INTEGER 
+
+   Definition: 
+        This flag indicates HDH is up.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        uddnLinkUp { uddn 5 }
+
+   Syntax: 
+        INTEGER 
+
+   Definition: 
+        This flag indicates LINK is up.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        uddnTotalQ { uddn 6 }
+
+   Syntax: 
+        GAUGE
+
+   Definition: 
+         This is the total number of bytes remaining for queueing.
+
+   Access: 
+        read-only.
+
+   Status: 
+
+        mandatory.
+
+   OBJECT: 
+   -------
+        uddnConnections { uddn 7 }
+
+   Syntax: 
+        GAUGE
+
+   Definition: 
+        This is the number of active connections.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        uddnLinkDownTo { uddn 8 }
+
+   Syntax: 
+        INTEGER  
+
+   Definition: 
+        This indicates how long to wait in milliseconds until the PSN
+        is declared down.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        uddnRcvIncomplete { uddn 9 }
+
+   Syntax: 
+        COUNTER
+
+   Definition: 
+        This is the number of incomplete transmissions received.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        uddnConnectionsReused { uddn 10 }
+
+   Syntax: 
+        COUNTER
+
+   Definition: 
+        This is the number of connections reused.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        uddnHdhWentDown { uddn 11 }
+
+   Syntax: 
+        COUNTER
+
+   Definition: 
+        This is the number of times HDH went down.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        uddnLinkWentDown { uddn 12 }
+
+   Syntax: 
+        COUNTER
+
+   Definition: 
+        This is the number of times LINK went down.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        uddnLeaderErrs { uddn 13 }
+
+   Syntax: 
+        COUNTER
+
+   Definition: 
+        This is the number of leader errors received.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        uddnPSNGoingDown { uddn 14 }
+
+   Syntax: 
+        COUNTER
+
+   Definition: 
+        This ia the number of 'PSN going down' messages received.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        uddnDeadHostStatus { uddn 15 }
+
+   Syntax: 
+        COUNTER
+
+   Definition: 
+        This is the number of 'dead host status' messages received.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        uddnIfReset { uddn 16 }
+
+   Syntax: 
+        COUNTER
+
+   Definition: 
+        This is the number of 'interface reset' messages received.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+"Timeplex X25 Group"
+
+
+   OBJECT: 
+   -------
+        ux25IfTable { ux25 1 }
+
+   Syntax: 
+        SEQUENCE OF X25IfEntry
+
+   Definition: 
+        This is the X25 interface table. Each variable is instantiated
+	by a physical interface number, which is 1-based. See the
+	description of the Timeplex Interfaces Group.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        ux25IfEntry { ux25IfTable 1 }
+
+   Syntax: 
+        ux25IfEntry ::= SEQUENCE (
+                ux25Service
+                        INTEGER,
+                ux25Window
+                        INTEGER,
+                ux25PktSize
+                        INTEGER
+           )
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        ux25Service { ux25IfEntry 1 }
+
+   Syntax: 
+        INTEGER {
+		Basic-service(0),
+		Standard-service(7)
+           }
+
+   Definition: 
+        This is the X.25 Standard/Basic service flag.
+ 
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        7
+
+
+   OBJECT: 
+   -------
+        ux25Window { ux25IfEntry 2 }
+
+   Syntax: 
+        INTEGER (2..7)
+
+   Definition: 
+        This is the X.25 maximum window size in packets.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        7
+
+
+   OBJECT: 
+   -------
+        ux25PktSize { ux25IfEntry 3 }
+
+   Syntax: 
+        INTEGER (7..11) 
+
+   Definition: 
+        This is the maximum X.25 packet size (bytes) in powers of 2.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        11
+
+
+"Timeplex FDDI Group"
+
+
+   ufddiSMT       OBJECT IDENTIFIER ::= { ufddi 1 }
+
+   -- This is the identification of the FDDI station parameters. All
+      station parameters are non-aggregates, therefore, each station
+      parameter is instantiated by appending `.0` to the name of the 
+      parameter.
+
+
+   ufddiMACTable  OBJECT IDENTIFIER ::= { ufddi 2 }
+
+   ufddiMACEntry  OBJECT IDENTIFIER ::= { ufddiMACTable 1 }
+
+   -- This is the identification of the FDDI MAC parameters. Each MAC
+      parameter is an aggregate. MACs are numbered sequentially. The
+      first MAC has index 1. Therefore, each MAC parameter is instantiated
+      by appending `.1', '.2', '.3', etc. to the name of the parameter.
+
+
+   ufddiPHYTable  OBJECT IDENTIFIER ::= { ufddi 3 }
+
+   ufddiPHYEntry  OBJECT IDENTIFIER ::= { ufddiPHYTable 1 }
+
+   -- This is the identification of the FDDI PHY parameters. Each
+      PHY parameter is an aggregate. PHYs are assigned the indices
+      1-n, where n = SpurCount + AttachCount. In a DAS, PHY A has
+      index 1 and PHY B has index 2. Additional PHYs in a station
+      (concentrator) are numbered from 3 thru n according to token
+      flow. Therefore, each PHY parameter is instantiated by 
+      appending '.i' (i=index) to the name of the parameter.
+
+   OBJECT: 
+   -------
+        ufddiSMTStationIdGrp { ufddiSMT 1 }
+
+   Syntax: 
+        SEQUENCE (
+		ufddiSMTStationId
+			OCTET STRING,
+		ufddiSMTStationType
+			INTEGER,
+		ufddiSMTVersionId
+			INTEGER
+ 	   )
+
+   Definition: 
+        This table defines the FDDI station's identity.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        ufddiSMTStationId { ufddiSMTStationIdGrp 1 }
+
+   Syntax: 
+        OCTET STRING
+
+   Definition: 
+        This is a 6-byte value that uniquely identifies the FDDI station.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        ufddiSMTStationType { ufddiSMTStationIdGrp 2 }
+
+   Syntax: 
+        INTEGER {
+		station(1),
+		concentrator(2)
+	   }
+
+   Definition: 
+        This flag serves to distinguish between a station and a 
+        concentrator.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+   OBJECT: 
+   -------
+        ufddiSMTVersionId { ufddiSMTStationIdGrp 3 }
+
+   Syntax: 
+        INTEGER
+
+   Definition: 
+        This is the SMT protocol identifier.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        ufddiSMTStationCfgGrp { ufddiSMT 2 }
+
+   Syntax: 
+        SEQUENCE (
+		ufddiSMTMACCount
+			INTEGER,
+		ufddiSMTAttachCount
+			INTEGER,
+		ufddiSMTSpurCount
+			INTEGER
+	   )
+
+   Definition: 
+        This table contains the FDDI station's configuration.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        ufddiSMTMACCount { ufddiSMTStationCfgGrp 1 }
+
+   Syntax: 
+        INTEGER
+
+   Definition: 
+        This is the number of MACs physically present in the
+        configuration.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+   OBJECT: 
+   -------
+        ufddiSMTAttachCount { ufddiSMTStationCfgGrp 2 }
+
+   Syntax: 
+        INTEGER
+
+   Definition: 
+        This is the number of PHY attachments to the FDDI dual ring.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        ufddiSMTSpurCount { ufddiSMTStationCfgGrp 3 }
+
+   Syntax: 
+        INTEGER
+
+   Definition: 
+        This is the number of slave ports on a concentrator.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+   OBJECT: 
+   -------
+        ufddiSMTOperationalGrp { ufddiSMT 3 }
+
+   Syntax: 
+        SEQUENCE (
+		ufddiSMTDasScmState
+			INTEGER
+	   )
+
+   Definition: 
+        This table constitutes the FDDI station's operational
+        parameters.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        ufddiSMTDasScmState { ufddiSMTOperationalGrp 1 }
+
+   Syntax: 
+        INTEGER {
+                isolated(1),
+                wrap_a(2),
+                wrap_b(3),
+                thru(4)
+           }
+
+   Definition: 
+        This is the status for a dual attachment station's (DAS)
+        configuration.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+   OBJECT: 
+   -------
+        ufddiMACAddressGrp { ufddiMACEntry 1 }
+
+   Syntax: 
+        SEQUENCE (
+		ufddiMACSMTLongAddr
+			OCTET STRING,
+		ufddiMACShortGrpAddr
+			OCTET STRING
+	   )
+
+   Definition: 
+        This table contains each FDDI MAC's set of addresses.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Action: reset the device.
+
+
+   OBJECT: 
+   -------
+        ufddiMACSMTLongAddr { ufddiMACAddressGrp 1 }
+
+   Syntax: 
+        OCTET STRING (6 bytes)
+
+   Definition: 
+        This is the 48 bit individual address of this MAC.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Action: 
+        reset the device.
+
+
+   OBJECT: 
+   -------
+        ufddiMACShortGrpAddr { ufddiMACAddressGrp 2 }
+
+   Syntax: 
+        OCTET STRING (2 bytes)
+
+   Definition: 
+        This is the 16 bit group address for this MAC.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Action: 
+        reset the device.
+
+
+   OBJECT: 
+   -------
+        ufddiMACCfgGrp { ufddiMACEntry 2 }
+
+   Syntax: 
+        SEQUENCE (
+		ufddiMACUpstreamNeighbor
+			OCTET STRING,
+		ufddiMACDownstreamNeighbor
+			OCTET STRING,
+		ufddiMACResourceIndex
+			INTEGER,
+		ufddiMACConnectedResId
+			INTEGER
+	   )
+
+   Definition: 
+        This table contains each FDDI MAC's configuration parameters.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        ufddiMACUpstreamNeighbor { ufddiMACCfgGrp 1 }
+
+   Syntax: 
+        OCTET STRING
+
+   Definition: 
+        This is this MAC's upstream neighbor's individual MAC address.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        ufddiMACDownstreamNeighbor { ufddiMACCfgGrp 2 }
+
+   Syntax: 
+        OCTET STRING
+
+   Definition: 
+        This is this MAC's downstream neighbor's individual MAC 
+        address.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        ufddiMACResourceIndex { ufddiMACCfgGrp 3 }
+
+   Syntax: 
+        INTEGER
+
+   Definition: 
+        This is the index of this MAC resource used to identify this 
+        MAC in SMT. The index range for the MACs begins at n+1, where 
+        n = last ufddiPHYResourceIndex.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        ufddiMACConnectedResId { ufddiMACCfgGrp 4 }
+
+   Syntax: 
+        INTEGER
+
+   Definition: 
+        This is the index of the PHY resource connected to this MAC's 
+        output port.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        ufddiMACOperGrp { ufddiMACEntry 3 }
+
+   Syntax: 
+        SEQUENCE (
+		ufddiMACTReq
+			INTEGER,
+		ufddiMACTMax
+			INTEGER,
+		ufddiMACTvxValue
+			INTEGER,
+		ufddiMACTMin
+			INTEGER
+	   )
+
+   Definition: 
+        This table contains each FDDI MAC's operational
+        characteristics.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Action: 
+        reset the device.
+
+
+   OBJECT: 
+   -------
+        ufddiMACTReq { ufddiMACOperGrp 1 }
+
+   Syntax: 
+        INTEGER (ufddiMACTMin..ufddiMACTMax)
+
+   Definition: 
+        This is the requested Target Token Rotation Time. The time 
+        units are in microseconds.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Action: 
+        reset the device.
+
+   Default: 
+        100000
+
+
+   OBJECT: 
+   -------
+        ufddiMACTMax { ufddiMACOperGrp 2 }
+
+   Syntax: 
+        INTEGER (ufddiMACTMin..335,540)
+
+   Definition: 
+        This is the maximum Target Token Rotation Time to be
+        supported by this station. The time units are in microseconds.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Action: 
+        reset the device.
+
+   Default: 
+        165000
+
+
+   OBJECT: 
+   -------
+        ufddiMACTvxValue { ufddiMACOperGrp 3 }
+
+   Syntax: 
+        INTEGER (1..5000)
+
+   Definition: 
+        This is the Valid-Transmission Timer value, the maximum time
+        allowed between reception of valid frames. The time units are
+        in microseconds.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Action: 
+        reset the device.
+
+   Default: 
+        2500
+
+
+   OBJECT: 
+   -------
+        ufddiMACTMin { ufddiMACOperGrp 4 }
+
+   Syntax: 
+        INTEGER (4000..ufddiMACTMax)
+
+   Definition: 
+        This is the minimum Target Token Rotation Time to be 
+        supported by this station. The time units are in microseconds.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Action: 
+        reset the device.
+
+   Default: 
+        4000
+
+
+   OBJECT: 
+   -------
+        ufddiMACCountersGrp { ufddiMACEntry 4 }
+
+   Syntax: 
+        SEQUENCE (
+		ufddiMACReceiveCt
+			COUNTER,
+		ufddiMACTransmitCt
+			COUNTER,
+		ufddiMACTokenCt
+			COUNTER
+	   )
+
+   Definition: 
+        This table contains the counters for each FDDI MAC.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        ufddiMACReceiveCt { ufddiMACCountersGrp 1 }
+
+   Syntax: 
+        COUNTER
+
+   Definition: 
+        This is the number of frames received by this MAC.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        ufddiMACTransmitCt { ufddiMACCountersGrp 2 }
+
+   Syntax: 
+        COUNTER
+
+   Definition: 
+        This is the number of frames transmitted by this MAC.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        ufddiMACTokenCt { ufddiMACCountersGrp 3 }
+
+   Syntax: 
+        COUNTER
+
+   Definition: 
+        This is the number of times this MAC has received a token.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        ufddiMACErrorCntrsGrp { ufddiMACEntry 5 }
+
+   Syntax: 
+        SEQUENCE (
+		ufddiMACTvxExpiredCt
+			COUNTER,
+		ufddiMACNotCopiedCt
+			COUNTER,
+		ufddiMACLateCt
+			COUNTER,
+		ufddiMACReceiveOverflowCt
+			COUNTER
+	   )
+
+   Definition: 
+        This table contains error counters for each FDDI MAC.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        ufddiMACTvxExpiredCt { ufddiMACErrorCntrsGrp 1 }
+
+   Syntax: 
+        COUNTER
+
+   Definition: 
+        This is the number of times that the Valid-Transmission
+	Timer expired.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        ufddiMACNotCopiedCt { ufddiMACErrorCntrsGrp 2 }
+
+   Syntax: 
+        COUNTER
+
+   Definition: 
+        This is the number of frames that should have been copied but
+	were not due to buffer congestion.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        ufddiMACLateCt { ufddiMACErrorCntrsGrp 3 }
+
+   Syntax: 
+        COUNTER
+
+   Definition: 
+        This is the number of Token Rotation Timer expirations.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        ufddiMACReceiveOverflowCt { ufddiMACErrorCntrsGrp 4 }
+
+   Syntax: 
+        COUNTER
+
+   Definition: 
+        This is the number of frames received that were too long.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+   OBJECT: 
+   -------
+        ufddiMACStatusGrp { ufddiMACEntry 6 }
+
+   Syntax: 
+        SEQUENCE (
+		ufddiMACRingOpCt
+			COUNTER,
+		ufddiMACEnteredBeaconCt
+			COUNTER
+	   )
+
+   Definition: 
+        This table contains status parameters for each FDDI MAC.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        ufddiMACRingOpCt { ufddiMACStatusGrp 1 }
+
+   Syntax: 
+        COUNTER
+
+   Definition: 
+        This is the number of times the ring has entered the 'Ring
+	Operational State' from the 'Ring Not Operational State'.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+
+   OBJECT: 
+   -------
+        ufddiMACEnteredBeaconCt { ufddiMACStatusGrp 2 }
+
+   Syntax: 
+        COUNTER
+
+   OBJECT: 
+   -------
+        ufddiPHYCfgGrp { ufddiPHYEntry 1 }
+
+   Definition: 
+        This table contains each PHY's configuration parameters.
+
+   Access: 
+        read-only.
+
+   Syntax: 
+        SEQUENCE (
+		ufddiPHYType
+			INTEGER,
+		ufddiPHYConnectState
+			INTEGER,
+		ufddiPHYRemotePHYType
+			INTEGER,
+		ufddiPHYRemoteMACIndicated
+			INTEGER,
+		ufddiPHYResourceIndex
+			INTEGER,
+		ufddiPHYConnectedResId
+			INTEGER
+	   )
+
+   Definition: 
+        This is the number of times that this MAC entered the beacon
+        state.
+
+   Access: read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        ufddiPHYType { ufddiPHYCfgGrp 1 }
+
+   Syntax: 
+        INTEGER {
+		a(1),
+		b(2),
+		m(3),
+		s(4)
+	   }
+               
+   Definition: 
+        This is the type of PHY.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+   OBJECT: 
+   -------
+        ufddiPHYConnectState { ufddiPHYCfgGrp 2 }
+
+   Syntax: 
+        INTEGER {
+		disabled(1),
+		connecting(2),
+		standby(3),
+		active(4)
+	   }
+
+   Definition: 
+        This is the state of this PHY.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        ufddiPHYRemotePHYType { ufddiPHYCfgGrp 3 }
+
+   Syntax: 
+        INTEGER {
+		a(1),
+		b(2),
+		s(3),
+		m(4),
+		unknown(5)
+	   }
+
+   Definition: 
+        This is the type of the remote PHY.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        ufddiPHYRemoteMACIndicated { ufddiPHYCfgGrp 4 }
+
+   Syntax: 
+        INTEGER 
+
+   Definition: 
+        This flag indicates that the remote partner intends to place
+	a MAC in the output token path of this PHY.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        ufddiPHYResourceIndex { ufddiPHYCfgGrp 5 }
+
+   Syntax: 
+        INTEGER
+
+   Definition: 
+        This is the index assigned to this PHY's resource and is used to
+	identify each PHY in SMT.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        ufddiPHYConnectedResId { ufddiPHYCfgGrp 6 }
+
+   Syntax: 
+        INTEGER
+
+   Definition: 
+        This is the index of the MAC or PHY resource connected to 
+        this PHY's output port.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        ufddiPHYAction { ufddiPHYEntry 2 }
+
+   Syntax: 
+        INTEGER {
+		enabled(0),
+		disabled(1)
+	   }
+
+   Definition: 
+        This value indicates an action that was taken (read) or
+	is to be taken (write) for the specified PHY.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        0
+
+
+"Timeplex TL_IP Group"
+
+
+   OBJECT: 
+   -------
+        tl_ipLogicalDisconnect { tl_ip 1 }
+
+   Syntax: 
+        INTEGER 
+
+   Definition: 
+        This flag tells IP to discard all incoming and outgoing
+        datagrams except for those destined for SNMP.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        FALSE(0)
+
+
+   OBJECT: 
+   -------
+        tl_ipLoopback { tl_ip 2 }
+
+   Syntax: 
+        INTEGER 
+
+   Definition: 
+        This flag indicates that the PSN is to loop back.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        FALSE(0)
+
+
+   OBJECT: 
+   -------
+        tl_ipRedirectTo { tl_ip 3 }
+
+   Syntax: 
+        INTEGER (1..65535)
+
+   Definition: 
+        This is the interval in seconds between the clearing of
+        the redirect tables.
+
+   Access: 
+        read-write.     
+
+   Status: 
+        mandatory.
+
+   Default: 
+        1800
+
+
+   OBJECT: 
+   -------
+        tl_ipMasker { tl_ip 4 }
+
+   Syntax: 
+        INTEGER 
+
+   Definition: 
+        This flag indicates the device should emulate a gateway and
+        respond to the receipt of a MASK request.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        FALSE(0)
+
+
+   OBJECT: 
+   -------
+        tl_ipWellKnownGateway { tl_ip 5 }
+
+   Syntax: 
+        IpAddress
+
+   Definition: 
+        This is the well known gateway address.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        tl_ipMaxRoutePids { tl_ip 6 }
+
+   Syntax: 
+        INTEGER
+
+   Definition: 
+        This is the maximum number of processes that perform routing.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        tl_ipRoutePidsTable { tl_ip 7 }
+
+   Syntax: 
+        SEQUENCE OF tl_ipRoutePidsEntry
+
+   Definition: 
+        This is a list of process IDs that determine the order in 
+        which to search the routing protocol processes' routing 
+        tables. For example, the value of 'tl_ipRoutePid.1" identifies
+        the process ID whose routing table is searched first. The
+        maximum number of entries in the list is given by 
+        'tl_ipMaxRoutePids'.
+
+   Access: 
+        read-write
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        tl_ipRoutePidsEntry { tl_ipRoutePidsTable 1 }
+
+   Syntax: 
+        tl_ipRoutePidsEntry ::= SEQUENCE (
+        	tl_ipRoutePid
+                	INTEGER 
+	   )
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   OBJECT: 
+   -------
+        tl_ipRoutePid { tl_ipRoutePidsEntry 1 }
+
+   Syntax: 
+        INTEGER {
+                Gateway-to-Gateway-protocol(3),
+                Routing-Information-Protocol(7),
+		Exterior-Gateway-Protocol(8),
+		Internet-Protocol(1)
+           }
+
+   Definition: 
+        This is an entry in the list of process IDs. A value of 255
+        indicates that the entry is not used.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        tl_ipRoutePidsEntry.1(3)
+	tl_ipRoutePidsEntry.2(7)
+	tl_ipRoutePidsEntry.3(8)
+	tl_ipRoutePidsEntry.4(1)
+
+
+   OBJECT: 
+   -------
+        tl_ipNbrStaticRoutes { tl_ip 8 }
+
+   Syntax: 
+        INTEGER
+
+   Definition: 
+        This is the number of static routes currently maintained in
+        non-volatile RAM.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        tl_ipStaticRouteTable { tl_ip 9 }
+
+   Syntax: 
+        SEQUENCE OF tl_ipStaticRouteEntry
+
+   Syntax: 
+        SEQUENCE (
+	        tl_ipStaticRouteNetwork
+	       	        IpAddress,
+        	tl_ipStaticRouteGateway
+                	IpAddress,
+	        tl_ipStaticRouteCost
+        	        INTEGER,
+	        tl_ipStaticRouteOverride
+        	        INTEGER
+	   )
+
+   Definition: 
+        This is the static routing table. Each variable is 
+        instantiated by network address. For example, if the user
+        wishes to know the cost to route to network address
+        128.170.0.0, he requests the value of tl_ipStaticRouteCost
+        for network address 128.170.0.0,
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        tl_ipStaticRouteEntry { tl_ipStaticRouteTable 1 }
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        tl_ipStaticRouteNetwork { tl_ipStaticRouteEntry 1 }
+
+   Syntax: 
+        IpAddress
+
+   Definition: 
+        This is the network address of the destination.
+
+   Access: 
+        read-only.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        tl_ipStaticRouteGateway { tl_ipStaticRouteEntry 2 }
+
+   Syntax: 
+        IpAddress
+
+   Definition: 
+        This is the gateway used to route to the network address.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        tl_ipStaticRouteCost { tl_ipStaticRouteEntry 3 }
+
+   Syntax: 
+        INTEGER (0..255)
+
+   Definition: 
+        This is the cost to route to the network address.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        tl_ipStaticRouteOverride { tl_ipStaticRouteEntry 4 }
+
+   Syntax: 
+        INTEGER 
+
+   Definition: 
+        This flag indicates that this route should override the
+        dynamic route.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        tl_ipRemotegTable { tl_ip 10 }
+
+   Syntax: 
+        SEQUENCE OF tl_ipRemotegEntry
+
+   Definition: 
+        This is a set of flags, one for each interface, that
+        indicates whether the interface is connected to a remote
+        gateway.
+
+   Access: 
+        read-write
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        tl_ipRemotegEntry { tl_ipRemotegTable 1 }
+
+   Syntax: 
+        tl_ipRemotegEntry ::= SEQUENCE (
+        	tl_ipRemoteg
+                	INTEGER 
+	   )
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        tl_ipRemoteg { tl_ipRemotegEntry 1 }
+
+   Syntax: 
+        INTEGER 
+
+   Definition: 
+        This flag indicates that the specified interface is an 
+        intersite gateway link.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        FALSE(0)
+
+
+   OBJECT: 
+   -------
+        tl_ipNetMaxPktTable { tl_ip 11 }
+
+   Syntax: 
+        SEQUENCE OF tl_ipNetMaxPktEntry
+
+   Definition: 
+        This is a set of values, one for each interface, that
+        defines the maximum packet size in bytes that the 
+        specified interface supports.
+
+   Access: 
+        read-write
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        tl_ipNetMaxPktEntry { tl_ipNetMaxPktTable 1 }
+
+   Syntax: 
+        tl_ipNetMaxPktEntry ::= SEQUENCE (
+        	tl_ipNetMaxPkt
+                	INTEGER
+	   )
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+
+   OBJECT: 
+   -------
+        tl_ipNetMaxPkt { tl_ipNetMaxPktEntry 1 }
+
+   Syntax: 
+        INTEGER (65..65535)
+
+   Definition: 
+        This is the maximum subnet packet size for the specified
+        interface.
+
+   Access: 
+        read-write.
+
+   Status: 
+        mandatory.
+
+   Default: 
+        FDDI-interface(4479)
+        LAPB-interface(1500)
+        Ethernet-1(1492)
+        Ethernet-2(1500)
+
+
+
+
+

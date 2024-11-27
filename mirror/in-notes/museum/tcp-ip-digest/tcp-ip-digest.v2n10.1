@@ -1,0 +1,294 @@
+22-Jun-83 08:51:21-PDT,13169;000000000001   
+Return-Path: <tcp-ip@brl-vgr>
+Received: FROM BRL-VGR BY USC-ISIF.ARPA WITH TCP ; 21 Jun 83 20:02:00 PDT
+Received: From Brl-Vgr.ARPA by BRL-VGR via smtp;  21 Jun 83 21:51 EDT
+Sender:    Mike Muuss <TCP-IP@brl>
+From:      TCP-IP@brl
+To:        TCP-IP@brl
+Date:      21 June 1983 00:00 EST
+Subject:   TCP-IP Digest, Vol 2 #10
+
+TCP/IP Digest           Tuesday, 21 June 1983      Volume 2 : Issue 10
+
+Today's Topics:
+                Deadbeat Hosts Dropped from Distribution
+               Looking for TCP/IP for an IBM 4341 (VM/370)
+          Connecting an IBM to UNIBUS devices (like Ethernet)!
+           Sources of TCP/IP Implementation for 68000 systesm
+          Spooled FTP Comments  &&  Comments on TCP/IP for VMS
+               Further Details on the ARPANET/MILNET Split
+----------------------------------------------------------------------
+                  TCP/IP Digest --- The InterNet Digest
+                         LIMITED DISTRIBUTION
+          For Research Use Only --- Not for Public Distribution
+----------------------------------------------------------------------
+
+Date:     Mon, 20 Jun 83 21:32:03 EDT
+From:     Mike Muuss (TCP-IP Digest)  <tcp-ip@BRL-VGR>
+To:       tcp-ip@BRL-VGR
+Subject:  Deadbeat hosts
+
+The following addresses have been deleted from the subscription list
+of the TCP Digest.  Neither BRL-VGR nor BRL was able to get through
+for a period of 14 days;  these hosts probably still have the TOPS-20
+TCP bug.  If anybody can help out these hosts, please try.
+			Best,
+			 -Mike
+
+	George @ Afsc-Hq		Dreifu @ Wharton-10
+	King @ Afsc-Hq			HAGAN @ Wharton-10
+	Perilli @ Afsc-Hq		LITWA @ Wharton-10
+
+	PACE @ Afsc-Sd			JARONSON @ Nlm-Mcs
+
+	Furuta @ Washington		Joe @ Washington
+
+------------------------------
+
+Date: 16 Jun 1983 07:57:21-PDT
+From: bierma@nprdc
+To: tcp-ip@sri-nic
+Subject: looking for a TCP/IP implementation for a IBM 4341.
+
+I am trying to set up a full service communications link between my VAX 
+and an IBM 4341 that is about 400 feet away in another building.  The
+4341 is running VM/370 and the VAX is running 4.1 UNIX (with BBN TCP/IP).
+Ideally I am looking for an implementation of TCP/IP that runs under
+VM/370 and network hardware that is compatible with both the VAX and
+the 4341 (ethernet?).  When I asked the IBM rep her answer was "What's
+TCP/IP?". Oh, Well so much for "No. 1".
+
+--Larry Bierma <bierma@nprdc>
+
+------------------------------
+
+Date:     Thu, 16 Jun 83 15:07:00 CDT
+From: Paul.Milazzo <milazzo.rice@rand-relay>
+Subject:  TCP/IP for VM/370
+To: tcp-ip@brl
+
+It seems we have acquired yet another "strange" machine at Rice.
+Does anyone know of a TCP/IP implementation for CMS under VM/SP
+on an IBM 4341?  If so, how can I obtain a copy, and what
+network interfaces does it support?
+
+				Paul Milazzo
+				Dept. of Mathematical Sciences
+				Rice University, Houston, TX
+
+
+------------------------------
+
+Date: 16 Jun 1983 1815-PDT
+Subject: TCP for an IBM 4341
+From: Dan Whelan <DAN@cit-20>
+To: bierma@nprdc, braden@usc-isi, tcp-ip@brl
+
+	We at Caltech are also concerned about TCP for a 4341 since IBM is
+upstairs right now installing one. We have a systems programmer who is
+interested in implementing TCP/IP under VM/CMS. Of course, we would rather
+port an exisiting implementation. We plan to connect our 4341 to our local
+Ethernet through its UNIBUS. Thats right, our 4341 has a UNIBUS. It appears
+IBM is now manufacturing a device called a DACU which is an IBM PC with
+a UNIBUS that attaches to a channel. Like the others, we'd welcome any
+suggestions.
+						    Dan Whelan
+
+Our machine is just being installed now, but not all of the hardware
+is here yet (including the DACU). I'll have more to add when we've played
+around with it. My understanding is that the unit sells for 12-13K.
+
+------------------------------
+
+Date: 15 Jun 1983  9:43:40 EDT (Wednesday)
+From: John Robinson <jr@bbncd>
+Subject: 68000 TCP/IP
+To: ram.arizona@rand-relay
+Cc: schantz@bbncd, tcp-ip@brl, jr@bbncd
+
+BBN is building a 68000 TCP/IP in the Distributed Operating System
+project on government funding.  Inquire of Rick Schantz (SCHANTZ@BBN).
+
+/jr
+
+------------------------------
+
+Date: 15 June 1983   18:08:58-PDT (Wednesday)
+From: nowicki%Shasta@su-score
+Subject: TCP/IP on Micros?
+To: ram.Arizona@rand-relay
+Cc: tcp-ip@brl
+
+The Network Graphics Project at Stanford, now called the Partitionable
+Computer Systems project, has developed an implementation of the IP/TCP
+protocols.  It is structured as an "internet server" within the V
+distributed system.  Processes anywhere in the system (on the same or
+different workstation) may send it standard V messages using the V I/O
+protocol.  The objects manipulated are either raw IP sockets or TCP
+connections.  Its major use is virtual terminal communication from
+graphics workstations through telnet.  It has been tested with the BBN
+Vax/Unix, Berkeley 4.1c Unix, and BBN TOPS-20 implementations of TCP.
+
+The internet server is portable with the rest of the V-System, since it
+is all written in C.  Currently the V-System runs on five different
+68000 systems based on the SUN CPU board, and is in the process of
+being ported to the VAX.  The internet server is mostly the work of
+Marvin Theimer, network address mmt@SU-HNV (or mmt%Diablo@Score).  It
+is 37K bytes of object code + 7K data including libraries, and about
+5000 lines of C source code.  The V-System is being licensed by the
+Stanford Office of Technology Licensing, 415-497-0651.
+
+	-- Bill
+
+------------------------------
+
+Date: 15 Jun 1983  9:24:48 EDT (Wednesday)
+From: John Robinson <jr@bbncd>
+Subject: Spooled FTP
+To: jim@uw-beaver
+Cc: tcp-ip@brl, bbn-tcp@bbn-unix, jr@bbncd
+
+Certainly in the Unix environment one gets almost all the way there with
+a combination of shell scripts and at(1).  The only troublesome aspect
+is how to deal with deferring login at the remote site.  Also, FTP may
+not in fact return error codes to the shell if the destination is
+unreachable (some do, some don't).
+
+Using mail (e.g. smtp) to send files isn't too bad a choice.  One could
+add a control line (instead of or in addition to a normal mail header),
+and queue the incoming message in a special directory where a daemon
+scans the inbox from time to time and breaks the files apart again.
+Giving this daemon root priveleges avoids the login issue, but
+introduces security holes if it isn't careful (ought to setuid and
+setgid before delivering the file).  Probably want this daemon to have
+a private file system to avoid filling up /usr when something goes
+wrong.
+
+/jr
+
+------------------------------
+
+From: joseph sventek <sventek%j@lbl-csam>
+Date:     Wednesday, 20 Apr 83 08:41:31 PST
+Subject:  TCP/IP for VMS
+
+We are currently running Compion's Access-X product (Access-T which can
+be interfaced to your own link level) with no problems.  I have written
+a driver interfacing the IP layer to the Proteon PRONET 10-Mbit ring
+interface.  As a result, we have telnet and ftp connection to our 4.1A
+UNIX host.  I have also interfaced the software tools mail delivery
+system to use TCP circuits to support SMTP between the hosts, thus
+providing a coherent mail system.  The user-interface utilities for
+that mail system are sndmsg and msg clones.
+
+As far as performance, I don't think anyone should expect blinding
+speed from Compion's TCP/IP implementation, due to the modularity
+employed in their software.  TCP service is provided by an ACP servicing
+qio requests to a pseudo-device.  IP service is provided by another ACP
+servicing requests to another pseudo-device.  The IP layer simply queues
+up multiple read and write requests to the backend device driver.  As a
+result, characters typed to user telnet when the remote host is providing
+the character echo result in 6 process context switches per packet
+(which may be single characters).  Other user protocols, such as ftp and
+smtp, which are more block at a time oriented perform better, but still
+suffer 6 context switches per request/response pair.  While this
+architecture may not be the bottleneck when communicating with the
+ARPANET, it is definitely the bottleneck when communicating over a
+high-speed local net.
+
+We have experienced none of the system-crashing bugs described above, as
+I have been informed by Compion personnel that most of the outstanding
+bugs were fixed in the Access-T 1.6 release, with which we share the
+user and server utilities.  Our experience has been extremely positive,
+not only with the software, but with the Compion personnel who aided us
+in our attempts to be the first user site to link to our own network
+link level.  It is an extremely easy way to get up to speed on TCP/IP on
+VMS.
+
+                                      Joe Sventek
+                                      j @ LBL-CSAM
+
+------------------------------
+
+Date: 17 Jun 1983 2012-PDT
+From: NIC@sri-nic
+Subject: FURTHER DETAILS ON THE ARPANET/MILNET SPLIT
+
+[ This message is an excerpt from DDN Newsletter 27, concerning the
+  MILNET/EXPNET split.  For more information, contact <NIC@NIC>.  -Mike ]
+
+
+Introduction
+
+As previously discussed  in DDN  Newsletter 26,  the existing  ARPANET
+will soon  be split  into  two separate  networks -  the  experimental
+ARPANET and the operational  MILNET.  Hosts on  the two networks  will
+intercommunicate  via  mail  bridges,   using  the  internet   gateway
+mechanisms to pass  mail traffic  between hosts on  the two  networks.
+The mail bridges will,  on a controlled  basis, provide full  internet
+gateway services for MILNET hosts that request it.
+
+The Logical Split
+
+Because it takes a large amount of time and effort to physically split
+a network  in a  coherent manner,  the ARPANET  will initially,  on  4
+October  1983,  be  logically  partitioned  by  the  use  of  existing
+mechanisms in the IMPs to enforce  segregation of hosts and TACs  into
+separate communities of  interest.  Each community  of interest  (COI)
+becomes a virtual network,  i.e., hosts (including  TACS) in the  same
+community can fully interoperate as is currently the case, while hosts
+in different communities  cannot directly  intercommunicate. This,  in
+effect, transforms the ARPANET  into an Internet  in which the  MILNET
+will assume  a new  class  A network  number,  network 26,  while  the
+ARPANET  remains  network  10.   (Details  of  the  host   renumbering
+procedures will  be covered  in a  later newsletter  from the  Network
+Information Center (NIC).)
+
+Intercommunication between the MILNET and ARPANET is via mail  bridges
+which use  standard internet  protocols and  mechanisms to  pass  data
+between hosts in the  two networks.  This is  why the conversion  from
+NCP to TCP/IP is  so important; any host  with a fully working  TCP/IP
+implementation (including ICMP, the host-gateway protocol), should see
+no loss  in  service  because  of  the  split.  However,  hosts  using
+incomplete TCP/IP implementations (those that do not include ICMP as a
+part of  IP,  or  have  no  provision  for  using  gateways)  will  be
+restricted to  communicating  with  other TCP/IP  hosts  in  the  same
+network.  In particular, this means that they will not be able to send
+(or receive) mail traffic  through the bridges to  hosts in the  other
+network.
+
+THERE CAN BE NO EXEMPTIONS TO THE SPLIT!!
+
+Unlike the NCP-to-TCP  conversion which  is still underway  for a  few
+hosts, once the  split occurs, there  is nothing that  can be done  to
+allow a host with an incomplete TCP/IP to fully intercommunicate  with
+the other  network other  than  helping them  to  convert to  a  fully
+working TCP/IP as soon as possible.
+
+Future DDN Newsletters will  discuss in greater  detail how the  split
+affects the users  and host  software maintainers, and  how the  split
+will be tested before it is finally implemented in October.
+
+The Physical Split
+
+Concurrent with  the logical  split the  network is  being  physically
+split as  well.  Many  new  trunks are  being  added to  support  each
+network, and  a  number of  trunks  will eventually  be  removed  once
+replacement trunks have been installed.  The first quarter of CY  1984
+has been established as the goal for completion of the physical split,
+but this is dependent upon delivery  of new circuits from the  TELCOs,
+some of which have very long lead times (over a year in some cases).
+
+To complete the physical split, hosts and terminals which are homed on
+the wrong IMP or TAC must be rehomed.  In some cases, a new IMP on the
+proper network will be used;  in other cases, a  host may need to  use
+HDH (the HDLC-based replacement  for VDH) in order  to gain access  to
+its network via a  remote IMP.  In either  case, the host must  change
+its network address,  and the TAC  users of these  hosts must be  made
+aware of the change. Both host  and terminal rehoming will be kept  to
+the absolute minimum possible.
+
+------------------------------
+
+END OF TCP-IP DIGEST
+********************

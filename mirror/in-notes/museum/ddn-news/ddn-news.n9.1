@@ -1,0 +1,58 @@
+21-Oct-81 18:50:05-PDT,3037;000000000001
+Mail-from: ARPANET host SRI-NIC rcvd at 21-Oct-81 1849-PDT
+Date: 21 Oct 1981 1337-PDT
+From: Francine Perillo <PERILLO at SRI-NIC>
+Subject: ANEWS-9
+To: anews1: ;
+
+
+                  The ARPANET HDH Host Interface
+ 
+There is a new alternative host interface for the ARPANET C/30 IMPs
+called HDH (HDLC Host).  This interface method is similar to the
+existing VDH (Very Distant Host) interface in that it provides for
+reliable transmission of messages between the host and its IMP over a
+communication circuit of arbitrary length.  As with VDH, the HDH
+interface can be used with communication circuits that range in speed
+from 9.6KB to 56KB. 
+ 
+HDH is superior to the VDH interface in that it uses as a reliable
+transmission protocol the HDLC protocol which is the link level control
+procedure of the CCITT international standard X.25.  HDLC is supported
+by a much wider range of vendor equipment than the special ARPANET VDH
+protocol.  It is also technically superior to VDH in that it provides
+for a window of up to seven outstanding frames instead of the two
+allowed by VDH, thus increasing the potential throughput.  The HDH
+interface is also capable of accepting a full-length ARPANET host/IMP
+message in a single frame, where VDH always requires fragmentation into
+buffer-sized frames.
+ 
+The HDH protocol is composed of three layers: the reliable transmission
+protocol layer (HDLC), an encapsulation layer, and the host/IMP layer
+(1822).  The HDLC layer is a full implementation of the CCITT X.25 Level
+2 only, it does NOT extend to the X.25 Level 3 protocol. The HDH level 2
+is capable of operating in either LAPB or LAP mode.  In addition, the
+framing and data transparency scheme can be either bit-oriented (HDLC)
+or byte-oriented (Bisynch).  The encapsulation layer provides some
+additional link-level functions not provided by the standard HDLC layer.
+These include line quality monitoring and loopback mode.  This layer
+operates in one of two modes, packet or message.  In packet mode,
+host/IMP messages are segmented into a series of frames containing a
+separate host/IMP leader and data packets no larger than 128 data bytes,
+requiring up to nine frames per host/IMP message.  In message mode,
+complete host/IMP messages can be sent in a single frame.  The host/IMP
+layer is the standard ARPANET host/IMP protocol (1822) with 96-bit
+leaders. 
+ 
+The HDH interface will be available only on C/30 IMPs equipped with a
+specialized I/O board that can accomodate up to 16 HDH ports.  Although
+the VDH protocol will continue to be supported for some time, new hosts
+are encouraged to adopt the HDH interface in order to gain increased
+performance and to take advantage of standard vendor host hardware and
+software.  The entire HDH protocol is documented in BBN Report 1822, the
+host/IMP layer in Section 3, the encapsulation layer in Appendix J, and
+the HDLC layer in Appendix K.  For more information contact Nancy Mimno
+(Mimno@BBN-UNIX or 617-497-3623). 
+ 
+-------
+-------

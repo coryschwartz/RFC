@@ -1,0 +1,4525 @@
+
+
+
+
+                             RFC INDEX
+                           -------------
+
+This file contains citations for all RFCs in reverse numeric order.  RFC
+citations appear in this format:
+
+####  Title of RFC.  Author 1.; Author 2.; Author 3.  Issue date;
+      ## p.  (Format: PS=xxx TXT=zzz bytes)  (Also FYI ##) 
+      (Obsoletes xxx; Obsoleted by xxx; Updates xxx; Updated by xxx)
+
+
+Key to citations:
+
+    #### is the RFC number; ## p. is the total number of pages.
+
+    The format and byte information follows the page information in
+    parenthesis.  The format, either ASCII text (TXT) or PostScript
+    (PS) or both, is noted, followed by an equals sign and the number
+    of bytes for that version.  (PostScript is a registered trademark
+    of Adobe Systems Incorporated.)  The example (Format: PS=xxx
+    TXT=zzz bytes) shows that the PostScript version of the RFC
+    is xxx bytes and the ASCII text version is zzz bytes.
+
+    The (Also FYI ##) phrase gives the equivalent FYI number if
+    the RFC was also issued as an FYI document.
+
+    "Obsoletes xxx" refers to other RFCs that this one replaces;
+    "Obsoleted by xxx" refers to RFCs that have replaced this one.
+    "Updates xxx" refers to other RFCs that this one merely updates
+    (but does not replace); "Updated by xxx" refers to RFCs that have
+    been updated by this one (but not replaced).  Only immediately
+    succeeding and/or preceding RFCs are indicated, not the entire
+    history of each related earlier or later RFC in a related series.
+
+For example:
+
+1129    Internet time synchronization: The Network Time 
+        Protocol.  Mills, D.L.  1989 October; 29 p. 
+        (Format: PS=551697 bytes)
+
+Many RFCs are available online; if not, this is indicated by (Not
+online).  Paper copies of all RFCs are available from SRI, either
+individually or on a subscription basis (for more information contact
+nisc@nisc.sri.com or call 1-415-859-6387).  Online copies are
+available via FTP from ftp.nisc.sri.com as rfc/rfc####.txt or
+rfc/rfc####.ps (#### is the RFC number without leading zeroes).
+
+Additionally, RFCs may be requested through electronic mail from SRI's
+automated mail server by sending a message to mail-server@nisc.sri.com.
+In the body of the message, indicate the RFC to be sent, e.g. "send rfcNNNN"
+where NNNN is the number of the RFC.  For PostScript RFCs, specify
+the extension, e.g. "send rfcNNNN.ps".  Multiple requests can be sent
+in a single message by specifying each request on a separate line.
+The RFC Index can be requested by typing "send rfc-index".
+
+                                RFC INDEX
+
+
+1456  Conventions for Encoding the Vietnamese Language; VISCII: VIetnamese 
+      Standard Code for Information Interchange; VIQR: VIetnamese Quoted- 
+      Readable Specification; Revision 1.1. Nguyen, C.T.; Ngo, H.D.; Bui, 
+      C.M.; Nguyen, T.V.  1993 May; 7 p. (Format: TXT=14732 bytes)
+
+1455  Not yet issued.
+
+1454  Comparison of Proposals for Next Version of IP. Dixon, T.  1993 May; 
+      15 p. (Format: TXT=35046 bytes)
+
+1453  Comment on packet video conferencing and the transport/network layers. 
+      Chimiak, W.J.  1993 April; 10 p. (Format: TXT=23563 bytes)
+
+1452  Coexistence between version 1 and version 2 of the Internet-standard 
+      Network Management Framework. Case, J.D.; McCloghrie, K.; Rose, M.T.; 
+      Waldbusser, S.  1993 April; 17 p. (Format: TXT=32176 bytes)
+
+1451  Manager-to-Manager Management Information Base. Case, J.D.; McCloghrie, 
+      K.; Rose, M.T.; Waldbusser, S.  1993 April; 36 p. (Format: TXT=62935 
+      bytes)
+
+1450  Management Information Base for version 2 of the Simple Network 
+      Management Protocol (SNMPv2). Case, J.D.; McCloghrie, K.; Rose, M.T.; 
+      Waldbusser, S.  1993 April; 27 p. (Format: TXT=42172 bytes)
+
+1449  Transport Mappings for version 2 of the Simple Network Management 
+      Protocol (SNMPv2). Case, J.D.; McCloghrie, K.; Rose, M.T.; Waldbusser, 
+      S.  1993 April; 25 p. (Format: TXT=41161 bytes)
+
+1448  Protocol Operations for version 2 of the Simple Network Management 
+      Protocol (SNMPv2). Case, J.D.; McCloghrie, K.; Rose, M.T.; Waldbusser, 
+      S.  1993 April; 36 p. (Format: TXT=74224 bytes)
+
+1447  Party MIB for version 2 of the Simple Network Management Protocol 
+      (SNMPv2). McCloghrie, K.; Galvin, J.M.  1993 April; 50 p. (Format: 
+      TXT=80762 bytes)
+
+1446  Security Protocols for version 2 of the Simple Network Management 
+      Protocol (SNMPv2). Galvin, J.M.; McCloghrie, K.  1993 April; 52 p. 
+      (Format: TXT=108733 bytes)
+
+1445  Administrative Model for version 2 of the Simple Network Management 
+      Protocol (SNMPv2). Galvin, J.M.; McCloghrie, K.  1993 April; 47 p. 
+      (Format: TXT=99443 bytes)
+
+1444  Conformance Statements for version 2 of the Simple Network Management 
+      Protocol (SNMPv2). Case, J.D.; McCloghrie, K.; Rose, M.T.; Waldbusser, 
+      S.  1993 April; 33 p. (Format: TXT=57744 bytes)
+
+1443  Textual Conventions for version 2 of the Simple Network Management 
+      Protocol (SNMPv2). Case, J.D.; McCloghrie, K.; Rose, M.T.; Waldbusser, 
+      S.  1993 April; 31 p. (Format: TXT=60947 bytes)
+
+1442  Structure of Management Information for version 2 of the Simple Network 
+      Management Protocol (SNMPv2). Case, J.D.; McCloghrie, K.; Rose, M.T.; 
+      Waldbusser, S.  1993 April; 54 p. (Format: TXT=95779 bytes)
+
+1441  SMTP Introduction to version 2 of the Internet-standard Network 
+      Management Framework. Case, J.D.; McCloghrie, K.; Rose, M.T.; 
+      Waldbusser, S.  1993 April; 13 p. (Format: TXT=25386 bytes)
+
+1440  Not yet issued.
+
+1439  Uniqueness of unique identifiers. Finseth, C.  1993 March; 11 p. 
+      (Format: TXT=20477 bytes)
+
+1438  Internet Engineering Task Force Statements of Boredom (SOBs). Chapin, 
+      A.L.; Huitema, C.  1993 April 1; 2 p. (Format: TXT=3044 bytes)
+
+1437  Extension of MIME content-types to a new medium. Borenstein, N.; 
+      Linimon, M.  1993 April 1; 6 p. (Format: TXT=13356 bytes)
+
+1436  Internet Gopher Protocol (a distributed document search and retrieval 
+      protocol). Anklesaria, F.; McCahill, M.; Linder, P.; Johnson, D.; 
+      Torrey, D.; Alberti, B.  1993 March; 16 p. (Format: TXT=36493 bytes)
+
+1435  IESG advice from experience with Path MTU Discovery. Knowles, S.  1993 
+      March; 2 p. (Format: TXT=2708 bytes)
+
+1434  Data Link Switching: Switch-to-Switch Protocol. Dixon, R.C.; Kushi, D.M.
+      1993 March; 33 p. (Format: TXT=80182 bytes)
+
+1433  Directed ARP. Garrett, J.; Hagan, J.D.; Wong, J.A.  1993 March; 18 p. 
+      (Format: TXT=41028 bytes)
+
+1432  Recent Internet books. Quarterman, J.  1993 March; 15 p. (Format: 
+      TXT=27089 bytes)
+
+1431  DUA metrics. Barker, P.  1993 February; 19 p. (Format: TXT=42240 bytes)
+
+1430  Strategic plan for deploying an Internet X.500 directory service. 
+      Hardcastle-Kille, S.; Huizer, E.; Cerf, V.; Hobby, R.; Kent, S.  1993 
+      February; 20 p. (Format: TXT=47887 bytes)
+
+1429  Listserv Distribute Protocol. Thomas, E.  1993 February; 8 p. (Format: 
+      TXT=17759 bytes)
+
+1428  Transition of Internet Mail from Just-Send-8 to 8bit-SMTP/MIME. 
+      Vaudreuil, G.M.  1993 February; 6 p. (Format: TXT=12064 bytes)
+
+1427  SMTP Service Extension for Message Size Declaration. Klensin, J.; Freed,
+      N.; Moore, K.  1993 February; 8 p. (Format: TXT=17856 bytes)
+
+1426  SMTP Service Extension for 8bit-MIME Transport. Klensin, J.; Freed, N.; 
+      Rose, M.T.; Stefferud, E.A.; Crocker, D.  1993 February; 6 p. (Format: 
+      TXT=11661 bytes)
+
+1425  SMTP Service Extension. Klensin, J.; Freed, N.; Rose, M.T.; Stefferud, 
+      E.A.; Crocker, D.  1993 February; 10 p. (Format: TXT=20932 bytes)
+
+1424  Privacy Enhancement for Internet Electronic Mail: Part IV: Key 
+      Certification and Related Services. Kaliski, B.S.  1993 February; 9 p. 
+      (Format: TXT=17537 bytes)
+
+1423  Privacy Enhancement for Internet Electronic Mail: Part III: Algorithms, 
+      Modes, and Identifiers. Balenson, D.  1993 February; 14 p. (Format: 
+      TXT=33277 bytes)  (Obsoletes RFC 1115)
+
+1422  Privacy Enhancement for Internet Electronic Mail: Part II: 
+      Certificate-Based Key Management. Kent, S.T.  1993 February; 32 p. 
+      (Format: TXT=86085 bytes)  (Obsoletes RFC 1114)
+
+1421  Privacy Enhancement for Internet Electronic Mail: Part I: Message 
+      Encryption and Authentication Procedures. Linn, J.  1993 February; 42 p.
+      (Format: TXT=103894 bytes)  (Obsoletes RFC 1113)
+
+1420  SNMP over IPX. Bostock, S.  1993 March; 4 p. (Format: TXT=6762 bytes)
+
+1419  SNMP over AppleTalk. Minshall, G.; Ritter, M.  1993 March; 7 p. (Format:
+      TXT=16470 bytes)
+
+1418  SNMP over OSI. Rose, M.T.  1993 March; 4 p. (Format: TXT=7721 bytes)  
+      (Obsoletes RFC 1161, RFC 1283)
+
+1417  NADF Standing Documents: A Brief Overview. North American Directory 
+      Forum.  1993 February; 4 p. (Format: TXT=7270 bytes)  (Obsoletes RFC 
+      1295, RFC 1255, RFC 1218)
+
+1416  Telnet Authentication Option. Borman, D.A.,ed.  1993 February; 7 p. 
+      (Format: TXT=13270 bytes)  (Obsoletes RFC 1409)
+
+1415  FTP-FTAM Gateway Specification. Mindel, J.L.; Slaski, R.L.  1993 
+      January; 58 p. (Format: TXT=128261 bytes)
+
+1414  Identification MIB. St. Johns, M.; Rose, M.T.  1993 February; 7 p. 
+      (Format: TXT=14165 bytes)
+
+1413  Identification Protocol. St. Johns, M.  1993 February; 8 p. (Format: 
+      TXT=16291 bytes)  (Obsoletes RFC 931)
+
+1412  Telnet Authentication: SPX. Alagappan, K.  1993 January; 4 p. (Format: 
+      TXT=6952 bytes)
+
+1411  Telnet Authentication: Kerberos Version 4. Borman, D.A.,ed.  1993 
+      January; 4 p. (Format: TXT=7967 bytes)
+
+1410  Not yet issued.
+
+1409  Telnet Authentication Option. Borman, D.A.,ed.  1993 January; 7 p. 
+      (Format: TXT=13119 bytes)  (Obsoleted by RFC 1416)
+
+1408  Telnet Environment Option. Borman, D.A.,ed.  1993 January; 7 p. (Format:
+      TXT=13936 bytes)
+
+1407  Definitions of Managed Objects for the DS3/E3 Interface Type. Cox, T.A.;
+      Tesink, K.,eds.  1993 January; 43 p. (Format: TXT=90682 bytes)  
+      (Obsoletes RFC 1233)
+
+1406  Definitions of Managed Objects for the DS1 and E1 Interface Types. 
+      Baker, F.; Watt, J.,eds.  1993 January; 50 p. (Format: TXT=97559 bytes)
+      (Obsoletes RFC 1232)
+
+1405  Mapping between X.400 (1984/1988) and Mail-11 (DECnet mail). Allocchio, 
+      C.  1993 January; 19 p. (Format: TXT=33885 bytes)
+
+1404  A Model for Common Operational Statistics. Stockman, B.  1993 January; 
+      27 p. (Format: TXT=52814 bytes)
+
+1403  BGP OSPF Interaction. Varadhan, K.  1993 January; 17 p. (Format: 
+      TXT=36173 bytes)  (Obsoletes RFC 1364)
+
+1402  There's Gold in them thar Networks! or Searching for Treasure in all the
+      Wrong Places. Martin, J.  1993 January; 39 p. (Format: TXT=71176 bytes) 
+      (Also FYI 10)   (Obsoletes RFC 1290)
+
+1401  Correspondence between the IAB and DISA on the use of DNS throughout the
+      Internet. Chapin, A.L.  1993 January; 8 p. (Format: TXT=12528 bytes)
+
+1400  Transition and Modernization of the Internet Registration Service. 
+      Williamson, S.  1993 March; 7 p. (Format: TXT=13008 bytes)
+
+1399  Not yet issued.
+
+1398  Not yet issued.
+
+1397  Default Route Advertisement In BGP2 And BGP3 Versions of the Border 
+      Gateway Protocol. Haskin, D.  1993 January; 2 p. (Format: TXT=4124 
+      bytes)
+
+1396  The Process for Organization of Internet Standards Working Group 
+      (POISED). Crocker, S.D.  1993 January; 10 p. (Format: TXT=22096 bytes)
+
+1395  BOOTP Vendor Information Extensions. Reynolds, J.K.  1993 January; 8 p. 
+      (Format: TXT=16314 bytes)  (Obsoletes RFC 1084, RFC 1048; Updates RFC 
+      951)
+
+1394  Relationship of Telex Answerback Codes to Internet Domains. Robinson, P.
+      1993 January; 17 p. (Format: TXT=43776 bytes)
+
+1393  Traceroute Using an IP Option. Malkin, G.S.  1993 January; 7 p. (Format:
+      TXT=13140 bytes)
+
+1392  Internet Users' Glossary. Malkin, G.S.; Parker, T.L.,eds.  1993 January;
+      53 p. (Format: TXT=104624 bytes) (Also FYI 18) 
+
+1391  The Tao of IETF: A Guide for New Attendees of the Internet Engineering 
+      Task Force. Malkin, G.S.  1993 January; 19 p. (Format: TXT=23569 bytes) 
+      (Also FYI 17) 
+
+1390  Transmission of IP and ARP over FDDI Networks. Katz, D.  1993 January; 
+      11 p. (Format: TXT=22077 bytes)
+
+1389  RIP Version 2 MIB Extension. Malkin, G.S.; Baker, F.  1993 January; 
+      13 p. (Format: TXT=23569 bytes)
+
+1388  RIP Version 2: Carrying Additional Information. Malkin, G.S.  1993 
+      January; 7 p. (Format: TXT=16227 bytes)  (Updates RFC 1058)
+
+1387  RIP Version 2 Protocol Analysis. Malkin, G.S.  1993 January; 3 p. 
+      (Format: TXT=5598 bytes)
+
+1386  The US Domain. Cooper, A.; Postel, J.B.  1992 December; 31 p. (Format: 
+      TXT=62310 bytes)
+
+1385  EIP: The Extended Internet Protocol: A framework for maintaining 
+      background compatibility Wang, Z.  1992 November; 17 p. (Format: 
+      TXT=39166 bytes)
+
+1384  Naming Guidelines for Directory Pilots. Barker, P.; Hardcastle-Kille, 
+      S.E.  1993 January; 12 p. (Format: TXT=25870, PS=175044 bytes)
+
+1383  Not yet issued.
+
+1382  SNMP MIB extensions for the X.25 packet layer. Throop, D.D.,ed.  1992 
+      November; 69 p. (Format: TXT=153877 bytes)
+
+1381  SNMP MIB extension for X.25 LAPB. Throop, D.D.; Baker, F.  1992 
+      November; 33 p. (Format: TXT=71253 bytes)
+
+1380  IESG deliberations on routing and addressing. Gross, P.G.; Almquist, P.
+      1992 November; 22 p. (Format: TXT=49415 bytes)
+
+1379  Extending TCP for transactions -- Concepts. Braden, R.T.  1992 November;
+      38 p. (Format: TXT=91353 bytes)
+
+1378  PPP AppleTalk Control Protocol (ATCP). Parker, B.  1992 November; 16 p. 
+      (Format: TXT=28496 bytes)
+
+1377  PPP OSI Network Layer Control Protocol (OSINLCP). Katz, D.  1992 
+      November; 10 p. (Format: TXT=22109 bytes)
+
+1376  PPP DECnet Phase IV Control Protocol (DNCP). Senum, S.J.  1992 November;
+      6 p. (Format: TXT=12448 bytes)
+
+1375  Suggestion for new classes of IP addresses. Robinson, P.  1992 October; 
+      7 p. (Format: TXT=16990 bytes)
+
+1374  IP and ARP on HIPPI. Renwick, J.K.; Nicholson, A.  1992 October; 43 p. 
+      (Format: TXT=100903 bytes)
+
+1373  Portable DUAs. Tignor, T.  1992 October; 12 p. (Format: TXT=19931 bytes)
+
+1372  Telnet remote flow control option. Hedrick, C.L.; Borman, D.  1992 
+      October; 6 p. (Format: TXT=11098 bytes)  (Obsoletes RFC 1080)
+
+1371  Choosing a "common IGP" for the IP Internet (The IESG's recommendation 
+      to the IAB). Gross, P.G.,ed.  1992 October; 9 p. (Format: TXT=18168 
+      bytes)
+
+1370  Applicability statement for OSPF. Chapin, A. Lyman  1992 October; 2 p. 
+      (Format: TXT=4303 bytes)
+
+1369  Implementation notes and experience for the Internet Ethernet MIB. 
+      Kastenholz, F.J.  1992 October; 7 p. (Format: TXT=13961 bytes)
+
+1368  Definitions of managed objects for IEEE 802.3 repeater devices. 
+      McMaster, D.; McCloghrie, K.  1992 October; 40 p. (Format: TXT=83905 
+      bytes)
+
+1367  Schedule for address space management guidelines. Topolcic, C.  1992 
+      October; 3 p. (Format: TXT=4780 bytes)
+
+1366  Guidelines for management of IP address space. Gerich, E.  1992 October;
+      8 p. (Format: TXT=17793 bytes)
+
+1365  IP address extension proposal. Siyan, K.  1992 September; 6 p. (Format: 
+      TXT=12790 bytes)
+
+1364  BGP OSPF interaction. Varadhan, K.  1992 September; 14 p. (Format: 
+      TXT=32121 bytes)  (Obsoleted by RFC 1403)
+
+1363  Proposed flow specification. Partridge, C.  1992 September; 20 p. 
+      (Format: TXT=50214 bytes)
+
+1362  Novell IPX over various WAN media (IPXWAN). Allen, M.  1992 September; 
+      13 p. (Format: TXT=30219 bytes)
+
+1361  Simple Network Time Protocol (SNTP). Mills, D.  1992 August; 10 p. 
+      (Format: TXT=23812 bytes)
+
+1360  IAB official protocol standards. Postel, J.B.,ed.  1992 September; 33 p.
+      (Format: TXT=71860 bytes)  (Obsoletes RFC 1280)
+
+1359  Connecting to the Internet: What connecting institutions should 
+      anticipate. ACM SIGUCCS Networking Task Force  1992 August; 25 p. 
+      (Format: TXT=53449 bytes) (Also FYI 16) 
+
+1358  Charter of the Internet Architecture Board (IAB). Chapin, A.L.  1992 
+      August; 5 p. (Format: TXT=11328 bytes)
+
+1357  Format for e-mailing bibliographic records. Cohen, D.  1992 July; 13 p. 
+      (Format: TXT=25021 bytes)
+
+1356  Multiprotocol interconnect on X.25 and ISDN in the packet mode. Malis, 
+      A.; Robinson, D.; Ullmann, R.  1992 August; 14 p. (Format: TXT=32043 
+      bytes)  (Obsoletes RFC 877)
+
+1355  Privacy and accuracy issues in network information center databases. 
+      Curran, J.; Marine, A.N.  1992 August; 4 p. (Format: TXT=8858 bytes) 
+      (Also FYI 15) 
+
+1354  IP forwarding table MIB. Baker, F.  1992 July; 12 p. (Format: TXT=24905 
+      bytes)
+
+1353  Definitions of managed objects for administration of SNMP parties. 
+      McCloghrie, K.; Davin, J.R.; Galvin, J.M.  1992 July; 26 p. (Format: 
+      TXT=59556 bytes)
+
+1352  SNMP security protocols. Galvin, J.M.; McCloghrie, K.; Davin, J.R.  1992
+      July; 41 p. (Format: TXT=95732 bytes)
+
+1351  SNMP administrative model. Davin, J.R.; Galvin, J.M.; McCloghrie, K.  
+      1992 July; 35 p. (Format: TXT=80721 bytes)
+
+1350  TFTP protocol (revision 2). Sollins, K.R.  1992 July; 11 p. (Format: 
+      TXT=24599 bytes)  (Obsoletes RFC 783)
+
+1349  Type of Service in the Internet protocol suite. Almquist, P.  1992 July;
+      28 p. (Format: TXT=68949 bytes)  (Updates RFC 1248, RFC 1247, RFC 1195, 
+      RFC 1123, RFC 1122, RFC 1060, RFC 791)
+
+1348  DNS NSAP RRs. Manning, B.  1992 July; 4 p. (Format: TXT=6871 bytes)  
+      (Updates RFC 1034, RFC 1035)
+
+1347  TCP and UDP with Bigger Addresses (TUBA), A simple proposal for Internet
+      addressing and routing. Callon, R.W.  1992 June; 7 p. (Format: TXT=26562
+      , PS=42398 bytes)
+
+1346  Resource allocation, control, and accounting for the use of network 
+      resources. Jones, P.  1992 June; 6 p. (Format: TXT=13084 bytes)
+
+1345  Character mnemonics and character sets. Simonsen, K.  1992 June; 103 p. 
+      (Format: TXT=249737 bytes)
+
+1344  Implications of MIME for Internet mail gateways. Borenstein, N.  1992 
+      June; 8 p. (Format: TXT=25872, PS=51812 bytes)
+
+1343  User agent configuration mechanism for multimedia mail format 
+      information. Borenstein, N.  1992 June; 10 p. (Format: TXT=29295, 
+      PS=59978 bytes)
+
+1342  Representation of non-ASCII text in Internet message headers. Moore, K.
+      1992 June; 7 p. (Format: TXT=15845 bytes)
+
+1341  MIME (Multipurpose Internet Mail Extensions): Mechanisms for specifying 
+      and describing the format of Internet message bodies. Borenstein, N.; 
+      Freed, N.  1992 June; 69 p. (Format: TXT=211117, PS=347082 bytes)
+
+1340  Assigned Numbers. Reynolds, J.K.; Postel, J.B.  1992 July; 138 p. 
+      (Format: TXT=232974 bytes)  (Obsoletes RFC 1060)
+
+1339  Remote mail checking protocol. Dorner, S.; Resnick, P.  1992 June; 5 p. 
+      (Format: TXT=13115 bytes)
+
+1338  Supernetting: An address assignment and aggregation strategy. Fuller, 
+      V.; Li, T.; Yu, J.Y.; Varadhan, K.  1992 June; 20 p. (Format: TXT=47975 
+      bytes)
+
+1337  TIME-WAIT assassination hazards in TCP. Braden, R.T.  1992 May; 11 p. 
+      (Format: TXT=22887 bytes)
+
+1336  Who's who in the Internet: Biographies of IAB, IESG and IRSG members. 
+      Malkin, G.S.  1992 May; 33 p. (Format: TXT=92119 bytes) (Also FYI 9)   
+      (Obsoletes RFC 1251)
+
+1335  Two-tier address structure for the Internet: A solution to the problem 
+      of address space exhaustion. Wang, Z.; Crowcroft, J.  1992 May; 7 p. 
+      (Format: TXT=15418 bytes)
+
+1334  PPP authentication protocols. Lloyd, B.; Simpson, W.A.  1992 October; 
+      16 p. (Format: TXT=33248 bytes)
+
+1333  PPP link quality monitoring. Simpson, W.A.  1992 May; 15 p. (Format: 
+      TXT=29965 bytes)
+
+1332  PPP Internet Protocol Control Protocol (IPCP). McGregor, G.  1992 May; 
+      12 p. (Format: TXT=17613 bytes)  (Obsoletes RFC 1172)
+
+1331  Point-to-Point Protocol (PPP) for the transmission of multi-protocol 
+      datagrams over point-to-point links. Simpson, W.A.  1992 May; 66 p. 
+      (Format: TXT=129892 bytes)  (Obsoletes RFC 1171, RFC 1172)
+
+1330  Recommendations for the phase I deployment of OSI Directory Services 
+      (X.500) and OSI Message Handling Services (X.400) within the ESnet 
+      community. ESnet Site Coordinating Committee, X.500/X.400 Task Force.  
+      1992 May; 87 p. (Format: TXT=192925 bytes)
+
+1329  Thoughts on address resolution for dual MAC FDDI networks. Kuehn, P.  
+      1992 May; 28 p. (Format: TXT=58150 bytes)
+
+1328  X.400 1988 to 1984 downgrading. Hardcastle-Kille, S.E.  1992 May; 5 p. 
+      (Format: TXT=10006 bytes)
+
+1327  Mapping between X.400(1988)/ISO 10021 and RFC 822. Hardcastle-Kille, 
+      S.E.  1992 May; 113 p. (Format: TXT=228598 bytes)  (Obsoletes RFC 1148, 
+      RFC 1138, RFC 1026, RFC 987; Updates RFC 822)
+
+1326  Mutual encapsulation considered dangerous. Tsuchiya, P.F.  1992 May; 
+      5 p. (Format: TXT=11241 bytes)
+
+1325  FYI on questions and answers: Answers to commonly asked "new Internet 
+      user" questions. Malkin, G.S.; Marine, A.N.  1992 May; 42 p. (Format: 
+      TXT=91884 bytes) (Also FYI 4)   (Obsoletes RFC 1206)
+
+1324  Discussion on computer network conferencing. Reed, D.  1992 May; 11 p. 
+      (Format: TXT=24988 bytes)
+
+1323  TCP extensions for high performance. Jacobson, V.; Braden, R.T.; Borman,
+      D.A.  1992 May; 37 p. (Format: TXT=84558 bytes)  (Obsoletes RFC 1072, 
+      RFC 1185)
+
+1322  Unified approach to inter-domain routing. Estrin, D.; Rekhter, Y.; Hotz,
+      S.  1992 May; 38 p. (Format: TXT=96934 bytes)
+
+1321  MD5 Message-Digest algorithm. Rivest, R.L.  1992 April; 21 p. (Format: 
+      TXT=35222 bytes)
+
+1320  MD4 Message-Digest algorithm. Rivest, R.L.  1992 April; 20 p. (Format: 
+      TXT=32407 bytes)  (Obsoletes RFC 1186)
+
+1319  MD2 Message-Digest algorithm. Kaliski, B.S.  1992 April; 17 p. (Format: 
+      TXT=25661 bytes)  (Updates RFC 1115)
+
+1318  Definitions of managed objects for parallel-printer-like hardware 
+      devices. Stewart, B.,ed.  1992 April; 11 p. (Format: TXT=19570 bytes)
+
+1317  Definitions of managed objects for RS-232-like hardware devices. 
+      Stewart, B.,ed.  1992 April; 17 p. (Format: TXT=30442 bytes)
+
+1316  Definitions of managed objects for character stream devices. Stewart, 
+      B.,ed.  1992 April; 17 p. (Format: TXT=35143 bytes)
+
+1315  Management Information Base for frame relay DTEs. Brown, C.; Baker, F.; 
+      Carvalho, C.  1992 April; 19 p. (Format: TXT=33825 bytes)
+
+1314  File format for the exchange of images in the Internet. Katz, A.R.; 
+      Cohen, D.  1992 April; 23 p. (Format: TXT=54072 bytes)
+
+1313  Today's programming for KRFC AM 1313 Internet talk radio. Partridge, C.
+      1992 April 1; 3 p. (Format: TXT=5444 bytes)
+
+1312  Message Send Protocol 2. Nelson, R.; Arnold, G.  1992 April; 8 p. 
+      (Format: TXT=18037 bytes)  (Obsoletes RFC 1159)
+
+1311  Introduction to the STD notes. Postel, J.B.,ed.  1992 March; 5 p. 
+      (Format: TXT=11308 bytes)
+
+1310  Internet standards process. Chapin, A.L.  1992 March; 23 p. (Format: 
+      TXT=54738 bytes)
+
+1309  Technical overview of directory services using the X.500 protocol. 
+      Weider, C.; Reynolds, J.K.; Heker, S.  1992 March; 16 p. (Format: 
+      TXT=35694 bytes) (Also FYI 14) 
+
+1308  Executive introduction to directory services using the X.500 protocol. 
+      Weider, C.; Reynolds, J.K.  1992 March; 4 p. (Format: TXT=9392 bytes) 
+      (Also FYI 13) 
+
+1307  Dynamically switched link control protocol. Nicholson, A.; Young, J.  
+      1992 March; 13 p. (Format: TXT=24145 bytes)
+
+1306  Experiences supporting by-request circuit-switched T3 networks. 
+      Nicholson, A.; Young, J.  1992 March; 10 p. (Format: TXT=25788 bytes)
+
+1305  Network Time Protocol (Version 3): Specification, implementation, and 
+      analysis. Mills, D.L.  1992 March; 113 p. (Format: TXT=307085, 
+      tar.Z=815759 bytes)  (Obsoletes RFC 1119)
+
+1304  Definitions of managed objects for the SIP interface type. Cox, T.A.; 
+      Tesink, K.,eds.  1992 February; 25 p. (Format: TXT=5241 bytes)
+
+1303  Convention for describing SNMP-based agents. McCloghrie, K.; Rose, M.T.
+      1992 February; 12 p. (Format: TXT=22915 bytes)
+
+1302  Building a network information services infrastructure. Sitzler, D.D.; 
+      Smith, P.G.; Marine, A.N.  1992 February; 13 p. (Format: TXT=29135 
+      bytes) (Also FYI 12) 
+
+1301  Multicast Transport Protocol. Armstrong, S.M.; Freier, A.O.; Marzullo, 
+      K.A.  1992 February; 38 p. (Format: TXT=91976 bytes)
+
+1300  Remembrances of things past. Greenfield, S.R.  1992 February; 4 p. 
+      (Format: TXT=4963 bytes)
+
+1299  Not yet issued.
+
+1298  SNMP over IPX. Wormley, R.B.; Bostock, S.  1992 February; 5 p. (Format: 
+      TXT=7878 bytes)
+
+1297  NOC integrated trouble ticket system: Functional specification wish list
+      ("NOC TT requirements"). Johnson, D.S.  1992 January; 12 p. (Format: 
+      TXT=32964 bytes)
+
+1296  Internet Growth (1981-1991). Lottor, M.  1992 January; 9 p. (Format: 
+      TXT=20103 bytes)
+
+1295  User bill of rights for entries and listing in the public directory. 
+      North American Directory Forum.  1992 January; 2 p. (Format: TXT=3502 
+      bytes)  (Obsoleted by RFC 1417)
+
+1294  Multiprotocol interconnect over Frame Relay. Bradley, T.; Brown, C.; 
+      Malis, A.G.  1992 January; 28 p. (Format: TXT=54992 bytes)
+
+1293  Inverse Address Resolution Protocol. Bradely, T.; Brown, C.  1992 
+      January; 6 p. (Format: TXT=11368 bytes)
+
+1292  Catalog of Available X.500 Implementations. Lang, R.; Wright, R.  1991 
+      December; 103 p. (Format: TXT=129468 bytes) (Also FYI 11) 
+
+1291  Mid-Level networks: Potential technical services. Aggarwal, V.  1991 
+      December; 10 p. (Format: TXT=24314, PS=218918 bytes)
+
+1290  There's gold in them thar networks! or searching for treasure in all the
+      wrong places. Martin, J.  1991 December; 27 p. (Format: TXT=46997 bytes)
+      (Also FYI 10)   (Obsoleted by RFC 1402)
+
+1289  DECnet phase IV MIB extensions. Saperia, J.  1991 December; 64 p. 
+      (Format: TXT=122272 bytes)
+
+1288  Finger User Information Protocol. Zimmerman, D.P.  1991 December; 12 p. 
+      (Format: TXT=25161 bytes)  (Obsoletes RFC 1196)
+
+1287  Towards the future Internet architecture. Clark, D.D.; Chapin, L.A.; 
+      Cerf, V.G.; Braden, R.T.; Hobby, R.  1991 December; 29 p. (Format: 
+      TXT=59812 bytes)
+
+1286  Definitions of managed objects for bridges. Decker, E.; Langille, P.; 
+      Rijsinghani, A.; McCloghrie, K.  1991 December; 40 p. (Format: txt=79104
+      bytes)
+
+1285  FDDI Management Information Base. Case, J.D.  1992 January; 46 p. 
+      (Format: TXT=99747 bytes)
+
+1284  Definitions of managed objects for the Ethernet-like interface types. 
+      Cook, J.,ed.  1991 December; 21 p. (Format: TXT=43225 bytes)
+
+1283  SNMP over OSI. Rose, M.T.  1991 December; 8 p. (Format: TXT=16814 bytes)
+      (Obsoletes RFC 1161; Obsoleted by RFC 1418)
+
+1282  BSD rlogin. Kantor, B.  1991 December; 5 p. (Format: TXT=10704 bytes)  
+      (Obsoletes RFC 1258)
+
+1281  Guidelines for the secure operations of the Internet. Pethia, R.D.; 
+      Crocker, S.D.; Fraser, B.Y.  1991 November; 10 p. (Format: TXT=22618 
+      bytes)
+
+1280  IAB official protocol standards. Postel, J.B.,ed.  1992 March; 32 p. 
+      (Format: TXT=70458 bytes)  (Obsoletes RFC 1250; Obsoleted by RFC 1360)
+
+1279  X.500 and domains. Hardcastle-Kille, S.E.  1991 November; 13 p. (Format:
+      TXT=26669, PS=170029 bytes)
+
+1278  String encoding of presentation address. Hardcastle-Kille, S.E.  1991 
+      November; 5 p. (Format: TXT=10256, PS=128696 bytes)
+
+1277  Encoding network addresses to support operations over non-OSI lower 
+      layers. Hardcastle-Kille, S.E.  1991 November; 10 p. (Format: TXT=22254,
+      PS=176169 bytes)
+
+1276  Replication and distributed operations extensions to provide an Internet
+      directory using X.500. Hardcastle-Kille, S.E.  1991 November; 17 p. 
+      (Format: TXT=33731, PS=217170 bytes)
+
+1275  Replication requirements to provide an Internet directory using X.500. 
+      Hardcastle-Kille, S.E.  1991 November; 2 p. (Format: TXT=4616, PS=83736 
+      bytes)
+
+1274  COSINE and Internet X.500 schema. Kille, S.E.; Barker, P.  1991 
+      November; 60 p. (Format: TXT=92827 bytes)
+
+1273  Measurement study of changes in service-level reachability in the global
+      TCP/IP Internet: Goals, experimental design, implementation, and policy 
+      considerations. Schwartz, M.F.  1991 November; 8 p. (Format: TXT=19949 
+      bytes)
+
+1272  Internet accounting: Background. Mills, C.; Hirsh, D.; Ruth, G.R.  1991 
+      November; 19 p. (Format: TXT=46562 bytes)
+
+1271  Remote network monitoring Management Information Base. Waldbusser, S.  
+      1991 November; 81 p. (Format: TXT=184111 bytes)
+
+1270  SNMP communications services. Kastenholz, F.J.,ed.  1991 October; 11 p. 
+      (Format: TXT=26167 bytes)
+
+1269  Definitions of managed objects for the Border Gateway Protocol: Version 
+      3. Willis, S.; Burruss, J.W.  1991 October; 13 p. (Format: TXT=25717 
+      bytes)
+
+1268  Application of the Border Gateway Protocol in the Internet. Rekhter, Y.;
+      Gross, P.G.,eds.  1991 October; 13 p. (Format: TXT=31102 bytes)  
+      (Obsoletes RFC 1164)
+
+1267  Border Gateway Protocol 3 (BGP-3). Lougheed, K.; Rekhter, Y.  1991 
+      October; 35 p. (Format: TXT=80724 bytes)  (Obsoletes RFC 1163)
+
+1266  Experience with the BGP protocol. Rekhter, Y.,ed.  1991 October; 9 p. 
+      (Format: TXT=21938 bytes)
+
+1265  BGP protocol analysis. Rekhter, Y.,ed.  1991 October; 8 p. (Format: 
+      TXT=20728 bytes)
+
+1264  Internet Engineering Task Force internet routing protocol 
+      standardization criteria. Hinden, R.M.  1991 October; 8 p. (Format: 
+      TXT=17016 bytes)
+
+1263  TCP extensions considered harmful. O'Malley, S.; Peterson, L.L.  1991 
+      October; 19 p. (Format: TXT=54078 bytes)
+
+1262  Guidelines for internet measurement activities. Cerf, V.G.,ed.  1991 
+      October; 3 p. (Format: TXT=6381 bytes)
+
+1261  Transiton of NIC services. Williamson, S.; Nobile, L.  1991 September; 
+      3 p. (Format: TXT=4488 bytes)
+
+1260  Not yet issued.
+
+1259  Building the open road: The NREN as test-bed for the national public 
+      network. Kapor, M.  1991 September; 23 p. (Format: TXT=62944 bytes)
+
+1258  BSD Rlogin. Kantor, B.  1991 September; 5 p. (Format: TXT=10763 bytes)  
+      (Obsoleted by RFC 1282)
+
+1257  Isochronous applications do not require jitter-controlled networks. 
+      Partridge, C.  1991 September; 5 p. (Format: TXT=11075 bytes)
+
+1256  ICMP router discovery messages. Deering, S.E.,ed.  1991 September; 19 p.
+      (Format: TXT=44628 bytes)
+
+1255  Naming scheme for c=US. North American Directory Forum.  1991 September;
+      25 p. (Format: TXT=53783 bytes)  (Obsoletes RFC 1218; Obsoleted by RFC 
+      1417)
+
+1254  Gateway congestion control survey. Mankin, A.; Ramakrishnan, K.K.,eds.  
+      1991 August; 25 p. (Format: TXT=69793 bytes)
+
+1253  OSPF version 2: Management Information Base. Baker, F.; Coltun, R.  1991
+      August; 42 p. (Format: TXT=77232 bytes)  (Obsoletes RFC 1252)
+
+1252  OSPF version 2: Management Information Base. Baker, F.; Coltun, R.  1991
+      August; 42 p. (Format: TXT=77250 bytes)  (Obsoletes RFC 1248; 
+      Obsoleted by RFC 1253)
+
+1251  Who's who in the internet: Biographies of IAB, IESG and IRSG members. 
+      Malkin, G.S.  1991 August; 26 p. (Format: TXT=72721 bytes) (Also FYI 9) 
+      (Obsoleted by RFC 1336)
+
+1250  IAB official protocol standards. Postel, J.B.,ed.  1991 August; 28 p. 
+      (Format: TXT=65279 bytes)  (Obsoletes RFC 1200; Obsoleted by RFC 1280)
+
+1249  DIXIE protocol specification. Howes, T.; Smith, M.; Beecher, B.  1991 
+      August; 10 p. (Format: TXT=20693 bytes)
+
+1248  OSPF version 2: Management Information Base. Baker, F.; Coltun, R.  1991
+      July; 42 p. (Format: TXT=77126 bytes)  (Obsoleted by RFC 1252; 
+      Updated by RFC 1349)
+
+1247  OSPF version 2. Moy, J.  1991 July; 189 p. (Format: PS=1063028, 
+      TXT=443917 bytes)  (Obsoletes RFC 1131; Updated by RFC 1349)
+
+1246  Experience with the OSPF protocol. Moy, J.,ed.  1991 July; 31 p. 
+      (Format: PS=146913, TXT=72180 bytes)
+
+1245  OSPF protocol analysis. Moy, J.,ed.  1991 July; 12 p. (Format: PS=64094,
+      TXT=27492 bytes)
+
+1244  Site Security Handbook. Holbrook, J.P.; Reynolds, J.K.,eds.  1991 July; 
+      101 p. (Format: TXT=259129 bytes) (Also FYI 8) 
+
+1243  Appletalk Management Information Base. Waldbusser, S.,ed.  1991 July; 
+      29 p. (Format: TXT=61985 bytes)
+
+1242  Benchmarking terminology for network interconnection devices. Bradner, 
+      S.,ed.  1991 July; 12 p. (Format: TXT=22817 bytes)
+
+1241  Scheme for an internet encapsulation protocol: Version 1. Woodburn, 
+      R.A.; Mills, D.L.  1991 July; 17 p. (Format: TXT=42468, PS=128921 bytes)
+
+1240  OSI connectionless transport services on top of UDP: Version 1. Shue, 
+      C.; Haggerty, W.; Dobbins, K.  1991 June; 8 p. (Format: TXT=18140 bytes)
+
+1239  Reassignment of experimental MIBs to standard MIBs. Reynolds, J.K.  1991
+      June; 2 p. (Format: TXT=3656 bytes)  (Updates RFC 1229, RFC 1230, RFC 
+      1231, RFC 1232, RFC 1233)
+
+1238  CLNS MIB for use with Connectionless Network Protocol (ISO 8473) and End
+      System to Intermediate System (ISO 9542). Satz, G.  1991 June; 32 p. 
+      (Format: TXT=65159 bytes)  (Obsoletes RFC 1162)
+
+1237  Guidelines for OSI NSAP allocation in the internet. Collela, R.; 
+      Gardner, E.P.; Callon, R.W.  1991 July; 38 p. (Format: PS=162808, 
+      TXT=119962 bytes)
+
+1236  IP to X.121 address mapping for DDN. Morales, L.F., Jr.; Hasse, P.R.  
+      1991 June; 7 p. (Format: TXT=12626 bytes)
+
+1235  Coherent File Distribution Protocol. Ioannidis, J.; Maguire, G.Q., Jr.  
+      1991 June; 12 p. (Format: TXT=29345 bytes)
+
+1234  Tunneling IPX traffic through IP networks. Provan, D.  1991 June; 6 p. 
+      (Format: TXT=12333 bytes)
+
+1233  Definitions of managed objects for the DS3 Interface type. Cox, T.A.; 
+      Tesink, K.,eds.  1991 May; 23 p. (Format: TXT=49559 bytes)  
+      (Obsoleted by RFC 1407; Updated by RFC 1239)
+
+1232  Definitions of managed objects for the DS1 Interface type. Baker, F.; 
+      Kolb, C.P.,eds.  1991 May; 28 p. (Format: TXT=60757 bytes)  
+      (Obsoleted by RFC 1406; Updated by RFC 1239)
+
+1231  IEEE 802.5 Token Ring MIB. McCloghrie, K.; Fox, R.; Decker, E.  1991 
+      May; 23 p. (Format: TXT=53542 bytes)  (Updated by RFC 1239)
+
+1230  IEEE 802.4 Token Bus MIB. McCloghrie, K.; Fox, R.  1991 May; 23 p. 
+      (Format: TXT=53100 bytes)  (Updated by RFC 1239)
+
+1229  Extensions to the generic-interface MIB. McCloghrie, K.,ed.  1991 May; 
+      16 p. (Format: TXT=36022 bytes)  (Updated by RFC 1239)
+
+1228  SNMP-DPI: Simple Network Management Protocol Distributed Program 
+      Interface. Carpenter, G.; Wijnen, B.  1991 May; 50 p. (Format: TXT=96972
+      bytes)
+
+1227  SNMP MUX protocol and MIB. Rose, M.T.  1991 May; 13 p. (Format: 
+      TXT=25868 bytes)
+
+1226  Internet protocol encapsulation of AX.25 frames. Kantor, B.  1991 May; 
+      2 p. (Format: TXT=2573 bytes)
+
+1225  Post Office Protocol: Version 3. Rose, M.T.  1991 May; 16 p. (Format: 
+      TXT=37340 bytes)  (Obsoletes RFC 1081)
+
+1224  Techniques for managing asynchronously generated alerts. Steinberg, L.  
+      1991 May; 22 p. (Format: TXT=54303 bytes)
+
+1223  OSI CLNS and LLC1 protocols on Network Systems HYPERchannel. Halpern, 
+      J.M.  1991 May; 12 p. (Format: TXT=29601 bytes)
+
+1222  Advancing the NSFNET routing architecture. Braun, H.W.; Rekhter, Y.  
+      1991 May; 6 p. (Format: TXT=15067 bytes)
+
+1221  Host Access Protocol (HAP) specification: Version 2. Edmond, W.  1991 
+      April; 68 p. (Format: TXT=156550 bytes)  (Updates RFC 907)
+
+1220  Point-to-Point Protocol extensions for bridging. Baker, F.,ed.  1991 
+      April; 18 p. (Format: TXT=38165 bytes)
+
+1219  On the assignment of subnet numbers. Tsuchiya, P.F.  1991 April; 13 p. 
+      (Format: TXT=30609 bytes)
+
+1218  Naming scheme for c=US. North American Directory Forum.  1991 April; 
+      23 p. (Format: TXT=42698 bytes)  (Obsoleted by RFC 1417)
+
+1217  Memo from the Consortium for Slow Commotion Research (CSCR). Cerf, V.G.
+      1991 April 1; 5 p. (Format: TXT=11079 bytes)
+
+1216  Gigabit network economics and paradigm shifts. Richard, P.; Kynikos, P.
+      1991 April 1; 4 p. (Format: TXT=8130 bytes)
+
+1215  Convention for defining traps for use with the SNMP. Rose, M.T.,ed.  
+      1991 March; 9 p. (Format: TXT=19336 bytes)
+
+1214  OSI internet management: Management Information Base. LaBarre, L.,ed.  
+      1991 April; 83 p. (Format: TXT=172564 bytes)
+
+1213  Management Information Base for network management of TCP/IP-based 
+      internets: MIB-II. McCloghrie, K.; Rose, M.T.,eds.  1991 March; 70 p. 
+      (Format: TXT=146080 bytes)  (Obsoletes RFC 1158)
+
+1212  Concise MIB definitions. Rose, M.T.; McCloghrie, K.,eds.  1991 March; 
+      19 p. (Format: TXT=43579 bytes)
+
+1211  Problems with the maintenance of large mailing lists. Westine, A.; 
+      Postel, J.B.  1991 March; 54 p. (Format: TXT=96167 bytes)
+
+1210  Network and infrastructure user requirements for transatlantic research 
+      collaboration: Brussels, July 16-18, and Washington July 24-25, 1990. 
+      Cerf, V.G.; Kirstein, P.T.; Randell, B.,eds.  1991 March; 36 p. (Format:
+      TXT=79048 bytes)
+
+1209  Transmission of IP datagrams over the SMDS Service. Piscitello, D.M.; 
+      Lawrence, J.  1991 March; 11 p. (Format: TXT=25280 bytes)
+
+1208  Glossary of networking terms. Jacobsen, O.J.; Lynch, D.C.  1991 March; 
+      18 p. (Format: TXT=41156 bytes)
+
+1207  FYI on Questions and Answers: Answers to commonly asked "experienced 
+      Internet user" questions. Malkin, G.S.; Marine, A.N.; Reynolds, J.K.  
+      1991 February; 15 p. (Format: TXT=33385 bytes) (Also FYI 7) 
+
+1206  FYI on Questions and Answers: Answers to commonly asked "new Internet 
+      user" questions. Malkin, G.S.; Marine, A.N.  1991 February; 32 p. 
+      (Format: TXT=72479 bytes) (Also FYI 4)   (Obsoletes RFC 1177; 
+      Obsoleted by RFC 1325)
+
+1205  5250 Telnet interface. Chmielewski, P.  1991 February; 12 p. (Format: 
+      TXT=27179 bytes)
+
+1204  Message Posting Protocol (MPP). Yeh, S.; Lee, D.  1991 February; 6 p. 
+      (Format: TXT=11371 bytes)
+
+1203  Interactive Mail Access Protocol: Version 3. Rice, J.  1991 February; 
+      49 p. (Format: TXT=123325 bytes)  (Obsoletes RFC 1064)
+
+1202  Directory Assistance service. Rose, M.T.  1991 February; 11 p. (Format: 
+      TXT=21645 bytes)
+
+1201  Transmitting IP traffic over ARCNET networks. Provan, D.  1991 February;
+      7 p. (Format: TXT=16959 bytes)  (Obsoletes RFC 1051)
+
+1200  IAB official protocol standards. Defense Advanced Research Projects 
+      Agency, Internet Activities Board.  1991 April; 31 p. (Format: TXT=67069
+      bytes)  (Obsoletes RFC 1140; Obsoleted by RFC 1250)
+
+1199  Request for Comments Summary: RFC Numbers 1100-1199. Reynolds, J.K.  
+      1991 December; 22 p. (Format: TXT=46443 bytes)
+
+1198  FYI on the X window system. Scheifler, R.W.  1991 January; 3 p. (Format:
+      TXT=3629 bytes) (Also FYI 6) 
+
+1197  Using ODA for translating multimedia information. Sherman, M.  1990 
+      December; 2 p. (Format: TXT=3620 bytes)
+
+1196  Finger User Information Protocol. Zimmerman, D.P.  1990 December; 12 p. 
+      (Format: TXT=24799 bytes)  (Obsoletes RFC 1194; Obsoleted by RFC 1288)
+
+1195  Use of OSI IS-IS for routing in TCP/IP and dual environments. Callon, 
+      R.W.  1990 December; 65 p. (Format: PS=381799, TXT=192628 bytes)  
+      (Updated by RFC 1349)
+
+1194  Finger User Information Protocol. Zimmerman, D.P.  1990 November; 12 p. 
+      (Format: TXT=24626 bytes)  (Obsoletes RFC 742; Obsoleted by RFC 1196)
+
+1193  Client requirements for real-time communication services. Ferrari, D.  
+      1990 November; 24 p. (Format: TXT=61540 bytes)
+
+1192  Commercialization of the Internet summary report. Kahin, B.,ed.  1990 
+      November; 13 p. (Format: TXT=35253 bytes)
+
+1191  Path MTU discovery. Mogul, J.C.; Deering, S.E.  1990 November; 19 p. 
+      (Format: TXT=47936 bytes)  (Obsoletes RFC 1063)
+
+1190  Experimental Internet Stream Protocol: Version 2 (ST-II). Topolcic, C.,
+      ed.  1990 October; 148 p. (Format: TXT=386909 bytes)  (Obsoletes IEN 
+      119)
+
+1189  Common Management Information Services and Protocols for the Internet 
+      (CMOT and CMIP). Warrier, U.S.; Besaw, L.; LaBarre, L.; Handspicker, 
+      B.D.  1990 October; 15 p. (Format: TXT=32928 bytes)  (Obsoletes RFC 
+      1095)
+
+1188  Proposed standard for the transmission of IP datagrams over FDDI 
+      networks. Katz, D.  1990 October; 11 p. (Format: TXT=22424 bytes)  
+      (Obsoletes RFC 1103)
+
+1187  Bulk table retrieval with the SNMP. Rose, M.T.; McCloghrie, K.; Davin, 
+      J.R.  1990 October; 12 p. (Format: TXT=27220 bytes)
+
+1186  MD4 message digest algorithm. Rivest, R.L.  1990 October; 18 p. (Format:
+      TXT=35391 bytes)  (Obsoleted by RFC 1320)
+
+1185  TCP extension for high-speed paths. Jacobson, V.; Braden, R.T.; Zhang, 
+      L.  1990 October; 21 p. (Format: TXT=49508 bytes)  (Obsoleted by RFC 
+      1323)
+
+1184  Telnet Linemode option. Borman, D.A.,ed.  1990 October; 23 p. (Format: 
+      TXT=53085 bytes)  (Obsoletes RFC 1116)
+
+1183  New DNS RR definitions. Everhart, C.F.; Mamakos, L.A.; Ullmann, R.; 
+      Mockapetris, P.V.  1990 October; 11 p. (Format: TXT=23788 bytes)  
+      (Updates RFC 1034, RFC 1035)
+
+1182  Not yet issued.
+
+1181  RIPE terms of reference. Blokzijl, R.  1990 September; 2 p. (Format: 
+      TXT=2523 bytes)
+
+1180  TCP/IP tutorial. Socolofsky, T.J.; Kale, C.J.  1991 January; 28 p. 
+      (Format: TXT=65494 bytes)
+
+1179  Line printer daemon protocol. McLaughlin, L.  1990 August; 14 p. 
+      (Format: TXT=24324 bytes)
+
+1178  Choosing a name for your computer. Libes, D.  1990 August; 8 p. (Format:
+      TXT=18472 bytes) (Also FYI 5) 
+
+1177  FYI on Questions and Answers: Answers to commonly asked "new internet 
+      user" questions. Malkin, G.S.; Marine, A.N.; Reynolds, J.K.  1990 
+      August; 24 p. (Format: TXT=52852 bytes) (Also FYI 4)   (Obsoleted by RFC
+      1206)
+
+1176  Interactive Mail Access Protocol: Version 2. Crispin, M.R.  1990 August;
+      30 p. (Format: TXT=67330 bytes)  (Obsoletes RFC 1064)
+
+1175  FYI on where to start: A bibliography of internetworking information. 
+      Bowers, K.L.; LaQuey, T.L.; Reynolds, J.K.; Roubicek, K.; Stahl, M.K.; 
+      Yuan, A.  1990 August; 42 p. (Format: TXT=67330 bytes) (Also FYI 3) 
+
+1174  IAB recommended policy on distributing internet identifier assignment 
+      and IAB recommended policy change to internet "connected" status. Cerf, 
+      V.G.  1990 August; 9 p. (Format: TXT=21321 bytes)
+
+1173  Responsibilities of host and network managers: A summary of the "oral 
+      tradition" of the Internet. VanBokkelen, J.  1990 August; 5 p. (Format: 
+      TXT=12527 bytes)
+
+1172  Point-to-Point Protocol (PPP) initial configuration options. Perkins, 
+      D.; Hobby, R.  1990 July; 38 p. (Format: TXT=76132 bytes)  (Obsoleted by
+      RFC 1331, RFC 1332)
+
+1171  Point-to-Point Protocol for the transmission of multi-protocol datagrams
+      over Point-to-Point links. Perkins, D.  1990 July; 48 p. (Format: 
+      TXT=92321 bytes)  (Obsoletes RFC 1134; Obsoleted by RFC 1331)
+
+1170  Public key standards and licenses. Fougner, R.B.  1991 January; 2 p. 
+      (Format: TXT=3144 bytes)
+
+1169  Explaining the role of GOSIP. Cerf, V.G.; Mills, K.L.  1990 August; 
+      15 p. (Format: TXT=30255 bytes)
+
+1168  Intermail and Commercial Mail Relay services. Westine, A.; DeSchon, 
+      A.L.; Postel, J.B.; Ward, C.E.  1990 July; 23 p. (Format: PS=149816 
+      bytes)
+
+1167  Thoughts on the National Research and Education Network. Cerf, V.G.  
+      1990 July; 8 p. (Format: TXT=20682 bytes)
+
+1166  Internet numbers. Kirkpatrick, S.; Stahl, M.K.; Recker, M.  1990 July; 
+      182 p. (Format: TXT=566778 bytes)  (Obsoletes RFC 1117, RFC 1062, RFC 
+      1020)
+
+1165  Network Time Protocol (NTP) over the OSI Remote Operations Service. 
+      Crowcroft, J.; Onions, J.P.  1990 June; 10 p. (Format: TXT=18277 bytes)
+
+1164  Application of the Border Gateway Protocol in the Internet. Honig, J.C.;
+      Katz, D.; Mathis, M.; Rekhter, Y.; Yu, J.Y.  1990 June; 23 p. (Format: 
+      TXT=56278 bytes)  (Obsoleted by RFC 1268)
+
+1163  Border Gateway Protocol (BGP). Lougheed, K.; Rekhter, Y.  1990 June; 
+      29 p. (Format: TXT=69404 bytes)  (Obsoletes RFC 1105; Obsoleted by RFC 
+      1267)
+
+1162  Connectionless Network Protocol (ISO 8473) and End System to 
+      Intermediate System (ISO 9542) Management Information Base. Satz, G.  
+      1990 June; 70 p. (Format: TXT=109893 bytes)  (Obsoleted by RFC 1238)
+
+1161  SNMP over OSI. Rose, M.T.  1990 June; 8 p. (Format: TXT=16036 bytes)  
+      (Obsoleted by RFC 1283, RFC 1418)
+
+1160  Internet Activities Board. Cerf, V.  1990 May; 11 p. (Format: TXT=28182 
+      bytes)  (Obsoletes RFC 1120)
+
+1159  Message Send Protocol. Nelson, R.  1990 June; 2 p. (Format: TXT=3957 
+      bytes)  (Obsoleted by RFC 1312)
+
+1158  Management Information Base for network management of TCP/IP-based 
+      internets: MIB-II. Rose, M.T.,ed.  1990 May; 133 p. (Format: TXT=212152 
+      bytes)  (Obsoleted by RFC 1213)
+
+1157  Simple Network Management Protocol (SNMP). Case, J.D.; Fedor, M.; 
+      Schoffstall, M.L.; Davin, C.  1990 May; 36 p. (Format: TXT=74894 bytes)
+      (Obsoletes RFC 1098)
+
+1156  Management Information Base for network management of TCP/IP-based 
+      internets. McCloghrie, K.; Rose, M.T.  1990 May; 91 p. (Format: 
+      TXT=138781 bytes)  (Obsoletes RFC 1066)
+
+1155  Structure and identification of management information for TCP/IP-based 
+      internets. Rose, M.T.; McCloghrie, K.  1990 May; 22 p. (Format: 
+      TXT=40927 bytes)  (Obsoletes RFC 1065)
+
+1154  Encoding header field for internet messages. Robinson, D.; Ullmann, R.  
+      1990 April; 7 p. (Format: TXT=12214 bytes)
+
+1153  Digest message format. Wancho, F.J.  1990 April; 4 p. (Format: TXT=6632 
+      bytes)
+
+1152  Workshop report: Internet research steering group workshop on 
+      very-high-speed networks. Partridge, C.  1990 April; 23 p. (Format: 
+      TXT=64003 bytes)
+
+1151  Version 2 of the Reliable Data Protocol (RDP). Partridge, C.; Hinden, 
+      R.M.  1990 April; 4 p. (Format: TXT=8293 bytes)  (Updates RFC 908)
+
+1150  F.Y.I. on F.Y.I.: Introduction to the F.Y.I. notes. Malkin, G.S.; 
+      Reynolds, J.K.  1990 March; 4 p. (Format: TXT=7867 bytes) (Also FYI 1) 
+
+1149  Standard for the transmission of IP datagrams on avian carriers. 
+      Waitzman, D.  1990 April 1; 2 p. (Format: TXT=3329 bytes)
+
+1148  Mapping between X.400(1988) / ISO 10021 and RFC 822. Kille, S.E.  1990 
+      March; 94 p. (Format: TXT=194292 bytes)  (Obsoleted by RFC 1327; Updates
+      RFC 1138)
+
+1147  FYI on a network management tool catalog: Tools for monitoring and 
+      debugging TCP/IP internets and interconnected devices. Stine, R.H.,ed.  
+      1990 April; 126 p. (Format: TXT=336906, PS=555225 bytes) (Also FYI 2) 
+
+1146  TCP alternate checksum options. Zweig, J.; Partridge, C.  1990 March; 
+      5 p. (Format: TXT=10955 bytes)  (Obsoletes RFC 1145)
+
+1145  TCP alternate checksum options. Zweig, J.; Partridge, C.  1990 February;
+      5 p. (Format: TXT=11052 bytes)  (Obsoleted by RFC 1146)
+
+1144  Compressing TCP/IP headers for low-speed serial links. Jacobson, V.  
+      1990 February; 43 p. (Format: TXT=120959, PS=534729 bytes)
+
+1143  Q method of implementing Telnet option negotiation. Bernstein, D.J.  
+      1990 February; 10 p. (Format: TXT=23331 bytes)
+
+1142  OSI IS-IS Intra-domain routing protocol. Oran, D.,ed.  1990 February; 
+      157 p. (Format: PS=1204297, TXT=425379 bytes)
+
+1141  Incremental updating of the Internet checksum. Mallory, T.; Kullberg, A.
+      1990 January; 2 p. (Format: TXT=3587 bytes)  (Updates RFC 1071)
+
+1140  IAB official protocol standards. Defense Advanced Research Projects 
+      Agency, Internet Activities Board.  1990 May; 27 p. (Format: TXT=60501 
+      bytes)  (Obsoletes RFC 1130; Obsoleted by RFC 1200)
+
+1139  Echo function for ISO 8473. Hagens, R.A.  1990 January; 6 p. (Format: 
+      TXT=14229 bytes)
+
+1138  Mapping between X.400(1988) / ISO 10021 and RFC 822. Kille, S.E.  1989 
+      December; 92 p. (Format: TXT=191029 bytes)  (Obsoleted by RFC 1327; 
+      Updates RFC 1026; Updated by RFC 1148)
+
+1137  Mapping between full RFC 822 and RFC 822 with restricted encoding. 
+      Kille, S.E.  1989 December; 3 p. (Format: TXT=6436 bytes)  (Updates RFC 
+      976)
+
+1136  Administrative Domains and Routing Domains: A model for routing in the 
+      Internet. Hares, S.; Katz, D.  1989 December; 10 p. (Format: TXT=22158 
+      bytes)
+
+1135  Helminthiasis of the Internet. Reynolds, J.K.  1989 December; 33 p. 
+      (Format: TXT=77033 bytes)
+
+1134  Point-to-Point Protocol: A proposal for multi-protocol transmission of 
+      datagrams over Point-to-Point links. Perkins, D.  1989 November; 38 p. 
+      (Format: TXT=87352 bytes)  (Obsoleted by RFC 1171)
+
+1133  Routing between the NSFNET and the DDN. Yu, J.Y.; Braun, H.W.  1989 
+      November; 10 p. (Format: TXT=23169 bytes)
+
+1132  Standard for the transmission of 802.2 packets over IPX networks. 
+      McLaughlin, L.J.  1989 November; 4 p. (Format: TXT=8128 bytes)
+
+1131  OSPF specification. Moy, J.  1989 October; 107 p. (Format: PS=857280 
+      bytes)  (Obsoleted by RFC 1247)
+
+1130  IAB official protocol standards. Defense Advanced Research Projects 
+      Agency, Internet Activities Board.  1989 October; 17 p. (Format: 
+      TXT=33858 bytes)  (Obsoletes RFC 1100; Obsoleted by RFC 1140)
+
+1129  Internet time synchronization: The Network Time Protocol. Mills, D.L.  
+      1989 October; 29 p. (Format: PS=551697 bytes)
+
+1128  Measured performance of the Network Time Protocol in the Internet 
+      system. Mills, D.L.  1989 October; 20 p. (Format: PS=633742 bytes)
+
+1127  Perspective on the Host Requirements RFCs. Braden, R.T.  1989 October; 
+      20 p. (Format: TXT=41267 bytes)
+
+1126  Goals and functional requirements for inter-autonomous system routing. 
+      Little, M.  1989 October; 25 p. (Format: TXT=62725 bytes)
+
+1125  Policy requirements for inter Administrative Domain routing. Estrin, D.
+      1989 November; 18 p. (Format: TXT=55248, PS=282123 bytes)
+
+1124  Policy issues in interconnecting networks. Leiner, B.M.  1989 September;
+      54 p. (Format: PS=315692 bytes)
+
+1123  Requirements for Internet hosts - application and support. Braden, R.T.,
+      ed.  1989 October; 98 p. (Format: TXT=245503 bytes)  (Updated by RFC 
+      1349)
+
+1122  Requirements for Internet hosts - communication layers. Braden, R.T.,ed.
+      1989 October; 116 p. (Format: TXT=295992 bytes)  (Updated by RFC 1349)
+
+1121  Act one - the poems. Postel, J.B.; Kleinrock, L.; Cerf, V.G.; Boehm, B.
+      1989 September; 6 p. (Format: TXT=10644 bytes)
+
+1120  Internet Activities Board. Cerf, V.  1989 September; 11 p. (Format: 
+      TXT=26123 bytes)  (Obsoleted by RFC 1160)
+
+1119  Network Time Protocol (version 2) specification and implementation. 
+      Mills, D.L.  1989 September; 64 p. (Format: PS=535202 bytes)  (Obsoletes
+      RFC 1059, RFC 958; Obsoleted by RFC 1305)
+
+1118  Hitchhikers guide to the Internet. Krol, E.  1989 September; 24 p. 
+      (Format: TXT=62757 bytes)
+
+1117  Internet numbers. Romano, S.; Stahl, M.K.; Recker, M.  1989 August; 
+      109 p. (Format: TXT=324666 bytes)  (Obsoletes RFC 1062, RFC 1020, RFC 
+      997; Obsoleted by RFC 1166)
+
+1116  Telnet Linemode option. Borman, D.A.,ed.  1989 August; 21 p. (Format: 
+      TXT=47473 bytes)  (Obsoleted by RFC 1184)
+
+1115  Privacy enhancement for Internet electronic mail: Part III - algorithms,
+      modes, and identifiers [Draft]. Linn, J.  1989 August; 8 p. (Format: 
+      TXT=18226 bytes)  (Obsoleted by RFC 1423; Updated by RFC 1319)
+
+1114  Privacy enhancement for Internet electronic mail: Part II - 
+      certificate-based key management [Draft]. Kent, S.T.; Linn, J.  1989 
+      August; 25 p. (Format: TXT=69661 bytes)  (Obsoleted by RFC 1422)
+
+1113  Privacy enhancement for Internet electronic mail: Part I - message 
+      encipherment and authentication procedures [Draft]. Linn, J.  1989 
+      August; 34 p. (Format: TXT=89293 bytes)  (Obsoletes RFC 989, RFC 1040; 
+      Obsoleted by RFC 1421)
+
+1112  Host extensions for IP multicasting. Deering, S.E.  1989 August; 17 p. 
+      (Format: TXT=39904 bytes)  (Obsoletes RFC 988, RFC 1054)
+
+1111  Request for comments on Request for Comments: Instructions to RFC 
+      authors. Postel, J.B.  1989 August; 6 p. (Format: TXT=11793 bytes)  
+      (Obsoletes RFC 825)
+
+1110  Problem with the TCP big window option. McKenzie, A.M.  1989 August; 
+      3 p. (Format: TXT=5778 bytes)
+
+1109  Report of the second Ad Hoc Network Management Review Group. Cerf, V.G.
+      1989 August; 8 p. (Format: TXT=20642 bytes)
+
+1108  U.S. Department of Defense security options for the Internet Protocol. 
+      Kent, S.T.  1991 November; 17 p. (Format: TXT=41791 bytes)  (Obsoletes 
+      RFC 1038)
+
+1107  Plan for Internet directory services. Sollins, K.R.  1989 July; 19 p. 
+      (Format: TXT=51773 bytes)
+
+1106  TCP big window and NAK options. Fox, R.  1989 June; 13 p. (Format: 
+      TXT=37105 bytes)
+
+1105  Border Gateway Protocol (BGP). Lougheed, K.; Rekhter, Y.  1989 June; 
+      17 p. (Format: TXT=37644 bytes)  (Obsoleted by RFC 1163)
+
+1104  Models of policy based routing. Braun, H.W.  1989 June; 10 p. (Format: 
+      TXT=25468 bytes)
+
+1103  Proposed standard for the transmission of IP datagrams over FDDI 
+      Networks. Katz, D.  1989 June; 9 p. (Format: TXT=19439 bytes)  
+      (Obsoleted by RFC 1188)
+
+1102  Policy routing in Internet protocols. Clark, D.D.  1989 May; 22 p. 
+      (Format: TXT=59664 bytes)
+
+1101  DNS encoding of network names and other types. Mockapetris, P.V.  1989 
+      April; 14 p. (Format: TXT=28677 bytes)  (Updates RFC 1034, RFC 1035)
+
+1100  IAB official protocol standards. Defense Advanced Research Projects 
+      Agency, Internet Activities Board.  1989 April; 14 p. (Format: TXT=30101
+      bytes)  (Obsoletes RFC 1083; Obsoleted by RFC 1130)
+
+1099  Request for comments summary: RFC numbers 1000-1099. Reynolds, J.K.  
+      1991 December; 22 p. (Format: TXT=49108 bytes)
+
+1098  Simple Network Management Protocol (SNMP). Case, J.D.; Fedor, M.; 
+      Schoffstall, M.L.; Davin, C.  1989 April; 34 p. (Format: TXT=71563 
+      bytes)  (Obsoletes RFC 1067; Obsoleted by RFC 1157)
+
+1097  Telnet subliminal-message option. Miller, B.  1989 April 1; 3 p. 
+      (Format: TXT=5490 bytes)
+
+1096  Telnet X display location option. Marcy, G.A.  1989 March; 3 p. (Format:
+      TXT=4634 bytes)
+
+1095  Common Management Information Services and Protocol over TCP/IP (CMOT). 
+      Warrier, U.S.; Besaw, L.  1989 April; 67 p. (Format: TXT=157506 bytes)  
+      (Obsoleted by RFC 1189)
+
+1094  NFS: Network File System Protocol specification. Sun Microsystems, Inc.
+      1989 March; 27 p. (Format: TXT=51454 bytes)
+
+1093  NSFNET routing architecture. Braun, H.W.  1989 February; 9 p. (Format: 
+      TXT=20629 bytes)
+
+1092  EGP and policy based routing in the new NSFNET backbone. Rekhter, J.  
+      1989 February; 5 p. (Format: TXT=11865 bytes)
+
+1091  Telnet terminal-type option. VanBokkelen, J.  1989 February; 7 p. 
+      (Format: TXT=13439 bytes)  (Obsoletes RFC 930)
+
+1090  SMTP on X.25. Ullmann, R.  1989 February; 4 p. (Format: TXT=6141 bytes)
+
+1089  SNMP over Ethernet. Schoffstall, M.L.; Davin, C.; Fedor, M.; Case, J.D.
+      1989 February; 3 p. (Format: TXT=4458 bytes)
+
+1088  Standard for the transmission of IP datagrams over NetBIOS networks. 
+      McLaughlin, L.J.  1989 February; 3 p. (Format: TXT=5749 bytes)
+
+1087  Ethics and the Internet. Defense Advanced Research Projects Agency, 
+      Internet Activities Board.  1989 January; 2 p. (Format: TXT=4582 bytes)
+
+1086  ISO-TP0 bridge between TCP and X.25. Onions, J.P.; Rose, M.T.  1988 
+      December; 9 p. (Format: TXT=19934 bytes)
+
+1085  ISO presentation services on top of TCP/IP based internets. Rose, M.T.  
+      1988 December; 32 p. (Format: TXT=64643 bytes)
+
+1084  BOOTP vendor information extensions. Reynolds, J.K.  1988 December; 8 p.
+      (Format: TXT=16327 bytes)  (Obsoletes RFC 1048; Obsoleted by RFC 1395)
+
+1083  IAB official protocol standards. Defense Advanced Research Projects 
+      Agency, Internet Activities Board.  1988 December; 12 p. (Format: 
+      TXT=27128 bytes)  (Obsoleted by RFC 1100)
+
+1082  Post Office Protocol: Version 3: Extended service offerings. Rose, M.T.
+      1988 November; 11 p. (Format: TXT=25423 bytes)
+
+1081  Post Office Protocol: Version 3. Rose, M.T.  1988 November; 16 p. 
+      (Format: TXT=37009 bytes)  (Obsoleted by RFC 1225)
+
+1080  Telnet remote flow control option. Hedrick, C.L.  1988 November; 4 p. 
+      (Format: TXT=6688 bytes)  (Obsoleted by RFC 1372)
+
+1079  Telnet terminal speed option. Hedrick, C.L.  1988 December; 3 p. 
+      (Format: TXT=4942 bytes)
+
+1078  TCP port service Multiplexer (TCPMUX). Lottor, M.  1988 November; 2 p. 
+      (Format: TXT=3248 bytes)
+
+1077  Critical issues in high bandwidth networking. Leiner, B.M.,ed.  1988 
+      November; 46 p. (Format: TXT=116464 bytes)
+
+1076  HEMS monitoring and control language. Trewitt, G.; Partridge, C.  1988 
+      November; 42 p. (Format: TXT=98774 bytes)  (Obsoletes RFC 1023)
+
+1075  Distance Vector Multicast Routing Protocol. Waitzman, D.; Partridge, C.;
+      Deering, S.E.  1988 November; 24 p. (Format: TXT=54731 bytes)
+
+1074  NSFNET backbone SPF based Interior Gateway Protocol. Rekhter, J.  1988 
+      October; 5 p. (Format: TXT=10872 bytes)
+
+1073  Telnet window size option. Waitzman, D.  1988 October; 4 p. (Format: 
+      TXT=7639 bytes)
+
+1072  TCP extensions for long-delay paths. Jacobson, V.; Braden, R.T.  1988 
+      October; 16 p. (Format: TXT=36000 bytes)  (Obsoleted by RFC 1323)
+
+1071  Computing the Internet checksum. Braden, R.T.; Borman, D.A.; Partridge, 
+      C.  1988 September; 24 p. (Format: TXT=54941 bytes)  (Updated by RFC 
+      1141)
+
+1070  Use of the Internet as a subnetwork for experimentation with the OSI 
+      network layer. Hagens, R.A.; Hall, N.E.; Rose, M.T.  1989 February; 
+      17 p. (Format: TXT=37354 bytes)
+
+1069  Guidelines for the use of Internet-IP addresses in the ISO 
+      Connectionless-Mode Network Protocol. Callon, R.W.; Braun, H.W.  1989 
+      February; 10 p. (Format: TXT=24268 bytes)  (Obsoletes RFC 986)
+
+1068  Background File Transfer Program (BFTP). DeSchon, A.L.; Braden, R.T.  
+      1988 August; 27 p. (Format: TXT=51004 bytes)
+
+1067  Simple Network Management Protocol. Case, J.D.; Fedor, M.; Schoffstall, 
+      M.L.; Davin, J.R.  1988 August; 33 p. (Format: TXT=69592 bytes)  
+      (Obsoleted by RFC 1098)
+
+1066  Management Information Base for network management of TCP/IP-based 
+      internets. McCloghrie, K.; Rose, M.T.  1988 August; 90 p. (Format: 
+      TXT=135177 bytes)  (Obsoleted by RFC 1156)
+
+1065  Structure and identification of management information for TCP/IP-based 
+      internets. McCloghrie, K.; Rose, M.T.  1988 August; 21 p. (Format: 
+      TXT=38858 bytes)  (Obsoleted by RFC 1155)
+
+1064  Interactive Mail Access Protocol: Version 2. Crispin, M.R.  1988 July; 
+      26 p. (Format: TXT=57813 bytes)  (Obsoleted by RFC 1176, RFC 1203)
+
+1063  IP MTU discovery options. Mogul, J.C.; Kent, C.A.; Partridge, C.; 
+      McCloghrie, K.  1988 July; 11 p. (Format: TXT=27121 bytes)  
+      (Obsoleted by RFC 1191)
+
+1062  Internet numbers. Romano, S.; Stahl, M.K.; Recker, M.  1988 August; 
+      65 p. (Format: TXT=198729 bytes)  (Obsoletes RFC 1020; Obsoleted by RFC 
+      1117)
+
+1061  Not yet issued.
+
+1060  Assigned numbers. Reynolds, J.K.; Postel, J.B.  1990 March; 86 p. 
+      (Format: TXT=177923 bytes)  (Obsoletes RFC 1010; Obsoleted by RFC 1340; 
+      Updated by RFC 1349)
+
+1059  Network Time Protocol (version 1) specification and implementation. 
+      Mills, D.L.  1988 July; 58 p. (Format: TXT=140890 bytes)  (Obsoleted by 
+      RFC 1119)
+
+1058  Routing Information Protocol. Hedrick, C.L.  1988 June; 33 p. (Format: 
+      TXT=93285 bytes)  (Updated by RFC 1388)
+
+1057  RPC: Remote Procedure Call Protocol specification: Version 2. Sun 
+      Microsystems, Inc.  1988 June; 25 p. (Format: TXT=52462 bytes)  
+      (Obsoletes RFC 1050)
+
+1056  PCMAIL: A distributed mail system for personal computers. Lambert, M.L.
+      1988 June; 38 p. (Format: TXT=85368 bytes)  (Obsoletes RFC 993)
+
+1055  Nonstandard for transmission of IP datagrams over serial lines: SLIP. 
+      Romkey, J.L.  1988 June; 6 p. (Format: TXT=12911 bytes)
+
+1054  Host extensions for IP multicasting. Deering, S.E.  1988 May; 19 p. 
+      (Format: TXT=45465 bytes)  (Obsoletes RFC 988; Obsoleted by RFC 1112)
+
+1053  Telnet X.3 PAD option. Levy, S.; Jacobson, T.  1988 April; 21 p. 
+      (Format: TXT=48952 bytes)
+
+1052  IAB recommendations for the development of Internet network management 
+      standards. Cerf, V.G.  1988 April; 14 p. (Format: TXT=30569 bytes)
+
+1051  Standard for the transmission of IP datagrams and ARP packets over 
+      ARCNET networks. Prindeville, P.A.  1988 March; 4 p. (Format: TXT=7779 
+      bytes)  (Obsoleted by RFC 1201)
+
+1050  RPC: Remote Procedure Call Protocol specification. Sun Microsystems, 
+      Inc.  1988 April; 24 p. (Format: TXT=51540 bytes)  (Obsoleted by RFC 
+      1057)
+
+1049  Content-type header field for Internet messages. Sirbu, M.A.  1988 
+      March; 8 p. (Format: TXT=18923 bytes)
+
+1048  BOOTP vendor information extensions. Prindeville, P.A.  1988 February; 
+      7 p. (Format: TXT=15423 bytes)  (Obsoleted by RFC 1084 (, RFC 1395)
+
+1047  Duplicate messages and SMTP. Partridge, C.  1988 February; 3 p. (Format:
+      TXT=5888 bytes)
+
+1046  Queuing algorithm to provide type-of-service for IP links. Prue, W.; 
+      Postel, J.B.  1988 February; 11 p. (Format: TXT=30106 bytes)
+
+1045  VMTP: Versatile Message Transaction Protocol: Protocol specification. 
+      Cheriton, D.R.  1988 February; 123 p. (Format: TXT=272058 bytes)
+
+1044  Internet Protocol on Network System's HYPERchannel: Protocol 
+      specification. Hardwick, K.; Lekashman, J.  1988 February; 43 p. 
+      (Format: TXT=103241 bytes)
+
+1043  Telnet Data Entry Terminal option: DODIIS implementation. Yasuda, A.; 
+      Thompson, T.  1988 February; 26 p. (Format: TXT=59478 bytes)  (Updates 
+      RFC 732)
+
+1042  Standard for the transmission of IP datagrams over IEEE 802 networks. 
+      Postel, J.B.; Reynolds, J.K.  1988 February; 15 p. (Format: TXT=35201 
+      bytes)  (Obsoletes RFC 948)
+
+1041  Telnet 3270 regime option. Rekhter, Y.  1988 January; 6 p. (Format: 
+      TXT=11608 bytes)
+
+1040  Privacy enhancement for Internet electronic mail: Part I: Message 
+      encipherment and authentication procedures. Linn, J.  1988 January; 
+      29 p. (Format: TXT=76276 bytes)  (Obsoletes RFC 989; Obsoleted by RFC 
+      1113)
+
+1039  DoD statement on Open Systems Interconnection protocols. Latham, D.  
+      1988 January; 3 p. (Format: TXT=6194 bytes)  (Obsoletes RFC 945)
+
+1038  Draft revised IP security option. St. Johns, M.  1988 January; 7 p. 
+      (Format: TXT=15879 bytes)  (Obsoleted by RFC 1108)
+
+1037  NFILE - a file access protocol. Greenberg, B.; Keene, S.  1987 December;
+      86 p. (Format: TXT=197312 bytes)
+
+1036  Standard for interchange of USENET messages. Horton, M.R.; Adams, R.  
+      1987 December; 19 p. (Format: TXT=46891 bytes)  (Obsoletes RFC 850)
+
+1035  Domain names - implementation and specification. Mockapetris, P.V.  1987
+      November; 55 p. (Format: TXT=125626 bytes)  (Obsoletes RFC 973, RFC 882,
+      RFC 883; Updated by RFC 1101, RFC 1183, RFC 1348)
+
+1034  Domain names - concepts and facilities. Mockapetris, P.V.  1987 
+      November; 55 p. (Format: TXT=129180 bytes)  (Obsoletes RFC 973, RFC 882,
+      RFC 883; Updated by RFC 1101, RFC 1183, RFC 1348)
+
+1033  Domain administrators operations guide. Lottor, M.  1987 November; 22 p.
+      (Format: TXT=37263 bytes)
+
+1032  Domain administrators guide. Stahl, M.K.  1987 November; 14 p. (Format: 
+      TXT=29454 bytes)
+
+1031  MILNET name domain transition. Lazear, W.D.  1987 November; 10 p. 
+      (Format: TXT=20137 bytes)
+
+1030  On testing the NETBLT Protocol over divers networks. Lambert, M.L.  1987
+      November; 16 p. (Format: TXT=40964 bytes)
+
+1029  More fault tolerant approach to address resolution for a Multi-LAN 
+      system of Ethernets. Parr, G.  1988 May; 17 p. (Format: TXT=44019 bytes)
+
+1028  Simple Gateway Monitoring Protocol. Davin, J.R.; Case, J.D.; Fedor, M.; 
+      Schoffstall, M.L.  1987 November; 38 p. (Format: TXT=82440 bytes)
+
+1027  Using ARP to implement transparent subnet gateways. Carl-Mitchell, S.; 
+      Quarterman, J.S.  1987 October; 8 p. (Format: TXT=21297 bytes)
+
+1026  Addendum to RFC 987: (Mapping between X.400 and RFC-822). Kille, S.E.  
+      1987 September; 4 p. (Format: TXT=7117 bytes)  (Obsoleted by RFC 1327; 
+      Updates RFC 987; Updated by RFC 1138)
+
+1025  TCP and IP bake off. Postel, J.B.  1987 September; 6 p. (Format: 
+      TXT=11648 bytes)
+
+1024  HEMS variable definitions. Partridge, C.; Trewitt, G.  1987 October; 
+      74 p. (Format: TXT=126536 bytes)
+
+1023  HEMS monitoring and control language. Trewitt, G.; Partridge, C.  1987 
+      October; 17 p. (Format: TXT=40992 bytes)  (Obsoleted by RFC 1076)
+
+1022  High-level Entity Management Protocol (HEMP). Partridge, C.; Trewitt, G.
+      1987 October; 12 p. (Format: TXT=25348 bytes)
+
+1021  High-level Entity Management System (HEMS). Partridge, C.; Trewitt, G.  
+      1987 October; 5 p. (Format: TXT=12993 bytes)
+
+1020  Internet numbers. Romano, S.; Stahl, M.K.  1987 November; 51 p. (Format:
+      TXT=146864 bytes)  (Obsoletes RFC 997; Obsoleted by RFC 1062, RFC 1117)
+
+1019  Report of the Workshop on Environments for Computational Mathematics. 
+      Arnon, D.  1987 September; 8 p. (Format: TXT=21151 bytes)
+
+1018  Some comments on SQuID. McKenzie, A.M.  1987 August; 3 p. (Format: 
+      TXT=7931 bytes)
+
+1017  Network requirements for scientific research: Internet task force on 
+      scientific computing. Leiner, B.M.  1987 August; 19 p. (Format: 
+      TXT=49512 bytes)
+
+1016  Something a host could do with source quench: The Source Quench 
+      Introduced Delay (SQuID). Prue, W.; Postel, J.B.  1987 July; 18 p. 
+      (Format: TXT=47922 bytes)
+
+1015  Implementation plan for interagency research Internet. Leiner, B.M.  
+      1987 July; 24 p. (Format: TXT=63159 bytes)
+
+1014  XDR: External Data Representation standard. Sun Microsystems, Inc.  1987
+      June; 20 p. (Format: TXT=39316 bytes)
+
+1013  X Window System Protocol, version 11: Alpha update April 1987. 
+      Scheifler, R.W.  1987 June; 101 p. (Format: TXT=244905 bytes)
+
+1012  Bibliography of Request For Comments 1 through 999. Reynolds, J.K.; 
+      Postel, J.B.  1987 June; 64 p. (Format: TXT=129194 bytes)
+
+1011  Official Internet protocols. Reynolds, J.K.; Postel, J.B.  1987 May; 
+      52 p. (Format: TXT=74593 bytes)  (Obsoletes RFC 991)
+
+1010  Assigned numbers. Reynolds, J.K.; Postel, J.B.  1987 May; 44 p. (Format:
+      TXT=78179 bytes)  (Obsoletes RFC 990; Obsoleted by RFC 1060)
+
+1009  Requirements for Internet gateways. Braden, R.T.; Postel, J.B.  1987 
+      June; 55 p. (Format: TXT=128173 bytes)  (Obsoletes RFC 985)
+
+1008  Implementation guide for the ISO Transport Protocol. McCoy, W.  1987 
+      June; 73 p. (Format: TXT=204664 bytes)
+
+1007  Military supplement to the ISO Transport Protocol. McCoy, W.  1987 June;
+      23 p. (Format: TXT=51280 bytes)
+
+1006  ISO transport services on top of the TCP: Version 3. Rose, M.T.; Cass, 
+      D.E.  1987 May; 17 p. (Format: TXT=31935 bytes)  (Obsoletes RFC 983)
+
+1005  ARPANET AHIP-E Host Access Protocol (enhanced AHIP). Khanna, A.; Malis, 
+      A.G.  1987 May; 31 p. (Format: TXT=69957 bytes)
+
+1004  Distributed-protocol authentication scheme. Mills, D.L.  1987 April; 
+      8 p. (Format: TXT=21402 bytes)
+
+1003  Issues in defining an equations representation standard. Katz, A.R.  
+      1987 March; 7 p. (Format: TXT=19816 bytes)
+
+1002  Protocol standard for a NetBIOS service on a TCP/UDP transport: Detailed
+      specifications. Defense Advanced Research Projects Agency, Internet 
+      Activities Board, End-to-End Services Task Force, NetBIOS Working Group.
+      1987 March; 85 p. (Format: TXT=170262 bytes)
+
+1001  Protocol standard for a NetBIOS service on a TCP/UDP transport: Concepts
+      and methods. Defense Advanced Research Projects Agency, Internet 
+      Activities Board, End-to-End Services Task Force, NetBIOS Working Group.
+      1987 March; 68 p. (Format: TXT=158437 bytes)
+
+1000  Request For Comments reference guide. Reynolds, J.K.; Postel, J.B.  1987
+      August; 149 p. (Format: TXT=323960 bytes)  (Obsoletes RFC 999)
+
+999   Requests For Comments summary notes: 900-999. Westine, A.; Postel, J.B.
+      1987 April; 22 p. (Format: TXT=62877 bytes)  (Obsoleted by RFC 1000)
+
+998   NETBLT: A bulk data transfer protocol. Clark, D.D.; Lambert, M.L.; 
+      Zhang, L.  1987 March; 21 p. (Format: TXT=57147 bytes)  (Obsoletes RFC 
+      969)
+
+997   Internet numbers. Reynolds, J.K.; Postel, J.B.  1987 March; 42 p. 
+      (Format: TXT=123919 bytes)  (Obsoleted by RFC 1020, RFC 1117; Updates 
+      RFC 990)
+
+996   Statistics server. Mills, D.L.  1987 February; 3 p. (Format: TXT=6127 
+      bytes)
+
+995   End System to Intermediate System Routing Exchange Protocol for use in 
+      conjunction with ISO 8473. International Organization for 
+      Standardization.  1986 April; 41 p. (Format: TXT=94069 bytes)
+
+994   Final text of DIS 8473, Protocol for Providing the Connectionless-mode 
+      Network Service. International Organization for Standardization.  1986 
+      March; 52 p. (Format: TXT=129006 bytes)  (Obsoletes RFC 926)
+
+993   PCMAIL: A distributed mail system for personal computers. Clark, D.D.; 
+      Lambert, M.L.  1986 December; 28 p. (Format: TXT=71725 bytes)  
+      (Obsoletes RFC 984; Obsoleted by RFC 1056)
+
+992   On communication support for fault tolerant process groups. Birman, 
+      K.P.; Joseph, T.A.  1986 November; 18 p. (Format: TXT=52313 bytes)
+
+991   Official ARPA-Internet protocols. Reynolds, J.K.; Postel, J.B.  1986 
+      November; 46 p. (Format: TXT=65205 bytes)  (Obsoletes RFC 961; 
+      Obsoleted by RFC 1011)
+
+990   Assigned numbers. Reynolds, J.K.; Postel, J.B.  1986 November; 75 p. 
+      (Format: TXT=174784 bytes)  (Obsoletes RFC 960; Obsoleted by RFC 1010; 
+      Updated by RFC 997)
+
+989   Privacy enhancement for Internet electronic mail: Part I: Message 
+      encipherment and authentication procedures. Linn, J.  1987 February; 
+      23 p. (Format: TXT=63934 bytes)  (Obsoleted by RFC 1040, RFC 1113)
+
+988   Host extensions for IP multicasting. Deering, S.E.  1986 July; 20 p. 
+      (Format: TXT=45220 bytes)  (Obsoletes RFC 966; Obsoleted by RFC 1054, 
+      RFC 1112)
+
+987   Mapping between X.400 and RFC 822. Kille, S.E.  1986 June; 69 p. 
+      (Format: TXT=127540 bytes)  (Obsoleted by RFC 1327; Updated by RFC 1026)
+
+986   Guidelines for the use of Internet-IP addresses in the ISO 
+      Connectionless-Mode Network Protocol [Working draft]. Callon, R.W.; 
+      Braun, H.W.  1986 June; 7 p. (Format: TXT=13950 bytes)  (Obsoleted by 
+      RFC 1069)
+
+985   Requirements for Internet gateways - draft. National Science Foundation,
+      Network Technical Advisory Group.  1986 May; 23 p. (Format: TXT=59221 
+      bytes)  (Obsoleted by RFC 1009)
+
+984   PCMAIL: A distributed mail system for personal computers. Clark, D.D.; 
+      Lambert, M.L.  1986 May; 31 p. (Format: TXT=69333 bytes)  (Obsoleted by 
+      RFC 993)
+
+983   ISO transport arrives on top of the TCP. Cass, D.E.; Rose, M.T.  1986 
+      April; 27 p. (Format: TXT=59819 bytes)  (Obsoleted by RFC 1006)
+
+982   Guidelines for the specification of the structure of the Domain Specific
+      Part (DSP) of the ISO standard NSAP address. Braun, H.W.  1986 April; 
+      11 p. (Format: TXT=22595 bytes)
+
+981   Experimental multiple-path routing algorithm. Mills, D.L.  1986 March; 
+      22 p. (Format: TXT=59069 bytes)
+
+980   Protocol document order information. Jacobsen, O.J.; Postel, J.B.  1986 
+      March; 12 p. (Format: TXT=24416 bytes)
+
+979   PSN End-to-End functional specification. Malis, A.G.  1986 March; 15 p. 
+      (Format: TXT=39472 bytes)
+
+978   Voice File Interchange Protocol (VFIP). Reynolds, J.K.; Gillman, R.; 
+      Brackenridge, W.A.; Witkowski, A.; Postel, J.B.  1986 February; 5 p. 
+      (Format: TXT=9223 bytes)
+
+977   Network News Transfer Protocol. Kantor, B.; Lapsley, P.  1986 February; 
+      27 p. (Format: TXT=55062 bytes)
+
+976   UUCP mail interchange format standard. Horton, M.R.  1986 February; 
+      12 p. (Format: TXT=26814 bytes)
+
+975   Autonomous confederations. Mills, D.L.  1986 February; 10 p. (Format: 
+      TXT=28010 bytes)
+
+974   Mail routing and the domain system. Partridge, C.  1986 January; 7 p. 
+      (Format: TXT=18581 bytes)
+
+973   Domain system changes and observations. Mockapetris, P.V.  1986 January;
+      10 p. (Format: TXT=22364 bytes)  (Obsoleted by RFC 1034, RFC 1035; 
+      Updates RFC 882, RFC 883)
+
+972   Password Generator Protocol. Wancho, F.J.  1986 January; 2 p. (Format: 
+      TXT=3890 bytes)
+
+971   Survey of data representation standards. DeSchon, A.L.  1986 January; 
+      9 p. (Format: TXT=22883 bytes)
+
+970   On packet switches with infinite storage. Nagle, J.  1985 December; 9 p.
+      (Format: TXT=24970 bytes)
+
+969   NETBLT: A bulk data transfer protocol. Clark, D.D.; Lambert, M.L.; 
+      Zhang, L.  1985 December; 15 p. (Format: TXT=40894 bytes)  (Obsoleted by
+      RFC 998)
+
+968   Twas the night before start-up. Cerf, V.G.  1985 December; 2 p. (Format:
+      TXT=2573 bytes)
+
+967   All victims together. Padlipsky, M.A.  1985 December; 2 p. (Format: 
+      TXT=4820 bytes)
+
+966   Host groups: A multicast extension to the Internet Protocol. Deering, 
+      S.E.; Cheriton, D.R.  1985 December; 27 p. (Format: TXT=61006 bytes)  
+      (Obsoleted by RFC 988)
+
+965   Format for a graphical communication protocol. Aguilar, L.  1985 
+      December; 51 p. (Format: TXT=108361 bytes)
+
+964   Some problems with the specification of the Military Standard 
+      Transmission Control Protocol. Sidhu, D.P.  1985 November; 10 p. 
+      (Format: TXT=21542 bytes)
+
+963   Some problems with the specification of the Military Standard Internet 
+      Protocol. Sidhu, D.P.  1985 November; 19 p. (Format: TXT=45102 bytes)
+
+962   TCP-4 prime. Padlipsky, M.A.  1985 November; 2 p. (Format: TXT=2885 
+      bytes)
+
+961   Official ARPA-Internet protocols. Reynolds, J.K.; Postel, J.B.  1985 
+      December; 38 p. (Format: TXT=54874 bytes)  (Obsoletes RFC 944; 
+      Obsoleted by RFC 991)
+
+960   Assigned numbers. Reynolds, J.K.; Postel, J.B.  1985 December; 60 p. 
+      (Format: TXT=129292 bytes)  (Obsoletes RFC 943; Obsoleted by RFC 990)
+
+959   File Transfer Protocol. Postel, J.B.; Reynolds, J.K.  1985 October; 
+      69 p. (Format: TXT=151249 bytes)  (Obsoletes RFC 765 [IEN 149])
+
+958   Network Time Protocol (NTP). Mills, D.L.  1985 September; 14 p. (Format:
+      TXT=31520 bytes)  (Obsoleted by RFC 1119)
+
+957   Experiments in network clock synchronization. Mills, D.L.  1985 
+      September; 27 p. (Format: TXT=70490 bytes)
+
+956   Algorithms for synchronizing network clocks. Mills, D.L.  1985 
+      September; 26 p. (Format: TXT=68868 bytes)
+
+955   Towards a transport service for transaction processing applications. 
+      Braden, R.T.  1985 September; 10 p. (Format: TXT=23066 bytes)
+
+954   NICNAME/WHOIS. Harrenstien, K.; Stahl, M.K.; Feinler, E.J.  1985 
+      October; 4 p. (Format: TXT=7623 bytes)  (Obsoletes RFC 812)
+
+953   Hostname Server. Harrenstien, K.; Stahl, M.K.; Feinler, E.J.  1985 
+      October; 5 p. (Format: TXT=8588 bytes)  (Obsoletes RFC 811)
+
+952   DoD Internet host table specification. Harrenstien, K.; Stahl, M.K.; 
+      Feinler, E.J.  1985 October; 6 p. (Format: TXT=12728 bytes)  (Obsoletes 
+      RFC 810)
+
+951   Bootstrap Protocol. Croft, W.J.; Gilmore, J.  1985 September; 12 p. 
+      (Format: TXT=29038 bytes)
+
+950   Internet standard subnetting procedure. Mogul, J.C.; Postel, J.B.  1985 
+      August; 18 p. (Format: TXT=39010 bytes)  (Updates RFC 792)
+
+949   FTP unique-named store command. Padlipsky, M.A.  1985 July; 2 p. 
+      (Format: TXT=4130 bytes)
+
+948   Two methods for the transmission of IP datagrams over IEEE 802.3 
+      networks. Winston, I.  1985 June; 5 p. (Format: TXT=11843 bytes)  
+      (Obsoleted by RFC 1042)
+
+947   Multi-network broadcasting within the Internet. Lebowitz, K.; Mankins, 
+      D.  1985 June; 5 p. (Format: TXT=12854 bytes)
+
+946   Telnet terminal location number option. Nedved, R.  1985 May; 4 p. 
+      (Format: TXT=6513 bytes)
+
+945   DoD statement on the NRC report. Postel, J.B.  1985 May; 2 p. (Format: 
+      TXT=5131 bytes)  (Obsoleted by RFC 1039)
+
+944   Official ARPA-Internet protocols. Reynolds, J.K.; Postel, J.B.  1985 
+      April; 40 p. (Format: TXT=63693 bytes)  (Obsoletes RFC 924; Obsoleted by
+      RFC 961)
+
+943   Assigned numbers. Reynolds, J.K.; Postel, J.B.  1985 April; 50 p. 
+      (Format: TXT=108133 bytes)  (Obsoletes RFC 923; Obsoleted by RFC 960)
+
+942   Transport protocols for Department of Defense data networks. National 
+      Research Council.  1985 February; 68 p. (Format: TXT=222477 bytes)
+
+941   Addendum to the network service definition covering network layer 
+      addressing. International Organization for Standardization.  1985 April;
+      34 p. (Format: TXT=70706 bytes)
+
+940   Toward an Internet standard scheme for subnetting. Gateway Algorithms 
+      and Data Structures Task Force.  1985 April; 3 p. (Format: TXT=7061 
+      bytes)
+
+939   Executive summary of the NRC report on transport protocols for 
+      Department of Defense data networks. National Research Council.  1985 
+      February; 20 p. (Format: TXT=43485 bytes)
+
+938   Internet Reliable Transaction Protocol functional and interface 
+      specification. Miller, T.  1985 February; 16 p. (Format: TXT=40561 
+      bytes)
+
+937   Post Office Protocol: Version 2. Butler, M.; Postel, J.B.; Chase, D.; 
+      Goldberger, J.; Reynolds, J.K.  1985 February; 24 p. (Format: TXT=43762 
+      bytes)  (Obsoletes RFC 918)
+
+936   Another Internet subnet addressing scheme. Karels, M.J.  1985 February; 
+      4 p. (Format: TXT=10407 bytes)
+
+935   Reliable link layer protocols. Robinson, J.G.  1985 January; 13 p. 
+      (Format: TXT=32335 bytes)
+
+934   Proposed standard for message encapsulation. Rose, M.T.; Stefferud, E.A.
+      1985 January; 10 p. (Format: TXT=22340 bytes)
+
+933   Output marking Telnet option. Silverman, S.  1985 January; 4 p. (Format:
+      TXT=6943 bytes)
+
+932   Subnetwork addressing scheme. Clark, D.D.  1985 January; 4 p. (Format: 
+      TXT=9509 bytes)
+
+931   Authentication server. St. Johns, M.  1985 January; 4 p. (Format: 
+      TXT=9259 bytes)  (Obsoletes RFC 912; Obsoleted by RFC 1413)
+
+930   Telnet terminal type option. Solomon, M.; Wimmers, E.  1985 January; 
+      4 p. (Format: TXT=6805 bytes)  (Obsoletes RFC 884; Obsoleted by RFC 
+      1091)
+
+929   Proposed Host-Front End Protocol. Lilienkamp, J.; Mandell, R.; 
+      Padlipsky, M.A.  1984 December; 52 p. (Format: TXT=138234 bytes)
+
+928   Introduction to proposed DoD standard H-FP. Padlipsky, M.A.  1984 
+      December; 21 p. (Format: TXT=61658 bytes)
+
+927   TACACS user identification Telnet option. Anderson, B.A.  1984 December;
+      4 p. (Format: TXT=5702 bytes)
+
+926   Protocol for providing the connectionless mode network services. 
+      International Organization for Standardization.  1984 December; 101 p. 
+      (Format: TXT=172024 bytes)  (Obsoleted by RFC 994)
+
+925   Multi-LAN address resolution. Postel, J.B.  1984 October; 15 p. (Format:
+      TXT=31992 bytes)
+
+924   Official ARPA-Internet protocols for connecting personal computers to 
+      the Internet. Reynolds, J.K.; Postel, J.B.  1984 October; 35 p. (Format:
+      TXT=50543 bytes)  (Obsoletes RFC 901; Obsoleted by RFC 944)
+
+923   Assigned numbers. Reynolds, J.K.; Postel, J.B.  1984 October; 47 p. 
+      (Format: TXT=99193 bytes)  (Obsoletes RFC 900; Obsoleted by RFC 943)
+
+922   Broadcasting Internet datagrams in the presence of subnets. Mogul, J.C.
+      1984 October; 12 p. (Format: TXT=24832 bytes)
+
+921   Domain name system implementation schedule - revised. Postel, J.B.  1984
+      October; 13 p. (Format: TXT=24059 bytes)  (Updates RFC 897)
+
+920   Domain requirements. Postel, J.B.; Reynolds, J.K.  1984 October; 14 p. 
+      (Format: TXT=28621 bytes)
+
+919   Broadcasting Internet datagrams. Mogul, J.C.  1984 October; 8 p. 
+      (Format: TXT=16838 bytes)
+
+918   Post Office Protocol. Reynolds, J.K.  1984 October; 5 p. (Format: 
+      TXT=10166 bytes)  (Obsoleted by RFC 937)
+
+917   Internet subnets. Mogul, J.C.  1984 October; 22 p. (Format: TXT=48326 
+      bytes)
+
+916   Reliable Asynchronous Transfer Protocol (RATP). Finn, G.G.  1984 
+      October; 54 p. (Format: TXT=113815 bytes)
+
+915   Network mail path service. Elvy, M.A.; Nedved, R.  1984 December; 11 p. 
+      (Format: TXT=22262 bytes)
+
+914   Thinwire protocol for connecting personal computers to the Internet. 
+      Farber, D.J.; Delp, G.; Conte, T.M.  1984 September; 22 p. (Format: 
+      TXT=58586 bytes)
+
+913   Simple File Transfer Protocol. Lottor, M.  1984 September; 15 p. 
+      (Format: TXT=21784 bytes)
+
+912   Authentication service. St. Johns, M.  1984 September; 3 p. (Format: 
+      TXT=4715 bytes)  (Obsoleted by RFC 931)
+
+911   EGP Gateway under Berkeley UNIX 4.2. Kirton, P.  1984 August 22; 22 p. 
+      (Format: TXT=57043 bytes)
+
+910   Multimedia mail meeting notes. Forsdick, H.C.  1984 August; 11 p. 
+      (Format: TXT=25553 bytes)
+
+909   Loader Debugger Protocol. Welles, C.; Milliken, W.  1984 July; 127 p. 
+      (Format: TXT=217583 bytes)
+
+908   Reliable Data Protocol. Velten, D.; Hinden, R.M.; Sax, J.  1984 July; 
+      56 p. (Format: TXT=101185 bytes)  (Updated by RFC 1151)
+
+907   Host Access Protocol specification. Bolt Beranek and Newman, Inc.  1984 
+      July; 75 p. (Format: TXT=134566 bytes)  (Updated by RFC 1221)
+
+906   Bootstrap loading using TFTP. Finlayson, R.  1984 June; 4 p. (Format: 
+      TXT=10329 bytes)
+
+905   ISO Transport Protocol specification ISO DP 8073. McKenzie, A.M.  1984 
+      April; 154 p. (Format: TXT=258729 bytes)  (Obsoletes RFC 892)
+
+904   Exterior Gateway Protocol formal specification. Mills, D.L.  1984 April;
+      30 p. (Format: TXT=65226 bytes)  (Updates RFC 827, RFC 888)
+
+903   Reverse Address Resolution Protocol. Finlayson, R.; Mann, T.; Mogul, 
+      J.C.; Theimer, M.  1984 June; 4 p. (Format: TXT=9572 bytes)
+
+902   ARPA Internet Protocol policy. Reynolds, J.K.; Postel, J.B.  1984 July; 
+      5 p. (Format: TXT=11317 bytes)
+
+901   Official ARPA-Internet protocols. Reynolds, J.K.; Postel, J.B.  1984 
+      June; 28 p. (Format: TXT=42682 bytes)  (Obsoletes RFC 880; Obsoleted by 
+      RFC 924)
+
+900   Assigned Numbers. Reynolds, J.K.; Postel, J.B.  1984 June; 43 p. 
+      (Format: TXT=84610 bytes)  (Obsoletes RFC 870; Obsoleted by RFC 923)
+
+899   Request For Comments summary notes: 800-899. Postel, J.B.; Westine, A.  
+      1984 May; 18 p. (Format: TXT=41028 bytes)
+
+898   Gateway special interest group meeting notes. Hinden, R.M.; Postel, 
+      J.B.; Muuss, M.; Reynolds, J.K.  1984 April; 24 p. (Format: TXT=43504 
+      bytes)
+
+897   Domain name system implementation schedule. Postel, J.B.  1984 February;
+      8 p. (Format: TXT=16139 bytes)  (Updates RFC 881; Updated by RFC 921)
+
+896   Congestion control in IP/TCP internetworks. Nagle, J.  1984 January 6; 
+      9 p. (Format: TXT=27294 bytes)
+
+895   Standard for the transmission of IP datagrams over experimental Ethernet
+      networks. Postel, J.B.  1984 April; 3 p. (Format: TXT=5156 bytes)
+
+894   Standard for the transmission of IP datagrams over Ethernet networks. 
+      Hornig, C.  1984 April; 3 p. (Format: TXT=5868 bytes)
+
+893   Trailer encapsulations. Leffler, S.; Karels, M.J.  1984 April; 3 p. 
+      (Format: TXT=13695 bytes)
+
+892   ISO Transport Protocol specification [Draft]. International Organization
+      for Standardization.  1983 December; 82 p. (Format: TXT=162564 bytes)  
+      (Obsoleted by RFC 905)
+
+891   DCN local-network protocols. Mills, D.L.  1983 December; 26 p. (Format: 
+      TXT=66769 bytes)
+
+890   Exterior Gateway Protocol implementation schedule. Postel, J.B.  1984 
+      February; 3 p. (Format: TXT=6070 bytes)
+
+889   Internet delay experiments. Mills, D.L.  1983 December; 12 p. (Format: 
+      TXT=27812 bytes)
+
+888   "STUB" Exterior Gateway Protocol. Seamonson, L.; Rosen, E.C.  1984 
+      January; 38 p. (Format: TXT=55585 bytes)  (Updated by RFC 904)
+
+887   Resource Location Protocol. Accetta, M.  1983 December; 16 p. (Format: 
+      TXT=37683 bytes)
+
+886   Proposed standard for message header munging. Rose, M.T.  1983 December 
+      15; 16 p. (Format: TXT=31546 bytes)
+
+885   Telnet end of record option. Postel, J.B.  1983 December; 2 p. (Format: 
+      TXT=3346 bytes)
+
+884   Telnet terminal type option. Solomon, M.; Wimmers, E.  1983 December; 
+      5 p. (Format: TXT=8166 bytes)  (Obsoleted by RFC 930)
+
+883   Domain names: Implementation specification. Mockapetris, P.V.  1983 
+      November; 73 p. (Format: TXT=179416 bytes)  (Obsoleted by RFC 1034, RFC 
+      1035; Updated by RFC 973)
+
+882   Domain names: Concepts and facilities. Mockapetris, P.V.  1983 November;
+      31 p. (Format: TXT=81574 bytes)  (Obsoleted by RFC 1034, RFC 1035; 
+      Updated by RFC 973)
+
+881   Domain names plan and schedule. Postel, J.B.  1983 November; 10 p. 
+      (Format: TXT=24070 bytes)  (Updated by RFC 897)
+
+880   Official protocols. Reynolds, J.K.; Postel, J.B.  1983 October; 26 p. 
+      (Format: TXT=38840 bytes)  (Obsoletes RFC 840; Obsoleted by RFC 901)
+
+879   TCP maximum segment size and related topics. Postel, J.B.  1983 
+      November; 11 p. (Format: TXT=22662 bytes)
+
+878   ARPANET 1822L Host Access Protocol. Malis, A.G.  1983 December; 48 p. 
+      (Format: TXT=77784 bytes)  (Obsoletes RFC 851)
+
+877   Standard for the transmission of IP datagrams over public data networks.
+      Korb, J.T.  1983 September; 2 p. (Format: TXT=3385 bytes)  (Obsoleted by
+      RFC 1356)
+
+876   Survey of SMTP implementations. Smallberg, D.  1983 September; 13 p. 
+      (Format: TXT=38529 bytes)
+
+875   Gateways, architectures, and heffalumps. Padlipsky, M.A.  1982 
+      September; 8 p. (Format: TXT=23380 bytes)
+
+874   Critique of X.25. Padlipsky, M.A.  1982 September; 13 p. (Format: 
+      TXT=37259 bytes)
+
+873   Illusion of vendor support. Padlipsky, M.A.  1982 September; 8 p. 
+      (Format: TXT=23673 bytes)
+
+872   TCP-on-a-LAN. Padlipsky, M.A.  1982 September; 8 p. (Format: TXT=22994 
+      bytes)
+
+871   Perspective on the ARPANET reference model. Padlipsky, M.A.  1982 
+      September; 25 p. (Format: TXT=76037 bytes)
+
+870   Assigned numbers. Reynolds, J.K.; Postel, J.B.  1983 October; 26 p. 
+      (Format: TXT=57563 bytes)  (Obsoletes RFC 820; Obsoleted by RFC 900)
+
+869   Host Monitoring Protocol. Hinden, R.M.  1983 December; 70 p. (Format: 
+      TXT=98720 bytes)
+
+868   Time Protocol. Postel, J.B.; Harrenstien, K.  1983 May; 2 p. (Format: 
+      TXT=3140 bytes)
+
+867   Daytime Protocol. Postel, J.B.  1983 May; 2 p. (Format: TXT=2405 bytes)
+
+866   Active users. Postel, J.B.  1983 May; 1 p. (Format: TXT=2087 bytes)
+
+865   Quote of the Day Protocol. Postel, J.B.  1983 May; 1 p. (Format: 
+      TXT=1734 bytes)
+
+864   Character Generator Protocol. Postel, J.B.  1983 May; 3 p. (Format: 
+      TXT=7016 bytes)
+
+863   Discard Protocol. Postel, J.B.  1983 May; 1 p. (Format: TXT=1297 bytes)
+
+862   Echo Protocol. Postel, J.B.  1983 May; 1 p. (Format: TXT=1294 bytes)
+
+861   Telnet extended options: List option. Postel, J.B.; Reynolds, J.K.  1983
+      May; 1 p. (Format: TXT=3181 bytes)  (Obsoletes NIC 16239)
+
+860   Telnet timing mark option. Postel, J.B.; Reynolds, J.K.  1983 May; 4 p. 
+      (Format: TXT=8108 bytes)  (Obsoletes NIC 16238)
+
+859   Telnet status option. Postel, J.B.; Reynolds, J.K.  1983 May; 3 p. 
+      (Format: TXT=4443 bytes)  (Obsoletes RFC 651)
+
+858   Telnet Suppress Go Ahead option. Postel, J.B.; Reynolds, J.K.  1983 May;
+      3 p. (Format: TXT=3825 bytes)  (Obsoletes NIC 15392)
+
+857   Telnet echo option. Postel, J.B.; Reynolds, J.K.  1983 May; 5 p. 
+      (Format: TXT=11143 bytes)  (Obsoletes NIC 15390)
+
+856   Telnet binary transmission. Postel, J.B.; Reynolds, J.K.  1983 May; 4 p.
+      (Format: TXT=9192 bytes)  (Obsoletes NIC 15389)
+
+855   Telnet option specifications. Postel, J.B.; Reynolds, J.K.  1983 May; 
+      4 p. (Format: TXT=6218 bytes)  (Obsoletes NIC 18640)
+
+854   Telnet Protocol specification. Postel, J.B.; Reynolds, J.K.  1983 May; 
+      15 p. (Format: TXT=39371 bytes)  (Obsoletes RFC 764, NIC 18639)
+
+853   Not issued.
+
+852   ARPANET short blocking feature. Malis, A.G.  1983 April; 13 p. (Format: 
+      TXT=17151 bytes)
+
+851   ARPANET 1822L Host Access Protocol. Malis, A.G.  1983 April 18; 44 p. 
+      (Format: TXT=72042 bytes)  (Obsoletes RFC 802; Obsoleted by RFC 878)
+
+850   Standard for interchange of USENET messages. Horton, M.R.  1983 June; 
+      18 p. (Format: TXT=43871 bytes)  (Obsoleted by RFC 1036)
+
+849   Suggestions for improved host table distribution. Crispin, M.R.  1983 
+      May; 2 p. (Format: TXT=5290 bytes)
+
+848   Who provides the "little" TCP services?. Smallberg, D.  1983 March 14; 
+      5 p. (Format: TXT=11280 bytes)
+
+847   Summary of Smallberg surveys. Smallberg, D.; Westine, A.; Postel, J.B.  
+      1983 February; 2 p. (Format: TXT=3906 bytes)  (Obsoletes RFC 846)
+
+846   Who talks TCP? - survey of 22 February 1983. Smallberg, D.  1983 
+      February 23; 14 p. (Format: TXT=46421 bytes)  (Obsoletes RFC 845; 
+      Obsoleted by RFC 847)
+
+845   Who talks TCP? - survey of 15 February 1983. Smallberg, D.  1983 
+      February 17; 14 p. (Format: TXT=46806 bytes)  (Obsoletes RFC 843; 
+      Obsoleted by RFC 846)
+
+844   Who talks ICMP, too? - Survey of 18 February 1983. Clements, R.  1983 
+      February 18; 5 p. (Format: TXT=9323 bytes)  (Updates RFC 843)
+
+843   Who talks TCP? - survey of 8 February 83. Smallberg, D.  1983 February 
+      9; 14 p. (Format: TXT=47023 bytes)  (Obsoletes RFC 842; Obsoleted by RFC
+      845; Updated by RFC 844)
+
+842   Who talks TCP? - survey of 1 February 83. Smallberg, D.  1983 February 
+      3; 14 p. (Format: TXT=46784 bytes)  (Obsoletes RFC 839; Obsoleted by RFC
+      843)
+
+841   Specification for message format for Computer Based Message Systems. 
+      National Bureau of Standards.  1983 January 27; 110 p. (Format: 
+      TXT=238774 bytes)  (Obsoletes RFC 806)
+
+840   Official protocols. Postel, J.B.  1983 April 13; 23 p. (Format: 
+      TXT=34868 bytes)  (Obsoleted by RFC 880)
+
+839   Who talks TCP?. Smallberg, D.  1983 January 26; 14 p. (Format: TXT=45987
+      bytes)  (Obsoletes RFC 838; Obsoleted by RFC 842)
+
+838   Who talks TCP?. Smallberg, D.  1983 January 20; 14 p. (Format: TXT=45844
+      bytes)  (Obsoletes RFC 837; Obsoleted by RFC 839)
+
+837   Who talks TCP?. Smallberg, D.  1983 January 12; 14 p. (Format: TXT=45627
+      bytes)  (Obsoletes RFC 836; Obsoleted by RFC 838)
+
+836   Who talks TCP?. Smallberg, D.  1983 January 5; 13 p. (Format: TXT=44397 
+      bytes)  (Obsoletes RFC 835; Obsoleted by RFC 837)
+
+835   Who talks TCP?. Smallberg, D.  1982 December 29; 13 p. (Format: 
+      TXT=43713 bytes)  (Obsoletes RFC 834; Obsoleted by RFC 836)
+
+834   Who talks TCP?. Smallberg, D.  1982 December 22; 13 p. (Format: 
+      TXT=43512 bytes)  (Obsoletes RFC 833; Obsoleted by RFC 835)
+
+833   Who talks TCP?. Smallberg, D.  1982 December 14; 13 p. (Format: 
+      TXT=43728 bytes)  (Obsoletes RFC 832; Obsoleted by RFC 834)
+
+832   Who talks TCP?. Smallberg, D.  1982 December 7; 13 p. (Format: TXT=43518
+      bytes)  (Obsoleted by RFC 833)
+
+831   Backup access to the European side of SATNET. Braden, R.T.  1982 
+      December; 5 p. (Format: TXT=12090 bytes)
+
+830   Distributed system for Internet name service. Su, Z.  1982 October; 
+      16 p. (Format: TXT=32585 bytes)
+
+829   Packet satellite technology reference sources. Cerf, V.G.  1982 
+      November; 5 p. (Format: TXT=10919 bytes)
+
+828   Data communications: IFIP's international "network" of experts. Owen, K.
+      1982 August; 11 p. (Format: TXT=29922 bytes)
+
+827   Exterior Gateway Protocol (EGP). Rosen, E.C.  1982 October; 44 p. 
+      (Format: TXT=68436 bytes)  (Updated by RFC 904)
+
+826   Ethernet Address Resolution Protocol: Or converting network protocol 
+      addresses to 48.bit Ethernet address for transmission on Ethernet 
+      hardware. Plummer, D.C.  1982 November; 10 p. (Format: TXT=22026 bytes)
+
+825   Request for comments on Requests For Comments. Postel, J.B.  1982 
+      November; 2 p. (Format: TXT=4255 bytes)  (Obsoleted by RFC 1111)
+
+824   CRONUS Virtual Local Network. MacGregor, W.I.; Tappan, D.C.  1982 August
+      25; 41 p. (Format: TXT=58732 bytes)
+
+823   DARPA Internet gateway. Hinden, R.M.; Sheltzer, A.  1982 September; 
+      33 p. (Format: TXT=62620 bytes)  (Updates IEN 109, IEN 30)
+
+822   Standard for the format of ARPA Internet text messages. Crocker, D.  
+      1982 August 13; 47 p. (Format: TXT=109200 bytes)  (Obsoletes RFC 733; 
+      Updated by RFC 1327)
+
+821   Simple Mail Transfer Protocol. Postel, J.B.  1982 August; 58 p. (Format:
+      TXT=124482 bytes)  (Obsoletes RFC 788)
+
+820   Assigned numbers. Postel, J.B.  1982 August 14; 1 p. (Format: TXT=54213 
+      bytes)  (Obsoletes RFC 790; Obsoleted by RFC 870)
+
+819   Domain naming convention for Internet user applications. Su, Z.; Postel,
+      J.B.  1982 August; 18 p. (Format: TXT=36358 bytes)
+
+818   Remote User Telnet service. Postel, J.B.  1982 November; 2 p. (Format: 
+      TXT=3809 bytes)
+
+817   Modularity and efficiency in protocol implementation. Clark, D.D.  1982 
+      July; 26 p. (Format: TXT=47319 bytes)
+
+816   Fault isolation and recovery. Clark, D.D.  1982 July; 12 p. (Format: 
+      TXT=20754 bytes)
+
+815   IP datagram reassembly algorithms. Clark, D.D.  1982 July; 9 p. (Format:
+      TXT=15028 bytes)
+
+814   Name, addresses, ports, and routes. Clark, D.D.  1982 July; 14 p. 
+      (Format: TXT=25426 bytes)
+
+813   Window and acknowlegement strategy in TCP. Clark, D.D.  1982 July; 22 p.
+      (Format: TXT=39277 bytes)
+
+812   NICNAME/WHOIS. Harrenstien, K.; White, V.  1982 March 1; 3 p. (Format: 
+      TXT=5562 bytes)  (Obsoleted by RFC 954)
+
+811   Hostnames Server. Harrenstien, K.; White, V.; Feinler, E.J.  1982 March 
+      1; 5 p. (Format: TXT=8007 bytes)  (Obsoleted by RFC 953)
+
+810   DoD Internet host table specification. Feinler, E.J.; Harrenstien, K.; 
+      Su, Z.; White, V.  1982 March 1; 9 p. (Format: TXT=14659 bytes)  
+      (Obsoletes RFC 608; Obsoleted by RFC 952)
+
+809   UCL facsimile system. Chang, T.  1982 February; 96 p. (Format: 
+      TXT=171153 bytes)
+
+808   Summary of computer mail services meeting held at BBN on 10 January 
+      1979. Postel, J.B.  1982 March 1; 8 p. (Format: TXT=15930 bytes)
+
+807   Multimedia mail meeting notes. Postel, J.B.  1982 February 9; 6 p. 
+      (Format: TXT=11633 bytes)
+
+806   Proposed Federal Information Processing Standard: Specification for 
+      message format for computer based message systems. National Bureau of 
+      Standards.  1981 September; 99 p. (Format: TXT=216377 bytes)  
+      (Obsoleted by RFC 841)
+
+805   Computer mail meeting notes. Postel, J.B.  1982 February 8; 6 p. 
+      (Format: TXT=12522 bytes)
+
+804   CCITT draft recommendation T.4 [Standardization of Group 3 facsimile 
+      apparatus for document transmission]. International Telecommunication 
+      Union, International Telegraph and Telephone Consultative Committee.  
+      1981; 12 p. (Format: TXT=17025 bytes)
+
+803   Dacom 450/500 facsimile data transcoding. Agarwal, A.; O'Connor, M.J.; 
+      Mills, D.L.  1981 November 2; 14 p. (Format: TXT=33826 bytes)
+
+802   ARPANET 1822L Host Access Protocol. Malis, A.G.  1981 November; 43 p. 
+      (Format: TXT=62470 bytes)  (Obsoleted by RFC 851)
+
+801   NCP/TCP transition plan. Postel, J.B.  1981 November; 21 p. (Format: 
+      TXT=42041 bytes)
+
+800   Request For Comments summary notes: 700-799. Postel, J.B.; Vernon, J.  
+      1982 November; 10 p. (Format: TXT=18354 bytes)
+
+799   Internet name domains. Mills, D.L.  1981 September; 6 p. (Format: 
+      TXT=14189 bytes)
+
+798   Decoding facsimile data from the Rapicom 450. Katz, A.R.  1981 
+      September; 17 p. (Format: TXT=39853 bytes)
+
+797   Format for Bitmap files. Katz, A.R.  1981 September; 2 p. (Format: 
+      TXT=3183 bytes)
+
+796   Address mappings. Postel, J.B.  1981 September; 7 p. (Format: TXT=11645 
+      bytes)  (Obsoletes IEN 115)
+
+795   Service mappings. Postel, J.B.  1981 September; 7 p. (Format: TXT=5460 
+      bytes)
+
+794   Pre-emption. Cerf, V.G.  1981 September; 4 p. (Format: TXT=6022 bytes)  
+      (Updates IEN 125)
+
+793   Transmission Control Protocol. Postel, J.B.  1981 September; 85 p. 
+      (Format: TXT=177957 bytes)
+
+792   Internet Control Message Protocol. Postel, J.B.  1981 September; 21 p. 
+      (Format: TXT=30404 bytes)  (Obsoletes RFC 777; Updated by RFC 950)
+
+791   Internet Protocol. Postel, J.B.  1981 September; 45 p. (Format: 
+      TXT=97779 bytes)  (Obsoletes RFC 760; Updated by RFC 1349)
+
+790   Assigned numbers. Postel, J.B.  1981 September; 15 p. (Format: TXT=36186
+      bytes)  (Obsoletes RFC 776; Obsoleted by RFC 820)
+
+789   Vulnerabilities of network control protocols: An example. Rosen, E.C.  
+      1981 July; 15 p. (Format: TXT=26440 bytes)
+
+788   Simple Mail Transfer Protocol. Postel, J.B.  1981 November; 62 p. 
+      (Format: TXT=112698 bytes)  (Obsoletes RFC 780; Obsoleted by RFC 821)
+
+787   Connectionless data transmission survey/tutorial. Chapin, A.L.  1981 
+      July; 41 p. (Format: TXT=86362 bytes)
+
+786   Mail Transfer Protocol: ISI TOPS20 MTP-NIMAIL interface. Sluizer, S.; 
+      Postel, J.B.  1981 July; 2 p. (Format: TXT=3245 bytes)
+
+785   Mail Transfer Protocol: ISI TOPS20 file definitions. Sluizer, S.; 
+      Postel, J.B.  1981 July; 3 p. (Format: TXT=7206 bytes)
+
+784   Mail Transfer Protocol: ISI TOPS20 implementation. Sluizer, S.; Postel, 
+      J.B.  1981 July; 3 p. (Format: TXT=6030 bytes)
+
+783   TFTP Protocol (revision 2). Sollins, K.R.  1981 June; 18 p. (Format: 
+      TXT=23522 bytes)  (Obsoletes IEN 133; Obsoleted by RFC 1350)
+
+782   Virtual Terminal management model. Nabielsky, J.; Skelton, A.P.  1981; 
+      20 p. (Format: TXT=44887 bytes)
+
+781   Specification of the Internet Protocol (IP) timestamp option. Su, Z.  
+      1981 May; 2 p. (Format: TXT=4100 bytes)
+
+780   Mail Transfer Protocol. Sluizer, S.; Postel, J.B.  1981 May; 43 p. 
+      (Format: TXT=82951 bytes)  (Obsoletes RFC 772; Obsoleted by RFC 788)
+
+779   Telnet send-location option. Killian, E.  1981 April; 2 p. (Format: 
+      TXT=2680 bytes)
+
+778   DCNET Internet Clock Service. Mills, D.L.  1981 April 18; 5 p. (Format: 
+      TXT=9689 bytes)
+
+777   Internet Control Message Protocol. Postel, J.B.  1981 April; 14 p. 
+      (Format: TXT=80232 bytes)  (Obsoletes RFC 760; Obsoleted by RFC 792)
+
+776   Assigned numbers. Postel, J.B.  1981 January; 13 p. (Format: TXT=31065 
+      bytes)  (Obsoletes RFC 770; Obsoleted by RFC 790)
+
+775   Directory oriented FTP commands. Mankins, D.; Franklin, D.; Owen, A.D.  
+      1980 December; 6 p. (Format: TXT=9822 bytes)
+
+774   Internet Protocol Handbook: Table of contents. Postel, J.B.  1980 
+      October; 3 p. (Format: TXT=3625 bytes)  (Obsoletes RFC 766)
+
+773   Comments on NCP/TCP mail service transition strategy. Cerf, V.G.  1980 
+      October; 11 p. (Format: TXT=22818 bytes)
+
+772   Mail Transfer Protocol. Sluizer, S.; Postel, J.B.  1980 September; 31 p.
+      (Format: TXT=62858 bytes)  (Obsoleted by RFC 780)
+
+771   Mail transition plan. Cerf, V.G.; Postel, J.B.  1980 September; 9 p. 
+      (Format: TXT=19154 bytes)
+
+770   Assigned numbers. Postel, J.B.  1980 September; 15 p. (Format: TXT=27117
+      bytes)  (Obsoletes RFC 762; Obsoleted by RFC 776)
+
+769   Rapicom 450 facsimile file format. Postel, J.B.  1980 September 26; 2 p.
+      (Format: TXT=4194 bytes)
+
+768   User Datagram Protocol. Postel, J.B.  1980 August 28; 3 p. (Format: 
+      TXT=6069 bytes)
+
+767   Structured format for transmission of multi-media documents. Postel, 
+      J.B.  1980 August; 33 p. (Format: TXT=62316 bytes)
+
+766   Internet Protocol Handbook: Table of contents. Postel, J.B.  1980 July; 
+      1 p. (Format: TXT=3585 bytes)  (Obsoleted by RFC 774)
+
+765   File Transfer Protocol specification. Postel, J.B.  1980 June; 70 p. 
+      (Format: TXT=150771 bytes)  (Obsoletes RFC 542; Obsoleted by RFC 959)
+
+764   Telnet Protocol specification. Postel, J.B.  1980 June; 15 p. (Format: 
+      TXT=40874 bytes)  (Obsoleted by RFC 854)
+
+763   Role mailboxes. Abrams, M.D.  1980 May 7; 1 p. (Format: TXT=965 bytes)
+
+762   Assigned numbers. Postel, J.B.  1980 January; 13 p. (Format: TXT=25421 
+      bytes)  (Obsoletes RFC 758; Obsoleted by RFC 770)
+
+761   DoD standard Transmission Control Protocol. Postel, J.B.  1980 January; 
+      84 p. (Format: TXT=172234 bytes)
+
+760   DoD standard Internet Protocol. Postel, J.B.  1980 January; 41 p. 
+      (Format: TXT=84214 bytes)  (Obsoletes IEN 123; Obsoleted by RFC 791, RFC
+      777)
+
+759   Internet Message Protocol. Postel, J.B.  1980 August; 71 p. (Format: 
+      TXT=127948 bytes)
+
+758   Assigned numbers. Postel, J.B.  1979 August; 12 p. (Format: TXT=23606 
+      bytes)  (Obsoletes RFC 755; Obsoleted by RFC 762)
+
+757   Suggested solution to the naming, addressing, and delivery problem for 
+      ARPANET message systems. Deutsch, D.P.  1979 September 10; 17 p. 
+      (Format: TXT=36773 bytes)
+
+756   NIC name server - a datagram-based information utility. Pickens, J.R.; 
+      Feinler, E.J.; Mathis, J.E.  1979 July; 11 p. (Format: TXT=24172 bytes)
+
+755   Assigned numbers. Postel, J.B.  1979 May 3; 12 p. (Format: TXT=22734 
+      bytes)  (Obsoletes RFC 750; Obsoleted by RFC 758)
+
+754   Out-of-net host addresses for mail. Postel, J.B.  1979 April 6; 10 p. 
+      (Format: TXT=19791 bytes)
+
+753   Internet Message Protocol. Postel, J.B.  1979 March; 62 p. (Format: 
+      TXT=97006 bytes)
+
+752   Universal host table. Crispin, M.R.  1979 January 2; 13 p. (Format: 
+      TXT=34560 bytes)
+
+751   Survey of FTP mail and MLFL. Lebling, P.D.  1978 December 10; 5 p. 
+      (Format: TXT=10363 bytes)
+
+750   Assigned numbers. Postel, J.B.  1978 September 26; 10 p. (Format: 
+      TXT=20686 bytes)  (Obsoletes RFC 739; Obsoleted by RFC 755)
+
+749   Telnet SUPDUP-Output option. Greenberg, B.  1978 September 18; 4 p. 
+      (Format: TXT=9160 bytes)
+
+748   Telnet randomly-lose option. Crispin, M.R.  1978 April 1; 2 p. (Format: 
+      TXT=2858 bytes)
+
+747   Recent extensions to the SUPDUP Protocol. Crispin, M.R.  1978 March 21; 
+      3 p. (Format: TXT=2928 bytes)
+
+746   SUPDUP graphics extension. Stallman, R.  1978 March 17; 15 p. (Format: 
+      TXT=31081 bytes)
+
+745   JANUS interface specifications. Beeler, M.  1978 March 30; 10 p. 
+      (Format: TXT=(22042 bytes)
+
+744   MARS - a Message Archiving and Retrieval Service. Sattley, J.  1978 
+      January 8; 6 p. (Format: TXT=11337 bytes)
+
+743   FTP extension: XRSQ/XRCP. Harrenstien, K.  1977 December 30; 8 p. 
+      (Format: TXT=16720 bytes)
+
+742   NAME/FINGER Protocol. Harrenstien, K.  1977 December 30; 7 p. (Format: 
+      TXT=12733 bytes)  (Obsoleted by RFC 1194)
+
+741   Specifications for the Network Voice Protocol (NVP). Cohen, D.  1977 
+      November 22; 30 p. (Format: TXT=59582 bytes)
+
+740   NETRJS Protocol. Braden, R.T.  1977 November 22; 19 p. (Format: 
+      TXT=39953 bytes)  (Obsoletes RFC 599)
+
+739   Assigned numbers. Postel, J.B.  1977 November 11; 11 p. (Format: 
+      TXT=16983 bytes)  (Obsoletes RFC 604, RFC 503; Obsoleted by RFC 750)
+
+738   Time server. Harrenstien, K.  1977 October 31; 1 p. (Format: TXT=1909 
+      bytes)
+
+737   FTP extension: XSEN. Harrenstien, K.  1977 October 31; 1 p. (Format: 
+      TXT=2185 bytes)
+
+736   Telnet SUPDUP option. Crispin, M.R.  1977 October 31; 2 p. (Format: 
+      TXT=3200 bytes)
+
+735   Revised Telnet byte macro option. Crocker, D.; Gumpertz, R.H.  1977 
+      November 3; 5 p. (Format: TXT=10879 bytes)  (Obsoletes RFC 729)
+
+734   SUPDUP Protocol. Crispin, M.R.  1977 October 7; 14 p. (Format: TXT=33920
+      bytes)
+
+733   Standard for the format of ARPA network text messages. Crocker, D.; 
+      Vittal, J.; Pogran, K.T.; Henderson, D.A.  1977 November 21; 38 p. 
+      (Format: TXT=75001 bytes)  (Obsoletes RFC 724; Obsoleted by RFC 822)
+
+732   Telnet Data Entry Terminal option. Day, J.D.  1977 September 12; 30 p. 
+      (Format: TXT=58929 bytes)  (Obsoletes RFC 731; Updated by RFC 1043)
+
+731   Telnet Data Entry Terminal option. Day, J.D.  1977 June 27; 28 p. 
+      (Format: TXT=63300 bytes)  (Obsoleted by RFC 732)
+
+730   Extensible field addressing. Postel, J.B.  1977 May 20; 5 p. (Format: 
+      TXT=9812 bytes)
+
+729   Telnet byte macro option. Crocker, D.  1977 May 13; 4 p. (Format: 
+      TXT=6695 bytes)  (Obsoleted by RFC 735)
+
+728   Minor pitfall in the Telnet Protocol. Day, J.D.  1977 April 27; 1 p. 
+      (Format: TXT=2265 bytes)
+
+727   Telnet logout option. Crispin, M.R.  1977 April 27; 3 p. (Format: 
+      TXT=5850 bytes)
+
+726   Remote Controlled Transmission and Echoing Telnet option. Postel, J.B.; 
+      Crocker, D.  1977 March 8; 16 p. (Format: TXT=39594 bytes)
+
+725   RJE protocol for a resource sharing network. Day, J.D.; Grossman, G.R.  
+      1977 March 1; 26 p. (Format: TXT=45604 bytes)
+
+724   Proposed official standard for the format of ARPA Network messages. 
+      Crocker, D.; Pogran, K.T.; Vittal, J.; Henderson, D.A.  1977 May 12; 
+      33 p. (Format: TXT=77423 bytes)  (Obsoleted by RFC 733)
+
+723   Not issued.
+
+722   Thoughts on interactions in distributed services. Haverty, J.  1976 
+      September 16; 20 p. (Format: TXT=30278 bytes)
+
+721   Out-of-band control signals in a Host-to-Host Protocol. Garlick, L.L.  
+      1976 September 1; 7 p. (Format: TXT=13978 bytes)
+
+720   Address specification syntax for network mail. Crocker, D.  1976 August 
+      5; 4 p. (Format: TXT=6835 bytes)
+
+719   Discussion on RCTE. Postel, J.B.  1976 July 22; 2 p. (Format: TXT=4823 
+      bytes)
+
+718   Comments on RCTE from the Tenex implementation experience. Postel, J.B.
+      1976 June 30; 2 p. (Format: TXT=3944 bytes)
+
+717   Assigned network numbers. Postel, J.B.  1976 July 1; 2 p. (Format: 
+      TXT=2430 bytes)
+
+716   Interim revision to Appendix F of BBN 1822. Walden, D.C.; Levin, J.  
+      1976 May 24; 2 p. (Format: TXT=3451 bytes)
+
+715   Not issued.
+
+714   Host-Host Protocol for an ARPANET-type network  (Not online) McKenzie, 
+      A.M.  1976 April 21; 43 p.
+
+713   MSDTP-Message Services Data Transmission Protocol. Haverty, J.  1976 
+      April 6; 29 p. (Format: TXT=42452 bytes)
+
+712   Distributed Capability Computing System (DCCS)  (Not online) Donnelley, 
+      J.E.  1976 February 5; 38 p.
+
+711   Not issued.
+
+710   Not issued.
+
+709   Not issued.
+
+708   Elements of a distributed programming system. White, J.E.  1976 January 
+      28; 29 p. (Format: TXT=59595 bytes)
+
+707   High-level framework for network-based resource sharing. White, J.E.  
+      1975 December 23; 27 p. (Format: TXT=58900 bytes)
+
+706   On the junk mail problem. Postel, J.B.  1975 November 8; 1 p. (Format: 
+      TXT=2131 bytes)
+
+705   Front-end Protocol B6700 version. Bryan, R.F.  1975 November 5; 40 p. 
+      (Format: TXT=73143 bytes)
+
+704   IMP/Host and Host/IMP Protocol change. Santos, P.J.  1975 September 15; 
+      3 p. (Format: TXT=7676 bytes)  (Obsoletes RFC 687)
+
+703   July, 1975, survey of New-Protocol Telnet Servers  (Not online) Dodds, 
+      D.W.  1975 July 11; 2 p.
+
+702   September, 1974, survey of New-Protocol Telnet servers  (Not online) 
+      Dodds, D.W.  1974 September 25; 2 p.
+
+701   August, 1974, survey of New-Protocol Telnet servers. Dodds, D.W.  1974 
+      August; 2 p. (Format: TXT=3662 bytes)
+
+700   Protocol experiment. Mader, E.; Plummer, W.W.; Tomlinson, R.S.  1974 
+      August; 6 p. (Format: TXT=14931 bytes)
+
+699   Request For Comments summary notes: 600-699. Postel, J.B.; Vernon, J.  
+      1982 November; 9 p. (Format: TXT=15219 bytes)
+
+698   Telnet extended ASCII option. Mock, T.  1975 July 23; 4 p. (Format: 
+      TXT=5307 bytes)
+
+697   CWD command of FTP  (Not online) Lieb, J.  1975 July 14; 2 p.
+
+696   Comments on the IMP/Host and Host/IMP Protocol changes  (Not online) 
+      Cerf, V.G.  1975 July 13; 2 p.
+
+695   Official change in Host-Host Protocol. Krilanovich, M.  1975 July 5; 
+      2 p. (Format: TXT=3527 bytes)
+
+694   Protocol information  (Not online) Postel, J.B.  1975 June 18; 36 p.
+
+693   Not issued.
+
+692   Comments on IMP/Host Protocol changes (RFCs 687 and 690)  (Not online) 
+      Wolfe, S.M.  1975 June 20; 2 p.  (Updates RFC 690)
+
+691   One more try on the FTP. Harvey, B.  1975 May 28; 13 p. (Format: 
+      TXT=33535 bytes)
+
+690   Comments on the proposed Host/IMP Protocol changes  (Not online) Postel,
+      J.B.  1975 June 6; 4 p.  (Updates RFC 687; Updated by RFC 692)
+
+689   Tenex NCP finite state machine for connections. Clements, R.  1975 May 
+      23; 6 p. (Format: TXT=13378 bytes)
+
+688   Tentative schedule for the new Telnet implementation for the TIP  (Not 
+      online) Walden, D.C.  1975 June 4; 1 p.
+
+687   IMP/Host and Host/IMP Protocol changes. Walden, D.C.  1975 June 2; 3 p. 
+      (Format: TXT=6183 bytes)  (Obsoleted by RFC 704; Updated by RFC 690)
+
+686   Leaving well enough alone  (Not online) Harvey, B.  1975 May 10; 9 p.
+
+685   Response time in cross network debugging. Beeler, M.  1975 April 16; 
+      4 p. (Format: TXT=7084 bytes)
+
+684   Commentary on procedure calling as a network protocol. Schantz, R.  1975
+      April 15; 7 p. (Format: TXT=21575 bytes)
+
+683   FTPSRV - Tenex extension for paged files. Clements, R.  1975 April 3; 
+      9 p. (Format: TXT=8981 bytes)
+
+682   Not issued.
+
+681   Network UNIX. Holmgren, S.  1975 March 18; 6 p. (Format: TXT=19305 
+      bytes)
+
+680   Message Transmission Protocol  (Not online) Myer, T.H.; Henderson, D.A.
+      1975 April 30; 6 p.  (Updates RFC 561)
+
+679   February, 1975, survey of New-Protocol Telnet servers  (Not online) 
+      Dodds, D.W.  1975 February 21; 2 p.
+
+678   Standard file formats. Postel, J.B.  1974 December 19; 8 p. (Format: 
+      TXT=12865 bytes)
+
+677   Maintenance of duplicate databases  (Not online) Johnson, P.R.; Thomas, 
+      R.  1975 January 27; 9 p.
+
+676   Not issued.
+
+675   Specification of Internet Transmission Control Program  (Not online) 
+      Cerf, V.G.; Dalal, Y.K.; Sunshine, C.A.  1974 December; 70 p.
+
+674   Procedure call documents: Version 2. Postel, J.B.; White, J.E.  1974 
+      December 12; 4 p. (Format: TXT=12475 bytes)
+
+673   Not issued.
+
+672   Multi-site data collection facility. Schantz, R.  1974 December 6; 10 p.
+      (Format: TXT=26279 bytes)
+
+671   Note on Reconnection Protocol  (Not online) Schantz, R.  1974 December 
+      6; 8 p.
+
+670   Not issued.
+
+669   November, 1974, survey of New-Protocol Telnet servers  (Not online) 
+      Dodds, D.W.  1974 December 4; 4 p.
+
+668   Not issued.
+
+667   BBN host ports  (Not online) Chipman, S.G.  1974 December 17; 1 p.
+
+666   Specification of the Unified User-Level Protocol  (Not online) 
+      Padlipsky, M.A.  1974 November 26; 17 p.
+
+665   Not issued.
+
+664   Not issued.
+
+663   Lost message detection and recovery protocol. Kanodia, R.  1974 November
+      29; 17 p. (Format: TXT=45956 bytes)
+
+662   Performance improvement in ARPANET file transfers from Multics. Kanodia,
+      R.  1974 November 26; 3 p. (Format: TXT=9048 bytes)
+
+661   Protocol information  (Not online) Postel, J.B.  1974 November 23; 23 p.
+
+660   Some changes to the IMP and the IMP/Host interface. Walden, D.C.  1974 
+      October 23; 2 p. (Format: TXT=5106 bytes)
+
+659   Announcing additional Telnet options  (Not online) Postel, J.B.  1974 
+      October 18; 1 p.
+
+658   Telnet output linefeed disposition. Crocker, D.  1974 October 25; 4 p. 
+      (Format: TXT=6603 bytes)
+
+657   Telnet output vertical tab disposition option. Crocker, D.  1974 October
+      25; 4 p. (Format: TXT=5871 bytes)
+
+656   Telnet output vertical tabstops option. Crocker, D.  1974 October 25; 
+      3 p. (Format: TXT=4952 bytes)
+
+655   Telnet output formfeed disposition option. Crocker, D.  1974 October 25;
+      4 p. (Format: TXT=6105 bytes)
+
+654   Telnet output horizontal tab disposition option. Crocker, D.  1974 
+      October 25; 4 p. (Format: TXT=6270 bytes)
+
+653   Telnet output horizontal tabstops option. Crocker, D.  1974 October 25; 
+      3 p. (Format: TXT=4782 bytes)
+
+652   Telnet output carriage-return disposition option. Crocker, D.  1974 
+      October 25; 3 p. (Format: TXT=7165 bytes)
+
+651   Revised Telnet status option. Crocker, D.  1974 October 25; 3 p. 
+      (Format: TXT=4446 bytes)  (Obsoleted by RFC 859)
+
+650   Not issued.
+
+649   Not issued.
+
+648   Not issued.
+
+647   Proposed protocol for connecting host computers to ARPA-like networks 
+      via front end processors  (Not online) Padlipsky, M.A.  1974 November 
+      12; 20 p.
+
+646   Not issued.
+
+645   Network Standard Data Specification syntax  (Not online) Crocker, D.  
+      1974 June 26; 9 p.
+
+644   On the problem of signature authentication for network mail. Thomas, R.
+      1974 July 22; 6 p. (Format: TXT=9728 bytes)
+
+643   Network Debugging Protocol. Mader, E.  1974 July; 8 p. (Format: 
+      TXT=12959 bytes)
+
+642   Ready line philosophy and implementation  (Not online) Burchfiel, J.D.  
+      1974 July 5; 5 p.
+
+641   Not issued.
+
+640   Revised FTP reply codes. Postel, J.B.  1974 June 5; 16 p. (Format: 
+      TXT=40431 bytes)
+
+639   Not issued.
+
+638   IMP/TIP preventive maintenance schedule  (Not online) McKenzie, A.M.  
+      1974 April 25; 4 p.  (Obsoletes RFC 633)
+
+637   Change of network address for SU-DSL  (Not online) McKenzie, A.M.  1974 
+      April 23; 1 p.
+
+636   TIP/Tenex reliability improvements. Burchfiel, J.D.; Cosell, B.; 
+      Tomlinson, R.S.; Walden, D.C.  1974 June 10; 9 p. (Format: TXT=20360 
+      bytes)
+
+635   Assessment of ARPANET protocols  (Not online) Cerf, V.G.  1974 April 22;
+      21 p.
+
+634   Change in network address for Haskins Lab  (Not online) McKenzie, A.M.  
+      1974 April 10; 1 p.
+
+633   IMP/TIP preventive maintenance schedule  (Not online) McKenzie, A.M.  
+      1974 March 18; 4 p.  (Obsoleted by RFC 638)
+
+632   Throughput degradations for single packet messages  (Not online) 
+      Opderbeck, H.  1974 May 20; 6 p.
+
+631   International meeting on minicomputers and data communication: Call for 
+      papers  (Not online) Danthine, A.  1974 April 17; 1 p.
+
+630   FTP error code usage for more reliable mail service  (Not online) 
+      Sussmann, J.  1974 April 10; 2 p.
+
+629   Scenario for using the Network Journal  (Not online) North, J.B.  1974 
+      March 27; 2 p.
+
+628   Status of RFC numbers and a note on pre-assigned journal numbers  (Not 
+      online) Keeney, M.L.  1974 March 27; 1 p.
+
+627   ASCII text file of hostnames  (Not online) Kudlick, M.D.; Feinler, E.J.
+      1974 March 25; 1 p.
+
+626   On a possible lockup condition in IMP subnet due to message sequencing. 
+      Kleinrock, L.; Opderbeck, H.  1974 March 14; 6 p. (Format: TXT=13484 
+      bytes)
+
+625   On-line hostnames service  (Not online) Kudlick, M.D.; Feinler, E.J.  
+      1974 March 7; 1 p.
+
+624   Comments on the File Transfer Protocol. Krilanovich, M.; Gregg, G.; 
+      Hathaway, W.; White, J.E.  1974 February 28; 4 p. (Format: TXT=10335 
+      bytes)  (Obsoletes RFC 607)
+
+623   Comments on on-line host name service  (Not online) Krilanovich, M.  
+      1974 February 22; 2 p.
+
+622   Scheduling IMP/TIP down time  (Not online) McKenzie, A.M.  1974 March 
+      13; 3 p.
+
+621   NIC user directories at SRI ARC  (Not online) Kudlick, M.D.  1974 March 
+      6; 1 p.
+
+620   Request for monitor host table updates. Ferguson, B.  1974 March 1; 2 p.
+      (Format: TXT=1995 bytes)
+
+619   Mean round-trip times in the ARPANET  (Not online) Naylor, W.; 
+      Opderbeck, H.  1974 March 7; 13 p.
+
+618   Few observations on NCP statistics. Taft, E.A.  1974 February 19; 4 p. 
+      (Format: TXT=5155 bytes)
+
+617   Note on socket number assignment. Taft, E.A.  1974 February 19; 4 p. 
+      (Format: TXT=8281 bytes)
+
+616   Latest network maps  (Not online) Walden, D.C.  1973 February 11; 3 p.
+
+615   Proposed Network Standard Data Pathname syntax. Crocker, D.  1974 March 
+      1; 6 p. (Format: TXT=9735 bytes)
+
+614   Response to RFC 607: "Comments on the File Transfer Protocol". Pogran, 
+      K.T.; Neigus, N.  1974 January 28; 5 p. (Format: TXT=11641 bytes)  
+      (Updates RFC 607)
+
+613   Network connectivity: A response to RFC 603  (Not online) McKenzie, A.M.
+      1974 January 21; 1 p.  (Updates RFC 603)
+
+612   Traffic statistics (December 1973)  (Not online) McKenzie, A.M.  1974 
+      January 16; 5 p.
+
+611   Two changes to the IMP/Host Protocol to improve user/network 
+      communications  (Not online) Walden, D.C.  1974 February 14; 4 p.
+
+610   Further datalanguage design concepts  (Not online) Winter, R.; Hill, J.;
+      Greiff, W.  1973 December 15; 79 p.
+
+609   Statement of upcoming move of NIC/NLS service  (Not online) Ferguson, B.
+      1974 January 10; 1 p.
+
+608   Host names on-line  (Not online) Kudlick, M.D.  1974 January 10; 3 p.  
+      (Obsoleted by RFC 810)
+
+607   Comments on the File Transfer Protocol. Krilanovich, M.; Gregg, G.  1974
+      January 7; 4 p. (Format: TXT=8826 bytes)  (Obsoleted by RFC 624; 
+      Updated by RFC 614)
+
+606   Host names on-line. Deutsch, L.P.  1973 December 29; 3 p. (Format: 
+      TXT=7027 bytes)
+
+605   Not issued.
+
+604   Assigned link numbers  (Not online) Postel, J.B.  1973 December 26; 2 p.
+      (Obsoletes RFC 317; Obsoleted by RFC 739)
+
+603   Response to RFC 597: Host status  (Not online) Burchfiel, J.D.  1973 
+      December 31; 1 p.  (Updates RFC 597; Updated by RFC 613)
+
+602   "The stockings were hung by the chimney with care". Metcalfe, R.M.  1973
+      December 27; 2 p. (Format: TXT=2035 bytes)
+
+601   Traffic statistics (November 1973)  (Not online) McKenzie, A.M.  1973 
+      December 14; 5 p.
+
+600   Interfacing an Illinois plasma terminal to the ARPANET  (Not online) 
+      Berggreen, A.  1973 November 26; 4 p.
+
+599   Update on NETRJS. Braden, R.T.  1973 December 13; 8 p. (Format: 
+      TXT=17120 bytes)  (Obsoletes RFC 189; Obsoleted by RFC 740)
+
+598   RFC index - December 5, 1973  (Not online) Stanford Research Inst., 
+      Network Information Center.  1973 December 5; 8 p.
+
+597   Host status  (Not online) Neigus, N.; Feinler, E.J.  1973 December 12; 
+      9 p.  (Updated by RFC 603)
+
+596   Second thoughts on Telnet Go-Ahead  (Not online) Taft, E.A.  1973 
+      December 8; 6 p.
+
+595   Second thoughts in defense of the Telnet Go-Ahead  (Not online) 
+      Hathaway, W.  1973 December 12; 5 p.
+
+594   Speedup of Host-IMP interface  (Not online) Burchfiel, J.D.  1973 
+      December 10; 3 p.
+
+593   Telnet and FTP implementation schedule change  (Not online) McKenzie, 
+      A.M.; Postel, J.B.  1973 November 29; 1 p.
+
+592   Some thoughts on system design to facilitate resource sharing  (Not 
+      online) Watson, R.W.  1973 November 20; 5 p.
+
+591   Addition to the Very Distant Host specifications  (Not online) Walden, 
+      D.C.  1973 November 29; 1 p.
+
+590   MULTICS address change  (Not online) Padlipsky, M.A.  1973 November 19; 
+      1 p.
+
+589   CCN NETRJS server messages to remote user  (Not online) Braden, R.T.  
+      1973 November 26; 4 p.
+
+588   London node is now up  (Not online) Stokes, A.V.  1973 October 29; 3 p.
+
+587   Announcing new Telnet options  (Not online) Postel, J.B.  1973 November 
+      13; 1 p.
+
+586   Traffic statistics (October 1973)  (Not online) McKenzie, A.M.  1973 
+      November 8; 4 p.
+
+585   ARPANET users interest working group meeting  (Not online) Crocker, D.; 
+      Neigus, N.; Feinler, E.J.; Iseli, J.  1973 November 6; 9 p.
+
+584   Charter for ARPANET Users Interest Working Group  (Not online) Iseli, 
+      J.; Crocker, D.; Neigus, N.  1973 November 6; 2 p.
+
+583   Not issued.
+
+582   Comments on RFC 580: Machine readable protocols  (Not online) Clements, 
+      R.  1973 November 5; 1 p.  (Updates RFC 580)
+
+581   Corrections to RFC 560: Remote Controlled Transmission and Echoing 
+      Telnet option  (Not online) Crocker, D.; Postel, J.B.  1973 November 2; 
+      4 p.
+
+580   Note to protocol designers and implementers. Postel, J.B.  1973 October 
+      25; 1 p. (Format: TXT=1492 bytes)  (Updated by RFC 582)
+
+579   Traffic statistics (September 1973)  (Not online) McKenzie, A.M.  1973 
+      November 26; 4 p.
+
+578   Using MIT-Mathlab MACSYMA from MIT-DMS Muddle  (Not online) Bhushan, 
+      A.K.; Ryan, N.D.  1973 October 29; 13 p.
+
+577   Mail priority  (Not online) Crocker, D.  1973 October 18; 2 p.
+
+576   Proposal for modifying linking  (Not online) Victor, K.  1973 September 
+      26; 2 p.
+
+575   Not issued.
+
+574   Announcement of a mail facility at UCSB  (Not online) Krilanovich, M.  
+      1973 September 26; 1 p.
+
+573   Data and file transfer: Some measurement results  (Not online) Bhushan, 
+      A.K.  1973 September 14; 12 p.
+
+572   Not issued.
+
+571   Tenex FTP problem  (Not online) Braden, R.T.  1973 November 15; 1 p.
+
+570   Experimental input mapping between NVT ASCII and UCSB On Line System  
+      (Not online) Pickens, J.R.  1973 October 30; 10 p.
+
+569   NETED: A common editor for the ARPA network. Padlipsky, M.A.  1973 
+      October 15; 7 p. (Format: TXT=18090 bytes)
+
+568   Response to RFC 567 - cross country network bandwidth  (Not online) 
+      McQuillan, J.M.  1973 September 18; 2 p.  (Updates RFC 567)
+
+567   Cross country network bandwidth. Deutsch, L.P.  1973 September 6; 1 p. 
+      (Format: TXT=1572 bytes)  (Updated by RFC 568)
+
+566   Traffic statistics (August 1973)  (Not online) McKenzie, A.M.  1973 
+      September 4; 4 p.
+
+565   Storing network survey data at the datacomputer  (Not online) Cantor, D.
+      1973 August 28; 6 p.
+
+564   Not issued.
+
+563   Comments on the RCTE Telnet option  (Not online) Davidson, J.  1973 
+      August 28; 4 p.
+
+562   Modifications to the Telnet specification  (Not online) McKenzie, A.M.  
+      1973 August 28; 1 p.
+
+561   Standardizing network mail headers. Bhushan, A.K.; Pogran, K.T.; 
+      Tomlinson, R.S.; White, J.E.  1973 September 5; 2 p. (Format: TXT=6484 
+      bytes)  (Updated by RFC 680)
+
+560   Remote Controlled Transmission and Echoing Telnet option  (Not online) 
+      Crocker, D.; Postel, J.B.  1973 August 18; 11 p.
+
+559   Comments on the new Telnet Protocol and its implementation  (Not online)
+      Bhushan, A.K.  1973 August 15; 5 p.
+
+558   Not issued.
+
+557   Revelations in network host measurements  (Not online) Wessler, B.D.  
+      1973 August 30; 2 p.
+
+556   Traffic statistics (July 1973)  (Not online) McKenzie, A.M.  1973 August
+      13; 4 p.
+
+555   Responses to critiques of the proposed mail protocol  (Not online) 
+      White, J.E.  1973 July 30; 14 p.
+
+554   Not issued.
+
+553   Draft design for a text/graphics protocol  (Not online) Irby, C.H.; 
+      Victor, K.  1973 July 14; 17 p.
+
+552   Single access to standard protocols  (Not online) Owen, A.D.  1973 July 
+      13; 1 p.
+
+551   [Letter from Feinroth re: NYU, ANL, and LBL entering the net, and FTP 
+      protocol]  (Not online) Feinroth, Y.; Fink, R.  1973 August 27; 1 p.
+
+550   NIC NCP experiment  (Not online) Deutsch, L.P.  1973 August 24; 2 p.
+
+549   Minutes of Network Graphics Group meeting, 15-17 July 1973  (Not online)
+      Michener, J.C.  1973 July 17; 13 p.
+
+548   Hosts using the IMP Going Down message  (Not online) Walden, D.C.  1973 
+      August 16; 1 p.
+
+547   Change to the Very Distant Host specification  (Not online) Walden, D.C.
+      1973 August 13; 4 p.
+
+546   Tenex load averages for July 1973  (Not online) Thomas, R.  1973 August 
+      10; 4 p.
+
+545   Of what quality be the UCSB resources evaluators?  (Not online) Pickens,
+      J.R.  1973 July 23; 2 p.
+
+544   Locating on-line documentation at SRI-ARC  (Not online) Meyer, N.D.; 
+      Kelley, K.  1973 July 13; 1 p.
+
+543   Network journal submission and delivery  (Not online) Meyer, N.D.  1973 
+      July 24; 8 p.
+
+542   File Transfer Protocol. Neigus, N.  1973 July 12; 52 p. (Format: 
+      TXT=10340 bytes)  (Obsoletes RFC 354; Obsoleted by RFC 765)
+
+541   Not issued.
+
+540   Not issued.
+
+539   Thoughts on the mail protocol proposed in RFC 524  (Not online) Crocker,
+      D.; Postel, J.B.  1973 July 7; 3 p.
+
+538   Traffic statistics (June 1973)  (Not online) McKenzie, A.M.  1973 July 
+      5; 4 p.
+
+537   Announcement of NGG meeting July 16-17  (Not online) Bunch, S.  1973 
+      June 27; 2 p.
+
+536   Not issued.
+
+535   Comments on File Access Protocol  (Not online) Thomas, R.  1973 July 25;
+      6 p.
+
+534   Lost message detection  (Not online) Walden, D.C.  1973 July 17; 2 p.
+
+533   Message-ID numbers  (Not online) Walden, D.C.  1973 July 17; 1 p.
+
+532   UCSD-CC Server-FTP facility  (Not online) Merryman, R.G.  1973 July 12; 
+      3 p.
+
+531   Feast or famine? A response to two recent RFC's about network 
+      information  (Not online) Padlipsky, M.A.  1973 June 26; 2 p.
+
+530   Report on the Survey project  (Not online) Bhushan, A.K.  1973 June 22; 
+      9 p.
+
+529   Note on protocol synch sequences  (Not online) McKenzie, A.M.; Thomas, 
+      R.; Tomlinson, R.S.; Pogran, K.T.  1973 June 29; 6 p.
+
+528   Software checksumming in the IMP and network reliability  (Not online) 
+      McQuillan, J.M.  1973 June 20; 11 p.
+
+527   ARPAWOCKY. Covill, D.L.  1973 May; 1 p. (Format: TXT=1901 bytes)
+
+526   Technical meeting: Digital image processing software systems  (Not 
+      online) Pratt, W.K.  1973 June 25; 3 p.
+
+525   MIT-MATHLAB meets UCSB-OLS -an example of resource sharing  (Not online)
+      Parrish, W.; Pickens, J.R.  1973 June 1; 10 p.
+
+524   Proposed Mail Protocol  (Not online) White, J.E.  1973 June 13; 44 p.
+
+523   SURVEY is in operation again  (Not online) Bhushan, A.K.  1973 June 5; 
+      1 p.
+
+522   Traffic statistics (May 1973)  (Not online) McKenzie, A.M.  1973 June 5;
+      4 p.
+
+521   Restricted use of IMP DDT  (Not online) McKenzie, A.M.  1973 May 30; 
+      2 p.
+
+520   Memo to FTP group: Proposal for File Access Protocol  (Not online) Day, 
+      J.D.  1973 June 25; 8 p.
+
+519   Resource evaluation  (Not online) Pickens, J.R.  1973 June; 6 p.
+
+518   ARPANET accounts  (Not online) Vaughan, N.; Feinler, E.J.  1973 June 19;
+      7 p.
+
+517   Not issued.
+
+516   Lost message detection  (Not online) Postel, J.B.  1973 May 18; 2 p.
+
+515   Specifications for datalanguage: Version 0/9  (Not online) Winter, R.  
+      1973 June 6; 35 p.
+
+514   Network make-work  (Not online) Kantrowitz, W.  1973 June 5; 3 p.
+
+513   Comments on the new Telnet specifications  (Not online) Hathaway, W.  
+      1973 May 30; 3 p.
+
+512   More on lost message detection  (Not online) Hathaway, W.  1973 May 23; 
+      1 p.
+
+511   Enterprise phone service to NIC from ARPANET sites  (Not online) North, 
+      J.B.  1973 May 23; 4 p.
+
+510   Request for network mailbox addresses  (Not online) White, J.E.  1973 
+      May 30; 3 p.
+
+509   Traffic statistics (April 1973)  (Not online) McKenzie, A.M.  1973 April
+      7; 3 p.
+
+508   Real-time data transmission on the ARPANET  (Not online) Pfeifer, L.; 
+      McAfee, J.  1973 May 7; 11 p.
+
+507   Not issued.
+
+506   FTP command naming problem  (Not online) Padlipsky, M.A.  1973 June 26; 
+      1 p.
+
+505   Two solutions to a file transfer access problem  (Not online) Padlipsky,
+      M.A.  1973 June 25; 3 p.
+
+504   Distributed resources workshop announcement  (Not online) Thomas, R.  
+      1973 April 30; 4 p.
+
+503   Socket number list  (Not online) Neigus, N.; Postel, J.B.  1973 April 
+      12; 9 p.  (Obsoletes RFC 433; Obsoleted by RFC 739)
+
+502   Not issued.
+
+501   Un-muddling "free file transfer"  (Not online) Pogran, K.T.  1973 May 
+      11; 5 p.
+
+500   Integration of data management systems on a computer network  (Not 
+      online) Shoshani, A.; Spiegler, I.  1973 April 16; 6 p.
+
+499   Harvard's network RJE  (Not online) Reussow, B.R.  1973 April 1; 7 p.
+
+498   On mail service to CCN  (Not online) Braden, R.T.  1973 April 17; 2 p.
+
+497   Traffic statistics (March 1973)  (Not online) McKenzie, A.M.  1973 April
+      10; 4 p.
+
+496   TNLS quick reference card is available  (Not online) Auerbach, M.F.  
+      1973 April 5; 2 p.
+
+495   Telnet Protocol specifications  (Not online) McKenzie, A.M.  1973 May 1;
+      3 p.  (Obsoletes RFC 158)
+
+494   Availability of MIX and MIXAL in the Network  (Not online) Walden, D.C.
+      1973 April 20; 1 p.
+
+493   Graphics Protocol  (Not online) Michener, J.C.; Cotton, I.W.; Kelley, 
+      K.C.; Liddle, D.E.; Meyer, E.W., Jr.  1973 April 26; 30 p.
+
+492   Response to RFC 467  (Not online) Meyer, E.W., Jr.  1973 April 18; 9 p.
+      (Updates RFC 467)
+
+491   What is "Free"?  (Not online) Padlipsky, M.A.  1973 April 12; 2 p.
+
+490   Surrogate RJS for UCLA-CCN  (Not online) Pickens, J.R.  1973 March 6; 
+      5 p.
+
+489   Comment on resynchronization of connection status proposal  (Not online)
+      Postel, J.B.  1973 March 26; 1 p.
+
+488   NLS classes at network sites  (Not online) Auerbach, M.F.  1973 March 
+      23; 2 p.
+
+487   Free file transfer  (Not online) Bressler, R.D.  1973 April 6; 2 p.
+
+486   Data transfer revisited  (Not online) Bressler, R.D.  1973 March 20; 
+      2 p.
+
+485   MIX and MIXAL at UCSB  (Not online) Pickens, J.R.  1973 March 19; 1 p.
+
+484   Not issued.
+
+483   Cancellation of the resource notebook framework meeting  (Not online) 
+      Kudlick, M.D.  1973 March 14; 1 p.
+
+482   Traffic statistics (February 1973)  (Not online) McKenzie, A.M.  1973 
+      March 12; 4 p.
+
+481   Not issued.
+
+480   Host-dependent FTP parameters  (Not online) White, J.E.  1973 March 8; 
+      1 p.
+
+479   Use of FTP by the NIC Journal  (Not online) White, J.E.  1973 March 8; 
+      6 p.
+
+478   FTP server-server interaction - II  (Not online) Bressler, R.D.; Thomas,
+      R.  1973 March 26; 2 p.
+
+477   Remote Job Service at UCSB  (Not online) Krilanovich, M.  1973 May 23; 
+      18 p.
+
+476   IMP/TIP memory retrofit schedule (rev. 2)  (Not online) McKenzie, A.M.  
+      1973 March 7; 2 p.  (Obsoletes RFC 447)
+
+475   FTP and network mail system  (Not online) Bhushan, A.K.  1973 March 6; 
+      8 p.
+
+474   Announcement of NGWG meeting: Call for papers  (Not online) Bunch, S.  
+      1973 March; 1 p.
+
+473   MIX and MIXAL?  (Not online) Walden, D.C.  1973 February 28; 1 p.
+
+472   Illinois' reply to Maxwell's request for graphics information (NIC 
+      14925)  (Not online) Bunch, S.  1973 March; 2 p.
+
+471   Workshop on multi-site executive programs  (Not online) Thomas, R.  1973
+      March 13; 2 p.
+
+470   Change in socket for TIP news facility  (Not online) Thomas, R.  1973 
+      March 13; 1 p.
+
+469   Network mail meeting summary  (Not online) Kudlick, M.D.  1973 March 8; 
+      9 p.
+
+468   FTP data compression  (Not online) Braden, R.T.  1973 March 8; 5 p.
+
+467   Proposed change to Host-Host Protocol: Resynchronization of connection 
+      status  (Not online) Burchfiel, J.D.; Tomlinson, R.S.  1973 February 20;
+      13 p.  (Updated by RFC 492)
+
+466   Telnet logger/server for host LL-67  (Not online) Winett, J.M.  1973 
+      February 27; 8 p.
+
+465   Not issued.
+
+464   Resource notebook framework  (Not online) Kudlick, M.D.  1973 February 
+      27; 2 p.
+
+463   FTP comments and response to RFC 430  (Not online) Bhushan, A.K.  1973 
+      February 21; 3 p.
+
+462   Responding to user needs  (Not online) Iseli, J.; Crocker, D.  1973 
+      February 22; 2 p.
+
+461   Telnet Protocol meeting announcement  (Not online) McKenzie, A.M.  1973 
+      February 14; 1 p.
+
+460   NCP survey  (Not online) Kline, C.  1973 February 13; 7 p.
+
+459   Network questionnaires  (Not online) Kantrowitz, W.  1973 February 26; 
+      1 p.
+
+458   Mail retrieval via FTP  (Not online) Bressler, R.D.; Thomas, R.  1973 
+      February 20; 2 p.
+
+457   TIPUG  (Not online) Walden, D.C.  1973 February 15; 1 p.
+
+456   Memorandum: Date change of mail meeting  (Not online) Kudlick, M.D.  
+      1973 February 13; 1 p.
+
+455   Traffic statistics (January 1973)  (Not online) McKenzie, A.M.  1973 
+      February 12; 4 p.
+
+454   File Transfer Protocol - meeting announcement and a new proposed 
+      document  (Not online) McKenzie, A.M.  1973 February 16; 38 p.
+
+453   Meeting announcement to discuss a network mail system  (Not online) 
+      Kudlick, M.D.  1973 February 7; 3 p.
+
+452   Not issued.
+
+451   Tentative proposal for a Unified User Level Protocol  (Not online) 
+      Padlipsky, M.A.  1973 February 22; 3 p.
+
+450   MULTICS sampling timeout change  (Not online) Padlipsky, M.A.  1973 
+      February 8; 1 p.
+
+449   Current flow-control scheme for IMPSYS  (Not online) Walden, D.C.  1973 
+      January 6; 1 p.  (Updates RFC 442)
+
+448   Print files in FTP  (Not online) Braden, R.T.  1973 February 27; 4 p.
+
+447   IMP/TIP memory retrofit schedule  (Not online) McKenzie, A.M.  1973 
+      January 29; 2 p.  (Obsoletes RFC 434; Obsoleted by RFC 476)
+
+446   Proposal to consider a network program resource notebook  (Not online) 
+      Deutsch, L.P.  1973 January 25; 1 p.
+
+445   IMP/TIP preventive maintenance schedule  (Not online) McKenzie, A.M.  
+      1973 January 22; 3 p.
+
+444   Not issued.
+
+443   Traffic statistics (December 1972)  (Not online) McKenzie, A.M.  1973 
+      January 18; 3 p.
+
+442   Current flow-control scheme for IMPSYS  (Not online) Cerf, V.G.  1973 
+      January 24; 7 p.  (Updated by RFC 449)
+
+441   Inter-Entity Communication - an experiment  (Not online) Bressler, R.D.;
+      Thomas, R.  1973 January 19; 10 p.
+
+440   Scheduled network software maintenance  (Not online) Walden, D.C.  1973 
+      January; 1 p.
+
+439   PARRY encounters the DOCTOR  (Not online) Cerf, V.G.  1973 January 21; 
+      5 p.
+
+438   FTP server-server interaction  (Not online) Thomas, R.; Clements, R.  
+      1973 January 15; 5 p.
+
+437   Data Reconfiguration Service at UCSB  (Not online) Faeh, E.  1973 June 
+      30; 9 p.
+
+436   Announcement of RJS at UCSB  (Not online) Krilanovich, M.  1973 January 
+      10; 2 p.
+
+435   Telnet issues  (Not online) Cosell, B.; Walden, D.C.  1973 January 5; 
+      14 p.  (Updates RFC 318)
+
+434   IMP/TIP memory retrofit schedule  (Not online) McKenzie, A.M.  1973 
+      January 4; 2 p.  (Obsoleted by RFC 447)
+
+433   Socket number list  (Not online) Postel, J.B.  1972 December 22; 8 p.  
+      (Obsoletes RFC 349; Obsoleted by RFC 503)
+
+432   Network logical map  (Not online) Neigus, N.  1972 December 29; 2 p.
+
+431   Update on SMFS login and logout  (Not online) Krilanovich, M.  1972 
+      December 15; 3 p.  (Obsoletes RFC 399)
+
+430   Comments on File Transfer Protocol  (Not online) Braden, R.T.  1973 
+      February 7; 8 p.
+
+429   Character generator process  (Not online) Postel, J.B.  1972 December 
+      12; 1 p.
+
+428   Not issued.
+
+427   Not issued.
+
+426   Reconnection Protocol  (Not online) Thomas, R.  1973 January 26; 16 p.
+
+425   "But my NCP costs $500 a day". Bressler, R.D.  1972 December 19; 1 p. 
+      (Format: TXT=1817 bytes)
+
+424   Not issued.
+
+423   UCLA Campus Computing Network liaison staff for ARPANET  (Not online) 
+      Noble, B.  1972 December 12; 1 p.  (Obsoletes RFC 389)
+
+422   Traffic statistics (November 1972)  (Not online) McKenzie, A.M.  1972 
+      December 11; 4 p.
+
+421   Software consulting service for network users  (Not online) McKenzie, 
+      A.M.  1972 November 27; 1 p.
+
+420   CCA ICCC weather demo  (Not online) Murray, H.  1973 January 4; 11 p.
+
+419   To: Network liaisons and station agents  (Not online) Vezza, A.  1972 
+      December 12; 1 p.
+
+418   Server file transfer under TSS/360 at NASA Ames  (Not online) Hathaway, 
+      W.  1972 November 27; 10 p.
+
+417   Link usage violation  (Not online) Postel, J.B.; Kline, C.  1972 
+      December 6; 1 p.
+
+416   ARC system will be unavailable for use during Thanksgiving week  (Not 
+      online) Norton, J.C.  1972 November 7; 1 p.
+
+415   Tenex bandwidth  (Not online) Murray, H.  1972 November 29; 2 p.
+
+414   File Transfer Protocol (FTP) status and further comments  (Not online) 
+      Bhushan, A.K.  1972 December 29; 5 p.  (Updates RFC 385)
+
+413   Traffic statistics (October 1972)  (Not online) McKenzie, A.M.  1972 
+      November 13; 8 p.
+
+412   User FTP documentation  (Not online) Hicks, G.  1972 November 27; 10 p.
+
+411   New MULTICS network software features  (Not online) Padlipsky, M.A.  
+      1972 November 14; 1 p.
+
+410   Removal of the 30-second delay when hosts come up  (Not online) 
+      McQuillan, J.M.  1972 November 10; 2 p.
+
+409   Tenex interface to UCSB's Simple-Minded File System  (Not online) White,
+      J.E.  1972 December 8; 8 p.
+
+408   NETBANK  (Not online) Owen, A.D.; Postel, J.B.  1972 October 25; 1 p.
+
+407   Remote Job Entry Protocol. Bressler, R.D.; Guida, R.; McKenzie, A.M.  
+      1972 October 16; 24 p. (Format: TXT=48770 bytes)  (Obsoletes RFC 360)
+
+406   Scheduled IMP software releases  (Not online) McQuillan, J.M.  1972 
+      October 10; 2 p.
+
+405   Correction to RFC 404  (Not online) McKenzie, A.M.  1972 October 10; 
+      1 p.  (Obsoletes RFC 404)
+
+404   Host address changes involving Rand and ISI  (Not online) McKenzie, A.M.
+      1972 October 5; 1 p.  (Obsoleted by RFC 405)
+
+403   Desirability of a network 1108 service  (Not online) Hicks, G.  1973 
+      January 10; 5 p.
+
+402   ARPA Network mailing lists  (Not online) North, J.B.  1972 October 26; 
+      8 p.  (Obsoletes RFC 363)
+
+401   Conversion of NGP-0 coordinates to device specific coordinates  (Not 
+      online) Hansen, J.  1972 October 23; 2 p.
+
+400   Traffic statistics (September 1972)  (Not online) McKenzie, A.M.  1972 
+      October 18; 3 p.
+
+399   SMFS login and logout  (Not online) Krilanovich, M.  1972 September 26; 
+      2 p.  (Obsoleted by RFC 431; Updates RFC 122)
+
+398   ICP sockets  (Not online) Pickens, J.R.; Faeh, E.  1972 September 22; 
+      2 p.
+
+397   Not issued.
+
+396   Network Graphics Working Group meeting - second iteration  (Not online) 
+      Bunch, S.  1972 November 13; 1 p.
+
+395   Switch settings on IMPs and TIPs  (Not online) McQuillan, J.M.  1972 
+      October 3; 1 p.
+
+394   Two proposed changes to the IMP-Host Protocol  (Not online) McQuillan, 
+      J.M.  1972 September 27; 3 p.
+
+393   Comments on Telnet Protocol changes  (Not online) Winett, J.M.  1972 
+      October 3; 5 p.
+
+392   Measurement of host costs for transmitting network data  (Not online) 
+      Hicks, G.; Wessler, B.D.  1972 September 20; 9 p.
+
+391   Traffic statistics (August 1972)  (Not online) McKenzie, A.M.  1972 
+      September 15; 3 p.  (Obsoletes RFC 378)
+
+390   TSO scenario  (Not online) Braden, R.T.  1972 September 12; 3 p.
+
+389   UCLA Campus Computing Network liaison staff for ARPA Network  (Not 
+      online) Noble, B.  1972 August 30; 2 p.  (Obsoleted by RFC 423)
+
+388   NCP statistics  (Not online) Cerf, V.G.  1972 August 23; 4 p.  (Updates 
+      RFC 323)
+
+387   Some experiences in implementing Network Graphics Protocol Level 0  (Not
+      online) Kelley, K.C.; Meir, J.  1972 August 10; 6 p.
+
+386   Letter to TIP users-2  (Not online) Cosell, B.; Walden, D.C.  1972 
+      August 16; 7 p.
+
+385   Comments on the File Transfer Protocol  (Not online) Bhushan, A.K.  1972
+      August 18; 5 p.  (Updates RFC 354; Updated by RFC 414)
+
+384   Official site idents for organizations in the ARPA Network  (Not online)
+      North, J.B.  1972 August 28; 5 p.  (Obsoletes RFC 289)
+
+383   Not issued.
+
+382   Mathematical software on the ARPA Network  (Not online) McDaniel, L.  
+      1972 August 3; 1 p.
+
+381   Three aids to improved network operation  (Not online) McQuillan, J.M.  
+      1972 July 26; 4 p.
+
+380   Not issued.
+
+379   Using TSO at CCN  (Not online) Braden, R.T.  1972 August 11; 5 p.
+
+378   Traffic statistics (July 1972)  (Not online) McKenzie, A.M.  1972 August
+      10; 3 p.  (Obsoleted by RFC 391)
+
+377   Using TSO via ARPA Network Virtual Terminal  (Not online) Braden, R.T.  
+      1972 August 10; 8 p.
+
+376   Network host status  (Not online) Westheimer, E.  1972 August 8; 3 p.  
+      (Obsoletes RFC 370)
+
+375   Not issued.
+
+374   IMP system announcement  (Not online) McKenzie, A.M.  1972 July 19; 2 p.
+
+373   Arbitrary character sets  (Not online) McCarthy, J.  1972 July 14; 4 p.
+
+372   Notes on a conversation with Bob Kahn on the ICCC  (Not online) Watson, 
+      R.W.  1972 July 12; 3 p.
+
+371   Demonstration at International Computer Communications Conference  (Not 
+      online) Kahn, R.E.  1972 July 12; 2 p.
+
+370   Network host status  (Not online) Westheimer, E.  1972 July 31; 3 p.  
+      (Obsoletes RFC 367; Obsoleted by RFC 376)
+
+369   Evaluation of ARPANET services January-March, 1972  (Not online) 
+      Pickens, J.R.  1972 July 25; 14 p.
+
+368   Comments on "Proposed Remote Job Entry Protocol"  (Not online) Braden, 
+      R.T.  1972 July 21; 2 p.
+
+367   Network host status  (Not online) Westheimer, E.  1972 July 19; 3 p.  
+      (Obsoletes RFC 366; Obsoleted by RFC 370)
+
+366   Network host status  (Not online) Westheimer, E.  1972 July 11; 3 p.  
+      (Obsoletes RFC 362; Obsoleted by RFC 367)
+
+365   Letter to all TIP users  (Not online) Walden, D.C.  1972 July 11; 5 p.
+
+364   Serving remote users on the ARPANET  (Not online) Abrams, M.D.  1972 
+      July 11; 7 p.
+
+363   ARPA Network mailing lists  (Not online) Stanford Research Inst., 
+      Network Information Center.  1972 August 8; 6 p.  (Obsoletes RFC 329; 
+      Obsoleted by RFC 402)
+
+362   Network host status  (Not online) Westheimer, E.  1972 June 28; 3 p.  
+      (Obsoletes RFC 353; Obsoleted by RFC 366)
+
+361   Deamon processes on host 106  (Not online) Bressler, R.D.  1972 July 5; 
+      1 p.
+
+360   Proposed Remote Job Entry Protocol  (Not online) Holland, C.  1972 June 
+      24; 16 p.  (Obsoleted by RFC 407)
+
+359   Status of the release of the new IMP System (2600)  (Not online) Walden,
+      D.C.  1972 June 22; 1 p.  (Obsoletes RFC 343)
+
+358   Not issued.
+
+357   Echoing strategy for satellite links  (Not online) Davidson, J.  1972 
+      June 26; 15 p.
+
+356   ARPA Network Control Center  (Not online) Alter, R.  1972 June 21; 1 p.
+
+355   Response to NWG/RFC 346  (Not online) Davidson, J.  1972 June 9; 2 p.
+
+354   File Transfer Protocol  (Not online) Bhushan, A.K.  1972 July 8; 29 p.  
+      (Obsoletes RFC 264, RFC 265; Obsoleted by RFC 542; Updated by RFC 385)
+
+353   Network host status  (Not online) Westheimer, E.  1972 June 12; 3 p.  
+      (Obsoletes RFC 344; Obsoleted by RFC 362)
+
+352   TIP site information form  (Not online) Crocker, D.  1972 June 5; 3 p.
+
+351   Graphics information form for the ARPANET graphics resources notebook  
+      (Not online) Crocker, D.  1972 June 5; 3 p.
+
+350   User accounts for UCSB On-Line System  (Not online) Stoughton, R.  1972 
+      May 18; 3 p.
+
+349   Proposed standard socket numbers  (Not online) Postel, J.B.  1972 May 
+      30; 1 p.  (Obsoleted by RFC 433)
+
+348   Discard process  (Not online) Postel, J.B.  1972 May 30; 1 p.
+
+347   Echo process  (Not online) Postel, J.B.  1972 May 30; 1 p.
+
+346   Satellite considerations  (Not online) Postel, J.B.  1972 May 30; 1 p.
+
+345   Interest in mixed integer programming (MPSX on NIC 360/91 at CCN)  (Not 
+      online) Kelley, K.C.  1972 May 26; 1 p.
+
+344   Network host status  (Not online) Westheimer, E.  1972 May 22; 3 p.  
+      (Obsoletes RFC 342; Obsoleted by RFC 353)
+
+343   IMP System change notification  (Not online) McKenzie, A.M.  1972 May 
+      19; 2 p.  (Obsoletes RFC 331; Obsoleted by RFC 359)
+
+342   Network host status  (Not online) Westheimer, E.  1972 May 15; 3 p.  
+      (Obsoletes RFC 332; Obsoleted by RFC 344)
+
+341   Not issued.
+
+340   Proposed Telnet changes  (Not online) O'Sullivan, T.C.  1972 May 15; 
+      1 p.
+
+339   MLTNET: A "Multi Telnet" subsystem for Tenex  (Not online) Thomas, R.  
+      1972 May 5; 8 p.
+
+338   EBCDIC/ASCII mapping for network RJE  (Not online) Braden, R.T.  1972 
+      May 17; 6 p.
+
+337   Not issued.
+
+336   Level 0 Graphic Input Protocol  (Not online) Cotton, I.W.  1972 May 5; 
+      2 p.
+
+335   New interface - IMP/360  (Not online) Bryan, R.F.  1972 May 1; 1 p.
+
+334   Network use on May 8  (Not online) McKenzie, A.M.  1972 May 1; 1 p.
+
+333   Proposed experiment with a Message Switching Protocol  (Not online) 
+      Bressler, R.D.; Murphy, D.; Walden, D.C.  1972 May 15; 52 p.
+
+332   Network host status  (Not online) Westheimer, E.  1972 April 25; 3 p.  
+      (Obsoletes RFC 330; Obsoleted by RFC 342)
+
+331   IMP System change notification  (Not online) McQuillan, J.M.  1972 April
+      19; 1 p.  (Obsoleted by RFC 343)
+
+330   Network host status  (Not online) Westheimer, E.  1972 April 13; 3 p.  
+      (Obsoletes RFC 326; Obsoleted by RFC 332)
+
+329   ARPA Network mailing lists  (Not online) Stanford Research Inst., 
+      Network Information Center.  1972 May 17; 7 p.  (Obsoletes RFC 303; 
+      Obsoleted by RFC 363)
+
+328   Suggested Telnet Protocol changes  (Not online) Postel, J.B.  1972 April
+      29; 1 p.
+
+327   Data and File Transfer workshop notes  (Not online) Bhushan, A.K.  1972 
+      April 27; 7 p.
+
+326   Network host status  (Not online) Westheimer, E.  1972 April 3; 3 p.  
+      (Obsoletes RFC 319; Obsoleted by RFC 330)
+
+325   Network Remote Job Entry program - NETRJS  (Not online) Hicks, G.  1972 
+      April 6; 9 p.
+
+324   RJE Protocol meeting  (Not online) Postel, J.B.  1972 April 3; 1 p.
+
+323   Formation of Network Measurement Group (NMG)  (Not online) Cerf, V.G.  
+      1972 March 23; 9 p.  (Updated by RFC 388)
+
+322   Well known socket numbers  (Not online) Cerf, V.G.; Postel, J.B.  1972 
+      March 26; 1 p.
+
+321   CBI networking activity at MITRE  (Not online) Karp, P.M.  1972 March 
+      24; 13 p.
+
+320   Workshop on hard copy line printers  (Not online) Reddy, R.  1972 March 
+      27; 4 p.
+
+319   Network host status  (Not online) Westheimer, E.  1972 March 21; 3 p.  
+      (Obsoletes RFC 315; Obsoleted by RFC 326)
+
+318   [Ad hoc Telnet Protocol]  (Not online) Postel, J.B.  1972 April 3; 23 p.
+      (Updates RFC 158; Updated by RFC 435)
+
+317   Official Host-Host Protocol modification: Assigned link numbers  (Not 
+      online) Postel, J.B.  1972 March 20; 1 p.  (Obsoleted by RFC 604)
+
+316   ARPA Network Data Management Working Group  (Not online) McKay, D.B.; 
+      Mullery, A.P.  1972 February 23; 10 p.
+
+315   Network host status  (Not online) Westheimer, E.  1972 March 8; 3 p.  
+      (Obsoletes RFC 306; Obsoleted by RFC 319)
+
+314   Network Graphics Working Group meeting  (Not online) Cotton, I.W.  1972 
+      March 14; 1 p.
+
+313   Computer based instruction  (Not online) O'Sullivan, T.C.  1972 March 6;
+      9 p.
+
+312   Proposed change in IMP-to-Host Protocol  (Not online) McKenzie, A.M.  
+      1972 March 22; 2 p.
+
+311   New console attachments to the USCB host  (Not online) Bryan, R.F.  1972
+      February 29; 2 p.
+
+310   Another look at Data and File Transfer Protocols  (Not online) Bhushan, 
+      A.K.  1972 April 3; 7 p.
+
+309   Data and File Transfer workshop announcement  (Not online) Bhushan, A.K.
+      1972 March 17; 5 p.
+
+308   ARPANET host availability data  (Not online) Seriff, M.  1972 March 13; 
+      3 p.
+
+307   Using network Remote Job Entry  (Not online) Harslem, E.  1972 February 
+      24; 6 p.
+
+306   Network host status  (Not online) Westheimer, E.  1972 February 15; 3 p.
+      (Obsoletes RFC 298; Obsoleted by RFC 315)
+
+305   Unknown host numbers  (Not online) Alter, R.  1972 February 23; 1 p.
+
+304   Data management system proposal for the ARPA network  (Not online) 
+      McKay, D.B.  1972 February 17; 12 p.
+
+303   ARPA Network mailing lists  (Not online) Stanford Research Inst., 
+      Network Information Center.  1972 February 23; 6 p.  (Obsoletes RFC 300;
+      Obsoleted by RFC 329)
+
+302   Exercising the ARPANET  (Not online) Bryan, R.F.  1972 February 8; 3 p.
+
+301   BBN IMP (#5) and NCC schedule March 4, 1971  (Not online) Alter, R.  
+      1972 February 11; 1 p.
+
+300   ARPA Network mailing lists  (Not online) North, J.B.  1972 January 25; 
+      6 p.  (Obsoletes RFC 211; Obsoleted by RFC 303)
+
+299   Information management system  (Not online) Hopkin, D.  1972 February 
+      11; 1 p.
+
+298   Network host status  (Not online) Westheimer, E.  1972 February 11; 3 p.
+      (Obsoletes RFC 293; Obsoleted by RFC 306)
+
+297   TIP message buffers  (Not online) Walden, D.C.  1972 January 31; 5 p.
+
+296   DS-1 display system  (Not online) Liddle, D.E.  1972 January 27; 23 p.
+
+295   Report of the Protocol Workshop, 12 October 1971  (Not online) Postel, 
+      J.B.  1972 January 2; 4 p.
+
+294   On the use of "set data type" transaction in File Transfer Protocol  
+      (Not online) Bhushan, A.K.  1972 January 25; 2 p.  (Updates RFC 265)
+
+293   Network host status  (Not online) Westheimer, E.  1972 January 18; 3 p.
+      (Obsoletes RFC 288; Obsoleted by RFC 298)
+
+292   Graphics Protocol: Level 0 only  (Not online) Michener, J.C.; Cotton, 
+      I.W.; Kelley, K.C.; Liddle, D.E.; Meyer, E.W., Jr.  1972 January 12; 
+      9 p.
+
+291   Data management meeting announcement  (Not online) McKay, D.B.  1972 
+      January 14; 2 p.
+
+290   Computer networks and data sharing: A bibliography  (Not online) 
+      Mullery, A.P.  1972 January 11; 15 p.  (Obsoletes RFC 243)
+
+289   What we hope is an official list of host names  (Not online) Watson, 
+      R.W.  1971 December 21; 3 p.  (Obsoleted by RFC 384)
+
+288   Network host status  (Not online) Westheimer, E.  1972 January 6; 6 p.  
+      (Obsoletes RFC 287; Obsoleted by RFC 293)
+
+287   Status of network hosts  (Not online) Westheimer, E.  1971 December 22; 
+      3 p.  (Obsoletes RFC 267; Obsoleted by RFC 288)
+
+286   Network library information system  (Not online) Forman, E.  1971 
+      December 21; 1 p.
+
+285   Network graphics  (Not online) Huff, D.  1971 December 15; 13 p.
+
+284   Not issued.
+
+283   NETRJT: Remote Job Service Protocol for TIPS  (Not online) Braden, R.T.
+      1971 December 20; 9 p.  (Updates RFC 189)
+
+282   Graphics meeting report  (Not online) Padlipsky, M.A.  1971 December 8; 
+      8 p.
+
+281   Suggested addition to File Transfer Protocol  (Not online) McKenzie, 
+      A.M.  1971 December 8; 5 p.
+
+280   Draft of host names  (Not online) Watson, R.W.  1971 November 17; 4 p.
+
+279   Not issued.
+
+278   Revision of the Mail Box Protocol  (Not online) Bhushan, A.K.; Braden, 
+      R.T.; Harslem, E.; Heafner, J.F.; McKenzie, A.M.; Melvin, J.T.; 
+      Sundberg, R.L.; Watson, R.W.; White, J.E.  1971 November 17; 4 p.  
+      (Obsoletes RFC 221)
+
+277   Not issued.
+
+276   NIC course  (Not online) Watson, R.W.  1971 November 8; 2 p.
+
+275   Not issued.
+
+274   Establishing a local guide for network usage  (Not online) Forman, E.  
+      1971 November 1; 5 p.
+
+273   More on standard host names  (Not online) Watson, R.W.  1971 October 18;
+      3 p.  (Obsoletes RFC 237)
+
+272   Not issued.
+
+271   IMP System change notifications  (Not online) Cosell, B.  1972 January 
+      3; 2 p.
+
+270   Correction to BBN Report No. 1822 (NIC NO 7958)  (Not online) McKenzie, 
+      A.M.  1972 January 1; 3 p.  (Updates NIC 7959)
+
+269   Some experience with file transfer  (Not online) Brodie, H.  1971 
+      December 6; 3 p.  (Updates RFC 122, RFC 238)
+
+268   Graphics facilities information  (Not online) Postel, J.B.  1971 
+      November 24; 1 p.
+
+267   Network host status  (Not online) Westheimer, E.  1971 November 22; 3 p.
+      (Obsoletes RFC 266; Obsoleted by RFC 287)
+
+266   Network host status  (Not online) Westheimer, E.  1971 November 8; 2 p.
+      (Obsoletes RFC 255; Obsoleted by RFC 267)
+
+265   File Transfer Protocol  (Not online) Bhushan, A.K.; Braden, R.T.; 
+      Crowther, W.R.; Harslem, E.; Heafner, J.F.; McKenzie, A.M.; Melvin, 
+      J.T.; Sundberg, R.L.; Watson, R.W.; White, J.E.  1971 November 17; 11 p.
+      (Obsoletes RFC 172; Obsoleted by RFC 354; Updated by RFC 294)
+
+264   Data Transfer Protocol  (Not online) Bhushan, A.K.; Braden, R.T.; 
+      Crowther, W.R.; Harslem, E.; Heafner, J.F.; McKenzie, A.M.; Melvin, 
+      J.T.; Sundberg, R.L.; Watson, R.W.; White, J.E.  1971 December 15; 8 p.
+      (Obsoletes RFC 171; Obsoleted by RFC 354)
+
+263   "Very Distant" Host interface  (Not online) McKenzie, A.M.  1971 
+      December 17; 2 p.
+
+262   Not issued.
+
+261   Not issued.
+
+260   Not issued.
+
+259   Not issued.
+
+258   Not issued.
+
+257   Not issued.
+
+256   IMPSYS change notification  (Not online) Cosell, B.  1971 November 3; 
+      1 p.
+
+255   Status of network hosts  (Not online) Westheimer, E.  1971 October 26; 
+      2 p.  (Obsoletes RFC 252; Obsoleted by RFC 266)
+
+254   Scenarios for using ARPANET computers  (Not online) Bhushan, A.K.  1971 
+      October 29; 32 p.
+
+253   Second Network Graphics meeting details  (Not online) Moorer, J.A.  1971
+      October 19; 1 p.
+
+252   Network host status  (Not online) Westheimer, E.  1971 October 8; 3 p.  
+      (Obsoletes RFC 240; Obsoleted by RFC 255)
+
+251   Weather data  (Not online) Stern, D.  1971 October 13; 2 p.
+
+250   Some thoughts on file transfer  (Not online) Brodie, H.  1971 October 7;
+      1 p.
+
+249   Coordination of equipment and supplies purchase  (Not online) Borelli, 
+      R.F.  1971 October 8; 2 p.
+
+248   Not issued.
+
+247   Proffered set of standard host names  (Not online) Karp, P.M.  1971 
+      October 12; 4 p.  (Obsoletes RFC 226)
+
+246   Network Graphics meeting  (Not online) Vezza, A.  1971 October 5; 1 p.
+
+245   Reservations for Network Group meeting  (Not online) Falls, C.  1971 
+      October 5; 1 p.
+
+244   Not issued.
+
+243   Network and data sharing bibliography  (Not online) Mullery, A.P.  1971 
+      October 5; 6 p.  (Obsoleted by RFC 290)
+
+242   Data descriptive language for shared data  (Not online) Haibt, L.; 
+      Mullery, A.P.  1971 July 19; 12 p.
+
+241   Connecting computers to MLC ports  (Not online) McKenzie, A.M.  1971 
+      September 29; 2 p.
+
+240   Site status  (Not online) McKenzie, A.M.  1971 September 30; 5 p.  
+      (Obsoletes RFC 235; Obsoleted by RFC 252)
+
+239   Host mnemonics proposed in RFC 226 (NIC 7625)  (Not online) Braden, R.T.
+      1971 September 23; 1 p.
+
+238   Comments on DTP and FTP proposals  (Not online) Braden, R.T.  1971 
+      September 29; 1 p.  (Updates RFC 171, RFC 172; Updated by RFC 269)
+
+237   NIC view of standard host names  (Not online) Watson, R.W.  1971 
+      September 29; 1 p.  (Obsoleted by RFC 273)
+
+236   Standard host names  (Not online) Postel, J.B.  1971 September 27; 2 p.
+      (Obsoletes RFC 229)
+
+235   Site status  (Not online) Westheimer, E.  1971 September 27; 4 p.  
+      (Obsoleted by RFC 240)
+
+234   Network Working Group meeting schedule  (Not online) Vezza, A.  1971 
+      October 5; 1 p.  (Updates RFC 222, RFC 204)
+
+233   Standardization of host call letters  (Not online) Bhushan, A.K.; 
+      Metcalfe, R.M.  1971 September 28; 1 p.
+
+232   Postponement of network graphics meeting  (Not online) Vezza, A.  1971 
+      September 23; 1 p.
+
+231   Service center standards for remote usage: A user's view  (Not online) 
+      Heafner, J.F.; Harslem, E.  1971 September 21; 5 p.
+
+230   Toward reliable operation of minicomputer-based terminals on a TIP  (Not
+      online) Pyke, T.N., Jr.  1971 September 24; 3 p.
+
+229   Standard host names  (Not online) Postel, J.B.  1971 September 22; 2 p.
+      (Obsoleted by RFC 236)
+
+228   Clarification  (Not online) Walden, D.C.  1971 September 22; 1 p.  
+      (Updates RFC 70)
+
+227   Data transfer rates (Rand/UCLA)  (Not online) Heafner, J.F.; Harslem, E.
+      1971 September 17; 2 p.  (Updates RFC 113)
+
+226   Standardization of host mnemonics  (Not online) Karp, P.M.  1971 
+      September 20; 1 p.  (Obsoleted by RFC 247)
+
+225   Rand/UCSB network graphics experiment  (Not online) Harslem, E.; 
+      Stoughton, R.  1971 September 13; 6 p.  (Updates RFC 74)
+
+224   Comments on Mailbox Protocol  (Not online) McKenzie, A.M.  1971 
+      September 14; 2 p.
+
+223   Network Information Center schedule for network users  (Not online) 
+      Melvin, J.T.; Watson, R.W.  1971 September 14; 3 p.
+
+222   Subject: System programmer's workshop  (Not online) Metcalfe, R.M.  1971
+      September 13; 2 p.  (Updates RFC 212; Updated by RFC 234)
+
+221   Mail Box Protocol: Version 2  (Not online) Watson, R.W.  1971 August 27;
+      5 p.  (Obsoletes RFC 196; Obsoleted by RFC 278)
+
+220   Not issued.
+
+219   User's view of the datacomputer  (Not online) Winter, R.  1971 September
+      3; 10 p.
+
+218   Changing the IMP status reporting facility  (Not online) Cosell, B.  
+      1971 September 8; 1 p.
+
+217   Specifications changes for OLS, RJE/RJOR, and SMFS  (Not online) White, 
+      J.E.  1971 September 8; 2 p.  (Updates RFC 74, RFC 105, RFC 122)
+
+216   Telnet access to UCSB's On-Line System  (Not online) White, J.E.  1971 
+      September 8; 27 p.
+
+215   NCP, ICP, and Telnet: The Terminal IMP implementation  (Not online) 
+      McKenzie, A.M.  1971 August 30; 7 p.
+
+214   Network checkpoint  (Not online) Harslem, E.  1971 August 21; 2 p.  
+      (Obsoletes RFC 198)
+
+213   IMP System change notification  (Not online) Cosell, B.  1971 August 20;
+      1 p.
+
+212   NWG meeting on network usage  (Not online) University of Southern 
+      California, Information Sciences Inst.  1971 August 23; 2 p.  (Obsoletes
+      RFC 207; Updated by RFC 222)
+
+211   ARPA Network mailing lists  (Not online) North, J.B.  1971 August 18; 
+      5 p.  (Obsoletes RFC 168; Obsoleted by RFC 300)
+
+210   Improvement of flow control  (Not online) Conrad, W.  1971 August 16; 
+      3 p.
+
+209   Host/IMP interface documentation  (Not online) Cosell, B.  1971 August 
+      13; 2 p.
+
+208   Address tables  (Not online) McKenzie, A.M.  1971 August 9; 4 p.
+
+207   September Network Working Group meeting  (Not online) Vezza, A.  1971 
+      August 9; 2 p.  (Obsoleted by RFC 212)
+
+206   User Telnet - description of an initial implementation  (Not online) 
+      White, J.E.  1971 August 9; 17 p.
+
+205   NETCRT - a character display protocol  (Not online) Braden, R.T.  1971 
+      August 6; 14 p.
+
+204   Sockets in use  (Not online) Postel, J.B.  1971 August 5; 1 p.  
+      (Updated by RFC 234)
+
+203   Achieving reliable communication  (Not online) Kalin, R.B.  1971 August 
+      10; 14 p.
+
+202   Possible deadlock in ICP  (Not online) Wolfe, S.M.; Postel, J.B.  1971 
+      July 26; 2 p.
+
+201   Not issued.
+
+200   RFC list by number  (Not online) North, J.B.  1971 August 1; 2 p.  
+      (Obsoletes RFC 170, RFC 160; Obsoleted by NIC 7724)
+
+199   Suggestions for a network data-tablet graphics protocol  (Not online) 
+      Williams, T.  1971 July 15; 13 p.
+
+198   Site certification - Lincoln Labs 360/67  (Not online) Heafner, J.F.  
+      1971 July 20; 1 p.  (Obsoletes RFC 193; Obsoleted by RFC 214)
+
+197   Initial Connection Protocol - Reviewed  (Not online) Shoshani, A.; 
+      Harslem, E.  1971 July 14; 4 p.
+
+196   Mail Box Protocol  (Not online) Watson, R.W.  1971 July 20; 4 p.  
+      (Obsoleted by RFC 221)
+
+195   Data computers-data descriptions and access language  (Not online) 
+      Mealy, G.H.  1971 July 16; 4 p.
+
+194   Data Reconfiguration Service - compiler/interpreter implementation notes
+      (Not online) Cerf, V.G.; Harslem, E.; Heafner, J.F.; Metcalfe, R.M.; 
+      White, J.E.  1971 July; 22 p.
+
+193   Network checkout  (Not online) Harslem, E.; Heafner, J.F.  1971 July 14;
+      2 p.  (Obsoleted by RFC 198)
+
+192   Some factors which a Network Graphics Protocol must consider  (Not 
+      online) Watson, R.W.  1971 July 12; 21 p.
+
+191   Graphics implementation and conceptualization at Augmentation Research 
+      Center  (Not online) Irby, C.H.  1971 July 13; 4 p.
+
+190   DEC PDP-10-IMLAC communications system  (Not online) Deutsch, L.P.  1971
+      July 13; 15 p.
+
+189   Interim NETRJS specifications. Braden, R.T.  1971 July 15; 19 p. 
+      (Format: TXT=37862 bytes)  (Obsoletes RFC 88; Obsoleted by RFC 599; 
+      Updated by RFC 283)
+
+188   Data management meeting announcement  (Not online) Karp, P.M.; McKay, 
+      D.B.  1971 January 28; 2 p.
+
+187   Network/440 protocol concept  (Not online) McKay, D.B.; Karp, D.P.  1971
+      July; 15 p.
+
+186   Network graphics loader  (Not online) Michener, J.C.  1971 July 12; 
+      21 p.
+
+185   NIC distribution of manuals and handbooks  (Not online) North, J.B.  
+      1971 July 7; 1 p.
+
+184   Proposed graphic display modes  (Not online) Kelley, K.C.  1971 July 6; 
+      7 p.
+
+183   EBCDIC codes and their mapping to ASCII  (Not online) Winett, J.M.  1971
+      July 21; 15 p.
+
+182   Compilation of list of relevant site reports  (Not online) North, J.B.  
+      1971 June 25; 1 p.
+
+181   Modifications to RFC 177  (Not online) McConnell, J.  1971 July 21; 2 p.
+      (Updates RFC 177)
+
+180   File system questionnaire  (Not online) McKenzie, A.M.  1971 June 25; 
+      8 p.
+
+179   Link number assignments. McKenzie, A.M.  1971 June 22; 1 p. (Format: 
+      TXT=810 bytes)  (Updates RFC 107)
+
+178   Network graphic attention handling  (Not online) Cotton, I.W.  1971 June
+      27; 18 p.
+
+177   Device independent graphical display description  (Not online) 
+      McConnell, J.  1971 June 15; 10 p.  (Updates RFC 125; Updated by RFC 
+      181)
+
+176   Comments on "Byte size for connections"  (Not online) Bhushan, A.K.; 
+      Kanodia, R.; Metcalfe, R.M.; Postel, J.B.  1971 June 14; 5 p.
+
+175   Comments on "Socket conventions reconsidered"  (Not online) Harslem, E.;
+      Heafner, J.F.  1971 June 11; 1 p.
+
+174   UCLA - computer science graphics overview  (Not online) Postel, J.B.; 
+      Cerf, V.G.  1971 June 8; 3 p.
+
+173   Network data management committee meeting announcement  (Not online) 
+      Karp, P.M.; McKay, D.B.  1971 June 4; 3 p.
+
+172   File Transfer Protocol  (Not online) Bhushan, A.K.; Braden, R.T.; 
+      Crowther, W.R.; Harslem, E.; Heafner, J.F.; McKenzie, A.M.; Melvin, 
+      J.T.; Sundberg, R.L.; Watson, R.W.; White, J.E.  1971 June 23; 15 p.  
+      (Obsoleted by RFC 265; Updates RFC 114; Updated by RFC 238)
+
+171   Data Transfer Protocol  (Not online) Bhushan, A.K.; Braden, R.T.; 
+      Crowther, W.R.; Harslem, E.; Heafner, J.F.; McKenzie, A.M.; Melvin, 
+      J.T.; Sundberg, R.L.; Watson, R.W.; White, J.E.  1971 June 23; 13 p.  
+      (Obsoleted by RFC 264; Updates RFC 114; Updated by RFC 238)
+
+170   RFC list by number  (Not online) Stanford Research Inst., Network 
+      Information Center.  1971 June 1; 2 p.  (Obsoleted by RFC 200)
+
+169   Computer networks  (Not online) Crocker, S.D.  1971 May 27; 5 p.
+
+168   ARPA Network mailing lists  (Not online) North, J.B.  1971 May 26; 5 p.
+      (Obsoletes RFC 155; Obsoleted by RFC 211)
+
+167   Socket conventions reconsidered  (Not online) Bhushan, A.K.; Metcalfe, 
+      R.M.; Winett, J.M.  1971 May 24; 7 p.
+
+166   Data Reconfiguration Service: An implementation specification  (Not 
+      online) Anderson, R.H.; Cerf, V.G.; Harslem, E.; Heafner, J.F.; Madden, 
+      J.; Metcalfe, R.M.; Shoshani, A.; White, J.E.; Wood, D.C.M.  1971 May 
+      25; 24 p.
+
+165   Proffered official Initial Connection Protocol  (Not online) Postel, 
+      J.B.  1971 May 25; 6 p.  (Obsoletes RFC 145, RFC 143, RFC 123; 
+      Updated by NIC 7101)
+
+164   Minutes of Network Working Group meeting, 5/16 through 5/19/71  (Not 
+      online) Heafner, J.F.  1971 May 25; 38 p.
+
+163   Data transfer protocols  (Not online) Cerf, V.G.  1971 May 19; 3 p.
+
+162   NETBUGGER3  (Not online) Kampe, M.  1971 May 22; 1 p.
+
+161   Solution to the race condition in the ICP  (Not online) Shoshani, A.  
+      1971 May 19; 2 p.
+
+160   RFC brief list  (Not online) Stanford Research Inst., Network 
+      Information Center.  1971 May 18; 4 p.  (Obsoleted by RFC 200; Updates 
+      NIC 6716)
+
+159   Not issued.
+
+158   Telnet Protocol: A proposed document  (Not online) O'Sullivan, T.C.  
+      1971 May 19; 11 p.  (Obsoleted by RFC 495; Updates RFC 139; Updated by 
+      RFC 318)
+
+157   Invitation to the Second Symposium on Problems in the Optimization of 
+      Data Communications Systems  (Not online) Cerf, V.G.  1971 May 12; 1 p.
+
+156   Status of the Illinois site: Response to RFC 116  (Not online) 
+      Bouknight, J.  1971 April 26; 1 p.  (Updates RFC 116)
+
+155   ARPA Network mailing lists  (Not online) North, J.B.  1971 May; 5 p.  
+      (Obsoletes RFC 95; Obsoleted by RFC 168)
+
+154   Exposition style  (Not online) Crocker, S.D.  1971 May 12; 1 p.  
+      (Obsoletes RFC 132)
+
+153   SRI ARC-NIC status  (Not online) Melvin, J.T.; Watson, R.W.  1971 May 
+      15; 4 p.
+
+152   SRI Artificial Intelligence status report  (Not online) Wilber, M.  1971
+      May 10; 1 p.
+
+151   Comments on a proffered official ICP: RFCs 123, 127  (Not online) 
+      Shoshani, A.  1971 May 10; 3 p.  (Updates RFC 127)
+
+150   Use of IPC facilities: A working paper  (Not online) Kalin, R.B.  1971 
+      May 5; 16 p.
+
+149   Best laid plans. Crocker, S.D.  1971 May 10; 1 p. (Format: TXT=713 
+      bytes)  (Updates RFC 140)
+
+148   Comments on RFC 123  (Not online) Bhushan, A.K.  1971 May 7; 1 p.  
+      (Updates RFC 123)
+
+147   Definition of a socket  (Not online) Winett, J.M.  1971 May 7; 2 p.  
+      (Updates RFC 129)
+
+146   Views on issues relevant to data sharing on computer networks  (Not 
+      online) Karp, P.M.; McKay, D.B.; Wood, D.C.M.  1971 May 12; 7 p.
+
+145   Initial Connection Protocol control commands  (Not online) Postel, J.B.
+      1971 May 4; 1 p.  (Obsoletes RFC 127; Obsoleted by RFC 165)
+
+144   Data sharing on computer networks  (Not online) Shoshani, A.  1971 April
+      30; 8 p.
+
+143   Regarding proffered official ICP  (Not online) Naylor, W.; Wong, J.; 
+      Kline, C.; Postel, J.B.  1971 May 3; 4 p.  (Obsoleted by RFC 165)
+
+142   Time-out mechanism in the Host-Host Protocol  (Not online) Kline, C.; 
+      Wong, J.  1971 May 3; 3 p.
+
+141   Comments on RFC 114: A File Transfer Protocol  (Not online) Harslem, E.;
+      Heafner, J.F.  1971 April 29; 2 p.  (Updates RFC 114)
+
+140   Agenda for the May NWG meeting  (Not online) Crocker, S.D.  1971 May 4; 
+      3 p.  (Updated by RFC 149)
+
+139   Discussion of Telnet Protocol  (Not online) O'Sullivan, T.C.  1971 May 
+      7; 11 p.  (Updates RFC 137; Updated by RFC 158)
+
+138   Status report on proposed Data Reconfiguration Service  (Not online) 
+      Anderson, R.H.; Cerf, V.G.; Harslem, E.; Heafner, J.F.; Madden, J.; 
+      Metcalfe, R.M.; Shoshani, A.; White, J.E.; Wood, D.C.M.  1971 April 28; 
+      30 p.
+
+137   Telnet Protocol - a proposed document  (Not online) O'Sullivan, T.C.  
+      1971 April 30; 6 p.  (Updated by RFC 139)
+
+136   Host accounting and administrative procedures  (Not online) Kahn, R.E.  
+      1971 April 29; 6 p.
+
+135   Response to NWG/RFC 110  (Not online) Hathaway, W.  1971 April 29; 2 p.
+      (Updates RFC 110)
+
+134   Network Graphics meeting  (Not online) Vezza, A.  1971 April 29; 2 p.
+
+133   File transfer and recovery  (Not online) Sundberg, R.L.  1971 April 27; 
+      5 p.
+
+132   Typographical error in RFC 107  (Not online) White, J.E.  1971 April 28;
+      1 p.  (Obsoleted by RFC 154; Updates RFC 107)
+
+131   Response to RFC 116: May NWG meeting  (Not online) Harslem, E.; Heafner,
+      J.F.  1971 April 22; 4 p.  (Updates RFC 116)
+
+130   Response to RFC 111: Pressure from the chairman  (Not online) Heafner, 
+      J.F.  1971 April 22; 2 p.  (Updates RFC 111)
+
+129   Request for comments on socket name structure  (Not online) Harslem, E.;
+      Heafner, J.F.; Meyer, E.W., Jr.  1971 April 22; 6 p.  (Updated by RFC 
+      147)
+
+128   Bytes  (Not online) Postel, J.B.  1971 April 21; 2 p.
+
+127   Comments on RFC 123  (Not online) Postel, J.B.  1971 April 20; 1 p.  
+      (Obsoleted by RFC 145; Updates RFC 123; Updated by RFC 151)
+
+126   Graphics facilities at Ames Research Center  (Not online) McConnell, J.
+      1971 April 18; 2 p.
+
+125   Response to RFC 86: Proposal for network standard format for a graphics 
+      data stream  (Not online) McConnell, J.  1971 April 18; 4 p.  (Updates 
+      RFC 86; Updated by RFC 177)
+
+124   Typographical error in RFC 107  (Not online) Melvin, J.T.  1971 April 
+      19; 1 p.  (Updates RFC 107)
+
+123   Proffered official ICP  (Not online) Crocker, S.D.  1971 April 20; 4 p.
+      (Obsoletes RFC 66, RFC 80; Obsoleted by RFC 165; Updates RFC 98, RFC 
+      101; Updated by RFC 127, RFC 148)
+
+122   Network specifications for UCSB's Simple-Minded File System  (Not 
+      online) White, J.E.  1971 April 26; 21 p.  (Updated by RFC 217, RFC 269,
+      RFC 399)
+
+121   Network on-line operators  (Not online) Krilanovich, M.  1971 April 21; 
+      14 p.
+
+120   Network PL1 subprograms  (Not online) Krilanovich, M.  1971 April 21; 
+      16 p.
+
+119   Network Fortran subprograms  (Not online) Krilanovich, M.  1971 April 
+      21; 17 p.
+
+118   Recommendations for facility documentation  (Not online) Watson, R.W.  
+      1971 April 16; 3 p.
+
+117   Some comments on the official protocol  (Not online) Wong, J.  1971 
+      April 7; 5 p.
+
+116   Structure of the May NWG meeting  (Not online) Crocker, S.D.  1971 April
+      12; 1 p.  (Updates RFC 99; Updated by RFC 131, RFC 156)
+
+115   Some Network Information Center policies on handling documents  (Not 
+      online) Watson, R.W.; North, J.B.  1971 April 16; 12 p.
+
+114   File Transfer Protocol  (Not online) Bhushan, A.K.  1971 April 10; 24 p.
+      (Updated by RFC 141, RFC 172, RFC 171)
+
+113   Network activity report: UCSB Rand  (Not online) Harslem, E.; Heafner, 
+      J.F.; White, J.E.  1971 April 5; 2 p.  (Updated by RFC 227)
+
+112   User/Server Site Protocol: Network host questionnaire responses  (Not 
+      online) O'Sullivan, T.C.  1971 April 1; 3 p.
+
+111   Pressure from the chairman  (Not online) Crocker, S.D.  1971 March 31; 
+      2 p.  (Updates RFC 107; Updated by RFC 130)
+
+110   Conventions for using an IBM 2741 terminal as a user console for access 
+      to network server hosts  (Not online) Winett, J.M.  1971 March 25; 4 p.
+      (Updated by RFC 135)
+
+109   Level III Server Protocol for the Lincoln Laboratory NIC 360/67 Host  
+      (Not online) Winett, J.M.  1971 March 24; 12 p.
+
+108   Attendance list at the Urbana NWG meeting, February 17-19, 1971  (Not 
+      online) Watson, R.W.  1971 March 25; 3 p.  (Updates RFC 101)
+
+107   Output of the Host-Host Protocol glitch cleaning committee  (Not online)
+      Bressler, R.D.; Crocker, S.D.; Crowther, W.R.; Grossman, G.R.; 
+      Tomlinson, R.S.; White, J.E.  1971 March 23; 11 p.  (Updates RFC 102; 
+      Updated by RFC 179, RFC 132, RFC 124, RFC 111, NIC 7147)
+
+106   User/Server Site Protocol network host questionnaire  (Not online) 
+      O'Sullivan, T.C.  1971 March 3; 3 p.
+
+105   Network specifications for Remote Job Entry and Remote Job Output 
+      Retrieval at UCSB  (Not online) White, J.E.  1971 March 22; 8 p.  
+      (Updated by RFC 217)
+
+104   Link 191  (Not online) Postel, J.B.; Crocker, S.D.  1971 February 25; 
+      1 p.
+
+103   Implementation of interrupt keys  (Not online) Kalin, R.B.  1971 
+      February 24; 3 p.
+
+102   Output of the Host-Host Protocol glitch cleaning committee  (Not online)
+      Crocker, S.D.  1971 February 22; 6 p.  (Updated by RFC 107)
+
+101   Notes on the Network Working Group meeting, Urbana, Illinois, February 
+      17, 1971  (Not online) Watson, R.W.  1971 February 23; 14 p.  
+      (Updated by RFC 108, RFC 123)
+
+100   Categorization and guide to NWG/RFCs  (Not online) Karp, P.M.  1971 
+      February 26; 43 p.
+
+99    Network meeting  (Not online) Karp, P.M.  1971 February 22; 1 p.  
+      (Updated by RFC 116)
+
+98    Logger Protocol proposal  (Not online) Meyer, E.W., Jr.; Skinner, T.P.  
+      1971 February 11; 12 p.  (Updated by RFC 123)
+
+97    First cut at a proposed Telnet Protocol  (Not online) Melvin, J.T.; 
+      Watson, R.W.  1971 February 15; 10 p.
+
+96    Interactive network experiment to study modes of access to the Network 
+      Information Center  (Not online) Watson, R.W.  1971 February 12; 4 p.
+
+95    Distribution of NWG/RFC's through the NIC  (Not online) Crocker, S.D.  
+      1971 February 4; 4 p.  (Obsoleted by RFC 155)
+
+94    Some thoughts on network graphics  (Not online) Harslem, E.; Heafner, 
+      J.F.  1971 February 3; 8 p.
+
+93    Initial Connection Protocol  (Not online) McKenzie, A.M.  1971 January 
+      27; 1 p.
+
+92    Not issued.
+
+91    Proposed User-User Protocol  (Not online) Mealy, G.H.  1970 December 27;
+      18 p.
+
+90    CCN as a network service center  (Not online) Braden, R.T.  1971 January
+      15; 6 p.
+
+89    Some historic moments in networking  (Not online) Metcalfe, R.M.  1971 
+      January 19; 12 p.
+
+88    NETRJS: A third level protocol for Remote Job Entry  (Not online) 
+      Braden, R.T.; Wolfe, S.M.  1971 January 13; 10 p.  (Obsoleted by RFC 
+      189)
+
+87    Topic for discussion at the next Network Working Group meeting  (Not 
+      online) Vezza, A.  1971 January 12; 3 p.
+
+86    Proposal for a network standard format for a data stream to control 
+      graphics display  (Not online) Crocker, S.D.  1971 January 5; 5 p.  
+      (Updated by RFC 125)
+
+85    Network Working Group meeting  (Not online) Crocker, S.D.  1970 December
+      28; 1 p.
+
+84    List of NWG/RFC's 1-80  (Not online) North, J.B.  1970 December 23; 8 p.
+
+83    Language-machine for data reconfiguration  (Not online) Anderson, R.H.; 
+      Harslem, E.; Heafner, J.F.  1970 December 18; 12 p.
+
+82    Network meeting notes  (Not online) Meyer, E.W., Jr.  1970 December 9; 
+      16 p.
+
+81    Request for reference information  (Not online) Bouknight, J.  1970 
+      December 3; 1 p.
+
+80    Protocols and data formats  (Not online) Harslem, E.; Heafner, J.F.  
+      1970 December 1; 9 p.  (Obsoleted by RFC 123)
+
+79    Logger Protocol error  (Not online) Meyer, E.W., Jr.  1970 November 16; 
+      1 p.
+
+78    NCP status report: UCSB/Rand  (Not online) Harslem, E.; Heafner, J.F.; 
+      White, J.E.  1970 October; 1 p.
+
+77    Network meeting report  (Not online) Postel, J.B.  1970 November 20; 
+      9 p.
+
+76    Connection by name: User oriented protocol  (Not online) Bouknight, J.; 
+      Madden, J.; Grossman, G.R.  1970 October 28; 8 p.
+
+75    Network meeting  (Not online) Crocker, S.D.  1970 October 14; 1 p.
+
+74    Specifications for network use of the UCSB On-Line System  (Not online) 
+      White, J.E.  1970 October 16; 11 p.  (Updated by RFC 217, RFC 225)
+
+73    Response to NWG/RFC 67  (Not online) Crocker, S.D.  1970 September 25; 
+      1 p.
+
+72    Proposed moratorium on changes to network protocol  (Not online) 
+      Bressler, R.D.  1970 September 28; 3 p.
+
+71    Reallocation in case of input error  (Not online) Schipper, T.  1970 
+      September 25; 1 p.
+
+70    Note on padding  (Not online) Crocker, S.D.  1970 October 15; 8 p.  
+      (Updated by RFC 228)
+
+69    Distribution list change for MIT  (Not online) Bhushan, A.K.  1970 
+      September 22; 1 p.  (Updates RFC 52)
+
+68    Comments on memory allocation control commands: CEASE, ALL, GVB, RET, 
+      and RFNM  (Not online) Elie, M.  1970 August 31; 2 p.
+
+67    Proposed change to Host/IMP spec to eliminate marking  (Not online) 
+      Crowther, W.R.  1970; 1 p.
+
+66    NIC - third level ideas and other noise  (Not online) Crocker, S.D.  
+      1970 August 26; 3 p.  (Obsoleted by RFC 123)
+
+65    Comments on Host/Host Protocol document #1  (Not online) Walden, D.C.  
+      1970 August 29; 2 p.
+
+64    Getting rid of marking  (Not online) Elie, M.  1970 July; 7 p.
+
+63    Belated network meeting report  (Not online) Cerf, V.G.  1970 July 31; 
+      2 p.
+
+62    Systems for interprocess communication in a resource sharing computer 
+      network  (Not online) Walden, D.C.  1970 August 3; 37 p.  (Obsoletes RFC
+      61)
+
+61    Note on interprocess communication in a resource sharing computer 
+      network  (Not online) Walden, D.C.  1970 July 17; 26 p.  (Obsoleted by 
+      RFC 62)
+
+60    Simplified NCP Protocol  (Not online) Kalin, R.B.  1970 July 15; 8 p.
+
+59    Flow control - fixed versus demand allocation  (Not online) Meyer, E.W.,
+      Jr.  1970 June 27; 7 p.
+
+58    Logical message synchronization  (Not online) Skinner, T.P.  1970 June 
+      26; 3 p.
+
+57    Thoughts and reflections on NWG/RFC 54  (Not online) Kraley, M.; 
+      Newkirk, J.  1970 June 19; 5 p.  (Updates RFC 54)
+
+56    Third level protocol: Logger Protocol  (Not online) Belove, E.; Black, 
+      D.; Flegal, R.; Farquar, L.G.  1970 June; 8 p.
+
+55    Prototypical implementation of the NCP  (Not online) Newkirk, J.; 
+      Kraley, M.; Postel, J.B.; Crocker, S.D.  1970 June 19; 32 p.
+
+54    Official protocol proffering  (Not online) Crocker, S.D.; Postel, J.B.; 
+      Newkirk, J.; Kraley, M.  1970 June 18; 16 p.  (Updated by RFC 57)
+
+53    Official protocol mechanism  (Not online) Crocker, S.D.  1970 June 9; 
+      1 p.
+
+52    Updated distribution list  (Not online) Postel, J.B.; Crocker, S.D.  
+      1970 July 1; 3 p.  (Updated by RFC 69)
+
+51    Proposal for a Network Interchange Language  (Not online) Elie, M.  1970
+      May 4; 19 p.
+
+50    Comments on the Meyer proposal  (Not online) Harslem, E.; Haverty, J.  
+      1970 April 30; 3 p.
+
+49    Conversations with S. Crocker (UCLA)  (Not online) Meyer, E.W., Jr.  
+      1970 April 23; 5 p.
+
+48    Possible protocol plateau  (Not online) Postel, J.B.; Crocker, S.D.  
+      1970 April 21; 16 p.
+
+47    BBN's comments on NWG/RFC #33  (Not online) Crowther, W.R.  1970 April 
+      20; 4 p.  (Updates RFC 33)
+
+46    ARPA Network protocol notes  (Not online) Meyer, E.W., Jr.  1970 April 
+      17; 27 p.
+
+45    New protocol is coming  (Not online) Postel, J.B.; Crocker, S.D.  1970 
+      April 14; 1 p.
+
+44    Comments on NWG/RFC 33 and 36  (Not online) Shoshani, A.; Long, R.; 
+      Landsberg, A.  1970 April 10; 5 p.  (Updates RFC 36)
+
+43    Proposed meeting [LIL]  (Not online) Nemeth, A.G.  1970 April 8; 1 p.
+
+42    Message data types  (Not online) Ancona, E.  1970 March 31; 3 p.
+
+41    IMP-IMP teletype communication  (Not online) Melvin, J.T.  1970 March 
+      30; 1 p.
+
+40    More comments on the forthcoming protocol  (Not online) Harslem, E.; 
+      Heafner, J.F.  1970 March 27; 3 p.
+
+39    Comments on protocol re: NWG/RFC #36  (Not online) Harslem, E.; Heafner,
+      J.F.  1970 March 25; 3 p.  (Updates RFC 36)
+
+38    Comments on network protocol from NWG/RFC #36  (Not online) Wolfe, S.M.
+      1970 March 20; 2 p.
+
+37    Network meeting epilogue, etc  (Not online) Crocker, S.D.  1970 March 
+      20; 4 p.
+
+36    Protocol notes  (Not online) Crocker, S.D.  1970 March 16; 7 p.  
+      (Updates RFC 33; Updated by RFC 39, RFC 44)
+
+35    Network meeting  (Not online) Crocker, S.D.  1970 March 3; 1 p.
+
+34    Some brief preliminary notes on the Augmentation Research Center clock  
+      (Not online) English, W.K.  1970 February 26; 1 p.
+
+33    New Host-Host Protocol  (Not online) Crocker, S.D.  1970 February 12; 
+      31 p.  (Obsoletes RFC 11; Updated by RFC 36, RFC 47)
+
+32    Connecting M.I.T. computers to the ARPA computer-to-computer 
+      communication network  (Not online) Vedder, D.  1969 January 31; 23 p.
+
+31    Binary message forms in computer  (Not online) Bobrow, D.; Sutherland, 
+      W.R.  1968 February; 6 p.
+
+30    Documentation conventions. Crocker, S.D.  1970 February 4; 1 p. (Format:
+      TXT=4199 bytes)  (Obsoletes RFC 27)
+
+29    Response to RFC 28. Kahn, R.E.  1970 January 19; 1 p. (Format: TXT=832 
+      bytes)
+
+28    Time standards. English, W.K.  1970 January 13; 1 p. (Format: TXT=599 
+      bytes)
+
+27    Documentation conventions. Crocker, S.D.  1969 December 9; 3 p. (Format:
+      TXT=3808 bytes)  (Obsoletes RFC 24; Obsoleted by RFC 30)
+
+26    Not issued.
+
+25    No high link numbers. Crocker, S.D.  1969 October 30; 1 p. (Format: 
+      TXT=497 bytes)
+
+24    Documentation conventions. Crocker, S.D.  1969 November 21; 3 p. 
+      (Format: TXT=3596 bytes)  (Obsoletes RFC 16; Obsoleted by RFC 27)
+
+23    Transmission of multiple control messages. Gregg, G.  1969 October 16; 
+      1 p. (Format: TXT=711 bytes)
+
+22    Host-host control message formats  (Not online) Cerf, V.G.  1969 October
+      17; 2 p.
+
+21    Network meeting. Cerf, V.G.  1969 October 17; 3 p. (Format: TXT=2226 
+      bytes)
+
+20    ASCII format for network interchange  (Not online) Cerf, V.G.  1969 
+      October 16; 6 p.
+
+19    Two protocol suggestions to reduce congestion at swap bound nodes. 
+      Kreznar, J.E.  1969 October 7; 1 p. (Format: TXT=2896 bytes)
+
+18    [Link assignments]. Cerf, V.G.  1969 September; 1 p. (Format: TXT=315 
+      bytes)
+
+17    Some questions re: Host-IMP Protocol. Kreznar, J.E.  1969 August 27; 
+      1 p. (Format: TXT=4583 bytes)
+
+16    M.I.T. Crocker, S.D.  1969 September 27; 1 p. (Format: TXT=376 bytes)  
+      (Obsoletes RFC 10; Obsoleted by RFC 24)
+
+15    Network subsystem for time sharing hosts  (Not online) Carr, C.S.  1969 
+      September 25; 8 p.
+
+14    Not issued.
+
+13    [Referring to NWG/RFC 11]  (Not online) Cerf, V.G.  1969 August 20; 1 p.
+
+12    IMP-Host interface flow diagrams  (Not online) Wingfield, M.  1969 
+      August 26; 5 p.
+
+11    Implementation of the Host-Host software procedures in GORDO  (Not 
+      online) Deloche, G.  1969 August 1; 52 p.  (Obsoleted by RFC 33)
+
+10    Documentation conventions. Crocker, S.D.  1969 July 29; 3 p. (Format: 
+      TXT=3469 bytes)  (Obsoletes RFC 3; Obsoleted by RFC 16)
+
+9     Host software  (Not online) Deloche, G.  1969 May 1; 14 p.
+
+8     Functional specifications for the ARPA Network  (Not online) Deloche, G.
+      1969 May 5; 4 p.
+
+7     Host-IMP interface  (Not online) Deloche, G.  1969 May; 4 p.
+
+6     Conversation with Bob Kahn. Crocker, S.D.  1969 April 10; 1 p. (Format: 
+      TXT=1620 bytes)
+
+5     Decode Encode Language. Rulifson, J.  1969 June 2; 18 p. (Format: 
+      TXT=27357 bytes)
+
+4     Network timetable  (Not online) Shapiro, E.B.  1969 March 24; 5 p.
+
+3     Documentation conventions. Crocker, S.D.  1969 April 9; 2 p. (Format: 
+      TXT=2403 bytes)  (Obsoleted by RFC 10)
+
+2     Host software  (Not online) Duvall, B.  1969 April 9; 10 p.
+
+1     Host software  (Not online) Crocker, S.D.  1969 April 7; 7 p.

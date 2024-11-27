@@ -1,0 +1,266 @@
+
+
+
+DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT
+DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT
+DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT DRAFT
+
+
+
+			RIPE NCC Activity Plan
+
+
+			     R.Blokzijl
+
+			  1 January 1994
+
+			     Version 2
+
+
+
+   1. Introduction
+
+      The RIPE NCC has been working since 1 April 1992 on the basis of an
+      Activity Plan defined by RIPE in 1991. In September 1993 the work of
+      the RIPE NCC has been reviewed by a RIPE panel; the results of the
+      review have been approved by RIPE, and have been published as document
+      ripe-099. 
+
+      Based upon the review activity, the review pannel recommended that a
+      new RIPE NCC Activity Plan should be adopted, better reflecting the
+      actual work of the RIPE NCC. This has resulted in the current document
+      which constitutes the RIPE NCC Activity Plan for 1994 and 1995.
+
+      Sebsequent sections give background information on RIPE and the RIPE
+      NCC. A full description of RIPE NCC activities is given, together with
+      reporting mechanisms. Finally, administrative procedures for change
+      control of the Activity Plan are defined.
+
+
+   2. Background
+
+      2.1 About RIPE
+
+          RIPE (Reseaux IP Europeens) is a collaborative organisation open to
+          all European Internet service providers. The objective of RIPE is
+          to ensure the necessary administrative and technical coordination
+          to allow the operation of a pan-European IP network. RIPE does not
+          operate a network of its own.
+
+          RIPE has been functioning since 1989. Currently more then 60
+          organisations participate in the work. The result of the RIPE
+          coordination effort is that the individual end-user is presented on
+          his desktop with a uniform IP service, irrespective of the
+          particular network his or her workstation is attached to. In
+          December 1993, more than 500,000 hosts throughout Europe are
+          reachable via networks coordinated by RIPE. The total number of
+          systems reachable worldwide is estimated at close to two million.
+
+
+      2.2 About the RIPE NCC
+
+          The RIPE Network Coordination Centre supports all those RIPE
+          activities which cannot be effectively performed by volunteers from
+          the participating organisations. Besides supporting RIPE
+          activities in general, the RIPE NCC provides the following services
+          to network operators:
+
+             o network management database containing information about IP
+               networks, DNS domains, IP routing policies and contact
+               information
+
+             o delegated Internet registry, a clearing house distributing 
+               Internet numbers (most importantly address space)
+
+             o domain name system (DNS) coordination
+
+             o graphical maps of IP networks
+
+             o repository for network operations software
+
+             o RIPE document store
+
+             o interactive information service
+
+          The RIPE NCC started operations on April 1st, 1992, and currently
+          has 3 permanent staff members.
+
+	  The RIPE NCC is embedded in RIPE. This means that the RIPE NCC
+	  Activity Plan is defined by RIPE, and that the RIPE NCC reports, at
+	  least, to RIPE on a regular basis.
+
+          The RARE association provides the formal framework for the RIPE NCC.
+
+
+   3. Technical - Coordination Activities
+
+      3.1 Internet Registry for Europe
+	  The RIPE NCC will will act as the European registry for the
+	  delegation of Internet numbers. The RIPE NCC will perform this
+	  function in close cooperation and coordination with
+	     a. The Internet Assigned Numbers Authority (IANA)
+	     b. The global Internet Registry (currently the Internic)
+	     c. Local Registries of European service providers
+	  In exceptional cases the NCC can act as the Registry of last resort
+	  for European organisations.
+
+      3.2 Maintain a database of European IP networks and their management
+          information.
+          The database to be maintained will contain several classes of objects.
+          These objects are described in detail in ripe-13.  At the moment the
+          following object classes have been defined:
+             a. Networks
+             b. Responsible persons
+             c. Domains
+             d. Routers
+             e. International lines
+             f. Name Servers
+
+          The NCC will be responsible for the database entries; this includes
+             a. collection of database entries
+             b. checking of individual entries
+             c. checking of consistency and integrity of the database
+
+          Quaterly reports on changes in the contents of the database will be
+          produced, together with statistics about the number of database
+          entries.
+
+     3.3. Distribution of the database.
+          Secondary copies of the database can be installed at other sites
+          upon request. It is the responsibility of the NCC to keep track of
+          such secondaries.
+          The RIPE NCC will provide assistance to local registries in setting
+          up secondary database servers.
+          An up to date record of secondary sites will be maintained on line.
+
+     3.4. Coordination of database exchange with other organisations.
+          The NCC will coordinate and execute the exchange of database informa-
+          tion with NCC's outside Europe. The result will be that for the end
+          user of the database one uniform set of global information will be
+          available.
+
+     3.5. Keep a record of operational contact points.
+          This will consist of a list of NOC's and responsible people that
+          will be used as a reference list for the individual NOC's to be used
+          in case of network related incidents, including security incidents.
+          Individual NOC's will be able to subscribe to a weekly update service.
+
+     3.6. Placement of name servers and backup servers in Europe, and beyond.
+          On a regular basis the interworking between the DNS name servers in
+          Europe, and their connections to name servers outside Europe, must be
+          checked.
+          Detected errors and inconsistencies must be reported.
+          Corrective actions must be followed in case of severe problems.
+          The result will be a consistent set of name servers.
+
+     3.7. Referral Services.
+	  The RIPE NCC will perform a Referral Service for Internet Service
+	  providers. The NCC will do this in a fair and impartial way.
+
+     3.8  Coordination with Local Registries.
+	  The RIPE NCC will keep close contact with Local Registries in
+	  Europe. The RIPE NCC will assist such registries in setting up
+	  and maintaining their services. 
+	  This activity may include presentations on the work of the
+	  RIPE NCC for broader audiances, such as relevant conferences and
+	  workshops. It may also include coordinated development of common
+	  tools.
+
+   4. Technical - Development Activities
+
+   NICs and NOCs and the NCC need special purpose software tools for their
+   work. While some of these tools are available commercially others will
+   have to either be obtained from the public domain or specially developed
+   to suit local needs. The NCC will collect, develop, document and test such
+   tools in order to make them available to the RIPE community. While some
+   basic support will be given the NCC will not provide full support for these
+   tools.
+
+     4.1. Database management tools.
+          Tools for management of the database and their maintenance are an im-
+          portant work item for the NCC. The result will be the availability of
+          a consistent database.
+
+     4.2. Database querying tools.
+          Development and maintenance of the whois utility. The result will be a
+          program, available from a file server, that permits remote
+          interrogation of the database.
+
+     4.3. DNS quality control tools.
+          Utilities for quality control of the interworking of the DNS name
+          servers will be developed and maintained. The result will be a set
+          of software and documentation, available from a server.
+
+     On an ad hoc basis special projects are taking place inside the RIPE
+     NCC. These projects are funded seperately, but the NCC may give
+     administrative, management and technical support. Therefore the
+     following activity is defined:
+
+     4.4. Special projects.
+	  The RIPE NCC can participate in special projects that have been
+	  approved by at least the RIPE community. The nature of the
+	  participation can be administrative, managerial or technical. The
+	  total amount of NCC participation should not exceed 20% of the NCC
+	  resources.
+	  Results of the special projects will be publicly available.
+
+
+
+   5. Administrative - RIPE Activity Support
+
+      The NCC will give the following support to the RIPE activities:
+
+      5.1. Keeping the RIPE document store.
+           The NCC will keep RIPE documents online and easily accessible to the
+           RIPE community. Copies of other document stores relevant to the
+           RIPE community, such as the repository of RFCs, will equally be
+           provided.
+           Modern document retrieval utilities will be installed and maintained
+           to facilitate access to the document store.
+
+      5.2. Technical and secretarial support for studies undertaken by RIPE.
+           The NCC will provide technical and clerical support for RIPE studies 
+           and working groups in order to enhance continuity and coordination
+           of the work between RIPE meetings.
+
+      5.3. Organisational support for RIPE meetings.
+           RIPE meeting attendance is expected to be on the order of 80 persons,           meeting three times a year.
+           The NCC will provide clerical support to organise these meetings in
+           order to keep them productive.
+
+
+
+   6. Administrative - Reporting
+
+      The NCC will follow the following general reporting procedures:
+
+      6.1. Quarterly reports an all activities will be produced for the RIPE
+           participating organisations and the RIPE NCC funding
+           organisations.
+
+      6.2. Quarterly reports on outstanding problems will be produced for the
+           RIPE participating organisations and the RIPE NCC funding
+           organisations.
+
+      6.3. The NCC reports on its ongoing work and outstanding problems also
+           to each RIPE meeting.  These meetings take currently place three
+           times a year.
+
+      6.4. The NCC will produce annual reports. These will be available on the
+           31st of January following the year to be reported on.
+           The annual report will contain a summary of the activities and an
+           overview of the finacial situation.
+
+      All reports produced by the RIPE NCC will be publicly available.
+
+
+
+   7. Review and Change Control
+
+      The functioning of the RIPE NCC based on the current activity plan
+      shall be reviewed in the fourth quarter of 1995. The review panel will
+      consist of at least the Chairs of RIPE and the RIPE Working Groups.
+
+      The current Activity Plan can be amended on request by a full RIPE
+      meeting which includes the organisations that are funding the RIPE NCC.
+

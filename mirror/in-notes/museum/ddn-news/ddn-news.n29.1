@@ -1,0 +1,112 @@
+24-Aug-83 14:23:19-PDT,5664;000000000001    
+Return-Path: <NIC@SRI-NIC>
+Received: FROM SRI-NIC BY USC-ISIF.ARPA WITH TCP ; 25 Jul 83 20:21:21 PDT
+Date: 25 Jul 1983 1850-PDT
+From: NIC at SRI-NIC
+Subject: DDN Newsletter No. 29
+To: DDN-NEWS-LIST4: ;
+
+========================================================================
+DDN-NEWS 29                                      NETWORK INFO CENTER for
+25 July 1983                                 DCA DDN Program Mgmt Office
+                                                           (NIC@SRI-NIC)
+                                                          (415) 859-3695
+
+                   DEFENSE DATA NETWORK NEWSLETTER
+
+(Maximum Distribution Requested. The DDN Newsletter is published by the 
+Network Information Center under DCA contract. For on-line subscription,
+contact NIC@SRI-NIC. Back issues obtainable by FTP from the directory 
+<DDN-NEWS> at SRI-NIC [10.0.0.73].)
+========================================================================
+
+Section I. OFFICIAL
+
+          Topic: - More Details on the MILNET/ARPANET Split
+
+------------------------------------------------------------------------
+
+           FURTHER DETAILS ON THE ARPANET/MILNET SPLIT
+
+Introduction
+
+This newsletter continues a discussion begun in DDN Newsletter 26  and
+continued in DDN Newsletters 27	and 28 of the upcoming  ARPANET/MILNET
+split.  If you have not yet read these newsletters, you are encouraged
+to do so.   Most hosts keep  publicly-accessible local copies  online.
+Copies may also  be obtained  by invoking  FTP from  your local  host,
+connecting  to  SRI-NIC  [10.0.0.73],   logging  in  as   'anonymous',
+password='guest',  and  doing   a  'get'  on   files  with   pathnames
+<DDN-NEWS>DDN-NEWS-x.txt (where 'x' is the newsletter number desired.)
+
+Further Information for TAC Users
+
+At the time of the Logical  ARPANET Split, some TAC users will  notice
+changes because they use network  addresses rather than host names  to
+establish connections  to  hosts.  At  first,  these changes  will  be
+limited to the requirement  that all MILNET hosts  have a new  network
+number, 26.  (ARPANET  hosts will  keep their  current network  number
+10).  Later, in preparation for the physical split, some hosts will be
+rehomed to a different IMP,  which will cause their network  addresses
+to change.  TAC users may find that hosts which they currently  access
+routinely are now  on the opposite  network.  This will  occur if  the
+host resides on the network opposite the one on which the TAC resides.
+
+To minimize any impact, each TAC user should:
+
+   a.  Learn the network assignment for the host(s)  and TAC(s)  which
+   you regularly use.  This information is available from SRI-NIC,  in
+   the file <NETINFO>MILNET-ARPANET.LIST.  Then always use a TAC  that
+   is on the same network as your primary host when possible.  If  you
+   use dial-in lines and there is a TAC on each network in  your area,
+   you should  dial in to the TAC on the same network as  the host you
+   intend to access.
+
+   b.  Contact  the  Liaison for  the  TAC(s) you  normally  use,  and
+   register your usage of that TAC.  When registering, include whether
+   you dial in or are full period (give your port number), your  name,
+   address, phone number, network  mailbox, and whether you  primarily
+   require MILNET or ARPANET access,  based upon the alignment of  the
+   hosts that you intend to access.
+
+   A list of  TAC liaisons  can be obtained  by invoking  FTP at  your
+   local host, connecting to the SRI-NIC (10.0.0.73) machine,  logging
+   in as 'anonymous', with password 'guest', and doing a 'get' on  the
+   pathname <NETINFO>TAC-LIAISON.TXT.
+
+   c.  Learn how  to specify  internet numeric addresses  to the  TAC.
+   The TAC accepts three forms of addresses:
+
+      (1)  The host/imp form:  (e.g.  1/22 for  ISIA).  This  form  is
+      acceptable if the TAC  and host are on  the same network.   Note
+      that 1/22 on the MILNET specifies a different host than 1/22  on
+      the ARPANET.  (E.g., 1/22 on MILNET means  26.1.0.22 while  1/22
+      on ARPANET means 10.1.0.22).
+
+      (2)  The network:host/imp form: (e.g. 10:1/22  for ISIA).   This
+      form  uniquely identifies ISIA no matter which  network your TAC
+      is on.
+
+      (3) The internet dotted decimal (a.b.c.d) form: (e.g.  10.1.0.22
+      for ISIA).  In the  ARPANET and the MILNET,  "a" is the  network
+      number, "b" is the  host port number, "c"  is the  logical  host
+      field,  and is usually set to  zero, and "d" is the IMP  number.
+      In the  ARPA internet,  using  this form  often makes  the  most
+      sense  because many  networks are not made up of hosts and  IMPs
+      and the interpretation  of the various  portions of the  address
+      may differ.  For example,  the address of  the host CMU-CS-G  is
+      128.2.254.132; the 128.2 specifies  the network number, and  the
+      254.132 specifies a certain host  on that network (which is,  in
+      fact, an Ethernet local-area network).
+
+   The TACs now  accept internet  addresses (type  (3) above) for  TCP
+   opens, and users are encouraged  to use these forms of  addressing.
+   The   TAC    User's    Manual   (available    from    SRI-NIC    as
+   <NETINFO>TAC-USER.DOC) contains  more  information  concerning  the
+   different  forms  of  addresses.   (Note:  <NETINFO>TAC-USER.SCRIBE
+   contains a SCRIBE-formatted version.)
+
+   d.  Report  all problems  that you  encounter to  TACBUGS@BBN-UNIX.
+   Reports of problems get your problems fixed;  they cannot be  fixed
+   if they are not reported.
+-------

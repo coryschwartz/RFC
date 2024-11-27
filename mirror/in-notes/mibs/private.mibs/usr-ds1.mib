@@ -1,0 +1,500 @@
+
+
+-- MIB File Generated on 14-Sep-1995 at 16:49:45
+
+DS1-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+   enterprises,
+   experimental,
+   IpAddress,
+   TimeTicks,
+   Gauge,
+   Counter
+      FROM RFC1155-SMI
+   DisplayString
+      FROM RFC1213-MIB
+   OBJECT-TYPE
+      FROM RFC-1212;
+
+
+ds1 OBJECT IDENTIFIER ::= { experimental 2 }
+
+ds1ConfigTable OBJECT-TYPE
+SYNTAX SEQUENCE OF DS1ConfigEntry
+ACCESS not-accessible
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1 1 }
+
+ds1ConfigEntry OBJECT-TYPE
+SYNTAX DS1ConfigEntry
+ACCESS not-accessible
+STATUS mandatory
+DESCRIPTION
+""
+INDEX { ds1CSUIndex }
+::= { ds1ConfigTable 1 }
+
+DS1ConfigEntry ::=
+SEQUENCE {
+ds1CSUIndex
+    INTEGER,
+ds1Index
+    INTEGER,
+ds1TimeElapsed
+    INTEGER,
+ds1ValidIntervals
+    INTEGER,
+ds1LineType
+    INTEGER,
+ds1ZeroCoding
+    INTEGER,
+ds1Loopback
+    INTEGER,
+ds1SendCode
+    INTEGER,
+ds1YellowAlarm
+    INTEGER,
+ds1RedAlarm
+    INTEGER,
+ds1CircuitIdentifier
+    DisplayString
+}
+
+ds1CSUIndex OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1ConfigEntry 1 }
+
+ds1Index OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1ConfigEntry 2 }
+
+ds1TimeElapsed OBJECT-TYPE
+SYNTAX INTEGER (1..900)
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1ConfigEntry 3 }
+
+ds1ValidIntervals OBJECT-TYPE
+SYNTAX INTEGER (0..96)
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1ConfigEntry 4 }
+
+ds1LineType OBJECT-TYPE
+SYNTAX INTEGER{
+  other(1),
+  ds1ESF(2),
+  ds1D4(3),
+  ds1ANSI-ESF(4),
+  ds1G704(5),
+  ds1G704-CRC(6)
+}
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1ConfigEntry 5 }
+
+ds1ZeroCoding OBJECT-TYPE
+SYNTAX INTEGER{
+  ds1JammedBit(1),
+  ds1B8ZS(2),
+  ds1InvertedHDLC(3),
+  ds1HDB3(4),
+  ds1ZBTSI(5)
+}
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1ConfigEntry 6 }
+
+ds1Loopback OBJECT-TYPE
+SYNTAX INTEGER{
+  ds1NoLoop(1),
+  ds1LocalLoopbackLocalSide(2),
+  ds1LocalLoopbackRemoteSide(3),
+  ds1RemoteLoopbackLocalSide(4),
+  ds1RemoteLoopbackRemoteSide(5)
+}
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1ConfigEntry 7 }
+
+ds1SendCode OBJECT-TYPE
+SYNTAX INTEGER{
+  ds1OtherTest(1),
+  ds1SendNoCode(2),
+  ds1SendSetCode(3),
+  ds1SendResetCode(4),
+  ds1SendQRSS(5)
+}
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1ConfigEntry 8 }
+
+ds1YellowAlarm OBJECT-TYPE
+SYNTAX INTEGER{
+  ds1NoYellowAlarm(1),
+  ds1YellowAlarm(2)
+}
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1ConfigEntry 9 }
+
+ds1RedAlarm OBJECT-TYPE
+SYNTAX INTEGER{
+  ds1NoRedAlarm(1),
+  ds1RedAlarm(2)
+}
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1ConfigEntry 10 }
+
+ds1CircuitIdentifier OBJECT-TYPE
+SYNTAX DisplayString (SIZE(0..255))
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1ConfigEntry 11 }
+
+ds1IntervalTable OBJECT-TYPE
+SYNTAX SEQUENCE OF DS1IntervalEntry
+ACCESS not-accessible
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1 2 }
+
+ds1IntervalEntry OBJECT-TYPE
+SYNTAX DS1IntervalEntry
+ACCESS not-accessible
+STATUS mandatory
+DESCRIPTION
+""
+INDEX { ds1IntervalIndex, ds1IntervalNumber }
+::= { ds1IntervalTable 1 }
+
+DS1IntervalEntry ::=
+SEQUENCE {
+ds1IntervalIndex
+    INTEGER,
+ds1IntervalNumber
+    INTEGER,
+ds1IntervalESs
+    Counter,
+ds1IntervalSESs
+    Counter,
+ds1IntervalSEFSs
+    Counter,
+ds1IntervalUASs
+    Counter,
+ds1IntervalCSSs
+    Counter,
+ds1IntervalBPVs
+    Counter,
+ds1IntervalCVs
+    Counter
+}
+
+ds1IntervalIndex OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1IntervalEntry 1 }
+
+ds1IntervalNumber OBJECT-TYPE
+SYNTAX INTEGER (1..96)
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1IntervalEntry 2 }
+
+ds1IntervalESs OBJECT-TYPE
+SYNTAX Counter
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1IntervalEntry 3 }
+
+ds1IntervalSESs OBJECT-TYPE
+SYNTAX Counter
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1IntervalEntry 4 }
+
+ds1IntervalSEFSs OBJECT-TYPE
+SYNTAX Counter
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1IntervalEntry 5 }
+
+ds1IntervalUASs OBJECT-TYPE
+SYNTAX Counter
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1IntervalEntry 6 }
+
+ds1IntervalCSSs OBJECT-TYPE
+SYNTAX Counter
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1IntervalEntry 7 }
+
+ds1IntervalBPVs OBJECT-TYPE
+SYNTAX Counter
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1IntervalEntry 8 }
+
+ds1IntervalCVs OBJECT-TYPE
+SYNTAX Counter
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1IntervalEntry 9 }
+
+ds1CurrentTable OBJECT-TYPE
+SYNTAX SEQUENCE OF DS1CurrentEntry
+ACCESS not-accessible
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1 3 }
+
+ds1CurrentEntry OBJECT-TYPE
+SYNTAX DS1CurrentEntry
+ACCESS not-accessible
+STATUS mandatory
+DESCRIPTION
+""
+INDEX { ds1CurrentIndex }
+::= { ds1CurrentTable 1 }
+
+DS1CurrentEntry ::=
+SEQUENCE {
+ds1CurrentIndex
+    INTEGER,
+ds1CurrentESs
+    Counter,
+ds1CurrentSESs
+    Counter,
+ds1CurrentSEFSs
+    Counter,
+ds1CurrentUASs
+    Counter,
+ds1CurrentCSSs
+    Counter,
+ds1CurrentBPVs
+    Counter,
+ds1CurrentCVs
+    Counter
+}
+
+ds1CurrentIndex OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1CurrentEntry 1 }
+
+ds1CurrentESs OBJECT-TYPE
+SYNTAX Counter
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1CurrentEntry 2 }
+
+ds1CurrentSESs OBJECT-TYPE
+SYNTAX Counter
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1CurrentEntry 3 }
+
+ds1CurrentSEFSs OBJECT-TYPE
+SYNTAX Counter
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1CurrentEntry 4 }
+
+ds1CurrentUASs OBJECT-TYPE
+SYNTAX Counter
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1CurrentEntry 5 }
+
+ds1CurrentCSSs OBJECT-TYPE
+SYNTAX Counter
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1CurrentEntry 6 }
+
+ds1CurrentBPVs OBJECT-TYPE
+SYNTAX Counter
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1CurrentEntry 7 }
+
+ds1CurrentCVs OBJECT-TYPE
+SYNTAX Counter
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1CurrentEntry 8 }
+
+ds1TotalTable OBJECT-TYPE
+SYNTAX SEQUENCE OF DS1TotalEntry
+ACCESS not-accessible
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1 4 }
+
+ds1TotalEntry OBJECT-TYPE
+SYNTAX DS1TotalEntry
+ACCESS not-accessible
+STATUS mandatory
+DESCRIPTION
+""
+INDEX { ds1TotalIndex }
+::= { ds1TotalTable 1 }
+
+DS1TotalEntry ::=
+SEQUENCE {
+ds1TotalIndex
+    INTEGER,
+ds1TotalESs
+    Counter,
+ds1TotalSESs
+    Counter,
+ds1TotalSEFSs
+    Counter,
+ds1TotalUASs
+    Counter,
+ds1TotalCSSs
+    Counter,
+ds1TotalBPVs
+    Counter,
+ds1TotalCVs
+    Counter
+}
+
+ds1TotalIndex OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1TotalEntry 1 }
+
+ds1TotalESs OBJECT-TYPE
+SYNTAX Counter
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1TotalEntry 2 }
+
+ds1TotalSESs OBJECT-TYPE
+SYNTAX Counter
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1TotalEntry 3 }
+
+ds1TotalSEFSs OBJECT-TYPE
+SYNTAX Counter
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1TotalEntry 4 }
+
+ds1TotalUASs OBJECT-TYPE
+SYNTAX Counter
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1TotalEntry 5 }
+
+ds1TotalCSSs OBJECT-TYPE
+SYNTAX Counter
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1TotalEntry 6 }
+
+ds1TotalBPVs OBJECT-TYPE
+SYNTAX Counter
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1TotalEntry 7 }
+
+ds1TotalCVs OBJECT-TYPE
+SYNTAX Counter
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+""
+::= { ds1TotalEntry 8 }
+
+END
+
+

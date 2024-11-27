@@ -1,0 +1,1963 @@
+
+
+
+
+
+
+November 1998
+
+
+INTERNET MONTHLY REPORTS
+------------------------
+
+The purpose of these reports is to communicate to the Internet Research
+Group the accomplishments, milestones reached, or problems discovered by
+the participating organizations.
+
+Each organization is expected to submit a 1/2 page report on the first
+business day of the month describing the previous month's activities.
+These reports should be submitted via network mail to "IMR-ED@ISI.EDU".
+
+`````````````````````````````````````````````````````````````````````
+
+The Internet Monthly Report mailing list is now managed by MajorDomo at
+ISI.EDU.  The announcements of new issues on the Internet Monthly Report
+are sent to the IETF-Announce list and to this IMR list.
+
+Requests to be ADDED or DELETED from the Internet Monthly report list
+should be sent to "majordomo@isi.edu" with the message body either
+"subscribe imr" or "unsubscribe imr".
+
+Details on obtaining the current IMR, or back issues, via FTP or EMAIL
+may be obtained by sending an EMAIL message to "rfc-info@ISI.EDU" with
+the message body "help: ways_to_get_imrs".  For example:
+
+        To: rfc-info@ISI.EDU
+        Subject: getting imrs
+
+        help: ways_to_get_imrs
+
+or  URL: http://www.isi.edu/in-notes/imr/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ramos                                                           [Page 1]
+
+Internet Monthly Report                                    November 1998
+
+
+TABLE OF CONTENTS
+
+  INTERNET ARCHITECTURE BOARD
+
+     IAB MESSAGE . . . . . . . . . . . . . . . . . . . . . . . page  3
+     INTERNET ENGINEERING REPORTS  . . . . . . . . . . . . . . page  3
+
+  Internet Projects
+
+     INTERNIC. . . . . . . . . . . . . . . . . . . . . . . . . page 26
+       Network Solutions Report. . . . . . . . . . . . . . . . page 26
+       US Domain Registry. . . . . . . . . . . . . . . . . . . page 27
+     MERIT INTERNET ENGINEERING. . . . . . . . . . . . . . . . page 29
+     IANA REPORT . . . . . . . . . . . . . . . . . . . . . . . page 31
+     RFC EDITOR REPORT . . . . . . . . . . . . . . . . . . . . page 32
+
+
+
+  CALENDAR OF EVENTS . . . . . . . . . . . . . . . . . . . . . page 33
+    TERENA List of Meetings  . . . . . . . . . . . . . . . . . page 35
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ramos                                                           [Page 2]
+
+Internet Monthly Report                                    November 1998
+
+
+
+INTERNET ARCHITECTURE BOARD
+
+     The minutes of the IAB back to 1990 are available for anonymous ftp
+     access on host ftp.isi.edu, directory /pub/IAB, or via the IAB
+     World-Wide Web page with URL http://www.iab.org/iab/.
+
+     Brian Carpenter IAB Chair
+
+INTERNET ENGINEERING REPORTS
+----------------------------
+
+               Internet Monthly Report for November, 1998
+
+
+  1. The final meeting of the year will be held in Orlando, Florida
+     from December 7-11, 1998. This meeting is being hosted by
+     Microsoft.
+
+     Once all arrangements have been made, notifications will be sent
+     to the IETF Announcement list. Remember that information on
+     future meetng sites can always be found in the file
+     0mtg-sites.txt, located on the IETF shadow directories. Of
+     course, this information is provided on the Web. The IETF's URL
+     is:
+
+                          http://www.ietf.org/
+
+  2. The minutes of the IESG teleconferences be found on all the IETF
+     shadow directories in the /iesg directory.
+
+     The following IESG minutes have been added:
+
+       September 22, 1998 (iesg.98-09-22)
+
+
+  3. The IESG approved or recommended the following 22 Protocol
+     Actions during the month of November, 1998:
+
+     o Procedure for Defining New DHCP Options for publication as a
+       Best Current Practices RFC.
+
+     o Enhancing TCP Over Satellite Channels using Standard Mechanisms
+       for publication as a Best Current Practices RFC.
+
+     o URI Resolution Services Necessary for URN Resolution for
+       publication as an Experimental Protocol.
+
+
+
+
+Ramos                                                           [Page 3]
+
+Internet Monthly Report                                    November 1998
+
+
+     o Roaming Requirements for publication as an Informational RFC.
+
+     o An Architecture for Differentiated Services for publication as
+       an Informational RFC.
+
+     o Limitations of Internet Protocol Suite for Distributed
+       Simulation in the Large Multicast Environment for publication
+       as an Informational RFC.
+
+     o Language Tagging in Unicode Plain Text for publication as an
+       Informational RFC.
+
+     o Independent Data Unit Protection Generic Security Service
+       Application Program Interface (IDUP-GSS-API) for publication as
+       an Informational RFC.
+
+     o SMTP Service Extension for Secure SMTP over TLS for publication
+       as a Proposed Standard.
+
+     o Definitions of Managed Objects for the DS1, E1, DS2 and E2
+       Interface Types for publication as a Proposed Standard.
+
+     o Definitions of Managed Objects for the DS3/E3 Interface Type
+       for publication as a Proposed Standard.
+
+     o HTTP Extensions for Distributed Authoring -- WEBDAV for
+       publication as a Proposed Standard.
+
+     o The Simple and Protected GSS-API Negotiation Mechanism for
+       publication as a Proposed Standard.
+
+     o Gateways and MIME Security Multiparts for publication as a
+       Proposed Standard.
+
+     o The ESP CBC-Mode Cipher Algorithms for publication as a
+       Proposed Standard.
+
+     o Message Submission for publication as a Proposed Standard.
+
+     o Textual Conventions for MIB Modules Using Performance History
+       Based on 15 Minute Intervals for publication as a Proposed
+       Standard.
+
+     o IPv6 over Non-Broadcast Multiple Access (NBMA) networks for
+       publication as a Proposed Standard.
+
+     o IPv6 over ATM Networks for publication as a Proposed Standard.
+
+
+
+
+Ramos                                                           [Page 4]
+
+Internet Monthly Report                                    November 1998
+
+
+     o Definition of the Differentiated Services Field (DS Field) in
+       the IPv4 and IPv6 Headers for publication as a Proposed
+       Standard.
+
+     o PPP LCP Internationalization Configuration Option for
+       publication as a Proposed Standard.
+
+     o DHCP Option for User Authentication Protocol for publication as
+       a Proposed Standard.
+
+
+  4. 15 Last Calls were issued by the IESG during the month of
+     November, 1998:
+
+     o URN Namespace Definition Mechanisms <draft-ietf-urn-nid-req-07>
+       for consideration as a Best Current Practices RFC.
+
+     o RTFM Working Group - New Attributes for Traffic Flow
+       Measurement <draft-ietf-rtfm-new-traffic-flow-06> for
+       consideration as an Experimental Protocol.
+
+     o RTFM: Applicability Statement
+       <draft-ietf-rtfm-applicability-statement-01> for consideration
+       as an Informational RFC.
+
+     o Traffic Flow Measurement: Architecture
+       <draft-ietf-rtfm-architecture-04> for consideration as an
+       Informational RFC.
+
+     o SRL: A Language for Describing Traffic Flows and Specifying
+       Actions for Flow Groups <draft-ietf-rtfm-ruleset-language-03>
+       for consideration as an Informational RFC.
+
+     o A Method for the Transmission of IPv6 Packets over ARCnet
+       Networks. <draft-souvatzis-ipv6-arcnet-04> for consideration as
+       a Proposed Standard.
+
+     o Traffic Flow Measurement: Meter MIB
+       <draft-ietf-rtfm-meter-mib-06> for consideration as a Proposed
+       Standard.
+
+     o Calendar attributes for vCard and LDAP
+       <draft-ietf-calsch-locating-01> for consideration as a Proposed
+       Standard.
+
+     o Media Features for Display, Print, and Fax
+       <draft-ietf-conneg-media-features-02> for consideration as a
+       Proposed Standard.
+
+
+
+Ramos                                                           [Page 5]
+
+Internet Monthly Report                                    November 1998
+
+
+     o IP and ARP over Fibre Channel
+       <draft-ietf-ipfc-fibre-channel-03> for consideration as a
+       Proposed Standard.
+
+     o DHCP Relay Agent Information Option
+       <draft-ietf-dhc-agent-options-05> for consideration as a
+       Proposed Standard.
+
+     o DHCP Option to Disable Stateless Auto-Configuration in IPv4
+       Clients <draft-ietf-dhc-autoconfig-02> for consideration as a
+       Proposed Standard.
+
+     o Conformance Statements for SMIv2 <draft-ops-smiv2-conf-00>
+       (Standard)
+
+     o Structure of Management Information Version 2 (SMIv2)
+       <draft-ops-smiv2-smi-00> (Standard)
+
+     o Textual Conventions for SMIv2 <draft-ops-smiv2-tc-00>
+       (Standard)
+
+
+  5. 7 new working groups were created
+
+       Multicast Source Discovery Protocol (msdp)
+       Message Tracking Protocol (msgtrk)
+       IS-IS for IP Internets (isis)
+       Intrusion Detection Exchange Format (idwg)
+       DAV Searching and Locating (dasl)
+       Signaling Transport (sigtran)
+       LDAP Duplication/Replication/Update Protocols (ldup)
+
+     and one working group was concluded
+
+       LDAP Service Deployment (lsd)
+
+  6. There were 387 Internet-Draft Actions during the month of
+     November, 1998:
+
+     (ipfc)     o Definitions of Managed Objects for the Fabric
+                  Element in Fibre Channel Standard
+                  <draft-ietf-ipfc-fabric-element-mib-04.txt>
+     (cat)      o Integrating Single-use Authentication Mechanisms
+                  with Kerberos
+                  <draft-ietf-cat-kerberos-passwords-04.txt>
+     (none)     o The Auto-Submitted, Supersedes and Expires Headers
+                  in E-mail and Netnews
+                  <draft-ietf-mailext-new-fields-14.txt>
+
+
+
+Ramos                                                           [Page 6]
+
+Internet Monthly Report                                    November 1998
+
+
+     (cat)      o Public Key Cryptography for Initial Authentication
+                  in Kerberos
+                  <draft-ietf-cat-kerberos-pk-init-07.txt>
+     (cat)      o Generic Security Service API Version 2 : C-bindings
+                  <draft-ietf-cat-gssv2-cbind-08.txt>
+     (rsvp)     o RSVP Cryptographic Authentication
+                  <draft-ietf-rsvp-md5-07.txt>
+     (none)     o SMTP Service Extension for Authentication
+                  <draft-myers-smtp-auth-12.txt>
+     (atommib)  o Definitions of Textual Conventions and
+                  OBJECT-IDENTITIES for ATM Management
+                  <draft-ietf-atommib-atm2TC-09.txt>
+     (cat)      o Extended Generic Security Service APIs: XGSS-APIs
+                  Access control and delegation extensions
+                  <draft-ietf-cat-xgssapi-acc-cntrl-03.txt>
+     (madman)   o Directory Server Monitoring MIB
+                  <draft-ietf-madman-dsa-mib-1-09.txt>
+     (mobileip) o Mobility Support in IPv6
+                  <draft-ietf-mobileip-ipv6-07.txt>
+     (dhc)      o Procedure for Defining New DHCP Options
+                  <draft-ietf-dhc-new-options-05.txt>
+     (dhc)      o Authentication for DHCP Messages
+                  <draft-ietf-dhc-authentication-09.txt>
+     (rsvp)     o RSVP Diagnostic Messages
+                  <draft-ietf-rsvp-diagnostic-msgs-05.txt>
+     (atommib)  o Definitions of Managed Objects for the SONET/SDH
+                  Interface Type <draft-ietf-atommib-sonetng-05.txt>
+     (atommib)  o Definitions of Managed Objects for ATM Management
+                  <draft-ietf-atommib-atm1ng-06.txt>
+     (atommib)  o Textual Conventions for MIB Modules Using
+                  Performance History Based on 15 Minute Intervals
+                  <draft-ietf-atommib-perfhistTC-05.txt>
+     (none)     o Message Submission <draft-gellens-submit-13.txt>
+     (pppext)   o Point-to-Point Tunneling Protocol--PPTP
+                  <draft-ietf-pppext-pptp-06.txt>
+     (ion)      o Definitions of Managed Objects for the NBMA Next
+                  Hop Resolution Protocol (NHRP)
+                  <draft-ietf-ion-nhrp-mib-05.txt>
+     (issll)    o SBM (Subnet Bandwidth Manager): A Protocol for
+                  RSVP-based Admission Control over IEEE 802-style
+                  networks <draft-ietf-issll-is802-sbm-07.txt>
+     (dhc)      o DHCP Options for Service Location Protocol
+                  <draft-ietf-dhc-slp-05.txt>
+     (dnsind)   o Secret Key Transaction Signatures for DNS (TSIG)
+                  <draft-ietf-dnsind-tsig-07.txt>
+     (pppext)   o Layer Two Tunneling Protocol 'L2TP'
+                  <draft-ietf-pppext-l2tp-12.txt>
+
+
+
+
+Ramos                                                           [Page 7]
+
+Internet Monthly Report                                    November 1998
+
+
+     (issll)    o A Framework for Providing Integrated Services Over
+                  Shared and Switched IEEE 802 LAN Technologies
+                  <draft-ietf-issll-is802-framework-05.txt>
+     (rmonmib)  o Remote Network Monitoring MIB Extensions for Switch
+                  Networks Version 1.0
+                  <draft-ietf-rmonmib-smon-05.txt>
+     (roamops)  o The Network Access Identifier
+                  <draft-ietf-roamops-nai-12.txt>
+     (dhc)      o The User Class Option for DHCP
+                  <draft-ietf-dhc-userclass-03.txt>
+     (bmwg)     o Terminology for Cell/Call Benchmarking
+                  <draft-ietf-bmwg-call-03.txt>
+     (ssh)      o Users' Security Handbook
+                  <draft-ietf-ssh-users-10.txt>
+     (svrloc)   o Service Templates and service: Schemes
+                  <draft-ietf-svrloc-service-scheme-13.txt>
+     (ipp)      o Design Goals for an Internet Printing Protocol
+                  <draft-ietf-ipp-req-03.txt>
+     (disman)   o Definitions of Managed Objects for the Delegation
+                  of Management Scripts
+                  <draft-ietf-disman-script-mib-06.txt>
+     (drums)    o Internet Message Format Standard
+                  <draft-ietf-drums-msg-fmt-06.txt>
+     (none)     o The LDAP Data Interchange Format (LDIF) - Technical
+                  Specification <draft-good-ldap-ldif-01.txt>
+     (svrloc)   o An API for Service Location
+                  <draft-ietf-svrloc-api-07.txt>
+     (rmonmib)  + Remote Network Monitoring MIB Protocol Identifier
+                  Macros <draft-ietf-rmonmib-rmonprot-mac-00.txt>
+     (cat)      o Public Key Cryptography for Cross-Realm
+                  Authentication in Kerberos
+                  <draft-ietf-cat-kerberos-pk-cross-05.txt>
+     (asid)     o Definition of the inetOrgPerson Object Class
+                  <draft-smith-ldap-inetorgperson-01.txt>
+     (applmib)  o Application Management MIB
+                  <draft-ietf-applmib-mib-11.txt>
+     (lsma)     o Limitations of Internet Protocol Suite for
+                  Distributed Simulation in the Large Multicast
+                  Environment <draft-ietf-lsma-limitations-04.txt>
+     (tls)      o The TLS Protocol Version 1.0
+                  <draft-ietf-tls-protocol-06.txt>
+     (ippm)     o A One-way Delay Metric for IPPM
+                  <draft-ietf-ippm-delay-05.txt>
+     (none)     o Multicast Tag Binding and Distribution using PIM
+                  <draft-farinacci-multicast-tagsw-01.txt>
+     (dhc)      o DHCP Relay Agent Information Option
+                  <draft-ietf-dhc-agent-options-05.txt>
+
+
+
+
+Ramos                                                           [Page 8]
+
+Internet Monthly Report                                    November 1998
+
+
+     (mmusic)   o SIP: Session Initiation Protocol
+                  <draft-ietf-mmusic-sip-10.txt,.ps>
+     (frnetmib) o Frame Relay Switched PVC MIB
+                  <draft-ietf-frnetmib-spvc-02.txt>
+     (rmonmib)  o Remote Network Monitoring Management Information
+                  Base for High Capacity Networks
+                  <draft-ietf-rmonmib-hcrmon-04.txt>
+     (roamops)  o The Accounting Data Interchange Format (ADIF)
+                  <draft-ietf-roamops-actng-05.txt>
+     (pppext)   o Semi Connected Mode for PPP links
+                  <draft-ietf-pppext-scm-01.txt>
+     (run)      o DON'T SPEW A Set of Guidelines for Mass Unsolicited
+                  Mailings and Postings (spam*)
+                  <draft-ietf-run-spew-07.txt>
+     (none)     o DIAMETER Base Protocol
+                  <draft-calhoun-diameter-07.txt>
+     (none)     o DIAMETER Extensible Authentication Protocol
+                  Extensions <draft-calhoun-diameter-eap-02.txt>
+     (ippm)     o A One-way Packet Loss Metric for IPPM
+                  <draft-ietf-ippm-loss-05.txt>
+     (dhc)      o The Server Selection Option for DHCP
+                  <draft-ietf-dhc-sso-02.txt>
+     (none)     o SMTP Service Extension for Secure SMTP over TLS
+                  <draft-hoffman-smtp-ssl-10.txt>
+     (ipp)      o Internet Printing Protocol/1.0: Model and Semantics
+                  <draft-ietf-ipp-model-11.txt>
+     (avt)      o Real-Time Transport Protocol Management Information
+                  Base <draft-ietf-avt-rtp-mib-03.txt>
+     (rps)      o Using RPSL in Practice
+                  <draft-ietf-rps-appl-rpsl-03.txt,.ps>
+     (tcpimpl)  o Known TCP Implementation Problems
+                  <draft-ietf-tcpimpl-prob-05.txt>
+     (avt)      o RTP Profile for Audio and Video Conferences with
+                  Minimal Control
+                  <draft-ietf-avt-profile-new-04.txt,.ps>
+     (ipngwg)   o Separating Identifiers and Locators in Addresses:
+                  An Analysis of the GSE Proposal for IPv6
+                  <draft-ietf-ipngwg-esd-analysis-03.txt>
+     (ipngwg)   o Router Renumbering for IPv6
+                  <draft-ietf-ipngwg-router-renum-06.txt>
+     (ion)      o A Distributed ATMARP Service Using SCSP
+                  <draft-ietf-ion-scsp-atmarp-01.txt>
+     (disman)   o Expression MIB
+                  <draft-ietf-disman-express-mib-07.txt>
+     (none)     o Internationalized Uniform Resource Identifiers
+                  (IURI) <draft-masinter-url-i18n-03.txt>
+     (issll)    o Network Element Service Specification for Low Speed
+                  Networks <draft-ietf-issll-isslow-svcmap-04.txt>
+
+
+
+Ramos                                                           [Page 9]
+
+Internet Monthly Report                                    November 1998
+
+
+     (dnssec)   o Storage of Diffie-Hellman Keys in the Domain Name
+                  System (DNS) <draft-ietf-dnssec-dhk-03.txt>
+     (ldapext)  o Lightweight Directory Access Protocol (v3):
+                  Extension for Transport Layer Security
+                  <draft-ietf-ldapext-ldapv3-tls-04.txt>
+     (find)     o The Architecture of the Common Indexing Protocol
+                  (CIP) <draft-ietf-find-cip-arch-02.txt>
+     (find)     o MIME Object Definitions for the Common Indexing
+                  Protocol (CIP) <draft-ietf-find-cip-mime-03.txt>
+     (none)     o Advise on the implementation of In-Reply-To,
+                  References and Supersedes e-mail and netnews
+                  headers <draft-palme-newfields-info-02.txt>
+     (cat)      o The Kerberos Network Authentication Service (V5)
+                  <draft-ietf-cat-kerberos-revisions-03.txt>
+     (dnsind)   o Reserved Top Level DNS Names
+                  <draft-ietf-dnsind-test-tlds-12.txt>
+     (ipp)      o Mapping between LPD and IPP Protocols
+                  <draft-ietf-ipp-lpd-ipp-map-05.txt>
+     (ipp)      o Internet Printing Protocol/1.0: Encoding and
+                  Transport <draft-ietf-ipp-protocol-07.txt>
+     (ipp)      o Rationale for the Structure of the Model and
+                  Protocol for the Internet Printing Protocol
+                  <draft-ietf-ipp-rat-04.txt>
+     (webdav)   o HTTP Extensions for Distributed Authoring -- WEBDAV
+                  <draft-ietf-webdav-protocol-10.txt>
+     (dnssec)   o Domain Name System Security Extensions
+                  <draft-ietf-dnssec-secext2-06.txt>
+     (ngtrans)  o Stateless IP/ICMP Translator (SIIT)
+                  <draft-ietf-ngtrans-siit-03.txt>
+     (issll)    o Integrated Service Mappings on IEEE 802 Networks
+                  <draft-ietf-issll-is802-svc-mapping-03.txt>
+     (avt)      o RTP Payload for DTMF Digits
+                  <draft-ietf-avt-dtmf-01.txt>
+     (idmr)     o Border Gateway Multicast Protocol (BGMP): Protocol
+                  Specification <draft-ietf-idmr-gum-04.txt>
+     (ptopomib) o Physical Topology MIB
+                  <draft-ietf-ptopomib-mib-03.txt>
+     (ptopomib) o Physical Topology Discovery Protocol and MIB
+                  <draft-ietf-ptopomib-pdp-03.txt>
+     (dhc)      o The Domain Search Option for DHCP
+                  <draft-ietf-dhc-domsrch-02.txt>
+     (2000)     o The Internet and the Millenium Problem (Year 2000)
+                  <draft-ietf-2000-issue-04.txt>
+     (avt)      o An RTP Payload Format for Generic Forward Error
+                  Correction <draft-ietf-avt-fec-04.txt>
+     (dnsind)   o Local Domain (DNS) Names
+                  <draft-ietf-dnsind-local-names-06.txt>
+
+
+
+
+Ramos                                                          [Page 10]
+
+Internet Monthly Report                                    November 1998
+
+
+     (radius)   o RADIUS Accounting Client MIB
+                  <draft-ietf-radius-acc-clientmib-02.txt>
+     (radius)   o RADIUS Accounting Server MIB
+                  <draft-ietf-radius-acc-servmib-02.txt>
+     (radius)   o RADIUS Authentication Client MIB
+                  <draft-ietf-radius-auth-clientmib-02.txt>
+     (radius)   o RADIUS Authentication Server MIB
+                  <draft-ietf-radius-auth-servmib-02.txt>
+     (none)     o Using TLS with IMAP4, POP3 and ACAP
+                  <draft-newman-tls-imappop-05.txt>
+     (nntpext)  o Network News Transport Protocol
+                  <draft-ietf-nntpext-base-06.txt>
+     (none)     o The SRP Authentication and Key Exchange System
+                  <draft-wu-srp-auth-02.txt>
+     (dnssec)   o Storing Certificates in the Domain Name System
+                  (DNS) <draft-ietf-dnssec-certs-03.txt>
+     (none)     o Telnet Authentication: SRP
+                  <draft-wu-telnet-auth-srp-02.txt>
+     (pppext)   o Layer Two Tunneling Protocol 'L2TP' Management
+                  Information Base
+                  <draft-ietf-pppext-l2tp-mib-03.txt>
+     (http)     o Hypertext Transfer Protocol -- HTTP/1.1
+                  <draft-ietf-http-v11-spec-rev-06.txt,.ps>
+     (urlreg)   o Guidelines for new URL Schemes
+                  <draft-ietf-urlreg-guide-04.txt>
+     (smime)    o Cryptographic Message Syntax
+                  <draft-ietf-smime-cms-09.txt>
+     (manet)    o Mobile Ad Hoc Networking Terminology
+                  <draft-ietf-manet-term-01.txt>
+     (svrloc)   o Service Location Protocol, Version 2
+                  <draft-ietf-svrloc-protocol-v2-11.txt>
+     (ldapext)  o Authentication Methods for LDAP
+                  <draft-ietf-ldapext-authmeth-03.txt>
+     (none)     o Anti-Spam Recommendations for SMTP MTAs
+                  <draft-lindberg-anti-spam-mta-06.txt>
+     (ipngwg)   o Basic Socket Interface Extensions for IPv6
+                  <draft-ietf-ipngwg-bsd-api-new-04.txt>
+     (dhc)      o DHCP Failover Protocol
+                  <draft-ietf-dhc-failover-03.txt>
+     (ippm)     o IPPM Metrics for Measuring Connectivity
+                  <draft-ietf-ippm-connectivity-04.txt>
+     (rap)      o A Framework for Policy-based Admission Control
+                  <draft-ietf-rap-framework-01.txt>
+     (none)     o GSS Algorithm for TSIG (GSS-TSIG)
+                  <draft-skwan-gss-tsig-03.txt>
+     (spki)     o SPKI Certificate Theory
+                  <draft-ietf-spki-cert-theory-04.txt>
+
+
+
+
+Ramos                                                          [Page 11]
+
+Internet Monthly Report                                    November 1998
+
+
+     (manet)    o Ad Hoc On Demand Distance Vector (AODV) Routing
+                  <draft-ietf-manet-aodv-02.txt>
+     (tcpsat)   o Ongoing TCP Research Related to Satellites
+                  <draft-ietf-tcpsat-res-issues-05.txt>
+     (iab)      o The Case for IPv6
+                  <draft-ietf-iab-case-for-ipv6-03.txt>
+     (calsch)   o CAP Requirements <draft-ietf-calsch-capreq-02.txt>
+     (calsch)   o ICalendar Real-time Interoperability Protocol
+                  (IRIP) <draft-ietf-calsch-irip-02.txt>
+     (ldapext)  o LDAP Extensions for Scrolling View Browsing of
+                  Search Results
+                  <draft-ietf-ldapext-ldapv3-vlv-02.txt>
+     (ipsec)    o Extended Authentication Within ISAKMP/Oakley
+                  <draft-ietf-ipsec-isakmp-xauth-03.txt>
+     (vrrp)     o Definitions of Managed Objects for the Virtual
+                  Router Redundancy Protocol using SNMPv2
+                  <draft-ietf-vrrp-mib-03.txt>
+     (none)     o BGP Security Analysis
+                  <draft-murphy-bgp-secr-02.txt>
+     (ngtrans)  o Network Address Translation - Protocol Translation
+                  (NAT-PT] <draft-ietf-ngtrans-natpt-03.txt>
+     (avt)      o Guidelines for Writers of RTP Payload Format
+                  Specifications
+                  <draft-ietf-avt-rtp-format-guidelines-01.txt,.ps>
+     (mpls)     o Use of Label Switching on Frame Relay Networks
+                  Specification <draft-ietf-mpls-fr-03.txt>
+     (disman)   o Definitions of Managed Objects for Scheduling
+                  Management Operations
+                  <draft-ietf-disman-schedule-mib-06.txt>
+     (avt)      o RTP: A Transport Protocol for Real-Time
+                  Applications <draft-ietf-avt-rtp-new-02.txt,.ps>
+     (none)     o Multipath Issues in Unicast and Multicast
+                  <draft-thaler-multipath-01.txt>
+     (none)     o IP Private Address Identification (PAID)
+                  <draft-yliteo-mobileip-paid-01.txt>
+     (rap)      o The COPS (Common Open Policy Service) Protocol
+                  <draft-ietf-rap-cops-03.txt>
+     (snmpv3)   o User-based Security Model (USM) for version 3 of
+                  the Simple Network Management Protocol (SNMPv3)
+                  <draft-ietf-snmpv3-usm-v2-03.txt>
+     (none)     o Telnet SASL Option
+                  <draft-newman-telnet-sasl-01.txt>
+     (cat)      o Public Key Cryptography for KDC Recovery in
+                  Kerberos V5
+                  <draft-ietf-cat-kerberos-pk-recovery-01.txt>
+     (none)     o Telnet Data Encryption Option
+                  <draft-tso-telnet-encryption-01.txt>
+
+
+
+
+Ramos                                                          [Page 12]
+
+Internet Monthly Report                                    November 1998
+
+
+     (none)     o Telnet Authentication Option
+                  <draft-tso-telnet-auth-enc-01.txt>
+     (none)     o Telnet Authentication: Kerberos Version 5
+                  <draft-tso-telnet-krb5-01.txt>
+     (none)     o Telnet Encryption: DES 64 bit Cipher Feedback
+                  <draft-tso-telnet-enc-des-cfb-01.txt>
+     (none)     o Telnet Encryption: DES 64 bit Output Feedback
+                  <draft-tso-telnet-enc-des-ofb-01.txt>
+     (dnsind)   o A New Scheme for the Compression of Domain Names
+                  <draft-ietf-dnsind-local-compression-03.txt>
+     (printmib) o Printer Finishing MIB
+                  <draft-ietf-printmib-finishing-07.txt>
+     (dnssec)   o DNS Operational Security Considerations
+                  <draft-ietf-dnssec-secops-02.txt>
+     (nntpext)  + An NNTP Extension for Dynamic Feed Adjustment
+                  <draft-ietf-nntpext-dynfeed-00.txt>
+     (none)     o Mobile IP extension for Private Internets Support
+                  (MPN) <draft-teoyli-mobileip-mvpn-01.txt>
+     (mboned)   o IP Multicast and Firewalls
+                  <draft-ietf-mboned-mcast-firewall-02.txt>
+     (pint)     o Toward the PSTN/Internet Inter-Networking
+                  --Pre-PINT Implementations
+                  <draft-ietf-pint-pre-implement-03.txt>
+     (ippm)     o Instantaneous Packet Delay Variation Metric for
+                  IPPM <draft-ietf-ippm-ipdv-02.txt>
+     (webdav)   o Requirements for Advanced Collection Functionality
+                  in WebDAV
+                  <draft-ietf-webdav-collection-reqts-03.txt>
+     (none)     o DAV Searching and Locating
+                  <draft-reddy-dasl-protocol-04.txt>
+     (urlreg)   o Registration Procedures for URL Scheme Names
+                  <draft-ietf-urlreg-procedures-04.txt>
+     (pkix)     o Certificate Management Messages over CMS
+                  <draft-ietf-pkix-cmc-02.txt>
+     (none)     o An Abstract API for Multicast Address Allocation
+                  <draft-ietf-malloc-api-04.txt>
+     (none)     o MPLS Loop Prevention Mechanism
+                  <draft-ohba-mpls-loop-prevention-02.txt>
+     (none)     o Static Multicast
+                  <draft-ohta-static-multicast-01.txt>
+     (rap)      o RSVP Extensions for Policy Control
+                  <draft-ietf-rap-rsvp-ext-01.txt>
+     (fax)      o Extended Facsimile Using Internet Mail
+                  <draft-ietf-fax-eifax-11.txt>
+     (none)     o HTTP Extension Framework
+                  <draft-frystyk-http-extensions-01.txt>
+     (adslmib)  o Definitions of Managed Objects for the ADSL Lines
+                  <draft-ietf-adslmib-adsllinemib-03.txt>
+
+
+
+Ramos                                                          [Page 13]
+
+Internet Monthly Report                                    November 1998
+
+
+     (iab)      o Architectural Implications of NAT
+                  <draft-iab-nat-implications-02.txt>
+     (pppext)   o PPP LCP Internationalization Configuration Option
+                  <draft-ietf-pppext-lcp-charset-07.txt>
+     (bridge)   o Definitions of Managed Objects for Bridges with
+                  Traffic Classes, Multicast Filtering and Virtual
+                  LAN Extensions <draft-ietf-bridge-bridgemib-03.txt>
+     (none)     o ARP and IP Broadcast over HIPPI-800
+                  <draft-pittet-hippiarp-01.txt>
+     (ldapext)  o Access Control Model for LDAP
+                  <draft-ietf-ldapext-acl-model-01.txt>
+     (none)     o The audio/mpeg Media Type
+                  <draft-nilsson-audio-mpeg-01.txt>
+     (none)     o NFS Version 2 and Version 3 Security Issues and the
+                  NFS Protocol's Use of RPCSEC_GSS and Kerberos V5
+                  <draft-eisler-nfssec-02.txt>
+     (none)     o Building Directories from DNS: Experiences from
+                  WWWSeeker <draft-rfced-info-moats-02.txt>
+     (none)     o Requirements for Simple Workflow Access Protocol
+                  <draft-sreddy-swap-requirements-02.txt>
+     (ip1394)   + DHCP on IEEE 1394 <draft-ietf-ip1394-dhcp-00.txt>
+     (hubmib)   o Definitions of Managed Objects for IEEE 802.3
+                  Medium Attachment Units (MAUs) using SMIv2
+                  <draft-ietf-hubmib-mau-mib-v2-01.txt>
+     (none)     o NNTP Authentication
+                  <draft-newman-nntpext-auth-01.txt>
+     (smime)    o Diffie-Hellman Key Agreement Method
+                  <draft-ietf-smime-x942-03.txt>
+     (webdav)   o WebDAV Advanced Collections Protocol
+                  <draft-ietf-webdav-collection-protocol-02.txt>
+     (urn)      o Assignment Procedures for the URI Resolution using
+                  DNS (RFC2168)
+                  <draft-ietf-urn-net-procedures-01.txt>
+     (none)     o Simple RTP Multiplexing Transfer Methods for VoIP
+                  <draft-tanigawa-rtp-multiplex-01.txt>
+     (none)     o Secure, Remote Access over the Internet using IPSec
+                  <draft-gupta-ipsec-remote-access-01.txt>
+     (pppext)   o L2TP Dynamic Data Window Adjustment
+                  <draft-ietf-pppext-l2tpdwin-01.txt>
+     (diffserv) o A Framework for Use of RSVP with Diff-serv Networks
+                  <draft-ietf-diffserv-rsvp-01.txt>
+     (none)     o Where to terminate a phone call
+                  <draft-faltstrom-e164-01.txt>
+     (none)     o PGPticket
+                  <draft-moscaritolo-mione-pgpticket-01.txt>
+     (smime)    o Domain Security Services using S/MIME
+                  <draft-ietf-smime-domsec-01.txt>
+
+
+
+
+Ramos                                                          [Page 14]
+
+Internet Monthly Report                                    November 1998
+
+
+     (none)     o Transmission of IPv6 Packets over IEEE 1394
+                  Networks <draft-fujisawa-ip1394-ipv6-01.txt>
+     (none)     o The vCard v3.0 XML DTD
+                  <draft-dawson-vcard-xml-dtd-02.txt>
+     (nat)      o Traditional IP Network Address Translator
+                  (Traditional NAT)
+                  <draft-ietf-nat-traditional-01.txt>
+     (diffserv) o Requirements of Diff-serv Boundary Routers
+                  <draft-bernet-diffedge-01.txt>
+     (usefor)   o Cancel-Locks in Usenet articles.
+                  <draft-ietf-usefor-cancel-lock-01.txt>
+     (none)     o DIAMETER: Policy and Accounting Extension for SIP
+                  <draft-pan-diameter-sip-01.txt>
+     (none)     o DIAMETER Mobile IP Extensions
+                  <draft-calhoun-diameter-mobileip-01.txt>
+     (snmpv3)   o View-based Access Control Model (VACM) for the
+                  Simple Network Management Protocol (SNMP)
+                  <draft-ietf-snmpv3-vacm-02.txt>
+     (diffserv) o Assured Forwarding PHB Group
+                  <draft-ietf-diffserv-af-03.txt>
+     (madman)   o Network Services Monitoring MIB
+                  <draft-ietf-madman-netsm-mib-01.txt>
+     (pim)      o Protocol Independent Multicast Version 2 Dense Mode
+                  Specification <draft-ietf-pim-v2-dm-01.txt>
+     (drums)    o Augmented BNF for Syntax Specifications: ABNF
+                  <draft-ietf-drums-abnf-v2-01.txt>
+     (tcpimpl)  o TCP Congestion Control
+                  <draft-ietf-tcpimpl-cong-control-01.txt>
+     (pppext)   o L2TP Over AAL5 and FUNI
+                  <draft-ietf-pppext-l2tp-atm-01.txt>
+     (hubmib)   o Definitions of Managed Objects for the
+                  Ethernet-like Interface Types
+                  <draft-ietf-hubmib-etherif-mib-v2-01.txt>
+     (snmpv3)   o An Architecture for Describing SNMP Management
+                  Frameworks <draft-ietf-snmpv3-arch-02.txt>
+     (ipp)      o Internet Printing Protocol/NV: IPP URL Scheme
+                  <draft-ietf-ipp-ipp-scheme-01.txt>
+     (entmib)   o Entity MIB using SMIv2 (Version 2)
+                  <draft-ietf-entmib-v2-01.txt>
+     (mpls)     o LDP Specification <draft-ietf-mpls-ldp-02.txt>
+     (none)     o The TEXT/PLAIN FORMAT Parameter
+                  <draft-gellens-format-02.txt>
+     (none)     o A Method for Transmitting PPP Over Ethernet 'PPPoE'
+                  <draft-carrel-info-pppoe-02.txt>
+     (pint)     o The PINT Profile of SIP and SDP: a Protocol for IP
+                  Access to Telephone Call Services
+                  <draft-ietf-pint-profile-01.txt>
+
+
+
+
+Ramos                                                          [Page 15]
+
+Internet Monthly Report                                    November 1998
+
+
+     (none)     o The Network Access Server
+                  <draft-beadles-nas-01.txt>
+     (none)     o Layer Two Tunnelling Protocol: ATM access
+                  extensions.
+                  <draft-tjoens-pppext-l2tp-atmext-01.txt>
+     (rps)      + PGP authentication for RIPE database updates
+                  <draft-ietf-rps-dbsec-pgp-authent-00.txt>
+     (none)     o ACAP Mailbox Dataset Class
+                  <draft-greenfield-acap-mbox-01.txt>
+     (nat)      o IP Network Address Translator (NAT) Protocol
+                  Issues. <draft-ietf-nat-protocol-issues-01.txt>
+     (malloc)   o Multicast address allocation based on the Dynamic
+                  Host Configuration Protocol
+                  <draft-ietf-malloc-mdhcp-01.txt>
+     (snmpv3)   o Coexistence between Version 1, Version 2, and
+                  Version 3 of the Internet-standard Network
+                  Management Framework
+                  <draft-ietf-snmpv3-coex-02.txt>
+     (diffserv) o An Expedited Forwarding PHB
+                  <draft-ietf-diffserv-phb-ef-01.txt>
+     (cat)      o Access Control Framework for Distributed
+                  Applications <draft-ietf-cat-acc-cntrl-frmw-01.txt>
+     (avt)      o Sampling of the Group Membership in RTP
+                  <draft-ietf-avt-rtpsample-01.txt>
+     (cat)      o Generic Authorization and Access control
+                  Application Program Interface C-bindings
+                  <draft-ietf-cat-gaa-cbind-01.txt>
+     (none)     o SCRAPI - A Simple 'Bare Bones' API for RSVP
+                  <draft-lindell-rsvp-scrapi-01.txt,.ps>
+     (rap)      o COPS Usage for Differentiated Services
+                  <draft-ietf-rap-cops-ds-01.txt>
+     (none)     + Conformance Statements for SMIv2
+                  <draft-ops-smiv2-conf-00.txt>
+     (none)     + Structure of Management Information Version 2
+                  (SMIv2) <draft-ops-smiv2-smi-00.txt>
+     (none)     + Textual Conventions for SMIv2
+                  <draft-ops-smiv2-tc-00.txt>
+     (dhc)      o DHCP Option for User Authentication Protocol
+                  <draft-ietf-dhc-options-uap-02.txt>
+     (snmpv3)   o Message Processing and Dispatching for the Simple
+                  Network Management Protocol (SNMP)
+                  <draft-ietf-snmpv3-mpc-02.txt>
+     (cat)      o The Kerberos Version 5 GSSAPI Mechanism, Version 2
+                  <draft-ietf-cat-krb5gss-mech2-02.txt>
+     (none)     o Anti-UBE and Anti-UCE Keywords in SMTP Banners
+                  <draft-hoffman-legis-smtp-banner-03.txt>
+     (dnsind)   o Extensions to DNS (EDNS1)
+                  <draft-ietf-dnsind-edns1-01.txt>
+
+
+
+Ramos                                                          [Page 16]
+
+Internet Monthly Report                                    November 1998
+
+
+     (dnsind)   o A DNS RR for specifying the location of services
+                  (DNS SRV) <draft-ietf-dnsind-rfc2052bis-01.txt>
+     (none)     o MIME Types for Use with the ISO ILL Protocol
+                  <draft-needleman-mime-ill-02.txt>
+     (nfsv4)    o NFS Version 4 Requirements
+                  <draft-ietf-nfsv4-requirements-03.txt>
+     (mpls)     o MPLS using ATM VC Switching
+                  <draft-ietf-mpls-atm-01.txt>
+     (none)     o LDAP Replication Architecture
+                  <draft-merrells-ldup-model-01.txt>
+     (ipsec)    o IPSec Monitoring MIB <draft-ietf-ipsec-mib-02.txt>
+     (conneg)   o A syntax for describing media feature sets
+                  <draft-ietf-conneg-feature-syntax-03.txt>
+     (fax)      o Content feature schema for Internet fax
+                  <draft-ietf-fax-feature-schema-03.txt>
+     (poisson)  o Bylaws for a Protocol Support Organization
+                  <draft-ietf-poisson-pso-bl-01.txt>
+     (none)     o Using Digest Authentication as a SASL Mechanism
+                  <draft-leach-digest-sasl-01.txt>
+     (pppext)   o Microsoft PPP CHAP Extensions, Version 2
+                  <draft-ietf-pppext-mschap-v2-02.txt>
+     (pppext)   o Deriving MPPE Keys From MS-CHAP V2 Credentials
+                  <draft-ietf-pppext-mschapv2-keys-02.txt>
+     (rap)      o COPS usage for RSVP
+                  <draft-ietf-rap-cops-rsvp-01.txt>
+     (none)     o The Use of the Internet Print Protocol [IPP] as a
+                  Facsimile Service [FAX]
+                  <draft-shockey-ipp2ifax-01.txt>
+     (none)     o Media Gateway Control Protocol (MGCP)
+                  <draft-huitema-MGCP-v0r1-01.txt>
+     (none)     + LDP State Machine <draft-wu-mpls-ldp-state-00.txt>
+     (none)     + T/UDP: UDP for TCAP <draft-ma-tudp-00.txt>
+     (none)     + Shared Registry System Protocol (SRSP)
+                  <draft-crispin-srs-00.txt>
+     (none)     + Neda's Efficient Mail Submission and Delivery
+                  (EMSD) <draft-rfced-info-banan-00.txt>
+     (manet)    + MANET Routing Protocol Applicability Statement
+                  <draft-ietf-manet-appl-00.txt>
+     (dhc)      + DHCP Use of the User Class Option for Address
+                  Assignment <draft-ietf-dhc-useraddr-00.txt>
+     (none)     + The 'eid' URL Scheme
+                  <draft-finseth-eid-url-scheme-00.txt>
+     (none)     + DIAMETER Reliable Transport Extensions
+                  <draft-calhoun-diameter-reliable-00.txt>
+     (trade)    + Digital Signatures for XML
+                  <draft-ietf-trade-xml-sig-00.txt>
+     (none)     + Route Reflection Considered Harmful
+                  <draft-dube-route-reflection-harmful-00.txt>
+
+
+
+Ramos                                                          [Page 17]
+
+Internet Monthly Report                                    November 1998
+
+
+     (none)     + Tree-based Reliable Multicast (TRAM)
+                  <draft-kadansky-tram-00.txt>
+     (pint)     + A Proposal for Internet Call Waiting Service using
+                  SIP An Implementation Report
+                  <draft-ietf-pint-icw-00.txt>
+     (none)     + Scoped Address Discovery Protocol (SADP)
+                  <draft-kermode-sadp-00.txt>
+     (pppext)   + PPP over Simple Data Link (SDL) using SONET/SDH
+                  with ATM-like framing
+                  <draft-ietf-pppext-sdl-00.txt>
+     (none)     + Requirements For Control Of A Media Services
+                  Function <draft-cromwell-navdec-media-req-00.txt>
+     (none)     + Dynamic RT/NRT PHB Group
+                  <draft-loukola-dynamic-00.txt>
+     (trade)    + Internet Open Trading Protocol (IOTP) HTTP
+                  Supplement <draft-ietf-trade-iotp-http-00.txt>
+     (nat)      + IP Network Address Translator Application
+                  Programming Interface <draft-ietf-nat-api-00.txt>
+     (none)     + An Architecture for Supporting Human Friendly
+                  Identifiers
+                  <draft-mealling-human-friendly-identifier-arch-00.txt>
+     (ipsec)    + Intra-Domain Group Key Management Protocol
+                  <draft-ietf-ipsec-intragkm-00.txt>
+     (none)     + A Multihoming solution using NATs
+                  <draft-akkiraju-nat-multihoming-00.txt>
+     (tcpimpl)  + The NewReno Modification to TCP's Fast Recovery
+                  Algorithm <draft-ietf-tcpimpl-newreno-00.txt>
+     (avt)      + An RTP Payload Format for Reed Solomon Codes
+                  <draft-ietf-avt-reedsolomon-00.txt>
+     (none)     + BGP/MPLS VPNs <draft-rosen-vpn-mpls-00.txt>
+     (poisson)  + Procedures for IETF appointments to the Protocol
+                  Supporting Organization
+                  <draft-ietf-poisson-appts-00.txt>
+     (none)     + Media Gateway Control Protocol (SGCP) Call Flows
+                  <draft-huitema-mgcp-flows-00.txt>
+     (none)     + Security Considerations for Mobility and Firewalls
+                  <draft-binkrich-mobisec-00.txt>
+     (dnssec)   + Simple Secure Domain Name System (DNS) Dynamic
+                  Update <draft-ietf-dnssec-simple-update-00.txt>
+     (avt)      + GeRM: Generic RTP Multiplexing
+                  <draft-ietf-avt-germ-00.txt,.ps>
+     (none)     + UTF-16, an encoding of ISO 10646
+                  <draft-hoffman-utf16-00.txt>
+     (none)     + Registration for the 'widetext' Media Type
+                  <draft-hoffman-widetext-00.txt>
+     (none)     + A Performance Oriented Service Interface for
+                  Virtual Private Networks
+                  <draft-duffield-vpn-qos-framework-00.txt>
+
+
+
+Ramos                                                          [Page 18]
+
+Internet Monthly Report                                    November 1998
+
+
+     (pim)      + Authenticating PIM version 2 messages
+                  <draft-ietf-pim-v2-auth-00.txt>
+     (nat)      + Security for IP Network Address Translator (NAT)
+                  Domains <draft-ietf-nat-security-00.txt>
+     (none)     + Diffie-Hellman Signing Algorithm
+                  <draft-schaad-dhsign-00.txt>
+     (none)     + Aggregation of Internet Integrated Services State
+                  using Parameter-based Admission Control
+                  <draft-greis-aggregation-with-pbac-00.txt>
+     (none)     + Service Requirements for Internet Telephony
+                  Signaling and Device Control Protocols
+                  <draft-sinnreich-sigdevctrl-00.txt>
+     (none)     + SIP For Presence <draft-rosenberg-sip-pip-00.txt>
+     (none)     + Mail Monitoring MIB
+                  <draft-ietf-madman-email-mib-00.txt>
+     (none)     + SMTP Service Extension for Command Pipelining
+                  <draft-freed-smtp-pipe-00.txt>
+     (none)     + Sieve -- IMAP flag Extension
+                  <draft-melnikov-sieve-imapflags-00.txt>
+     (none)     + IP Multicast Applications: Challenges and Solutions
+                  <draft-quinn-multicast-apps-00.txt>
+     (iptel)    + A Framework for a Peer Gatekeeper Routing Protocol
+                  <draft-ietf-iptel-pgrp-framework-00.txt>
+     (none)     + RTP Generic Payload with Scaleable & Flexible Error
+                  Resiliency <draft-guillemot-genrtp-00.txt>
+     (none)     + Common Gateway Interface for SIP
+                  <draft-lennox-sip-cgi-00.txt,.ps>
+     (none)     + E.164 Resolution <draft-brown-e164-00.txt>
+     (ngtrans)  + Categorizing Translators between IPv4 and IPv6
+                  <draft-ietf-ngtrans-translator-00.txt>
+     (none)     + Partitioning Label Space among Multicast Routers on
+                  a Common Subnet
+                  <draft-farinacci-multicast-label-part-00.txt>
+     (none)     + RTSP-based Stream Control in MPEG-4
+                  <draft-christ-rtsp-mpeg4-00.txt>
+     (rmonmib)  + Remote Network Monitoring MIB Protocol Identifier
+                  Reference <draft-ietf-rmonmib-rmonprot-ref-00.txt>
+     (none)     + A SOCKS-based IPv6/IPv4 Translator Architecture
+                  <draft-kitamura-socks-ipv6-trans-arch-00.txt>
+     (ngtrans)  + Dual Stack Hosts using the 'Bump-in-the-Stack'
+                  Technique
+                  <draft-ietf-ngtrans-dual-stack-hosts-00.txt>
+     (none)     + Regional Aware Foreign Agent (RAFA) for Fast Local
+                  Handoffs <draft-chuafoo-mobileip-rafa-00.txt>
+     (pppext)   + Framework for L2TP Message Extensions
+                  <draft-ietf-pppext-l2tpmsgext-00.txt>
+     (none)     + A Syntax For The MGCP Audio Package
+                  <draft-cromwell-navdec-mgcp-audio-pkg-00.txt>
+
+
+
+Ramos                                                          [Page 19]
+
+Internet Monthly Report                                    November 1998
+
+
+     (none)     + Amendments to the Assured Forwarding PHB Group
+                  <draft-firoiu-diffserv-af-amend-00.txt>
+     (none)     + TLSMUX - Multiplexed TLS for uniform encrypted
+                  access to local services <draft-wong-tlsmux-00.txt>
+     (nat)      + NAT Friendly Application Design Guidelines
+                  <draft-ietf-nat-app-guide-00.txt>
+     (mmusic)   + Session Announcement Protocol: Version 2
+                  <draft-ietf-mmusic-sap-v2-00.txt>
+     (none)     + IEEE 1394 Asynchronous Streams
+                  <draft-johansson-ip1394-asynch-streams-00.txt,.ps>
+     (ipngwg)   + Initial IPv6 Sub-TLA ID Assignments
+                  <draft-ietf-ipngwg-iana-tla-00.txt>
+     (none)     + FTP Client MIB
+                  <draft-stewart-ftp-client-mib-00.txt>
+     (none)     + Logical addressing and routing for
+                  multicasting(LAR)
+                  <draft-pansiot-logical-addressing-00.txt>
+     (pppext)   + Mobile PPP (MPPP) <draft-ietf-pppext-mppp-00.txt>
+     (none)     + TCP Performance Enhancing Proxy Terminology
+                  <draft-griner-tcppep-term-00.txt>
+     (none)     + Bulk File MIB <draft-stewart-bulk-file-mib-00.txt>
+     (none)     + Media Gateway Architecture: A Functional Model of
+                  the Media Gateway
+                  <draft-cuervo-navdec-mg-arch-00.txt>
+     (none)     + A Bounded-delay service for the internet
+                  <draft-carter-bounded-delay-00.txt>
+     (none)     + Requirements TV Broadcast URI Schemes
+                  <draft-tenkate-tvweb-uri-reqs-00.txt>
+     (tls)      + Upgrading to TLS Within HTTP/1.1
+                  <draft-ietf-tls-http-upgrade-00.txt>
+     (none)     + The iCalendar XML DTD
+                  <draft-dawson-ical-xml-dtd-00.txt>
+     (none)     + On-Demand Multicast Routing Protocol (ODMRP) for
+                  Ad-Hoc Networks <draft-gerla-manet-odmrp-00.txt>
+     (none)     + A Functional Description of a SIP-PSTN Gateway
+                  <draft-donovan-sip-gw-client-00.txt>
+     (avt)      + RTP Payload format for Interleaved Media
+                  <draft-ietf-avt-interleaving-00.txt>
+     (urn)      + Resolution of Uniform Resource Identifiers using
+                  the Domain Name System
+                  <draft-ietf-urn-dns-rds-00.txt>
+     (urn)      + The Naming Authority Pointer (NAPTR) DNS Resource
+                  Record <draft-ietf-urn-naptr-rr-00.txt>
+     (none)     + PPP Internet Protocol Control Protocol Extensions
+                  for IP Subnet <draft-heinanen-ppp-subnet-00.txt>
+     (none)     + IP VPN Realization using MPLS Tunnels
+                  <draft-casey-vpn-mpls-00.txt>
+
+
+
+
+Ramos                                                          [Page 20]
+
+Internet Monthly Report                                    November 1998
+
+
+     (mobileip) + Mobile IP Dynamic Home Address Allocation
+                  Extensions
+                  <draft-ietf-mobileip-home-addr-alloc-00.txt>
+     (none)     + Mobile Service Discovery Over Wireless Links
+                  <draft-jawanda-sdow-00.txt>
+     (pppext)   + Always On Dynamic ISDN (AODI).
+                  <draft-ietf-pppext-aodi-00.txt>
+     (none)     + RSVP Killer Reservations
+                  <draft-talwar-rsvp-kr-00.txt>
+     (none)     + An extended IP VPN Architecture
+                  <draft-casey-vpn-extns-00.txt>
+     (none)     + RSVP Support for Mobile IP Version 6 in Wireless
+                  Environments
+                  <draft-fhns-rsvp-support-in-mipv6-00.txt>
+     (none)     + Simpler and More Secure Architectures for SNMPv3
+                  <draft-maughan-nsa-snmpv3-sec-00.txt>
+     (none)     + Scenarios for an Internet-Scale Event Notification
+                  Service (ISENS) <draft-khare-notification-00.txt>
+     (none)     + Problem Statement, Requirements, and Solution
+                  Outline <draft-frystyk-httpng-overview-00.txt>
+     (iab)      + Report on the 1998 IAB Routing Workshop
+                  <draft-iab-rtr-workshop-00.txt>
+     (uswg)     + Obsolete FYI Documents
+                  <draft-ietf-uswg-historic-00.txt>
+     (manet)    + Optimized Link State Routing Protocol
+                  <draft-ietf-manet-olsr-00.txt>
+     (none)     + Optimizing TCP over Satellite ATM Networks
+                  <draft-goyal-tcpsat-tcpatm-00.txt>
+     (none)     + Routing of Multimedia Connections when Interworking
+                  with PSTN, ATM, and IP Networks
+                  <draft-ash-itu-sg2-qos-routing-00.txt>
+     (none)     o Differentiated Service Management Information Base
+                  using SMIv2 <draft-pan-diffserv-mib-01.txt>
+     (rps)      + Routing Policy Specification Language (RPSL)
+                  <draft-ietf-rps-rpsl-v2-00.txt,.ps>
+     (none)     + SOCKS64: An IPv4-IPv6 intercommunication gateway
+                  using SOCKS5 protocol
+                  <draft-jinzaki-socks64-00.txt>
+     (ipp)      + Internet Printing Protocol/1.0: Implementer's Guide
+                  <draft-ietf-ipp-implementers-guide-00.txt>
+     (none)     + Capability Card: An Attribute Certificate in XML
+                  <draft-otani-ccard-00.txt>
+     (none)     + Constraint-Based LSP Setup using LDP
+                  <draft-jamoussi-mpls-cr-ldp-00.txt>
+     (none)     + Internet Telephony Gateway Location Service
+                  Protocol <draft-agapi-ini-gwloc-00.txt>
+     (mmusic)   + Reliability of Provisional Responses in SIP
+                  <draft-ietf-mmusic-sip-100rel-00.txt>
+
+
+
+Ramos                                                          [Page 21]
+
+Internet Monthly Report                                    November 1998
+
+
+     (none)     + Requirements for the Reference Point ('N') between
+                  Media Gateway Controller and Media Gateway
+                  <draft-vandenameele-tiphon-arch-gway-decomp-00.txt>
+     (none)     + Client-Cache Communication
+                  <draft-melve-clientcache-com-00.txt>
+     (mpls)     + Extensions to RSVP for LSP Tunnels
+                  <draft-ietf-mpls-rsvp-lsp-tunnel-00.txt>
+     (none)     + Inter Cache Communication Protocols
+                  <draft-melve-intercache-comproto-00.txt>
+     (none)     + Solicitation Extensions for BGP-4
+                  <draft-jamieson-bgp-solicit-00.txt>
+     (none)     + Transport SS7 Signalling Over IP
+                  <draft-mcgrew-tss7s-00.txt>
+     (none)     + DateAndTime Extension for the MIB-2 system Group
+                  <draft-schoenw-snmpv2-mib-ext-00.txt>
+     (none)     + UMTS/IMT-2000 and Mobile IP/DIAMETER Harmonization
+                  <draft-gustafsson-mobileip-imt-2000-00.txt>
+     (none)     + Virtual Private Networks Identifier
+                  <draft-fox-vpn-id-00.txt>
+     (none)     + Performance Requirements for Signaling in Internet
+                  Telephony <draft-seth-sigtran-req-00.txt>
+     (none)     + DHCP Option 61 UUID Type Definition
+                  <draft-henry-DHCP-opt61-UUID-type-00.txt>
+     (mobileip) + Mobile IP Regionalized Tunnel Management
+                  <draft-ietf-mobileip-reg-tunnel-00.txt>
+     (mobileip) + Mobile IP Foreign Agent Challenge/Response
+                  Extension <draft-ietf-mobileip-challenge-00.txt>
+     (none)     + MPLS Optimized Multipath (MPLS--OMP)
+                  <draft-villamizar-mpls-omp-00.txt,.ps>
+     (none)     + Long Thin Networks
+                  <draft-montenegro-pilc-ltn-00.txt>
+     (rsvp)     + Preemption Priority Policy Element
+                  <draft-ietf-rap-signaled-priority-00.txt>
+     (none)     + MPLS Traffic Engineering Management Information
+                  Base <draft-srinivasan-mpls-te-mib-00.txt>
+     (none)     + XML Encoded Form Values
+                  <draft-kristensen-xml-map-00.txt>
+     (none)     + Architectural Framework for Signaling Transport
+                  <draft-ong-sigtran-framework-arch-00.txt>
+     (none)     + MPLS for PIM-SM <draft-ooms-mpls-pimsm-00.txt>
+     (iab)      + Security Mechanisms for the Internet
+                  <draft-iab-secmech-00.txt>
+     (none)     + Supporting Service Level Agreements using
+                  Differentiated Services
+                  <draft-verma-diffserv-ntimplem-00.txt>
+     (avt)      + RTP Payloads for Telephone Signal Events
+                  <draft-ietf-avt-telephone-tones-00.txt>
+
+
+
+
+Ramos                                                          [Page 22]
+
+Internet Monthly Report                                    November 1998
+
+
+     (nat)      + IP Host Network Address (and Port) Translation
+                  <draft-ietf-nat-hnat-00.txt>
+     (none)     + iCAL in XML <draft-reddy-xml-ical-00.txt>
+     (policy)   + Policy Framework Core Information Model
+                  <draft-ietf-policy-core-schema-00.txt>
+     (policy)   + Policy Framework Definition Language
+                  <draft-ietf-policy-framework-pfdl-00.txt>
+     (isis)     + Optional Checksums in ISIS
+                  <draft-ietf-isis-wg-snp-checksum-00.txt>
+     (isis)     + Maintaining more than 255 adjacencies in IS-IS
+                  <draft-ietf-isis-wg-255adj-00.txt>
+     (none)     + Cellular IP <draft-valko-cellularip-00.txt>
+     (none)     + A Framework for E.164 Number to IP Address Mapping
+                  <draft-lee-e164-framework-00.txt>
+     (none)     + Remote Monitoring MIB Extensions for Differentiated
+                  Services Enabled Networks
+                  <draft-bierman-dsmon-mib-00.txt>
+     (ippm)     + Empirical Bulk Transfer Capacity
+                  <draft-ietf-ippm-btc-framework-00.txt>
+     (ippm)     + A Round-trip Delay Metric for IPPM
+                  <draft-ietf-ippm-rt-delay-00.txt>
+     (none)     + MPLS Extensions for Differential Services
+                  <draft-wu-mpls-diff-ext-00.txt>
+     (none)     + Efficiently transporting ad-carrying web pages
+                  <draft-gupta-efficient-ad-00.txt>
+     (none)     + Dynamic Hostname Exchange Mechanism for ISIS
+                  <draft-shen-dyname-isis-00.txt>
+     (none)     + Proposal for additional RTP-SDES types
+                  <draft-parnes-rtp-sdes-00.txt>
+     (dnsind)   + A DNS RR Type for Lists of IP Address Prefixes (APL
+                  RR) <draft-ietf-dnsind-apl-rr-00.txt>
+     (none)     + Connectionless SCCP over IP Adaptation Layer (CSIP)
+                  <draft-sanchez-CSIP-v0r0-00.txt>
+     (rap)      + Identity Representation for RSVP
+                  <draft-ietf-rap-rsvp-identity-00.txt>
+     (aft)      + GSS-API Authentication Method for SOCKS Version 5
+                  <draft-ietf-aft-socks-gssapi-revisions-00.txt>
+     (iesg)     + Applicability Statement for HTTP State Management
+                  <draft-iesg-http-cookies-00.txt>
+     (pppext)   + L2TP Link Extensions
+                  <draft-ietf-pppext-l2tp-link-00.txt>
+     (none)     + LDUP Replication Information Model
+                  <draft-reed-ldup-infomod-00.txt>
+     (none)     + A Two-Tier Resource Management Model for
+                  Differentiated Services Networks
+                  <draft-rotzy-2-tier-management-00.txt>
+     (none)     + The KeyNote Trust-Management System
+                  <draft-blaze-ietf-trustmgt-keynote-00.txt>
+
+
+
+Ramos                                                          [Page 23]
+
+Internet Monthly Report                                    November 1998
+
+
+     (ldapext)  + LDAP Control for a Duplicate Entry Representation
+                  of Search Results
+                  <draft-ietf-ldapext-ldapv3-dupent-00.txt>
+     (none)     + LDAP Schema for Internet Mail
+                  <draft-srivastava-ldap-mail-00.txt>
+     (udlr)     + Internet Architecture Considerations for Assymetric
+                  and Unidirectional Broadcast Links
+                  <draft-ietf-udlr-life-00.txt>
+     (udlr)     + Internet Architecture Considerations for Assymetric
+                  and Unidirectional Broadcast Links
+                  <draft-ietf-udlr-assym-broadcast-links-00.txt>
+
+
+  7. 28 RFCs were published during this period:
+
+     RFC2401 PS (ipsec)   Security Architecture for the Internet
+                          Protocol
+     RFC2402 PS (ipsec)   IP Authentication Header
+     RFC2403 PS (ipsec)   The Use of HMAC-MD5-96 within ESP and AH
+     RFC2404 PS (ipsec)   The Use of HMAC-SHA-1-96 within ESP and AH
+     RFC2405 PS (ipsec)   The ESP DES-CBC Cipher Algorithm With
+                          Explicit IV
+     RFC2406 PS (ipsec)   IP Encapsulating Security Payload (ESP)
+     RFC2407 PS (ipsec)   The Internet IP Security Domain of
+                          Interpretation for ISAKMP
+     RFC2408 PS (ipsec)   Internet Security Association and Key
+                          Management Protocol (ISAKMP)
+     RFC2409 PS (ipsec)   The Internet Key Exchange (IKE)
+     RFC2410 PS (ipsec)   The NULL Encryption Algorithm and Its Use
+                          With IPsec
+     RFC2411 I  (ipsec)   IP Security Document Roadmap
+     RFC2412 I  (ipsec)   The OAKLEY Key Determination Protocol
+     RFC2439 PS (idr)     BGP Route Flap Damping
+     RFC2440 PS (openpgp) OpenPGP Message Format
+     RFC2441 I  (none)    Working with Jon Tribute delivered at UCLA,
+                          October 30, 1998
+     RFC2442 I  (none)    The Batch SMTP Media Type
+     RFC2443 E  (ion)     A Distributed MARS Service Using SCSP
+     RFC2445 PS (calsch)  Internet Calendaring and Scheduling Core
+                          Object Specification (iCalendar)
+     RFC2446 PS (calsch)  iCalendar Transport-Independent
+                          Interoperability Protocol (iTIP) Scheduling
+                          Events, BusyTime, To-dos and Journal
+                          Entries
+     RFC2447 PS (calsch)  iCalendar Message-based Interoperability
+                          Protocol (iMIP)
+     RFC2448 I  (none)    AT&T's Error Resilient Video Transmission
+                          Technique
+
+
+
+Ramos                                                          [Page 24]
+
+Internet Monthly Report                                    November 1998
+
+
+     RFC2449 PS (none)    POP3 Extension Mechanism
+     RFC2451 PS (ipsec)   The ESP CBC-Mode Cipher Algorithms
+     RFC2453 S  (ripv2)   RIP Version 2 Carrying Additional
+                          Information
+     RFC2455 PS (snanau)  Definitions of Managed Objects for APPN
+     RFC2456 PS (snanau)  Definitions of Managed Objects for APPN
+                          TRAPS
+     RFC2457 PS (snanau)  Definitions of Managed Objects for Extended
+                          Border Node
+     RFC2458 I  (pint)    Toward the PSTN/Internet Inter-Networking -
+                          -Pre-PINT Implementations
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ramos                                                          [Page 25]
+
+Internet Monthly Report                                    November 1998
+
+
+INTERNET PROJECTS
+-----------------
+
+
+INTERNIC
+--------
+
+     NETWORK SOLUTIONS REPORT
+
+
+     ******************************************************
+     *  gopher sessions  *
+     ******************************************************
+     Connections: cat: gopher-server*: No such file or directory
+       0
+     Retrievals: cat: gopher-server*: No such file or directory
+       0
+     ******************************************************
+     *  wais sessions  *
+     ******************************************************
+     Connections: wais-server*.gz: No such file or directory
+       0
+     Retrievals: wais-server*.gz: No such file or directory
+       0
+     ******************************************************
+     *  whois sessions  *
+     ******************************************************
+     Client Queries:  40107422
+     Server Queries 53360912
+
+     ******************************************************
+     *  ftp sessions  *
+     ******************************************************
+     Connections:  130497
+     Retrievals:  197075
+     ******************************************************
+     *  telnet sessions  *
+     ******************************************************
+     Connections:  245991
+     ******************************************************
+     *  mailserver sessions  *
+     ******************************************************
+     Connections:  0
+     ******************************************************
+     *  http sessions  *
+     ******************************************************
+     Retrievals:  36184504
+     Phones: 65,200
+
+
+
+Ramos                                                          [Page 26]
+
+Internet Monthly Report                                    November 1998
+
+
+     Emails : 911,943
+     Updates: 353,511
+
+     by Ricardo A. Gonzalez <rgonzale@internic.net>
+
+THE US DOMAIN REGISTRY
+
+     THE US DOMAIN
+     =============
+
+     The US Domain registration information is available online at
+     http://www.isi.edu/us-domain.
+
+     Much of the processing of the requests to the third level domain
+     name is now automated. In particular, most requests to register
+     names in localities already delegated are automatically forwarded
+     to the administrator of that locality.
+
+     US DOMAIN ADMINISTRATIVE INFORMATION
+     ====================================
+
+             EMAIL/FAX            2348
+             PHONE                  60
+             ----------------------------
+             Total Contacts       2408
+
+
+             DELEGATIONS:           68
+             FORWARDED REQUESTS:  1110
+             OTHER US DOMAIN MSGS:1230
+             ---------------------------
+             Total                2408
+
+     OTHER US DOMAIN MESSAGES include referrals to other subdomains or
+     to/from the InterNic, phone calls, modifications, application
+     requests, discussion and clarification of the requests, questions
+     about names, resolving technical problems with zone files and name
+     servers, and whois listings.
+
+     MAJOR SUBDOMAINS DELEGATED
+     ==========================
+
+
+     K12     CC      TEC     STATE   LIB     MUS     GEN     DST     COG
+     ===================================================================
+     51      40      36      48      43      25      29      10      6
+     ===================================================================
+
+
+
+
+Ramos                                                          [Page 27]
+
+Internet Monthly Report                                    November 1998
+
+
+     THIRD LEVEL DELEGATIONS
+     ========================
+
+     LOCALITIES
+     ==========
+     DILLSBORO.IN.US.                UNION.OH.US.
+     FREEPORT.TX.US.                 SEASIDE-HEIGHTS.NJ.US.
+     CONCORDIA.KS.US.                SHIAWASSEE.MI.US.
+     FINGER.TN.US.                   BRAXTON.WV.US.
+     OHARA.PA.US.                    ELLETTSVILLE.IN.US.
+     MONTPELIER.VT.US.               FRANKLIN.MI.US.
+     STURGIS.MI.US.                  SILVERTON.OR.US.
+
+
+     OTHERS
+     ======
+     MILLELACSOJIBWE.NSN.US.
+
+
+     OTHER US DOMAIN DELEGATIONS THIS MONTH
+     ======================================
+     CI.BAY-SPRINGS.MS.US.           DUTCH.BELL.KY.US.
+     NWEA.GEN.NE.US.                 FROM.RIMROCK.AZ.US.
+     VILLAGE.COTTAGE-GROVE.WI.US.    SFCA.FORT-MYERS.FL.US.
+     CI.HANSON.MA.US.                TWP.SALISBURY.PA.US.
+     XYMEX.SOLANO.CA.US.             PARKS.WOODRIDGE.IL.US.
+     CI.WHITMAN.MA.US.               IRC.FORT-MYERS.FL.US.
+     CI.KENMORE.WA.US.               CO.HENRY.IA.US.
+     CI.BRADFORD.IL.US.              CHS.TOWN.CAMILLUS.NY.US.
+     GUNS.KISSIMMEE.FL.US.           LVA.LIB.VA.US.
+     TWP.COLUMBUS.MN.US.             DIXON.LIB.CA.US.
+     NANTICOKE.PERRY-HALL.MD.US.     IRWINDALE.CA.US.
+     DOUG.WAYNE.PA.US.               MYERS.BRUNSWICK.GA.US.
+     CO.HALL.NE.US.                  STARGATE.OAK-BROOK.IL.US.
+     SVA.PVT.K12.VA.US.              JFAM.VISTA.CA.US.
+     CO.EL-PASO.TX.US.               ORLAND-PARK.IL.US.
+     COOK-LOVE.SOPERTON.GA.US.       YEOMANS.BRUNSWICK.GA.US.
+     CI.OAKDALE.CA.US.               HARBOR.VENTURA.CA.US.
+     CI.TRAVERSE-CITY.MI.US.         CI.REEDSVILLE.WI.US.
+     OAKEN.MIAMI.FL.US.              DARWIN.MIRAMAR.FL.US.
+     SAU43.NEWPORT.NH.US.            CO.PIERCE.WI.US.
+     STEELE.WASHINGTON.DC.US.        CI.HUSTISFORD.WI.US.
+     OLYMPUS.MIAMI.FL.US.            JEDI.MIAMI.FL.US.
+     CI.BENTON.WI.US.                CI.NELSON.NE.US.
+     DIRECT.PLAINVIEW.NY.US.         DIRECT.OLD-BETHPAGE.NY.US.
+     DRIVER.FERNANDINA-BEACH.FL.US.  COLLECTOR.CO.HIGHLANDS.FL.US.
+     CI.ALBION.NE.US.                CROWSON.DARDENNE-PRAIRIE.MO.US.
+     CYBERSPACE2000.FORT-MYERS.FL.US.
+
+
+
+Ramos                                                          [Page 28]
+
+Internet Monthly Report                                    November 1998
+
+
+     URL: http://www.isi.edu/us-domain/
+
+     by Brenna Guthrie <US-Domain@ISI.EDU>
+
+MERIT INTERNET ENGINEERING
+--------------------------
+
+   This report summarizes November 1998 Internet engineering activities
+   at Merit Network, Inc. (www.merit.edu).
+
+   Merit has released version 1.5.1a of MRT, the Multi-Threaded Routing
+   Toolkit (www.merit.edu/mrt/).  The new release offers performance
+   improvements, an enhanced user interface, and support for:
+
+       - Dynamic configuration, i.e., the ability to reconfigure options
+         and settings while the program is running
+       - Soft reconfiguration, i.e., the ability to change filters and
+         other parameters without restarting the MRT BGP session.
+
+   In addition, users can now run multiple instances of MRT on a single
+   host.
+
+   MRT was used to establish Merit's native IPv6 connection to CAIRN,
+   the Collaborative Advanced Interagency Research Network.  MichNet,
+   Merit's statewide network, has access to the vBNS/CAIRN via an OC-3c
+   ATM link to MREN and the Ameritech NAP in Chicago.
+
+   The MRT project team has launched a collaborative routing research
+   effort with software developers in Japan. Masaki Hirabaru and Craig
+   Labovitz of Merit will be working with Ikuo Nakagawa, INTEC Systems
+   Laboratory Inc., and Kunihiro Ishiguro, Digital Magic Labs, Inc.  The
+   project is funded by the Japanese governmental organization TAO.
+
+   The Merit GateD Consortium (www.gated.org) held a comprehensive
+   training and membership meeting in November, covering configuration
+   and operations issues for the various GateD protocols and platforms.
+   The Consortium is headed by Sue Hares; members of the project team
+   offering training included Hares, Linda Place, Mariella Wells, Bill
+   Siadak, Andy Adams, Allan Rubens, Chris Hopps, and Chris Richardson.
+
+   Netrail hosted the 14th North American Network Operators' Group
+   (NANOG) meeting in Atlanta on November 8-10.  Craig Labovitz of Merit
+   moderated the meeting; Pam Ciesla and Susan R. Harris handled
+   conference logistics.  Presentations are listed below; presentation
+   slides are available on the NANOG Web site, www.nanog.org.
+
+
+
+
+
+
+Ramos                                                          [Page 29]
+
+Internet Monthly Report                                    November 1998
+
+
+   TUTORIALS
+     -  Good ISPs Have No Class: Addressing Nuances and Nuisances
+           (Howard Berkowitz)
+     -  Optimal External Route Selection: Tips and Techniques for ISPs
+           (Avi Freedman, Net Access)
+
+   PRESENTATIONS
+     -  Alternative Interconnects: Technology, Attachment Requirements, and
+        Performance Measurements  (Bill Manning, ISI, panel moderator)
+           John Meylor  (jmeylor@cisco.com)
+           Christian Nielsen (christian@nielsen.net)
+           Jeremy Porter (jerry@fc.net)
+           Dave Siegel (dave@siegelie.com)
+           Steve Feldman (feldman@mfst.com
+           David Thomas   (dat@insync.net)
+           Bill Norton (wbn@equinix.com)
+
+     -  Who You Gonna Call? (Sean Donelan, Data Research Associates)
+
+     -  Interesting Peering Activities at the Exchange Points
+        (Naiming Shen, Cisco)
+
+     -  Canada's National Optical Internet (Bill St. Arnaud, CANARIE)
+
+     -  Technology for Backbone Web Caching (Peter Danzig,
+        Network Appliance, moderator)
+           Ed Kern, DIGEX
+           James Aviani, Cisco
+           Shirish Sathaye, Alteon
+           Bill Maggs, MCI
+
+     -  Multicast/MBGP: Real-Life Experiences in the Field (Dave Meyer,
+        Cisco, panel moderator)
+           Steve Rubin, AboveNet
+           Dorian Kim, Verio
+           Doug Pasko, Cable & Wireless
+           Henry Kilmer/Danielle Deibler, DIGEX
+           Jian Li, Qwest
+           Amir Tabdili, Sprint
+           Mujahid Khan, Sprint
+
+     -  Planning for Multicast Address Allocation: A Plea for Input from the
+        IETF MALLOC Working Group  (Dave Thaler, Microsoft)
+
+
+
+
+
+
+
+
+Ramos                                                          [Page 30]
+
+Internet Monthly Report                                    November 1998
+
+
+     -  Updates from the Internet GigaPoPs
+           Ron Hutchins, Southern CrossRoads, Atlanta GigaPoP
+           Dave Meyer, Oregon GigaPoP
+           Mark Johnson, North Carolina Networking Initiative
+           Stan Barber, Texas GigaPoP
+
+     -  ARIN Update (Kim Hubbard, ARIN)
+
+     -  InterNIC Update (Mark Kosters, InterNIC)
+
+     -  CAR Talk:  Configuration Considerations for Cisco's Committed Access
+        Rate (Cathy Wittbrodt, @Home)
+
+     -  Router Update: Fast Packet Forwarding and Packet Treatment for
+        Differentiated Services  (Curtis Villamizer, ANS, panel moderator)
+           Paul Ferguson, Cisco
+           John Stewart, Juniper
+           Jeff Wabik, Netstar/Ascend
+           Steve Willis, Argon
+           Hank Zannini, Avici Systems
+
+   BOFs
+       - Data Center Needs, Problems, and Technology (Bill Norton, Equinix,
+         and Sean Donelan, Data Research Associates)
+       - Caching in Today's Marketplace:  Vendor Approaches and Solutions
+         (Duane Wessels, University of California, San Diego)
+
+
+   by Susan R. Harris <srh@merit.edu>
+
+
+
+IANA REPORT
+-----------
+
+     ARP Parameters                                  1
+     Domain System Parameters                        4
+     MIME Media Types                                14
+     Multicast Addresses: Individual Assignments     6
+     Private Enterprise Numbers                      71
+     Port Numbers                                    33
+     Protocol Numbers                                2
+     SMI Numbers                                     1
+
+     by Josh Elliott <elliott@iana.org>
+
+
+
+
+
+
+Ramos                                                          [Page 31]
+
+Internet Monthly Report                                    November 1998
+
+
+RFC EDITOR REPORT
+-----------------
+
+     This is a summary of Request for Comments Editor activity for the
+     month of November, 1998:
+
+                                  TIME IN QUEUE
+     DOCUMENTS        New*   30 days     60 days      90 days      TOTAL
+     ------------------------------------------------------------------
+                                                                  |
+     Beginning of       0       10          7           35        | 52
+     month                                                        |
+                                                                  |
+     New               37        0          0            0        | 37
+                                                                  |
+                                                                  |
+     Processed         10        6          1           17        | 34
+     ------------------------------------------------------------------
+                                                                  |
+     End of month      27        4          6           18        | 55
+
+     * New RFCs added to queue throughout the month
+
+     The Requests for Comments (RFCs) are a series of notes, started in
+     1969, about the Internet (originally the ARPANET). The notes
+     discuss many aspects of computing and computer communication
+     focusing in networking protocols, procedures, programs, and
+     concepts, but also including meeting notes, opinion, and sometimes
+     humor. The specification documents of the Internet protocol suite,
+     as defined by the Internet Engineering Task Force (IETF) and its
+     steering group (the IESG), are published as RFCs.
+
+     RFCs-to-be are edited by the RFC Editor.  RFCs enter the RFC
+     Editor's work queue either by an action of the IESG or by
+     independent submission.  Most independent submissions are referred
+     to the IESG to check for overlap with IETF work.  The IESG might
+     put a hold on a document to gather more input from its members.
+     The wait for an RFC to be published varies as there can be
+     unforeseen complications (typically editorial matters that need
+     clarification from the author).  Documents can be removed from the
+     publication queue if they are found to be insufficient or incorrect
+     or if the IESG asks the author to join work already in progress in
+     the IETF.
+
+     by Alegre Ramos <rfc-ed@rfc-editor.org>
+
+
+
+
+
+
+Ramos                                                          [Page 32]
+
+Internet Monthly Report                                    November 1998
+
+
+CALENDAR
+--------
+
+The information below has been submitted to the IETF Secretariat as a
+means of notifying readers of future events. Readers are requested to
+send in dates of events that are appropriate for this calendar section.
+Please send submissions, corrections, etc., to:
+
+               <meeting-planning@ietf.org>
+
+Please note: The Secretariat does not maintain on-line information for
+the events listed below.
+
+A copy of this calendar is available as follows:
+
+VIA FTP
+--------
+IETF Information is available by anonymous FTP from several sites.
+
+        Northern Europe Address:   ftp.nordu.net (192.36.148.198)
+        Southern Europe Address:   ftp.nis.garr.it (193.205.245.10)
+        Pacific Rim Address:  munnari.oz.au (128.250.1.21)
+        Africa Address:       ftp.is.co.za (196.4.160.12)
+        West Coast Address:  ftp.isi.edu (128.9.0.32)
+        US East Coast Address:  ftp.ietf.org
+
+cd ietf
+ls *0mtg*
+
+
+WWW
+- -------
+<http://www.ietf.org/home.html> Click on the link for "meetings" and
+you should find an entry "listing of other Internet related events".
+
+
+************************************************************************
+
+
+1998
+- -----------
+
+Dec. 6-11         12th Systems Administration Conf.
+                    (LISA '98)                    Boston, MA
+Dec. 7-11         43rd IETF                       Orlando, FL
+
+
+
+
+
+
+Ramos                                                          [Page 33]
+
+Internet Monthly Report                                    November 1998
+
+
+1999
+------
+Jan 31-Feb 2      NANOG 15                        Denver, CO
+Feb. 3-5          1999 Network and Distributed System
+                   Security (NDSS) Symposium
+                   Catamaran Resort Hotel         San Diego, CA
+Feb. 7-13         ATM Forum                       Atlanta, GA
+Feb. 22-25        USENIX - 3rd Sym. on
+                   Oper. Sys Design and
+                   Implementation (OSDI '99)      New Orleans, LA
+Feb 23-25         W3C Interest Group Mtg          TBA
+Mar. 8-9          Electronic Payments Forum       San Francisco, CA
+Mar. 8-12         IEEE 802                        Austin
+Mar. 15-19        44th IETF                       TBA
+Mar. 22-25        14th Int'l Unicode Conference   Boston, MA
+Mar. 24-Apr 1     ITU Fax Standards Meeting       Geneva, Switzerland
+Mar. 24-29        Electronic Messaging Assoc.
+                  EMA '99                         Geneva, Switzerland
+Apr. 5-9          Networld+Interop 99             Singapore
+Apr. 18-24        ATM Forum                       Rome, Italy
+Apr. 26-27        Ninth Int'l Packet Video Wrkshp New York, NY
+May 10-14         IFIP/IEEE Int'l Symposium on
+                   Integrated Network Mgmt        Boston, MA
+May 11-14         Networld+Interop '99            Las Vegas, NV
+May 11-May 14     8th International World Wide Web
+                     Conference                   Toronto, Canada
+May 31-Jun 4      Networld+Interop 99             Tokyo, Japan
+Jun 4-6           W3C Interest Group Mtg          TBA
+Jun 7-10          TERENA-NORDUnet Networking 1999 Lund, Sweden
+Jun 25-29         INET'99                         San Jose, CA
+Jul 5-9           IEEE 802                        Montreal, Canada
+Jul 12-16         45th IETF                       Oslo, Norway
+Jul. 18-24        ATM Forum                       New Orleans, LA
+Aug. 30-Sep 3     SIGCOMM '99 (West Coast US)     Cambridge, MA
+Sep. 21-23         W3C Interest Group Mtg         TBA
+Sep. 26-Oct 2     ATM Forum                       Bangkok, Thailand
+Oct. 8-14         TELECOM '99                     Geneva, Switzerland
+Oct. 13-17        Networld+Interop '99            Atlanta, GA
+Nov. 3-4          Cross-Industry Working Team (XIWT) Crystal City, VA
+Nov. 8-12         46th IETF                       Wash DC
+Nov. 8-12         IEEE 802                        Kaui
+Nov. 28-Dec 4     ATM Forum                       Beverly Hills, CA
+
+
+
+
+
+
+
+
+
+Ramos                                                          [Page 34]
+
+Internet Monthly Report                                    November 1998
+
+
+2000
+-----
+Mar. 6-10       IEEE 802                          Albuquerque
+Mar. 10-14      IEEE 802                          San Diego, CA
+MAR 27-31       47th IETF                         Adelaide, Australia
+May 9-11        Networld+Interop '00              Las Vegas, NV
+late Aug        SIGCOMM 2000                      Europe (tentative)
+Sep 25-29       Networld+Interop '00              Atlanta, GA
+Nov. 6-10       IEEE 802                          Tampa, FL
+
+
+     The TERENA Calendar for January 1999 may be found on URL:
+
+     http://www.terena.nl/news/calendar.html
+
+     +++++++++++++++++++++++++++++++++++
+
+            TERENA Secretariat
+
+            Singel 466-468
+            1017 AW Amsterdam
+            the Netherlands
+
+            email <secretariat@terena.nl>
+
+            tel: +31 20 530 4488
+            fax: +31 20 530 4499
+
+     +++++++++++++++++++++++++++++++++++
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ramos                                                          [Page 35]
+

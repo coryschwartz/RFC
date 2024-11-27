@@ -1,0 +1,376 @@
+ 5-Feb-82 02:40:37-PST,14512;000000000001
+Mail-from: ARPANET host BRL rcvd at 5-Feb-82 0239-PST
+Sender:    Mike Muuss <TCP-IP@BRL>
+From:      TCP-IP at BRL
+To:        TCP-IP at BRL
+Date:      4 Feb 1982
+Subject:   TCP-IP Digest, Vol 1 #14
+Via:  Brl; 4 Feb 82 23:52-EDT
+
+TCP/IP Digest            Thursday, 4 Feb 1982      Volume 1 : Issue 14
+
+Today's Topics:
+               Digest Mail Input  &&  TCP/IP Press Package
+                         Protocol Documents List
+                 ArpaNet Link -vs- Message-ID and TCP/IP
+       FTP Server Replies and Commands  &&  TCP/IP for the Cybers
+                   Introduction to Networking Pointer
+                        SMTP Protocol Discussions
+                    *Spoiler*  DECNET and UNIX Survey
+----------------------------------------------------------------------
+                         LIMITED DISTRIBUTION
+          For Research Use Only --- Not for Public Distribution
+----------------------------------------------------------------------
+
+To: TCP-IP@BRL
+Subject: Digest Mail Input
+
+   The address for submissions to the Digest is:
+
+	   TCP-IP@MIT-AI			(ARPAnet)
+	   !menlo70!hao!brl-bmd!tcp-ip		(UUCP/USEnet)
+
+   Requests, problems, or discussions with the Moderator not to be published
+   in the digest can be sent to:
+
+	   TCP-IP-REQUEST@MIT-AI		(ARPAnet)
+	...!menlo70!hao!brl-bmd!tcp-ip-request	(UUCP/USEnet)
+
+   ARPAnet mail may also be sent to those same addresses at
+   BRL (i.e. TCP-IP@BRL).
+
+
+A message sent to TCP-IP-Request was mistakenly published in Vol 1 #13.
+This will not happen again.  I regret any inconvienience this
+may have caused.
+				-Mike
+
+------------------------------
+
+From: Mike Muuss <Mike@BRL>
+Subject: TCP/IP "Press Package"
+
+Einar Stefferud <Stef@KA> and Vint Cerf <Cerf@usc-isi> have come up with
+the idea of putting together a TCP/IP "Press Package" which we could feed
+to Datamation and IBM and everybody else who ought to hear about TCP/IP,
+but maybe hasn't.  This would be mostly a cut-and-paste job done to some
+of the existing RFCs and IENs, along with descriptive text from previous
+digests, and new contributions.  If you submitted something which was
+published in a previous digest, and you would not mind having it become
+part of the Press Package, please send me a note -- only contributions
+specifically designated for public distribution will be included in
+the press package.  The same holds true for all new submissions to the
+Digest.  Only clearly marked letters will be added to the press package
+file;  all others go to the digest only.
+
+Also, anybody who would like to contribute (USMAIL) addresses of people
+who ought to get the press package should send them to TCP-IP-Request.
+
+				Thoughts?
+				  -Mike
+
+------------------------------
+
+From: POSTEL at USC-ISIF
+Subject: Protocol Documents
+
+It might be helpful to have a list of the documents that specify the
+protocols to be used in the TCP environment.
+
+The NCP/TCP Transition Plan                 [RFC 801]
+Protocol Documents
+   Introduction
+      Catenet Model                          [IEN-48]
+   Network Level
+      Internet Protocol                     [RFC-791]
+      Internet Control Message Protocol     [RFC-792]
+   Host Level
+      User Datagram Protocol                [RFC-768]
+      Transmission Control Protocol         [RFC-793]
+   Application Level
+      Telnet Protocol                       [RFC-764]
+      File Transfer Protocol                [RFC-765]
+      Simple Mail Transfer Protocol         [RFC-788]
+      Trivial File Transfer Protocol        [RFC-783]
+      Name Server Protocol                  [IEN-116]
+   Appendices
+      Assigned Numbers                      [RFC-790]
+      Pre-emption                           [RFC-794]
+      Service Mappings                      [RFC-795]
+      Address Mappings                      [RFC-796]
+      Mail Header Format Standards          [RFC-733]
+
+These documents can be copied as public access files from the Network
+Information Center Library on the SRI-NIC ARPANET host. The FTP pathname
+for a file is <NETINFO>RFCxxx.TXT or <NETINFO>IEN-xxx.TXT where the xxx
+is the document number (note the dash in the IEN file names, and no dash
+in the RFC file names).  These files can be copied via FTP using the FTP
+username ANONYMOUS and password GUEST.
+
+--jon.
+
+------------------------------
+
+From: GEORGE at AFSC-HQ
+To: tcp-ip at BRL
+Subject: ARPANET "link" vs "message-id"
+
+With a TCP/IP implementation on ARPANET, the use of the "link" field
+in the 1822 leader to identify Internet Protocol precludes the use of
+the "message-ID" field for multiplexing independent data streams
+between hosts.  It seems that we're reduced to a send message -- wait
+for RFNM (or msg type 7-9) before another message can be sent to the
+same host.  An alternative, of course, is to ignore RFNM's and let the
+higher-level TCP layer handle all retransmissions and let the local
+IMP block output from the host after 8 messages.  Am I missing something
+or is there to be an RFC replacing the Report 1822 (May 1978 revision)?
+   
+C K Norris, SAMNET Software Development Group, Eglin AFB 
+            mail addr : George @ AFSC-HQ
+
+------------------------------
+
+From: GEORGE at AFSC-HQ
+To: Tcp-ip at BRL, postel at ISIF
+Subject: FTP server replies/ (commands)
+
+It appears that most server FTPs use a "255 SOCK port no." reply (command ?).
+Where is this documented? I see no mention of this command in RFC764 nor
+in the older RFC542 (Arpanet Protocol Handbook, NIC 7104-jan78).
+ 
+The Air Force Systems Command FTP server (SAMNET) for PDP11 RSX11M also
+issues the "255 SOCK port no." but always for the default port no. SAMNET
+user FTP, assuming all servers will speak on the default port, issues
+his "ACCEPT CONNECTION" for the server default port (actually before
+issuing his STOR or RETR). FTP servers, such as UNIX and more recently
+TOPS20, which issue the SOCK reply (COMMAND ?) for other than the default
+port cause us problems. ( SAMNET user FTP times out--DATA connection not
+established--).
+ 
+After studying RFC793 (TCP) and RFC764 (FTP) , I am concerned this problem
+will follow us to TCP/IP. Is there an RFC that describes "SOCK". 
+My interpretation of RFC764 is - server FTP does not issue Commands only
+replies and is therefore bound to speak on the DEFAULT PORT. I would
+appreciate some comments from the ARPANET community and Protocol designers
+on this subject.
+ 
+Regards, 
+ 
+Calvin George
+USAF AD/KRESS
+EGLIN AFB,FL. 32542 
+
+------------------------------
+
+From: POSTEL at USC-ISIF
+Subject: re: FTP commands and replies
+To:   George at AFSC-HQ
+cc:   postel at ISIF, tcp-ip at BRL
+
+Calvin:
+
+Nice to hear from you, and learn of your interest in FTP. You concern for
+function to switch off the default data socket (or port in TCP) is well taken,
+it is an important function.
+
+I think you had a typo in your message.  You referred to RFC 764 as being
+the FTP document for use of FTP on TCP.  Actually the FTP document is
+RFC 765 (RFC 764 is the Telnet document).
+
+In RFC 765, there is both a PORT command, and a 227 reply, to support the
+selection of a non-default data connection.  There is a brief example of
+the scenario on page 41.
+
+You are correct in suggesting that there have been implementation problems
+with this procedure in the past.  I think the new description (in RFC 765)
+is clear enough that much of the past misunderstandings can be eliminated.
+
+In fact, the documentation of the old NCP based FTP is in a poor state. This
+is due to the fact that several of the implementations were based on early
+versions of the specification and were not updated to match later 
+specifications.  A measure of the confusion that existed can be seen from a
+review of RFC 691 which compares two sets of FTP reply codes.
+
+We expect that the past confusion and problems can be left behind as we move
+to TCP, with a clearer specification of the FTP procedure.
+
+Thanks again for letting me know your concern.
+
+--jon.
+
+------------------------------
+
+From: teklabs!michaele at Berkeley
+Subject: TCP in Ratfor
+
+    Mike O'Dell from LBL-UNIX stated that we (teklabs) have written a
+TCP in ratfor for Cybers.  That is not quite right.  We have written a
+TCP for Cybers in SYMPL (CDC's systems language), a subset of JOVIAL.
+
+    We have been running it for several monbths, and it works well.
+Also, Clem Cole in not working at Tek right now, he is attending a
+Phd program at Berkely.
+
+Michael Edelman - teklabs!michaele
+
+------------------------------
+
+From: teklabs!michaele at Berkeley
+Subject: Teklabs tcp/ip
+
+    It has been stated that Teklab is writing a version of TCP in Ratfor.
+That is not true.  Teklabs has implemeted TCP/IP on a Cyber 175. The
+TCP is written in SYMPL, CDC's systems language; IP is written in PP
+assembler.  Teklabs is in the process of implementing TCP/IP for VMS and
+TOPS.  The TCP is being written in BLISS, and IP will be written in the
+appropriate assembler.
+
+    The Cyber version of TCP/IP has been up for several months and works
+very well.  The VMS version should be up within a month.  The TOPS version
+should be up in about three or four months.  For more information, you can
+contact Tim Fallon (Project Leader) at
+ucbvax!teklabs!timf, or Rick Krull (implementation programmer) at
+ucbvax!teklabs!rickk.
+
+    My familiarity with the network comes from helping Tim and Rick
+with The Cyber Systems interface, and doing some small amount of
+testing for/with them.
+
+Have a good One!
+
+Michael Edelman
+Computer Science Center 50/454
+Tektronix, Inc.
+P.O. Box 500
+Beaverton, OR 97077
+503-627-5034
+
+or better yet:  ucbvax!teklabs!michaele
+
+------------------------------
+
+From: cbosg!harpo!floyd!unc!smb at Berkeley
+Full-Name: Steven M. Bellovin
+Subject: Introduction to Networking
+
+The latest issue of Computing Surveys has a pretty good introduction
+to network protocols and the ISO Open System Interconnection model.
+
+------------------------------
+
+From:      Michael Muuss <mike@BRL>
+Subject:   Discussion of SMTP in TCP Digest?
+
+	Because SMTP is one of the "protocols" that is comming with
+the TCP/IP package, the TCP Digest seems a good place for this discussion.
+It certainly will hit all the designers and implementors, which is good.
+You should probably CC MSGGroup or HeaderPeople or whoever else seems
+appropriate, but I know of no other list that does any better.  (Of course,
+there are probably a few lists bouncing around that I have never run into.
+If you find a better forum, please let me know).
+						-Mike
+
+------------------------------
+
+From: lwa at mit-csr at mit-multics
+Reply-to: lwa.INP@MIT-Multics
+Subject: Meta-meta-discussion
+
+I agree that the meta-discussion should be moved to a more appropriate
+list, although I have no suggestions for which list is appropriate.  I
+have found the TCP/IP discussions to be most interesting, as we are
+presently implementing (yet another) version of IP and TCP for UNIX
+here.
+
+In regard to this, I have a question about the SMTP protocol as documented
+in RFC788.  There appears to be no way for the SMTP user process to abort
+a transaction once it has begun to send the data portion of a message.  Is
+this correct, or am I simply missing something?
+					-Larry Allen
+
+------------------------------
+
+From:     Mike Muuss <Mike@BRL>
+Subject:  *** Spoiler Warning ***   ---   DECNET and UNIX
+
+Bill Shannon at DEC asked me to publish his UNIX/DECNET Communications Survey
+in the digest so that it would reach the most number of people.  In light
+of his comments below, I felt that this would not be inappropriate, although
+a little off the usual topic.  Networking is networking.
+
+The next two messages are the last in this Digest.  Those of you who who
+are not interested in DECNET or UNIX can stop here.
+	-Mike
+
+------------------------------
+
+From: decvax!shannon at Berkeley
+To: ucbvax!mike at brl, ucbvax!tcp-ip at brl
+Subject: Re:  DECnet/Unix Survey
+
+I sent it to tcp-ip so that if you felt it was appropriate you
+could include it in the digest.  If you followed any of the
+discussion in net.news recently some people have expressed a
+concern that Usenet (and even more so Arpanet) is not the right
+place to do something like that.  I of course disagree but for
+different reasons than most other people.  I think I needed to
+emphasize more that the survey was not done by DEC-the-corporation
+as a prelude to coming out with a product, but by Bill-Shannon-a-
+member-of-the-DEC-Unix-Engineering-Group before I spend my time
+working on such a project.  Of course there would be nothing to
+prevent DEC from turning it into a product but that was not the
+intent.
+					Bill
+
+------------------------------
+
+From: decvax!shannon at Berkeley
+To: ucbvax!tcp-ip@brl
+Subject: DECnet/Unix Survey
+
+The DEC Unix Engineering Group is considering doing some work
+to provide some DECnet capability for Unix.  To make sure that
+we do something useful (if we do anything!), we'd like to get
+some feedback as to what people would like.  A survey form is
+included, please return directly to me with your comments. 
+Any general interest messages can be sent directly to the net.
+
+
+					Bill Shannon
+					decvax!shannon
+					(603) 884-5044
+
+
+===============================================================================
+
+			DECnet/Unix Survey
+
+1.  Do you require a supported product?  Must it be supported by DEC?
+
+2.  How much would you be willing to pay for both supported and unsupported?
+
+3.  What version(s) of Unix should it run on?  Is VMUNIX enough?  V7?  S3?
+
+4.  Would you be willing to buy hardware (eg, a front end), to support DECnet?
+
+5.  Do you need to talk to all DEC systems, or would VMS be enough?
+
+6.  Is Phase III end-node capability enough, or do you require routing?
+
+7.  What hardware support do you require?  Is DMC/DMR enough?
+
+8.  Is X.25 support required?
+
+9.  Which of the following capabilities do you require: file transfer, mail,
+    virtual terminals, transparent remote file access?
+
+10. Should it be integrated with any other Unix networking capability, e.g.,
+    Arpanet, uucp, Berknet, or should it be entirely separate?
+
+11. Anything else you would like to say?
+
+Please return to decvax!shannon@Berkeley.
+
+END OF TCP-IP DIGEST
+********************
+

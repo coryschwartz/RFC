@@ -1,0 +1,63 @@
+
+A new Request for Comments is now available in the online RFC
+libraries.
+
+Note: This is a PostScript RFC, a secondary version is available in
+ASCII.  The secondary ASCII version may lack figures and the
+information encoded in typographic variation (italics, boldface,
+etc.).  Since this information often provides essential context, the
+ASCII version is at best incomplete and at worst misleading.  Anyone
+expecting to understand this document is strongly encouraged to obtain
+the PostScript version.
+
+
+	RFC 1347:
+
+        Title:      TCP and UDP with Bigger Addresses (TUBA),
+                    A Simple Proposal for Internet Addressing and Routing
+       	Author:     R. Callon
+	Mailbox:    callon@bigfut.lkg.dec.com
+        PS-Pages:  NNN          ASCII-Pages:  NNN
+        PS-Characters:  989,724 ASCII-Characters:  433,332
+	Obsoletes/Updates:  none
+
+
+----> Insert "abstract" info here. <-----
+
+This memo provides information for the Internet community. It
+does not specify an Internet standard. Distribution of this
+memo is unlimited.
+
+This announcement is sent to the IETF list and the RFC-DIST list.
+Requests to be added to or deleted from the IETF distribution list
+should be sent to IETF-REQUEST@NRI.RESTON.VA.US.  Requests to be added
+to or deleted from the RFC-DIST distribution list should be sent to
+RFC-REQUEST@NIC.DDN.MIL.
+
+Details on obtaining RFCs via FTP or EMAIL may be obtained by sending
+an EMAIL message to "rfc-info@ISI.EDU" with the message body
+"help: ways_to_get_rfcs".  For example:
+
+        To: rfc-info@ISI.EDU
+        Subject: getting rfcs
+
+        help: ways_to_get_rfcs
+
+Requests to be added to or deleted from this distribution list should
+be sent to RFC-REQUEST@NIC.DDN.MIL.
+
+Requests for special distribution should be addressed to either the
+author of the RFC in question, or to NIC@NIC.DDN.MIL.  Unless
+specifically noted otherwise on the RFC itself, all RFCs are for
+unlimited distribution.
+
+Submissions for Requests for Comments should be sent to
+RFC-EDITOR@ISI.EDU.  Please consult RFC 1111, "Instructions to RFC
+Authors", for further information.
+
+Requests to be added to or deleted from this distribution list should
+be sent to RFC-REQUEST@NIC.DDN.MIL.
+
+
+Joyce K. Reynolds
+USC/Information Sciences Institute

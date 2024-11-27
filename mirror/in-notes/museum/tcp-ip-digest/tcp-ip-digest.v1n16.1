@@ -1,0 +1,158 @@
+21-Feb-82 20:11:23-PST,5996;000000000001
+Mail-from: ARPANET host BRL rcvd at 21-Feb-82 2011-PST
+Sender:    Mike Muuss <TCP-IP@BRL>
+From:      TCP-IP at BRL
+To:        TCP-IP at BRL
+Date:      21 Feb 1982
+Subject:   TCP-IP Digest, Vol 1 #16
+Via:  Brl; 21 Feb 82 20:32-EDT
+
+TCP/IP Digest             Sunday, 21 Feb 1982      Volume 1 : Issue 16
+
+Today's Topics:
+                        TCP-IP for Univac systems
+                        Quote Character for SMTP
+                        FTP Commands and Replies
+                   MCNC Network Suggestions Solicited
+----------------------------------------------------------------------
+                         LIMITED DISTRIBUTION
+          For Research Use Only --- Not for Public Distribution
+----------------------------------------------------------------------
+
+Return-path: @COMSAT-DCN7,@DLM-DLM6,Mills@COMSAT
+From: Mills at COMSAT
+Subject: TCP-IP for Univac systems
+To:   TCP-IP at BRL
+
+The Universtiy of Maryland Computer Science Center is now implementing
+TCP-IP for the Univac 11xx machines. Currently, they have an IP version
+running with the DCNET local-network protocol and a TCP/TELNET user
+interface. TCP itself is only partially complete at this time.
+
+Further information can be obtained from Mike Petry (301) 454-2946.
+
+Regards,
+Dave
+
+------------------------------
+
+From: POSTEL at USC-ISIF
+Subject: SMTP Quote
+To:   Greenwald.INP at MIT-MULTICS
+cc:   Postel at ISIF, TCP-IP at BRL
+
+There is a quote character in SMTP, the backslash "\".
+
+--jon.
+------------------------------
+
+[ The next two letters are a continuation of the discussion between Calvin
+  George and Jon Postel started in V1#15, concerning FTP Commands and
+  Replies.  They are published by permission.  -Mike ]
+
+From: GEORGE at AFSC-HQ
+Subject: ftp commands and replies
+
+I am still concerned that there can be different interpretations of
+RFC765 (your correction noted) concerning the changing of DEFAULT
+port numbers. The scenario on page 41 of RFC765 concerns 3rd party
+transfers. I appreciate the need for the PASV command and 227 reply
+for 3rd party transfers. In the case of 2 party transfers, I see no
+requirement (in the protocol specification) for the USER to issue
+a PASV command to the SERVER, so that the SERVER might have the 
+opportunity to specify a different port for the data connection. 
+By using DEFAULT ports, defined for FTP, it appears to me there is
+less network overhead establishing connections. I also cannot see
+that requiring the SERVER to use the DEFAULT port places any undue
+restrictions on the SERVER, given the way TCP defines a session.
+ 
+My real concern is:  Given we (SAMNET) convert our FTP assuming there is
+no requirement to issue the PASV command (for 2 party xfers) and the 
+UNIX and TOPS20 implementors convert their FTP such that they expect
+a PASV so they can REPLY with their intended data port-- our current
+problem may well follow us to TCP.
+ 
+Could it be that I do not understand RFC765 or is there some ambiguity
+in this area?
+ 
+-Calvin
+
+------------------------------
+
+From: POSTEL at USC-ISIF
+Subject: Re: ftp commands and replies
+To:   GEORGE at AFSC-HQ
+
+Calvin:
+
+I think your concern about two-party transfers and the potential for
+deadlock between a default-only data connection implementation and
+a non-default-only data connection implementation can be put to rest.
+The RFC 765 rules require that every implementation operate with the
+default ports, and that only the user can initiate a change from the
+defaults.
+
+I will put  a note in my master copy of the RFC to add a paragraph
+on page 15 and on page 40 stating this very clearly.
+
+--jon.
+
+------------------------------
+
+From: decvax!duke!mcnc!smb at Berkeley
+Full-Name: Steven M. Bellovin
+To: decvax!duke!mcnc!tcp-ip@Berkeley
+Subject: Network suggestions solicited
+
+We would like some advice from the networking community out there in
+TCP-IP land.
+
+The Microelectronics Center of North Carolina (MCNC) is in the process of
+setting up a network to connect the various universities and other
+institutions that are participants.  We would welcome any suggestions
+about hardware, software, etc., given the rather varied machines to be
+connected.
+
+Configuraton:
+
+	At MCNC itself are two VAX 11/780s running 4.1BSD UNIX.
+	Currently, there are 9600 baud leased lines to each of the
+	participating institutions (PIs); these lines are used for
+	8-line statistical multiplexors.  We are considering high-speed
+	microwave links to fully interconnect all of the PIs, and would
+	prefer software that would remain usable.
+
+	UNC has two VAX 11/780s running 4.1BSD, an 11/45 running v7
+	UNIX, and another 11/45 which will probably run 2.8BSD.  The
+	first three machines are in the same room, and are connected by
+	Able Interlinks; the fourth is across the street, and will
+	probably be connected via either an DMR11 over a coax cable, or
+	a 9600 baud asynch line.  They are linked by uucp and Purdue EE
+	net connections.
+
+	Duke has an 11/70 running v7, as well as several smaller 11s.
+
+	UNC-Charlotte has a pair of 11/40s running v7.
+
+	NCSU has several VAX 11/780s running VMS and (sometimes) Eunice;
+	an 11/24 acts as a front-end for their terminals via DECnet.
+
+	NC A&T will soon (imminently) have a VAX 11/780 running 4.1BSD.
+
+	RTI has an 11/23; it's not clear what system they'll run on it yet.
+	V7 and XENIX are two possiblities.
+
+	There are plans to get a large number of single-user
+	workstations; these will also need to be tied in to the net.
+	And we'll probably need the ability to talk to IBM systems
+	running MVS and/or VM, and probably other machines as well.
+
+We need mail service, remote logins, and both spooled and real-time
+file transfer.  Some of these files will be quite large.  We currently
+use uucp, but it isn't sufficient.
+
+Now -- if you had all that hardware, what would *you* do?
+
+END OF TCP-IP DIGEST
+********************
+

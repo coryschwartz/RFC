@@ -1,0 +1,319 @@
+23-Dec-81 23:43:10-PST,13987;000000000001
+Mail-from: ARPANET host BRL rcvd at 23-Dec-81 2342-PST
+Date:      23 Dec 81 21:55:24-EST (Wed)
+From:      Mike Muuss <tcp-ip@brl>
+To:        list: 
+Subject:   TCP-IP Digest, Vol 1 #9
+Bcc:       
+
+TCP/IP Digest           Wednesday, 23 Dec 1981     Volume 1 : Issue 9
+
+Today's Topics:
+            ComputerWorld TCP Article && Packet Radio IP Woes
+    TCP-IP Implementations for TOPS-10?  && BBN VAX TCP/IP Status Report
+    TCP/IP Pronet Device Drivers for 4.1BSD && November Internet Report:
+    Summary, VAX & C70 TCP, HP3000, TAC Operational, SATNET, GATEWAYs
+                 TOPS-20 TCP/IP Performance Measurements
+----------------------------------------------------------------------
+
+From: Raleigh F Romine <romine@SRC-Unix>
+Subject: ComputerWorld TCP Article
+
+Mike,
+	The 14 Dec issue of ComputerWorld has an interesting
+article on the ARPAnet TCP/IP cutover and it's commercial 
+impact.  It might be of interest to TCP-IP Digest readers.
+
+Raleigh
+
+------------------------------
+
+From: WOHL at CMU-20C
+Subject: Why use user.host@forwarder ?
+
+The proposed syntax of mailboxes for NCP to TCP forwarders
+(see rfc801 pg 15) is user.host@forwader.   Since tops-20
+user names can have dots in them this new syntax would make
+the parsing of mailboxes ambigous.   The mailbox foo.xx@cmuc
+could mean user foo on xx via cmuc or user foo.xx on cmuc.
+
+The choice to overload the use of the dot would prevent
+the many tops-20 sites from acting as relay hosts.
+Why move away from the rfc733 idea that dot is part of a
+username?
+	Aaron
+
+------------------------------
+
+From: John C. Gilmore <GNU at MIT-AI>
+
+Please add me to the list "tcp-ip".  I'm doing packet radio Internet
+design and are having (what seems the usual) problems with Internet --
+the addresses are too short (24 bits within network, requiring central
+authority passing them out).
+
+What we're plainning on, at the moment, is using those 24 bits to encode the
+latitude and longitude to within a 1 degree-per-side rectangle, and add new
+required "Option" fields containing the real addresses.  Is there a better 
+approach short of junking Internet?
+
+------------------------------
+
+From: STECKEL at HARV-10
+Subject: TCP-IP Implementations for TOPS-10
+
+Sirs -
+ As the entire staff of HARV-10, an ARPAnet site running a DEC PDP-10
+under the TOPS-10 monitor, I am wondering if any other TOPS-10 site is
+considering writing the conversion code.  If not, I would like to know
+what document describes the exact method for sending an IP message via
+the "1822" interface (BBN report describing IMP-HOST messages).
+ regards,
+ Geoff Steckel (STECKEL@HARV-10)
+
+[ The connection is mentioned in passing in RFC790, which states that all
+  InterNet messages are to be sent on Link 155 decimal, which is currently
+  not used for ArpaNet Host-Host Protocol.  For the rest, RFCs 791, 792,
+  and 793 should do the trick.  -Mike]
+
+------------------------------
+
+From: Rob Gurwitz <gurwitz at BBN-RSM>
+
+Mike,
+I'm sending you this update on the progress of our BBN VAX TCP/IP in hopes
+of clearing up some misconceptions that might have formed in the community
+about it.  Specifically, I want to clarify notions about "the BBN TCP/IP"
+(we've done many implementations at various times), about Berkeley's role
+in the implementation, and about general availability of the software.
+Rob
+
+*********
+
+BBN has developed an implementation of TCP/IP for DEC's VAX(TM) family of
+processors, that runs under the Berkeley 4.1BSD version of UNIX(TM).  The
+development effort was funded by DARPA.  
+
+BBN has been involved in the development of TCP/IP from its earliest stages,  
+and was responsible for some of the first experimental implementations 
+for TOPS20 and PDP-11s running UNIX.  The VAX TCP/IP, along with TCPs for 
+the HP 3000 and the BBN C/30 Terminal Access Controller, is one of several 
+"second generation" implementations being produced at BBN, and is intended 
+for production use.  The VAX TCP/IP implementation has also been ported to
+the BBNCC C/70, which runs UNIX Version 7.
+
+Some important features of the BBN VAX TCP/IP are that it runs in the UNIX 
+kernel for enhanced performance, it is a complete implementation of the TCP 
+and IP protocols, and provides facilities for direct user access to the IP 
+and underlying network protocols.  
+
+Performance measurements indicate BBN VAX TCP/IP data throughput to be in
+excess of 120K bits/second over an ARPANET interface.  Work is currently
+underway in cooperation with the Berkeley Computer Science Research Group
+to enhance BBN VAX TCP/IP performance over high speed local area networks.
+Preliminary studies have measured throughputs in excess of 1.25M
+bits/second with a prototype ETHERNET.  
+
+In addition to the TCP/IP software for the VAX, BBN has developed 
+implementations of the TELNET Virtual Terminal Protocol, File Transfer Protocol
+(FTP), and Mail Transfer Protocol (MTP), for use with TCP.  The BBN VAX TCP/IP 
+will support a variety of high speed local area network interfaces, as well 
+as ARPANET interfaces.  The software is in beta-test at several sites
+around the country, and will be generally available direct from BBN in 
+Spring, 1982, or through Berkeley in their next software distribution.
+
+------------------------------
+
+From: tjt at mit-vax at mit-xx
+Subject: pronet device drivers
+
+We (MIT Laboratory for Computer Science) are working on such a driver
+to work with the BBN TCP/IP that runs under 4.1BSD in loose
+collobaration with Rob Gurwitz of BBN (they also have some Pronet
+boards).  We hope to get something usable within a week or so, but
+also expect to have some minor difficulty scheduling debugging time
+on our machine (hence 1-2 weeks rather than 1-2 days).
+
+------------------------------
+
+From: Mike Muuss <tcp-ip@BRL>
+
+One of the folks at Utah forwarded me the "November Internet Report"
+and suggested that I extract portions of general interest and send
+them to the whole list.  Undoubtably, some of you will have seen this
+before, so you can just ignore the next 150 lines.
+
+------------------------------
+
+From: Dave Clark (DClark @MIT-Multics)
+Sender: WESTINE at USC-ISIF
+Subject: November Internet Report, TCP/IP Summary
+
+TCP/IP continues to get more visibility, including a recent
+Computerworld story that reported some of the good performance
+results from the VAX software. Attention in the performance
+area is really important.
+
+The performance results that the TOPS-20 study produced are
+typical of other such investigations. One always hopes that
+there is one really awful place where a fix will have a
+wonderful result, but such is never the case. The time just
+gets used up everywhere. The TOPS-20 study also identified a
+problem that, in my opinion, will be the most important
+performance issue: the sending of unnecessary packets.  Most
+implementations have processing times that relate to number of
+packets, and not to the number of bits sent. This being so,
+sending half as many packets for the same data cuts the
+processing time in half. There are few other places where one
+can get this kind of improvement in one move. I have a chapter
+of my implementor's guide that discusses how to send fewer
+packets. Anyone wanting a early draft (cost: your comments
+back) should let me know.
+
+Now that the SMTP specification is out, people should think
+about getting it implemented, if they have not already done
+so. The mail aspect of conversion to TCP has many parts to it,
+and we must make steady progress here to avoid missing
+deadlines.
+
+------------------------------
+
+From:   Bob Hinden
+Sender: WESTINE at USC-ISIF
+Subject: November Internet Report, BBN COMMUNICATIONS SYSTEMS DIVISION
+
+VAX and C70 TCP
+
+   Testing, bug fixing, and performance analysis continued on
+   the VAX TCP.  The software was sent to Berkeley, CMU, ISI,
+   Purdue (CSNET), Stanford, and MIT LCS.  BBN-VAX is running
+   multi-homed on the ARPANET and the RCCNET. Things seem to
+   be working fine, and we are providing good service to users
+   on both nets.  Work is continuing on defining and enhancing
+   the raw IP and local net user interfaces.  We will be
+   merging in the Berkeley performance improvements for high
+   speed local net use in the near future.
+
+   On the C70 front, we have a TCP running on a NCP/TCP host.
+   The software is performing well enough to put into
+   production.  We are still working on tuning the TCP for the
+   C70's smaller buffer complement, with good success.  We
+   expect to be providing TCP service to the BBN Unix Cost
+   Center C70s (at least 8 machines), including NCP/TCP mail
+   forwarding, in the coming month.
+
+HP3000
+
+   We are currently working on a raw datagram user interface.
+   The interface will be implemented with user intrinsics
+   similar to the TCP intrinsics previously implemented.  Once
+   the Interface has been implemented and tested, we will
+   build an Internet name server.  Watch this space next month
+   for an invitation to try our Internet name server.
+
+TAC
+
+   The first operational TAC in the Arpanet was installed at
+   CCA. After a few problems the first day, it now seems quite
+   stable. It has been up since November 24.
+
+SATNET
+
+   We installed a C/30 Satellite IMP at COMSAT Laboratories in
+   Clarksburg, Maryland, the first time ever that a C/30 has
+   served as a Satellite IMP in SATNET.  Connectivity between
+   Clarksburg and the other Satellite IMPs on SATNET through
+   the INTELSAT IV-A satellite remains untested, though, since
+   the COMSAT Unattended Earth Terminal is non-functional with
+   SATNET.  We have established the convention that C/30
+   Satellite IMP version numbers begin with a 4 instead of a
+   3, as shown in the MONITOR reports when typing ^P.
+
+GATEWAY
+
+   Development is continuing on the macro-11 gateways.  After
+   GGP routing has been fully debugged, the new gateway should
+   be ready for installation at the first site, the RCC
+   gateway.
+
+   The TIU and macro-11 gateway have been successfully tested
+   as hosts on a V2LNI ring net.  The TIU was able to pass
+   internet traffic through the V2LNI net to BBN-VAX on the
+   DIV-5 net via the macro-11 gateway.
+
+   The gateway VDH loader has become operational at NDRE.  The
+   only way to load the NDRE gateway is via SATNET using the
+   VDH loader.
+
+------------------------------
+
+From:   Charles Lynn
+Sender: WESTINE at USC-ISIF
+Subject: November Internet Report, BBN INFORMATION SCIENCES DIVISION
+
+Most of our efforts during November have been directed at
+TOPS-20 TCP/IP performance.  In our timing experiments, we are
+employing techniques such as PC sampling, control stack
+sampling, and packet tracing.
+
+PC-sampling of the TCP/IP process has produced discouragingly
+flat histograms;  the highest frequency was about six percent
+(checksumming).
+
+A control stack sampling facility was then developed to
+provide time breakdowns by logical function.  This reveals
+that most of the time is spent processing incoming packets.
+The data indicates several areas where further specific
+monitoring might be useful:  free storage management, buffer
+header usage (reuse vs allocating & deallocating both memory
+and locks each time), and improvements in the decision-making
+control structure for incoming packets, to be sure that the
+most common cases are examined earliest.
+
+Packet traces have revealed circumstances under which the TCP
+is forced to process unnecessary ACKs and retransmissions.
+For example, if the receiving user is using multiple buffers,
+extra ACKs are sent which show an (insignificantly) larger
+window before the transmitter has processed the previous ACK
+(of data).  If 3 buffers are being used, filling the first
+generates an ACK for the data and passes the buffer to the
+user (leaving a window of two buffers).  The user then
+processes the data and requests that the buffer be refilled
+(increasing the window to three buffers).  Another ACK for the
+old data with the increased window is sent to the transmitter
+which has to process an "extra" packet.
+
+In another situation, a receiver that sends an ACK before it
+has processed all of its received packets interacts adversely
+with the retransmitter, which does not retransmit a packet
+until the previous one has been ACKed.  If the transmitter is
+generating data faster than the net is processing it (or is
+PUSHing) there may be several packets in the retransmission
+queue.  When a packet is lost (but packets after it get
+through) a timeout will cause the packet to be retransmitted.
+Before the ACK for the retransmitted packet can arrive, the
+following packet may timeout (but is not retransmitted because
+the ACK for the prior has not yet arrived).  While the ACK for
+the lost packet is traveling to the sender, the receiver is
+processing the following packet which did get through.  When
+the sender gets the ACK, it then retransmits the (second)
+timedout packet.  Several unnecessary retransmissions may
+follow until the other end can catch up.
+
+We are also investigating another problem area that could add
+significantly to the cpu-utilization of the TCP/IP:  use of
+1822 interfaces that transfer all 36 bits of the PDP-10 word
+to/from the net, necessitating a (possibly) expensive
+bit-shuffle in behalf of the 8-bit-oriented TCP.  We are
+presently performing experiments to determine the precise
+cpu-cost of this bit-rearranging, and will publish the results
+when available.  If this cost proves significant AND
+replacement of the interface with an AN10/20 is not possible
+AND the interface can be modified to perform 32-bit transfers
+(true of both flavors of BBN 1822), we will provide the
+software modifications needed to converse with the modified
+interface.
+
+END OF TCP-IP DIGEST
+********************
+

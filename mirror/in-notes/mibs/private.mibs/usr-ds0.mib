@@ -1,0 +1,403 @@
+
+
+-- MIB File Generated on 14-Sep-1995 at 16:47:38
+
+DS0-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+   enterprises,
+   experimental,
+   IpAddress,
+   TimeTicks,
+   Gauge,
+   Counter
+      FROM RFC1155-SMI
+   DisplayString
+      FROM RFC1213-MIB
+   OBJECT-TYPE
+      FROM RFC-1212;
+
+
+-- This is the MIB module which contains NAS DS0 Objects.
+
+usr OBJECT IDENTIFIER ::= { enterprises 429 }
+
+nas OBJECT IDENTIFIER ::= { usr 1 }
+
+ds0 OBJECT IDENTIFIER ::= { nas 5 }
+
+ds0CfgTable OBJECT-TYPE
+SYNTAX SEQUENCE OF Ds0CfgEntry
+ACCESS not-accessible
+STATUS mandatory
+DESCRIPTION
+"A table of operator definable parameters for each DS0"
+::= { ds0 1 }
+
+ds0CfgEntry OBJECT-TYPE
+SYNTAX Ds0CfgEntry
+ACCESS not-accessible
+STATUS mandatory
+DESCRIPTION
+"There is one DS0 Configure entry for each DS0 timeslot in 
+the chassis"
+INDEX { ds0CfgDs1Index, ds0CfgDs0Index }
+::= { ds0CfgTable 1 }
+
+Ds0CfgEntry ::=
+SEQUENCE {
+ds0CfgDs1Index
+    INTEGER,
+ds0CfgDs0Index
+    INTEGER,
+ds0CfgDs0Id
+    DisplayString,
+ds0CfgType
+    INTEGER,
+ds0CfgTimeSlot
+    INTEGER,
+ds0CfgState
+    INTEGER
+}
+
+ds0CfgDs1Index OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+"The index value which uniquely identifies the CSU to which 
+this entry is applicable.  The value of ds0CfgDs1Index 
+matches the value of the index for the corresponding DS1 
+entity in the entity table of the chassis MIB."
+::= { ds0CfgEntry 1 }
+
+ds0CfgDs0Index OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+"The index value which uniquely identifies the timeslot of 
+the CSU to which this entry refers."
+::= { ds0CfgEntry 2 }
+
+ds0CfgDs0Id OBJECT-TYPE
+SYNTAX DisplayString (SIZE(0..40))
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"An operator definable string useful for easy identification 
+of a DS0 relative to the user application."
+::= { ds0CfgEntry 3 }
+
+ds0CfgType OBJECT-TYPE
+SYNTAX INTEGER{
+  tdm(1),
+  spanLine1(2),
+  spanLine2(3)
+}
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"Specifies the connection type for the particular 
+DS0-Default=TDM(1)."
+::= { ds0CfgEntry 4 }
+
+ds0CfgTimeSlot OBJECT-TYPE
+SYNTAX INTEGER (0..256)
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"The TDM time slot number used by the particular DS0."
+::= { ds0CfgEntry 5 }
+
+ds0CfgState OBJECT-TYPE
+SYNTAX INTEGER{
+  normal(1),
+  busyOut(2),
+  transparent(3),
+  fracUnused(4)
+}
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"Specifies the state of the particular DS0."
+::= { ds0CfgEntry 6 }
+
+ds0StatTable OBJECT-TYPE
+SYNTAX SEQUENCE OF Ds0StatEntry
+ACCESS not-accessible
+STATUS mandatory
+DESCRIPTION
+"USR's DS0 Status table contains various timeslot status 
+information."
+::= { ds0 2 }
+
+ds0StatEntry OBJECT-TYPE
+SYNTAX Ds0StatEntry
+ACCESS not-accessible
+STATUS mandatory
+DESCRIPTION
+"There is one entry in the DS0 Status table for each 
+timeslot in the chassis."
+INDEX { ds0StatDs1Index, ds0StatDs0Index }
+::= { ds0StatTable 1 }
+
+Ds0StatEntry ::=
+SEQUENCE {
+ds0StatDs1Index
+    INTEGER,
+ds0StatDs0Index
+    INTEGER,
+ds0StatDs0
+    INTEGER,
+ds0StatModem
+    INTEGER
+}
+
+ds0StatDs1Index OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+"The index value which uniquely identifies the CSU to which 
+this entry is applicable.  The value of ds0StatDs1Index 
+matches the value of the index for the coresponding DS1 
+entity in the entity table of the chassis MIB."
+::= { ds0StatEntry 1 }
+
+ds0StatDs0Index OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+"The index value which uniquely identifies the timeslot of 
+the CSU to which this entry refers.  The value of 
+ds0StatDs0Index matches the value of the index for the 
+corresponding DS0 entity in the entity table of the chassis 
+MIB."
+::= { ds0StatEntry 2 }
+
+ds0StatDs0 OBJECT-TYPE
+SYNTAX INTEGER{
+  other(1),
+  idle(2),
+  dialingIn(3),
+  dialingOut(4),
+  connectedIn(5),
+  connectedOut(6),
+  softBusyOut(7),
+  hardBusyOut(8),
+  autoBusyOut(9),
+  mdmBusyOut(10),
+  ignoringCalls(11),
+  mdmCallIgnore(12),
+  test(13),
+  alarm(14),
+  transparent(15),
+  unavailable(16),
+  transparentTest(17),
+  unused(18),
+  busyOut(19),
+  fracUnused(20),
+  passThru(21)
+}
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+"This object indicates the current status of the specified 
+timeslot.  The status values change dynamically with system 
+operation."
+::= { ds0StatEntry 3 }
+
+ds0StatModem OBJECT-TYPE
+SYNTAX INTEGER{
+  other(1),
+  unavailable(2),
+  available(3),
+  busyOut(4),
+  transparentTest(5),
+  unused(6),
+  transparent(7)
+}
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+"This object identifies whether the modem connected to the 
+specified timeslot is available or not.  A modem is 
+considered available if the Dual T1 Card identifies the 
+modem's presence on the TDM bus."
+::= { ds0StatEntry 4 }
+
+ds0CmdTable OBJECT-TYPE
+SYNTAX SEQUENCE OF Ds0CmdEntry
+ACCESS not-accessible
+STATUS mandatory
+DESCRIPTION
+"The DS0 Command table contains an entry for each of the 
+manageable timeslots in the chassis.  It provides a means 
+through which to take specific actions on one or more 
+timeslots in the chassis."
+::= { ds0 3 }
+
+ds0CmdEntry OBJECT-TYPE
+SYNTAX Ds0CmdEntry
+ACCESS not-accessible
+STATUS mandatory
+DESCRIPTION
+"There is one entry in the DS0 Command table per timeslot in 
+the chassis."
+INDEX { ds0CmdDs1Index, ds0CmdDs0Index }
+::= { ds0CmdTable 1 }
+
+Ds0CmdEntry ::=
+SEQUENCE {
+ds0CmdDs1Index
+    INTEGER,
+ds0CmdDs0Index
+    INTEGER,
+ds0CmdMgtStationId
+    OCTET STRING,
+ds0CmdReqId
+    INTEGER,
+ds0CmdFunction
+    INTEGER,
+ds0CmdForce
+    INTEGER,
+ds0CmdParam
+    OCTET STRING,
+ds0CmdResult
+    INTEGER,
+ds0CmdCode
+    INTEGER
+}
+
+ds0CmdDs1Index OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+"The index value which uniquely identifies the CSU to which 
+this entry is applicable.  The value of ds0CmdDs1Index 
+matches the value of the index for the corresponding DS1 
+entity in the entity table of the chassis MIB."
+::= { ds0CmdEntry 1 }
+
+ds0CmdDs0Index OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+"The index which uniquely identifies the timeslot of the 
+specified CSU to which this entry is applicable."
+::= { ds0CmdEntry 2 }
+
+ds0CmdMgtStationId OBJECT-TYPE
+SYNTAX OCTET STRING (SIZE(0..8))
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"This object is a generic read-write variable that a 
+Management Station (MS) can use to guarantee that the 
+results from a given command are the results of a command 
+issued by that specific MS.  Each MS must SET a unique 
+value to this object when doing commands and GET the value 
+of this object together with ds0CmdReqId and ds0CmdResult 
+to detect interference from other MSs."
+::= { ds0CmdEntry 3 }
+
+ds0CmdReqId OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+"This object contains the value of the request-id field in 
+the SNMP PDU which invoked the current or most recent 
+command on this DS0 entity.  If the request-id is unknown 
+or undefined, this object contains the zero value."
+::= { ds0CmdEntry 4 }
+
+ds0CmdFunction OBJECT-TYPE
+SYNTAX INTEGER{
+  noCommand(1),
+  hardBusyOut(2),
+  softBusyOut(3),
+  restore(4),
+  disconnect(5),
+  callIgnore(6),
+  transparentTest(7)
+}
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"This object contains a value that identifies the command 
+being requested."
+::= { ds0CmdEntry 5 }
+
+ds0CmdForce OBJECT-TYPE
+SYNTAX INTEGER{
+  force(1),
+  noForce(2)
+}
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"In some cases, the DS0 entity may be in a state such that 
+certain commands could adversely affect connections.  In 
+such cases, a command request with ds0CmdForce not defined, 
+or set to noForce will result in a warning.  If the 
+operator elects to ignore such warnings, ds0CmdForce can be 
+set to force in a re-issued request and the command will be 
+carried out regardless of its potentially hazzardous 
+effects."
+::= { ds0CmdEntry 6 }
+
+ds0CmdParam OBJECT-TYPE
+SYNTAX OCTET STRING (SIZE(0..24))
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"This object contains parameters that are specific to the 
+particular command being issued.  In some cases, there will 
+be no additional parameters required."
+::= { ds0CmdEntry 7 }
+
+ds0CmdResult OBJECT-TYPE
+SYNTAX INTEGER{
+  none(1),
+  success(2),
+  inProgress(3),
+  notSupported(4),
+  unAbleToRun(5),
+  aborted(6),
+  failed(7)
+}
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+"This object contains the result of the most recently 
+requested command, or the value none(1) if no commands have 
+been requested since the last reset."
+::= { ds0CmdEntry 8 }
+
+ds0CmdCode OBJECT-TYPE
+SYNTAX INTEGER{
+  noError(1),
+  unable(2),
+  unrecognizedCommand(6),
+  slotEmpty(8),
+  noResponse(12),
+  unsupportedCommand(20),
+  deviceDisabled(22),
+  pendingSoftwareDownload(73)
+}
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+"The value of this object upon command completion indicates 
+a further description of what went wrong if the command was 
+unsuccessful."
+::= { ds0CmdEntry 9 }
+
+END
+
+

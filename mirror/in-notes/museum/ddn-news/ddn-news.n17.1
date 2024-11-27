@@ -1,0 +1,122 @@
+ 2-Nov-82 10:22:11-PST,5557;000000000001
+Mail-from: ARPANET host SRI-NIC rcvd at 2-Nov-82 1019-PST
+Date:  2 Nov 1982 0212-PST
+From: FEINLER at SRI-NIC
+Subject: Network Newsletter No. 17
+To: ANEWS-DIST: ;
+
+=====================================================================
+ANEWS-17                                      NETWORK INFO CENTER for
+1 Nov 1982                                DCA DDN Program Mgmt Office
+                                                        (NIC@SRI-NIC)
+                                                       (415) 859-3695
+
+                  DoD NETWORK NEWSLETTER
+
+
+=====================================================================
+
+         TOPIC:  - More TCP/IP tests, Nov 15; Dec 13,14, 1982
+                 - Next Sponsor's Meeting, Dec. 2, 1982
+                 - SMTP implementations needed by Jan. 1983
+                 - TAC User Guide now available
+                 - AAAI Conf. - Call for papers
+
+---------------------------------------------------------------------
+
+ATTENTION - NETWIDE TCP EXPERIMENT - NOV 15, DEC 13 & 14, 1982
+
+On November 15, December 13, and December 14, 1982, for a 24-hour period
+each day (00:01 to 24:00 EST), a TCP-only experiment will be conducted 
+on the ARPANET.  During this period, the ARPANET IMPS will be disabled 
+from sending NCP Host-to-Host traffic, and network traffic measurements 
+will be taken.
+
+The method that will be used to disable the NCP trafic will be for the 
+IMPS to reject any messages submitted by the hosts that use link 0 
+(i.e., that have bits 65-72 in the 1822 leader set to zero).  If an IMP 
+receives such a message, it will respond to the host with a type 7 
+(destination host or IMP dead) subtype 3 (communication with the 
+destination host is administratively prohibited) message (see BBN Report
+1822, page 3-30).  This response is consistent with the IMP's present 
+behavior, and this is similar to the method that was used when short 
+leaders were removed from the network.
+
+During the test, hosts that are running NCP and TCP in parallel with 
+shared remote host state tables may encounter some problems unless their
+NCP is turned off for the duration.  Several TOPS-20 TCP implementations
+fall into this category, and other hosts may as well.  TCP-only hosts 
+should encounter no difficulties, and NCP-only hosts will be unable to 
+use the network.
+
+It is important to note that this method of disabling NCP traffic will 
+be used once the network pases the TCP-only date next year (1 Jan 83), 
+so your host software should (if it cannot now) be able to correctly 
+recognize and handle type 7, subtype 3 messages from the IMP.
+
+Any technical questions concerning the test may be direct to Andrew 
+Malis (Malisatbbn-unix), (617) 497-3419.  Any administrative questions 
+should be directed to DCA Code B645 (formerly Code 252) 
+(DCACODE252ATUSC-ISI).
+
+Regards,
+Jack Snively
+DCA Code B645
+ARPANET MANAGEMENT
+TELEPHONE: (202) 692-6175/6176 or
+(AV) 222-6175/6176.
+
+SPONSORS MEETING TO BE HELD DEC. 2, 1983
+
+The Sponsors Meeting will be held on Dec. 2, 1983 in Washington, D.C.  
+Time and place to be announced in a future message.
+
+We anticipate spending some time at the meeting on the subject of the 
+DDN, particularly as it affects the ARPANET and the Sponsors.  We would 
+also like to include other imporatant topics, time permitting.  
+Suggested topics for discussion, along with their relative importance, 
+who should present them, and about how much time is required should be 
+sent to us here at DCA (GPARK@BBNC).  The agenda will be prepared from 
+these suggestions.  We may not be able to cover everything, but will try
+to include the things which you consider most important.
+
+Regards,
+
+Glynn Parker
+DCA Code B627
+
+2ND REMINDER - SMTP MUST BE IMPLEMENTED BY 1 JAN 1983
+
+SMTP will become the official network mail protocol.  All hosts with 
+mail service should plan on implementing SMTP by 1 Jan. 1983 for sending
+and receiving network mail.  SMTP is completely separate from FTP, and 
+is handled by a distinct server.  This is different in detail from the 
+current mail-handling procedures.  Questions about implementation of the
+mail protocol should be addressed to Jon Postel (POSTEL@ISIF).
+
+In addition, all hosts must be able to understand the 4-octet host 
+addressing scheme outlined in RFC-796 and RFC-810.
+
+TAC USER GUIDE ONLINE AT THE NIC
+
+Robin Clifford of BBN has just published a revised TAC User Guide (BBN 
+Rept. 4780, Oct. 1982).  Contact your local TAC Liaison first for 
+hardcopies.  If the TAC Liaison is out of copies, contact Judy Gordon at
+BBN (jgordon@bbn-unix) on the East Coast and NIC@SRI-NIC on the West 
+coast for hardcopies.  The User Guide is also online on SRI-NIC 
+(10.0.0.73) in the file <NETINFO>TAC-USER-GUIDE.DOC.  It can be FTPed to
+your local host using username=anonymous, pw=guest.
+
+AAAI CALL FOR PAPERS
+
+The 3rd National Conference on Artificial Intelligence will be held in 
+Washington, D.C., Aug. 22-26, 1983 at the Washington Hilton.  Authors 
+are invited to submit short papers on original research covering any 
+aspect of artificial intelligence.  Submit papers to:  American 
+Association for Artificial Intelligence, 445 Burgess Drive, Menlo Park, 
+Ca 94025, (415) 328-3123, AAAI-OFFICE@SUMEX-AIM.  Program Chairman is 
+Michael R. Genesereth, Computer Science Dept., Stanford University, 
+Stanford, CA, (415) 497-0324, CSD.Genesereth@SU-SCORE.  Watch your 
+electronic bulletin board for further details.
+
+-------

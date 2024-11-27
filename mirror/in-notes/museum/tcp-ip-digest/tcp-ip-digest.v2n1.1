@@ -1,0 +1,441 @@
+26-Feb-83 06:00:24-PST,16211;000000000001
+Return-path: <tcp-ip@brl-bmd.arpa>
+Mail-From: SMTP created at 26-Feb-83 05:57:03
+Received: FROM BRL-BMD BY USC-ISIF.ARPA WITH TCP ; 26 Feb 83 05:57:10 PST
+Sender:    Mike Muuss <TCP-IP@Brl.ARPA>
+From:      TCP-IP@Brl.ARPA
+To:        TCP-IP@Brl.ARPA
+Date:      26 Feb 1983
+Subject:   TCP-IP Digest, Vol 2 #1
+Received: From brl-gateway.ARPA via smtptcp;  26 Feb 83 5:12 EST
+
+TCP/IP Digest           Saturday, 26 Feb 1983      Volume 2 : Issue 1
+
+Today's Topics:
+                 Administrivia -- Mail Programs for UNIX
+               MOS Driver for Interlan? -- "C" for TCP/IP?
+          Mail in FTP discontinued -- LH/DH-11 Driver for 3Com?
+                    SMTP Specification Clarification
+          Gateway Table Availible -- Common SMTP Mail Problems
+               InterNet Software for PDP-11 UNIX Availible
+                           TCP/IP above X.25?
+----------------------------------------------------------------------
+                  TCP/IP Digest --- The InterNet Digest
+                         LIMITED DISTRIBUTION
+          For Research Use Only --- Not for Public Distribution
+----------------------------------------------------------------------
+
+From:    Mike Muuss <Mike@BRL>
+Subject: Administrivia
+
+While BRL's hosts started passing TCP traffic about 6-Jan, we were not
+able to overcome all our mail difficulties until just recently, so
+there have been no TCP Digest transmissions since 17-Dec-82.
+At this time, it should be "business as normal" once again.
+
+Remember, please address all submissions to the digest to
+	TCP-IP at BRL
+and administrative correspondence (addition, deletion, meta-chatter, ...) to
+	TCP-IP-REQUEST at BRL
+
+Since the big NCP to TCP conversion is (mostly) behind us now, I think that
+the topic of the digest should broaden to
+
+	"Inter-Net Networking -- Design and Implimentation Issues",
+
+or thereabouts.
+	Happy New Year!
+		-Mike
+
+------------------------------
+
+Date:     19 Dec 82 02:06:42 EST  (Sun)
+From:     Chris Torek <chris.umcp-cs@Udel-Relay>
+Subject:  Re:  Mail Programs for UNIX ??
+To:       NADC at Usc-Eclb, TCP-IP at BRL, POSTEL at Usc-Isif
+
+	From: NADC at Usc-Eclb
+	Subject: Mail Programs for UNIX ??
+
+	... What are other sites with this environment (VAX, UNIX4.1
+	bsd, and BBN's TCP/IP) using?  And what is a source for
+	information on the programs?
+
+We are currently running MMDF and are not yet on the net, but have
+looked into this.  The next release of MMDF will have an Arpa channel
+(an MMDF "channel" is a program that knows how to talk to a particular
+mailer -- an elegant solution to the multiple-mail-format problem, if
+you ask me).  We were supposed to have received a version of this
+sometime this week, I think (hello, Dave Farber?) but haven't yet.  As
+soon as we do I plan to hack at it so that it works "right".  I'll let
+you know if we get something working.
+
+------------------------------
+
+Return-Path: <DClark@MIT-MULTICS.ARPA>
+Date:  20 December 1982 11:26 est
+From:  DClark.INP at Mit-Multics
+Subject:  Merle:
+To:  neer at Usc-Eclb
+cc:  tcp-ip at BRL
+
+     We currently run MOS for our local net gateway. We expect to do an
+Interlan driver during January, unless we hear of one already done. If
+you can wait that long, you are welcome.
+     We have a non-kernel tcp for Unix written in C. That could be move
+to a 68000, using the 68000 C compiler. The amount of work would depend
+on what operating system you were going to run. If you wait somewhat
+longer, we will do that too. I cannot predict the time, though.
+     Dave Clark
+
+
+------------------------------
+
+Date: 20 Dec 1982 1651-EST
+From: Chris Ryland <CPR@Mit-Xx>
+Subject: lightweight C version of TCP/IP
+To: tcp-ip at BRL
+
+I'm looking for a smallish C version of TCP/IP (for the 68000).
+Any leads to same appreciated.
+
+------------------------------
+
+Date: 20 Dec 1982 1548-PST
+From: POSTEL at Usc-Isif
+Subject: Mail in FTP discontinued under TCP
+To:   TCP-IP at BRL
+
+Please note that even though the MAIL commands appear in the current
+document for FTP on TCP (RFC 765) they are not to be used.  In the
+future all mail is to use the SMTP procedures documented in RFC 821.
+
+--jon.
+
+------------------------------
+
+Date: Tue, 21 Dec 1982 1629-EST
+From: Graham Campbell <gc@Bnl>
+To: tcp-ip at BRL
+Subject: 3Com TCP/IP
+
+Does anyone have the interface code for the 3Com implementation to run
+an ACC LHDH-11? (We are running Unix v7, but anything would help)
+
+------------------------------
+
+Date: 27 Dec 1982 1612-PST
+From: POSTEL at Usc-Isif
+Subject: SMTP Problem
+To:   tcp-ip at BRL
+
+Hi:
+
+There is a minor problem with many SMTP implementations due to a minor
+difference between the old specification (RFC-788) and the current
+specification (RFC-821).
+
+The difference is in the details of the reverse-path of the FROM argument
+of the MAIL command.  In 788 the separator between all of the path elements
+was comma, in 821 the last separator is a colon.  For example, in 788 one
+could have
+      MAIL FROM:<@FOO,@BAR,JOE@HOST>
+but in 821 this must be
+      MAIL FROM:<@FOO,@BAR:JOE@HOST>
+
+Certainly an obscure minor detail, but exactly the kind that computers are
+good at checking.  People that have programs built to RFC-788 should change
+them soon so they can talk to new programs built to the current specification.
+
+This difference also ocurrs in the forward-path argument of the RCPT command.
+
+--jon.
+
+------------------------------
+
+Return-path: ROODE@SRI-NIC
+Date:  5 Jan 1983 2340-PST
+From: ROODE at SRI-NIC (David Roode)
+Subject: obtaining gateway table
+To: tcp-ip@BRL
+Location:  EJ296    Phone: (415) 859-2774
+
+With the cutover to TCP/IP on January 1, many more hosts now have
+Internet capability.  Besides the entries always present in the
+ARPAnet host table, you now will have use for Internet Gateway
+entries.  These are included as part of the standardized DoD Internet
+Host Table originally described in RFC 810, dated 1 March 1982.
+You may wish to utilize the NIC Hostnames Server (RFC 811) to obtain
+updated copies of the complete table.  You can do this by
+TCP telneting to the NIC on the Hostname Server port (101 decimal),
+and entering a command line containing one of the following keys:
+
+	HNAME <name>	    --search for name
+	HADDR <addr>	    --search for address
+	ALL		    --dump entire table
+
+	  (all of the above display entries in the standard format)
+
+	ALL-INGWAY	    --dump TENEX/TOPS-20 gateway file
+	ALL-HSTNAM	    --dump TENEX/TOPS-20 gateway file
+
+<name> is a name or nicname
+<addr> is a dotted Internet address (RFC 796), for example 10.0.0.73,
+	composed of the four octets of the full 32 bit Internet address,
+        each expressed in decimal
+
+The command line is terminated by carriage return.
+
+[ Hosts are strongly encouraged to reload their host tables frequently.
+  Either when booting the system, or at certain times during the week
+  seems to be the best approach.  -Mike ]
+
+------------------------------
+
+Date: 17 Jan 1983 2255-PST
+From: POSTEL@Usc-Isif.arpa
+Subject: Common Mail Problems
+To:   mike@Brl.arpa
+
+You might consider this for the TCP-IP-DIGEST.
+--jon.
+
+Date: 17 Jan 1983 2218-PST
+From: MOCKAPETRIS at USC-ISIF
+Subject: common SMTP problems
+
+In an effort to help mail implementers identify mail problems more
+rapidly, we have created a list of problems we have encountered,
+in the hope that others may not have to find them the same way we did.
+The file will be kept in ISIF<SMTP>mail.errors, and we encourage any
+contributions.  It at least shows you some of the armor plating you
+need on your mailer.
+
+We have also set up a list of SMTP people in ISIF:<SMTP>SMTP.PEOPLE
+which has contacts for those installations we know of.  
+
+Both files are ANONYMOUS accessible.
+
+***** Accepting paths *****
+
+	Some mailers do not accept SMTP paths.  In general,
+an SMTP receiver should always accept a path in the FROM specifiaction,
+even if it cannot relay mail, and hence can't accept paths in a TO
+specification.
+
+***** "," vs ":", bad syntax errors *****
+
+	During August 1982, the SMTP specification for
+paths was changed.  In the old specification, SMTP paths were specified
+using only commas.  For example:
+	MAIL FROM:<@ISID,MOCKAPETRIS@ISIF>
+	RCPT TO:<@ISIA,@ISIB,SMTP@ISID>
+whereas the new specification changes the last ",", if any, to a
+colon:
+	MAIL FROM:<@ISID:MOCKAPETRIS@ISIF>
+	RCPT TO:<@ISIA,@ISIB:SMTP@ISID>
+
+	Various mailers will accept only one or the other form, leading to 
+(typically) syntax errors.  The recommended approach to this
+problem is to accept both forms, and to generate ":" form addresses.
+More clever mailers will try the other form when one fails, and will
+avoid path creation when not necessary.  That is send
+	MAIL FROM:<MOCKAPETRIS@ISIF>
+rather than
+	MAIL FROM:<@ISIF,MOCKAPETRIS@ISIF>
+or
+	MAIL FROM:<@ISIF:MOCKAPETRIS@ISIF>
+where possible.
+
+***** various marginal addresses *****
+
+We have seen several instances of mail transfers with commands
+like:
+	RCPT to:<mockapetris>
+rather than :
+	RCPT to:<mockapetris@isif>
+
+We recommend that if your mailer accepts this sort of thing, it
+should rewrite the address before forwarding.  I.E. Its OK to
+accept technically bad addresses, but you should not output them.
+
+***** TCP PSH bit = timeouts *****
+
+When sending SMTP data via TCP, the PSH bit should be set on the
+last character of each command/response/DATA text.  The PSH bit forces
+the data through to the receiving SMTP.  This is absolutely necessary
+when talking to TOPS-20 SMTPs.
+
+If PSH isn't set, TCP is free to buffer that data in either the sending
+or receiving host without passing it to the SMTP receiver.
+
+***** UNIX TCP BUG = duplicated mail, timeouts *****
+
+In at least old versions of the TCP code distributed by BBN, there
+is a bug that can cause buffered data to not be sent until more data
+is transmitted.  When used by SMTP, this typically causes the end of a DATA
+transaction to appear to hang.  When the sending SMTP times out, it sends
+a QUIT.  This QUIT forces out the buffered data, and causes the receiver to
+see the end of the DATA commmand.  Thus the sender thinks the transaction has
+failed (it timed out), and the receiver thinks that the transaction has
+succeeded.  Later, the sender retransmits the whole message,
+leading to duplications.
+
+The fix is below:
+
+In tcp-states.c, procedure sss_snd, under the comment "find end of send buffer
+and append data", a while clause reading:
+
+	while (m->m_next != NULL) {
+		m = m->m_next;
+		last +=m->m_len;
+	}
+is in error.  The fix is to reverse the two statements in the clause.
+As it is it counts the last buffer twice and the first buffer not at all.
+With the fix, each buffer is counted once.
+
+***** CRLF at end of message *****
+
+There is a bug in many versions of XMAILR that will garbage the MAIL.TXT
+file if asked to store a message that does not end in CRLF.  The ISI
+SMTP adds an extra CRLF to all messages as a temporary cludge to
+avoid this problem.
+
+***** CRLF and UNIX systems *****
+
+Some UNIXes send mail that if full of LFs rather than CRLFs.  This can
+cause problems in mail reading programs such as MSG, which can type
+the mail but not locate header fields.
+
+***** Null FROM fields *****
+
+The SMTP specification allows the FROM field to be null.  Some mailers
+don't accept null fields, and others add hops to a null FROM field
+when forwarding mail.
+
+***** Domain names ******
+
+There is a great deal of disagrement regarding doamin names in host
+identifiers.  The only widely acceptable domain names are X.ARPA
+for X, where X is a valid Internet (i.e. host table from NIC) host name.
+This will undoubtedly change as domain naming is standardized.
+
+***** HELO command *****
+
+Many mailers demand a HELO command before they will accept mail.  Its
+best to give one before attempting to transmit.
+
+***** QUIT command *****
+
+Several mailers simply hang up rather than sending QUITs, particularly
+after errors.  The QUIT command, followed by a TCP close, is recommended.
+
+***** TCP close ******
+
+SMTP connections are supposed to be closed rather than aborted.  Several
+mailers don't do this, probably because TCP close can take a long
+time, i.e. 30 seconds.
+
+***** RCPT command responses in UNIX SMTP *****
+
+Some versions of SMTP derived from the BBN code don't look at
+the response to RCPT commands.
+
+***** Multi-line responses *****
+
+The SMTP protocol defines a method for giving multi-line response codes.
+Many mailers generate multi-line responses; some even use them in the
+message sent on initial connect.  
+
+Unfortunately, some mailers don't understand multi-line responses.
+We have seen UNIX mailers that take each line of a multi-line response
+as a separate response.  Thus, for example, they take a 3 line
+initial connect message and interpret it as the initial connect
+message and positive responses to the first two commands sent, and 
+stay two commands out of phase in matching up commands and responses.
+This leads to interesting behavior.
+
+We have also observed the reverse problem.  Some mailers send
+multi-line responses without the "-" which would identify the response
+as being multi-line.
+
+***** sndmsg balks *****
+
+Some versions of SMTP derived from the BBN SMTP seem to occasionally
+send SMTP responses without numeric codes.  The message typically contains
+text "sndmsg balks ...".  Other messages without codes are also seen.
+
+***** TELNET protocol in SMTP transactions *****
+
+The SMTP connection is not supposed to do TELNET negotiations, etc.
+The control codes used can make otherwise understandable transmissions
+unintelligible to SMTPs that don't implement TELNET codes.  TELNET codes
+should not be supported because they would destroy the ability
+of the SMTP protocol to send arbitrary octets in the message body.
+Admittedly this is not a real issue for DEC-10s and 20s, but could
+prevent future use of mail to send arbitrary text.
+
+***** \ and " in addresses ******
+
+The use of the \ and " in addresses should be avoided when not necessary
+because many mailers don't as yet do the right thing; those mailers
+should be fixed.
+
+------------------------------
+
+Date: 26 Jan 1983 1028-EST (Wednesday)
+From: martin@Mit-Csr.arpa
+Subject: Internet Software for Unix
+To: TCP-IP@Brl.arpa
+
+This is probably an appropriate forum to mention
+the existence of some internet software which is
+running on our PDP 11/45 version 6 (with local mods)
+UNIX.
+
+In the kernel we have modules to drive a "Pronet"
+device (10 Mb/s token-passing ringnet), to transmit
+and receive internet packets, to demultiplex incoming
+TCP and UDP packets, to reassemble internet fragments,
+and to maintain a cache of internet hosts and their best
+first hop gateways.  Kernel code and data use from 9k
+to 10.5k bytes depending on the size of the receive packets
+buffer.
+
+Outside the kernel we have: TCP, user and server telnet,
+SMTP, ICMP, and TFTP.  All are running but are in varying
+stages of development.
+
+We are willing to give this software to anyone who wants
+it, has a Unix source license, and will agree to a few constraints.  
+We should point out that it would be difficult for someone who is 
+not a Unix wizard to install this code.  To find out more about the 
+software send mail to martin@mit-csr or to lwa@mit-csr.
+
+		Liza Martin
+		Larry Allen
+
+------------------------------
+
+Date: Fri 7 Jan 83 03:41:54-EST
+From: Marc Shapiro <Shapiro@MIT-XX.ARPA>
+Subject: Request for info
+To: tcp-ip@BRL.ARPA, protocols@MIT-MC.ARPA, human-nets@RUTGERS.ARPA
+
+I need info on the following topics:
+
+* Are there any implementations of either TCP/IP or TCP alone *above* X.25
+  for DEC-20 and/or Vax/unix
+
+* all possible info on    Ethernet/X.25 gateways, supported protocols
+  and what they are worth.
+
+Thanks.  Please reply directly to SHAPIRO@MIT-XX.
+
+[ Replies might as well include the digest too.  -Mike ]
+
+------------------------------
+
+END OF TCP-IP DIGEST
+********************
+

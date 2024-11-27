@@ -1,0 +1,680 @@
+23-Sep-83 13:37:24-PDT,31099;000000000001   
+Return-Path: <tcp-ip@brl-vgr>
+Received: FROM BRL-VGR BY USC-ISIF.ARPA WITH TCP ; 22 Sep 83 13:27:30 PDT
+Received: From Brl-Vgr.ARPA by BRL-VGR via smtp;  22 Sep 83 8:43 EDT
+Sender:    Mike Muuss <TCP-IP@brl>
+From:      TCP-IP@brl
+To:        TCP-IP@brl
+Date:      22 Sep 1983 00:00 EST
+Subject:   TCP-IP Digest, Vol 2 #17
+
+TCP/IP Digest          Thursday, 22 Sept 1983      Volume 2 : Issue 17
+
+Today's Topics:
+                    IP on Ethernets with 4.2 BSD UNIX
+                              XNS for UNIX?
+                  MIT TCP/IP for IBM Peronal Computers
+               Lengthy discussion of Pinging and Gateways
+----------------------------------------------------------------------
+                  TCP/IP Digest --- The InterNet Digest
+                         LIMITED DISTRIBUTION
+          For Research Use Only --- Not for Public Distribution
+----------------------------------------------------------------------
+
+Date: 13 Sep 1983 09:37:58 PDT
+From: POSTEL@usc-isif
+Subject: IP on Ethernets & Berkeley Hacks
+To:   tcp-ip-digest@brl
+
+From: karels%ucbarpa@Berkeley (Mike Karels)
+Date: 13 Sep 1983 0926-PDT (Tuesday)
+To: POSTEL@USC-ISIF
+Cc: mosher@Berkeley
+Subject: Re: Special Hacks vs. Standard Hosts
+
+It is now very easy to turn off both trailer protocols and address resolution
+protocol.  The ifconfig program, run at boot time to set the local network
+address, allows those options to be set or cleared.  It is possible to
+use both ARP and the "old" address mapping dependent on the address range,
+but this does require changing the value of a global variable to specify
+the boundary between them.  Also, as part of the ARP implementation,
+there is a way of asking about the ability to do trailer encapsulation,
+and thus ARP hosts that do not do trailers should be handled transparently.
+Given that it is so easy to disable trailers, I don't think there should
+be any concern about compatibility.  I will be adding a section on this
+to the installation and operation manual.
+
+		Mike
+
+------------------------------
+
+Date:           Fri, 16 Sep 83 14:33:55 PDT
+From:           Rich Wales <v.wales@ucla-locus>
+To:             TCP-IP@brl
+Subject:        XNS for UNIX?
+
+Does anyone know of implementations of the Xerox Network Systems (XNS)
+protocols under 4.1BSD UNIX?
+
+I have had a couple of people tell me about a company called Network
+Research Corporation in Los Angeles which supposedly has an XNS imple-
+mentation, but I would like to know if there are any others available.
+
+-- Rich Wales <wales@UCLA-LOCUS>
+
+------------------------------
+
+Date: 21 Sep 1983 20:19:11-PDT
+From: John L. Romkey <romkey%MIT-BORAX@mit-multics>
+To: TCP-IP@brl
+Subject: MIT TCP/IP for IBM PC's
+
+I have been working for about one and a half years on MIT's TCP/IP for the
+PC (with the 3COM ethernet interface). The programs work, but we're not set
+up to distribute them. We started work on them as a research project, but
+there is a lot of demand for this type of program. Unfortunately, we're not
+set up to distribute and maintain the programs for a large number of users.
+We are currently trying to arrange for the code to be both available and
+supported. As soon as we make any progress in this area, we'll make an
+announcement here.
+
+Please don't deluge me with requests for the programs or the sources. If you
+really MUST have a copy, contact Jerry Saltzer (Saltzer@Mit-Multics). I can
+answer technical questions about the programs, though.
+                                                            - John Romkey
+                                                              romkey@mit-borax
+
+------------------------------
+
+Date: 13 Sep 1983 10:21:59 PDT
+From: POSTEL@usc-isif
+Subject: Official Policy or Buggy Procedure ?
+To:   TCP-ip@sri-nic
+
+Folks:
+
+The tone of many of the recent messages on gateway routing, pinging,
+table updates, etc. seems to take on the feel that certain things have
+been done according to a mysterious official policy determined by the
+nameless them.
+
+It is much more likely that there are bugs in the procedures, that
+information that should have been communicated wasn't, or that someone
+forgot to do something.
+
+For example, there is this discussion on the importance of pinging dumb
+gateways.  One part of the discussion is concered with the fact that for
+a time one dumb gateway was not in the set that the prime gateways know
+about.  Part of the discussion is based on the assumption that this will
+often be the case and therefore hosts have to keep all dumb gateways in
+there tables (and possibly ping them).
+
+I think it is more likely that the gateway in question was left out due
+to a error or noncommunication.  I think it is a bug in procedures that
+should be fixed once, rather that having many hosts do resource
+consuming things all the time.
+
+--jon.
+
+------------------------------
+
+Date: 12 Sep 1983 18:45:35 PDT
+From: POSTEL@usc-isif
+Subject: Some Comments on Gateways & Procedures
+To:   tcp-ip@sri-nic
+
+There are currently several types of gateways:
+
+   PRIME - these talk to each other and maintain dynamic routing 
+   information and have some information about some non-prime gateways.
+
+      These are the best gateways to use.  Just about all the gateways 
+      between long haul networks (ARPANET, MILNET, SATNET) are prime 
+      gateways.
+
+   DUMB - these don't do the dynamic routing stuff, so have static 
+   routing tables (but maybe not complete tables), but do answer pings.
+
+      These are usually gateways between a long haul network and a 
+      "stub". A stub is a dead end, typically a single local net.  
+      Usually there is no alternate gateway.
+
+   ALWAYS-UP - these don't do dynamic routing and these don't answer 
+   pings.
+
+      Like the dumb gateways only dumber, and usually used in the same 
+      way - for connecting stubs.  At least one is not tempted to ping 
+      these.
+
+The PRIME gateways use a Gateway to Gateway Protocol (GGP) to exchange 
+routing information.  The GGP procedures will not be satisfactory for 
+large internets.  In fact, the current number of assigned networks is 
+close to the limits of GGP's capabilities.
+
+Because the number of gateways known to the PRIME gateways impacts the 
+performance of the GGP there is a motivation not to include gateways 
+until they are actually ready to pass data traffic.
+
+   Currently, the procedure for making sure a gateway is known to the 
+   PRIME gateways is for the responsible person for the gateway to send 
+   a computer mail message to "gateway@bbn-unix".
+
+Changes Are Planned:
+
+Some time in the next few months a specification for the Exterior 
+Gateway Protocol (EGP) will be finalized.  Once this is done a schedule 
+will be established for conversion of all gateways to this protocol.
+
+This will mean that all gateways will have a level of knowledge about 
+that of the current PRIME gateways.
+
+--jon.
+
+------------------------------
+
+Date: Mon 12 Sep 83 22:17:34-PDT
+From: Mark Crispin <MRC@SU-SCORE.ARPA>
+Subject: pinging on ARPANET
+To: TCP-IP@SRI-NIC.ARPA
+Postal-Address: 725 Mariposa Ave. #103; Mountain View, CA 94041
+Phone: (415) 497-1407 (Stanford); (415) 968-1052 (residence)
+
+     Yes, it is true that in 1822 type networks the network tells the
+host about undelivered messages, so nominally there is no need to ping
+on those networks.  The problem is that many implementations of TCP,
+including the TOPS-20 and Tenex one, ignore the 1822 level information
+at TCP level!  As of this writing, the code to collect 1822 information
+doesn't even work in the DEC kernal!
+
+     I fixed those bugs for the Stanford TOPS-20's, but I still haven't
+come up with a good way to make the IP or TCP levels use it.  A good
+deal of effort is taken to insulate the IP and TCP levels from 1822, with
+some justification.  To do it right would require some redesign to allow
+a transmission level to communicate network/gateway/host accessibility
+instead of concluding the other end isn't there by not getting any answer.
+
+     As of right now, the 1822 information is useless on just about all
+TOPS-20's but Stanford, where it's collected enough so that the Telnet
+program can report a host's Type 6 status if it is down...
+
+------------------------------
+
+Date: Mon 12 Sep 83 22:36:24-PDT
+From: David Roode <ROODE@sri-nic>
+Subject: Only PRIME gateways should ping DUMB gateways
+To: tcp-ip@sri-nic
+Location:  EJ286    Phone: (415) 859-2774
+
+I ask the question: if you list no DUMB gateways, nor ALWAYS-UP gateways,
+would not a normal interaction with a PRIME gateway determine
+the proper DUMB gateway, even if there were two alternate routes
+to the same place and the first potential gateway were dead?
+
+Are you not then causing your own problems when you list
+such gateways, if your software will not robustly pass on to the next
+one when the first is down, when you have the alternative
+of not listing any at all and achieving correct behavior by depending
+on a Prime Gateway?
+
+Could we at least be informed of the DUMB gateways known to the
+PRIME gateways, so that we can leave such DUMB gateways out of
+our tables and win?  If the PRIME gateways knew all the DUMB
+gateways in the current NIC host table, that would fill the bill.
+Isn't this already nearly enough the truth to be assumed operant?
+
+And furthermore, doesn't the Prime gateway when-to-ping algorithm
+solve the problem of pinging too often, even if TOPS-20's IP
+does not, making a good workaround for TOPS-20 sites?  I.e.,
+not only can TOPS-20 IP's forego pinging DUMB gateways altogether,
+but even the resulting number of pingers ping sparingly.
+
+------------------------------
+
+Date: Mon 12 Sep 83 21:36:03-PDT
+From: Mark Crispin <MRC@SU-SCORE.ARPA>
+Subject: Pinging, etc.
+To: TCP-IP@SRI-NIC.ARPA
+Postal-Address: 725 Mariposa Ave. #103; Mountain View, CA 94041
+Phone: (415) 497-1407 (Stanford); (415) 968-1052 (residence)
+
+     Well, then.  We seem to have various needs at odds.  Some of us find
+ourselves quite distraught when our users scream at us for not being able
+to reach some network.  We find that the Prime gateways won't give us any
+info about that network.  We find that the gateway for that network is
+registered as "dumb".  In our never-ending attempt to follow The Official
+Word, we declare said gateways as Always-Up so we don't ping it.  But, if
+there is more than one eligible gateway and an Always-Up gateway is in
+fact down, we find ourselves equally unable to communicate as we futilly
+send messages to an unpinged dead gateway.
+
+     Confusion is rapidly replaced by disgruntlement, and finally by
+anger.  In spite of this some of us still try.  Score pings all the NIC
+registered dumb gateways and two prime gateways: its assigned Milnet
+gateway and another.  I don't think we're winning, but at least we may
+have a chance.  Many sites don't try at all and run the vanilla NIC
+gateway file.
+
+     Can you blame us?  We have received NO useful guidelines on how to
+configure one's gateway table.  We get told not to ping more than two
+prime gateways, but find we can't talk to a lot of places.  We get told
+to fix our kernals to not ping until that network is needed; a laudable
+idea, but many of us don't have the technical skills and those of us who
+do have other things to do.  After all, nobody is funding us to work on
+the TOPS-20 TCP kernal; BBN and DEC are.  I thought it was claimed that
+the TOPS-20 TCP was "done" over a year ago; maybe the Powers That Be want
+to revise that claim?
+
+     I claim that the NIC should provide an Officially Sanctioned gateway
+table, or set of tables, with sites assigned to such-and-such a table.
+Some effort should also be made to identify all the dumb and always-up
+gateways to the prime gateways, so that we don't find ourselves obliged
+to ping many gateways to ensure connectivity.
+
+------------------------------
+
+Date: 11 Sep 1983 19:25:15 PDT
+From: POSTEL@usc-isif
+Subject: Gateway Pinging
+To:   TCP-IP@sri-nic
+
+For the information of all, here is a recent measure of the ICMP 
+ECHO/ECHO-REPLY (PING) traffic between Hosts and Gateways.
+
+--jon.
+
+Date:  7 Sep 1983 15:41:26 EDT (Wednesday)
+From: Robin Clifford <clifford@BBN-UNIX>
+Subject: Gateway pinging
+
+By way of information, I have a recent copy of Steve Cohn's ping
+matrix.  It shows the message traffic between hosts and gateways.
+It was taken on 1 September.
+
+There has been a minor reduction in host pinging since the test
+was run on 7 July.  However, you'll see that a substantial number
+of hosts are still pinging to excess.
+
+Robin Clifford
+
+*****************************************************************************
+
+
+          G        S C D D E  D I C I I  B P B V C  B C R C B  M S W W
+          A        T M C C D  C S S S S  R U R A R  B 3 2 I B  I A A I
+          T        A U N E N  E I S I I  L R A N O  N P D T N  T C S S
+          E        N     C    C P   | |    D G   N  | 0 2   |      H C
+          W        F       U  P S   P G    U G   U  C   +   R       
+          A        O       N  S A   N W    E     S          C       
+          Y        R       I  A T   G                       C       
+                   D       X  T                                     
+          HOST:    1 2 3 1 3  5 3 2 1 3  3 2 0 3 1  3 1 3 1 3  0 3 3 0
+                                                                    
+          IMP:     1 1 1 2 2  2 2 2 2 2  2 3 3 4 4  4 5 5 5 7  7 8 9 9
+                   1 4 7 0 0  0 2 5 7 7  9 7 8 0 9  9 1 1 4 2  7 0 1 4
+                                                                    
+          HOST                                                      
+          -------------------------------------------------------------
+    SRI:  1/2        X X X      X X        X     X  X X X   X  X X   X
+          2/2                         X                     X
+    UTAH: 3/4      X X X X    X X X      X X X   X  X X X X X  X X X X
+    BBN:  0/5                                  X X          X
+          3/5                                  X X          X
+    STAN: 3/11           X
+    GUNTR:1/13     X   X X        X X X                     X      X
+    CMU:  3/14     X X X X      X X      X X X   X  X X X   X  X X   X
+    RADC: 3/18         X   X                 X X      X X   X  X X
+    ISI:  1/22           X            X
+          2/22           X            X 
+    USC:  0/23         X   X                 X X    X X X   X    X
+          1/23         X X      X          X X   X  X X X   X  X X   X
+          3/23         X X      X          X X   X  X X X   X  X X   X
+    ISI:  0/27           2            2      2
+    XEROX:0/32           7            7
+          3/32     X X   X    X X X   X  X X X   X  X X X X X  X X X X
+    TYMSH:*/43 no pinging
+    MIT:  0/44                    5   5                     5
+    BBN:  0/49                                 X X          X
+          3/49                                 X X          X
+    ISI:  1/52           X            X  
+          2/52 no traffic (host down ?)
+          3/52           X            X
+    CIT:  0/54     X   X X        X X X                     X      X
+    SUMEX:0/56           X            X
+    RUTGR:2/58     X X X X    X X X   X  X X X   X  X X X X X  X X X X
+    STLA: 0/61         X X      X          X X      X X X   X  X X   X
+    TEXAS:1/62           X            X
+    ANDRW:0/67         X   X                 X X      X X   X  X X
+    SRI:  0/73           X            X
+          2/73       X X X      X X        X     X  X X X   X  X X   X
+    DEC:  0/79 no traffic (host down ?)
+          1/79                                 X X          X
+    SANDI:0/87         X   X                 X X      X X   X  X X
+    NIH:  0/88     X   X X          X      X                X
+    COLUM:0/89         X X      X        X X X      X X X   X  X X   X
+    WASH: 0/91     X X X X        X   X  X X X   X  X X X X X  X X X X
+    TYMSH:*/93 no pinging
+                                                                    
+    This table shows the rate of message traffic between hosts and gateways.
+    The entries are based on measurements made 03:40-03:55 (EDT) on
+    1 September 1983.  (by S.Cohn)
+    
+    The key is as follows:
+      X indicates pinging at an interval between 37 and 60 seconds.
+      2,5,7 any numeral indicates a pinging interval of that many minutes.
+      [ ] a blank indicates that the host does not ping that gateway.
+
+------------------------------
+
+Date: 12 Sep 1983 16:32:41 PDT
+From: POSTEL@usc-isif
+Subject: On the Bad Effects of Pinging
+To:   tcp-ip@sri-nic
+
+The IMPs in the ARPANET do some resource reservation (between the source
+and destination IMPs) to support the super job they do of delivering 
+messages correctly, in order, etc.
+
+There is a limited ammount of this resource.  An IMP can have only a 
+limited number of reservations at a time.
+
+If a host tries to send messages to a lot of other hosts in rapid 
+succession, the IMPs have to do and undo their resource reservations 
+over and over.
+
+Sometimes it takes a while for the IMPs to complete the resource 
+reservations. When this happens the IMP may "block" the host.  This 
+prevents the host from sending any messages to any host for a while.
+
+If a host send messages to a set of 10 [*] or more other hosts in quick 
+succession, it virtually guarantees the host will get blocked for a 
+non-trivial time every time it does this.  If a host does this once a 
+minute it is virtually guaranteed that the host is geting very poor 
+utilization of the ARPANET for its data traffic.
+
+   [*] I don't know the actual number, but i am sure it is less than 10.
+
+It is important to note that a gateway is a host from the point of view 
+of the IMP, and the gateway is subject to the same blocking.  When a 
+gateway has to send ECHO-REPLIES to many hosts, it too is virtually 
+guaranteed to get poor utilization of the ARPANET for its data traffic.
+
+--jon.
+
+------------------------------
+
+Date: 12 Sep 1983 16:52:22 PDT
+From: POSTEL@usc-isif
+Subject: Some Ideas On a Reduced Level of Pinging
+To:   tcp-ip@sri-nic
+
+It is never useful to ping far away gateways.  Only consider pinging 
+gateways on your own networks (networks you are directly attached to).
+
+If background pinging is considered then the gateways to ping (if any) 
+differ for each host.
+
+   The "ping load" should be spread evenly across all gateways.
+
+   One should ping independenly operated gateways (e.g., on different 
+   powers systems).
+
+   One should ping topologically and geographically nearby gateways.
+
+There should be no background pinging.  Unless a gateway is "in use" 
+there is no need to know if it is up or down.  Only when there is 
+traffic to a gateway is there any need to consider pinging it.
+
+   In ARPANET type networks (e.g., ARPANET, MILNET, MINET) the network 
+   tells the host about undelivered messages, so there is no need to 
+   ping in these nets.
+
+   In other types of networks it may be useful to ping the "in use" 
+   gateways.
+
+--jon.
+
+------------------------------
+
+Date: 13 Sep 83 03:58:36 EDT
+From: Charles Hedrick <HEDRICK@RUTGERS.ARPA>
+Subject: Re: Only PRIME gateways should ping DUMB gateways
+To: ROODE@SRI-NIC.ARPA
+cc: tcp-ip@SRI-NIC.ARPA
+
+The problem with DUMB gateways having alternates is what happens if
+the one you choose goes down while you are using it.  Unless your
+monitor tells you when a packet is undeliverable, your connection
+will just hang.  The PRIME gateway only helps when you first make
+the connection.
+
+------------------------------
+
+Date: Tue 13 Sep 83 02:12:18-PDT
+From: Mathis@SRI-KL.ARPA
+Subject: Re: Pinging, etc.
+To: MRC@SU-SCORE.ARPA
+cc: TCP-IP@SRI-NIC.ARPA, Mathis@SRI-KL.ARPA, nic@SRI-NIC.ARPA
+
+   A simple change in the way the NIC handles the gateway table may result
+in a lot less pinging over the next few months until EGP gets implemented.
+But first some background from a different perspective.
+
+   There are 3 functional types of gateways: 
+	- PRIME gateways, 
+	- dumb or always-up gateways that are 1) the only path into a network
+       	  and 2) known to the prime gateways
+	- multiple dumb gateways into a network.
+
+   Of these three types, only 1 PRIME gateway ever needs to be pinged (at a
+slow interval, say every 120 secs although I don't want to start that argument 
+again).  Dumb gateways known to PRIMEs never need to be pinged (so what if 
+they are down, there is no other way).  Dual path dumb gateways need to be
+pinged (also at a slow interval).
+
+   The INTERNET.GATEWAY tables should be changed to have 2 types of entries:
+
+	- PRIME gateways, pick EXACTLY 1 to ping SLOWLY
+	- multiple-path dumb gateways 
+
+(or there could be 2 tables, PRIME and multiple-path DUMB).
+
+All dumb gateways known to PRIME gateways should be removed from the GATEWAY
+table and only be listed in the HOST table with a descriptor that it is really
+a gateway.  A host would not normally need to know about simple dumb gateways
+that are also known to the PRIMEs (if your host doesn't process REDIRECTS--go
+to your room without dinner).
+
+Individual hosts could filter their own table until the NIC gets around
+to a new table, except that most people don't know which dumb gateways are
+known to the PRIMEs.  To help get the information around, when a new gateway
+owner wants to register a gateway, the NIC should notify BBN about the new
+gateway.  The user, BBN and NIC should then decide if the PRIMES can know
+about the dumb gateway or if it is multiple path gateway that needs to go
+in the table to be pinged.
+
+------------------------------
+
+Date: 13 Sep 1983 17:28:08 EDT (Tuesday)
+From: Mike Brescia <brescia@bbn-unix>
+Subject: Core, GGP, and non-GGP gateways; a list
+To: tcp-ip@nic
+Cc: brescia@bbn-unix
+
+Following gateway lines are from [nic]<netinfo>hosts.txt.307.  I have
+prefixed the following codes on these lines to indicate some information
+used in the BBN gateways (sometimes called 'core gateways').
+
+I hope this will help table maintainers chose gateways for pinging, and
+prompt people to advise of gateways which should not be overlooked.
+
+I have made no attempt to define the meaning or use of the terms PRIME,
+DUMB, or ALWAYS-UP.  As far as I can tell from the listing, they have
+not been consistent.  There are PSAT 'gateways' which are shown as DUMB,
+and others as ALWAYS-UP.  There are PRIME systems listed which do not
+participate in GGP routing, do not forward packets, or do not issue ICMP
+redirect messages.
+
+Mike Brescia
+
+-- -- -- -- -- -- -- --
+
+BBN - gateway code supported by BBN.  There are 24 listed.
+
+GGP - exchange GGP routing info with some BBN gateways. There are 3.
+
+NR  - known to some BBN gateways as 'non-routing' (non-GGP) paths to
+    some net(s).  Note: these are NOT pinged.  There are 8 listed, and
+    in addition, there are NR gateways with addresses 10.0.0.25,
+    10.1.0.77, and 10.2.0.78.
+
+BBN GATEWAY : 1.0.0.11, 3.0.0.62 : BBN-PR-GATEWAY :: MOS : IP/GW,GW/PRIME :
+BBN GATEWAY : 4.0.0.38, 48.0.0.4, 50.0.0.4 : NTARE-GATEWAY,NTA-GATEWAY,NDRE
+BBN GATEWAY : 4.0.0.60, 32.3.0.42, 35.7.0.0, 128.16.0.0 : UCL-GATEWAY,GOONH
+BBN GATEWAY : 4.0.0.76 : DFVLR-GATEWAY : LSI-11/23 : MOS : IP/GW,GW/PRIME :
+    GATEWAY : 4.0.0.92 : FUCINO-IG : H-316 : SIMP : IP/GW :
+BBN GATEWAY : 8.3.0.14, 192.1.2.1 : BBN-FIBER-GATEWAY,BBN-FIBER,FIBER : LSI
+NR  GATEWAY : 10.3.0.2, 39.128.1.230 : SRINET-GATEWAY :: UNIX : IP/GW,GW/DU
+NR  GATEWAY : 10.0.0.4, 192.5.12.21 : UTAH-GATEWAY : VAX-11/750 : UNIX : IP
+    GATEWAY : 10.2.0.5, 3.2.0.5 : BBN-PTIP-GATEWAY,BBN-RCC : PLURIBUS :: IP
+BBN GATEWAY : 10.5.0.5, 26.2.0.49 : BBN-MILNET-GWY,MILBBN,BBN-MILNET-GW : L
+    GATEWAY : 10.3.0.10, 28.9.0.0 : LL-PSAT-IG,LL-11 ::: IP/GW,GW/DUMB :
+    GATEWAY : 10.5.0.10, 28.18.0.0, 28.19.0.0 : LL-GW : PDP-11/44 : EPOS : 
+NR  GATEWAY : 10.1.0.11, 36.40.0.62 : STANFORD-GATEWAY : LSI-11/23 : MOS : 
+NR  GATEWAY : 10.2.0.14, 128.2.254.36 : CMU-GATEWAY : PDP-11/40 :: IP/GW,GW
+GGP GATEWAY : 10.3.0.17, 128.4.0.1, 128.5.0.1, 128.8.0.1 : DCN-GATEWAY : LS
+BBN GATEWAY : 10.1.0.20, 128.19.0.2, 4.0.0.24 : DCEC-GATEWAY,EDN-GATEWAY : 
+    GATEWAY : 10.5.0.20, 28.10.0.0 : DCEC-PSAT-IG ::: IP/GW,GW/ALWAYS-UP :
+BBN GATEWAY : 10.7.0.20, 26.0.0.104 : DCEC-MILNET-GWY,MILDCEC,DCEC-MILNET-G
+BBN GATEWAY : 10.2.0.22, 26.0.0.103 : ISI-MILNET-GWY,MILISI,ISI-MILNET-GW :
+    GATEWAY : 10.3.0.22, 28.8.0.0 : ISI-PSAT-IG ::: IP/GW,GW/DUMB :
+BBN GATEWAY : 10.2.0.25, 4.0.0.61 : CSS-GATEWAY : PDP-11/40 : MOS : IP/GW,G
+BBN GATEWAY : 10.3.0.27, 128.9.0.81 : ISI-GATEWAY,ISI-GW : PDP-11/23 : MOS 
+BBN GATEWAY : 10.2.0.28, 26.0.0.106 : ARPA-MILNET-GWY,MILARPA,ARPA-MILNET-G
+BBN GATEWAY : 10.2.0.37, 128.10.0.3 : PURDUE-CS-GW : PDP-11/34 : MOS : IP/G
+BBN GATEWAY : 10.0.0.38, 9.0.0.11 : BRAGG-GWY1 : LSI-11/2 : MOS : IP/GW,GW/
+BBN GATEWAY : 10.3.0.38 : NET-5-GATEWAY : LSI-11/2 : MOS : IP :
+BBN GATEWAY : 10.1.0.49, 128.11.0.1, 192.1.2.3 : BBN-CGTWY,CGTWY,CRONUS : L
+    GATEWAY : 10.5.0.49, 4.0.0.30 : CLARKSBURG-IG : C/30 : SIMP : IP/GW,GW/
+BBN GATEWAY : 10.1.0.51, 128.21.0.11 : SRI-C3P0 : LSI-11/2 : MOS : IP/GW,GW
+    GATEWAY : 10.1.3.51, 28.11.0.0 : SRI-PSAT-IG ::: IP/GW,GW/ALWAYS-UP :
+BBN GATEWAY : 10.3.0.51, 45.0.0.11, 128.21.0.12 : SRI-R2D2 : LSI-11/2 : MOS
+BBN GATEWAY : 10.4.0.51, 26.2.0.73 : SRI-MILNET-GWY,MILSRI,SRI-MILNET-GW : 
+NR  GATEWAY : 10.1.0.54, 192.5.7.2 : CIT-CS-GW : VAX-11/780 : UNIX : IP/GW,
+BBN GATEWAY : 10.3.0.72, 8.3.0.8 : BBN-NET-GATEWAY,BBN-RCC-GATEWAY : LSI-11
+GGP GATEWAY : 10.0.0.77, 18.10.0.4 : MIT-GW,MIT-GATEWAY : PDP-11 : MOS : IP
+BBN GATEWAY : 10.2.0.80, 26.0.0.105 : SAC-MILNET-GWY,MILSAC,SAC-MILNET-GW :
+BBN GATEWAY : 10.3.0.80, 47.0.0.11 : SAC-GATEWAY,SAC-GW,SAC-GWY1 : PDP-11/2
+NR  GATEWAY : 10.3.0.91, 192.5.8.5 : UW-VLSI-GW : VAX-11/780 : UNIX : IP/GW
+BBN GATEWAY : 10.0.0.94, 192.5.2.6 : WISC-GATEWAY : PDP-11/34 : MOS : IP/GW
+    GATEWAY : 10.3.0.96, 192.5.36.5 : CORNELL-GW : VAX-11/780 : UNIX : IP/G
+BBN GATEWAY : 14.0.0.10 : BBN-VAN-GW ::::
+GGP GATEWAY : 25.6.0.0, 25.13.0.0, 35.6.0.0 : RSRE-GATEWAY :: EMMOS : IP/GW
+    GATEWAY : 26.1.0.18, 28.12.0.0 : RADC-PSAT-IG : PLURIBUS :: IP/GW,GW/AL
+    GATEWAY : 26.0.0.29, 192.5.22.2 : BRL-GATEWAY2 :: UNIX : IP/GW,GW/DUMB 
+NR  GATEWAY : 26.3.0.29, 192.5.21.5, 128.20.0.1, 192.5.25.2 : BRL-GATEWAY :
+NR  GATEWAY : 26.0.0.58, 192.5.15.129 : NYU-GW : VAX-11/780 : UNIX : IP/GW,
+    GATEWAY : 26.0.0.81, 192.5.27.0 : DTNSRDC-GW : VAX-11/750 : UNIX : IP/G
+    GATEWAY : 26.3.0.81, 192.5.26.0 : NSRDCOA-GW : VAX-11/750 : UNIX : IP/G
+    GATEWAY : 128.10.0.2, 14.0.0.1 : CSNET-PURDUE-GW : VAX-11/780 : UNIX : 
+
+[ Don't forget BRL-GATEWAY and BRL-GATEWAY2 !  -Mike ]
+
+------------------------------
+
+Date: Tue 13 Sep 83 12:47:03-PDT
+From: Mark Crispin <MRC@SU-SCORE.ARPA>
+Subject: Re: Only PRIME gateways should ping DUMB gateways
+To: ROODE@SRI-NIC.ARPA
+cc: tcp-ip@SRI-NIC.ARPA
+Postal-Address: 725 Mariposa Ave. #103; Mountain View, CA 94041
+Phone: (415) 497-1407 (Stanford); (415) 968-1052 (residence)
+
+Roode's statement that PRIME gateways should know about all DUMB
+gateways is laudable.  Many of us assumed it was reality.
+Unfortunately, it isn't.  Were it to become reality (and be guaranteed
+as such), it would make the pinging problem academic.  Every site could
+be given its officially assigned two PRIME gateways and that would be
+that.
+
+------------------------------
+
+Date: Tue 13 Sep 83 17:01:48-PDT
+From: Mathis@SRI-KL.ARPA
+Subject: Re: Core, GGP, and non-GGP gateways; a list
+To: brescia@BBN-UNIX.ARPA
+cc: tcp-ip@SRI-NIC.ARPA, Mathis@SRI-KL.ARPA
+
+   The gateway list also needs to be trimmed of gateways that are essentally
+useless for general internet routing purposes.  For example, I don't think
+the various SIMP and PSAT gateways should be included since those gateways
+are essentially for internal test use.  Is there a SATNET/WB NET position
+on whether those gateways should be included if we assume that any gateway
+not known to the BBN/GGP gateways should be pinged?
+Jim
+
+------------------------------
+
+Date: 14 Sep 1983 12:10:53-EST
+From: Christopher A Kent <cak@purdue>
+Reply-to: cak@purdue
+To: POSTEL@usc-isif
+cc: tcp-ip@sri-nic
+Subject: Re: Some Comments on Gateways & Procedures
+
+I think it's great that all this stored up knowledge is finally making
+it into the open. I have learned a lot about this by having to figure
+it out (I have had some willing tutors, scattered across the internet)
+in order to keep my users happy and keep my "worked-all-nets" certificate
+up to date.
+
+There is at least one additional type of gateway -- the gateway that 
+understands (some) GGP, reroutes packets, and speaks full ICMP, but
+isn't one of the "core" gateways supported by BBN and participating
+in the full GGP conversation. The gateway that I built for the BBN
+VAX TCP is one of these; I believe that the standalone gateway at
+CMU is also. The MIT C-Gateway may be as well.
+
+Thus, the people that use "my" gateway at their site list it as both
+DUMB and PRIME, depending on their intent. If an errant datagram makes
+its way to one of these gateways, bound for a network to which the
+gateway is not connected, it will send a redirect and route the
+'gram appropriately, if it knows how (if it's in the NIC's table,
+it probably knows how). So it's not a true stub gateway. It responds
+to both GGP and ICMP Pings, so it's not a DUMB or ALWAYS-UP. But
+it doesn't send or receive GGP routing updates, so it's not really
+PRIME, either.
+
+I have as many of the gateways listed with NIC installed in my tables
+as possible; we don't ping gateways unless we're using them, and 
+don't in general seem to have too much trouble getting to networks
+far and wide. If the core gateways would update their tables to know
+about new stub gateways more quickly, I think we would be saved
+an awful lot of grief.
+
+Cheers,
+chris
+
+------------------------------
+
+Date: 14 Sep 1983 1022-PDT
+Subject: Re: Core, GGP, and non-GGP gateways; a list
+From: Ian H. Merritt <MERRITT@usc-isib>
+To: Mathis@SRI-KL.ARPA
+cc: brescia@BBN-UNIX.ARPA, tcp-ip@SRI-NIC.ARPA
+
+I agree it is not a good idea to be pinging WBnet gateways.  Since these
+are, at least for the moment, primarly used for experiments, often
+including traffic measurements, pinging could distort the results.
+Though the access to the internet could be disabled for most
+experiments, the WBnet is not yet available for reliable or even
+semi-reliable service, and should not really be known about by any
+machines not directly participating in the experiments.
+
+					Ian H. Merritt
+					Wideband Communications Project
+					USC/ISI
+
+------------------------------
+
+END OF TCP-IP DIGEST
+********************

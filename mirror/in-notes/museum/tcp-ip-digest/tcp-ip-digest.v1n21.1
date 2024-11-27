@@ -1,0 +1,377 @@
+22-Jul-82 04:46:32-PDT,16921;000000000001
+Mail-from: ARPANET host BRL rcvd at 22-Jul-82 0443-PDT
+UUCP-From: decvax!duke!unc!brl-bmd!tcp-ip
+Sender:    Mike Muuss <TCP-IP@BRL>
+From:      TCP-IP at BRL
+To:        TCP-IP at BRL
+Date:      21 July 1982
+Subject:   TCP-IP Digest, Vol 1 #21
+Via:  Brl-Bmd; 21 Jul 82 19:41-EDT
+
+TCP/IP Digest          Wednesday, 21 July 1982     Volume 1 : Issue 21
+
+Today's Topics:
+                HP3000 TCP Software Availible for MPE IV
+                 CSNET's TCP/IP using X.25 for Transport
+                Interlan -vs- 3Com Controller Comparison
+                   InterNet Mail and the Ordinary User
+                  Request for TCP on DG MV/8000 System
+             Sandia Request for advice on TCP-based Network
+                      Status of TCP/IP for TOPS20?
+                 Anybody doing a VLSI TCP/IP Front End?
+                   More on X.25 Service Specifications
+                      TCP/IP made Mandatory for DoD
+----------------------------------------------------------------------
+                         LIMITED DISTRIBUTION
+          For Research Use Only --- Not for Public Distribution
+----------------------------------------------------------------------
+
+From: Mike Muuss <Mike@BRL>
+
+Sorry about the long delay since the last digest.  The low rate of
+submissions plus too much work were the culprits.
+				-Mike
+
+------------------------------
+
+From: Jack Sax <sax@Bbn-Rsm>
+Subject: HP3000 TCP software
+To: tcp-ip at BRL
+     
+     BBN has developed TCP/IP software for the HP3000 computer.  The
+software runs under the MPE IV operation system on any of the HP3000
+series computers.  In addition the basic TCP/IP software we also
+have User and Server Telnet, User FTP,  A raw IP datagram user interface,
+and a Name Server.  Yet to come is a Server FTP and an MTP mail program.
+The software has been up and running on the ARPANET (bbn-hp host 2 on imp83).
+for about 9 months and has taken a lot of pounding to shake out the bugs.  
+
+     We use HP's INP (intelligent Network Processor) as an interface device
+to connect to a C30 IMP.  The HP3000 uses HDH/HDLC protocols between the host
+and the IMP.  These protocols are described in BBN report 1822 Appendix j.
+
+     Documentation and more information are available from Jack Sax  sax@bbn 
+(617) 497-3867 or Winston Edmond edmond@bbn (617) 497-3416
+
+------------------------------
+
+From: Doug Comer <dec@Purdue>
+To: tcp-ip at BRL
+Subject: CSNET's TCP/IP over X.25
+
+     As part of the Purdue CSNET effort,  we  have  designed
+and  implemented  software   to  send IP datagrams across an
+X.25 network.  Essentially, our software layers TCP/IP  over
+the   X.25   net  by managing  X.25  virtual circuits.  When
+IP sends a datagram, our software first maps  the   Internet
+address   into   an   equivalent  Telenet  address.  It then
+checks to see if there is an open X.25  connection  (virtual
+circuit)  to  the destination address, and uses it  if there
+is one.  If none exists, the software opens one.  It  should
+be  noted  that all traffic to a given host flows  over  one
+X.25 virtual circuit.
+
+     The software runs on Digital Equipment Corporation  VAX
+computers  under  UNIX  (BSD  4.1) using an Interactive Sys-
+tems Inc.  INcard-X25 device to handle X.25 levels 1-3.   It
+uses  the  Gurwitz  implementation  of TCP/IP from BBN.  Our
+software was demonstrated to  CSNET  project   personnel  on
+June 15.  The demonstration consisted of sending files (FTP)
+and  doing  remote  login  (TELNET) through TCP/IP, over the
+GTE  Telenet  network between computers at Purdue University
+in West Lafayette, Indiana and  the  University of Wisconsin
+in Madison, Wisconsin.
+
+     For more  information  contact  Professors  Doug  Comer
+(dec@purdue)  or Tim Korb (jtk@purdue), principal invesitga-
+tors  on  the  Purdue  CSNET   contract,  or   Paul   McNabb
+(pam@purdue), CSNET systems programmer.
+
+------------------------------
+
+From: unc!duke!harpo!decvax!steveg
+Subject:  Interlan Controller
+
+We have gone into detailed analysis of the differences between 3Com and
+Interlan. Basically the 3Com is cheaper and gives you less. This is
+no problem if you are a stand-alone system (Indeed, we will probably
+get 3Com for our SUNs) but on a Timeshare VAX it can be hell.
+Let me illustrate:
+
+o On a 3Com you have to carry the data from the SBI memory to the UNIBUS
+  memory in has on its card. This is a big expensive loop of 16 bit
+  word transfers, withi much unibus window turning. The Interlan board
+  does cycle stealing to the SBI memory. No processor intervention needed.
+
+o If a collision occurs on the 3Com, you have to go in and dump the
+  queued output datagrams, if you don't you will not know who the next
+  collision belongs to. You also have to do the backoff and retry in
+  the driver at interrupt level. (you have to wait a precise number
+  of microseconds). The Interlan does backoffs by itself.
+
+o The 3Com driver does not allow you to cancel pending messages.
+  If you hit ^C to stop a remote disk file transfer, you can't
+  abort it.
+
+o Don't Believe 3Com about collisions being very rare. Those measure
+  ments were taken under fairly controlled enviroments by Shoch.
+  There are other articles that point in other directions. Use
+  your head and what you think your net environment will eventually
+  look like when deciding if collisions are so rare.
+
+If you are single user micro, none of this is any worry. So the
+Interlan is no big win (and is more expensive). Look at what you
+are going to use it for, and make your decision on this basis
+
+------------------------------
+
+From:  TMPLee.DODCSC at Mit-Multics
+Subject:  Internet Mail & Ordinary Users
+To:  tcp-ip at BRL
+
+Mike,
+
+I've noticed lately that some, but not all, of the traffic I've been
+receiving on multics (or perhaps its a function of where its sent from)
+has been bearing Internet kinds of headers.  Presumably this means a) that
+the net is gradually moving over to the Internet frame of mind, and
+b) that this is being done in a way that ordinary users like me are
+essentially transparent to and don't have to really think about.
+If that is the case, it would be nice of someone to make a general statement
+to the world at large reassuring us that although the transition to
+TCP-IP may be a pain to all those who have to implement it, ordinary
+people who just send and receive mail, and maybe even extending that
+to FTP and TELNET, will so no change in their interfaces (unless they
+start communicating beyond the ARPANET in whch case they'll have to at
+least learn some extended form of addressing.)
+
+Ted Lee
+
+------------------------------
+
+From: MCCUNE at Usc-Eclc
+Subject: Connecting DG machine to ARPAnet
+To:   TCP-IP at BRL
+
+I'm interested in connecting a Data General computer (MV 8000 most
+likely, but could be an Eclipse or Nova also) to the ARPAnet.
+In fact, I would like to create a gateway between a DG X.25
+network and the ARPA TCP/IP network.  My options seem to be:
+
+(1) Build a TCP/IP server for the 8000 from scratch.  Is anyone already
+working on this?
+
+(2) Port someone elses code, e.g., the RATFOR implementation from
+Tektronix.  Is this really feasible?
+
+(3) Put a dedicated gateway on both networks.  Does anyone know of
+a reasonable candidate (e.g., some flavor of PDP-11), i.e., one that
+already has one or both of TCP and X.25 implemented and that doesn't
+cost too much?
+
+Thanks for any and all answers to the above questions or any related
+suggestions.
+
+	Brian McCune
+
+------------------------------
+
+From: Norm Samuelson <Samuelson@Sandia>
+Subject: some questions about TCP-IP implementations
+To: tcp-ip at BRL
+Postal-Address: Sandia National Labs, Div 2644, Albuquerque, NM 87185
+Telephone: (505) 844-6300, [FTS 844-6300, AUTOVON 244-6300]
+
+Sandia is building a local net which may be connected to a soon-coming
+DOE network which MAY use TCP-IP.  We have CDC (6600, 7600, and CYBER-xxx)
+UNIVAC (1100/82), CRAY-1, and some DEC (PDP-11, VAX, DEC-20).  We are
+taking time to reconsider some previous decisions about the protocol
+on that local net (which must by the way deal with security issues).
+We are going to put a FUJITSU (IBM look-alike) system on the net as 
+file store.  The local network will use an NSC hyper channel.  We plan
+to have one or more gateways to our distributed network (covering a few
+square miles), and possibly the new DOE satelite network.
+
+Now the questions:
+
+1) Does TCP/IP seem reasonable for such a net.  (Most important use of
+the local net will be file transfers from the CDC and CRAY systems to
+and from the file store).
+
+2) Are TCP/IP implementations available for CDC, CRAY, and IBM systems?
+
+We are trying to make somewhat intelligent decisions rather quickly,
+that we and our users may have to live with for years.  Honest answers
+would be appreciated, whether pro or con.
+
+- Sam -
+
+
+------------------------------
+
+From: Jim Rees <JIM@Washington>
+Subject: TCP for TOPS-20
+To: TCP-IP at BRL
+
+I just wondered what the current status of TCP/IP for TOPS-20 is.  Last
+I heard it suffered from performance problems and was not really suitable
+for every day use.  I've also heard reports that BBN or DEC is trying to
+fix it up to be more usable.  Who is supporting it and when will a good
+implementation be available?
+
+[ At the last InterNet meeting at BBN, BBN reported that they had
+  improved the TOPS-20/TENEX greatly.  No idea when this will
+  become availible, though.  -Mike]
+
+------------------------------
+
+From: WOROBEY at Usc-Isi
+Subject: TCP-IP
+To:   tcp-ip at BRL
+
+Gentlemen:
+It would appear that the optimal implementation for TCP/IP
+would be in a linecard front end that could be tailored
+to meet standard host interface protocols by 
+firmware changes. Any VLSI work going on out there
+on a optimized TCP/IP processor?
+Regards
+
+
+------------------------------
+
+From: Walt <Haas@Utah-20>
+Subject: Re: S R Kleiman on Service Specifications (TCP-IP Digest, V1#20)
+To: TCP-IP at BRL
+
+I guess I don't understand how what you say can be true.  To take a
+concrete example, when an X.25 package places a virtual call to
+another X.25 machine, the packet level in the calling machine builds a
+CALL REQUEST packet which it then gives to the link level for
+forwarding.  The link level at the receiving machine passes the
+corresponding INCOMING CALL packet up to the receiving packet level.
+This much is the first two arrows of the four arrow model.
+
+Now it may well be that the receiving packet level has to perform
+time-consuming functions in order to decide whether to accept this
+call .  While these functions are being performed, there is in fact no
+flow control blockage at the LINK level; the link level continues to
+service requests to/from the other logical channels of the packet
+level.  However the particular logical channel that the call was
+placed on is of course in a blocked state during Call Establishment
+Phase; the caller is in state P2 (DTE waiting) and the callee is in
+state P3 (DCE waiting).  Other logical channels are not affected by
+this condition.  Finally, when the callee decides to accept or reject
+the call, the logical channel in question goes to DATA TRANSFER or
+CALL CLEARING state.  This is the second two arrows of the four arrow
+model.  AT NO TIME is the link level ever in a flow control blocked
+condition because of this.
+
+Indeed, when the CALL REQUEST packet is passed to the link level of an
+X.25 implementation, there is no reason for the link level to be aware
+that this is a CALL REQUEST packet as opposed to, say, a DATA packet.
+The link level has no reason to examine the content of these packets,
+it merely forwards them to the corresponding link level at the other
+end.  Hence the addition of FAST SELECT and DATAGRAM packets in the
+1980 standard had no effect on the link level.
+
+Now if we consider the effect of the three arrow model, the reply from
+the callee indicates only that the call was received.  This is an
+end-to-end flow control that is not provided by the link level
+interface, whose flow control in X.25 indicates only that the frame
+carrying the CALL REQUEST packet has been passed across the interface
+to the link level in the network node.  Hence the acknowledgement
+arrow in the three arrow model does provide some information, but not
+much.  However in the four arrow model, when the packet level gets the
+CALL ACCEPTED or CALL CLEARING packet indicating whether or not the
+remote packet level accepted the call, there is considerable
+information content in this packet.  Not only is a logical channel
+open, but the flow control parameters and the throughput class and the
+question of whether acknowledgments will be end-to-end have all been
+resolved.
+
+Walter O. Haas
+Arpanet address: Haas@Utah-20
+Usenet address: harpo!utah-cs!haas
+
+------------------------------
+
+From:     Michael Muuss <mike@brl-bmd>
+To:       Tcp-ip at Brl
+Subject:  TCP/IP made Mandatory -- IEN 207
+
+[ This copy of IEN207 is included here for those who were not aware of where
+  the mandate to use TCP/IP for all DoD networking.  -Mike]
+
+Internet Experiment Note: 207                                 March 1982
+
+MEMORANDUM FOR SECRETARIES OF THE MILITARY DEPARTMENTS
+               CHAIRMAN OF THE JOINT CHIEFS OF STAFF
+               DIRECTORS OF THE DEFENSE AGENCIES
+
+SUBJECT:  DoD Policy on Standardization of Host-to-Host
+          Protocols for Data Communications Networks
+
+Reference:  (a)  USDR&E Memo, "Host-to-Host Protocols for Data
+                 Communications Networks," 23 Dec 78 (IEN-152).
+
+            (b)  DoD Standard Transmission Control Protocol
+                 Specification, Jan 80 (IEN-129, RFC-761).
+
+            (c)  DoD Standard Internet Protocol Specification, Jan 80
+                 (IEN-128, RFC760).
+
+            (d)  DoD Directive 4120.3, "Department of Defense
+                 Standardization Program," 6 June 73
+
+            (e)  DoDI 4120.20, "Development and use of Non-Government
+                 Specifications and Standards," 28 Dec 76
+
+1.  The purpose of this memorandum is to clarify DoD policy concerning
+standardization of host-to-host protocols for data communications
+networks .
+
+2.  The policy cited in reference (a) is reaffirmed, namely:  (1) the
+use of DoD standard host-to-host protocols (Transmission Control
+Protocol (TCP) and Internet Protocol (IP), references (b) and (c)) is
+mandatory for all DoD packet-oriented data networks which have a
+potential for host-to-host connectivity across network or subnetwork
+boundaries; (2) the Director, Defense Communications Agency, is designated
+as the Executive Agent for computer communications protocols; and (3)
+case-by-case exceptions will be granted by the Executive Agent only for
+networks shown to have no future requirements for interoperability.
+
+3.  Reference (a) is not intented to replace the normal DoD
+standardization procedures established by DoDD 4120.3 (reference (d)).
+Rather, the Executive Agent Function is intended to place increased
+emphasis and initiative on the important and currently volatile
+technology of data communications protocol standardization.  New
+standards and modifications to existing standards will be submitted by
+the Executive Agent to the Defense Department components for
+ratification aned dissemination in accordance with the provisions of
+reference (d).
+
+4.  DoDI 4120.20 (reference (e)) also continues to apply to protocol
+standards.  Thus, it is desired that nongovernment protocol standards be
+adopted and used in lieu of the development and promulgation of new
+documents. Military requirements for interoperability, security,
+reliability and survability are sufficiently pressing to have justified
+the development and adoption of TCP and IP in the absence of
+satisfactory nongovernment protocol standards.  In the future, the
+Executive Agent will determine whenever unique military requirements
+justify the development and adoption of unique DoD protocol standards
+after making every effort to use prevailing nongovernment standards.
+Moreover, the Executive Agent will make every effort to inject DoD
+requirements into the nongovernment standard development process through
+participation in voluntary standards forums and through coordination
+with other U.S. Government members of such forums.  This influence
+should be exerted with the objectives of both avoiding the need to
+develop and adopt unique DoD standards and enabling eventual replacement
+of unique DoD standards with functionally equivalent nongovernment
+standards.
+
+                                                      Richard D. DeLauer
+
+END OF TCP-IP DIGEST
+********************
+

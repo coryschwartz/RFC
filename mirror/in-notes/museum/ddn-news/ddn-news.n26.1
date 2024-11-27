@@ -1,0 +1,235 @@
+11-May-83 09:08:52-PDT,11762;000000000001
+Return-path: <NIC@SRI-NIC>
+Mail-From: SMTP created at 11-May-83 09:06:48
+Received: FROM SRI-NIC BY USC-ISIF.ARPA WITH TCP ; 11 May 83 09:06:56 PDT
+Date: 10 May 1983 1630-PDT
+From: NIC at SRI-NIC
+Subject: DDN Newsletter No. 26
+To: DDN-NEWS-DIST: ;
+
+======================================================================
+DDN-NEWS 26                                    NETWORK INFO CENTER for
+6 May 1983                                  DCA DDN Program Mgt Office
+                                                         (NIC@SRI-NIC)
+                                                        (415) 859-3695
+
+
+
+                   DEFENSE DATA NETWORK NEWSLETTER
+
+(Maximum Distribution Requested.  The  DDN Newsletter is published  by
+the Network Information Center  under DCA contract.  For subscription,
+contact NIC@SRI-NIC.  Back issues obtainable by FTP from the directory
+<DDN-NEWS> at SRI-NIC  [10.0.0.73].)
+======================================================================
+
+Section I. OFFICIAL
+
+             Topic: - ARPANET/MILNET SPLIT - How It Will Happen
+
+Section II. UNOFFICIAL  (none this issue)
+
+----------------------------------------------------------------------
+
+
+ARPANET/MILNET SPLIT - HOW IT WILL HAPPEN.
+
+Restructuring the ARPANET into  two networks, an experimental  network
+(ARPANET)  and  an  operational  network  (MILNET),  began  with   the
+establishment of the MILNET  on 4 April 1983.  This Newsletter is  the
+first of a series of newsletters which will describe the  evolutionary
+process which will be  used to accomplish the split.  While it is  the
+intent of the DDN-PMO to minimize any user impact, some effects cannot
+be avoided.  These newsletters are intended to keep users informed  so
+that they can better participate in split activities and plan for  any
+impacts.
+
+This introductory article will briefly address major milestones in the
+split, and describe the two  nets after the split.  Future newsletters
+will elaborate on these and related issues.
+
+
+   1. Major Milestones.
+
+Four dates stand  out above  others as  significant in  the effort  to
+divide the ARPANET: 4 April 1983, 4 October 1983, 1 December 1983  and
+the first quarter of CY 1984.
+
+On 4  April 1983,  the MILNET  was established  and CSIF  billing  for
+ARPANET service discontinued for those  DoD nodes and TACs  designated
+to become part of the Defense Data Network - Unclassified Segment, the
+MILNET.  With this  action,  the DDN  (MILNET)  came  officially  into
+existence, and the evolutionary  process of partitioning the  existing
+shared backbone into the MILNET  and the ARPANET Experimental  Network
+began. A  complete  list  of  MILNET and  ARPANET  facilities  may  be
+obtained from  the  Network Information  Center  (NIC) from  the  file
+[SRI-NIC] <NETINFO>MILNET-ARPANET.LIST .
+
+On 4  October  1983,  the  MILNET and  ARPANET  will  become  separate
+networks.  This initial partitioning will be implemented by exercising
+software in each IMP which enforces the segregation of hosts and  TACs
+into  separate  communities  of  interest.   Electronic  mail  service
+between ARPANET  and  MILNET  will  be provided  for  all  users,  and
+approved hosts will  be authorized additional  services, i.e.,  telnet
+and  FTP,  where   required,  via  devices   known  as   mail-bridges.
+Implementation of  this  software  segregation  of  the  networks,  or
+software split, will require each host to update its tables to reflect
+correct network numbers.   The ARPANET  hosts will remain  in Net  10,
+while the MILNET hosts will change to Net 26.  Future newsletters will
+address these, and  other issues  pertinent to the  software split  in
+depth.
+
+1 December 1983 is  the target date  for Phase One  of the TAC  Access
+Control System (TACACS).  TACACS will be installed on the MILNET only.
+Software development for Phase One  is nearing completion by BBN,  and
+the major  effort  remaining  is  user  registration,  which  will  be
+accomplished during  the coming  months  by SRI  International  (SRI).
+This undertaking is being accomplished by expanding the existing WHOIS
+database to become the official register of authorized network  users,
+with a subset being the register of authorized MILNET TAC users.   SRI
+will be working very closely  with Host Administrators at each  MILNET
+site during the registration and  beyond.  Your cooperation and  input
+to SRI requests for information is officially solicited.  TACACS  will
+be the subject of a future Newsletter.
+
+The first  quarter, CY  1984, has  been established  as the  goal  for
+completion of  the  circuit reconfiguration  necessary  to  physically
+divide the two networks.  The date for this milestone is somewhat soft
+since it  depends upon  successful  completion of  a large  number  of
+circuit orders, many of which involve  long lead times.  When the date
+for this milestone  is more  precisely known, it  will be  publicized.
+Because of the software split occurring in October 1983, however,  the
+physical partitioning should be transparent to the user community.
+
+
+
+   2. Communities of Interest.
+
+Three distinct  communities of  interest  have been  identified  among
+users presently on the ARPANET;  these are the ARPANET Community,  the
+Military Open Community, and the  Military Closed Community.  Each  of
+these have  their own  purposes to  fulfill and  requirements which  a
+network must serve.  The term Military, in this context, is not to  be
+understood as  exclusively  DoD,  but  as  referring  to  its  primary
+make-up.  It  may also  include  contractors and  other  organizations
+which  support  DoD  programs,  as  well  as  the  non-DoD  Government
+agencies.
+
+The ARPANET Community consists of hosts and users who participate with
+DARPA in  network  and  internetwork  experimentation.  Communications
+reliability, although important, is  secondary to research needs.  For
+example, among network experiments currently projected by DARPA, it is
+planned to segment the network in order to further explore the use  of
+packet radio  techniques  for  network  reconstitution.  Although  the
+disruption caused  by  such experiments  is  hardly affordable  in  an
+operational environment, it  is an  acceptable price to  pay within  a
+community where research is the prime reason for existence.
+
+The Military  Open  Community consists  of  hosts and  users  who,  to
+satisfy their  assigned  mission,  require  continued  access  to  the
+ARPANET community, but whose  mission is primarily operational  rather
+than experimental in  nature.  Because of  their mission  orientation,
+the users in this community would find the disruptions associated with
+the  experimental  environment   of  the  ARPANET   community  to   be
+unacceptable.  A large portion of this community are themselves in the
+Research and  Development  business,  but do  not  meet  the  specific
+criteria of  participating  with  or in  coordination  with  DARPA  in
+network or internetwork experimentation.
+
+The smallest  of  the three  communities  using the  existing  ARPANET
+consists of military  hosts and users  who communicate primarily  with
+their own  interest  group,  and have  no  requirement  for  continued
+communication with the  ARPANET community.  Although currently  small,
+projections of new users who will require service in the coming  years
+indicate this to  be a strong growth area.  Examples  of new users  in
+this group include personnel centers, finance centers, and  comparable
+organizations for whom general access clearly is not advised.
+
+     3. Network Architecture.
+
+        (a) Three Communities on Two Backbones.
+
+With the communities of interest clearly identified, the task  becomes
+how to partition  the network  to meet the  needs of  all, with  least
+disruption in the process, and at the least cost.  The approach chosen
+is a  physically separated,  dual-backbone design  with both  military
+communities on one backbone, and  the ARPANET community on the  other.
+Once separated, the backbones will  be connected by mail-bridges  (see
+below) in order  to maintain  communications between  the MILNET  Open
+Community and the ARPANET community.  Within the MILNET, the Open  and
+Closed communities will be separated by  the continued use of the  IMP
+software used for the initial  ARPANET/MILNET split in October.   Mail
+Relays (see below) which  will only be  capable of passing  electronic
+mail will be the only interconnections provided.  A schematic  drawing
+of this topology is shown below.  Future newsletters will elaborate on
+various features of the topology.
+
+
+----------------------------------------------------------------------
+
+    MILNET BACKBONE                               ARPANET BACKBONE
+************************                      ************************
+*                      *                      *                      *
+* -------------------- *                      * -------------------- *
+* |                  | *    -------------     * |                  | *
+* |   Milnet Open    |------| Four Mail |-------|      ARPANET     | *
+* |   Community      | *    | Bridges   |     * |     Community    | *
+* |                  | *    -------------     * |                  | *
+* |                  | *                      * |                  | *
+* |                  | *    -------------     * |                  | *
+* |                  |------|   NIC*    |-------|                  | *
+* |                  | *    -------------     * |                  | *
+* -------------------- *                      * -------------------- *
+*          |           *                      ************************
+*          |           *       
+*    --------------    *         *The Network Information Center (NIC)
+*    | Mail Relay  |   *          serves both networks.
+*    ---------------   *
+*          |           *
+*          |           *
+* -------------------- *
+* |                  | *
+* |   Milnet Closed  | *
+* |   Community      | *
+* |                  | *
+* -------------------- *
+************************
+
+
+
+      FIGURE 1. MILNET/ARPANET TOPOLOGY SCHEMATICALLY DISPLAYED.
+---------------------------------------------------------------------
+
+
+         (2) Equipment and Systems.
+
+MAILBRIDGE
+
+The mail-bridge connects  the MILNET and  ARPANET backbones.   Bridges
+are being  installed and  will be  operational prior  to the  software
+split in October.  The  mail-bridge provides electronic mail  services
+for all users between  the two nets and,  on a controlled basis,  full
+gateway service for MILNET hosts  who request it.  A future newsletter
+will describe the procedure for obtaining this service.
+
+
+MAIL-RELAY
+
+The Mail Relay is functionally similar  to the mail-bridge in that  it
+passes electronic  mail;  it  is  dissimilar  in  that,  as  presently
+designed, it is incapable of passing  anything else.  One or more mail
+relays will  be placed  between the  Military Open  Community and  the
+Military Closed Community  to provide mail  service.  The relay(s) are
+not expected to be operational prior to the physical split in 1984.
+
+
+ELECTRONIC MAIL SERVICE
+
+In order to ease the process of relocating mail accounts, the DDN will
+provide a  limited  number  of  mail  accounts.   Priority  for  these
+accounts will be given to MILNET  users whose present accounts are  on
+hosts which have been aligned to the ARPANET, leaving the user without
+a usable account.  Such users should exhaust other means of  obtaining
+mail service before requesting service through the DDN PMO.
+
+-------

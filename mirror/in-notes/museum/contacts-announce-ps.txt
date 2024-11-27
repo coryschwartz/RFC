@@ -1,0 +1,37 @@
+
+A new Request for Comments is now available from venera.isi.edu.  
+
+WARNING: This is a PostScript RFC, a secondary version is available in
+ASCII.
+
+As the contact for a primary RFC library, you are responsible for
+retrieving this new RFC (both in PostScript and ASCII) from ISI, and
+installing it in your RFC library.  The official RFC announcement will
+be sent to the public distribution list in one working day from this
+posting.
+
+
+	RFC 1347:
+
+        Title:      TCP and UDP with Bigger Addresses (TUBA),
+                    A Simple Proposal for Internet Addressing and
+                    Routing
+        Author:     R. Callon
+        Mailbox:    callon@bigfut.lkg.dec.com
+        PS-Pages:    7          ASCII-Pages:    9
+        PS-Characters:   42,398 ASCII-Characters:  26,563
+        Obsoletes/Updates:  none
+
+		pathname: in-notes/rfc1347.ps
+                          in-notes/rfc1347.txt
+
+
+This memo provides information for the Internet community. It
+does not specify an Internet standard. Distribution of this
+memo is unlimited.
+
+
+Joyce K. Reynolds
+USC/Information Sciences Institute
+
+======================================================================

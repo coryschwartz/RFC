@@ -1,0 +1,1724 @@
+
+
+*****  ATTACHMENT: i:\disk2a\usr\sar\mibs\vine1_cmib.my *****
+
+VINES-MIB { iso org(3) dod(6) internet(1) private(4) enterprises(1) 130 }
+
+DEFINITIONS ::= BEGIN
+
+IMPORTS
+	enterprises, OBJECT-TYPE, NetworkAddress, IpAddress, Counter, 
+	Gauge, TimeTicks
+		FROM RFC1155-SMI;
+
+-- banyan specific objects
+
+banyan OBJECT IDENTIFIER ::= { enterprises 130 }
+
+vinesmibs OBJECT IDENTIFIER ::= { banyan 1 }
+mib1      OBJECT IDENTIFIER ::= { vinesmibs 1 }
+
+systemsummary	OBJECT IDENTIFIER ::= { mib1 1 }
+services	OBJECT IDENTIFIER ::= { mib1 2 }
+peripherals	OBJECT IDENTIFIER ::= { mib1 3 }
+filesystem	OBJECT IDENTIFIER ::= { mib1 4 }
+commresources	OBJECT IDENTIFIER ::= { mib1 5 }
+vip		OBJECT IDENTIFIER ::= { mib1 6 }
+vrtp		OBJECT IDENTIFIER ::= { mib1 7 }
+vspp		OBJECT IDENTIFIER ::= { mib1 8 }
+vinterfaces	OBJECT IDENTIFIER ::= { mib1 9 }
+
+-- object types
+
+-- the systemsummary group
+
+ssName OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The StreetTalk name of the server, up to 15 characters long."
+	::= { systemsummary 1 }
+
+ssNetid OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The VINES network ID of the server equal to the servr's serial
+		number.  This id may be up to 4 bytes in length."
+	::= { systemsummary 2 }
+
+ssSwRev OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The VINES software revision for this server."
+	::= { systemsummary 3 }
+
+ssLoadAvg1 OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The one minute exponential decaying average of server load."
+	::= { systemsummary 4 }
+
+ssLoadAvg5 OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The five minute exponential decaying average of server load."
+	::= { systemsummary 5 }
+
+ssLoadAvg15 OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The 15 minute exponential decaying average of server load."
+	::= { systemsummary 6 }
+
+ssMsgAvg1 OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The one minute exponential decaying average of network 
+		messages sent and received per second."
+	::= { systemsummary 7 }
+
+ssMsgsIn OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of network messages that the server has 
+		received over the network since the last reboot."
+	::= { systemsummary 8 }
+
+ssMsgsOut OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of network messages that the server has sent
+		over the network since the last reboot."
+	::= { systemsummary 9 }
+
+ssDrops OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of received messages that could not be 
+		processed due to a lack of communications buffer space."
+	::= { systemsummary 10 }
+
+ssSwapAvg OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"An exponential decaying average of the number of times a 
+		process was swapped to or from disk per second over a one 
+		minute period."
+	::= { systemsummary 11 }
+
+-- the services group
+
+svcNumber OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The number of services in the svcTable."
+	::= { services 1 }
+
+svcTable OBJECT-TYPE
+	SYNTAX  SEQUENCE OF SvcEntry
+	ACCESS  not-accessible
+	STATUS  mandatory
+	DESCRIPTION
+		"A list of services on the server."
+	::= { services 2 }
+
+svcEntry OBJECT-TYPE
+	SYNTAX  SvcEntry  
+	ACCESS  not-accessible
+	STATUS  mandatory
+	DESCRIPTION
+		"Each entry contains a set of statistics for one service."
+	INDEX	{ svcIndex }
+	::= { svcTable 1 }
+
+SvcEntry ::= SEQUENCE {
+    svcIndex
+	INTEGER,
+    svcName
+	OCTET STRING,
+    svcStatus
+	INTEGER,
+    svcUpTime
+	TimeTicks,
+    svcMsgsIn
+	Counter,
+    svcMsgsOut
+	Counter,
+    svcLocIn
+	Counter,
+    svcLocOut
+	Counter,
+    svcActSess
+	INTEGER,
+    svcTotSess
+	Counter,
+    svcCategory
+	INTEGER
+}
+
+svcIndex OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"A unique value for each service used by SNMP to keep track of
+		service table entries.  This value may vary if the table 
+		changes."
+	::= { svcEntry 1 }
+
+svcName OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The StreetTalk name of the service, the names are of the form
+		'item@group@organization'."
+	::= { svcEntry 2 }
+
+svcStatus OBJECT-TYPE
+	SYNTAX  INTEGER {
+	        running(1),     
+	        initializing(2),
+	        crashing(3),
+	        inconsistent(4),
+	        stopped(5)
+	    }
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The status of the service.  
+		Running - available to users.
+		Initializing - starting and will be available shortly.
+		Crashing - not functioning properly.
+		Inconsistent - the name cannot be found.
+		Stopped - not running."
+	::= { svcEntry 3 }
+
+svcUpTime OBJECT-TYPE
+	SYNTAX  TimeTicks
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The amount of time that the service has been running."
+	::= { svcEntry 4 }
+
+svcMsgsIn OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of messages that the service has received 
+		over the network since the service was last started."
+	::= { svcEntry 5 }
+
+svcMsgsOut OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of messages that the service has sent
+		over the network since the service was last started."
+	::= { svcEntry 6 }
+
+svcLocIn OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The number of messages received by the service that were sent
+		by entities that are local to the service's server since the
+		service was last started."
+	::= { svcEntry 7 }
+
+svcLocOut OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The number of messages sent by the service to entities that 
+		are local to the service's server since the service was last 
+		started."
+	::= { svcEntry 8 }
+
+svcActSess OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The number of active sessions with the service."
+	::= { svcEntry 9 }
+
+svcTotSess OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of sessions that the service has handled
+		since it was last started."
+	::= { svcEntry 10 }
+
+svcCategory OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The type of service defined as follows:
+		1 Server service
+		2 File Service or DOS/UNIX bridge file service
+		3 Print Service
+		4 Mail Service
+		5 StreeTalk Service
+		8 Semaphore Service
+		9 3270/SNA Service
+		10 Asynchronous Terminal Emulation Service
+		12 Netbios Name Service
+		14 3270/BSC Service
+		16 Network Management Service
+		17 VINES Security Service
+		18 StreeTalk Directory Assistance Service
+		1887 SNMP Service
+		1888 SMTP Service
+		Third-party services return values from 1000 to 1899."
+	::= { svcEntry 11 }
+
+svcUserTable OBJECT-TYPE
+	SYNTAX  SEQUENCE OF SvcUserEntry
+	ACCESS  not-accessible
+	STATUS  mandatory
+	DESCRIPTION
+		"A list of the users for the services."
+	::= { services 3 }
+
+svcUserEntry OBJECT-TYPE
+	SYNTAX  SvcUserEntry  
+	ACCESS  not-accessible
+	STATUS  mandatory
+	DESCRIPTION
+		"An entry in the list of service users."
+	INDEX	{ svcUserSvcIndex,
+		  svcUserIndex }
+	::= { svcUserTable 1 }
+
+SvcUserEntry ::= SEQUENCE {
+    svcUserSvcIndex
+	INTEGER,
+    svcUserIndex
+	INTEGER,
+    svcUserSvcName
+	OCTET STRING,
+    svcUserName
+	OCTET STRING
+}
+
+svcUserSvcIndex OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"A unique value for each service on the server, used by SNMP 
+		to order the list."
+	::= { svcUserEntry 1 }
+
+svcUserIndex OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"A unique value for each user of a service.  This value will
+		change as new users are added and old users deleted from the
+		service."
+	::= { svcUserEntry 2 }
+
+svcUserSvcName OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The StreetTalk name of the service."
+	::= { svcUserEntry 3 }
+
+svcUserName OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The StreetTalk name of the user of the service."
+	::= { svcUserEntry 4 }
+
+-- the Peripherals group  
+
+dskNumber OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The number of disks in the disk table."
+	::= { peripherals 1 }
+
+dskTable OBJECT-TYPE
+	SYNTAX  SEQUENCE OF DskEntry
+	ACCESS  not-accessible
+	STATUS  mandatory
+	DESCRIPTION
+		"A list of statistics for the disks on this server."
+	::= { peripherals 2 }
+
+dskEntry OBJECT-TYPE
+	SYNTAX  DskEntry
+	ACCESS  not-accessible
+	STATUS  mandatory
+	DESCRIPTION
+		"The statistics for one disk."
+	INDEX	{ dskIndex }
+	::= { dskTable 1 }
+
+DskEntry ::= SEQUENCE {
+    dskIndex
+	INTEGER,
+    dskName
+	OCTET STRING,
+    dskUtil
+	INTEGER,
+    dskDemand
+	INTEGER,
+    dskSizeMB
+	INTEGER,
+    dskUsedPct
+	INTEGER,
+    dskStatus
+	INTEGER,
+    dskNOperations
+	INTEGER,
+    dskNBlocks
+	INTEGER
+}
+
+dskIndex OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"A unique value for each disk on the server, used by SNMP to 
+		order the table."
+	::= { dskEntry 1 }
+
+dskName OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The name of the disk unit."
+	::= { dskEntry 2 }
+
+dskUtil OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"A five minute exponential decaying average showing the 
+		percentage of time that the disk unit was in use transferring
+		data."
+	::= { dskEntry 3 }
+
+dskDemand OBJECT-TYPE
+	SYNTAX 	INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"A five minute exponential decaying average showing the 
+		percentage of time that the disk unit needed to be used to 
+		satisfy all requests."
+	::= { dskEntry 4 }
+
+dskSizeMB OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The size of the disk in megabytes."
+	::= { dskEntry 5 }
+
+dskUsedPct OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The percentage of disk space that is currently in use."
+	::= { dskEntry 6 }
+
+dskStatus OBJECT-TYPE
+	SYNTAX  INTEGER {
+	        down(1),     
+	        up(2)
+	    }
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The disks status, 1 is non-operational, 2 is operational."
+	::= { dskEntry 7 }
+
+dskNOperations OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of reads and writes for the disk since the
+		server was last booted."
+	::= { dskEntry 8 }
+
+dskNBlocks OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of 1-kilobyte data blocks transferred to and
+		from the disk since the server was last booted."
+	::= { dskEntry 9 }
+
+prnNumber OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The number of printers in the printer table."
+	::= { peripherals 3 }
+
+prnTable OBJECT-TYPE
+	SYNTAX  SEQUENCE OF PrnEntry
+	ACCESS  not-accessible
+	STATUS  mandatory
+	DESCRIPTION
+		"A list of the printers on the server."
+	::= { peripherals 4 }
+
+prnEntry OBJECT-TYPE
+	SYNTAX  PrnEntry
+	ACCESS  not-accessible
+	STATUS  mandatory
+	DESCRIPTION
+		"Information for a printer on the server."
+	INDEX	{ prnIndex }
+	::= { prnTable 1 }
+
+PrnEntry ::= SEQUENCE {
+    prnIndex
+	INTEGER,
+    prnName
+	OCTET STRING,
+    prnType
+	INTEGER
+}
+
+prnIndex OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"A unique value for each printer connected to the server, used
+		by SNMP to order the table.  This may change if a printer is
+		added or removed from the server."
+	::= { prnEntry 1 }
+
+prnName OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The StreetTalk name of the printer's VINES print service."
+	::= { prnEntry 2 }
+
+prnType OBJECT-TYPE
+	SYNTAX  INTEGER {
+	        parallel(1),
+	        serial(2)   
+	    }
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The printer type."
+	::= { prnEntry 3 }
+
+-- the Filesystem group  
+
+fsTotCache OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The amount of server RAM, in kilobytes, that is used for
+		caching purposes.  This is configurable from the server's
+		console."
+	::= { filesystem 1 }
+
+fsCacheBufSize OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The amount of server RAM, in kilobytes, that makes up a file 
+		system cache buffer.  Also configurable from the console."
+	::= { filesystem 2 }
+
+fsMaxOpenFiles OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The largest number of open files on the server at a single
+		point in time."
+	::= { filesystem 3 }
+
+fsOpenFiles OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The number of files currently open."
+	::= { filesystem 4 }
+
+fsMaxOpensOnFiles OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The largest number of open operations on files at a single
+		point in time.  There can be more than one open operation on
+		an open file.  For example, two users may open the same file.
+		This file would count as one open file and two open operations
+		on the file."
+	::= { filesystem 5 }
+
+fsOpensOnFiles OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The current number of open operations on files."
+	::= { filesystem 6 }
+
+fsRecLocks OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The current number of record locks."
+	::= { filesystem 7 }
+
+fsMaxRecLocks OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The largest number of simultaneous record locks."
+	::= { filesystem 8 }
+
+fsPctCacheHits OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The percentage of cache buffer requests that the system was
+		able to service using existing cache buffers, without reading
+		new data from disk."
+	::= { filesystem 9 }
+
+fsCacheUnavail OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The number of cache buffer requests that the server was 
+		unable to service without reading new data from disk."
+	::= { filesystem 10 }
+
+-- the Commresources group  
+
+commTotBufs OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total communications buffer space (the amount of server
+		RAM used for network communications) in kilobytes.  This is
+		configurable from the server's console."
+	::= { commresources 1 }
+
+commBufUsage OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The percentage of the communications buffer space currently 
+		in use."
+	::= { commresources 2 }
+
+commAllocsFailed OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The cumulative total of the number of buffers that could not
+		be allocated since the server was last booted."
+	::= { commresources 3 }
+
+commSocksCfg OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The maximum number of sockets that can be open at one time.
+		Configurable from the server console."
+	::= { commresources 4 }
+
+commSocksInUse OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The percentage of the maximum configured sockets in use."
+	::= { commresources 5 }
+
+commMaxOpenSocks OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The maximum number of sockets in use since the server was
+		last booted."
+	::= { commresources 6 }
+
+-- the VIP group
+
+vipTotIn OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of VINES IP packets that the server has
+		received since the server was last booted."
+	::= { vip 1 }
+
+vipTotOut OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of VINES IP packets that the server has
+		sent since the server was last booted."
+	::= { vip 2 }
+
+vipBad OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of badly formed packets that the server
+		has received since the server was last booted."
+	::= { vip 3 }
+
+vipRouted OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of packets that were routed to another node
+		since the server was last booted."
+	::= { vip 4 }
+
+vipRoutedHWM OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The largest number of packets routed in 1 second since the 
+		server was last booted."
+	::= { vip 5 }
+
+vipBcast OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The number of VINES IP broadcast packets sent, both generated
+		from the server and routed from other nodes."
+	::= { vip 6 }
+
+vipBcastHWM OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The largest number of packets broadcast in 1 second since the
+		server was last booted."
+	::= { vip 7 }
+
+vipReass OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The number of times packets were reassembled since the server
+		was last booted.  One VINES IP packet being broken into three
+		message fragments is counted as one fragmentation.  The three
+		fragments being reassembled into one VINES IP packet counts as
+		one reassembly."
+	::= { vip 8 }
+
+vipFrags OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The number of packet fragmentations performed since the server
+		was last booted."
+	::= { vip 9 }
+
+vipToDodIP OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The number of packets that VINES IP passed to DARAP IP 
+		(TCP/IP) for encapsulation in IP headers since the server was
+		last booted."
+	::= { vip 10 }
+
+vipFromDodIP OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The number of packets that VINES IP received from DARPA IP
+		(TCP/IP) since the server was last booted."
+	::= { vip 11 }
+
+-- the VRTP group
+
+vrtpNbrNumber  OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The number of entries in the neighbor table (NbrTable)."
+	::= { vrtp 1 }
+
+vrtpNbrTable OBJECT-TYPE
+	SYNTAX  SEQUENCE OF NbrEntry
+	ACCESS  not-accessible
+	STATUS  mandatory
+	DESCRIPTION
+		"A list of information about neighbors of this server."
+	::= { vrtp 2 }
+
+vrtpNbrEntry OBJECT-TYPE
+	SYNTAX  NbrEntry
+	ACCESS  not-accessible
+	STATUS  mandatory
+	DESCRIPTION
+		"The information for each entry in the table."
+	INDEX	{ vrtpNbrNetid,
+		  vrtpNbrSubNetid,
+		  vrtpNbrIfType,
+		  vrtpNbrLocSlot,
+		  vrtpNbrLocLine }
+	::= { vrtpNbrTable 1 }
+
+NbrEntry ::= SEQUENCE {
+    vrtpNbrNetid
+	INTEGER,
+    vrtpNbrSubNetid
+	INTEGER,
+    vrtpNbrType
+	INTEGER, 
+    vrtpNbrIfType
+	INTEGER,
+    vrtpNbrRemAddress
+	OCTET STRING,
+    vrtpNbrLocAddress
+	OCTET STRING,
+    vrtpNbrLocSlot
+	INTEGER,
+    vrtpNbrLocLine
+	INTEGER,
+    vrtpNbrSvrName
+	OCTET STRING
+}
+
+vrtpNbrNetid OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The network ID of the neighbor, which is the first part of
+		the neighbor's VINES internet address.  If the neighbor is a
+		server the network number is the server's serial number."
+	::= { vrtpNbrEntry 1 }
+
+vrtpNbrSubNetid OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The subnetwork ID of the neighbor, which is the second part of
+		the neighbor's VINES internet address.  If the neighbor is a
+		server the subnetwork number is 1."
+	::= { vrtpNbrEntry 2 }
+
+vrtpNbrType OBJECT-TYPE
+	SYNTAX  INTEGER {
+	        server(1),
+	        workstation(2)
+	    }
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The type of the neighbor (workstation = pc)."
+	::= { vrtpNbrEntry 3 }
+
+vrtpNbrIfType OBJECT-TYPE
+	SYNTAX  INTEGER {
+		    ethernet3Com(1),
+		    ethernetNI5010(2),
+		    ethernetBICC(3),
+		    ethernetUB(4),
+		    omninetCorvus(5),
+		    arcnetSMC(6),
+		    pcnetSytek(7),
+		    proNetProteon(8),
+		    unused9(9),
+		    unused10(10),
+		    hdlc(11),
+		    blkAsync(12),
+		    unused13(13),
+		    unused14(14),
+		    tokenRingIBM(15),	
+		    x25(16),
+		    tokenRingUB(17),
+		    ipaDavidSys(18),
+		    tokenRingPronet4(19),
+		    ethernetEplus3Com(20),
+		    lanLinkNT(21),
+		    unused22(22),
+		    ethernetNI5210(23),
+		    unused24(24),
+		    unused25(25),
+		    unused26(26),
+		    starlanWDigital(27),
+		    ethernetWDigital(28),
+		    starlanATT(29),	
+		    starlanNI5210(30),
+		    ethernet3Com3C503(31), 
+		    ethernet3Com3C523(32),
+		    tokenRing3Com3C603(33),
+		    lanLinkNTMC(34),
+		    unused35(35),
+		    ethernetIntelPC586E(36),
+		    starlanATT10(37),
+		    pronetProteonMC(38),
+		    arcnetSMCMC(39),
+		    tokenRingIBMMC(40),
+		    ethernetNI9210MC(41)
+		}	
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The type of interface that the server uses to reach the 
+		neighbor."
+	::= { vrtpNbrEntry 4 }
+
+vrtpNbrRemAddress OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The address of the neighbor's physical interface, such as a 
+		LAN address.  If the neighbor is connected via an HDLC or 
+		asynchronous line this object specifies an internal id."
+	::= { vrtpNbrEntry 5 }
+
+vrtpNbrLocAddress OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The address of the server's physical interface, sucha as a 
+		LAN address."
+	::= { vrtpNbrEntry 6 }
+
+vrtpNbrLocSlot OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The slot number of the interface card that the server uses to
+		reach the neighbor."
+	::= { vrtpNbrEntry 7 }
+
+vrtpNbrLocLine OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The number of the line on the serial card that the server uses
+		to reach the neighbor.  It does not apply to neighbors that are
+		reached over LANs."
+	::= { vrtpNbrEntry 8 }
+
+vrtpNbrSvrName OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The name of the neighbor.  If the neighbor is a workstation
+		then this object has no meaning."
+	::= { vrtpNbrEntry 9 }
+
+vrtpRtNumber  OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The number of entires in the route table (RtTable)."
+	::= { vrtp 3 }
+
+vrtpRtTable OBJECT-TYPE
+	SYNTAX  SEQUENCE OF RtEntry
+	ACCESS  not-accessible
+	STATUS  mandatory
+	DESCRIPTION
+		"A list of networks and the routing information to find them."
+	::= { vrtp 4 }
+
+vrtpRtEntry OBJECT-TYPE
+	SYNTAX  RtEntry
+	ACCESS  not-accessible
+	STATUS  mandatory
+	DESCRIPTION
+		"An entry for one network."
+	INDEX	{ vrtpRtNetid }
+	::= { vrtpRtTable 1 }
+
+RtEntry ::= SEQUENCE {
+    vrtpRtNetid
+	INTEGER,
+    vrtpRtMetric
+	INTEGER,
+    vrtpRtIdle
+	INTEGER,
+    vrtpRtGateNetid
+	INTEGER,
+    vrtpRtSvrName
+	OCTET STRING,
+    vrtpRtGateSvrName
+	OCTET STRING
+}
+
+vrtpRtNetid OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The network ID of the route's destination server."
+	::= { vrtpRtEntry 1 }
+
+vrtpRtMetric OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The routing metric used by the called server to reach the
+		destination.  The metric reflects the cost of the path to
+		the destination, it is in 200-millisecond units."
+	::= { vrtpRtEntry 2 }
+
+vrtpRtIdle OBJECT-TYPE
+	SYNTAX  INTEGER 
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The time to live timer for this route's entry.  This value 
+		indicicates the amount of time before the entry is removed 
+		from the called server's routing table.  The value is returned
+		in 90 second units."
+	::= { vrtpRtEntry 3 }
+
+vrtpRtGateNetid OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The network ID of the server that acts as the router for 
+		reaching the destination server."
+	::= { vrtpRtEntry 4 }
+
+vrtpRtSvrName OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	ACCESS  read-only
+	STATUS  optional
+	DESCRIPTION
+		"The name of the destination server."
+	::= { vrtpRtEntry 5 }
+
+vrtpRtGateSvrName OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	ACCESS  read-only
+	STATUS  optional
+	DESCRIPTION
+		"The name of the server that acts as the router for reaching
+		the destination server."
+	::= { vrtpRtEntry 6 }
+
+-- the VSPP group
+
+vsppConnsInUse OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The number of SPP connections currently in use by processes
+		on the server."
+	::= { vspp 1 }
+
+vsppConnsCfg OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The maximum number of SPP connections that can be in use
+		on the server at one time."
+	::=  { vspp 2 }
+
+vsppMaxConns OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The maximum number of SPP connections in use at a single
+		point in time since the server was last booted."
+	::= { vspp 3 }
+
+-- the Vinterfaces group
+
+vifNumber OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The number of VINES interfaces configured on the server."
+	::= { vinterfaces 1 }
+
+vifTable OBJECT-TYPE
+	SYNTAX  SEQUENCE OF IfEntry
+	ACCESS  not-accessible
+	STATUS  mandatory
+	DESCRIPTION
+		"List of interfaces with some statistics about each interface."
+	::= { vinterfaces 2 }
+
+vifEntry OBJECT-TYPE
+	SYNTAX  IfEntry
+	ACCESS  not-accessible
+	STATUS  mandatory
+	DESCRIPTION
+		"Information about one interface."
+	INDEX	{ vifSlot,
+		  vifLine,
+		  vifSession }
+	::= { vifTable 1 }
+
+IfEntry ::= SEQUENCE {
+    vifSlot
+	INTEGER,
+    vifLine
+	INTEGER,
+    vifSession
+	INTEGER,
+    vifType
+	INTEGER, 
+    vifDescr
+	OCTET STRING,
+    vifAddress
+	OCTET STRING,
+    vifInPkts
+	Counter,
+    vifInErrs
+	Counter,
+    vifOutPkts
+	Counter,
+    vifOutErrs
+	Counter
+}
+
+vifSlot OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The slot number of the interface's communications card."
+	::= { vifEntry 1 }
+
+vifLine OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The line number of the interface, applies to serial interfaces
+		only."
+	::= { vifEntry 2 }
+
+vifSession OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The local session number of an X.25 virtual circuit, applies
+		to X.25 interfaces only."
+	::= { vifEntry 3 }
+
+vifType OBJECT-TYPE
+	SYNTAX  INTEGER {
+		    ethernet3Com(1),
+		    ethernetNI5010(2),
+		    ethernetBICC(3),
+		    ethernetUB(4),
+		    omninetCorvus(5),
+		    arcnetSMC(6),
+		    pcnetSytek(7),
+		    proNetProteon(8),
+		    unused9(9),
+		    unused10(10),
+		    hdlc(11),
+		    blkAsync(12),
+		    unused13(13),
+		    unused14(14),
+		    tokenRingIBM(15),	
+		    x25(16),
+		    tokenRingUB(17),
+		    ipaDavidSys(18),
+		    tokenRingPronet4(19),
+		    ethernetEplus3Com(20),
+		    lanLinkNT(21),
+		    unused22(22),
+		    ethernetNI5210(23),
+		    unused24(24),
+		    unused25(25),
+		    unused26(26),
+		    starlanWDigital(27),
+		    ethernetWDigital(28),
+		    starlanATT(29),	
+		    starlanNI5210(30),
+		    ethernet3Com3C503(31), 
+		    ethernet3Com3C523(32),
+		    tokenRing3Com3C603(33),
+		    lanLinkNTMC(34),
+		    unused35(35),
+		    ethernetIntelPC586E(36),
+		    starlanATT10(37),
+		    pronetProteonMC(38),
+		    arcnetSMCMC(39),
+		    tokenRingIBMMC(40),
+		    ethernetNI9210MC(41)
+		}	
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The interface type, types are the same as defined for 
+		vrtpNbrIfType in the vrtp neighbor table."
+	::= { vifEntry 4 }
+
+
+vifDescr OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"A textual description of the interface."
+	::= { vifEntry 5 }
+
+vifAddress OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The physical address of the interface, applies to LAN
+		interfaces only."
+	::= { vifEntry 6 }
+
+vifInPkts OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of VINES IP packets that the server
+		received since the last reboot."
+	::= { vifEntry 7 }
+
+vifInErrs OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of received VINES IP packets that contained
+		errors since the last reboot."
+	::= { vifEntry 8 }
+
+vifOutPkts OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of VINES IP packets that the server
+		sent since the last reboot."
+	::= { vifEntry 9 }
+
+vifOutErrs OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of transmitted VINES IP packets that 
+		contained errors since the last reboot."
+	::= { vifEntry 10 }
+
+vifLnkNumber OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The number of serial links connected to the server."
+	::= { vinterfaces 3 }
+
+vifLnkTable OBJECT-TYPE
+	SYNTAX  SEQUENCE OF LnkEntry
+	ACCESS  not-accessible
+	STATUS  mandatory
+	DESCRIPTION
+		"Data link level statistics for the serial lines on 
+		this server."
+	::= { vinterfaces 4 }
+
+vifLnkEntry OBJECT-TYPE
+	SYNTAX  LnkEntry
+	ACCESS  not-accessible
+	STATUS  mandatory
+	DESCRIPTION
+		"Stats for one serial line."
+	INDEX	{ vifLnkSlot,
+		  vifLnkLine }
+	::= { vifLnkTable 1 }
+
+LnkEntry ::= SEQUENCE {
+    vifLnkSlot
+	INTEGER,
+    vifLnkLine
+	INTEGER,
+    vifLnkType
+	INTEGER,
+    vifLnkTotIn
+	Counter,
+    vifLnkTotOut
+	Counter,
+    vifLnkRetrans
+	Counter,
+    vifLnkCRCErrs
+	Counter,
+    vifLnkDrops
+	Counter,
+    vifLnkUnders
+	Counter,
+    vifLnkOvers
+	Counter,
+    vifLnkFrmErrs
+	Counter
+}
+
+vifLnkSlot OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The slot number of the serial communications card to which
+		the serial line is connected."
+	::= { vifLnkEntry 1 }
+
+vifLnkLine OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The line number of the line on the serial communications 
+		card."
+	::= { vifLnkEntry 2 }
+
+vifLnkType OBJECT-TYPE
+	SYNTAX  INTEGER {
+		ate(1),
+		unused2(2),
+		unused3(3),
+		unused4(4),
+		unused5(5),
+		unused6(6),
+	        blkasynch(7),
+	        hdlc(8),
+	        x25(9),
+	        sdlcv1(10),
+	        bsc3270(11),
+	        sdlcv2(12)
+	    }
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The type of data link level protocol used on this line.
+		1 Asynchronous Terminal Emulation.
+		7 Block asynchronous.
+		8 High-level Data Link Control (HDLC).
+		9 X.25
+		10 Synchronous DataLink Control (SDLC) 1.
+		11 3270/BSC bisynchronous communication.
+		12 Same as SDLC1 except line is connected to an ICA card."
+	::= { vifLnkEntry 3 }
+
+vifLnkTotIn OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of frames received."
+	::= { vifLnkEntry 4 }
+
+vifLnkTotOut OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of frames transmitted."
+	::= { vifLnkEntry 5 }
+
+vifLnkRetrans OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of frames retransmitted."
+	::= { vifLnkEntry 6 }
+
+vifLnkCRCErrs OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The number of errors due to CRC or frames that the card
+		dropped."
+	::= { vifLnkEntry 7 }
+
+vifLnkDrops OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The number of frames that the server could not receive due to
+		a lack of communications buffers."
+	::= { vifLnkEntry 8 }
+
+vifLnkUnders OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of transmitter underrun errors on receive."
+	::= { vifLnkEntry 9 }
+
+vifLnkOvers OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of receiver overrun errors on receive."
+	::= { vifLnkEntry 10 }
+
+vifLnkFrmErrs OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of framing errors."
+	::= { vifLnkEntry 11 }
+
+vifX25VCNumber OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The number of X.25 virtual circuits that are available to
+		the server."
+	::= { vinterfaces 5 }
+
+vifX25VCTable OBJECT-TYPE
+	SYNTAX  SEQUENCE OF X25VCEntry
+	ACCESS  not-accessible
+	STATUS  mandatory
+	DESCRIPTION
+		"A list of X.25 packet level statistics for the virtual 
+		circuit."
+	::= { vinterfaces 6 }
+
+vifX25VCEntry OBJECT-TYPE
+	SYNTAX  X25VCEntry
+	ACCESS  not-accessible
+	STATUS  mandatory
+	DESCRIPTION
+		"Statistics for one virtual circuit."
+	INDEX	{ vifX25VCSlot,
+		  vifX25VCLine,
+		  vifX25VCSession }
+	::= { vifX25VCTable 1 }
+
+X25VCEntry ::= SEQUENCE {
+    vifX25VCSlot
+	INTEGER,
+    vifX25VCLine
+	INTEGER,
+    vifX25VCSession
+	INTEGER,
+    vifX25VCTotIn
+	Counter,
+    vifX25VCTotOut
+	Counter,
+    vifX25VCInErrs
+	Counter,
+    vifX25VCOutErrs
+	Counter,
+    vifX25VCPktsOut
+	Counter,
+    vifX25VCPktsAwaitAck
+	INTEGER,
+    vifX25VCBytesOut
+	Counter,
+    vifX25VCBytesAwaitAck
+	INTEGER,
+    vifX25VCPktsIn
+	Counter,
+    vifX25VCBytesIn
+	Counter,
+    vifX25VCResetsIn
+	Counter,
+    vifX25VCResetsOut
+	Counter
+}
+
+vifX25VCSlot OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The slot number of the serial communications card to which
+		the virtual circuit's line is connected."
+	::= { vifX25VCEntry 1 }
+
+vifX25VCLine OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The number of the X.25 line configured on the serial 
+		communications card."
+	::= { vifX25VCEntry 2 }
+
+vifX25VCSession OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The local session number of the virtual circuit."
+	::= { vifX25VCEntry 3 }
+
+vifX25VCTotIn OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of VINES IP packets received on this VC."
+	::= { vifX25VCEntry 4 }
+
+vifX25VCTotOut OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of VINES IP packets sent on this VC."
+	::= { vifX25VCEntry 5 }
+
+vifX25VCInErrs OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of received X.25 packets that contained 
+		errors."
+	::= { vifX25VCEntry 6 }
+
+vifX25VCOutErrs OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of transmitted X.25 packets that contained
+		errors."
+	::= { vifX25VCEntry 7 }
+
+vifX25VCPktsOut OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of X.25 packets transmitted."
+	::= { vifX25VCEntry 8 }
+
+vifX25VCPktsAwaitAck OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of X.25 packets transmitted that are 
+		awaiting acknowledgement."
+	::= { vifX25VCEntry 9 }
+
+vifX25VCBytesOut OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of bytes transmitted."
+	::= { vifX25VCEntry 10 }
+
+vifX25VCBytesAwaitAck OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of bytes transmitted that are awaiting
+		acknowledgement."
+	::= { vifX25VCEntry 11 }
+
+vifX25VCPktsIn OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of X.25 packets that have been received."
+	::= { vifX25VCEntry 12 }
+
+vifX25VCBytesIn OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of bytes received."
+	::= { vifX25VCEntry 13 }
+
+vifX25VCResetsIn OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of X.25 reset packets received."
+	::= { vifX25VCEntry 14 }
+
+vifX25VCResetsOut OBJECT-TYPE
+	SYNTAX  Counter
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The total number of X.25 reset packets transmitted."
+	::= { vifX25VCEntry 15 }
+
+
+vifStatsList OBJECT-TYPE
+	SYNTAX  SEQUENCE OF VifStatEntry
+	ACCESS  not-accessible
+	STATUS  mandatory
+	DESCRIPTION
+		"A list of statistics for each LAN card in the server.  The
+		type and quantity of statistics depend on the type of the 
+		card."
+	::= { vinterfaces 7 }
+
+vifStatEntry OBJECT-TYPE
+	SYNTAX  VifStatEntry
+	ACCESS  not-accessible
+	STATUS  mandatory
+	DESCRIPTION
+		"The statistics for one card."
+	INDEX	{ vifStatSlot,
+		  vifStatIndex }
+	::= { vifStatsList 1 }
+
+VifStatEntry ::= SEQUENCE {
+    vifStatSlot
+	INTEGER,
+    vifStatIndex
+	INTEGER,
+    vifStatDescr
+	OCTET STRING,
+    vifStatValue
+	INTEGER
+}
+
+vifStatSlot OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The slot number of the LAN interface card."
+	::= { vifStatEntry 1 }
+
+vifStatIndex OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"A unique value for each statistic, used by SNMP to order
+		the table."
+	::= { vifStatEntry 2 }
+
+vifStatDescr OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"A brief description of the statistic."
+	::= { vifStatEntry 3 }
+
+vifStatValue OBJECT-TYPE
+	SYNTAX  INTEGER
+	ACCESS  read-only
+	STATUS  mandatory
+	DESCRIPTION
+		"The value of the statistic."
+	::= { vifStatEntry 4 }
+
+END
+

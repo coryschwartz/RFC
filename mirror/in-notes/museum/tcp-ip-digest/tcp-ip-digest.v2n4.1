@@ -1,0 +1,272 @@
+21-Apr-83 09:37:50-PST,11733;000000000001    
+Return-path: <tcp-ip@Brl-Vgr.ARPA>
+Mail-From: SMTP created at 20-Apr-83 19:11:48
+Received: FROM BRL-VGR BY USC-ISIF.ARPA WITH TCP ; 20 Apr 83 19:12:05 PST
+Received: From Brl-Vgr.ARPA by BRL-VGR via smtp;  20 Apr 83 6:56 EST
+Sender:    Mike Muuss <TCP-IP@Brl.ARPA>
+From:      TCP-IP@Brl.ARPA
+To:        TCP-IP@Brl.ARPA
+Date:      20 Apr 1983 00:00 EST
+Subject:   TCP-IP Digest, Vol 2 #4
+
+TCP/IP Digest           Wednesday, 20 Apr 1983     Volume 2 : Issue 4
+
+Today's Topics:
+                          TCP/IP -vs- Xerox NS
+                         Merging Protocol Sets?
+                     MIT-CSR TCP/IP on non-I/D UNIX
+                    3Com UNET on non-I/D UNIX systems
+                   BBN TCP/IP on non-I/D UNIX systems
+                         DEC Equipment & TCP/IP
+----------------------------------------------------------------------
+                  TCP/IP Digest --- The InterNet Digest
+                         LIMITED DISTRIBUTION
+          For Research Use Only --- Not for Public Distribution
+----------------------------------------------------------------------
+
+Date: Tue, 12 Apr 83 10:34 PST
+From: Taft.PA@parc-maxc.arpa
+Subject: TCP/IP vs Xerox NS
+To: TCP-IP@brl.arpa
+
+Let me suggest that there is not much point in engaging in a "TCP vs.
+NS" debate, since there's far more to discuss than can reasonably be
+presented in this forum.  People who want more information about NS
+would be better served by reading the open literature (references below)
+and forming their own judgements.
+
+The Xerox NS family of protocols are a re-engineered version of the Pup
+protocols.  NS and Pup are true internet protocols, architecturally very
+similar to TCP/IP.  This is not accidental, as there was considerable
+cross-fertilization between the Xerox and ARPA internet projects.
+
+Of course, there are also many differences.  Some are a reflection of
+differing technical judgements made by the designers, while others are
+of no significance.  But the fundamental similarities are far more
+important than the detailed differences.
+
+So why is Xerox pushing NS rather than TCP/IP?  Well, why do similar but
+incompatible products appear in any marketplace?  Xerox has a big
+investment in NS, and had to make product plans based on it long before
+TCP/IP had solidified to its present form.  NS is not really "new".
+Though the protocol specifications were published only a little over a
+year ago, NS has been around for several years, and its predecessor,
+Pup, has been in active use since 1975.
+
+	Ed Taft
+
+
+References (there are many others; these are the ones that come
+immediately to mind):
+
+D. R. Boggs, J. F. Shoch, E. A. Taft, R. M. Metcalfe, "Pup: an
+internetwork architecture", IEEE Transactions on Communication, vol.
+COM-28, no. 4, April 1980.  (This was a special issue on network
+architectures and protocols; it contains many interesting papers.)
+
+Y. K. Dalal, "Use of multiple networks in the Xerox Network System",
+IEEE Computer magazine, 15(10), October 1982.
+
+J. E. White, Y. K. Dalal, "Higher-level protocols enhance Ethernet",
+Electronic Design, 30(8), April 1982.
+
+------------------------------
+
+Date: 12 Apr 1983 0823-PST
+Subject: TCP/IP vs. XNS
+From:  Dan <LYNCH@Usc-Isib.ARPA>
+To: tcp-ip@Brl.ARPA
+
+ISI has decided to purchase a bunch of Xerox 8010 workstations
+and will be implementing TCP/IP on them in the next 6 months.
+We will be in a position to comment on the relative merits
+of each protocol suite after we have our TCP/IP implementation 
+running.  The first task we face is to figure out where to make
+the cut.  We will have enough access to the low level drivers 
+to be able to make the cut anywhere we choose, but we are not
+sure that is the best way to "merge" the functionality of
+these two "similar" protocols.  The whole insanity of "layered"
+protocols becomes quite apparent when one considers what we are
+about to delve into -- one from culumn A and one from column B
+and then two from column A, etc???
+Dan Lynch
+
+------------------------------
+
+Date: 12 Apr 1983 1026-EST (Tuesday)
+From: lwa@Mit-Csr.ARPA
+Subject: Re: Paul Milazzo's TCP request
+To: TCP-IP@Brl.ARPA
+
+Our TCP/IP implementation is running on one LSI-11/23 that I know
+of.  It's pretty tight, though, and certain pieces (like the
+Internet reassembly code) had to be omitted.  It's going to
+take some amount of work on the part of whoever brings it up
+to get it to fit.
+
+Regarding the earlier user-only implementations (eg. BBN's): we
+actually had the BBN implementation running on an 11/40 at one
+point, but there were only three disk buffers left, so it wasn't
+very useful...
+					regards,
+					Larry
+
+------------------------------
+
+Date: 12-Apr-83 10:32:43-EST
+From: gc@Bnl.ARPA
+Subject: TCP/IP for nonsplit I/D systems
+To: milazzo.rice@Rand-Relay.ARPA
+Cc: tcp-ip@Brl.ARPA
+
+We are currently running the 3Com Unet implementation of TCP/IP on a v7
+system on an 11/44, however there are installation directions in our manual
+for installing on non-split I/D systems and on BSD 2.8 systems also.
+From our experience, it might be a tight fit but probably worth a try.
+
+------------------------------
+
+Date: 12 Apr 1983 0943-PST
+From: DEDWARDS@Usc-Isi.ARPA
+Subject: re' TCP/IP for UNIX LSI-11/23
+To:   milazzo.rice@Rand-Relay.ARPA
+cc:   tcp-ip@Brl.ARPA
+
+As it turns out I am running TCP/IP on my 11/34 and 11/23 - this
+is the external to the kernel version done at BBN several years ago.
+The underlying UNIX is a BBN version 6, but it should be movable
+to V7.  It does require that you have portions of the old NCP
+buffering mechanism installed though, so you do need to have
+room to add stuff to your kernel (also needs Rand ports, await/
+capac, pty, etc).  With only a couple of users and full memory,
+the 11/34 does pretty well on the ARPAnet - the 11/23 is somewhat
+slower.
+
+Howard Weiss
+DoD Computer Security Center
+
+------------------------------
+
+From:     smb%mhb5b@brl-bmd
+Date:     13 Apr 83 11:26:51 EST  (Wed)
+Subject:  TCP/IP for UNIX LSI-11/23
+To:       unc!milazzo.rice@Rand-Relay.ARPA, unc!tcp-ip@brl-bmd.arpa
+Full-Name: Steven M. Bellovin
+
+I'm pretty sure that 3Com's UNET will run on 11/23s, under either v7 or 2.8BSD.
+A source license is about $5000, I believe.
+
+------------------------------
+
+Date: 14 Apr 83 20:51:19 PST (Thu)
+From: unisoft!billn@Ucb-Vax.ARPA
+Subject: tcp on 11/23
+To: milazzo.rice@Rand-Relay.ARPA
+Cc: tcp-ip@Brl.ARPA
+
+UNET from 3com runs on an 11/23.  At least they say so; I've never tried it.
+I suspect it does, since they developed much of UNET on 11/23's.  There are
+alot of options you can turn off to get sizes down in user programs. Kernel
+size is a bit of a problem, but solvable, using the kernel overlay scheme
+("kov's") from Ken Harrenstein (klh@sri-nic)  The new version (UNET 2.0) is
+reputed to be up-to-date arpa compatable, including smtp.  They include,
+naturally, a driver for their q-bus ethernet controller.
+
+/bill
+
+------------------------------
+
+Date: 23 Nov 1982 1653-PST
+Subject: DEC equipment and IP/TCP
+From: Joel Goldberger <JGoldberger@USC-ISIB>
+To: TCP-IP@BRL
+
+I can tell you what the situation is regarding IP/TCP implementations on
+most DEC equipment.  There are basically four operating systems that
+people run on DEC 10/20's and two operating systems that are run on
+Vaxes.
+
+On the 10/20's people are running:
+	TOPS-10
+	TENEX
+	TOPS-20
+	and ITS (The MIT Incompatible Timesharing System)
+
+BBN has had an implementation of IP/TCP for TENEX and TOPS-20 for some time
+and that is what we are running.  Very few other sites were willing to run
+this software though.  DEC proposed a much cleaner user-interface to TCP for
+TOPS-20 that most of the TOPS-20 sites decided to wait for.  This code was
+originally scheduled to be made available to ISI at the beginning of July,
+since then the date has been slipping.  Monday the person working on it at
+DEC (Kevin Paetzold) announced over the TOPS-20 distribution list that he
+would be making the code available on 1 December.  Obviously once the code
+is delivered there will be some lag before the support software gets written
+and debugged, and I seriously doubt that all of that can be accomplished in
+the one month before the switchover.
+
+I don't believe that anything besides the present BBN implementation of
+IP/TCP will ever be available for TENEX systems, and most of the TENEXes on
+the Network already have this code up and running.  There is some work
+needed to make the support programs run under TENEX, but I believe Henry
+Miller at NIC is doing this.
+
+Ken Harrenstein has been (re-)hired by MIT to implement IP/TCP on the ITS
+machines (MIT-AI/DM/ML/MC).  I believe he is already back at MIT doing this.
+
+I know of no implementation for TOPS-10 (or WAITS), either available or in
+development.
+
+
+On VAXes people mostly run either VMS or UNIX (primarily Berkeley UNIX).
+
+For VMS there are two implementations available:
+
+Digital Technology Incorporated offers a comercial product called ACCESS-T
+in a Binary only distribution that includes all the usual servers and user
+programs (FTP/TELNET/SMTP), as well as a library of user callable routines
+for establishing and controlling IP and TCP connections.  We ordered this
+product for our VMS system and were given a very early Beta-Test version
+that was essentially unusable (It crashed VMS every time a TELNET connection
+was closed).  They did some debugging on our system and fixed most of the
+problems, but we still chose not to run it for the time being.  This
+decision was mostly due to the way they had implemented MAIL; sending and
+receiving were two disjoint programs and there was no way to REPLY or
+FORWARD messages conveniently.  They have just announced a new version of
+their software that will run under version 3.0 of VMS; The previous release
+would not.  We will be evaluating this latest version when we bring up
+version 3.0 on our VAX.
+
+David Kashtan at SRI has been working on porting the Berkeley 4.1aBsd (UNIX)
+implementation of IP/TCP to run under the EUNICE UNIX compatibility package
+that he authored and SRI distributes.  (We are currently running his ported
+version of the Berkeley NCP code on our VAX.)  I received a message from him
+on Friday (19 November) that he had succeeded in bringing up IP/TCP, and was
+now running his VAX (SRI-IU) with both NCP and TCP.  We will be getting a
+copy of his code in the next week or so and hope to use that on our VMS
+system.  I assume he will make it available to anyone who wants it.
+
+Under Berkeley UNIX there are also two choices:
+
+BBN (Rob Gurwitz) has an implementation for Berkeley 4.1Bsd which many sites
+are running (including us).  It comes complete with user and server
+processes, source code, and again a library of user-callable routines for
+establishing connections.  We have found it to be very stable and Rob is
+very good about bug-fixes and general support.  I don't know if he plans on
+offering an implementation for Berkeley's future releases.
+
+Berkeley (Bill Joy) essentially re-wrote the BBN implementation for 
+Berkeley 4.1aBsd, and the soon to be released 4.2 Bsd.  We have been running
+this version on VAX 11/750's connected to a 10MBit EtherNet and have found
+it also very stable.  4.1a & 4.2 include a set of network utilities that
+allow access to remote file-systems and remote command execution, features
+not directly available with the BBN implementation.
+
+I hope this has been of some help to you.
+
+- Joel Goldberger -
+
+------------------------------
+
+END OF TCP-IP DIGEST
+********************
+

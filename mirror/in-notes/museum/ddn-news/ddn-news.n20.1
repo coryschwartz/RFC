@@ -1,0 +1,154 @@
+13-Jan-83 19:19:37-PST,5542;000000000001
+Mail-From: SMTP created at 13-Jan-83 19:15:19
+Return-path: NIC@SRI-NIC
+Received: FROM SRI-NIC BY USC-ISIF.ARPA WITH TCP ; 13 Jan 83 19:14:28 PST
+Date: 13 Jan 1983 1543-PST
+From: NIC at SRI-NIC
+Subject: Network Newsletter No. 20
+To: ANEWS-DIST: ;
+cc: Dcacodeb627 at BBNA
+
+=====================================================================
+ANEWS-20                                      NETWORK INFO CENTER for
+13 Jan 1983                               DCA DDN Program Mgmt Office
+                                                        (NIC@SRI-NIC)
+                                                       (415) 859-3695
+
+                     DoD NETWORK NEWSLETTER
+
+
+=====================================================================
+
+             TCP/IP Conversion Effective 1 Jan 83
+
+---------------------------------------------------------------------
+
+
+1. The network  transition to exclusive  use of TCP/IP  took place  as
+scheduled.  The  net is  up with  relatively few  NCP-only  exemptions
+granted.  Individual host  TCP implementation  problems have  occurred
+and  exemptions  were  granted  to  those  sites  experiencing  severe
+disruption of service.  The exemptions are temporary and firm  cutover
+dates (to TCP-only operation) have been published (see Table 1).
+
+2.  To  support those  users  whose hosts  are  still using  NCP,  the
+ARPANET terminal access controllers (TAC) will continue to support NCP
+through January 1983.  This will allow hosts using NCP an  opportunity
+to transition  to TCP  without  seriously disrupting  remote  terminal
+service.  Terminal users will have to enter an additional command when
+connecting to a TAC in order to  communicate with NCP hosts.  As of  1
+Feb 83, all TACs will run TCP/IP only.
+
+3.  The University of Delaware (UDEL)  has agreed to serve as a  mail-
+forwarding relay  during the  transition  period.  A  modification  to
+normal addressing is necessary as described below:	
+
+   a.  A TCP user with mail for an NCP user will address
+        TO: <Account-Name>.<NCP-HostName>@UDEL-RELAY. 
+           Example:  PVAYDA.OFFICE-10@UDEL-RELAY.
+       Important:  The origin host must be TCP.
+
+   b.  An NCP user with mail for a TCP user will address
+        TO: <Account-Name>.<TCP-HostName>@UDEL-TCP.
+           Example:  DHENRY.BBNC@UDEL-TCP. 
+       Important:  The origin host must be NCP.
+
+   c.  UDEL will  return incorrectly addressed  messages.  Should  the
+destination host protocol not be known, or be transitioning, UDEL will
+complete the transaction  (TCP to TCP, or  NCP to NCP).  The  critical
+point is the correct protocol of the sender.
+
+   d.   POC  at  UDEL is Mr. Brendan  Reilly,  (302) 738-1266,
+Reilly@UDEL-RELAY.
+
+4.  The list of TCP exemptions is included for your information (Table
+1) to enable effective use of the UDEL relay.
+
+5.  Should  unforeseen  problems  result  in a  need  to  request  NCP
+enablement,  Newsletter   No.  19   establishes  reclama   procedures.
+Briefly, reclamas  should  provide your  justification,  schedule  for
+TCP-only implementation, source of TCP  conversion effort, and a  list
+of the hosts you  communicate with. TCP exemptions  are granted on  an
+individual host basis  and each host  administrator must  individually
+request NCP  enablement.  POC  for all  such requests  is Major  Bruce
+Sweeny, DCACODEB627@BBN-TENEXB, or by phone, (703) 285-5020.
+
+6. Thank you for your patience and cooperation.
+
+-----
+      Table 1.   NCP Enabled Hosts
+
+ADDRESS        HOST NAME        CUTOVER
+-------        ---------        -------
+10.0..2        SRI-NSC11        1 Apr 83
+10.1..2        SRI-KL           1 Mar 83
+10.2..2        SRI-CSL          1 Feb 83
+
+10.0..6        MIT-MULTICS      1 Feb 83
+10.1..6        MIT-DMS          1 Feb 83
+10.2..6        MIT-AI           1 Feb 83
+10.3..6        MIT-ML           1 Feb 83
+
+10.2..9        YALE             1 Feb 83
+
+10.0..11       SU-AI            15 Mar 83
+10.3..11       SU-SCORE         1 Feb 83
+
+10.0..14       CMUB             1 Apr 83
+10.1..14       CMUA             1 Apr 83
+
+10.3..16       AMES11           1 Feb 83
+
+10.4..18       ROCHESTER        1 May 83
+
+10.0..23       USC-ECLB         1 May 83
+10.1..23       USC-ECLC         1 May 83
+10.3..23       USC-ECL          1 May 83
+
+10.3..24       WHARTON          1 Mar 83
+
+10.0..27       USC-ISID         16 Jan 83
+
+10.3..32       KESTREL          1 Feb 83
+
+10.0..43       OFFICE-1         1 Feb 83
+10.1..43       OFFICE-2         1 Feb 83
+
+10.0..44       MIT-XX           1 Feb 83
+10.3..44       MIT-MC           1 Feb 83
+
+10.3..53       MARTIN           1 Feb 83
+
+10.2..54       ACC              1 Feb 83
+10.3..54       JPL-VAX          4 Feb 83
+
+10.0..58       NYU              1 Feb 83
+
+10.0..65       AFSC-SD          15 Feb 83
+
+10.0..66       MITRE-BEDFORD    1 Apr 83
+
+10.0..67       AFSC-HQ          15 Feb 83
+
+10.0..73       SRI-NIC          1 Feb 83
+10.2..73       SRI-AI           1 Mar 83
+
+10.1..77       testing port     1 Feb 83
+10.3..77       testing port     1 Feb 83
+
+10,0..87       SANDIA           1 Feb 83
+
+10.2..92       NUSC-NPT         1 Feb 83
+
+10.0..93       OFFICE-8         1 Feb 83
+10.1..93       OFFICE-10        1 Feb 83
+10.2..93       OFFICE-22B       1 Feb 83
+
+10.0..95       S1-Gateway       Unknown
+10.1..95       S1-A             1 Mar 83
+10.3..95       S1-C             1 Feb 83
+
+10.1..96       UDEL-TCP         1 Mar 83
+
+
+-------

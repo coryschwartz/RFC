@@ -1,0 +1,174 @@
+
+
+-- MIB File Generated on 30-Nov-1995 at 15:20:49
+
+IDT1-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+   enterprises,
+   experimental,
+   IpAddress,
+   TimeTicks,
+   Gauge,
+   Counter
+      FROM RFC1155-SMI
+   DisplayString
+      FROM RFC1213-MIB
+   OBJECT-TYPE
+      FROM RFC-1212;
+
+
+usr OBJECT IDENTIFIER ::= { enterprises 429 }
+
+nas OBJECT IDENTIFIER ::= { usr 1 }
+
+idt1 OBJECT IDENTIFIER ::= { nas 15 }
+
+-- The T1-PRI ISDN Card Configuration Group.
+
+idt1Cfg OBJECT IDENTIFIER ::= { idt1 1 }
+
+idt1CfgTable OBJECT-TYPE
+SYNTAX SEQUENCE OF Idt1CfgEntry
+ACCESS not-accessible
+STATUS mandatory
+DESCRIPTION
+"This table contains an entry for each of the manageable 
+T1-PRI ISDN Cards in the chassis.  It contains objects that 
+reflect the current configuration of parameters that affect 
+the operation of all the entities that reside on the given 
+card."
+::= { idt1Cfg 1 }
+
+idt1CfgEntry OBJECT-TYPE
+SYNTAX Idt1CfgEntry
+ACCESS not-accessible
+STATUS mandatory
+DESCRIPTION
+"There is one Configuration table entry per T1-PRI ISDN Card 
+in the chassis."
+INDEX { idt1CfgIndex }
+::= { idt1CfgTable 1 }
+
+Idt1CfgEntry ::=
+SEQUENCE {
+idt1CfgIndex
+    INTEGER,
+idt1CfgAssgndISDNGateway
+    INTEGER,
+idt1CfgMdmCallsAllowedEna
+    INTEGER
+}
+
+idt1CfgIndex OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+"A unique value for each card in the chassis.  The value of 
+idt1CfgIndex matches the value of the index for the 
+corresponding card entity in the entity table of the 
+chassis MIB."
+::= { idt1CfgEntry 1 }
+
+idt1CfgAssgndISDNGateway OBJECT-TYPE
+SYNTAX INTEGER (0..16)
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"Identifies the NAS chassis slot of the Gateway Card 
+assigned to this T1-PRI ISDN card. Range 0-16. 
+Default=0(none)."
+::= { idt1CfgEntry 2 }
+
+idt1CfgMdmCallsAllowedEna OBJECT-TYPE
+SYNTAX INTEGER{
+  enable(1),
+  disable(2)
+}
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"Indicates if modem calls are disabled/enabled for this 
+T1-PRI ISDN Card. Default = enable(1)."
+::= { idt1CfgEntry 3 }
+
+-- The T1-PRI ISDN Card Call Routing Group.
+
+idt1Cr OBJECT IDENTIFIER ::= { idt1 2 }
+
+idt1CrTable OBJECT-TYPE
+SYNTAX SEQUENCE OF Idt1CrEntry
+ACCESS not-accessible
+STATUS mandatory
+DESCRIPTION
+"This table contains an entry for each of the manageable 
+T1-PRI ISDN Cards in the chassis.  It contains objects that 
+reflect the current call routing configuration of the card."
+::= { idt1Cr 1 }
+
+idt1CrEntry OBJECT-TYPE
+SYNTAX Idt1CrEntry
+ACCESS not-accessible
+STATUS mandatory
+DESCRIPTION
+"There is one Call Routing Table entry per T1-PRI ISDN Card 
+in the chassis."
+INDEX { idt1CrIndex, idt1CrPhNumIndex }
+::= { idt1CrTable 1 }
+
+Idt1CrEntry ::=
+SEQUENCE {
+idt1CrIndex
+    INTEGER,
+idt1CrPhNumIndex
+    INTEGER,
+idt1CrInboundPhNum
+    DisplayString,
+idt1CrInboundCallType
+    INTEGER
+}
+
+idt1CrIndex OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+"A unique value for each card in the chassis.  The value of 
+idt1CrIndex matches the value of the index for the 
+corresponding card's entry in the entity table of the 
+chassis MIB."
+::= { idt1CrEntry 1 }
+
+idt1CrPhNumIndex OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+"This object is the index for one of the 48 inbound call 
+routing objects for this card."
+::= { idt1CrEntry 2 }
+
+idt1CrInboundPhNum OBJECT-TYPE
+SYNTAX DisplayString (SIZE(0..18))
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"This is one of the 48 inbound call routing phone numbers."
+::= { idt1CrEntry 3 }
+
+idt1CrInboundCallType OBJECT-TYPE
+SYNTAX INTEGER{
+  analog(1),
+  digital(2)
+}
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"This is one of the 48 inbound call routing call types. 
+Default = analog(1)."
+::= { idt1CrEntry 4 }
+
+END
+
+

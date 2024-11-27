@@ -1,0 +1,138 @@
+29-Nov-81 10:48:48-PST,5086;000000000001
+Mail-from: ARPANET host BRL rcvd at 29-Nov-81 1048-PST
+Date:      29 Nov 81 11:27:29-EDT (Sun)
+From:      Mike Muuss <tcp-ip@brl>
+To:        list: 
+Subject:   TCP-IP Digest, Vol 1 #7
+Bcc:       
+
+TCP/IP Digest             Sunday, 29 Nov 1981      Volume 1 : Issue 7
+
+Today's Topics:
+                       Query:  TCP-IP for RSX-11M?
+                        List of TCP-Capable Hosts
+               UUCP Networking Concerns + Internet Issues
+         General Networking Issues "Fair Game" in TCP-IP Digest
+                       Query:  TCP-IP for NOS/BE?
+----------------------------------------------------------------------
+
+From: RCOLE at USC-ISIE
+Subject: for TCP-IP digest
+
+I would like to obtain information from anyone who has (or knows of)
+a TCP-IP implementation for RSX11-M, the machine in question
+is an 11/70. Any help gratefully received.
+
+Reply to: Robert Cole, University College, London. RCOLE@ISIE
+
+------------------------------
+
+Subject: Re: TCP
+From: CERF at USC-ISI
+To: MCCUNE at USC-ISIC
+Cc: tcp-ip at BRL
+
+[TCP] TELNET is available on all ISI hosts; FTP is available on the
+VAX and is being worked on for the TOPS-20 by BBN (Charles Lynn).
+
+A list of TCP-capable hosts is in [ISIF]<internet-notebook>TCP-IP-STATUS.TXT.
+
+TN runs on the TOPS-20 ("TelNet") and can be used to go from ISIC to
+the VAX.
+
+Vint
+The file at ISIF is in need of updating - Jon Postel will be pulsing
+the TCP implementers for new info, but you may find the current version
+of some interst.
+
+------------------------------
+
+From: chico!duke!unc!smb at Berkeley
+In-real-life: Steven M. Bellovin
+Subject: Re:  systems news articles
+
+	From duke!dbl Wed Nov 18 14:01:41 1981
+	Date-Sent: Wed Nov 18 13:57:35 1981
+	To: unc!smb
+	Subject: systems news articles
+
+	MMDF- swd has done some looking into it as well, and thinks
+	it's the way to go.  We've heard from farber and crocker at
+	udel that we will probably be the next csnet site to go online,
+	so we'll be getting the most up-to-date version of MMDF
+	sometime this month (or maybe early December).
+
+I'm rapidly coming to that conclusion as well, and the sooner I see
+some manuals and some code, the happier I'll be.  I just read RFC754
+and RFC799, and it's becoming apparent that the ARPAnuts are setting
+standards which we'll have to adhere to if we're to talk to them.  And
+the whole uucp addressing mess is getting out of hand -- and that says
+nothing of changing topologies (what do we do with wolfvax's mail when
+they hook in to MCNC instead) or the distinction users here have to
+make between pnet mail and uucp mail.  Add in ARPA, CSnet, and maybe
+Berknet among the duke machines, and you have a royal mess.  I'm
+inclined to start a new net newsgroup to discuss mail, networking,
+addressing, etc., from a UNIX/uucp point of view -- say, net.net
+(fa.tcp-ip appears to be too specialized, though I'll route a copy of
+this to the moderator).
+
+------------------------------
+
+Date: 19 Nov 1981 07:40:13-PST
+From: cbosgd!mark at Berkeley
+Subject: Re:  systems news articles
+
+Having a newsgroup to discuss nets is different than discussing mail.
+I propose net.net and net.mail.  I'm not sure net.net is needed -
+does fa.tcp-ip subsume it?  There will probably soon be a net.csnet, too.
+
+	Mark
+
+------------------------------
+
+From:      Mike Muuss <tcp-ip@brl>
+To:        chico!duke!unc!smb at Ucb-C70
+Subject:   Networking Discussions in TCP-IP Digest?
+
+Steve -
+	While the masthead "TCP-IP Digest" is really rather specialized,
+I had intended the Digest as more of a discussion on IMPLEMENTATION
+issues of networking (as opposed to Philosophical discussions as
+get found in HUMAN-NETS).  The troubles with multiple networks, and
+the variety of message formats (for mail), and routing problems in
+general are all fair game for the TCP-IP digest.  You are welcome
+to have this networking discussion in the TCP digest -- if the volume
+becomes too great I would be willing to clone a new digest later on.
+
+	BRL polls Duke via UUCP, so messages addressed to ...!duke!bmd70!tcp-ip
+should make it to the digest (no need to go through Berkeley).  Give it
+a try.  Our RMAIL is smart enough to prevent accidental gatewaying;  sorry.
+
+					Cheers,
+					 -Mike
+
+------------------------------
+
+Sender: DRDAR-MST at OFFICE-8
+Subject: TCP/IP and the CYBERS
+From: Richard Sitnik
+
+     In a recent message Mike Muuss mentioned that there are
+plans to install a version of TCP-IP on the CYBER.  Also, in
+Issue 6 of the TCP-IP Digest Mike mentioned that Tektronix has
+implemented TCP under NOS.
+
+     I would like to find out more about plans regarding
+TCP-IP.  In particular, do you know of anyone who is working on a
+NOS/BE version?  I have spoken to Tektronix and their
+implementation will only work with NOS and requires a HYPER
+channel.  They are not aware of any NOS/BE efforts.  I will
+prepare an item for the TCP-IP Digest detailing my discussion
+with Tektronix.
+
+
+RICH
+
+END OF TCP-IP DIGEST
+********************
+

@@ -1,0 +1,13 @@
+
+
+The cisco Enterprise MIB is available via anonymous ftp from host
+ftp.cisco.com. The latest document will always be available from that
+location.
+
+cisco Systems
+3/91
+
+**Disclaimer: The Internet Assigned Numbers Authority (IANA) warns
+that there is no assurance that the file pointed to has passed the
+mib-checker.**
+

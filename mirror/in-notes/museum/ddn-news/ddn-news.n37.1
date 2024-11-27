@@ -1,0 +1,765 @@
+10-Dec-84 10:53:00-PST,33893;000000000001    
+Return-Path: <NIC@SRI-NIC.ARPA>
+Received: FROM SRI-NIC.ARPA BY USC-ISIF.ARPA WITH TCP ; 6 Dec 84 18:02:07 PST
+Date: Thu 6 Dec 84 14:26:37-PST
+From: DDN Reference <NIC@SRI-NIC.ARPA>
+Subject: DDN-NEWS-37 SPECIAL ISSUE
+To: DDN-NEWS: ;
+cc: NIC@SRI-NIC.ARPA
+
+======================================================================
+DDN NEWS 37, SPECIAL ISSUE                     NETWORK INFO CENTER for
+1 Dec 1984                                 DCA DDN Program Mgmt Office
+                                         (NIC@SRI-NIC)  (415) 859-3695
+
+
+                    DEFENSE  DATA  NETWORK
+
+                          NEWSLETTER
+
+
+[Maximum Distribution Requested.  The DDN NEWSLETTER is distributed by
+the Network Information Center under DCA contract.  For  subscription,
+contact  NIC@SRI-NIC.   Back issues  may be obtained by FTP  from  the
+directory <DDN-NEWS> at SRI-NIC  [26.0.0.73 and 10.0.0.51].
+======================================================================
+
+Section I. OFFICIAL
+
+             Topic:  1.  MILITARY PERSONNEL
+                     2.  DDN USER ASSISTANCE
+                     3.  PHYSICAL SPLIT
+                     4.  MILNET EUROPE
+		     5.  MILNET PACIFIC
+		     6.  MILNET ACCESS CONTROL
+                     7.  DDN NODE INSTALLATIONS
+                     8.  DRAFT DCA INSTRUCTION FOR MANAGEMENT OF
+				INSTALLATION ACTIONS
+	             9.  DDN NODE INSTALLATION/RELOCATION LEAD TIMES
+		    10.  ARPANET TAC ACCESS CONTROL SYSTEM
+		    11.  AIR FORCE DDN PMO
+		    12.  THE THIRD DDN TCO CONFERENCE
+                    13.  SUPPORT CONCEPT ANALYSIS
+                    14.  INTERNET PRIVATE LINE INTERFACE (IPLI)
+                    15.  NETWORK ACCESS COMPONENET ACQUISITION
+		    16.  DDN HOST INTERFACE ACQUISITION
+		    17.  DDN DOCUMENTS OF INTEREST
+                    18.  NIC INFORMATION
+
+
+This month's newsletter is a special issue of 13 pages of DDN network
+developments and news.  Because of it's size, please FTP the file from
+the SRI-NIC host using pathname 
+
+                    DDN-NEWS:DDN-NEWS-37.TXT 
+
+
+DDN Newsletter Special Issue 37				  1 Dec 1984		
+
+
+
+
+                               FOREWORD
+
+
+This is the second  DDN Newsletter since I assumed the duties of Program
+Manager.   During  the last three months  I have had the opportunity  of
+speaking  with many of you,  and I have found you to be enthusiastically
+pursuing  our common  goals.   This quarter  I want  to  emphasize  four
+significant achievements for which we can jointly be proud.
+
+First, we have provided service to the first three IGNET host computers,
+thus initiating  service to  the  first new  major Army  system.   This,
+coupled with continuing host cutovers in the Navy NARDAC in New Orleans,
+Norfolk, and Jacksonville, Fl.  and the soon to  be provided support  to
+the  Air  Force's  APDS  II  and  European  Distribution  System,   will
+significantly widen the MILNET family of subscriber systems.
+
+Second,  the physical separation of the MILNET from the ARPANET has been
+completed  forming  an operational  network  to support the needs of the
+unclassified military subscriber community.  This action took nearly two
+years to complete,  and the final separation  went so smoothly that few,
+if any, network users noticed the event.
+
+Third,  in an effort  to improve  the availability of DDN compatible host
+interface  products    from commercial vendors, the DDN PMO has
+awarded five host interface contracts.  Each contract is for delivery of
+a host interface  for qualification  on DDN.   In addition,  three  more
+contracts are pending.
+
+Finally,  from the comments  and concerns  I have heard  in the last
+three months, it is clear to me that as far as interfaces to the network
+are concerned,  DDN Standard  X.25 is needed as early as DDN can provide
+it.   Our contractor,  Bolt Beranek and Newman, Inc. (BBN), has reviewed
+their schedule  for DDN Standard  X.25 and has agreed  to  speed up  the
+scheduled  release  of the interface  from December  1985, as originally
+scheduled, to a revised date for release into the network of May 1985.
+
+
+
+
+                                        F. Lee Maybaum
+                                        Colonel, USAF
+                                        Program Manager
+                                        Defense Data Network
+
+DDN Newsletter Special Issue 37				  1 Dec 1984		
+
+
+                             
+                          DDN NEWSLETTER
+			  --------------
+
+The purpose of the  Defense Data Network (DDN)  Newsletter is to  inform
+DDN users and interested parties of our progress, problems, issues,  and
+achievements.  Your comments  and questions on  items in the  Newsletter
+are encouraged and  for this  purpose, responsible  action officers  are
+listed with most items.  In addition, attached to this Newsletter is the
+current  telephone  listing  of   the  Defense  Data  Network,   Program
+Management Office (DDN  PMO).  If you  have general comments  concerning
+the Newsletter, please  contact Ensign  Jessie Royster,  B613, at  (703)
+285-5032, (V) 356-5032.
+
+Beginning with this issue, the DDN Quarterly Newsletter will be combined
+with the  online DDN  Newsletter into  one series  of newsletters.   The
+quarterly version will no longer be called 'quarterly', but will instead
+be given the  next issue  number in the  newsletter series  and will  be
+labeled as  a  'special issue'  of  the DDN  Newsletter.   The  'special
+issues' will continue to be mailed to  each of you in hardcopy from  the
+DDN PMO.
+
+All issues of the DDN Newsletter, including regular and special  issues,
+will also be  available online  on the  SRI-NIC machine  at the  Network
+Information Center (NIC) at SRI International in Menlo Park, CA.
+
+If you have questions about the online newsletter, or wish to be added
+to the online notification list
+
+   - Send a message to NIC@SRI-NIC.ARPA
+   - Call the NIC toll-free number, 1-800-235-3155.
+
+To retrieve a given  newsletter across the network,  invoke FTP on  your
+local host, open a connection to SRI-NIC (10.0.0.51 or 26.0.0.73), login
+as 'anonymous'  using password  'guest', and  get files  with  pathnames
+<DDN-NEWS>ddn-news-nn.txt, where 'nn' is the  number of the issue to  be
+retrieved.   There   is  also   an   index  available   with   pathname,
+<DDN-NEWS>ddn-news.index.
+
+			  MILITARY PERSONNEL
+			  ------------------
+
+Interested in an assignment with the DCA DDN Program Management  Office?
+Military  personnel   in  the   Communications  and   Computer   Science
+specialties can make their desire  known and increase their  opportunity
+for assignment  by sending  their career  brief and  last two  or  three
+fitness reports to the Assistant Deputy Director for Military Personnel,
+HQ DCA Code 304,  Arlington, Va., 20305-2000.   (Lt. Col. Nagley,  B610,
+(703)285-5010, (V) 356-5010)
+
+
+1 Dec 1984                               DDN Newsletter Special Issue 37
+
+
+
+                          DDN USER ASSISTANCE
+			  -------------------
+
+
+DCA has established an  800 toll-free service  for DDN user  assistance.
+The service is provided by the NIC under contract to the DDN PMO.  Users
+who experience  problems with  using the  network in  general, and  with
+Terminal-to-TAC use in particular,  are encouraged to  make use of  this
+service.  User assistance is available Monday through Friday, 8 am - 5 pm
+Pacific time.  The number is 1-800-235-3155.  Users who experience
+network problems outside these hours should call the Network Monitoring
+Center, Cambridge, Massachusetts, (617) 661-0100.  (Mr. Jack Snively,
+B646, (703) 285-5227, (V) 356-5227)
+
+                             PHYSICAL SPLIT
+			     --------------
+
+The physical split of the MILNET  and ARPANET was completed 6  September
+84 with  the  disconnection  of the  last  inter-switch  trunk  directly
+connecting IMPs on  the two  networks, and full  activation of  separate
+network monitoring centers for each network.
+
+This event  concludes  a two  year  planning and  implementation  effort
+creating the DDN unclassified  segment, MILNET, for  DoD long haul  data
+communications users.  The ARPANET continues  to be operated by DCA  for
+DARPA-sponsored data  communications  network research  and  development
+projects.  (Maj. Bruce Sweeny, B647, (703) 285-5007, (V) 356-5007)
+
+
+                             MILNET EUROPE
+			     -------------	
+
+Implementation  difficulties  have  caused  slippages  in  the  European
+network expansion schedule.   The overall expansion  plan will begin  to
+show progress in  second quarter FY85.   However, extensive efforts  are
+under way to achieve a MILNET/MINET merge prior to the end of 1984.  (Mr.
+Darryl Henry, B627, (703)285-5038 (V) 356-5038)
+
+
+                             MILNET PACIFIC
+			     --------------
+
+The planned topology of the Pacific portion of the MILNET has  undergone
+some revision in  recent months.   Wahiawa, Hawaii,  is currently  under
+review and may not  become a MILNET node  site.  The Navy has  requested
+that NAVDAF, Pearl Harbor, be considered instead of the DSCS station  at
+Wahiawa; however, the  DDN PMO intends  to ask the  Navy to review  this
+decision.  Since some of  the DSCS channels  proposed are not  currently
+available, it is  expected that  DCTN and  commercial satellite  service
+will be  used to  augment the  available  DSCS.  This  may result  in  a
+revised topology.   (Mr.  Dennis  Morris.   B627,  (703)  285-5021,  (V)
+356-5021)
+
+DDN Newsletter Special Issue 37			              1 Dec 1984
+
+
+
+                         MILNET ACCESS CONTROL
+			 ---------------------
+
+The final Honeywell H316 TAC on the MILNET has been replaced with a C/30
+TAC, making  TACACS fully  operational throughout  the MILNET.   Several
+efforts are underway with the goal of strengthening the system.   TACACS
+Phase II, when implemented, will greatly enhance the level of protection
+by  providing  real-time  reporting  of  a  wide  variety  of  intrusion
+attempts.  Implementation of mail-bridge filters to prevent uncontrolled
+access from ARPANET TACs into the MILNET will be the next major step  in
+Access Control.   An  announcement  on this  step  will  be  forthcoming
+shortly.  (Maj. Glynn Parker, (703) 285-5133, (V) 356-5133)
+
+
+                         DDN NODE INSTALLATION
+			 ---------------------
+
+The following nodes have been activated since March 1984:
+
+   Naples, Italy		    MINET
+   NARDAC, New Orleans, LA          MILNET
+   Dugway Proving Ground, UT        MILNET
+   Randolph AFB, TX                 MILNET
+   St. Louis, MO                    MILNET  (2nd IMP)
+   New Cumberland AD, PA            MILNET
+   Anniston AD, AL                  MILNET
+   Lawrence Livermore Lab., CA      ARPANET 
+   RADC, Griffis AFB, NY            ARPANET 
+   MITRE, McLean, VA                ARPANET 
+   Sigonella, Italy                 MINET
+   Scott AFB, IL                    MILNET  (2nd IMP)
+   TACOM, Warren, MI                MILNET
+   Ft. Huachuca, AZ                 MILNET
+   NARDAC, Jacksonville, FL         MILNET
+   Wright Patterson AFB, OH         MILNET  (2nd IMP)
+   NARDAC, Norfolk, VA              MILNET
+   Crane, IN                        MILNET  (Experimental TEP only)
+   RAND, Santa Monica, CA	    MILNET
+   Frankfurt, FRG		    MILNET
+
+The following nodes are near activation but are awaiting completion of
+inter-switch trunk circuits:
+   
+   ROTA, Spain                      MINET
+   NARDAC, San Francisco, CA        MILNET
+   Lowry AFB, CO                    MILNET
+   Ft. Leavenworth, KA              MILNET
+   DCAOC, Arlington, VA             MILNET  (IMP and NMC)
+   NSA, Ft. Meade, MD               ARPANET 
+   Landstuhl, FRG		    MILNET
+   Ramstein, FRG		    MILNET 
+
+1 Dec 1984				DDN Newsletter Special Issue 37
+
+
+
+Site surveys for the following  DDN nodes have recently been  conducted,
+or are scheduled in the immediate future.  These nodes are scheduled for
+installation  in  March-September  1985.    Additional  nodes  will   be
+scheduled as site nominations are received from the services.
+
+
+                                  ARMY
+				  ----
+
+MILNET:  Fort McPherson, GA; Fort Belvoir, VA; Stockton, CA; Fort
+Detrick, MD; Fort Benning, GA; Fort Bragg, NC; Camp Roberts, CA; Rock
+Island, IL; Fort Hood, TX; Fort Ord, CA; Fort Dix, NJ; Fort Knox, KY;
+Fort Sill, OK; Letterman AMC, CA; Fitz Simmons AMC, CO; Fort Buckner,
+Okinawa; Landstuhl, FRG; Fort Greeley, AK; Fort Campbell, KY.
+
+DISNET:  Fort Hood, TX; Fort McPherson, GA; Fort Belvoir, VA; 
+Fort Huachuca, AZ.
+
+                                  NAVY
+				  ----
+
+MILNET:  Port Hueneme, CA; Great Lakes, IL; NTEC, Orlando, FL;
+Mechanicsburg, PA; Corona, CA; Corpus Christie, TX; Bremerton, WA.
+
+                                  USAF
+				  ----
+
+MINET:  Athens, Greece; Incirlik, Turkey.
+
+MILNET:  WPAFB, OH (3rd IMP); Davis-Monthan AFB, AZ; Hill AFB, UT; McClellan
+AFB, CA; Sunnyvale AFS, CA; MacDill AFB, FL; Sheppard AFB, TX; Elmendorf
+AFB, AK; Humosa, Spain; Ramstein AFB, FRG; Langley AFB, VA; Croughton, UK.
+
+DISNET:  McClellan AFB, CA; Pentagon; Andrews AFB, MD; Scott AFB, IL.
+
+                             OTHER AGENCIES
+			     --------------			
+
+DCAOC - (MILNET and DISNET IMPs and MCs)
+NSA - IPLI Test Bed (3 IMPs, NMC)
+
+(Maj. Bruce Sweeny, (703) 285-5007, (V) 356-5007)
+
+                                 MINET
+				 -----	
+
+The MINET Stage II task order was executed on 27 April 1984.  The Naples
+and Sigonella nodes were installed in July.  The Capodichino  electronic
+mail host  and  the satellite  circuit  from Vaihingen  to  Naples  were
+operational in October.  Terminal  installations in Italy are  scheduled
+for completion by  December.  Installations  in Spain  are scheduled  to
+start in January 1985 and to be completed in February.
+
+Preparations are now underway to transition the MINET system into an
+operational MILNET effort in December 1984.
+
+DDN Newsletter Special Issue				1 Dec 1984
+
+
+EUCOM hosted a MINET Users Conference in Stuttgart, FRG 27-29 November.
+
+Planning for MINET Stage III, which will be completed as part of the DDN
+European expansion, continues with a scheduled start date of April 1985.
+(Maj. Robert Haskell, B647, (703) 285-5340, (V) 356-5340)
+
+Port allocation and management, processing requests for termination on a
+DDN TAC, validation of existing full period service, planned common-user
+dial-access expansion,  and publication  of TAC  dial-up phone  numbers.
+Further, implementation of these procedures will eliminate the need  for
+the quarterly inventory  report previously  submitted by  the Node  Site
+Coordinators.  (Mr. Jack Snively, B646, (703) 285-5227, (V) 356-5227)
+
+    DRAFT DCA INSTRUCTION FOR MANAGEMENT OF DDN INSTALLATION ACTIONS
+    ----------------------------------------------------------------
+
+Draft DCAI 310-P70-XX, 31 May 1984 has been forwarded to DCA PAC and DCA
+EUR for comments.  The new  DCAI describes detailed procedures and  flow
+of  DCA  actions   on  new  node   site  installations  and   subscriber
+connections.  (Maj. Bruce Sweeny, B647, (703) 285-5007), (V) 356-5007)
+
+
+              DDN NODE INSTALLATION/RELOCATION LEAD TIMES
+	      -------------------------------------------
+
+Installation of new nodes and relocation of existing nodes require the
+same set of functions and similar lead times to execute.  These are:
+
+a. Nomination of new site to DCA via the Service's DDN coordinating
+   office with completed presurvey form.  (T=0)
+
+b. DCA and service E&I agency conduct a joint site survey at the
+   nominated site.  (T=30-60 days)
+
+c. DCA orders interswitch trunks and remote access lines, plus needed
+   node equipment (T=60-90 days).  For relocations some circuits may be
+   rehomes of existing lines; this must be determined by negotiations
+   between DCA and the applicable circuit provider (TELCO Service) on
+   a case-by-case basis.
+
+d. Circuits are installed/tested or rehomed and tested, and the service
+   engineers prepare the new site.  (T=90 days (Conus)-540 days (Oconus))
+
+e. DCA provides for delivery of new node equipment or deinstallation
+   and reinstallation of relocated node equipment.  (T depends on
+   successful circuit activations.)  For relocations, the site is	
+   expected to provide for transportation of node equipment between
+   old and new sites, unless other arrangment are negotiated with DCA.
+			
+f. New node testing and cutover.  This is done at the time of the node
+   equipment installation.  (T depends principally on trunk circuit
+   lead times but estimate T=180-540 days.)
+
+   (Maj. Bruce Sweeny, B647, (703) 285-5007, (V) 356-5007)
+
+1 Dec 1984				DDN Newsletter Special Issue 37 
+
+
+
+
+                   ARPANET TAC ACCESS CONTROL SYSTEM
+		   ---------------------------------
+
+Over the  next several  months,  a system  will  be put  into  operation
+designed to authenticate each  user who attempts  to access the  ARPANET
+via a Terminal Access Controller (TAC).  This is a separate system  from
+the MILNET TACACS already in use to control access to DDN through MILNET
+TACS.  The  new ARPANET  access  system will  affect only  ARPANET  TACS
+(which currently  have no  access control)  and the  UCL-TAC in  London.
+Details of this new ARPANET TACACS system will be announced in a  future
+DDN Management Bulletin.
+
+The MILNET and ARPANET access  control systems have a similar  function,
+namely to restrict DDN access via TACs to authorized users, but they are
+implemented differently.  In the  current MILNET TACACS,  identification
+of authorized  users is  provided by  the Host  Administrators, and  all
+users must be registered and given TAC access cards by the NIC.  In  the
+new ARPANET system, a capability  for registering authorized users  will
+be provided to a "responsible person" in each government and  contractor
+organization whose members need to use ARPANET TACs.
+
+
+Information about authorized users will be  kept in a user database.   A
+"user database tool" has been developed which the responsible persons in
+various organizations will  use to add,  delete, and change  identifying
+information on authorized TAC  users.  The database  tool resides on  an
+ARPANET host and can be accessed by authorized persons over the network.
+
+Periodically, the user database information  will be sent in a  compiled
+form to each of several "login hosts" on the ARPANET.  When a user on  a
+TAC port tries to open  a connection, he or she  will be prompted for  a
+name and password.   The TAC will  then interact with  one of the  login
+hosts to validate the given name and password.  Each TAC will contain  a
+list of all login hosts and, if one is down, the TAC will  automatically
+try another.  If  the name/password  pair is invalid,  according to  the
+login host, the TAC will  give the user an  error message and refuse  to
+open the connection.   Thus, access will  be limited to  users who  have
+been entered into the user database by the responsible person for  their
+organization.
+
+In addition to  information about  authorized users,  the user  database
+also contains records  identifying organizations  and their  responsible
+persons.  The organizations  are arranged in  a hierarchical  structure,
+with DCA, due to  its responsibility for  operational management of  the
+ARPANET, as  the  root organization  at  level zero.   DARPA  and  other
+government organizations will be  at level one  and will be  responsible
+for creating the next level.  For example, IPTO will be an  organization
+at level two (below DARPA).  Below IPTO will be contractor organizations
+whose members  need  ARPANET access  to  support efforts  performed  for
+
+
+DDN Newsletter Special Issue 37		                     1 Dec 1984
+
+
+
+DARPA/IPTO.  In each case, both  user and organization records can  only
+be created below a given organization by someone authorized to "act  as"
+the  organization.   The  responsible  person  can  always  act  as  the
+organization.  Thus, the responsible person can assign a subordinate the
+job of actually manipulating the user database tool.
+
+The process  is  now underway  of  identifying responsible  persons  for
+organizations which use ARPANET, and  sending them documentation on  the
+user database  tool.   Soon  after  receiving  this  documentation,  the
+responsible persons will begin entering  authorized users into the  user
+database.  If  you are  an ARPANET  TAC user,  you should  expect to  be
+contacted by someone in your  organization with a username and  password
+prior to full activation of the  access control system.  A trial  period
+will begin shortly,  during which  access control will  operate using  a
+standard username and password announced in the TAC herald.  Before  the
+end of this trial  period, adequate notice will  be given in the  herald
+that individual passwords will soon be required.  This will give  users,
+who have not been contacted, time  to track down the responsible  person
+at their  organization to  obtain a  username and  password.  (Mr.  Jack
+Snively, B646, (703) 285-5320, (V) 356-5230)
+
+                           AIR FORCE DDN PMO
+			   -----------------
+
+The Air Force has  established an Air  Force DDN Implementation  Office,
+which  will  coordinate  all  AF  DDN  activities  including  subscriber
+connections and node site support.  This office is the Automated Systems
+Program Office (ASPO) and is headed  up by Maj. Larry Angell.  The  ASPO
+operates from Gunter AFS, Alabama.  Contact can be made by U.S. mail  to
+ASPO/PGD, Gunter  AFS, AL,  36114-6340; by  AUTODIN to  ASPO Gunter  AFS
+AL//PGD//; by  DDN  to  AFDDN@Gunter-Adam; and  by  telephone  to  (205)
+279-3531, (V) 446-3261.
+
+DDN is  particularly  pleased  to  have  this  full-bodied  support  and
+anticipates that future support for the Air Force subscribers will be of
+the highest calibre.  The ASPO has a wide range of planning guides  such
+as Facility Support Plan (FSP), Installation/Implementation Plan (I/IP),
+and Program  Management  Plan  (PMP), among  others.   These  plans  are
+available upon request through the  ASPO. (Maj. Mike Allen, B616,  (703)
+285-5025, (V) 356-5025)
+
+                      THE THIRD DDN TCO CONFERENCE
+		      ----------------------------	
+
+The DDN PMO held the  third DDN Telecommunications Certification  Office
+(TCO) working  group conference  during the  period of  18-21  September
+1984.  This year's conference  was held at  DIRUSARCCO at Ft.  Huachuca,
+AZ.  The purpose  of the conference  was to discuss  DDN procedures  for
+requesting service and other items pertaining to the DDN program as they
+relate to TCO responsibilities.  Some of the items discussed were:
+
+1 Dec 1984				DDN Newsletter Special Issue 37
+
+
+   - Lead time for DDN service
+   - Crypto account information for classified requirements
+   - Changes to DDN TSR item numbers
+   - Service and O&M responsibility for feeder TSR user information
+
+Additional information may be obtained by contacting the DDN PMO, Code
+B628, (703) 285-5100, (V) 356-5100.
+
+
+                        SUPPORT CONCEPT ANALYSIS
+                        ------------------------
+
+Dynamics Research Corporation of Wilmington, MA, has been tasked by  the
+DDN PMO to do  a comparative logistic support  concept analysis for  the
+DDN.  The analysis  will be used  in the formulation  of a DDN  Logistic
+Support Concept Recommendation to  the DDN coordinating committee.   The
+analysis will  investigate  four methods  or  options for  DDN  logistic
+support:
+
+
+   - Sole source contractor support
+   - Competitively procured contractor support
+   - Organic on-site and contractor off-site support
+   - On- and off-site organic support
+
+The  analysis   will  also   take  into   consideration  subjective   or
+non-quantifiable factors other  than cost.  Work  on the analysis  began
+the week of  24 September 1984  and the final  report will be  delivered
+ninety days  after receipt  of the  task order.   (Jimmy Connell,  B635,
+(703) 285-5237, (V) 356-5237)
+
+
+                 INTERNET PRIVATE LINE INTERFACE (IPLI)
+                 --------------------------------------
+
+A contract modification for the IPLI has been developed and negotiated
+with the contractor.  The modification includes NSA's IPLI prototype
+development security requirements, HEMP protection development, addition
+of the external gateway protocol, narrative clarifications, and
+extension of the contract through 31 March 1985.  The IPLI is presently
+undergoing software unit and some system testing and hardware validation
+testing.  (Robert Olson, B626, (703) 285-5449, (V) 356-5449)
+
+
+               NETWORK ACCESS COMPONENT (NAC) ACQUISITION
+	       ------------------------------------------	 
+
+The "Request for Proposals" (RFP) on the NAC was issued in July 1984  by
+DECCO.  Over 90 RFP  copies were requested.  The  responses were due  18
+September 1984.  The nominees for the evaluation panel were submitted by
+the Army,  Navy, and  Air Force.   The evaluation  panel convened  on  1
+October 1984.  It is anticipated that the contract will be signed during
+the first  quarter  FY85.  Delivery  of  the first  production  NACs  is
+expected in the second  quarter FY86, with a  delivery rate of 25  units
+per month during the life of the contract.  (Ronald Hyrkas, B626,  (703)
+285-5105, (V) 356-5105)
+
+DDN Newsletter Special Issue 37				1 Dec 1984
+
+
+                     DDN HOST INTERFACE ACQUISITION
+		     ------------------------------
+
+In an effort  to make  it possible to  obtain DDN  host interfaces  from
+commercial vendors, DDN  is acquiring  host interfaces  for testing  and
+evaluation purposes.  These host interfaces are for major host  computer
+system families  within the  DDN  subscriber community.   The  following
+contracts have been awarded:
+									
+         COMPANY                   HOST FAMILY
+
+   - Network Solutions             IBM 370 MVS
+   - Control Data Systems          CDC Cyber 170 NOS
+   - Honeywell Info. Systems       HIS Level 6 GCOS 6 MOD 400
+   - Gould Software Div.           DEC VAX 11 VAX/VMS
+   - Internet Systems Corp.        SPERRY 1100
+
+Contracts are in process for the following host families:
+
+   - HIS DPS8 GCOS8
+   - IBM 370 VM
+   - Burroughs B5000
+
+Awards are expected shortly for the first two families.  The third one
+will be delayed until after 15 December 1984, pending the availability
+of funds.  (June Mallory, B626, (703) 285-5131, (V) 356-5131.)
+
+                       DDN DOCUMENTS OF INTEREST
+                       -------------------------
+
+1.  Defense Data Network Subscriber Interface Guide.  Defense
+    Communications Agency, DDN PMO, Washington, D.C., 20305-2000,
+    July 1983. (Available from DTIC as AD A132-877)
+
+2.  Defense Data Network X.25 Host Interface Specification.  Defense
+    Communications Agency, DDN PMO, Washington, D.C., 20305-2000,
+    Dec. 1983. (Available from DTIC as AD A137 427)
+
+3.  Military Standard Internet Protocol.  Defense Communications
+    Agency, Attn: J110, Reston, VA., 12 Aug 1983.
+    (Available from NavPubs as MIL-STD 1777)
+
+4.  Military Standard Transmission Control Protocol.  Defense
+    Communications Agency, Attn: J110, Reston, VA., 12 Aug 1983.
+    (Available from NavPubs as MIL-STD 1778)
+
+5.  Military Standard TELNET Protocol Specification.  RFC-854, Info.
+    Sci. Inst., Univ. S. Calif., Marina del Rey, May 1983.
+    (Available from NavPubs as MIL-STD 1782)
+
+6.  Military Standard Simple Mail Transfer Protocol.  RFC 821, Info.
+    Sci. Inst., Univ. S. Calif., Marina del Rey, Aug. 1982
+    (Available from NavPubs as MIL STD 1781)
+
+7.  Defense Data Network Management Engineering Plan.  Provisional.
+    Defense Communications Agency, Attn: Code B627, DDN PMO,
+    Washington, D.C. 20305-2000, Jan. 1984. (LIMITED DISTRIBUTION)
+
+1 Dec 1984				DDN Newsletter Special Issue 37
+
+
+
+8.  DRAFT Defense Data Network System Description, Defense Communications
+    Agency, Attn: Code B627, DDN PMO, Washington, D.C. 20305-2000,
+    Jan. 1984. (Available from DDN PMO)
+
+9.  Defense Data Network Information Brochure, Defense
+    Communications Agency, Attn: Code B615, DDN PMO, Washington,
+    D.C. 20305-2000, Nov. 1983. (Available from DDN PMO)
+
+10. DDN Node Site Preparation and Installation Guide, Defense
+    Communications Agency, Attn: Code B645, DDN PMO, Washington,
+    D.C. 20305-2000, June 1984. (LIMITED DISTRIBUTION)
+
+11. Procedures for Processing DDN User and Node Site Requirements,
+    Draft.  DCAI 310-P70-XX, Defense Communications Agency, Attn:
+    Code B645, DDN PMO, Washington, D.C. 20305-2000, May 1984.
+    (LIMITED DISTRIBUTION)
+
+12. WWMCCS ADP Telecommunications Standard Engineering Practices,
+    Defense Communications Agency, Attn: Code B645, DDN PMO,
+    Washington, D.C. 20305-2000, Sep. 1981.
+
+These items may be ordered from the following addresses:
+
+   DDN PMO   Defense Communications Agency
+             DDN PMO
+             Attn: B613, C. Hart
+             Washington, D.C. 20305-2000
+             (703) 285-5031, (V) 356-5031
+
+   DTIC      Defense Technical Information Center
+             Cameron Station
+             Alexandria, VA 22314
+             (703) 274-7633, (V) 284-7633
+
+   NAVPUBS   Navy Publications
+             5801 Tabor Avenue
+             Philadelphia, PA 19120
+             (215) 697-2000, (V) 442-4120
+
+
+
+The following documents are being entered into the DTIC.  The AD ordering
+number will be provided in the next newsletter.
+
+1.  File Transfer Protocol. RFC 765, Info. Sci. Inst., Univ. S. Calif.,
+    Marina del Rey, June 1980.
+
+2.  Defense Data Network Subscriber Security Guide, Defense
+    Communications Agency, Attn: Code B615, DDN PMO, Washington,
+    D.C. 20305-2000, Nov. 1983.
+
+DDN Newsletter Special Issue 37				1 Dec 1984
+
+
+	
+3.  Internet Protocol Transition Workbook, Network Information Center,
+    SRI International, Menlo Park, CA, Mar. 1982.
+
+4.  Internet Protocol Implementation Guide, Network Information
+    Center, SRI International, Menlo Park, CA, Aug. 1982.
+
+5.  Internet Mail Protocols.  Network Information Center, SRI
+    International, Menlo Park, CA, Nov. 1982.
+
+6.  Miscellaneous Protocols.  RFCs 862-868, Network Information Center,
+    SRI International, Menlo Park, CA, June 1983.
+
+7.  DoD Protocol Reference Model, DRAFT.  System Develop. Corp.,
+    Santa Monica, CA, Dec. 1983.
+
+8.  TAC users Guide.  Rept. 4780, Bolt Beranek and Newman, Inc.,
+    Cambridge, MA, Oct. 1982.
+
+9.  Interface Message Processor, Specifications for the 
+    Interconnection of a Host and an IMP.  Appendices J and K,
+    Rept. BBN-1822, Bolt, Beranek and Newman, Inc., Cambridge, 
+    MA, Dec. 1981.
+
+10. The ARPANET 1822L Host Access Protocol, RFC878, Bolt,
+    Beranek and Newman, Inc., Cambridge, MA, Dec. 1983.
+   
+
+                       ONLINE AND HARDCOPY ITEMS
+		       -------------------------
+
+RFCs (Requests for Comments) are a  set of network technical notes  used
+primarily to introduce proposed  internet protocols and related  network
+topics.  Dr. Jon Postel is currently serving as Editor-in-Chief for  the
+RFCs.  To submit an  RFC for publication, contact  POSTEL@USC-ISIF.ARPA.
+To be added to the notification list for new RFC announcements,  contact
+NIC@SRI-NIC.ARPA.  RFCs can be  found online on  the SRI-NIC machine  in
+the <RFC>  directory.   They  may  be FTPed  by  connecting  to  SRI-NIC
+(10.0.0.51 or 26.0.0.7) and logging in as 'ANONYMOUS' with password =
+'GUEST' using pathnames <RFC>rfcnnn.txt where nnn = the number of any
+given RFC.  An online index for RFCs is available on SRI-NIC using
+pathname <RFC>rfc-index.txt.
+
+Another group of technical notes known as IENs (Internet Experiment
+Notes) are also available on SRI-NIC in directory <IEN> and may be FTPed
+using pathname <IEN>ien-nnn.txt where 'nnn' is the number of any given
+IEN.  The index for IENs is in the online file <IEN>ien-index.txt.
+
+               OTHER ONLINE FILES AVAILABLE FROM THE NIC
+               -----------------------------------------
+
+   DOCUMENT                       FILE OR PATHNAME
+
+DDN Management Bulletins      <DDN-NEWS>ddn-mgt-bulletins-n.txt
+                                 (where 'n' = the Bulletin number)
+DDN Newsleters                <DDN-NEWS>ddn-news-n.txt
+                                 (where 'n' = the Newsletter number)
+
+Host Administrators List      <NETINFO>mil-host-administrators.txt
+                              <NETINFO>arpa-host-administrators.txt
+Host Administrators Duties    <NETINFO>site-mgt-duties.txt
+Node Site Coordinators List   <NETINFO>mil-nsc.txt
+                              <NETINFO>arpa-nsc.txt
+Node Site Coordinators Duties <NETINFO>site-mgt-duties.txt
+
+
+1 Dec 1984				DDN Newsletter Special Issue 37
+
+
+Host Technical Liaison List   <NETINFO>mil-liaison.txt
+                              <NETINFO>arpa-liaison.txt
+Host Technical Liaison Duties <NETINFO>site-mgt-duties.txt
+TCP/IP Implementations and
+  Vendors Guide               <NETINFO>tcp-ip-implementations.txt
+TAC List By Location          <NETINFO>tac-location.txt
+MILNET TAC Phone Numbers      <NETINFO>tac-phones.list
+BBN TAC User's Guide          <NETINFO>tac-user.doc
+                              <NETINFO>tac-user.scribe (SCRIBE version)
+List of NIC documents         <NETINFO>nic-pubs.txt
+
+
+
+
+
+-------

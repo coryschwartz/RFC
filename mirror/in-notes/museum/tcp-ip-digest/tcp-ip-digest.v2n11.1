@@ -1,0 +1,495 @@
+22-Jun-83 08:51:44-PDT,24093;000000000001    
+Return-Path: <tcp-ip@brl-vgr>
+Received: FROM BRL-VGR BY USC-ISIF.ARPA WITH TCP ; 21 Jun 83 21:24:34 PDT
+Received: From Brl-Vgr.ARPA by BRL-VGR via smtp;  21 Jun 83 22:30 EDT
+Sender:    Mike Muuss <TCP-IP@brl>
+From:      TCP-IP@brl
+To:        TCP-IP@brl
+Date:      22 June 1983 00:00 EST
+Subject:   TCP-IP Digest, Vol 2 #11
+
+TCP/IP Digest          Wednesday, 22 June 1983     Volume 2 : Issue 11
+
+Today's Topic:
+            TOPS-20/TENEX TCP/IP Implementations, and Pinging
+----------------------------------------------------------------------
+                  TCP/IP Digest --- The InterNet Digest
+                         LIMITED DISTRIBUTION
+          For Research Use Only --- Not for Public Distribution
+----------------------------------------------------------------------
+
+From: Mike Muuss <mike@brl>
+Subject: Special Issue on TOPS-20/TENEX TCP/IP Implementations, and Pinging
+
+This issue is entirely devoted to discussion of the TOPS-20/TENEX
+IP routing mechanism, which uses InterNet Control Message Protocol "Echo"
+(ICMP/ECHO) packets to determine the Up/Down status of various Gateways.
+(I have removed most of the lengthy message headers to improve readability).
+
+			-Mike
+
+------------------------------
+
+Date: 20 Jun 1983 13:37:21 EDT (Monday)
+From: Steven Cohn <scohn@bbn-unix>
+Subject: TCP & Gateway Pinging
+
+In the course of studying the long delays and other problems experienced
+by users of the TYMSHARE-[IMP]43 Office machines 1,2,3, and 7, some
+undesirable aspects of the TCP implementation at TYMSHARE were
+uncovered.  We have not yet examined the rest of the IMPs on the ARPANET
+to determine if other hosts are suffering from the same disease, but
+have reason to suspect TENEX and TOPS-20 TCP implementations.
+
+TYMSHARE's TCP running on OFFICE-1 and OFFICE-2 had built into it a
+clumsy approach to maintaining a table on the status of internet
+gateways.  Generally it is unnecessary to communicate with a gateway
+unless one has traffic destined for that gateway, however, both hosts
+were regularly "pinging", or exchanging single messages, with each of 23
+gateways, at the interval of 37 seconds.  This is unnecessary for
+TYMSHARE as none of its users accesses the ARPANET through a gateway.
+It also may have contributed some of the degradation of service that
+they have observed.  This last point has not yet been demonstrated, but
+as I explain below, there is good reason to suspect this.
+
+Here is the scenario.  TYMSHARE-43 is a C/30 IMP running 4305.  This
+provides for 56 end-to-end connections.  TYMSHARE has 4 real hosts
+which, during one of my 5-minute measurements, sent substantial numbers
+of messages to 15 different hosts on the ARPANET.  However, as their
+implementation of TCP, combined with its interaction with 1822, uses the
+handling type field, each of these logical connections may result in
+several subnetwork connections.  (This results from a misinterpretation
+of the implementation specifications in BBN Report 1822 on the
+interconnection of a host and IMP.  We are presently considering what
+the right policy on this matter should be.  Handling type should
+generally be set to zero.  If messages are submitted on a single
+host-to-host connection with different handling types then a separate
+connection will be set up for each type.  We have observed as many as 5
+different subnetwork connections between a pair of hosts.  This is
+undesirable for two reasons.  First, since messages in the same stream
+will be sent on different connections, the IMPs will not deliver them in
+order so that the TCP will have to reorder them; messages on the same
+connection are always delivered in correct order.  Second, having more
+connections open drains the resources of the IMP.  This can be quite
+serious, as I explain below.  Furthermore, it is not at all clear that
+there are any benefits to maintaining multiple connections.)
+
+Here's the problem.  Two of the hosts on TYMSHARE-43 ping each of the 23
+gateways every 37 seconds.  (CUMSTATS, after much scrutiny, exposed
+this.) These possibly also have variable handling type.  Thus this
+configuration can easily consume the available connection resources in
+the IMP which means that each time either of the hosts pings a gateway
+it will probably need to set up a new connection.  (EESTATS over a
+1-hour period showed that the IMP was resetting its transmit blocks once
+every 1.07 seconds, on average.)
+
+Assuming a new connection is required for each ICMP ping of a gateway,
+then each host is blocked every 37/23 = 1.6 seconds for as long as it
+takes to set up a connection.  (When the ping message is submitted the
+interface blocks until a message number is obtained.  Since there is no
+existing connection a connection must be established before obtaining a
+message number and queuing the message.) Measured round-trip times for
+messages originating at TYMSHARE-43 (using CUMSTATS) range between 440
+and over 600 ms, averaged over 1-hour periods.  Minute-by-minute
+fluctuations presumably result in higher values at times.  If we assume
+a 600 ms round-trip time then it takes at least 600 ms to set up a
+connection to a gateway and dispatch the ping.  During this time nothing
+else can be submitted to the net by that host.  Thus, using the above
+values, the two host would each be blocked 600 ms out of each 1.6
+seconds or almost 40 % of the time.  If the ICMP pings are bunched this
+could lead to higher blockage rates for particular intervals.
+
+This can have at least two adverse effects.  First, it will certainly
+impact host throughput if its interface is blocked 40 % of the time on
+useless persuits, at least from TYMSHARE's perspective.  Second, it
+cannot be useful to the gateways to be pinged this often by however many
+hosts on the ARPANET happen to be running this code.  (Incidentally, we
+will soon run measurements to try to identify any other culprits.)
+
+When I explained this all to Robert Lieberman at TYMSHARE he discovered,
+via some software people at SRI, that the timer in the TCP code which
+controlled this gateway pinging could be easily adjusted and since his
+hosts do not talk to gateways he set the timer to 280 minutes,
+effectively disabling the pinging so that we can observe the effect on
+performance.  Our hope is that this will yield improved service for the
+STLA-[IMP]61 users of TYMSHARE hosts.  Basically this approach to the
+gateways is inadequate and must be replaced.  Just setting the timers is
+not an adequate solution, although useful immediately.
+
+It is not known if this contention for connections is degrading service
+for other hosts on the network.  However, the mechanism explained above
+may very well be impacting your network performance without being
+obvious.  It happens, for example, that this mechanism does not produce
+any kind of trap that would signal a problem to network operators
+because, while the host may be blocked much of the time, it is not
+blocked for an extended period e.g. 3 seconds.
+
+I would appreciate hearing about any other cases, suspected or proven,
+where connection contention causes degraded service.  Remember, the
+ARPANET is NOT just a datagram network.
+
+Regards,
+
+Steve Cohn
+
+------------------------------
+
+Date: 20 Jun 1983 1112-PDT
+From: Henry W. Miller <Miller@sri-nic>
+Subject: Re: TCP & Gateway Pinging
+
+Steve,
+
+	Thank you for your deductions on this.  I believe that you will
+find all or most of the TOPS20 and TENEX sites on the network exhibiting
+this behavior, since we are running variants of the same code.  However,
+the pinging algorithim should be sufficiently similar in all the
+implementations to exhibit the same bad manners.  The exceptions, as
+far as I can see are those hosts who have edited entries out of their
+gateway tables.
+
+	As far as I know, 37 seconds is the standard inter-ping
+interval.  From conversations with Dave Mills and Mike Brescia,
+this interval is way too short, and results with the poor gateways
+being flooded by probes at a high rate.  This congests them as well,
+and hampers communications with other nets.  The value of PINGT0
+in the monitor should be raised to a higher value.  We are currently
+using about a 1 minute interval, and may raise that if the results
+warrant it.
+
+	There are many other things that the code may be doing
+wrong, but more research is needed.
+
+-HWM
+
+------------------------------
+
+Date: 21-Jun-83 02:56 PDT
+From: RLL.TYM@office-2
+Subject: Warning, TCP-4 problems
+
+This message is to make it clear that at least two problems exist in the
+TOPS20, TENEX TCP code that is based on the BBN implementation.
+
+1) The frequency of 'pinging' has caused excessive delays and heavy net
+loads for our local IMP.  Our brief experiments show that whatever the
+interval is, when the process wakes up and begins to 'ping' the several
+gateways, all hell breaks loose and the host/imp are effectively down
+until this process completes.  The most noticeable symptom is the sudden
+slowness for a minute or so. However, the most annoying is the fact that
+this process in some way (yet unknown) can disrupt the other connections
+to our hosts with the result of user jobs that disconnect in funny ways
+leaving 'hung' jobs on the host.  With a PING interval of 37 seconds (the
+common standard), the situation is far worse.  We have gone the full way
+and will just NOOP the entire process of pinging.  When a proper
+solution is found, we will re-implement the pinging process.
+
+2) This version of the BBN TCP code uses connections in an inefficient
+manner as was stated by Steve Cohn.  Also we agree with Steve that this
+code has a 'clumsy' approach to maintaining internet gateway data.
+
+Since we run as vanilla as possible implementation of the TCP code to be
+as compatible as possible with the TOPS20 sites, we will wait until
+there is some general agreement on how to design the 'ping' process
+before installing it.  Since BBN is not supporting this code, we will
+continue to work closely with SRI, ISI, Stanford, etc. in solving these
+common problems.
+
+Robert
+
+------------------------------
+
+Date: Tue 21 Jun 83 04:00:25-PDT
+From: Mark Crispin <MRC@SU-SCORE.ARPA>
+Subject: Re: Warning, TCP-4 problems
+
+One suggestion -
+
+     Do not run the NIC-supplied INTERNET.GATEWAYS file!!  This
+is not made obvious to sites (I certainly was unaware of it), but
+it is an important axiom.
+
+     The problem is that the NIC gateways file has all the
+gateways.  You really don't want all the gateways; instead, you
+want a few "prime" gateways that are your primary contacts for IP
+datagrams leaving ARPANET.  You probably also want a few other
+selected "always-up" (these don't get pinged) and "dumb" gateways
+(e.g. for nets you know you are going to talk to all the time).
+
+     The reason you don't need all the gateways is that ICMP to
+the prime gateways will take care of fixing up your routing table
+to suit your needs dynamically as those needs happen.  ICMP is
+always going to be better than any file the NIC could provide.
+
+     I've talked to several individuals who've been involved with
+this stuff for years, and they all concur: if you're on the East
+coast, run BBN's INTERNET.GATEWAYS; if you're on the West coast,
+run ISI's.  Otherwise, look at both and figure out for yourself
+what looks best for your needs.  Use the NIC's only as a
+reference source of gateways you might want to add.  Don't
+actually run it.
+
+-- Mark --
+
+------------------------------
+
+Date: 21 Jun 83 11:34:32 EDT
+From: Dir LCSR Comp Facility <HEDRICK@RUTGERS.ARPA>
+Subject: Re: Warning, TCP-4 problems
+
+It would help me (and I suspect also other people on this list) if
+someone would describe in a bit more detail the method in which we hear
+about gateways that are not listed in our internet.gateways file.  I
+would like to be able to talk to any internet-addressable host.  I would
+not like to spend all of my time pinging.  If I list only the prime
+gateways, will I still be able to talk through any gateway?  If so, then
+why does anyone list anything other than the prime gateways?  Also, a
+previous message said that prime gateways are safe because they don't
+get pinged.  It also implied, but did not say, that this was true of
+DUMB gateways also.  Is it?  Would anything be gained if we listed all
+of the gateways from the NIC file, but changed the ones that get pinged
+(I am still not clear on which those are) to be listed as dumb?
+
+------------------------------
+
+Date: 21 Jun 1983 0945-PDT
+From: POSTEL@usc-isif
+Subject: Re: Warning, TCP-4 problems
+
+
+       +-------------------------------------------------------+
+       |                                                       |
+       | It is not necessary for any host to ping any gateway. |
+       |                                                       |
+       +-------------------------------------------------------+
+
+All a host has to have is a short list of fairly reliable gateways.  The host
+also keeps a dynamicly built table of (destination-network,gateway-to-use)
+pairs.  When the host has oo send a datagram it first checks to see if the
+destination network is in the dynamic table.  If it is then it uses the
+indicated gateway.  If the destination network is not in the dynamic table,
+then the host choose one of the gateways from the short list (randomly if
+it wants) and makes a new entry in the dynamic table for that new pair.  If
+a host sends a datagram to a destination network through the "wrong" gateway,
+that gateway will (in addition to forwarding the datagram anyway) send back
+to the host a  ICMP Redirect Control Message indicating the correct gateway.
+The host on receiving an ICMP redirect message should update the dynamic
+table entry to show the correct gateway for that destination network.  The
+entries in the dynamic table should be aged and deleted after a fairly long
+time (say, an hour). The entries should also be deleted at once if there if
+is any indication that the gateway has died (e.g., an ARPANET 1822 "host dead"
+is returned).
+
+--jon.
+
+------------------------------
+
+Date: 21 Jun 1983 0959-PDT
+Subject: Of gateways and pinging
+From: Joel Goldberger <JGoldberger@usc-isib>
+
+Mark's comments on this subject are essentially correct, but it's clear
+that there is some confusion.  PRIME gateways are a small subset of
+gateways that engage in GGP (Gateway Gateway Protocol) amongst
+themselves to maintain up to date routing tables.  At some interval they
+announce to each other what networks they are connected to and how far
+(in hops) they are from all networks that they know.  I'm not sure what
+their known set of networks is.  The way things are supposed to work is
+that if a host needs to talk to a particular network and doesn't know
+the gateway to use it sends the message to any PRIME gateway.  If that
+gateway knows of another gateway that is closer it sends an ICMP
+re-direct packet back to the host.
+
+TOPS-20 uses two different methods to PING gateways; PRIME gateways are
+sent ICMP Echo packets, which they return as ICMP Echo Reply packets.
+Dumb gateways (which don't speak ICMP) are PINGed with ICMP Echo-Reply
+packets "reverse-addressed", that is the packet is addressed to the host
+that is pinging; since the packet isn't for the gateway that received
+it, it simply sends it back out.  ALWAYS-UP and HOST gateways are not
+PINGed at all.  Since non-PRIME gateways don't get involved in the GGP
+routing table update game one needs to include them in the tables if one
+wants to talk to hosts on the network that they serve.
+
+I hope this removes some of the mystery surrounding this subject.
+
+- Joel Goldberger -
+
+------------------------------
+
+Date: 21 Jun 1983 1940-EDT
+Sender: CLYNN@bbna
+Subject: Re: Warning, TCP-4 problems
+From: CLYNN@bbna
+
+  Recent measurements and messages indicate that a clarification
+of the use and contents of the INTERNET.GATEWAYS file is needed and
+that some TOPS20/TENEX hosts may still have a bug in their network
+driver which is degrading network performance.  First, the bug:
+The end of the IMPHDR routine (1822DV.MAC) should be:
+
+	LOAD T3,NBBSZ,(T2)	; Get size
+	SUBI T3,.NBHHL		; (Pseudo and real) header words
+	ASH T3,2+3		; Make into bits
+	CAILE T3,^D1008-1	; Uncontrolled flow must be single packet
+	  MOVX T1,STY%FC	; Too big, must use Normal flow-controlled
+	STOR T1,IHSTY,(T2)	; Message sub-type
+	RET			; And return
+
+If there is an		IDIVI T3,^D1008
+			STOR T3,IHHTY,(T2)
+please remove it.
+
+
+  In theory, gateways do not have to be pinged;  a generic internet
+gateway server whose internet logical name is coded into each host
+could supply that host with the internet address of a gateway to use
+(try) when the route to a destination network is not known.
+
+   Until such a service is readily, reliably available, the TOPS20
+and TENEX hosts use a site-dependent initialization file, named
+INTERNET.GATEWAYS, to provide the address of a gateway to try when
+the route to a destination is not known.  There is no need for a
+host to know about all of the gateways;  the gateway system and
+the ICMP protocol should make it possible for a host to reach any
+"official" internet address, if it is at all possible.
+
+  The INTERNET.GATEWAYS file should contain one or two (fairly
+reliable) "PRIME" gateways on each network to which the TOPS20
+or TENEX is directly connected.  Briefly, a PRIME gateway is
+one of the "back-bone" gateways which knows now to route a packet
+to one of the reachable networks, and will send ICMP redirect
+messages when appropriate.  For reasons of performance (some of
+which have been described in other messages), it is best if
+sites do not all use the same gateway(s).  A "nearby" prime
+gateway should be the first entry in the file, and a "backup"
+should follow.  Entries should not be included simply because
+the site has frequent communications with a particular net.
+
+     One can make a reliability argument that the backup
+     should be on the other side of the continent to try
+     and minimize the possibility that both are down at
+     the same time (due to a failure or maintenance).  A
+     better solution (until the "gateway server" arrives)
+     would be to have a backup file and to teach the
+     operator(s) when and how to dynamically install it.
+
+  Before one starts changing the values of the default network
+parameters, make sure the consequences are well understood (and
+please inform the operator what sorts of "performance problems"
+the users may consequently report).  Most of the timeouts, etc.
+are associated with robustness;  the longer the time constants,
+the longer the associated outage will be when something fails.
+
+   If a gateway listed in the routing cache goes down then
+communication with the related network will not be possible
+until the route is timed-out;  setting the timeout of the
+routing cache to a large number can result in many problem
+reports.  Setting it too short will cause packets to be sent
+to the prime gateway more frequently.  [One recent incident:
+"Users at B cannot communicate with Site D (anywhere else is
+ok, though)" -- an ICMP redirect caused an entry to be placed
+into the routing cache, and that gateway had subsequently
+failed;  the routing cache was set to time out in six hours.
+By the time the problem had been identified, there was only
+one hour to go ...]
+
+  If the ping interval is lengthened, the loss of a gateway will
+not be noticed for a period about four times as long.  During the
+interval, attempts to use the gateway (which are "hidden" from
+the user) will fail.  If pinging is disabled, and the first prime
+gateway listed in INTERNET.GATEWAYS goes down, the host will only
+be able to communicate with directly connected networks and
+networks which are still in the routing cache.
+
+  If your host is only connected directly to the ARPANET, then
+you need not read further.  Complications arise when the host
+must be able to deal with "unofficial" entities -- hidden nets
+or hosts, local area networks, home-brew gateways, etc.
+
+  When the host tries to find a route to a network, it first checks
+the routing cache.  If there is a functioning interface to the
+desired network, it is used, secondly, if a <net,gateway> pair
+is found, the gateway is used as the destination for the packet.
+If no entry is found,
+    [the gateways listed in INTERNET.GATEWAYS (which are "up")
+    are examined (in the order specified in the INTERNET.GATEWAYS
+    file) to see if one is listed as being able to reach the
+    desired net, if so, it is used,  otherwise,]
+the first PRIME gateway in the file (which is "up") will be tried.
+If an ICMP Redirect Net message is received, the <net,gateway>
+pair will be entered into the routing cache.
+
+  The TOPS20/TENEX TCP-IP implementation is designed to operate in
+the internet environment, not just the ARPANET;  in fact, it is not
+necessary that the host even be connected to the ARPANET  (thus it
+cannot rely on ARPANET/1822-specific mechanisms such as "host dead";
+there is no corresponding mechanism in ethernet, for example).
+The bracketed clause in the paragraph above is intended to allow a
+site's liaison to both override the routing supplied by the internet
+gateways (for administrative purposes, for example), and to allow
+the host to use hidden or "unofficial" gateways, etc. between
+networks with which the host must communicate, or which form the
+site's local area network.  If such is not the case, there probably
+should not be an entry in the gateway file;  if there is an entry
+in the file (which isn't being pinged) and the gateway fails,
+communications with the associated nets will be blocked.
+
+  The following descriptions of non-PRIME gateways is included for
+completeness, but use of such gateways is probably limited to sites
+which have to communicate via local gateway implementations that do
+not "conform to the official behavior" expected of a PRIME gateway.
+
+PRIME gateways speak Internet Control Message Protocol, and will
+turn an ICMP ECHO packet into an ECHO-REPLY;  they know how to
+forward packets to reachable networks, and will send ICMP Redirect
+messages when appropriate.  (E.g. the "backbone" gateways.)  They
+are pinged to monitor when they are up and down.
+
+DUMB gateways do not speak ICMP and thus will only forward packets.
+These are pinged with ECHO-REPLIES instead of ECHO packets.
+
+ALWAYS-UP gateways will not answer pings at all due to strange
+implementations which, for example, prohibit reflecting packets
+back into the net from which they came.  They are assumed to always
+be up;  if they go down, you have a black hole.  (E.g. Two IMPs
+on different networks which have ports which are wired together.)
+
+HOST gateways are hosts which are capable of routing packets which
+they receive;  they should not be burdened with forwarding packets
+since they did not originate them, but they can be used in an
+emergency.  (E.g.  TOPS20s [BBN or current DEC software] connected
+to more than one (inter)network can be used to pass packets between
+those (inter)networks.)
+
+Hopefully, this has answered more questions than it raises;
+if questions remain, send me a note.
+
+Charlie
+
+------------------------------
+
+Date: 21 Jun 1983 1216-PDT
+From: David Roode <ROODE@sri-nic>
+Subject: Re: Warning, TCP-4 problems
+
+Two more questions:
+
+1) Does or Does NOT the TOPS-20 TCP's ICMP processes redirect messages?
+
+2) IS there a program that anyone has that will printout the current
+status of the monitor's gateway table?
+
+------------------------------
+
+Date: 21 Jun 1983 1653-PDT
+From: Henry W. Miller <Miller@sri-nic>
+Subject: Re: Warning, TCP-4 problems
+
+	Yes, it does, but only redirect net, not redirect host.
+
+-HWM
+
+------------------------------
+
+END OF TCP-IP DIGEST
+********************

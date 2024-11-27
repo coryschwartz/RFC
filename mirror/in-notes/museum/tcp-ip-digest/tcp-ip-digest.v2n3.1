@@ -1,0 +1,147 @@
+12-Apr-83 03:31:14-PST,5434;000000000001
+Return-path: <tcp-ip@Brl-Vgr.ARPA>
+Mail-From: SMTP created at 12-Apr-83 03:28:42
+Received: FROM BRL-VGR BY USC-ISIF.ARPA WITH TCP ; 12 Apr 83 03:28:51 PST
+Sender:    Mike Muuss <TCP-IP@Brl.ARPA>
+From:      TCP-IP@Brl.ARPA
+To:        TCP-IP@Brl.ARPA
+Date:      12 Apr 1983 00:00 EST
+Subject:   TCP-IP Digest, Vol 2 #3
+Received: From Brl-Vgr.ARPA via smtp;  12 Apr 83 3:03 EST
+
+TCP/IP Digest             Tuesday, 12 Apr 1983     Volume 2 : Issue 3
+
+Today's Topics:
+                              VDH on UNIX?
+                    TCP/IP for UNIX on an LSI-11/23?
+                 TCP/IP on 68000 running UNIX System III
+                         XNS:  A Real Standard?
+----------------------------------------------------------------------
+                  TCP/IP Digest --- The InterNet Digest
+                         LIMITED DISTRIBUTION
+          For Research Use Only --- Not for Public Distribution
+----------------------------------------------------------------------
+
+Date:     25 Mar 83 00:28:41 EST  (Fri)
+From: Mark Weiser <mark.umcp-cs@Udel-Relay.ARPA>
+Subject:  VDH on Unix.
+To: tcp-ip@Brl.ARPA, dan@Sri-Tsc.ARPA
+
+I inquired about this a long time ago, to all the mailing lists I could
+think of including Unix-Wizards and Info-Vax.  The silence was deafening.
+An ECC from ACC is the only way to go.  (Two of these boxes at either
+end of a transmission line of arbitrary length make each end think it
+is talking a LH/DH protocol.)
+
+[ Actually, one alternative to consider is an HDH (HDLC Distant Host)
+  connection to the IMP.  ACC has a UNIBUS interface for HDH, and
+  Rob Gurwitz of BBN is reported to be building a driver.  HDH uses
+  the same type of access lines as VDH did (synchronous modems),
+  and is less expensive than ECUs.  As HDH is still brand new, there
+  may be some bugs left to find for a little while.  -Mike ]
+
+------------------------------
+
+Date:     Thu, 7 Apr 83 17:53:45 CST
+From: Paul.Milazzo <milazzo.rice@Rand-Relay.ARPA>
+Subject:  TCP/IP for UNIX LSI-11/23
+To: TCP-IP@Brl.ARPA
+
+Does anyone know of a TCP/IP implementation which will run under UNIX
+V7 or 2.xBSD on an LSI-11/23?  The machine will be used as a network
+print server on a 10Mb Ethernet using a specialized user-level
+protocol, so no protocol software is necessary, although some flavor of
+FTP would be nice during the development phase.
+
+				Paul Milazzo
+				Dept. of Mathematical Sciences
+				Rice University, Houston, TX
+
+[ The only PDP-11 UNIX implementations I know of fit only into split-I/D
+  PDP-11s, although the MIT-CSR one might fit, as might the early
+  "all in user code" TCP implementations.  -Mike ]
+
+------------------------------
+
+Date: 30 Mar 83 11:31:04 PST (Wed)
+From: UCBVAX@Ucb-Vax.ARPA
+Subject: tcp on 68000's
+To: tcp-ip@Brl.ARPA
+
+Unisoft has ported the UCB IP/TCP code to UNIX System III running on
+various incarnations of the 68000.  The kernel code running now is derived,
+in truth, from the Croft port of 4.1a+ to the pdp-11.  User programs
+running now are rcp, rlogin, and mail -- based on "delivermail".
+
+Buffer-to- buffer performance to date:
+
+	Ethernet, 3com multibus controllers, 2 8-mhz "Sun"-type cpu boards,
+	on-board memory (no wait-states).
+
+	With Checksums		580,000+ bits/sec.
+	Without Checksums	680,000+ bits/sec.
+
+Future plans:  Merge in UCB 4.1c/4.2 kernel changes; bring up arpa standard
+ftp, telnet, mail;  Bring up various random hacks such as rwho, etc.
+
+We have experienced no "stuttering", a recent complaint about this code when
+it runs on the 11 -- but of course we aren't on the Arpanet (sigh).
+
+This code will be available to all oem's of Unisoft, some of which include
+Wicat, Codata, Dual, Pixel, Callan, Corvus, Cosmos, CYB, Heurikon, Ampex,
+Microbar, Megadata, Momentum, NCR, Pacific Micro, Victory, Xyvision.  Sun
+Microsystems is an oem of Unisoft also; rumor has it that they have
+some networking software of their own.
+
+Whether any of these companies choose to make this code available to their
+customers is up to the companies.
+
+Bill Northlich
+Unisoft Corp.
+2405 Fourth Street
+Berkeley, Ca. 94710
+(415) 644-1230
+TWX II (910)366-2145
+ucbvax!unisoft!billn
+
+------------------------------
+
+Date:     12 Apr 83 2:11:22 EST (Tue)
+From:     Mike Muuss (TCP-IP Digest)  <tcp-ip@BRL-VGR>
+To:       tcp-ip at BRL-VGR
+Subject:  XNS:  A Real Standard?
+
+Recently, a very good question was raised about XNS,
+Xerox's new network protocol:
+
+	"Is XNS becoming the commercial [network] standard?"
+
+Two statements about this question were made that bear repeating
+(published by permission):
+
+Chris Kent <CAK@Purdue> said:
+
+	"XNS may well become a standard for Ethernet based networks;
+	 what happens when you want to talk to someone else?"
+
+Chris Ryland <CPR@MIT-XX> said:
+
+	"Yes, it does appear that XNS is gaining the momentum needed
+	 to become a true standard (vs. a paper standard).  I say this
+	 because there are a lot of companies offering or about to offer
+	 XNS-based networks (Network Research, ACC, 3Com, Bridge, are
+	 a few)."
+
+I would like to see a discussion of:
+
+1)  the technical merits of XNS -vs- TCP/IP, and
+2)  some speculation on their futures in the commercial arena
+
+in future issues of the TCP Digest ("The INTERNET Digest").
+
+				Best,
+				 -Mike
+------------------------------
+END OF TCP-IP DIGEST
+********************
+

@@ -1,0 +1,753 @@
+
+
+PROBE-MIB DEFINITIONS ::= BEGIN
+
+-- LanProbe Private MIB (as implemented in LanProbe-II, first version)
+--
+-- Author:        Hewlett-Packard Company
+-- Last updated:  August 25, 1992
+-- Purpose:       Defines objects need to configure a network probe's:
+--                 *  IP interface,
+--                 *  trap destinations, and
+--                 *  access security
+--                and to reboot the probe and check its administrative
+--                status.  Designed for use with the HP LanProbe which
+--                also supports the RMON MIB and MIB-II.
+--
+--         (c) Copyright 1991,1992 Hewlett-Packard Company.
+--
+
+IMPORTS
+    enterprises, Counter, IpAddress      FROM RFC1155-SMI
+    DisplayString                        FROM RFC1213-MIB
+    OBJECT-TYPE                          FROM RFC-1212
+    EntryStatus, OwnerString             FROM RFC-1271;        -- RMON MIB
+
+    -- textual conventions
+
+    AccessLevel ::= INTEGER
+        {   level1(1),
+            level2(2),
+            level3(3),
+            level4(4)
+        }
+    -- The level of access right that maps to a community string.
+    -- There are four levels with increasing degree of authorization.
+    -- Each higher level is granted the rights of the lower levels
+    -- in addition to the following specific privileges:
+    --
+    -- level1 - Read access to MIB-II objects.
+    --
+    -- level2 - Read access to MIB-II, RMON MIB, and LanProbe MIB
+    --    objects, excluding the objects in the AccessControl group
+    --    and in the captureBufferTable.
+    --
+    -- level3 - Write access to RMON MIB and LanProbe MIB objects, 
+    --    excluding the objects in the probeAdmin, interface,
+    --    and accessControl groups.  Read access to MIB-II, RMON MIB 
+    --    (including the captureBufferTable), and LanProbe MIB objects 
+    --    excluding those in the accessControl group.
+    --
+    -- level4 - Read and write access to all MIB-II, RMON MIB, and LanProbe
+    --    MIB objects.
+
+
+
+    -- Default IP values
+    --
+    -- Because Marshall Rose's MOSY compiler does not accept
+    -- an IP address for a DEFVAL, these DEFVALs have been commented
+    -- out but it is required that implementors use these default
+    -- values.
+
+
+
+
+    hp                        OBJECT IDENTIFIER    ::= { enterprises 11 }
+    nm                        OBJECT IDENTIFIER    ::= { hp 2 }
+    hpExperimental            OBJECT IDENTIFIER    ::= { nm 1 }
+    system                    OBJECT IDENTIFIER    ::= { nm 3 }
+    interface                 OBJECT IDENTIFIER    ::= { nm 4 }
+    snmp                      OBJECT IDENTIFIER    ::= { nm 13 }
+    netElement                OBJECT IDENTIFIER    ::= { system 7 }
+    ino                       OBJECT IDENTIFIER    ::= { hpExperimental 5 }
+    trap                      OBJECT IDENTIFIER    ::= { snmp 1 }
+    community                 OBJECT IDENTIFIER    ::= { snmp 5 }
+
+    -- sysObjectId definitions
+
+    lanprobe                  OBJECT IDENTIFIER    ::= { netElement 6 }
+    general                   OBJECT IDENTIFIER    ::= { lanprobe 1 }
+    lp1                       OBJECT IDENTIFIER    ::= { lanprobe 2 }
+    lp2                       OBJECT IDENTIFIER    ::= { lanprobe 3 }
+    pview                     OBJECT IDENTIFIER    ::= { lanprobe 4 }
+
+    -- probe Group locations
+
+    probeAdmin                OBJECT IDENTIFIER    ::= { general 1 }
+    probeView                 OBJECT IDENTIFIER    ::= { general 4 }
+    ethernet                  OBJECT IDENTIFIER    ::= { interface 4 }
+    accessControl             OBJECT IDENTIFIER    ::= { community 1 }
+    delivery                  OBJECT IDENTIFIER    ::= { trap 3 }
+
+
+-- probeadmin Group
+--
+-- These objects identifies the device, control its operation, and
+-- allows new operating software to be downloaded.  These objects are
+-- writeable only by clients with the highest access level (level4).
+-- All information in this group is stored in non-volatile memory and will
+-- be preserved across power failures.
+--
+-- Access privileges:
+-- level1:  no access
+-- level2:  read-only access
+-- level3:  read-only access
+-- level4:  read-write access
+
+probeIdentification  OBJECT-TYPE
+    SYNTAX    DisplayString (SIZE(0..127))
+    ACCESS    read-write
+    STATUS    mandatory
+    DESCRIPTION
+        "A string uniquely identifying this device."
+    ::= { probeAdmin 1 }
+
+probeFirmwareRev  OBJECT-TYPE
+    SYNTAX    DisplayString (SIZE(0..15))
+    ACCESS    read-only
+    STATUS    mandatory
+    DESCRIPTION
+        "The firmware revision of this device."
+    ::= { probeAdmin 2 }
+
+probeHardwareRev  OBJECT-TYPE
+    SYNTAX    DisplayString (SIZE(0..31))
+    ACCESS    read-only
+    STATUS    mandatory
+    DESCRIPTION
+        "The hardware revision of this device."
+    ::= { probeAdmin 3 }
+
+probeDateTime  OBJECT-TYPE
+    SYNTAX    DisplayString (SIZE(26..40))
+    ACCESS    read-write
+    STATUS    mandatory
+    DESCRIPTION
+        "Probe's current date and time in the format:
+             WWW MMM DD HH:MM:SS TTT YYYY
+         (eg: 'Wed Jan 02 02:03:55 PST 1980').
+         The length of the timezone field can be from
+         1 to 15 octets.  The timezone is stored for the
+         convenience of the manager and is not used by
+         the probe to adjust the probe's clock.  If and when
+         the timezone and clock changes, the manager must
+         update probeDateTime.  The timezone field has
+         the default value of 'PST', Pacific Standard Time."
+    ::= { probeAdmin 4 }
+
+probeResetControl  OBJECT-TYPE
+    SYNTAX    INTEGER
+    {   running(1),
+        warmBoot(2),
+        coldBoot(3)
+    }
+    ACCESS    read-write
+    STATUS    mandatory
+    DESCRIPTION
+        "Setting this object to warmBoot(2) causes the device to
+         restart the application software with current configuration
+         parameters saved in non-volatile memory.  Setting this
+         object to coldBoot(3) causes the device to reinitialize
+         configuration parameters in non-volatile memory to default
+         values and restart the application software.  When the device
+         is running normally, this variable has a value of running(1)."
+    ::= { probeAdmin 5 }
+
+probeDownloadFile  OBJECT-TYPE
+    SYNTAX    DisplayString (SIZE(0..127))
+    ACCESS    read-write
+    STATUS    mandatory
+    DESCRIPTION
+        "The file name to be downloaded from the TFTP server."
+    ::= { probeAdmin 6 }
+
+probeDownloadTFTPServer  OBJECT-TYPE
+    SYNTAX    IpAddress
+    ACCESS    read-write
+    STATUS    mandatory
+    DESCRIPTION
+        "The IP address of the TFTP server that contains the boot
+         image to load."
+    ::= { probeAdmin 7 }
+
+probeDownloadAction  OBJECT-TYPE
+    SYNTAX    INTEGER
+    {   imageValid(1),
+        downloadToPROM(2)
+    }
+    ACCESS    read-write
+    STATUS    mandatory
+    DESCRIPTION
+        "When this object is set to downloadToPROM(2) (supported
+         only by LanProbe-II), the device will discontinue its
+         normal operation and begin download of the image specified
+         by  probeDownLoadFile from the server specifed by
+         probeDownLoadTFTPServer using the TFTP protocol. The new 
+         image is written to the flash EPROM memory after its checksum 
+         has been verified to be correct.  When the download process is 
+         completed, the device will warm boot to restart the newly loaded 
+         application.  When the device is not downloading, this object 
+         will have a value of imageValid(1)."
+    ::= { probeAdmin 8 }
+
+probeDownloadStatus  OBJECT-TYPE
+    SYNTAX    INTEGER
+    {   downloadSuccess(1),
+        downloadFailed(2),
+        downloadStatusUnknown(3)
+    }
+    ACCESS    read-only
+    STATUS    mandatory
+    DESCRIPTION
+        "The status of the last download procedure, if any.  This object
+         will have a value of downloadStatusUnknown(3) if no download
+         process has been performed."
+    ::= { probeAdmin 9 }
+
+probeEchoInterval OBJECT-TYPE
+    SYNTAX    INTEGER
+    ACCESS    read-write
+    STATUS    mandatory
+    DESCRIPTION
+        "The probe will send an ICMP echo request (ping) to the
+         default gateway every probeEchoInterval seconds.  To force
+         the probe not to send any echo requests, set probeEchoInterval
+         to 0."
+    DEFVAL { 30 }
+    ::= { probeAdmin 10 }
+
+
+
+
+-- interface Group
+
+-- These objects set up communication parameters for each interface
+-- supported by the device.  These objects are writeable only by
+-- clients with the highest access level (level4).  The entries in
+-- the ethernetConfigTable are created by the agent.  All information in 
+-- this table is stored in non-volatile memory and will be preserved 
+-- across power failures.
+--
+-- Access privileges:
+-- level1:  no access
+-- level2:  read-only access
+-- level3:  read-only access
+-- level4:  read-write access
+
+
+ethernetConfigTable  OBJECT-TYPE
+    SYNTAX    SEQUENCE OF EthernetConfigEntry
+    ACCESS    not-accessible
+    STATUS    mandatory
+    DESCRIPTION
+        "A table of Ethernet interface configuration entries."
+    ::= { ethernet 1 }
+
+ethernetConfigEntry  OBJECT-TYPE
+    SYNTAX    EthernetConfigEntry
+    ACCESS    not-accessible
+    STATUS    mandatory
+    DESCRIPTION
+        "A set of configuration parameters for a particular
+         Ethernet interface on this device."
+    INDEX  { etherIfIndex }
+    ::= { ethernetConfigTable 1 }
+
+EthernetConfigEntry ::= SEQUENCE {
+    etherIfIndex           INTEGER (1..65535),
+    etherIpAddress         IpAddress,
+    etherSubnetMask        IpAddress,
+    etherDefaultGateway    IpAddress
+}
+
+etherIfIndex  OBJECT-TYPE
+    SYNTAX    INTEGER (1..65535)
+    ACCESS    read-only
+    STATUS    mandatory
+    DESCRIPTION
+        "The value of this object uniquely identifies the Ethernet
+         interface on this device for which this entry contains
+         configuration parameters.  The interface identified by a
+         particular value of this object is the same interface as
+         identified by the same value of the ifIndex object, defined
+         in RFC 1213."
+    ::= { ethernetConfigEntry 1 }
+
+etherIpAddress  OBJECT-TYPE
+    SYNTAX    IpAddress
+    ACCESS    read-write
+    STATUS    mandatory
+    DESCRIPTION
+        "The IP address of this Ethernet interface.  The default value
+        for this object is 0.0.0.0.  If either the etherIpAddress or
+        etherSubnetMask are 0.0.0.0, then when the device boots, it will
+        use BOOTP to try to figure out what these values should be.
+        Otherwise, if BOOTP fails, before the device can talk on the
+        network, this value must be configured through a terminal
+        attached to the device."
+    -- DEFVAL { 0.0.0.0 }
+    ::= { ethernetConfigEntry 2 }
+
+etherSubnetMask  OBJECT-TYPE
+    SYNTAX    IpAddress
+    ACCESS    read-write
+    STATUS    mandatory
+    DESCRIPTION
+        "The subnet mask of this Ethernet interface.  The default value
+        for this object is 0.0.0.0.  If either the etherIpAddress
+        or etherSubnetMask are 0.0.0.0, then when the device boots, it
+        will use BOOTP to try to figure out what these values should be.
+        Otherwise, if BOOTP fails, before the device can talk on the
+        network, this value must be configured through a terminal
+        attached to the device."
+    -- DEFVAL { 0.0.0.0 }
+    ::= { ethernetConfigEntry 3 }
+
+etherDefaultGateway  OBJECT-TYPE
+    SYNTAX    IpAddress
+    ACCESS    read-write
+    STATUS    mandatory
+    DESCRIPTION
+        "The default gateway of this Ethernet interface."
+    -- DEFVAL { 0.0.0.0 }
+    ::= { ethernetConfigEntry 4 }
+
+
+
+-- accessControl Groups
+
+-- commAccess Table
+--
+-- This table configures community names that will have access to
+-- this device and assigns them an access control level.  Only
+-- those communities defined in this table shall have access to
+-- this device through SNMP.
+--
+-- Only those communities with level4 access shall have access
+-- to this table.
+--
+-- This table will be stored in non-volatile memory and will be
+-- preserved across power failures.  This table will be initialized
+-- to contain the following default entries if the device has gone
+-- through a cold restart, where configuration data is cleared:
+--
+-- 1 - An entry with commAccessIndex equal to 1, commAccessCommunity
+--     equal to "public", commAccessLevel equal to level1(1),
+--     and commAccessStatus equal to valid(1).
+--
+-- 2 - An entry with commAccessIndex equal to 2, commAccessCommunity
+--     equal to "rmon", commAccessLevel equal to level2(2),
+--     and commAccessStatus equal to valid(1).
+--
+--3 - An entry with commAccessIndex equal to 3, commAccessCommunity
+--     equal to "rmon_admin", commAccessLevel equal to level3(3),
+--     and commAccessStatus equal to valid(1).
+--
+-- 4 - An entry with commAccessIndex equal to 4, commAccessCommunity
+--     equal to "hp_admin", commAccessLevel equal to
+--     level4(4), and commAccessStatus equal to valid(1).
+--
+-- Since this initial state would grant complete access to
+-- well-known communities, it is recommended that a management
+-- station respond quickly to the newly restarted device and
+-- change this configuration to a local configuration.
+--
+-- The commAccessCommunity of each valid row is unique among
+-- all valid rows.
+--
+-- Access privileges:
+-- level1:  no access
+-- level2:  no access
+-- level3:  no access
+-- level4:  read-write access
+
+
+commAccessTable  OBJECT-TYPE
+    SYNTAX    SEQUENCE OF CommAccessEntry
+    ACCESS    not-accessible
+    STATUS    mandatory
+    DESCRIPTION
+        "A list of community access entries"
+    ::= { accessControl 1 }
+
+commAccessEntry  OBJECT-TYPE
+    SYNTAX    CommAccessEntry
+    ACCESS    not-accessible
+    STATUS    mandatory
+    DESCRIPTION
+        "A mapping of community name to access rights."
+    INDEX { commAccessIndex }
+    ::= { commAccessTable 1 }
+
+CommAccessEntry ::= SEQUENCE {
+    commAccessIndex        INTEGER (1..65535),
+    commAccessCommunity    OCTET STRING (SIZE(0..127)),
+    commAccessLevel        AccessLevel,
+    commAccessOwner        OwnerString,
+    commAccessStatus       INTEGER
+}
+
+commAccessIndex  OBJECT-TYPE
+    SYNTAX    INTEGER (1..65535)
+    ACCESS    read-only
+    STATUS    mandatory
+    DESCRIPTION
+        "A unique index for this entry."
+    ::= { commAccessEntry 1 }
+
+commAccessCommunity  OBJECT-TYPE
+    SYNTAX    OCTET STRING (SIZE(0..127))
+    ACCESS    read-write
+    STATUS    mandatory
+    DESCRIPTION
+        "The community string to which this entry grants access.
+         This string must be unique among the community strings
+         defined in all entries of this table.
+
+         This object may not be modifed if the associated commAccessStatus
+         object is equal to valid(1)."
+    ::= { commAccessEntry 2 }
+
+commAccessLevel  OBJECT-TYPE
+    SYNTAX    AccessLevel
+    ACCESS    read-write
+    STATUS    mandatory
+    DESCRIPTION
+        "The access level for this community string.
+
+         This object may not be modifed if the associated commAccessStatus
+         object is equal to valid(1)."
+    ::= { commAccessEntry 3 }
+
+commAccessOwner  OBJECT-TYPE
+    SYNTAX    OwnerString
+    ACCESS    read-write
+    STATUS    mandatory
+    DESCRIPTION
+        "The owner of this serial connection entry."
+    ::= { commAccessEntry 4 }
+
+commAccessStatus  OBJECT-TYPE
+    SYNTAX    EntryStatus
+    ACCESS    read-write
+    STATUS    mandatory
+    DESCRIPTION
+        "The status of this community access entry.  When this
+        object is set to valid(1), if the commAccessCommunity for 
+        this row is not unique among commAccessCommunity objects 
+        for all valid rows, the set request will be rejected
+        with badValue(3)."
+    ::= { commAccessEntry 5 }
+
+
+-- The commAccessCommunity of each valid row is unique among
+-- all valid rows.
+
+
+
+-- client Table
+--
+-- Since community strings are fairly easy to discover, by themselves
+-- they do not provide a very secure mechanism for controlling access
+-- to the device.  Therefore, this client table specifies which IP
+-- addresses can access the device with a particular community.  A
+-- particular IP address may have more than one entry in this table so
+-- that different users on that host can use different communities and
+-- thus be granted different access.  Using a mask, a client table
+-- entry may grant the same community to multiple IP addresses.  This
+-- is useful in environments where a large number of users wish to
+-- access the device.
+--
+-- The client table works with the access table as follows.  When the device
+-- receives an SNMP request, it loops through the access table, ANDing
+-- the requestor's IP address with each clientIpMask.  If the result matches
+-- the clientIpAddress and the community name in the request matches
+-- the community name in the current clientTable row, we go to the access
+-- table.  If there is a row in the access table with a community string
+-- matching that in the requestor's packet, the requestor is given the
+-- corresponding accessLevel.  That accessLevel is used to determine
+-- what objects in the MIB the requestor can read and write.
+--
+-- Only those communities with level4 access shall have access to this
+-- table.
+--
+-- This table will be stored in non-volatile memory and will be
+-- preserved across power failures.  This table will be initialized
+-- to contain the following default entries if the device has gone
+-- throught a cold restart.
+--
+-- 1 - An entry with clientIndex equal to 1, clientIpMask and
+--     clientIpAddress equal to 0.0.0.0, clientCommunity equal to
+--     "public", and clientStatus equal to valid(1).  This entry
+--     allows any IP address to use the "public" community.
+--
+-- 2 - An entry with clientIndex equal to 2, clientIpMask and
+--     clientIpAddress equal to 0.0.0.0, clientCommunity equal to
+--     "rmon", and clientStatus equal to valid(1).  This entry
+--     allows any IP address to use the "rmon" community.
+--
+-- 3 - An entry with clientIndex equal to 3, clientIpMask and
+--     clientIpAddress equal to 0.0.0.0, clientCommunity equal to
+--     "rmon_admin", and clientStatus equal to valid(1).  This entry
+--     allows any IP address to use the "rmon_admin" community.
+--
+-- 4 - An entry with clientIndex equal to 4, clientIpMask and
+--     clientIpAddress equal to 0.0.0.0, clientCommunity equal to
+--     "hp_admin", and clientStatus equal to valid(1).
+--     This entry allows any IP address to use the "hp_admin" community.
+--
+-- Since this initial state would grant wide access to well-known
+-- communities, it is recommended that a management station respond
+-- quickly to the newly restarted device and change this configuration
+-- to a local configuration.
+--
+-- Access privileges:
+-- level1:  no access
+-- level2:  no access
+-- level3:  no access
+-- level4:  read-write access
+
+
+clientTable  OBJECT-TYPE
+    SYNTAX    SEQUENCE OF ClientEntry
+    ACCESS    not-accessible
+    STATUS    mandatory
+    DESCRIPTION
+        "A list of client entries."
+    ::= { accessControl 2 }
+
+clientEntry  OBJECT-TYPE
+    SYNTAX    ClientEntry
+    ACCESS    not-accessible
+    STATUS    mandatory
+    DESCRIPTION
+        "A configuration that allows an SNMP community to send
+         packets from a particular IP address."
+    INDEX { clientIndex }
+    ::= { clientTable 1 }
+
+ClientEntry ::= SEQUENCE {
+    clientIndex            INTEGER (1..65535),
+    clientIpAddress        IpAddress,
+    clientIpMask           IpAddress,
+    clientCommunity        OCTET STRING (SIZE(0..127)),
+    clientOwner            OwnerString,
+    clientStatus           EntryStatus
+}
+
+clientIndex  OBJECT-TYPE
+    SYNTAX    INTEGER (1..65535)
+    ACCESS    read-only
+    STATUS    mandatory
+    DESCRIPTION
+        "A value that uniquely identifies this client entry."
+    ::= { clientEntry 1 }
+
+clientIpAddress  OBJECT-TYPE
+    SYNTAX    IpAddress
+    ACCESS    read-write
+    STATUS    mandatory
+    DESCRIPTION
+        "An IP Address (or portion thereof) from which this device will
+         accept SNMP packets with the associated community.  The requesting
+         entity's IP address is ANDed with the clientIpMask before being
+         compared to the clientIpAddress.  Note that if the clientIpMask
+         is set to 0.0.0.0, a clientIpAddress of 0.0.0.0 matches allx
+         IP addresses.
+
+         This object may not be modifed if the associated clientStatus
+         object is equal to valid(1)."
+    ::= { clientEntry 2 }
+
+clientIpMask  OBJECT-TYPE
+    SYNTAX    IpAddress
+    ACCESS    read-write
+    STATUS    mandatory
+    DESCRIPTION
+        "A mask to be ANDed with the requesting entity's IP address
+         before comparison with clientIpAddress.  If the result matches
+         with clientIpAddress, then the address is authenticated.
+
+         This object may not be modifed if the associated clientStatus
+         object is equal to valid(1)."
+    -- DEFVAL { 255.255.255.255 }
+    ::= { clientEntry 3 }
+
+clientCommunity  OBJECT-TYPE
+    SYNTAX    OCTET STRING (SIZE(0..127))
+    ACCESS    read-write
+    STATUS    mandatory
+    DESCRIPTION
+        "The community that can be used by the client represented
+         by the associated IP Address.
+
+         This object may not be modifed if the associated clientStatus
+         object is equal to valid(1)."
+    ::= { clientEntry 4 }
+
+clientOwner  OBJECT-TYPE
+    SYNTAX    OwnerString
+    ACCESS    read-write
+    STATUS    mandatory
+    DESCRIPTION
+        "The owner of this client entry."
+    ::= { clientEntry 5 }
+
+clientStatus  OBJECT-TYPE
+    SYNTAX    EntryStatus
+    ACCESS    read-write
+    STATUS    mandatory
+    DESCRIPTION
+        "The status of this client entry."
+    ::= { clientEntry 6 }
+
+
+
+-- Trap Destination Table
+--
+-- This table defines the destination addresses for traps generated
+-- from the device.  This table maps a community to one or more trap
+-- destination entries.  
+--
+-- The same trap will be sent to all destinations specified in the
+-- entries that have the same trapDestCommunity as the eventCommunity
+-- (as defined by RMON MIB).  Information in this table will be stored
+-- in non-volatile memory.  If the device has gone through a hard 
+-- restart, this information will be reset to its default state.
+--
+-- Only those communities with level3 or level4 access shall have
+-- write access to this table.
+--
+-- Access privileges:
+-- level1:  no access
+-- level2:  read-only access
+-- level3:  read-write access
+-- level4:  read-write access
+
+
+trapDestTable  OBJECT-TYPE
+    SYNTAX    SEQUENCE OF TrapDestEntry
+    ACCESS    not-accessible
+    STATUS    mandatory
+    DESCRIPTION
+        "A list of trap destination entries."
+    ::= { delivery 3 }
+
+trapDestEntry  OBJECT-TYPE
+    SYNTAX    TrapDestEntry
+    ACCESS    not-accessible
+    STATUS    mandatory
+    DESCRIPTION
+        "This entry includes a destination IP address to which to send
+        traps for this community."
+    INDEX { trapDestIndex }
+    ::= { trapDestTable 1 }
+
+TrapDestEntry ::= SEQUENCE {
+    trapDestIndex                INTEGER (1..65535),
+    trapDestCommunity            OCTET STRING (SIZE(0..127)),
+    trapDestDeliveryType         INTEGER,
+    trapDestPrimaryIpAddress     IpAddress,
+    trapDestPrimaryIfIndex       INTEGER (1..65535),
+    trapDestOwner                OwnerString,
+    trapDestStatus               INTEGER
+}
+
+trapDestIndex  OBJECT-TYPE
+    SYNTAX    INTEGER (1..65535)
+    ACCESS    read-only
+    STATUS    mandatory
+    DESCRIPTION
+        "A value that uniquely identifies this trapDestEntry."
+    ::= { trapDestEntry 1 }
+
+trapDestCommunity  OBJECT-TYPE
+    SYNTAX    OCTET STRING (SIZE(0..127))
+    ACCESS    read-write
+    STATUS    mandatory
+    DESCRIPTION
+        "A community to which the destination IP address belongs.
+         This entry is associated with any eventEntries in the RMON MIB
+         whose value of eventCommunity is equal to the value of this
+         object.  Every time an associated event entry sends a trap
+         due to an event, that trap will be sent according to the
+         address specified in this entry.
+
+         This object may not be modifed if the associated trapDestStatus
+         object is equal to valid(1)."
+    ::= { trapDestEntry 2 }
+
+trapDestDeliveryType  OBJECT-TYPE
+    SYNTAX    INTEGER
+    {   one-shot(1)
+    }
+    ACCESS    read-write
+    STATUS    mandatory
+    DESCRIPTION
+        "If this object has the value one-shot(1), then the trap will
+         be sent only once to the primary address without requiring
+         acknowledgement.
+
+         This object may not be modifed if the associated trapDestStatus
+         object is equal to valid(1)."
+    DEFVAL { 1 }
+    ::= { trapDestEntry 3 }
+
+
+trapDestPrimaryIpAddress  OBJECT-TYPE
+    SYNTAX    IpAddress
+    ACCESS    read-write
+    STATUS    mandatory
+    DESCRIPTION
+        "The primary IP address to which to send traps.
+
+         This object may not be modifed if the associated trapDestStatus
+         object is equal to valid(1)."
+    ::= { trapDestEntry 4 }
+
+trapDestPrimaryIfIndex  OBJECT-TYPE
+    SYNTAX    INTEGER (1..65535)
+    ACCESS    read-write
+    STATUS    mandatory
+    DESCRIPTION
+        "The value of this object uniquely identifies the interface on
+         this device through which the host at trapPrimaryIpAddress
+         can be reached.  The interface identified by a particular
+         value of this object is the same interface as identified by
+         the same value of the ifIndex object, defined in RFC 1213.
+
+         This object may not be modifed if the associated trapDestStatus
+         object is equal to valid(1)."
+    DEFVAL { 1 }
+    ::= { trapDestEntry 5 }
+
+trapDestOwner  OBJECT-TYPE
+    SYNTAX    OwnerString
+    ACCESS    read-write
+    STATUS    mandatory
+    DESCRIPTION
+        "The owner of this trap destination entry."
+    ::= { trapDestEntry 8 }
+
+trapDestStatus  OBJECT-TYPE
+    SYNTAX    EntryStatus
+    ACCESS    read-write
+    STATUS    mandatory
+    DESCRIPTION
+        "The status of this trap destination entry."
+    ::= { trapDestEntry 9 }
+
+END
+
+

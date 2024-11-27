@@ -1,0 +1,1322 @@
+
+
+
+
+
+
+
+
+                                   -- Proteon
+                            -- Nine Technology Drive
+                         -- Westborough, MA 01581-5008
+
+
+
+
+
+
+
+                         -- Proteon Specific Variables
+                           -- in the SNMP MIB for the
+                                   -- DNX300
+
+
+
+
+
+
+
+
+
+                                                         -- Revision I
+                                                      -- Release 13.0b
+
+                                         -- File Name Ref: provars.def
+
+                              -- Rev By: Arun  Mahajan  Date: 03/17/93
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   -- Proteon
+                            -- Nine Technology Drive
+                         -- Westborough, MA 01581-5008
+
+
+
+
+
+
+
+                         -- Proteon Specific Variables
+                          -- in the SNMP MIB for the
+                                   -- DNX300
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- DNX300 Specific SNMP Variables                     Page 2
+
+
+           -- This document describes the variables in the
+           -- Enterprise-specific Proteon MIB. The variables are
+           -- structured based on the RFC for the Structure of
+           -- Management Information (SMI), RFC1155, and the format
+           -- of the definitions is as per RFC1212, the Concise MIB
+           -- Defintions RFC
+
+           -- THIS FILE IS MACHINE GENERATED. DO NOT EDIT!!
+
+          PROTEON-MIB  {  iso  org(3)  dod(6)  internet(1)  private(4)
+          enterprises(1) 1 }
+
+          DEFINITIONS    ::= BEGIN
+
+          IMPORTS
+              enterprises, NetworkAddress, IpAddress, Counter,  Gauge,
+          TimeTicks
+                                FROM RFC1155-SMI
+                            OBJECT-TYPE
+                                FROM RFC-1212;
+
+                    -- textual conventions
+
+                    DisplayString ::=
+                        OCTET STRING
+                    -- This data type is used to model textual
+                    -- information taken from the NVT ASCII
+                    -- character set.  By convention, objects
+                    -- with this syntax are declared as having
+                    -- SIZE (0..255)
+
+
+          proteon    OBJECT IDENTIFIER ::= { enterprises 1 }
+
+                    -- groups in the PROTEON-MIB
+
+           admin    OBJECT IDENTIFIER ::= { proteon 1 }
+           xface    OBJECT IDENTIFIER ::= { proteon 2 }
+           proto    OBJECT IDENTIFIER ::= { proteon 3 }
+
+
+           -- object types
+
+           -- the admin group
+
+          objid    OBJECT IDENTIFIER ::= { admin 1 }
+
+           -- There are no variables under this branch of the tree.
+           -- It is used to assign unique sysObjectID's to the
+           -- Proteon Routers.
+
+           -- the status group
+
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- DNX300 Specific SNMP Variables                     Page 3
+
+
+          status        OBJECT IDENTIFIER ::= { admin 2 }
+
+          proAdminStatusReloadTime OBJECT-TYPE
+              SYNTAX    TimeTicks
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The time (in hundredths of a second) since the last
+                  time the router software was reloaded."
+              ::= { status 1 }
+
+          proAdminStatusStarts OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The number of times the router has started since
+                  the last reload.  This is number of restarts plus
+                  one."
+              ::= { status 2 }
+
+          proAdminStatusCrashes OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The number of times the router has crashed since
+                  the last reload."
+              ::= { status 3 }
+
+          proAdminStatusCrashMsg OBJECT-TYPE
+              SYNTAX    OCTET STRING
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The last crash message.  If the router has not
+                  crashed since the last reload, the message will
+                  so indicate."
+              ::= { status 4 }
+
+           -- the event logging system group
+
+          els        OBJECT IDENTIFIER ::= { admin 3 }
+
+          proAdminElsPin OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-write
+              STATUS    mandatory
+              DESCRIPTION
+                  "The number of ELS alerts which may be generated per
+                  second.  A value of zero indicates no limit."
+              ::= { els 1 }
+
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- DNX300 Specific SNMP Variables                     Page 4
+
+
+          proAdminElsDroppeds OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The number of ELS alerts which have been dropped
+                  because the pin has been reached."
+              ::= { els 2 }
+
+          proAdminElsDisplay OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-write
+              STATUS    mandatory
+              DESCRIPTION
+                  "This object is a control switch for the displaying
+                  of logging messages on the router's console.  It is
+                  instanced by the ELS event number.
+                  It assumes the following values,
+                  '0' for inactive, do not display messages,
+                  '1' for active, display messages."
+
+              ::= { els 3 }
+
+          proAdminElsAlert OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-write
+              STATUS    mandatory
+              DESCRIPTION
+                  "This object is a control switch for the sending of
+                  logging messages with SNMP alerts.  It is instanced
+                  by the ELS event number.
+                  It assumes the following values,
+                  '0' for inactive, do not send alerts,
+                  '1' for active, send alerts."
+              ::= { els 4 }
+
+          proAdminElsMeters OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "This object is a counter of the number of times an
+                  ELS event occured.  It is instanced by the ELS event
+                  number."
+              ::= { els 6 }
+
+           -- generic interface group
+
+          generic        OBJECT IDENTIFIER ::= { xface 1 }
+
+          proXfaceGenericType OBJECT-TYPE
+              SYNTAX    INTEGER {
+                  vi(1),        -- VI LNI
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- DNX300 Specific SNMP Variables                     Page 5
+
+
+                  pn10(2),      -- ProNET-10
+                  pn80(3),      -- ProNET-80
+                  chaos(4),     -- CHAOSnet
+                  xeth(5),      -- Experimental Ethernet (3Mb)
+                  m1822(6),     -- ACC M/1822
+                  scc(7),       -- On-board SCC on HK68ME
+                  ieth(8),      -- Interlan Ethernet
+                  peth(9),      -- Proteon Ethernet
+                  com2(10),     -- COM-2
+                  com4(11),     -- COM-4
+                  omn(12),      -- Omninet
+                  pn4(13),      -- ProNET-4
+                  wdeth(15),    -- Western Digital Ethernet
+                  gwslc(16),    -- Gateway Serial Line Controller
+                  x25(17),      -- X.25
+                  pqsx(18),     -- Proteon QPSX MAN
+                  atr(19),      -- Apollo Token Ring
+                  fddi(20),     -- p4200 FDDI
+                  pn16(23),     -- ProNET-16
+                  atcomsl(24),  -- AT COM-2
+                  ceth(25),     -- CNX500/DNX300 Single/Dual Ethernet
+                  csl(26),      -- CNX500/DNX300 T1/E1 serial
+                  seth(27),     -- Interlan NP-600 smart Ethernet
+                  srlygwsl(28), -- SDLC Relay on a gwslc
+                  srlyatc2(29), -- SDLC Relay on a atcomsl
+                  srlycsl(30),  -- SDLC Relay on a csl
+                  srbtnl(31),   -- SRB Tunnel over a protocol net
+                  sdlcrly(32),  -- SDLC Relay over a protocol net
+                  nseth(33),    -- National Semiconductor Ethernet
+                  x25atc2(34),  -- x25 on a atcomsl
+                  x25csl(35),   -- x25 on a CNX csl
+                  x25dcsl(36),  -- x25 on a DNX300 csl
+                  qsl(37)       -- CNX500 Quad Serial Controller
+                  }
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The type of the interface, according to the link
+                  level protocol."
+              ::= { generic 1 }
+
+          proXfaceGenericCSR OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The Command and Status Register address for the
+                  interface."
+              ::= { generic 2 }
+
+          proXfaceGenericIntVec OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- DNX300 Specific SNMP Variables                     Page 6
+
+
+              STATUS    mandatory
+              DESCRIPTION
+                  "The multi-bus interrupt vector for the interface."
+              ::= { generic 3 }
+
+          proXfaceGenericMaintInt OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The number of seconds before the next interface
+                   maintenance."
+              ::= { generic 4 }
+
+          proXfaceGenericMaintLim OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The number of maintenance check failures permitted
+                  before a self test is run."
+              ::= { generic 5 }
+
+          proXfaceGenericNextTest OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The number of seconds before the next self test."
+              ::= { generic 6 }
+
+          proXfaceGenericNextMaint OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The number of seconds between maintenance checks."
+              ::= { generic 7 }
+
+          proXfaceGenericMaintCnt OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The number of failed maintenance checks since the
+                  last successful maintenance check."
+              ::= { generic 8 }
+
+          proXfaceGenericMaintFails OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- DNX300 Specific SNMP Variables                     Page 7
+
+
+                  "The total number of maintenance failures on this
+                   interface."
+              ::= { generic 9 }
+
+          proXfaceGenericTestPasses OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The total number of self test successes on this
+                  interface."
+              ::= { generic 10 }
+
+          proXfaceGenericTestFails OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The total number of self test failures on this
+                  interface."
+              ::= { generic 11 }
+
+          proXfaceGenericModuleId OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The module identifier of this interface, this
+                  object is relevant only to the CNX and DNX
+                  platforms. It uniquely identifies the interface
+                  card-type.
+
+                  For the DNX, it assumes the following values
+                  '0' for the WAN card,
+                  '16' for the ethernet card,
+                  '32' for the token ring card,
+                  '255' if there is no physical interface, but
+                  configuration exists in the NVRAM,
+                  any other value should be construed as
+                  'unknown-type'."
+              ::= { generic 12 }
+
+           -- the token ring interface group
+
+          tokenr        OBJECT IDENTIFIER ::= { xface 2 }
+
+          proXfaceTokenrRingState OBJECT-TYPE
+              SYNTAX    INTEGER {
+                  sigloss(32768), -- signal loss
+                  harderr(16384), -- hard error
+                  softerr(8192),  -- soft error
+                  beacon(4096),   -- transmit beacon
+                  lwf(2048),      -- lobe wire fault
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- DNX300 Specific SNMP Variables                     Page 8
+
+
+                  are(1024),      -- auto-removal error
+                  remrcvd(512),   -- remove received
+                  cntovrf(256),   -- counter overflow
+                  snglsta(128),   -- single station
+                  ringrcvr(64)    -- ring recovery
+                  }
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The current ring status SSB posted by the TMS380.
+                  This object will be 0 unless there is a serious
+                  error on the ring which causes a ring status
+                  interrupt."
+              ::= { tokenr 1 }
+
+          proXfaceTokenrCheckState OBJECT-TYPE
+              SYNTAX    INTEGER {
+                  dioparity(32768), -- DIO parity
+                  dmaread(16384),   -- DMA read abort
+                  dmawrite(8192),   -- DMA write abort
+                  illopcode(4096),  -- Illegal Op code
+                  lbparity(2048),   -- Comm. Proc. detects
+                            -- Adapter Bus parity error
+                  sifparity(512),   -- SIF detects AB parity error
+                  phparity(256),    -- PH detects AB parity error
+                  recvparity(128),  -- parity error during copy
+                  xmitparity(64),   -- parity error during xmit
+                  ringurun(32),     -- DMA underrun during xmit
+                  ringorun(16),     -- DMA overrun during recv
+                  invintrpt(8),     -- invalid interrupt
+                  inveintrpt(4),    -- invalid error interrupt
+                  invxop(2)         -- invalid XOP request
+                  }
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The adapter check status information read from the
+                  TMS380. This value is zero until an adapter check
+                  interrupt occurs."
+              ::= { tokenr 2 }
+
+          proXfaceTokenrSigLosses OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times that the adapter detected a
+                   loss of signal on the ring (a ring status
+                   interrupt with the Signal Loss bit set)."
+              ::= { tokenr 3 }
+
+          proXfaceTokenrHardErrors OBJECT-TYPE
+              SYNTAX    Counter
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- DNX300 Specific SNMP Variables                     Page 9
+
+
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times the adapter was transmitting or
+                  receiving beacon frames (a ring status interrupt
+                  with the Hard Error bit set)."
+              ::= { tokenr 4 }
+
+          proXfaceTokenrXmitBeacons OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times the adapter posted a ring
+                  status interrupt with the Transmit Beacon bit
+                  set."
+              ::= { tokenr 5 }
+
+          proXfaceTokenrLobeWireFaults OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times the adapter detected an open or
+                  short circuit in the lobe data path."
+              ::= { tokenr 6 }
+
+          proXfaceTokenrAutoremovalErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times the adapter has detected an
+                  internal hardware error following a Beacon
+                  Auto-removal."
+              ::= { tokenr 7 }
+
+          proXfaceTokenrRemovesReceives OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of Remove Ring Station MAC frame
+                  requests received."
+              ::= { tokenr 8 }
+
+          proXfaceTokenrRingRecoveries OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times the adapter was transmitting or
+                  receiving Claim Token MAC frames."
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- DNX300 Specific SNMP Variables                    Page 10
+
+
+              ::= { tokenr 9 }
+
+          proXfaceTokenrLineErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times any of the following conditions
+                  are detected: a frame was repeated or duplicated,
+                  the EDI was zero, a code violation existed between
+                  the SDEL and EDEL, a code violation existed within
+                  a token, or an FCS error existed."
+              ::= { tokenr 10 }
+
+          proXfaceTokenrBurstErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times the adapter detected the
+                  absence of transitions for five half bit times
+                  between the SDEL and EDEL."
+              ::= { tokenr 11 }
+
+          proXfaceTokenrLostFrames OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times the adapter failed to receive
+                  the end of the frame it was transmitting."
+              ::= { tokenr 12 }
+
+          proXfaceTokenrReceiveCongestions OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times the adapter, in repeat mode,
+                  recognised a frame with its specific address but
+                  had no buffer space into which the frame could
+                  be copied."
+              ::= { tokenr 13 }
+
+          proXfaceTokenrFrameCopyErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times the adapter recognized a frame
+                  with its specific address but finds the ARI bits
+                  set to 00."
+              ::= { tokenr 14 }
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- DNX300 Specific SNMP Variables                    Page 11
+
+
+          proXfaceTokenrTokenErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times the adapter detected the any of
+                  the following conditions: a token with non-zero
+                  priority and monitor count bit set to 1, a frame and
+                  the monitor count bit is set to 1, no token or frame
+                  received within 10ms, or the starting
+                  delimiter/token sequence had a code violation."
+              ::= { tokenr 15 }
+
+          proXfaceTokenrDMAbusErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times an error was detected on the
+                  internal internal DMA bus. This is a normal event
+                  for the TMS380. It is expected to count during
+                  operation."
+              ::= { tokenr 16 }
+
+          proXfaceTokenrDMAparityErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of parity errors detected on the
+                  internal DMA bus."
+              ::= { tokenr 17 }
+
+          proXfaceTokenrARIFCIerrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times the adapter detected that the
+                  upstream neighbor station was unable to set the ARI
+                  or FCI bits in received frames."
+              ::= { tokenr 18 }
+
+          proXfaceTokenrInputOverflowErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "Input Overflow. The number of packets recieved
+                  which are larger than our buffer size."
+              ::= { tokenr 19 }
+
+          proXfaceTokenrOutputErrors OBJECT-TYPE
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- DNX300 Specific SNMP Variables                    Page 12
+
+
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "Output Errors. The number of times that the frame
+                  transmit or strip process was in error."
+              ::= { tokenr 20 }
+
+          proXfaceTokenrXmitCongestions OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "Transmit Congestion. The number of times that a
+                  frame was sent and the ARI bit was set and the
+                  FCI bit cleared in the Frame Status. This
+                  indicates congestion at the recieving node."
+              ::= { tokenr 21 }
+
+          proXfaceTokenrMedias OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "Media type used for the token ring connection
+                  '1' for shielded twisted pair, STP
+                  '2' for unshielded twisted pair, UTP."
+              ::= { tokenr 22 }
+
+           -- the pronet-10/80 interface group
+           -- relevant only to the p4100 and p4200
+           -- and not for the CNX500 and DNX300
+
+          pronet        OBJECT IDENTIFIER ::= { xface 3 }
+
+
+           -- the interlan Ethernet interface group
+           -- relevant only for the p4200 and not
+           -- for the CNX500, the DNX300 and
+           -- the p4100
+
+          ieth        OBJECT IDENTIFIER ::= { xface 4 }
+
+
+           -- the Proteon/Western Digital/National Semiconductor
+           -- Ethernet interface group, relevant for the p4100
+           -- and the p4200 and not relevant for the CNX500 and
+           -- the DNX300
+
+          peth        OBJECT IDENTIFIER ::= { xface 5 }
+
+
+           -- the com-2/4 serial line interface group
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- DNX300 Specific SNMP Variables                    Page 13
+
+
+           -- relevant only for the p4200 and not
+           -- relevant for the CNX500, the DNX300 and
+           -- the p4100
+
+          comsl        OBJECT IDENTIFIER ::= { xface 6 }
+
+
+           -- the Gateway serial line interface group
+           -- relevant only for the p4100 and not
+           -- relevant for the p4200, the DNX300 and the CNX500
+
+          gwsl        OBJECT IDENTIFIER ::= { xface 7 }
+
+
+           -- the X.25 interface group
+           -- relevant for the p4100 and the p4200 and
+           -- not relevant for the CNX500 and the DNX300
+
+          prox25        OBJECT IDENTIFIER ::= { xface 8 }
+
+
+           -- FDDI interface group
+           -- relevant only for the p4200 and not
+           -- relevant for the p4100, the DNX300 and the CNX500
+           -- the p4100 and the DNX300 have no FDDI interface
+           -- the CNX500 FDDI variables are as per rfc 1285
+
+          profddi        OBJECT IDENTIFIER ::= { xface 9 }
+
+
+           -- the AT COM-2 serial line interface group
+           -- relevant only for the p4100 and not
+           -- relevant for the p4200, the DNX300 and the CNX500
+
+          atcomsl        OBJECT IDENTIFIER ::= { xface 12 }
+
+
+           -- the CNX500/DNX300 Ethernet interface group
+           -- relevant only for the CNX500 and the DNX300 and not
+           -- relevant for the p4100 and the p4200
+
+          ceth        OBJECT IDENTIFIER ::= { xface 13 }
+
+          proXfaceCethInOverruns OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of received frames whose length was
+                  greater than the maximum ethernet frame size."
+              ::= { ceth 1 }
+
+          proXfaceCethInDroppeds OBJECT-TYPE
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- DNX300 Specific SNMP Variables                    Page 14
+
+
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times that the adapter asserted an
+                  overwrite warning, which is posted when the
+                  receive buffer is full. It does not necessarily
+                  mean that a frame was lost."
+              ::= { ceth 2 }
+
+          proXfaceCethFramesLosts OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of frames lost due to insufficient
+                  buffer space, as counted by the 82596."
+              ::= { ceth 3 }
+
+          proXfaceCethCRCerrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times that a frame received contained
+                  a CRC error, as counted by the 82596."
+              ::= { ceth 4 }
+
+          proXfaceCethAlignErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of frames received which were
+                  misaligned, as counted by the 82596. A
+                  frame is misaligned if its received
+                  length is not a multiple of 8 bits."
+              ::= { ceth 5 }
+
+          proXfaceCethInFifoOverruns OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times the input FIFO in the adapter
+                  overflowed while copying a frame from the line."
+              ::= { ceth 6 }
+
+          proXfaceCethOutSuccessWretries OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- DNX300 Specific SNMP Variables                    Page 15
+
+
+                  "The number of frames which were successfully
+                  transmitted after one or more collisions."
+              ::= { ceth 7 }
+
+          proXfaceCethOutExcessColls OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times that a frame destined for the
+                  line incurred 16 collisions and was discarded."
+              ::= { ceth 8 }
+
+          proXfaceCethOutCarrierSenseLosts OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times that the transmit carrier sense
+                  was lost."
+              ::= { ceth 9 }
+
+          proXfaceCethOutFifoUnderruns OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times the output FIFO in the adapter
+                  underflowed while putting a frame on the line."
+              ::= { ceth 10 }
+
+          proXfaceCethOutCDheartbeatErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times that a heartbeat was not
+                  detected after transmitting a frame."
+              ::= { ceth 11 }
+
+          proXfaceCethOutWindowColls OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times that a frame in the process
+                  of being put on the line collided with another
+                  frame after the first 51.2 microseconds of
+                  transmission."
+              ::= { ceth 12 }
+
+          proXfaceCethMedia OBJECT-TYPE
+              SYNTAX    INTEGER
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- DNX300 Specific SNMP Variables                    Page 16
+
+
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The media type in use for the ethernet connection.
+                  It assumes the following values,
+                  '0' for thicknet-ver2,
+                  '1' for thicknet-ver1,
+                  '2' for thinnet-ver2,
+                  '3' for thinnet-ver1,
+                  '4' for tenBaset-ver2."
+              ::= { ceth 13 }
+
+           -- the CNX500/DNX300 T1/E1 Serial Line interface group
+           -- relevant only for the CNX500 and the DNX300 and not
+           -- relevant for the p4100 and the p4200
+
+          csl        OBJECT IDENTIFIER ::= { xface 14 }
+
+          proXfaceCslLevelConvertType OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The level converter type for the port.
+                   It assumes the following values,
+                   '4294967295' for eia-RS232,
+                   '4294967294' for eia-RS449,
+                   '4294967293' for ccitt-V35,
+                   '4294967292' for ccitt-X21,
+                   any other value should be construed as
+                   'unknown-type'."
+              ::= { csl 1 }
+
+          proXfaceCslModemSignals OBJECT-TYPE
+              SYNTAX    INTEGER {
+                          cd-on(1),
+                          cts-on(2),
+                          cts-plus-cd(3),
+                          dsr-on(4),
+                          dsr-plus-cd(5),
+                          dsr-plus-cts(6),
+                          dsr-plus-cts-plus-cd(7)
+                  }
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "An indication of the state of certain modem
+                  signals."
+              ::= { csl 2 }
+
+          proXfaceCslRcvErrs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- DNX300 Specific SNMP Variables                    Page 17
+
+
+              STATUS    optional
+              DESCRIPTION
+                  "The number of frame residue and CRC errors during
+                  reception."
+              ::= { csl 3 }
+
+          proXfaceCslTxAbts OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of transmission aborts requested."
+              ::= { csl 4 }
+
+          proXfaceCslTxNoCts OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of transmissions aborted due to the
+                 absence of CTS."
+              ::= { csl 5 }
+
+          proXfaceCslTxUnderflows OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of transmissions aborted due to transmit
+                  FIFO underflow."
+              ::= { csl 6 }
+
+          proXfaceCslRxFifoOverruns OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of receive FIFO overrun errors."
+              ::= { csl 7 }
+
+          proXfaceCslRxBufferOverruns OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of receive buffer overrun errors."
+              ::= { csl 8 }
+
+          proXfaceCslRxHostOverruns OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- DNX300 Specific SNMP Variables                    Page 18
+
+
+                  "The number of host receive buffer overrun errors."
+              ::= { csl 9 }
+
+          proXfaceCslBusAddrErrs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of DDLC bus / address errors."
+              ::= { csl 10 }
+
+          proXfaceCslIntfRomRevs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The ROM revision number on the T1/E1 serial  inter-
+          face
+                  card."
+              ::= { csl 11 }
+
+           -- the NP-600/XL Smart Ethernet interface group
+           -- relevant only for the p4100 and not
+           -- relevant for the CNX500, the DNX300 and the p4200
+
+          seth        OBJECT IDENTIFIER ::= { xface 15 }
+
+
+           -- the general (across all protocols) group
+
+          general        OBJECT IDENTIFIER ::= { proto 1 }
+
+          -- there are no general variables defined at this time.
+
+           -- the IP protocol group
+
+          proip         OBJECT  IDENTIFIER  ::=  {  proto  2  }  defgw
+          OBJECT IDENTIFIER ::= { proip 1 }    -- default gateway
+
+          proProtoIpDefGwAddress OBJECT-TYPE
+              SYNTAX    IpAddress
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The Internet address of the default gateway for the
+                  router."
+              ::= { defgw 1 }
+
+          proProtoIpDefGwCost OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- DNX300 Specific SNMP Variables                    Page 19
+
+
+                  "The cost of the default gateway for the router."
+              ::= { defgw 2 }
+
+          proProtoIpDefGwAge OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The age of the default gateway for the router."
+              ::= { defgw 3 }
+
+          END
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+

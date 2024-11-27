@@ -1,0 +1,1118 @@
+
+
+-- MIB File Generated on 31-Aug-1995 at 17:52:37
+
+NMC-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+   enterprises,
+   experimental,
+   IpAddress,
+   TimeTicks,
+   Gauge,
+   Counter
+      FROM RFC1155-SMI
+   DisplayString
+      FROM RFC1213-MIB
+   OBJECT-TYPE
+      FROM RFC-1212;
+
+
+usr OBJECT IDENTIFIER ::= { enterprises 429 }
+
+nas OBJECT IDENTIFIER ::= { usr 1 }
+
+nmc OBJECT IDENTIFIER ::= { nas 2 }
+
+-- The NAS Network Management Card Configuration Group.
+
+nmcCfg OBJECT IDENTIFIER ::= { nmc 1 }
+
+nmcCfgSystemTime OBJECT-TYPE
+SYNTAX DisplayString (SIZE(0..8))
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"This parameter is used to set and read the current time as 
+kept by the NMC's real-time clock.  It should be set to the 
+local time in the place where the chassis is physically 
+located.  The real-time clock has the capability of 
+maintaining correct time for short durations without power."
+::= { nmcCfg 1 }
+
+nmcCfgSystemDate OBJECT-TYPE
+SYNTAX DisplayString (SIZE(0..8))
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"This parameter is used to set and read the current date as 
+kept by the NMC's real-time clock.  It should be set to the 
+local date where the chassis is physically located."
+::= { nmcCfg 2 }
+
+nmcGmtime OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+"This object reflects the current time in Greenwich Mean 
+Time (GMT).  The value of this object is sent in USR's 
+enterprise specific SNMP trap messages for use by the 
+receiving Management Stations."
+::= { nmcCfg 3 }
+
+nmcTimezone OBJECT-TYPE
+SYNTAX INTEGER{
+  easternUsa-gmtPlus5(1),
+  centralUsa-gmtPlus6(2),
+  mountainUsa-gmtPlus7(3),
+  pacificUsa-gmtPlus8(4),
+  gmtPlus9(5),
+  gmtPlus10(6),
+  gmtPlus11(7),
+  gmtPlus12(8),
+  gmtMinus12(9),
+  gmtMinus11(10),
+  gmtMinus10(11),
+  gmtMinus9(12),
+  gmtMinus8(13),
+  gmtMinus7(14),
+  gmtMinus6(15),
+  gmtMinus5(16),
+  gmtMinus4(17),
+  gmtMinus3(18),
+  gmtMinus2(19),
+  gmtMinus1(20),
+  gmtPlus0(21),
+  gmtPlus1(22),
+  gmtPlus2(23),
+  gmtPlus3(24),
+  gmtPlus4(25)
+}
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"This object should be set to reflect the timezone in which 
+the chassis is physically located.  It is used in the 
+conversion from local time to Greenwich Mean Time (GMT).  
+The timezones are named for the number of hours by which 
+GMT differs from local time.
+Default=gmtPlus0(21)."
+::= { nmcCfg 4 }
+
+nmcCfgAuthFailTrapEnable OBJECT-TYPE
+SYNTAX INTEGER{
+  enable(1),
+  disable(2)
+}
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"This object indicates whether or not the SNMP Proxy Agent 
+running in the Network Management Card is to send a trap 
+upon reception of an SNMP message that was not properly 
+authenticated.  MIB-I and II require a mechanism for 
+enabling/disabling generation of this trap."
+::= { nmcCfg 5 }
+
+nmcDaySavingTime OBJECT-TYPE
+SYNTAX INTEGER{
+  enable(1),
+  disable(2)
+}
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"The value of this object determines whether or not the NMC 
+will honor daylight savings time when converting from local 
+time to Greenwich Mean Time (GMT)."
+::= { nmcCfg 6 }
+
+nmcCfgWanDialOutPhoneNum OBJECT-TYPE
+SYNTAX DisplayString (SIZE(0..39))
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"This is the phone number that the NMC will use to dial a 
+modem that is connected to the WAN port if there is no 
+existing connection when the NMC tries to send and IP 
+datagram out that port."
+::= { nmcCfg 7 }
+
+nmcCfgAtString OBJECT-TYPE
+SYNTAX DisplayString (SIZE(0..39))
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"This object is the user defined AT string that will be used 
+to configure a modem connected to the NMC's WAN port if the 
+NMC needs to dial out to make a connection."
+::= { nmcCfg 8 }
+
+nmcPowerUpAutoCfgEnable OBJECT-TYPE
+SYNTAX INTEGER{
+  enable(1),
+  disable(2)
+}
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"This parameter defines whether or not to automatically 
+configure cards when they are inserted into the chassis or 
+when the chassis is powered on.  If set to do the 
+autoconfigure, the values used to configure the cards will 
+be those that were last saved to the NMC's NVRAM.  For 
+cards that do not match the values in NVRAM, those cards 
+will be configured with default values."
+::= { nmcCfg 9 }
+
+nmcCfgNumWanRetries OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"This will specify the number of attempts to be made by 
+port_write_task() to send the packet out of the WAN port 
+while doing a dial up connection. The default is 0 which 
+means the number of retries is disabled and it will keep 
+trying to transmit the same packet for ever until it 
+succeeds."
+::= { nmcCfg 10 }
+
+nmcCfgWanRetryPause OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"The amount of time in seconds that the NMC will pause 
+between attempts to transmit a packet. The default value 
+for this object is 30."
+::= { nmcCfg 11 }
+
+nmcCfgWanRetrySuspendTime OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"The Time period in seconds for which the WAN port should 
+suspend its attempts to send out the packet. This time 
+period applies when the number of failures has reached a 
+configured maximum. It may resume its retries after the 
+time period."
+::= { nmcCfg 12 }
+
+nmcCfgNumFailBefSuspend OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"The number of connection failures to allow before 
+suspending retries."
+::= { nmcCfg 13 }
+
+nmcCfgLogSrvrSelect OBJECT-TYPE
+SYNTAX INTEGER{
+  primary(1),
+  secondary(2),
+  none(3)
+}
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"The server selection for event logging.
+Default=none(3)."
+::= { nmcCfg 14 }
+
+nmcCfgLogPriSrvrAddr OBJECT-TYPE
+SYNTAX IpAddress
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"The primary logging server's IP address."
+::= { nmcCfg 15 }
+
+nmcCfgLogSecSrvrAddr OBJECT-TYPE
+SYNTAX IpAddress
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"The secondary logging server's IP address."
+::= { nmcCfg 16 }
+
+nmcCfgLogUdpPortNum OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"The logging server's UDP port number.
+Default=1646."
+::= { nmcCfg 17 }
+
+nmcCfgLogRetryCnt OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"The NMC logging client transmission retry 
+count.
+Default=3."
+::= { nmcCfg 18 }
+
+nmcCfgLogCallStatGrpSel OBJECT-TYPE
+SYNTAX INTEGER{
+  none(1),
+  group2(2),
+  group3(3),
+  group4(4),
+  group23(5),
+  group24(6),
+  group34(7),
+  all(8)
+}
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"The optional call statistics groups included in log 
+messages.  Groups are Usage(1), Data Transfer(2), 
+Performance(3) and Operating Mode(4). Group 1 is always 
+sent. Groups 2-4 are optional.
+Default = none(1)."
+::= { nmcCfg 19 }
+
+-- The NAS Network Management Card Status Group.
+
+nmcStat OBJECT IDENTIFIER ::= { nmc 2 }
+
+nmcStatStatus OBJECT-TYPE
+SYNTAX INTEGER{
+  other(1),
+  ok(2),
+  nonCriticalFailure(3)
+}
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+"This object will indicate the general status or health of 
+the Network Management Card."
+::= { nmcStat 1 }
+
+nmcStatDramInstalled OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+"This object indicates the amount of dynamic RAM currently 
+installed on the Network Management Card.  The units for 
+this value are kilobytes."
+::= { nmcStat 2 }
+
+nmcStatNVRAMInstalled OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+"This object indicates the amount of non-volatile RAM 
+currently installed on the Network Management Card.  The 
+units for this value are kilobytes."
+::= { nmcStat 3 }
+
+nmcStatEventId OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+"This value increments once for each network management 
+event detected by the NMC.  It is used to correlate SNMP 
+traps with events that occured in the system."
+::= { nmcStat 4 }
+
+nmcStatTemperature OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-only
+STATUS optional
+DESCRIPTION
+"This object reflects the current temperature in the NAS 
+chassis, as detected by the NMC.  The value of this object 
+indicates the temperature in degree Celcius."
+::= { nmcStat 5 }
+
+nmcStatPowerUpTstFailures OBJECT-TYPE
+SYNTAX Counter
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+"This object contains the number of power up tests which 
+failed during the power up of the NMC card."
+::= { nmcStat 6 }
+
+nmcStatPowerUpTstFailBMap OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+"This object defines a bit map which contains a one in the 
+postion that indicates a power up test failure.  The number 
+returned is an integer that represents which power up 
+test(s) that have failed. (e.g. a return value of three 
+would mean power up tests 1 & 2 failed since bits 00000011 
+in the least significant byte would be set.)"
+::= { nmcStat 7 }
+
+nmcStatTestResult OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+"This object contains the bit mapped result of the request 
+to perform a self test.  A non zero value indicates that 
+there has been one or more self test failures."
+::= { nmcStat 8 }
+
+nmcStatCompSwVer OBJECT-TYPE
+SYNTAX DisplayString (SIZE(0..9))
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+"This object contains the software compatibility version."
+::= { nmcStat 9 }
+
+-- The NAS Network Management Card Trap Group.
+
+nmcTrap OBJECT IDENTIFIER ::= { nmc 3 }
+
+nmcTrapSequenceNumber OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+"This object increments every time a trap is generated by 
+the NMC.  This object is sent in the var-bind list of each 
+trap and can be used by management stations to detect when 
+a trap has been lost."
+::= { nmcTrap 1 }
+
+nmcTrapDestTable OBJECT-TYPE
+SYNTAX SEQUENCE OF NmcTrapDestEntry
+ACCESS not-accessible
+STATUS mandatory
+DESCRIPTION
+"This table defines the places to which traps are to be 
+sent.  These places may refer to management consoles, or 
+other alarm collection processes."
+::= { nmcTrap 2 }
+
+nmcTrapDestEntry OBJECT-TYPE
+SYNTAX NmcTrapDestEntry
+ACCESS not-accessible
+STATUS mandatory
+DESCRIPTION
+"There is an entry in this table for each destination to 
+which the NMC is to send SNMP traps."
+INDEX { nmcTrapDestIP }
+::= { nmcTrapDestTable 1 }
+
+NmcTrapDestEntry ::=
+SEQUENCE {
+nmcTrapDestIP
+    IpAddress,
+nmcTrapDestCommunity
+    OCTET STRING,
+nmcTrapDestDescr
+    DisplayString
+}
+
+nmcTrapDestIP OBJECT-TYPE
+SYNTAX IpAddress
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+"This object identifies the IP address to be used for 
+sending traps to the destination identified by 
+nmcTrapDestDescr."
+::= { nmcTrapDestEntry 1 }
+
+nmcTrapDestCommunity OBJECT-TYPE
+SYNTAX OCTET STRING (SIZE(0..31))
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"This object identifies the community string to be used when 
+sending traps to the destination identified by 
+nmcTrapDestDescr."
+::= { nmcTrapDestEntry 2 }
+
+nmcTrapDestDescr OBJECT-TYPE
+SYNTAX DisplayString (SIZE(0..24))
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"This object contains a plain text description of the trap 
+destination to which this entry pertains."
+::= { nmcTrapDestEntry 3 }
+
+nmcArTrapId OBJECT-TYPE
+SYNTAX INTEGER (0..127)
+ACCESS read-only
+STATUS optional
+DESCRIPTION
+"A single user defined value can be configured through 
+AutoResponse script MIB objects to be sent to the 
+management stations when a NMC AutoResponse SNMP TRAP 
+occurs."
+::= { nmcTrap 3 }
+
+-- The NAS Network Management Card Command Group.
+
+nmcCmd OBJECT IDENTIFIER ::= { nmc 4 }
+
+nmcCmdMgtStationId OBJECT-TYPE
+SYNTAX OCTET STRING (SIZE(0..8))
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"This object is a generic read-write variable that a 
+Management Station (MS) can use to guarantee that the 
+results from a given command are the results of a command 
+issued by that specific MS.  Each MS must SET a unique 
+value to this object when doing commands and GET the value 
+of this object together with ds0CmdReqId and ds0CmdResult 
+to detect interference from other MSs."
+::= { nmcCmd 1 }
+
+nmcCmdReqId OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"This object contains the value of the request-id field in 
+the SNMP PDU which invoked the current or most recent 
+command or test on this Network Management Card.  If the 
+request-id is unknown or undefined, this object contains 
+the value zero."
+::= { nmcCmd 2 }
+
+nmcCmdFunction OBJECT-TYPE
+SYNTAX INTEGER{
+  noCommand(1),
+  saveToNvram(2),
+  restoreFromDefaults(3),
+  restoreFromNvram(4),
+  nonDisruptSelfTest(5),
+  softwareReset(6),
+  saveUiParmsToEEPROM(7)
+}
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"This object contains a value which describes the command 
+which is being invoked."
+::= { nmcCmd 3 }
+
+nmcCmdForce OBJECT-TYPE
+SYNTAX INTEGER{
+  noForce(1),
+  force(2)
+}
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"In some cases, the Network Managment Card may be in a state 
+such that certain commands could adversely affect 
+operations.  In such cases, a command request with this 
+object not present or set to noForce will result in a 
+warning.  If the operator elects to ignore such warnings, 
+this object can be set to force in a subsequent issue of 
+the command to cause the command to be carried out 
+regardless of its potentially hazzardous effects."
+::= { nmcCmd 4 }
+
+nmcCmdParam OBJECT-TYPE
+SYNTAX OCTET STRING (SIZE(0..24))
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"This object contains parameters that are specific to the 
+particular command being issued.  In some cases, there will 
+be no additional parameters required."
+::= { nmcCmd 5 }
+
+nmcCmdResult OBJECT-TYPE
+SYNTAX INTEGER{
+  none(1),
+  success(2),
+  inProgress(3),
+  notSupported(4),
+  unAbleToRun(5),
+  aborted(6),
+  failed(7)
+}
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+"This object contains the result of the most recently 
+requested command or test, or the value none(1) if no 
+commands have been requested since the last reset."
+::= { nmcCmd 6 }
+
+nmcCmdCode OBJECT-TYPE
+SYNTAX INTEGER{
+  noError(1),
+  unable(2),
+  unrecognizedCommand(6),
+  unsupportedCommand(20),
+  testFailed(25),
+  nvramAccessConflict(27),
+  pendingSoftwareDownload(73)
+}
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+"The value of this object upon command completion indicates 
+a further description of what went wrong if the command was 
+unsuccessful.  In the case of tests, a bit mapped result of 
+each of the sub-tests performed appears in the 
+nmcStatTestResult object."
+::= { nmcCmd 7 }
+
+-- The NAS Network Management Card HUB Security Group
+
+nmcHs OBJECT IDENTIFIER ::= { nmc 6 }
+
+nmcHsDialInOutNamePrompt OBJECT-TYPE
+SYNTAX DisplayString (SIZE(0..80))
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"This is the first prompt that appears when users establish 
+a connection with a security modem.  It should serve to 
+identify the system and prompt users to enter their name."
+::= { nmcHs 1 }
+
+nmcHsDialInOutPsswdPrompt OBJECT-TYPE
+SYNTAX DisplayString (SIZE(0..80))
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"This prompt appears after a valid response has been made to 
+the previous prompt (i.e., name string followed by CR/LF), 
+and prompts users to enter their password."
+::= { nmcHs 2 }
+
+nmcHsDialBackNamePrompt OBJECT-TYPE
+SYNTAX DisplayString (SIZE(0..80))
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"This prompt only appears when users are configured for dial 
+back security (to either a stored or entered number).  It 
+is also only issued when the Request Login Validation on 
+Dial-Back field is enabled for the user in the RADIUS user 
+database.  This prompt should be different than the name 
+prompt used when users first log into the system."
+::= { nmcHs 3 }
+
+nmcHsDialBackPsswdPrompt OBJECT-TYPE
+SYNTAX DisplayString (SIZE(0..80))
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"This prompt appears after a valid response to the prior 
+prompt, and prompts users to enter their password."
+::= { nmcHs 4 }
+
+nmcHsDialBackPhonePrompt OBJECT-TYPE
+SYNTAX DisplayString (SIZE(0..80))
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"This prompt only appears if you have configured the user 
+for dial back entered mode in the RADIUS user database.  It 
+prompts the user to enter the phone number at which the 
+system can call them back."
+::= { nmcHs 5 }
+
+nmcHsDialBackPendPrompt OBJECT-TYPE
+SYNTAX DisplayString (SIZE(0..80))
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"This message only appears if you configure users for a dial 
+back mode (to either a stored or entered number) in the 
+RADIUS user database.  It confirms to users that they have 
+logged in successfully, and lets them know that the system 
+has reserved a modem to call them back."
+::= { nmcHs 6 }
+
+nmcHsMdmSelectPrompt OBJECT-TYPE
+SYNTAX DisplayString (SIZE(0..80))
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"This message only appears if a user is configured for dial 
+back in the RADIUS database and that this record has the 
+Request Dial Back Modem Selection field enabled.  The 
+system displays a list of allowed dial back modems that 
+have been entered for this user.  Users must enter the 
+number that appears on the menu next to their choice."
+::= { nmcHs 7 }
+
+nmcHsLoginFailedMsg OBJECT-TYPE
+SYNTAX DisplayString (SIZE(0..80))
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"This message appears when users fail to enter a valid 
+name/password combination."
+::= { nmcHs 8 }
+
+nmcHsPhoneRestrictPrompt OBJECT-TYPE
+SYNTAX DisplayString (SIZE(0..80))
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"This message appears when users are prompted for a dial 
+back phone number and the entered number violates the 
+allowed numbers specified in the Call Restriction List."
+::= { nmcHs 9 }
+
+nmcHsInvalidMdmSelecMsg OBJECT-TYPE
+SYNTAX DisplayString (SIZE(0..80))
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"This message appears when users configured for dial back 
+with the Request Dial-Back Modem Selection field enabled, 
+select a modem to which they are not allowed access (as 
+specified in the list of allowed Dial-Back modems)."
+::= { nmcHs 10 }
+
+nmcHsNoMdnsAvailMsg OBJECT-TYPE
+SYNTAX DisplayString (SIZE(0..80))
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"This message appears when the system is unable to reserve a 
+modem for dial-back that was either selected by the user or 
+defined in it's list of Allowed Dial Back modems."
+::= { nmcHs 11 }
+
+nmcHsConnectSuccessMsg OBJECT-TYPE
+SYNTAX DisplayString (SIZE(0..80))
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"This message confirms that users have successfully 
+compleated their login and may proceed with either their 
+dial-in or dial-out call."
+::= { nmcHs 12 }
+
+nmcHsNewPasswordPrompt OBJECT-TYPE
+SYNTAX DisplayString (SIZE(0..80))
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"This prompt only appears when a users password has expired. 
+ It is issued once for the new password and then again for 
+re-issue of the new password."
+::= { nmcHs 13 }
+
+nmcHsChangePasswordMsg OBJECT-TYPE
+SYNTAX DisplayString (SIZE(0..80))
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"This message appears during name/password authentication 
+when the user's password has expired.  This message is 
+immediately followed by the enter new password prompt."
+::= { nmcHs 14 }
+
+nmcHsPromptRspTimeout OBJECT-TYPE
+SYNTAX INTEGER (10..255)
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"This value represents the number of seconds in which users 
+must respond to each prompt.  Users failing to respond 
+within the specified time are disconnected, and a Dial 
+Security login failure trap is generated.  Any login 
+failures of this type also apply to the user blacklist 
+function if a valid user name has been entered.  This field 
+takes precidence over the modem's inactivity timer during a 
+security login.  The default for this object is 
+30(seconds)."
+::= { nmcHs 15 }
+
+nmcHsPromptRspAttempts OBJECT-TYPE
+SYNTAX INTEGER (1..16)
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"This value represents the number of tries the user is 
+allowed per prompt during any one security session.  If 
+this number is reached, the call is terminated.  For the 
+purposes of retry limiting, the user name and password are 
+treated as a single prompt.  This means that if a valid 
+name and an invalid password are entered, the failure is 
+counted against both the Prompt Response Attempt Limit and 
+the Failed Logins Before Blacklist.  The default for this 
+object is 1."
+::= { nmcHs 16 }
+
+nmcHsPromptRspEchoEna OBJECT-TYPE
+SYNTAX INTEGER{
+  disable(1),
+  enable(2)
+}
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"When enabled, this option instructs the NMC to echo the 
+user's typed responses back to the users screen.  Password 
+responses are echoed as 'X's.  The default for this option 
+is disabled."
+::= { nmcHs 17 }
+
+nmcHsDialBackDelay OBJECT-TYPE
+SYNTAX INTEGER (1..100)
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"This object defines the number of seconds to wait between 
+successive dial back attempts; i.e., the time the NMC waits 
+before attempting the next dial back when it was unable to 
+connect.  The default is 30 seconds."
+::= { nmcHs 18 }
+
+nmcHsDialBackAttempts OBJECT-TYPE
+SYNTAX INTEGER (1..100)
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"This object defines the number of times that the NMC will 
+attempt to dial back a dial in user configured for dial 
+back when successive dial back attempts fail.  The default 
+for this object is one. "
+::= { nmcHs 19 }
+
+nmcHsSecuritySrvrAddr OBJECT-TYPE
+SYNTAX IpAddress
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"This object identifies the IP address of the RADIUS 
+security server where the NMC RADIUS client sends requests."
+::= { nmcHs 20 }
+
+nmcHsSecuritySrvrPort OBJECT-TYPE
+SYNTAX INTEGER
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"This object identifies the UDP port where the NMC's RADIUS 
+client issues requests to the RADIUS security server.  The 
+default port is 1545."
+::= { nmcHs 21 }
+
+nmcHsSecuritySrvrRetries OBJECT-TYPE
+SYNTAX INTEGER (0..3)
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"This object identifies the number of retries that the NMC's 
+RADIUS client will preform when attempting to send requests 
+to a RADIUS security server. The default retry number is 1."
+::= { nmcHs 22 }
+
+nmcHsMdmAttemptLimit OBJECT-TYPE
+SYNTAX INTEGER (1..16)
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"This value represents the number of times an attempt can be 
+made to login on any one modem without success.  If this 
+value is exceeded and the mdmLoginAttemptLimExceeded trap 
+has been enabled, then the mdmLoginAttemptLimExceeded trap 
+is generated.  Default = 3."
+::= { nmcHs 23 }
+
+-- The NAS Network Management Card Security Trap Enable Group.
+
+nmcTe OBJECT IDENTIFIER ::= { nmc 7 }
+
+nmcTeDialOutLoginFail OBJECT-TYPE
+SYNTAX INTEGER{
+  enableTrap(1),
+  disableAll(2),
+  enableLog(3),
+  enableAll(4)
+}
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"Enable/disable for the trap generated when a dial out login 
+security session has failed."
+::= { nmcTe 1 }
+
+nmcTeDialInLoginFail OBJECT-TYPE
+SYNTAX INTEGER{
+  enableTrap(1),
+  disableAll(2),
+  enableLog(3),
+  enableAll(4)
+}
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"Enable/disable for the trap generated when a dial in login 
+security session has failed."
+::= { nmcTe 2 }
+
+nmcTeDialOutRestrictNum OBJECT-TYPE
+SYNTAX INTEGER{
+  enableTrap(1),
+  disableAll(2),
+  enableLog(3),
+  enableAll(4)
+}
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"Enable/disable for the trap generated when a dial out 
+security session has failed as a result of attempting to 
+dial a restricted phone number."
+::= { nmcTe 3 }
+
+nmcTeDialBackRestrictNum OBJECT-TYPE
+SYNTAX INTEGER{
+  enableTrap(1),
+  disableAll(2),
+  enableLog(3),
+  enableAll(4)
+}
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"Enable/disable for the trap generated when a dial back 
+security session has failed as a result of attempting to 
+dial a restricted phone number."
+::= { nmcTe 4 }
+
+nmcTeUserBlacklist OBJECT-TYPE
+SYNTAX INTEGER{
+  enableTrap(1),
+  disableAll(2),
+  enableLog(3),
+  enableAll(4)
+}
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"Enable/disable for the trap generated when a security user 
+has reached their final failed login attempt number and is 
+now being blacklisted."
+::= { nmcTe 5 }
+
+nmcTeUserBlacklistLogin OBJECT-TYPE
+SYNTAX INTEGER{
+  enableTrap(1),
+  disableAll(2),
+  enableLog(3),
+  enableAll(4)
+}
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"Enable/disable for the trap generated when a security login 
+attempt by a currently blacklisted user has occurred."
+::= { nmcTe 6 }
+
+nmcTeRespAttmptLimExceed OBJECT-TYPE
+SYNTAX INTEGER{
+  enableTrap(1),
+  disableAll(2),
+  enableLog(3),
+  enableAll(4)
+}
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"Enable/disable for the trap generated when a security user 
+has failed to issue a valid response to a particular 
+security prompt before the configured limit."
+::= { nmcTe 7 }
+
+nmcTeLoginAttmptLimExceed OBJECT-TYPE
+SYNTAX INTEGER{
+  enableTrap(1),
+  disableAll(2),
+  enableLog(3),
+  enableAll(4)
+}
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"Enable/disable for the trap generated when a security 
+session has failed because the indicated user does not 
+appear in the security user database."
+::= { nmcTe 8 }
+
+nmcTeLogSrvrLoss OBJECT-TYPE
+SYNTAX INTEGER{
+  enable(1),
+  disable(2)
+}
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"Enable/disable for the trap generated when communication 
+with a logging server has been lost."
+::= { nmcTe 9 }
+
+nmcUiCfg OBJECT IDENTIFIER ::= { nmc 8 }
+
+nmcUiCfgLanIPAddr OBJECT-TYPE
+SYNTAX IpAddress
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"This contains the IP address of the LAN interface."
+::= { nmcUiCfg 1 }
+
+nmcUiCfgLanSubnetMask OBJECT-TYPE
+SYNTAX IpAddress
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"This specifies the subnet mask for LAN interface."
+::= { nmcUiCfg 2 }
+
+nmcUiCfgWanIPAddr OBJECT-TYPE
+SYNTAX IpAddress
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"This specifies the IP address for the WAN interface."
+::= { nmcUiCfg 3 }
+
+nmcUiCfgWanSubnetMask OBJECT-TYPE
+SYNTAX IpAddress
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"This specifies the Subnet mask for the WAN interface."
+::= { nmcUiCfg 4 }
+
+nmcUiCfgDefaultGwyIP OBJECT-TYPE
+SYNTAX IpAddress
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"This specifies the address of the Gateway to which the IP 
+will forward those packets whose net ID does not match the 
+net ID of either interface."
+::= { nmcUiCfg 5 }
+
+nmcUiCfgLocalTrIeeeAddr OBJECT-TYPE
+SYNTAX OCTET STRING (SIZE(6..6))
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"This gives the IEEE physical address of the Token Ring 
+interface."
+::= { nmcUiCfg 6 }
+
+nmcUiCfgPrivateString OBJECT-TYPE
+SYNTAX DisplayString (SIZE(0..12))
+ACCESS write-only
+STATUS mandatory
+DESCRIPTION
+"This specifies the SNMP read-write community 
+string.
+Default='private'."
+::= { nmcUiCfg 7 }
+
+nmcUiCfgLanIfEnable OBJECT-TYPE
+SYNTAX INTEGER{
+  enable(1),
+  disable(2)
+}
+ACCESS read-write
+STATUS optional
+DESCRIPTION
+"This parameter controls the enable/disable of the LAN 
+interface."
+::= { nmcUiCfg 8 }
+
+nmcUiCfgPublicString OBJECT-TYPE
+SYNTAX DisplayString (SIZE(0..12))
+ACCESS write-only
+STATUS mandatory
+DESCRIPTION
+"This specifies the SNMP read-only community 
+string.
+Default='public'."
+::= { nmcUiCfg 9 }
+
+-- The NAS Network Management Card Authorized Access Group.
+
+nmcAuth OBJECT IDENTIFIER ::= { nmc 9 }
+
+nmcAuthAccTable OBJECT-TYPE
+SYNTAX SEQUENCE OF NmcAuthAccEntry
+ACCESS not-accessible
+STATUS mandatory
+DESCRIPTION
+"This table defines which management stations are allowed 
+access to the NMC."
+::= { nmcAuth 1 }
+
+nmcAuthAccEntry OBJECT-TYPE
+SYNTAX NmcAuthAccEntry
+ACCESS not-accessible
+STATUS mandatory
+DESCRIPTION
+"There is an entry for each management station allowd access 
+to the NMC."
+INDEX { nmcAuthAccIpAddr }
+::= { nmcAuthAccTable 1 }
+
+NmcAuthAccEntry ::=
+SEQUENCE {
+nmcAuthAccIpAddr
+    IpAddress,
+nmcAuthAccNetMask
+    IpAddress,
+nmcAuthAccDescr
+    DisplayString
+}
+
+nmcAuthAccIpAddr OBJECT-TYPE
+SYNTAX IpAddress
+ACCESS read-only
+STATUS mandatory
+DESCRIPTION
+"This is the IP address of the station allowed access to the 
+NMC."
+::= { nmcAuthAccEntry 1 }
+
+nmcAuthAccNetMask OBJECT-TYPE
+SYNTAX IpAddress
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"This is the network mask of the station allowed access to 
+the NMC."
+::= { nmcAuthAccEntry 2 }
+
+nmcAuthAccDescr OBJECT-TYPE
+SYNTAX DisplayString (SIZE(0..24))
+ACCESS read-write
+STATUS mandatory
+DESCRIPTION
+"This is the description of the station allowed access to 
+the NMC."
+::= { nmcAuthAccEntry 3 }
+
+END
+
+

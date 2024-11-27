@@ -1,0 +1,427 @@
+ 8-Mar-82 05:35:04-PST,16579;000000000001
+Mail-from: ARPANET host BRL rcvd at 8-Mar-82 0533-PST
+Sender:    Mike Muuss <TCP-IP@BRL>
+From:      TCP-IP at BRL
+To:        TCP-IP at BRL
+Date:      8 Mar 1982
+Subject:   TCP-IP Digest, Vol 1 #17
+Via:  Brl; 8 Mar 82 1:41-EDT
+
+TCP/IP Digest            Monday, 8 March 1982      Volume 1 : Issue 17
+
+Today's Topics:
+          Changes in IP since 1981 -- IP/TCP Document Editions
+                NTIS Document Number for TCP/IP Documents
+                  TOPS-20AN Birds of a Feather Session?
+     TCP/IP for CYBER Status Report -- Ford Aerospace Status Report
+    TELNET without TCP, for Speed? -- Need InterNet Name Server in C
+     Xerox NS Protocol Query -- Need TCP/IP and Drivers for VAX/VMS
+                          Suggestions for MCNC
+----------------------------------------------------------------------
+                         LIMITED DISTRIBUTION
+          For Research Use Only --- Not for Public Distribution
+----------------------------------------------------------------------
+
+From: POSTEL at USC-ISIF
+Subject: re: Addressing Questions in IP
+To:   ODonnell at YALE
+cc:   Postel at ISIF, TCP-IP at BRL
+
+In answer your questions about addressing:
+
+I think the major conceptual change from the January 1980 editions to 
+the September 1981 editions is in the area of addressing.  (There are 
+other changes I will describe in another message.)  The significant 
+change is to treat the 32-bit address as having three formats or 
+classes.
+
+   Class A Address
+
+      The first type of address has a 7-bit network number and a 24-bit 
+      local address.
+
+       1                   2                   3
+       0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      |0|   NETWORK   |                Local Address                  |
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+   Class B Address
+
+      The second type of address has a 14-bit network number and a 
+      16-bit local address.
+
+       1                   2                   3
+       0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      |1 0|           NETWORK         |          Local Address        |
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+   Class C Address
+
+      The third type of address has a 21-bit network number and a 8-bit 
+      local address.
+
+       1                   2                   3
+       0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      |1 1 0|                    NETWORK              | Local Address |
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+The local address carries information to address a host in the network 
+identified by the network number.
+
+The assignment of network numbers is managed by a central authority 
+(right now it is me, eventually it will be the NIC).  And, for certain 
+networks the mapping of addresses in that networks context to Internet 
+addresses will also be managed centrally (for example, Telenet to 
+Internet).
+
+The DOD Internet gateway procedures do use the network number as the 
+fundamental piece of information to make the routing decision.  I don't 
+think that DOD Internet Gateways have any more overhead in making the 
+routing decision than Xerox NS Internet Gateways do, and i suspect that 
+DOD gatways have less overhead.
+
+Please get the latest editions of the specifications:  RFCs 790 through 
+796.  These are in public access files in the Network Information Center
+online library.  You can obtain copies via FTP.  Use the FTP username 
+ANONYMOUS and password GUEST.  The pathnames for the files are of the 
+form:
+
+   <NETINFO>RFC790.TXT
+
+--jon.
+
+------------------------------
+
+From: POSTEL at USC-ISIF
+Subject: IP/TCP Document Editions
+To:   ODonnell at YALE
+cc:   postel at ISIF, tcp-ip at BRL
+
+   There are two widely distributed editions of the documents describing
+   the Internet Protocol (or IP) and Transmission Control Protocol (or 
+   TCP), the DOD standard protocols for internetworking.  I would like 
+   to clarify the status of these two editions, and note some of the 
+   technical differences in the specifications.
+
+   The first set of documents is dated January 1980 and carry the 
+   reference numbers RFC-760, IEN-128, NTIS-ADA079730, and RFC-761, 
+   IEN-129, NTIS-ADA082609, and these appeared in Computer Communication
+   Review, Special Interest Group on Data Communication, ACM, V.10, N.4,
+   October 1980.
+
+   The second set of documents is dated September 1981 and carry the 
+   reference numbers RFC-791, RFC-792, and RFC-792, (NTIS number applied
+   for).
+
+   Based on the first set of documents these prococols were ratified as 
+   DOD standards by Gerald P. Dinneen (Assistant Secretary of Defense 
+   for Communications, Command, Control and Intelligence) in April 1980 
+   [see IEN-152].
+
+   This set in motion a study effort managed by DCA to identify and 
+   incorportate into the specifications additional capabilities 
+   important in the military environment.
+
+   Based on the results of the DCA study effort and other protocol 
+   design improvements the second set of documents was produced.  These 
+   September 1981 documents now are the current specification of the IP 
+   and TCP for use in the DARPA research community and are being 
+   considered for ratification as the DOD standard protocols for 
+   internetworking to supersede the January 1980 edition.
+
+   The differences between the two editions are at the overall 
+   conceptual level quite minor, and the general principles of 
+   operations of the protocols are quite similar.
+
+   There are specific differences however.  In the IP, the interpretaion
+   of the Internet Address is changed, the Type Of Service is slightly 
+   changed, the security provisions are substantially different, and 
+   there are now no header fields that change their length in 
+   transmission or processing.  In the TCP, the "Rubber" End of Letter 
+   is removed and replaced with a "Push" function.
+
+   Changes in the IP specification:
+
+      Addresses
+
+         The Internet Address was formerly a 32-bit field rigidly 
+         divided into a 8-bit Network number and a 24-bit address within
+         network part. There were a maximum of 256 networks.  Now, while
+         the field is still 32-bits, the division is more flexible.  Now
+         there are possibilities for 128 class A networks (with 24-bit 
+         address within network parts), 2^14 class B networks (with 
+         16-bit address within network parts), and 2^21 class C networks
+         (with 8-bit address within network parts).
+
+      Type Of Service
+
+         The type of service is changed to identify a specific use of 
+         each of the 8 possible precedence values.  The remainder of the
+         type of service is completely redefined in terms of delay, 
+         throughput, and reliability.
+
+      Security
+
+         The security option is completely redefined to conform to 
+         current military requiments.
+
+      Variable Length Fields
+
+         In the January 1980 edition several optional fields were 
+         allowed to grow or shrink during processing in the gateways.  
+         In the September 1981 edition this has been eliminated.  Now, 
+         once the length for one of these option fields is set, it will 
+         remain the same length for the life of that datagram.
+
+      Option Type Codes
+
+         The option type codes now include a bit that indicates if the 
+         option is to be copied on fragmentation.
+
+      Errors
+
+         The Error option has been eliminated.  It is replaced by the 
+         use of an auxilary protocol called Internet Control Message 
+         Protocol (or ICMP) as part of the inplemetation of the Internet
+         Protocol Module.  ICMP includes facilities for the notification
+         of errors, and the exchange of control information between 
+         Internet Protocol Modules.
+
+   Changes in the TCP specification:
+
+      End Of Letter
+
+         The end of letter function was replaced by a push function.  In
+         the January 1980 edition, the EOL was "rubber" in that it was 
+         tied to a buffer size, and the end of letter consumed the 
+         remainder of the buffer and that amount of the transmission 
+         sequence numbers.  Also there was some confusion of the end 
+         user to end user significance of the end of letter -- could it 
+         act as a user level record marker?
+
+         In the September 1981 edition, there is only a push function.  
+         This push function is not explicitly involved in buffer space 
+         allocation nor does it consume sequence numbers.  It does mean 
+         that any data should be delivered as promptly as possible even 
+         if buffers are not most efficiently utilized.  The push can not
+         act as a user level record marker.
+
+         In conjunction with this change the Buffer Size option was 
+         eliminated.
+
+      Closing States
+
+         Some additions were made to the connection closing procedure to
+         properly account for all the possible sequence of actions and 
+         to be sure the timeout on the connection record is used when 
+         necessary.
+
+      Small Corrections to Handling ACKs and RSTs
+
+         Some small corrections were made to the processing of ACKs and 
+         RSTs (mainly in the pre established states).
+
+      Comment on Retransmission Policy
+
+         A small discussion was added to suggest a way of determining 
+         and maintaining a dynamic model of the proper retransmission 
+         timeout.
+
+      Comment on Window Policy
+
+         A small discussion was added to suggest a way overcoming the 
+         tendency for the window increments and the transmitted data 
+         segments to become smaller and smaller.
+
+      Comment on Quite Time
+
+         A discussion was added on the reasons the TCP should not 
+         immediately begin to transmit segments on recovery from a 
+         system crash.
+
+      Maximum Segment Size
+
+         An option was added to all the specification of the maximum 
+         segment size that a TCP module can accept.
+
+   --jon.
+
+------------------------------
+
+From: POSTEL at USC-ISIF
+Subject: IP/TCP Specifications in NTIS
+To:   TCP-IP at BRL
+cc:   Postel at ISIF
+
+The current specifications of IP/TCP are now available from NTIS.
+The collection of RFCs 790 through 796 is on file as one document
+at NTIS under the title
+"Internet and Transmission Control Protocol Specifications" 
+The NTIS number is   AD A111091.
+
+--jon.
+
+------------------------------
+
+From: Kevin Paetzold <PAETZOLD at DEC-MARLBORO>
+To: tcp-ip at BRL
+DTN: 231-7430
+Mail-stop: MR1-2/L10
+Telephone: 617-467-7430
+Subject: ARPANET liason meeting (east coast march 26 at BBN)
+
+	Would you forward this to the TCP/IP digest.  Arnold Miller
+and I will be attending the ARPANET liason meeting to be held on
+March 26 at BBN.  We would like to schedule a "TOPS-20AN Birds of a 
+Feather" type meeting for any liasons from TOPS-20 sites.  We will
+discuss what DEC plans on doing to support TCP/IP under TOPS-20.
+Exact time and place for this meeting have not yet been determined.
+More info will follow.  Interested parties may send mail to us.
+PAETZOLD@DEC-MARLBORO and MILLER@DEC-MARLBORO.
+
+Kevin Paetzold
+Digital Equipment Corporation
+
+------------------------------
+
+From:      Crimmins at BRL-BMD
+Subject:   TCP/IP for CYBER
+
+	I spoke with Tim Fallon of Tektronix about the status of
+ the Tektronix version of TCP/IP. Tim said a decision should be
+ made by 1 Apr 82, he sounded like Tektronix will release it but
+ the details where not yet set.
+     
+					TomC
+
+------------------------------
+
+From: Sherman at SRI-KL
+Subject: FACC interneting
+To:   tcp-ip at BRL
+
+Hi Digest,
+     We at Ford Aerospace and Communications have been developing
+an internal network based on IP/TCP. We currently have
+a collection of Fuzzballss (DCNet via D. Mills) operating on a 
+LAN. This is in turn connected via phone lines to a VAX
+running Berkely BSD 4.1 UNIX with UNET ver 1.6 from 3Com.
+     We have developed a number of application programs (ftp and
+smtp) compatible with the lattest internet specifications.
+We also plan to include some other PDP11 UNIX System III players.
+     Regards,
+     Dick Sherman
+
+------------------------------
+
+Subject: TELNET protocols...
+From:  William "Chops" Westfield <BillW@SRI-KL>
+To: tcp-ip at BRL
+
+It seems to me that by the time you put Telnet on top of TCP and
+IP, the telnet connection is probably more reliable than the TTY-host
+connection, at the expense of a lot of CPU overhead.  Now, as more
+and more of the terminals connected to a host come in over a network
+rather than through normal TTY ports, this could become a problem.
+
+Has anyone considered putting some kind of modified Telnet protocol
+directly on top of IP ?  FTP and MAIL and other things that need
+the reliability can use the normal Telnet [TCP] protocol, but it would
+be nice if tying user terminals to a host over a net (especially
+a local net, where transmission is relatively reliable by itself),
+were computationally cheaper...
+
+Bill Westfield
+Networks Development, SRI
+
+------------------------------
+
+From: ARPAVAX.sam at Berkeley
+To: tcp-ip at brl
+Subject: Internet Name Server
+
+Does anyone have a C implementation of the Internet Name Server
+they'd be willing to share?
+
+	Sam Leffler
+	sam at berkeley
+
+------------------------------
+
+From: Roy Marantz <MARANTZ at RUTGERS>
+Subject: Xerox protocol query
+To: tcp-ip at BRL
+
+Can someone give me pointer(s) to where I can get information on the
+newly release protocol (NS?) from Xerox?  I've heard of the announcement,
+but haven't seen it anywhere.  Thanks.
+
+Roy
+
+------------------------------
+
+From: Steve Berlin <BERLIN at MIT-XX>
+Subject: TCP/IP and drivers for VMS
+To: tcp-ip at BRL, info-vax at SANDIA
+
+We are acquiring about two dozen VAX-750's during the next few months, and
+are currently deciding what network hardware and software we will use.  It
+looks like we will have both LNI and 3Com Ethernet hardware, and possibly
+Chaosnet as well.  The transport protocol will probably be TCP/IP.  I would
+like pointers to any software, particularly drivers and TCP/IP
+implementations, that is available for either UNIX or VMS.  We have TCP/IP
+for UNIX from Gurwitz @ BBN.  Does anybody have further news of the TEKLABS
+TCP/IP for VMS?  Thanks for your help.
+
+------------------------------
+
+From: mo at LBL-UNIX (Mike O'Dell [system])
+To: BERLIN at MIT-XX
+cc: tcp-ip at BRL, info-vax at SANDIA
+Subject: Re: TCP/IP and drivers for VMS
+
+Try Digital Technology Inc. in Urbana Illinois.
+	-Mike
+
+------------------------------
+
+[ The following letters contain suggestions for the MicroElectronics
+  Center of North Carolina, which requested advice in the last digest.  -M ]
+
+From: Chris Ryland <Ryland at SRI-KL>
+To:   TCP-IP at BRL
+Subject: TCP-IP Digest, Vol 1 #16, request from Steven M. Bellovin
+
+With all that hardware running Unix, I'd run Chaosnet, which is about
+the most proven local network available today.  You don't clearly need
+any internetwork support, which is why I recommend Chaosnet.
+
+------------------------------
+
+Subject: Re:   TCP-IP Digest, Vol 1 #16
+From: CERF at USC-ISI
+To: TCP-IP at BRL
+
+For Steve Bellovin:
+
+I would suggest you use the Berkeley Vax/TCP/IP protocol
+base, and get 3COM UNET for the 11/70 and other 11's, also
+for XENIX. The 11/23's could run the DCNET software from COMSAT
+(Dave Mills). The MVS could run the UCLA TCP/IP software
+package (Bob Braden - Braden@ISIA).   The CSNET system is
+a good model for some of what you want to do.  VMS TCP/IP
+can be had from DTI Inc sometime in April this year for the
+NCSU systems.
+
+As to the actual networks to connect all this - not so clear,
+but it sounds as if you'll need some gateways to connect
+local nets to public or private long-haul nets.
+
+Vint Cerf
+
+END OF TCP-IP DIGEST
+********************
+

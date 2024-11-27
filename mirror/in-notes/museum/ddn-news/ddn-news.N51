@@ -1,0 +1,323 @@
+(Message inbox:3)
+Posted-Date: Fri 19 Dec 86 16:35:34-PST
+Received-Date: Fri, 19 Dec 86 19:50:19 PST
+Received: from C.ISI.EDU by venera.isi.edu (5.54/5.51)
+	id AA02249; Fri, 19 Dec 86 19:50:19 PST
+Received: FROM SRI-NIC.ARPA BY C.ISI.EDU WITH TCP ; 19 Dec 86 19:30:47 PST
+Date: Fri 19 Dec 86 16:35:34-PST
+From: DDN Reference <NIC@SRI-NIC.ARPA>
+Subject: DDN News #51
+To: DDN-NEWS:;
+Cc: nic@SRI-NIC.ARPA
+Message-Id: <12264151371.17.NIC@SRI-NIC.ARPA>
+
+The following DDN DCS newsletter was issued in hardcopy on 30 Sept
+1986.  It has just been transferred to online format for release to
+the DDN Newsletter distribution list as of today's date.
+
+-The DDN Network Information Center
+
+
+
+======================================================================
+DDN NEWS 51, SPECIAL ISSUE       DCA DDN Defense Communications System
+30 Sept 86                       Published by: DDN Network Info Center
+                                    (NIC@SRI-NIC.ARPA)  (800) 235-3155
+
+
+                        DEFENSE  DATA  NETWORK
+
+                              NEWSLETTER
+
+
+Maximum Distribution Requested.  The DDN NEWSLETTER is distributed
+online by the DDN Network Information Center under DCA contract.  For
+addition to the online mailing list, contact NIC@SRI-NIC.ARPA.  Back
+issues may be read through the TACNEWS server ("@n" command at the
+TAC) or may be obtained via FTP from the SRI-NIC host [26.0.0.73 or
+10.0.0.51] using login="anonymous" and password="guest".  The pathname
+for newsletters is DDN-NEWS:DDN-NEWS-nn.TXT (where "nn" is the
+newsletter number).
+======================================================================
+
+
+Section I. OFFICIAL
+
+             Topic:    1.  DOD HIGHER LEVEL COMPUTER PROTOCOL TESTING
+		       2.  DDN MANAGEMENT ENGINEERING PLAN
+		       3.  NATIONAL SCIENCE FOUNDATION USE OF THE ARPANET
+		       4.  DDN WHITE PAPER ON CAPACITY
+		       5.  DDN TELECOMMUNICATIONS CERTIFICATION OFFICE
+		             (TCO)	
+                       6.  INTER-SERVICE/AGENCY AUTOMATED MESSAGE 
+			      PROCESSING EXCHANGE (I-S/A AMPE)
+		       7.  CONUS AUTODIN SOFTWARE ACCEPTANCE TESTING 
+			      BEGINS
+		       8.  RELOCATION OF THE AUTODIN TEST FACILITY
+		       9.  CONUS AUTODIN 0&M CONFERENCE
+
+
+
+
+
+
+             DOD HIGHER LEVEL COMPUTER PROTOCOL TESTING
+             ------------------------------------------ 
+
+The following is the text of DCA/B6l3 MSG O7OOl5Z JUN 86:
+
+QUOTE :
+
+1.  Many of you are now in the process of acquiring DoD Standard Higher
+Level Computer Protocols -- Transmission Control Protocol (TCP),
+Internet Protocol (IP), Simple Mail Transfer Protocol (SMTP), File
+Transfer Protocol (FTP), and Network Virtual Terminal Protocol
+(TELNET). Some of you have required [that] DCA provide a means of testing
+these protocols to ensure a purchaser has obtained a working product.
+While DCA tests compliance at the lower computer protocol levels to
+assure proper network interface, there is no requirement at this time
+for DCA to provide the same assurance at the higher computer protocol
+levels. However, in the interest of gaining some measure of confidence
+in interoperability, a functional test is desirable. We solicit your
+comments on the following proposal for host computers; the similar
+issue for gateways will be resolved later.
+
+2.  Two levels of test, each involving two computer systems, are
+proposed. In the first test level, DCA will test your proposed host
+system against a DCA reference host computer system for compliance with
+DoD high level computer protocols. This will give you a known good
+reference host. In the second test level, your Service/Agency uses its
+remaining systems and determines if the purchased higher level protocol
+software is functionally acceptable and meets contract requirements.
+
+3.  In order to compliance-test your proposed Service/Agency reference
+host, you will need to write test driver software for each protocol.
+We will provide specifications and we estimate six man-months will be
+required to write the test driver software. If all goes well, the
+compliance test will take two days to accomplish and your reference
+host will be certified. The actual test of the proposed reference host
+is accomplished across the DDN and assumes a qualified lower level
+interface.  As each Service/Agency needs to accept test higher level
+protocol software, you will use the DCA provided Generic Test Plan,
+your reference host, and the system to be tested. The acceptance
+criteria of each higher level protocol software package would be
+determined by the procuring Service/Agency.
+
+4.  While there is some effort needed to make this proposal work, it
+will result in some assurance you are getting the higher level host
+computer protocols you are buying. Writing the Generic Test Plan would
+take a few months.  The Beta testing of your reference system can
+start as soon as you are ready. Although DCA has not yet accomplished
+a higher level protocol compliance test, we are ready for Beta testing
+and looking for volunteer systems.
+
+5.  We are also able to offer you our Compliance Test Software. You
+could then have the same reference host that DCA has at DCEC. Our
+system is a DEC VAX 11/750, but the software we have developed can be
+made to operate with other DEC VAX/MICROVAX equipment.
+
+6.  The Compliance Test guarantees both interoperability and protocol
+standards conformity, but it is costly.  The functional test provides
+less assurance, but at less cost.  Any of the testing methods require
+computer protocol knowledgeable personne1.  POC for comments is Chuck
+Ely or Lt Col Steve Rose, DCA/B6l3, (703) 285-5337 or (V) 356-5337.
+
+UNQUOTE.
+
+All Military Departments and most Defense Agencies received this
+message.  Questions on what your Service/Agency is doing can be answered
+by your Headquarters.  (LtCol Rose/DCA/B6l3/(703) 285-5445)
+
+
+                    DDN MANAGEMENT ENGINEERING PLAN
+                    -------------------------------
+
+This week the Defense Data Network Management Engineering Plan (MEP)
+was sent to the Services, Defense Intelligence Agency, and OJCS for
+signature. The Plan is the primary DCA document for defining and
+controlling program tasks and activities to be implemented by the
+participating DOD components. The MEP provides the baseline to be used
+in preparing the Implementation Installation Plan and all other
+supporting documentation within the DOD components. The MEP is
+designed to be concise and dynamic to allow for changes throughout the
+life of the program. (Lt Col Russ Mundy/DCA/B6O2/(703) 285-5481)
+
+
+             NATIONAL SCIENCE FOUNDATION USE OF THE ARPANET
+             ----------------------------------------------
+
+A National Science Foundation (NSF) Program Status Review was held
+Friday, 12 Sep to discuss the NSF project with representatives of NSF and
+DARPA. This project has recently taken a big step toward achieving
+operational status during the month of August. Three NSF sites,
+including the NSF Headquarters, have connected to the ARPANET and begun
+test and acceptance procedures.
+
+In total, there are now 34 universities and supercomputer facilities
+which have expressed interest in the NSF project. Another 9 sites have
+indicated a desire to become part of this program as a result of
+advertising by NSF. Actions on these new sites will be held in
+abeyance while ARPANET topology is studied. This will be done to
+improve the performance of the network, and to determine how to best
+add the new subscribers to the ARPANET. Once modeling is complete,
+addition of the new NSF requirements can proceed with the assurance of
+adequate network performance.
+
+To better accommodate the current traffic while allowing for
+additional traffic, three more PSNs are being added to the network.
+Two of the sites have already been surveyed. Soon, we expect to survey
+the third site at the University of Maryland.  All three sites should
+have packet switch nodes installed by next spring. 
+(Maj Jim Jack/DCA/B64l/(703) 285-5037)
+
+
+                      DDN WHITE PAPER ON CAPACITY
+                      ---------------------------
+
+The Defense Data Network (DDN) White Paper on High Capacity for DOD
+Data Transmission was forwarded to the Services and Defense Agencies.
+The paper focused on four points:
+
+        a.  DDN is an evolving system with large capacity.
+
+        b.  DDN technology facilitates the expansion of network 
+            capacity to meet the requirements imposed by the 
+            user population.
+
+        c.  DDN is able to identify user requirements and is 
+            capable of expansion in order to meet those requirements.
+
+        d.  The technical means exist to verify that the network 
+            design is adequate to serve the stated requirements.
+
+(Lt Col Russ Mundy/DCA/B6O2/(703) 285-5481)
+
+
+          DDN TELECOMMUNICATIONS CERTIFICATION OFFICE (TCO)
+          -------------------------------------------------
+
+1.  Effective 22 Sep 86, the DDN TCO has moved to a new location.
+Along with this move, the responsibilities of the DDN TCO personnel
+have also been adjusted to reflect better management of requirements
+and to provide a better response to the users. The adjustment of
+responsibilities are as follows and are to be used by all for status
+on DDN requirements:
+
+        a. Chief, DDN TCO - Mr. Ron Gutschmidt, COML (703) 285-5100, 
+           (V) 356-5100.
+
+        b. Feeder TSR/Connect Order through TSO process.
+
+           Supv   -   Mr. Charleton Woodward COML (703) 359-1368
+           Army   -   Mr. Joe Stelmak COML (703) 359-1357
+           Navy   -   Mr. Pat Royse COML (703) 359-1359
+                      Mr. Craig Hilliard COML (703) 359-1358
+           AF     -   Ms. Sherry Royse COML (703) 359-1386
+                      Ms. Sara Brandner COML (703) 359-1409
+           Others -   Mr. Bill Parker COML (703) 359-1356
+
+AUTOVON numbers for the above personnel are 289-5798/5799/5816/5817/
+5818/5819
+
+        c: CLAM through IN-EFFECT process.
+
+           Army   -   Mr. Tom Edwards, COML (703) 285-5339, (V) 356-5339
+                      (Section Supv)
+           Navy   -   RM2 Debbie McCloud, COML (703) 285-5571, (V) 356-5571
+           AF     -   Ms. Julie Damme, COML (703) 285-5486, (V) 356-5486
+           Others -   TSgt Tommie McDonald, COML (703) 285-5343, (V)356-5343
+                      Ms. Susan Mulligan, COML (703) 285-5474, (V) 356-5474
+
+2.  To ensure continuity with users and the DDN TCO along with timely
+response to your inquiries, request you contact the appropriate  
+individuals listed in paragraph lB and lC above for status on DDN
+requirements.
+
+3.  The DDN TCO can also receive requests for status by facsimile. The
+telephone number for the DDN TCO FAX is COML (703) 285-5475, 
+(V) 356-5475.
+
+(Mr. Ron Gutschmidt, DDN TCO/B643/COML (703) 285-5100, (V) 356-5100.
+
+
+       INTER-SERVICE/AGENCY AUTOMATED MESSAGE PROCESSING EXCHANGE 
+       ----------------------------------------------------------
+                             (I-S/A AMPE)
+                             ------------       
+
+During early August, the Government and TRW agreed on alternate design
+approaches to resolve the issues surfaced during the System Design
+Review (SDR) in May.  A revised System Specification which
+incorporates these alternate design approaches was delivered to the
+Government for review on l8 September.  SDR closure is now projected
+to occur once the A-Specification is approved.
+
+A new TRW team, under new program management, has been formed and
+efforts to definitize the entire program schedule have been underway
+during August and September.  A revised I-S/A AMPE Design Period
+schedule should be available by mid October.
+
+Negotiations are currently underway with TRW on the cost ceiling for
+the I-S/A AMPE Monitoring Center applications software development
+addition to the existing I-S/A AMPE contract.  Assuming that a
+mutually agreeable cost ceiling can be achieved and subject to final
+approval, issuance of a Change Order is projected for the Oct
+timeframe.  (Merle E. Fleit/DCA/B604/(703) 285-5131)
+
+
+            CONUS AUTODIN SOFTWARE ACCEPTANCE TESTING BEGINS
+            ------------------------------------------------
+
+Acceptance testing of the CONUS AUTODIN E-16 Software Assembly began
+on 8 September 1986. The new assembly is designed to permit use of the
+new AUTODIN Terminal Concentrators (ATC's) as the system "front end"
+devices. The ATC's will work in conjunction with, and eventually
+replace, the older Accumulation and Distribution Units (ADU's), which
+date to the early 1960's and have become unsupportable in recent
+years.  The new equipment will be installed on a planned phase-in
+schedule over the next two years. In addition to replacing aging
+equipment, the ATC's will also be faster, provide greater security,
+and add connectivity capability. The latter is important because, in
+recent years, the number of prospective AUTODIN customers has
+increased while the number of available system ports has remained
+static.  (Mr. Harry Perkins/DCA/B67O/(V) 343-2124)
+
+
+               RELOCATION OF THE AUTODIN TEST FACILITY
+               ---------------------------------------
+
+The Overseas AUTODIN System Test Facility (AUTOFAC) at the U.S. Army
+East Coast Telecommunications Center (ECTC) at Fort Detrick, MD, is
+being moved from the second floor to the first floor of the large
+central communications building, which also houses the Detrick AUTODIN
+Switching Center (ASC). The move has been undertaken by the Army in
+order to make room for the Washington Area Wideband System (WAWS)
+equipment. The current effort will provide installation and checkout
+of the Patch and Test Facility and the Bulk Storage Subsystem. The
+work is being performed by the U. S. Army Informations Systems
+Installation Battalion, from Fort Huachuca, AZ, with the assistance
+of ECTC personnel. The equipment being installed is Government
+Furnished Equipment (GFE) for the Overseas AUTODIN processor
+replacement upgrade.  That upgrade is now under contract to American
+Satellite Co., which will install the new VAX 11/785 processors at the
+AUTOFAC as the first stage of the processor replacement program for
+the Overseas AUTODIN system. (Mr. Harry Perkins/DCA/B67O/(V) 343-2124)
+
+
+                      CONUS AUTODIN 0&M CONFERENCE
+                      ----------------------------      
+
+The annua1 Operations and Maintenance (O&M) conference for the CONUS
+AUTODIN system was held on 16-17 September at the Sheraton Inn in
+Frederick, MD.  The conference was sponsored by DCA. Attendees were
+briefed on the CONUS AUTODIN upgrades, including the AUTODIN Terminal
+Concentrator (ATC), and the Automated Patch and Test Facility (PTF),
+which is now in operation at four AUTODIN Switching Centers (ASC's)
+and will be extended to the other five ASC's over the next two years.
+Conference participants raised several issues of concern, which DCA
+agreed to review. After the formal meetings, conference attendees
+toured the Fort Detrick ASC and saw the first installed ATC in
+operation under test. Persons from sites not having the Automated PTF
+also toured the Detrick PTF and observed operation of that equipment.
+(Mr. Harry Perkins/DCA/B67O/(V) 343-2124)
+-------

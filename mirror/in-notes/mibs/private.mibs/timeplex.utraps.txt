@@ -1,0 +1,169 @@
+
+
+"INTRODUCTION"
+
+
+
+
+
+        This document describes the SNMP Trap messages that are currently being
+        sent by Timeplex network devices to the Element Management Station (EMS).
+        The SNMP Trap messages are divided into 2 groups: generic and specific. Generic
+        traps are those defined in RFC 1067. Timeplex network devices comply with
+	the standard as well as providing additional information to further clarify
+	the generic trap. Specific traps are used to identify events that are
+	specific to Timeplex network devices. Here again, additional information is
+	provided to clarify the specific trap.
+        
+
+
+"GENERIC TRAPS"
+
+
+                
+        An SNMP Trap message as defined in RFC 1067 contains a field named 'generic'.
+        The value of this field indicates the type of generic trap. Timeplex network 
+        devices use the field named 'specific' to convey additional information 
+	clarifying the generic trap. RFC 1067 does not restrict the use of this field
+        for generic traps. There are 32 bits available in the 'specific' field. The
+        following defines the generic traps together with the values of their respective
+        'generic' and 'specific' fields:
+
+
+                COLDSTART TRAP 
+                
+                        Cause: issued upon power-up.
+                          Generic field:   0
+                          Specific field:  0
+
+
+                WARMSTART TRAP 
+
+			Cause: issued after a network device has reset due to some unrecoverable
+				error condition.
+                          Generic field:   1
+                          Specific field:  process ID (bits 8-15) 
+					   error code (bits 0-7)
+ 
+                LINKDOWN TRAP 
+
+			Cause: issued after a network link interface (LAPB) has been declared down.
+                          Generic field:   2
+			  Specific field:  reason (bits 30-31)
+						0 = scheduled
+						1 = link error
+						2 = indeterminate
+						3 = frame reject
+						      state information (bits 0-23)
+ 
+                LINKUP TRAP 
+
+			Cause: issued after a network link interface (LAPB) has been declared up.
+                          Generic field:   3
+			  Specific field:  initial UP (bit 31)
+						0 = TRUE
+						1 = FALSE
+
+		AUTHENTICATION FAILURE TRAP
+
+                        Cause: issued whenever SNMP receives an SNMP request message that
+                               is not from the EMS or has an invalid community name.
+                          Generic type:  4
+                          Specific type: IP address in network byte order of the source
+					 of the invalid SNMP request
+
+
+		EGP NEIGHBOR LOSS TRAP
+
+                        Cause: issued whenever EGP detects that one of his neighbors is 
+                               no longer responsive.
+                          Generic type:  5
+                          Specific type: IP address in network byte order of the EGP neighbor
+					 that is mo longer responsive
+
+"SPECIFIC TRAPS"
+
+
+
+        The specific trap type is meaningful only when the generic trap type is SPECIFIC (=6).
+        In other words, if an SNMP Trap message contains a 'generic' value of 6, them the 
+        'specific' value identifies the specific trap type. The lower 8 bits identify the
+	specific trap type; the upper 24 bits contain information to further clarify the
+	specific trap. The following defines the specific trap types:
+
+
+	FDDI SCM STATE CHANGE TRAP
+
+		Cause: issued when a station wraps or unwraps
+		  Lower 8 bits:   151
+		  Upper 24 bits:  Station state [1-4] in bits 15-8
+					  1 = Isolated (will not be transmitted over the network)
+					  2 = Wrap A
+					  3 = Wrap B
+					  4 = Thru
+					  6 = Cleave A (wrap A for Dual Home
+					      operation)
+					  7 = Cleave B (wrap B for Dual Home
+					      operation)
+
+
+	FDDI UPSTREAM NEIGHBOR CHANGE TRAP
+
+		Cause: issued when a station detects a new upstream neighbor
+		       has been connected to the ring.
+		  Lower 8 bits:   152
+		  Upper 24 bits:  not used
+
+
+	FDDI DOWNSTREAM NEIGHBOR CHANGE TRAP
+
+		Cause: issued when a station detects that a new downstream neighbor
+		       has been connected to the ring.
+		  Lower 8 bits:   153
+		  Upper 24 bits:  not used
+
+
+	FDDI CONNECT REJECTED TRAP
+
+		Cause: issued when the station PHY rejects a neighbor PHY connection.
+		  Lower 8 bits:   154
+		  Upper 24 bits:  PHY resource index [1-10] in bits 23-16
+				  reject code [2-6] in bits 15-8
+					  2 = Neighbor Station Reject
+					  3 = Connect Ports Incompatible
+                                          4 = Exceesive Bit Errors on link
+                                          5 = Neighbor Station Detected
+                                              Excessive Bit Erros
+                                          6 = Master Port to Master Port
+                                              Connect Reject
+
+					
+	DUPLICATE MAC ADDRESS
+		Cause: issued when a station detects when another station on
+		       the ring has the same physical(MAC) address as the this
+		       issuing station.
+		  Lower 8 bits:   155
+		  Upper 24 bits:  not used
+		
+
+	UNA DUPLICATE MAC ADDRESS
+		Cause: issued when this station's upstream neighbor station
+		       detects that it has a duplicate MAC address.
+		  Lower 8 bits:   156
+		  Upper 24 bits:  not used
+		
+
+	FDDI TWISTED RING
+		Cause: issued when a station detects that its PHY A/B is
+		       connected to a matching PHY A/B causing the ring to twist back on itself.
+		  Lower 8 bits:   157
+		  Upper 24 bits:  not used
+		
+
+	SLAVE LINK ERROR TRAP
+		Cause: issued when a concentrator detects that one of its slave
+		       links has exceed its CRC error rate threshold.
+		  Lower 8 bits:   158
+		  Upper 24 bits:  Slave port [1-8] in bits 15-8
+
+

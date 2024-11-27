@@ -1,0 +1,183 @@
+
+copyright.txt
+
+                    COPYRIGHTS AND PATENT RIGHTS IN RFCs
+
+                             1 November 2006
+     _________________________________________________________________
+
+   This page summarizes the current rules governing RFC copyrights and
+   dislaimers on patent ("Intellectual Property") rights.
+
+   It is coordinated with the IETF documents "IETF Rights in
+   Contributions", BCP 78/RFC 3978, "RFC 3978 Update to Recognize the
+   IETF Trust", BCP 78/RFC 4748, and "Intellectual Property Rights in
+   IETF Technology", BCP 79/RFC 3979. These documents are the result of a
+   recent effort by the IPR Working Group of the IETF working group of
+   the IETF, replacing earlier versions BCP 78/RFC 3667 and BCP 79/RFC
+   3668. 
+
+   An HTML version of this text is available at:
+     http://www.rfc-editor.org/copyright.html.
+
+   Earlier versions of this document:
+     * copyright.1Mar05.txt
+     * copyright.17Feb04.txt
+     * copyright.23Jan01.txt (and earlier)
+
+    _________________________________________________________________
+
+   BCP 78 (RFC 3978) specifies the copyright rules applicable to
+   RFCs, aligning these rules with modern copyright law.  The rules
+   are generally intended to safeguard the integrity, future
+   availability, and usefulness of published RFCs but continue the
+   historical policy of free and open distribution and reuse of RFCs,
+   to the extent possible.
+
+    BCP 78 (RFC 4748)  transfers ownership to the IETF Trust. 
+
+   As explained in BCP 78, there are two classes of RFCs: IETF
+   submissions and RFC Editor ("independent") submissions. The rules
+   for copyrights on IETF submissions are fully defined in BCP 78, but
+   some aspects of these rules are left for the RFC Editor to define
+   for independent submissions.  There is really only one essential
+   difference: the freedom to create derivative works; see below.
+
+  Topics:
+
+     o Reproduction Rules
+     o Derivative Works
+     o Intellectual Property Rights (IPR) on RFC Content
+     o Boilerplate within I-Ds and RFCs
+   _________________________________________________________________
+
+                           Reproduction Rules
+
+       The following rules control the reproduction of RFCs by third
+       parties:
+ 
+         1. Copying and distributing an entire RFC [1] without
+            changes: 
+
+            1a. Copying for free redistribution is allowed and
+            encouraged. [2]
+
+            1b. Inclusion of RFC copies within other documents or
+            collections that are distributed for a fee is allowed. [3]
+
+     Note: In case (1b), it is a courtesy to ask the RFC author(s) and
+     to provide a copy of the final document or collection.
+
+         2. Translating RFCs into other languages: Translation and
+            publication of an entire RFC into another language is
+            allowed.
+
+     	    It is courtesy to inform the RFC author(s) of such
+	    translation.
+
+         3. Copying and distributing an entire RFC with changes in
+            format, font, etc.: Changing format, font, etc. is allowed
+            only with permission of the author(s). With this
+            permission, rule 1. applies.
+
+         4. Copying and distributing portions of an RFC:
+
+     This is what the lawyers call "preparation of derivative works".
+     The rules are shown below.
+
+       NOTES:
+       [1] "Entire" includes all the copyright and IPR boilerplate.
+       [2] This case permits the present mirroring of RFCs on many web
+       	   sites.
+       [3] Anyone can take some RFCs, put them in a book, copyright
+       	   the book, and sell it. This in no way inhibits anyone else
+       	   from doing the same thing, or inhibits any other
+       	   distribution of the RFCs.
+
+         _____________________________________________________________
+
+                              Derivative Works
+
+          + Permissions for Derivative Works
+
+            Section 3.3 of BCP 78 specifies a restricted allowance for
+            derivative works from RFCs that were IETF submissions. An
+            author of one of these RFCs is required only to permit
+            derivative works for use within the IETF standards process
+            (although an author is free to permit more general usage).
+            This means, for example, that it may not be permissible
+            for a third party to extract text from an IETF submission
+            RFC for use in a "man" page or other system documentation,
+            even if credit is given.
+
+            For independent RFC submissions, however, the RFC Editor
+            requires that authors grant unlimited permission for
+            derivative works, with appropriate credits and
+            citations. In summary:
+
+               o 4a. Preparation of derivative works from an RFC that
+                 was an IETF contribution is allowed, but only for use
+                 within the IETF standards process. Proper credit and
+                 citations must be provided [BCP 78 Section 3.3.a(c)].
+
+               o 4b. Preparation of derivative works from an RFC that
+                 was an RFC Editor contribution is allowed. [BCP 78
+                 Section 4.2a(C)] Credit and citations must be given.
+
+          + No Derivative Works (NDW)
+
+            Since many Internet Drafts (I-Ds) represent work in
+            progress, I-D authors sometimes want to prevent all
+            preparation of derivative works based on their
+            documents. Although Section 5.2a of BCP 78 specifies "no
+            derivative works" (NDW) boilerplate that may be included
+            in an I-D, IETF rules generally do not allow NDW
+            boilerplate in documents used in the Internet Standards
+            process (see Section 7.3 of BCP 78).  Use of NDW
+            boilerplate in an independent submission must be approved
+            by the RFC Editor. The RFC Editor will generally allow use
+            of NDW boilerplate only for publication of proprietary
+            protocols or the publication of specifications developed
+            by other standards organizations, as discussed in Section
+            7.3 of BCP 78.
+            _____________________________________________________________
+
+                      Intellectual Property Rights (IPR)
+
+       BCP 79 governs issues concerning possible intellectual property
+       described in RFCs. An IETF submission will include a
+       "Disclaimer of validity" [BCP 79 Section 5] boilerplate.  For
+       RFC Editor submissions, BCP 79 requires this boilerplate if IPR
+       has previously been disclosed for this RFC; however, the RFC
+       Editor's policy is to always include this boilerplate. It may
+       be omitted from a independent submission only when it is clear
+       from the nature of the RFC contents that no intellectual
+       property rights could be claimed.
+
+       Note also that an RFC should not contain a notice of the
+       existence of specific relevant intellectual property (patents,
+       etc.). (This point is unclear in BCP 79, but the RFC Editor has
+       been informed that the IPR Working Group is quite clear about
+       it.)
+       _____________________________________________________________
+
+                       Boilerplate Within I-Ds and RFCs
+
+       The normal last-page boilerplate in an RFC is shown for
+       [10]IETF submissions and for [11]RFC Editor (independent)
+       submissions. This boilerplate should appear in every Internet
+       Draft. This boilerplate has the following components:
+
+          + Copyright Statement [BCP 78 Section 5.4]. Note that there
+            is a very small difference between the Copyright
+            statements for IETF submissions [BCP 78 Section 5.4] and
+            RFC Editor submissions.
+
+          + Disclaimer [BCP 78 Section 5.5]
+
+          + Disclaimer of Validity (of IPR claims) [BCP 79 Section 5]
+
+       Finally, the RFC Editor will add its own acknowledgment of
+       funding from the Internet Society at the end of the RFC.
+       _________________________________________________________________
+       _________________________________________________________________

@@ -1,0 +1,2347 @@
+>From lupine!ncd.com!dimick@uunet.UU.NET Tue Oct 16 09:19:54 1990
+Received: from uunet.UU.NET by salt.acc.com (5.61/1.34)
+	id AA05383; Tue, 16 Oct 90 09:05:08 -0700
+Received: from lupine.UUCP by uunet.uu.net (5.61/1.14) with UUCP 
+	id AA28127; Tue, 16 Oct 90 12:04:13 -0400
+Received: from bryant.com by lupine.ncd.com (4.1/SMI-4.1)
+	id AA10167; Tue, 16 Oct 90 08:59:36 PDT
+Received: from local by bryant.com (4.0/SMI-4.0)
+	id AA12305; Tue, 16 Oct 90 08:59:25 PDT
+Message-Id: <9010161559.AA12305@bryant.com>
+To: chris@salt.acc.com
+Cc: djm@ncd.com, dimick@ncd.com
+Subject: Re: NCD enterprise mib extensions 
+In-Reply-To: Your message of Mon, 15 Oct 90 17:04:53 -0700.
+             <9010160004.AA04221@bryant.com> 
+Date: Tue, 16 Oct 90 08:59:24 PDT
+From: Kim Dimick <dimick@ncd.com>
+Status: R
+
+
+
+Chris
+
+I think you are looking for our mib file and the snmp documentation we send to
+our customer.
+
+Attached is a copy of our snmp documentation and the second mail message will
+have the mib file.
+
+-------------------             ----------------------------------------
+Kim D. Dimick                       Network Computing Devices, Inc.
+Technical Support Engineer          350 North Bernardo Avenue
+support@ncd.com                     Mountain View, CA  94043
+uunet!lupine!support  	  	    Phone: (415) 694-0650 Fax: (415) 961-7774
+
+-----------------------snmp.doc file----------------------
+
+
+#ident "@(#)snmp.doc	13.3	90/08/08"
+
+1. Introduction
+
+	The following describes a Management Information Base (MIB) tailored
+	to Network Computing Devices (NCD) X Display Stations. (Although, 
+	much of the MIB could be applied to non-NCD devices.)  This MIB 
+	conforms to the standards set down in RFC1155, and is written in the
+	style of RFC1158. This MIB is an adjunct to the one specified in
+	RFC1158. It was written to provide the same level of network 
+	management information via SNMP (or CMOT) as that level which is 
+	currently available on an NCD Display Station via local mechanisms.
+
+
+2. Object Definitions
+
+2.1 System Group
+
+	The System Group contains basic information on the unit. 
+
+	OBJECT:
+	-------
+		ncdSysMemTotal { ncdSystem 1 }
+
+	Syntax:
+		INTEGER
+
+	Definition:
+		The total amount of RAM installed in the system. This does
+		not include special purpose RAM such as video memory.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdSysMemAvail { ncdSystem 2 }
+
+	Syntax:
+		Gauge
+
+	Definition:
+		The amount of RAM memory which is currently unallocated.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdSysMemFrags { ncdSystem 3 }
+
+	Syntax:
+		Gauge
+
+	Definition:
+		The number of discontiguous blocks of unallocated memory.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdSysIdleTime { ncdSystem 4 }
+
+	Syntax:
+		TimeTicks
+
+	Definition:
+		The estimated amount of time since boot that the system
+		was not executing any useful task.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+2.2 Mbuf Group
+
+	The Mbuf Group provides information on the memory buffers used by
+	the network protocol stacks for dynamic storage needs. Note that
+	protocol stacks other than TCP/IP may be running on the unit and
+	will consume mbuf resources. These are the same type of buffers
+	as used by the BSD TCP/IP implementation.
+
+	OBJECT:
+	-------
+		ncdMbufTotal { ncdMbuf 1 }
+
+	Syntax:
+		INTEGER
+
+	Definition:
+		The total number of mbufs that currently exist in the system.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdMbufFree { ncdMbuf 2 }
+
+	Syntax:
+		Gauge
+
+	Definition:
+		The number of mbufs which are unallocated.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdMbufClusterTotal { ncdMbuf 3 }
+
+	Syntax:
+		INTEGER
+
+	Definition:
+		The total number of clusters that currently exist in the
+		system.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdMbufClusterFree { ncdMbuf 4 }
+
+	Syntax:
+		Gauge
+
+	Definition:
+		The number of clusters which are unallocated.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdMbufReserved { ncdMbuf 5 }
+
+	Syntax:
+		Gauge
+
+	Definition:
+		The number of mbufs that are reserved, but as yet
+		unallocated, for storing user data within the protocol
+		stacks.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdMbufDrops { ncdMbuf 6 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of times the networking code was unable to 
+		allocate an mbuf, and initiated error recovery procedures
+		due to this failure.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdMbufWaits { ncdMbuf 7 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of times the networking code had to block waiting
+		for mbufs to become available.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdMbufData { ncdMbuf 8 }
+
+	Syntax:
+		Gauge
+
+	Definition:
+		The number of mbufs currently allocated to storing user data
+		within the protocol stacks.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdMbufHeader { ncdMbuf 9 }
+
+	Syntax:
+		Gauge
+
+	Definition:
+		The number of mbufs allocated to storing protocol header
+		information.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdMbufSocket { ncdMbuf 10 }
+
+	Syntax:
+		Gauge
+
+	Definition:
+		The number of mbufs allocated to storing BSD socket 
+		information.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdMbufProtoCtrlBlock { ncdMbuf 11 }
+
+	Syntax:
+		Gauge
+
+	Definition:
+		The number of mbufs allocated to storing internal
+		protocol information.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdMbufRouteTable { ncdMbuf 12 }
+
+	Syntax:
+		Gauge
+
+	Definition:
+		The number of mbufs allocated to storing routing table
+		information.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdMbufAtTable { ncdMbuf 13 }
+
+	Syntax:
+		Gauge
+
+	Definition:
+		The number of mbufs allocated to storing address 
+		translation information.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdMbufSocketName { ncdMbuf 14 }
+
+	Syntax:
+		Gauge
+
+	Definition:
+		The number of mbufs allocated to storing BSD socket name
+		information.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdMbufSocketOptions { ncdMbuf 15 }
+
+	Syntax:
+		Gauge
+
+	Definition:
+		The number of mbufs allocated to storing BSD socket
+		option information.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdMbufFrags { ncdMbuf 16 }
+
+	Syntax:
+		Gauge
+
+	Definition:
+		The number of mbufs allocated to storing IP fragments.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdMbufInterfaceAddr { ncdMbuf 17 }
+
+	Syntax:
+		Gauge
+
+	Definition:
+		The number of mbufs allocated to storing network
+		interface address information.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+2.3 Ethernet Group
+
+	The Ethernet Group contains information on the unit's ethernet
+	option card which uses the AMD LANCE controller.
+
+	OBJECT:
+	-------
+		ncdEtherTable { ncdEther 1 }
+
+	Syntax:
+		SEQUENCE OF NcdEtherEntry
+
+	Definition:
+		A table containing Ethernet interface information.
+
+	Access:
+		read-write
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdEtherEntry { ncdEtherTable 1 }
+
+	Syntax:
+		NcdEtherEntry ::= SEQUENCE {
+                      ncdEtherInCrcErrors,
+                          Counter,
+                      ncdEtherInMissed,
+                          Counter,
+                      ncdEtherInFrameErrors,
+                          Counter,
+                      ncdEtherSingleCollisions,
+                          Counter,
+                      ncdEtherMultipleCollisions,
+                          Counter,
+                      ncdEtherLateCollisions,
+                          Counter,
+                      ncdEtherOutDeferred,
+                          Counter,
+                      ncdEtherOutRetryErrors,
+                          Counter,
+                      ncdEtherLostCarrier,
+                          Counter,
+                      ncdEtherRestarts,
+                          Counter
+		}
+
+	Definition:
+		Information about an Ethernet interface.
+
+	Access:
+		read-write
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdEtherInCrcErrors { ncdEtherEntry 1 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of times a incoming frame failed the 
+		Cyclic Redundancy Check (CRC).
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdEtherInMissed { ncdEtherEntry 2 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of times an incoming frame was not received
+		due to a lack of buffers.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdEtherInFrameErrors { ncdEtherEntry 3 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of times an incoming frame had a bad bit
+		alignment.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdEtherSingleCollisions { ncdEtherEntry 4 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of times an outbound frame had a single
+		collision occur during transmission.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdEtherMultipleCollisions { ncdEtherEntry 5 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of times an outbound frame had multiple 
+		collisions occur during transmission.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdEtherLateCollisions { ncdEtherEntry 6 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of times the collision signal was asserted
+		after the preamble of a frame was transmitted.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdEtherOutDeferred { ncdEtherEntry 7 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of times an outbound frame could not be
+		transmitted directly due to the Ethernet being busy,
+		and the Ethernet exponentail backoff algorithm was
+		invoked.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdEtherOutRetryErrors { ncdEtherEntry 8 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of times an outbound frame could not be
+		transmitted after 16 backed-off attempts due to 
+		repeated collisions on the Ethernet.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdEtherLostCarrier { ncdEtherEntry 9 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of times carrier (Receiver Enable) was lost
+		during the transmission of a frame.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdEtherRestarts { ncdEtherEntry 10 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of times the software has restarted the
+		Ethernet controller, possibly due to a heuristic for
+		determining an inoperable controller.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+2.4 Serial Group
+
+	The Serial Group contains information on the unit's auxilary
+	RS-232 port(s) which can be used for a terminal session, a network
+	interface, a debug session, or a printer daemon.
+
+	OBJECT:
+	-------
+		ncdSerialTable { ncdSerial 1 }
+
+	Syntax:
+		SEQUENCE OF NcdSerialEntry
+
+	Definition:
+		A table containing serial interface information.
+
+	Access:
+		read-write
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdSerialEntry { ncdSerialTable 1 }
+
+	Syntax:
+		NcdSerialEntry ::= SEQUENCE {
+                      ncdSerialInOverruns,
+                          Counter,
+                      ncdSerialInFrameErrors,
+                          Counter,
+                      ncdSerialInParityErrors,
+                          Counter,
+                      ncdSerialInBreakErrors,
+                          Counter
+		}
+
+	Definition:
+		Information about a serial interface.
+
+	Access:
+		read-write
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdSerialInOverruns { ncdSerialEntry 1 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of times an incoming octet overwrote a
+		previously received octet in the UART's buffer.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdSerialInFrameErrors { ncdSerialEntry 2 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of times an incoming octet had bad bit
+		alignment.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdSerialInParityErrors { ncdSerialEntry 3 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of times the parity bit of an incoming
+		octet was incorrect.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdSerialInBreakErrors { ncdSerialEntry 4 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of times a stop bit was not received at the
+		expected time after a start bit, and the intervening
+		bits were all zero.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+2.5 TCP Group
+
+	The TCP Group contains additional information on TCP beyond that 
+	defined by RFC 1066. 
+
+	OBJECT:
+	-------
+		ncdTcpRetransDrops { ncdTcp 1 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of connections progressing directly to the
+		CLOSED state due to too many retransmissions being sent.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdTcpOutKeepAlives { ncdTcp 2 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of TCP Keep Alive packets transmitted.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdTcpKeepAliveDrops { ncdTcp 3 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of connections progressing directly to the
+		CLOSED state due to too many keep alives being sent.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdTcpInAcks { ncdTcp 4 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of TCP packets received which acknowledged
+		1 or more octets of unacknowledged data.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdTcpOutBareAcks { ncdTcp 5 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of TCP packets transmitted which contained
+		no data, and only the ACK flag turned on.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+2.6 TFTP Group
+
+	The TFTP Group contains information on the TFTP file transfer
+	client that is used to download fonts, and read or write remote
+	configuration files.
+
+	OBJECT:
+	-------
+		ncdTftpClientReadReqs { ncdTftp 1 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of file read requests made by the TFTP client.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdTftpClientWriteReqs { ncdTftp 2 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of file write requests made by the TFTP client.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdTftpClientInDataPkts { ncdTftp 3 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of TFTP Data packets received by the TFTP client.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdTftpClientInAcks { ncdTftp 4 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of TFTP Ack packets received by the TFTP client.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdTftpClientInNoFileErrors { ncdTftp 5 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of times an TFTP Error packet was received 
+		by the TFTP client with the error code set to 
+		"File not found".
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdTftpClientInAccessErrors { ncdTftp 6 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of times an TFTP Error packet was received 
+		by the TFTP client with the error code set to 
+		"Access violation".
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdTftpClientInDiskFullErrors { ncdTftp 7 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of times an TFTP Error packet was received 
+		by the TFTP client with the error code set to "Disk full".
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdTftpClientNoBufs { ncdTftp 8 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of times the TFTP client failed to allocate
+		a buffer.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdTftpClientOutDataPkts { ncdTftp 9 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of TFTP Data packets sent by the TFTP client.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdTftpClientOutAcks { ncdTftp 10 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of TFTP Ack packets sent by the TFTP client.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdTftpClientRetrans { ncdTftp 11 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of times a TFTP packet was retransmitted by
+		the TFTP client.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdTftpClientRetries { ncdTftp 12 }
+
+	Syntax:
+		INTEGER
+
+	Definition:
+		The number of retransmissions of a TFTP packet sent
+		before an error situation is declared.
+
+	Access:
+		read-write
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdTftpClientTimeout { ncdTftp 13 }
+
+	Syntax:
+		TimeTicks
+
+	Definition:
+		The amount of time between retransmissions of a TFTP
+		packet.
+
+	Access:
+		read-write
+
+	Status:
+		optional
+
+
+2.7 NFS Group
+
+	The NFS Group contains information on the NFS file transfer
+	client that is used to download fonts, and read or write remote
+	configuration files.
+
+	OBJECT:
+	-------
+		ncdNfsClientNulls { ncdNfs 1 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of NFS Null operations requested by the
+		NFS client.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdNfsClientGetAttributes { ncdNfs 2 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of NFS Get Attribute operations requested by
+		the NFS client.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdNfsClientSetAttributes { ncdNfs 3 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of NFS Set Attribute operations requested by
+		the NFS client.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdNfsClientGetRoots { ncdNfs 4 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of NFS Get File System Root operations 
+		requested by the NFS client.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdNfsClientLookups { ncdNfs 5 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of NFS File Name Component Lookup
+		operations requested by the NFS client.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdNfsClientReadLinks { ncdNfs 6 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of NFS Read Link operations requested 
+		by the NFS client.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdNfsClientReads { ncdNfs 7 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of NFS Read operations requested by the NFS client.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdNfsClientWriteCaches { ncdNfs 8 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of NFS Write Cache operations requested by 
+		the NFS client.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdNfsClientWrites { ncdNfs 9 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of NFS Write operations requested by the NFS 
+		client.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdNfsClientCreates { ncdNfs 10 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of NFS File Create operations requested by
+		the NFS client.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdNfsClientRemoves { ncdNfs 11 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of NFS File Remove operations requested by
+		the NFS client.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdNfsClientRenames { ncdNfs 12 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of NFS File Rename operations requested by
+		the NFS client.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdNfsClientCreateLinks { ncdNfs 13 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of NFS Create Link operations requested by
+		the NFS client.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdNfsClientCreateSymlinks { ncdNfs 14 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of NFS Create Symbolic Link operations 
+		requested by the NFS client.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdNfsClientMakeDir { ncdNfs 15 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of NFS Create Directory operations requested by
+		the NFS client.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdNfsClientRemoveDir { ncdNfs 16 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of NFS Remove Directory operations requested by
+		the NFS client.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdNfsClientReadDir { ncdNfs 17 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of NFS Read Directory operations requested by
+		the NFS client.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdNfsClientStatFileSys { ncdNfs 18 }
+
+	Syntax:
+		Counter
+
+	Definition:
+		The number of NFS Stat File System operations requested by
+		the NFS client.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdNfsMountTable { ncdNfs 19 }
+
+	Syntax:
+		SEQUENCE OF NfsMountEntry
+
+	Definition:
+		A table containing NFS Client file system mounting
+		information.
+
+	Access:
+		read-write
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdNfsMountEntry { ncdNfsMountTable 1 }
+
+	Syntax:
+		NcdNfsMountEntry ::= SEQUENCE {
+                      ncdNfsMountEntryIndex
+                          INTEGER,
+                      ncdNfsMountEntryLocalDir
+                          OCTET STRING,
+                      ncdNfsMountEntryServerAddr
+                          IpAddress,
+                      ncdNfsMountEntryServerDir
+                          OCTET STRING,
+                      ncdNfsMountEntryReadSize
+                          INTEGER (1..8192),
+                      ncdNfsMountEntryWriteSize
+                          INTEGER (1..8192),
+                      ncdNfsMountEntryRetries
+                          INTEGER,
+                      ncdNfsMountEntryTimeout
+                          INTEGER
+		}
+
+	Definition:
+		Information about an NFS mounted file system on the
+		NFS Client. An object of this type is transient, in
+		that the file system can be unmounted.
+
+	Access:
+		read-write
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdNfsMountEntryIndex { ncdNfsMountEntry 1 }
+
+	Syntax:
+		INTEGER
+
+	Definition:
+		A unique value for each mounted file system. The value
+		must remain constant during the period of time that the
+		file system remains mounted.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdNfsMountEntryLocalDir { ncdNfsMountEntry 2 }
+
+	Syntax:
+		OCTET STRING
+
+	Definition:
+		The local directory name of the mount point of the NFS
+		file system represented by this entry.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdNfsMountEntryServerAddr { ncdNfsMountEntry 3 }
+
+	Syntax:
+		NetworkAddress
+
+	Definition:
+		The IP address of the NFS file server for this entry.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdNfsMountEntryServerDir { ncdNfsMountEntry 4 }
+
+	Syntax:
+		OCTET STRING
+
+	Definition:
+		The directory name of the file system on the file server
+		for this entry.
+
+	Access:
+		read-only
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdNfsMountEntryReadSize { ncdNfsMountEntry 5 }
+
+	Syntax:
+		INTEGER
+
+	Definition:
+		The preferred size of read requests sent by the client
+		to the NFS server.
+
+	Access:
+		read-write
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdNfsMountEntryWriteSize { ncdNfsMountEntry 6 }
+
+	Syntax:
+		INTEGER
+
+	Definition:
+		The preferred size of write requests sent by the client
+		to the NFS server.
+
+	Access:
+		read-write
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdNfsMountEntryRetries { ncdNfsMountEntry 7 }
+
+	Syntax:
+		INTEGER
+
+	Definition:
+		The number of retransmissions of an NFS request sent before
+		an error situation is declared by the RPC layer.
+
+	Access:
+		read-write
+
+	Status:
+		optional
+
+
+	OBJECT:
+	-------
+		ncdNfsMountEntryTimeout { ncdNfsMountEntry 8 }
+
+	Syntax:
+		TimeTicks
+
+	Definition:
+		The amount of time between retransmissions of an NFS
+		request used by the RPC layer.
+
+	Access:
+		read-write
+
+	Status:
+		optional
+
+
+
+3. Definitions
+
+		NCD-MIB-1 {iso org(3) dod(6) internet(1) private(4)
+			enterprises(1) ncd(82) ncd-mibs(2) 1 }
+
+		DEFINITIONS ::= BEGIN
+
+		IMPORTS
+			private, enterprises, OBJECT-TYPE, NetworkAddress,
+			IpAddress, Counter, Gauge, TimeTicks
+			    FROM RFC1065-SMI;
+
+		  ncd OBJECT IDENTIFIER ::= { enterprises 82 }
+		  ncd-products OBJECT IDENTIFIER ::= { ncd 1 }
+		  ncd16 OBJECT IDENTIFIER ::= { ncd-products 1 }
+		  ncd19 OBJECT IDENTIFIER ::= { ncd-products 2 }
+		  ncd17c OBJECT IDENTIFIER ::= { ncd-products 3 }
+		  ncd16e OBJECT IDENTIFIER ::= { ncd-products 4 }
+		  ncd-mibs OBJECT IDENTIFIER ::= { ncd 2 }
+		  ncd-mibs-mib1 OBJECT IDENTIFIER ::= { ncd-mibs 1 }
+
+		  ncdSystem OBJECT IDENTIFIER ::= { ncd-mibs-mib1 1 }
+		  ncdMbuf OBJECT IDENTIFIER ::= { ncd-mibs-mib1 2 }
+		  ncdEther OBJECT IDENTIFIER ::= { ncd-mibs-mib1 3 }
+		  ncdSerial OBJECT IDENTIFIER ::= { ncd-mibs-mib1 4 }
+		  ncdTcp OBJECT IDENTIFIER ::= { ncd-mibs-mib1 5 }
+		  -- ncdUdp OBJECT IDENTIFIER ::= { ncd-mibs-mib1 6 }
+		  ncdTftp OBJECT IDENTIFIER ::= { ncd-mibs-mib1 7 }
+		  ncdNfs OBJECT IDENTIFIER ::= { ncd-mibs-mib1 8 }
+
+		  -- NCD System Group
+
+                  ncdSysMemTotal OBJECT-TYPE
+                          SYNTAX  INTEGER
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdSystem 1 }
+
+                  ncdSysMemAvail OBJECT-TYPE
+                          SYNTAX  Gauge
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdSystem 2 }
+
+                  ncdSysMemFrags OBJECT-TYPE
+                          SYNTAX  Gauge
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdSystem 3 }
+
+                  ncdSysIdleTime OBJECT-TYPE
+                          SYNTAX  TimeTicks
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdSystem 4 }
+
+		  -- NCD Mbuf Group
+
+                  ncdMbufTotal OBJECT-TYPE
+                          SYNTAX  INTEGER
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdMbuf 1 }
+
+                  ncdMbufFree OBJECT-TYPE
+                          SYNTAX  Gauge
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdMbuf 2 }
+
+                  ncdMbufClusterTotal OBJECT-TYPE
+                          SYNTAX  INTEGER
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdMbuf 3 }
+
+                  ncdMbufClusterFree OBJECT-TYPE
+                          SYNTAX  Gauge
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdMbuf 4 }
+
+                  ncdMbufReserved OBJECT-TYPE
+                          SYNTAX  Gauge
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdMbuf 5 }
+
+                  ncdMbufDrops OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdMbuf 6 }
+
+                  ncdMbufWaits OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdMbuf 7 }
+
+                  ncdMbufData OBJECT-TYPE
+                          SYNTAX  Gauge
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdMbuf 8 }
+
+                  ncdMbufHeader OBJECT-TYPE
+                          SYNTAX  Gauge
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdMbuf 9 }
+
+                  ncdMbufSocket OBJECT-TYPE
+                          SYNTAX  Gauge
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdMbuf 10 }
+
+                  ncdMbufProtoCtrlBlock OBJECT-TYPE
+                          SYNTAX  Gauge
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdMbuf 11 }
+
+                  ncdMbufRouteTable OBJECT-TYPE
+                          SYNTAX  Gauge
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdMbuf 12 }
+
+                  ncdMbufAtTable OBJECT-TYPE
+                          SYNTAX  Gauge
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdMbuf 13 }
+
+                  ncdMbufSocketName OBJECT-TYPE
+                          SYNTAX  Gauge
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdMbuf 14 }
+
+                  ncdMbufSocketOptions OBJECT-TYPE
+                          SYNTAX  Gauge
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdMbuf 15 }
+
+                  ncdMbufFrags OBJECT-TYPE
+                          SYNTAX  Gauge
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdMbuf 16 }
+
+                  ncdMbufInterfaceAddr OBJECT-TYPE
+                          SYNTAX  Gauge
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdMbuf 17 }
+
+		  -- NCD Ether Group
+
+                  -- the ether interface table
+
+                  ncdEtherTable OBJECT-TYPE
+                          SYNTAX  SEQUENCE OF NcdEtherEntry
+                          ACCESS  read-write
+                          STATUS  optional
+                          ::= { ncdEther 1 }
+
+                  ncdEtherEntry OBJECT-TYPE
+                          SYNTAX  NcdEtherEntry
+                          ACCESS  read-write
+                          STATUS  optional
+                          ::= { ncdEtherTable 1 }
+
+                  NcdEtherEntry ::= SEQUENCE {
+		      ncdEtherInCrcErrors,
+			  Counter,
+		      ncdEtherInMissed,
+			  Counter,
+		      ncdEtherInFrameErrors,
+			  Counter,
+		      ncdEtherSingleCollisions,
+			  Counter,
+		      ncdEtherMultipleCollisions,
+			  Counter,
+		      ncdEtherLateCollisions,
+			  Counter,
+		      ncdEtherOutDeferred,
+			  Counter,
+		      ncdEtherOutRetryErrors,
+			  Counter,
+		      ncdEtherLostCarrier,
+			  Counter,
+		      ncdEtherRestarts,
+			  Counter
+                  }
+
+                  ncdEtherInCrcErrors OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdEtherEntry 1 }
+
+                  ncdEtherInMissed OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdEtherEntry 2 }
+
+                  ncdEtherInFrameErrors OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdEtherEntry 3 }
+
+                  ncdEtherSingleCollisions OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdEtherEntry 4 }
+
+                  ncdEtherMultipleCollisions OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdEtherEntry 5 }
+
+                  ncdEtherLateCollisions OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdEtherEntry 6 }
+
+                  ncdEtherOutDeferred OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdEtherEntry 7 }
+
+                  ncdEtherOutRetryErrors OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdEtherEntry 8 }
+
+                  ncdEtherLostCarrier OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdEtherEntry 9 }
+
+                  ncdEtherRestarts OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdEtherEntry 10 }
+
+		  -- NCD Serial Group
+
+                  -- the serial interface table
+
+                  ncdSerialTable OBJECT-TYPE
+                          SYNTAX  SEQUENCE OF NcdSerialEntry
+                          ACCESS  read-write
+                          STATUS  optional
+                          ::= { ncdSerial 1 }
+
+                  ncdSerialEntry OBJECT-TYPE
+                          SYNTAX  NcdSerialEntry
+                          ACCESS  read-write
+                          STATUS  optional
+                          ::= { ncdSerialTable 1 }
+
+                  NcdSerialEntry ::= SEQUENCE {
+		      ncdSerialInOverruns,
+			  Counter,
+		      ncdSerialInFrameErrors,
+			  Counter,
+                      ncdSerialInParityErrors,
+			  Counter,
+                      ncdSerialInBreakErrors,
+			  Counter
+                  }
+
+                  ncdSerialInOverruns OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdSerialEntry 1 }
+
+                  ncdSerialInFrameErrors OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdSerialEntry 2 }
+
+                  ncdSerialInParityErrors OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdSerialEntry 3 }
+
+                  ncdSerialInBreakErrors OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdSerialEntry 4 }
+
+		  -- NCD TCP Group
+
+                  ncdTcpRetransDrops OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdTcp 1 }
+
+                  ncdTcpOutKeepAlives OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdTcp 2 }
+
+                  ncdTcpKeepAliveDrops OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdTcp 3 }
+
+                  ncdTcpInAcks OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdTcp 4 }
+
+                  ncdTcpOutBareAcks OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdTcp 5 }
+
+		  -- NCD TFTP Group
+
+                  ncdTftpClientReadReqs OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdTftp 1 }
+
+                  ncdTftpClientWriteReqs OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdTftp 2 }
+
+                  ncdTftpClientInDataPkts OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdTftp 3 }
+
+                  ncdTftpClientInAcks OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdTftp 4 }
+
+                  ncdTftpClientInNoFileErrors OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdTftp 5 }
+
+                  ncdTftpClientInAccessErrors OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdTftp 6 }
+
+                  ncdTftpClientInDiskFullErrors OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdTftp 7 }
+
+                  ncdTftpClientNoBufs OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdTftp 8 }
+
+                  ncdTftpClientOutDataPkts OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdTftp 9 }
+
+                  ncdTftpClientOutAcks OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdTftp 10 }
+
+                  ncdTftpClientRetrans OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdTftp 11 }
+
+                  ncdTftpClientRetries OBJECT-TYPE
+                          SYNTAX  INTEGER
+                          ACCESS  read-write
+                          STATUS  optional
+                          ::= { ncdTftp 12 }
+
+                  ncdTftpClientTimeout OBJECT-TYPE
+                          SYNTAX  TimeTicks
+                          ACCESS  read-write
+                          STATUS  optional
+                          ::= { ncdTftp 13 }
+
+		  -- NCD NFS Group
+
+                  ncdNfsClientNulls OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdNfs 1 }
+
+                  ncdNfsClientGetAttributes OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdNfs 2 }
+
+                  ncdNfsClientSetAttributes OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdNfs 3 }
+
+                  ncdNfsClientGetRoots OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdNfs 4 }
+
+                  ncdNfsClientLookups OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdNfs 5 }
+
+                  ncdNfsClientReadLinks OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdNfs 6 }
+
+                  ncdNfsClientReads OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdNfs 7 }
+
+                  ncdNfsClientWriteCaches OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdNfs 8 }
+
+                  ncdNfsClientWrites OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdNfs 9 }
+
+                  ncdNfsClientCreates OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdNfs 10 }
+
+                  ncdNfsClientRemoves OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdNfs 11 }
+
+                  ncdNfsClientRenames OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdNfs 12 }
+
+                  ncdNfsClientCreateLinks OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdNfs 13 }
+
+                  ncdNfsClientCreateSymlinks OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdNfs 14 }
+
+                  ncdNfsClientMakeDir OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdNfs 15 }
+
+                  ncdNfsClientRemoveDir OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdNfs 16 }
+
+                  ncdNfsClientReadDir OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdNfs 17 }
+
+                  ncdNfsClientStatFileSys OBJECT-TYPE
+                          SYNTAX  Counter
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdNfs 18 }
+
+                  -- the NFS client mount table
+
+                  ncdNfsMountTable OBJECT-TYPE
+                          SYNTAX  SEQUENCE OF NcdNfsMountEntry
+                          ACCESS  read-write
+                          STATUS  optional
+                          ::= { ncdNfs 19 }
+
+                  ncdNfsMountEntry OBJECT-TYPE
+                          SYNTAX  NcdNfsMountEntry
+                          ACCESS  read-write
+                          STATUS  optional
+                          ::= { ncdNfsMountTable 1 }
+
+                  NcdNfsMountEntry ::= SEQUENCE {
+		      ncdNfsMountEntryIndex
+			  INTEGER,
+		      ncdNfsMountEntryLocalDir
+			  OCTET STRING,
+                      ncdNfsMountEntryServerAddr
+                          IpAddress,
+                      ncdNfsMountEntryServerDir
+			  OCTET STRING,
+                      ncdNfsMountEntryReadSize
+                          INTEGER (1..8192),
+                      ncdNfsMountEntryWriteSize
+                          INTEGER (1..8192),
+                      ncdNfsMountEntryRetries
+                          INTEGER,
+                      ncdNfsMountEntryTimeout
+                          INTEGER
+                  }
+
+                  ncdNfsMountEntryIndex OBJECT-TYPE
+                          SYNTAX  INTEGER
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdNfsMountEntry 1 }
+
+                  ncdNfsMountEntryLocalDir OBJECT-TYPE
+                          SYNTAX  OCTET STRING
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdNfsMountEntry 2 }
+
+                  ncdNfsMountEntryServerAddr OBJECT-TYPE
+                          SYNTAX  NetworkAddress
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdNfsMountEntry 3 }
+
+                  ncdNfsMountEntryServerDir OBJECT-TYPE
+                          SYNTAX  OCTET STRING
+                          ACCESS  read-only
+                          STATUS  optional
+                          ::= { ncdNfsMountEntry 4 }
+
+                  ncdNfsMountEntryReadSize OBJECT-TYPE
+                          SYNTAX  INTEGER
+                          ACCESS  read-write
+                          STATUS  optional
+                          ::= { ncdNfsMountEntry 5 }
+
+                  ncdNfsMountEntryWriteSize OBJECT-TYPE
+                          SYNTAX  INTEGER
+                          ACCESS  read-write
+                          STATUS  optional
+                          ::= { ncdNfsMountEntry 6 }
+
+                  ncdNfsMountEntryRetrans OBJECT-TYPE
+                          SYNTAX  INTEGER
+                          ACCESS  read-write
+                          STATUS  optional
+                          ::= { ncdNfsMountEntry 7 }
+
+                  ncdNfsMountEntryTimeout OBJECT-TYPE
+                          SYNTAX  TimeTicks
+                          ACCESS  read-write
+                          STATUS  optional
+                          ::= { ncdNfsMountEntry 8 }
+
+		END
+
+
+4. Identification of OBJECT instances for use with SNMP
+
+/* TBD */
+4.1 ncdEtherTable Object Type Names
+
+    The name of an ethernet interface entry, 'x', is an OBJECT IDENTIFIER
+    of the form 'a' such that 'a' is the value of that instance of ifIndex 
+    object type associated with 'x'.
+
+    For each object type, 't', for which the defined name, 'n', has a
+    prefix of ncdEther, an instance, 'i', of 't' is named by
+    an OBJECT IDENTIFIER of the form 'n.y', where 'y' is the name of
+    the interface entry about which 'i' represents information.
+
+    For example, suppose one wanted to find the number of Ethernet late
+    collisions associated with the second interface. Accordingly,
+    ncdEtherEntry.ncdEtherLateCollisions.2 would identify the desired 
+    instance.
+
+4.2 ncdSerialTable Object Type Names
+
+    The name of an serial interface entry, 'x', is an OBJECT IDENTIFIER
+    of the form 'a' such that 'a' is the value of that instance of ifIndex
+    object type associated with 'x'.
+
+    For each object type, 't', for which the defined name, 'n', has a
+    prefix of ncdSerial, an instance, 'i', of 't' is named by
+    an OBJECT IDENTIFIER of the form 'n.y', where 'y' is the name of
+    the interface entry about which 'i' represents information.
+
+    For example, suppose one wanted to find the number of serial parity
+    errors associated with the third interface. Accordingly,
+    ncdSerialEntry.ncdSerialInParityErrors.3 would identify the desired
+    instance.
+
+4.3 ncdNfsMountTable Object Type Names
+
+    The name of an NFS mount entry, 'x', is an OBJECT IDENTIFIER of the
+    form 'a' such that 'a' is the value of that instance of 
+    ncdNfsMountEntryIndex object type associated with 'x'.
+
+    For each object type, 't', for which the defined name, 'n', has a
+    prefix of ncdNfsMountEntry, an instance, 'i', of 't' is named by
+    an OBJECT IDENTIFIER of the form 'n.y', where 'y' is the name of
+    the NFS mount entry about which 'i' represents information.
+
+    For example, suppose one wanted to find the IP address of the NFS
+    server associated with the second NFS mount table entry. Accordingly,
+    ncdNfsMountEntryServerAddr.2 would identify the desired instance.
+
+
+5. SNMP Traps Generated
+
+5.1 Cold Start Trap
+
+    This trap is generated when the SNMP agent in the NCD unit is first
+    initialized.
+
+5.2 Authentication Failure Trap
+
+    This trap is generated when the SNMP agent detects that the 
+    authentication information in an SNMP request packet is invalid.
+    Generation of this trap can be controlled through the 
+    "snmpEnableAuthTraps" object.
+
+
+

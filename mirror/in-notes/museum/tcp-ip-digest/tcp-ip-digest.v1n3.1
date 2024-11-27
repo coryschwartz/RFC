@@ -1,0 +1,378 @@
+19-Oct-81 23:26:23-PDT,18187;000000000001
+Mail-from: ARPANET host BRL rcvd at 19-Oct-81 2325-PDT
+Date:      19 Oct 81 20:52:13-EDT (Mon)
+From:      Mike Muuss <tcp-ip@brl>
+Reply-to:  tcp-ip at Brl
+Subject:   TCP-IP Digest, Vol 1 #3
+
+TCP/IP Digest             Monday, 19 Oct 1981      Volume 1 : Issue 3
+
+Today's Topics:
+                     Acronyms -- Protocol Documents
+          TCP Transition Notes -- Simple Mail Transfer Protocol
+                Problems with TOPS-20 TCP Implementation?
+                    Throughput Considerations of TCP
+                     TCP/IP:  Suitable for MicroPs?
+
+----------------------------------------------------------------------
+
+From: Zellich at OFFICE-3 (Rich Zellich)
+Subject: Acronyms
+
+Apparently there are enough non-net-hackers on the list that I should
+explain the acronyms I used in my message in V1#2.
+
+TCP - Transmission Control Protocol
+      (see RFC's 791, 792, & 793 for details on TCP and IP)
+IP  - Internet [control] Protocol
+RFC - Request For Comment; Technical notes requesting comment from the
+      ARPANET public (also the only place to find those protocols which
+      have been adopted as DCA standards or ad hoc standards).
+      The RFC's are numbered and are available from the <NETINFO>
+      directory on the SRI-NIC host.  Suggested course of action is to
+      first FTP <NETINFO>RFC-INDEX.TXT to see what is available.
+IEN - Internet Experiment Note; Similar to RFC's, and available from
+      the same place via FTP, but applicable specifically to the DCA/DARPA
+      sponsored Internet Experiment work (where TCP & IP originally came
+      from).  Suggested course of action is to first FTP IEN-INDEX.TXT to
+      see what is available.
+FTP - File Transfer Protocol; a network protocol/service whereby users
+      can transfer files between/among hosts.  If you're not up on the
+      use of FTP, see your friendly local ARPANET Liaison.
+NIC - Network Information Center; The friendly people who maintain the
+      online information databases such as RFC's, IEN's, lists of ARPANET
+      Hosts, Liaisons, and Users, etc.  In addition to supporting the
+      net "standard" ANONYMOUS login with password GUEST to obtain the
+      files kept in <NETINFO>, they also have a nifty online query system
+      available to anyone who can connect to SRI-NIC via TIP or TELNET.
+      To use it, first connect to the SRI-NIC host, then login as NIC (no
+      password is necessary) and follow the instructions.  The NIC/Query
+      system can locate users, hosts, liaisons, and provides much other
+      ARPANET information.
+      [To find out how to use a TIP or the host TELNET service, see
+       your friendly local ARPANET Liaison.]
+DARPA - Defense Advanced Research Projects Agency; the friendly folks who
+      originally brought you the ARPANET (for whom it is named) and who
+      are now funding internet research using the ARPANET as part of their
+      laboratory.
+DCA - Defense Communications Agency; The not-quite-as friendly folks
+      who run the ARPANET for the Dept. of Defense (actually, also very
+      friendly, but they have the Gov't Accounting Office (GAO) and every
+      other busybody in the country breathing down their necks about what
+      all that money is being spent for, so they're inclined to be a bit
+      serious about the uses we make of the net).
+
+Cheers,
+Rich
+
+------------------------------
+
+From: POSTEL at USC-ISIF
+Subject: Protocol Documents
+To:   TCP-IP-Digest at BRL
+
+In recent years the ARPA Network Research Program has had as one concern
+the interconnection of networks.  In the course of this research a
+family of protocols suitable for an internetwork environment has
+emerged.  The major internet protocol documents have been issued as
+RFCs.
+
+The situation has evolved to the point that it is appropriate for the
+internet family of protocols to replace the old ARPANET protocols.  To
+this end an Internet Protocol Handbook will be prepared by the Network
+Information Center.  This Internet Protocol Handbook will closely
+parallel the old ARPANET Protocol Handbook, and will primarily be a
+collection of existing RFCs.  Until this new Protocol Handbook is
+available, people interested in the internet protocols, especially
+implementers, may desire to make their own temporary notebooks of the
+relevant protocol documents.  To aid this, the following is suggested as
+a table of contents for such a collection.  Any suggestions for
+additions should be sent to Jon Postel (Postel@ISIF).
+
+RFCs are public access document files and may be copied from the Network
+Information Center online Library at SRI-NIC via FTP using the FTP user
+name ANONYMOUS and password GUEST.  The RFCs have pathnames of the form
+"<NETINFO>RFCnnn.TXT", where "nnn" is replaced by the document number.
+
+
+
+
+                           Table of Contents
+
+
+
+Network Level
+
+   Internet Protocol (IP)                                        RFC 791
+
+   Internet Control Message Protocol (ICMP)                      RFC 792
+
+Host Level
+
+   User Datagram Protocol (UDP)                                  RFC 768
+
+   Transmission Control Protocol (TCP)                           RFC 793
+
+Application Level
+
+   Trivial File Transfer Protocol (TFTP)                         RFC 783
+
+   Telnet Protocol (TELNET)                                      RFC 764
+
+   File Transfer Protocol (FTP)                                  RFC 765
+
+   Simple Mail Transfer Protocol (SMTP)                          RFC xxx
+
+Appendices
+
+   Assigned Numbers                                              RFC 790
+
+   Service Mappings                                              RFC 795
+
+   Address Mappings                                              RFC 796
+
+   Document File Format Standards                                RFC 678
+
+   Mail Header Format Standards                                  RFC 733
+
+Note:  The RFC on the simple mail protocol will be issued soon.
+
+------------------------------
+
+From: DUCKETT at USC-ISIE
+Subject: TCP-IP Digest
+
+Dear Mike:
+
+I found your first two Digest issues of considerable interest.  If you 
+have questions concerning policy on the TCP transition, I suggest you 
+ask me or Capt. Glynn Parker (DCACode252@ISIA) who manages the ARPANET 
+for DCA.
+
+Jon Postel is responsible for the transition planning and is working on 
+documentation to aid users in preparation for the mixed NCP/TCP mode of 
+operation which we can expect during calendar 1982.  Already we have a 
+community of TCP-only users who are at Ft. Bragg, North Carolina 
+entering the ARPANET via a gateway to the Ft. Bragg packet radio 
+network.  There are likewise a number of European researchers in the UK,
+Norway, and soon Germany who will likewise access the ARPANET using 
+TCP/IP through SATNET/ARPANET gateways.
+
+Jon Postel will be spelling this out in more detail, but one crucial 
+step towards the transition is the implementation of a Simple Mail 
+Transfer Protocol (SMTP) which can run above either TCP or NCP.  This 
+mail transport mechanism achieves the same function as the MAIL or MLFL 
+commands of FTP, but with greater efficiency and, most important, 
+handles clearly the problem of forwarding mail from NCP to TCP 
+environments and back.  To allow mail to go thru during the NCP/TCP 
+transition, everyone must have a functioning SMTP running on either NCP 
+or TCP.  Without this, it won't be possible to handle mail forwarding 
+transparently. There is a kludge available to handle the recalcitrant 
+FTP mailer, but is is very inconvenient for users.  Jon Postel will be 
+documenting all this in more detail.
+
+Dave Clark at MIT (DClark@MIT-Multics) is the internet systems Architect
+and is responsible for long-range planning.  A number of capabilities 
+are still sought for the internet system including handling packetized 
+voice and dealing with partitioning of networks.  Dave will probably 
+want to share some of his thoughts in your digest as well.
+
+I'd like to comment on TCP performance on local nets.  Mitre has done 
+some work in this area, achieving on the order of 200-350 kb/s for full 
+TCP/IP operation.  The protocol is not in and of itself inefficient on a
+local net.  In fact, the short delay on the net is generally helpful.  
+Suggest you discuss this with Steve Holmgren at MITRE Corporation 
+(Steve@MITRE).  Steve has also done work on front ends for UNIX.  This 
+may be relevant to your specific interests as well.  Digital Technology 
+Inc. (DTI) has also done work on front ends--Gary Grossman (grg@DTI) can
+answer questions.
+
+The most noticeable performance factors seem to be software checksumming
+(takes CPU cycles) and careful window flow control/retransmission 
+timeouts.  Dave Clark has worked on the latter in some depth.  Small, 
+efficient TCP's can be and have been built.  A big challenge is dealing 
+with the wide range of delays and bandwidths presented by the internet 
+environment.
+
+I believe TCP/IP to be the most thoroughly tested and widely implemented
+multinetwork protocol ever built.  It is a crucial component of future 
+DoD command and control systems.  People participating in this 
+transition of the ARPANET into the internet environment are 
+participating in an event as exciting as the construction of the ARPANET
+and I am very proud to be a part of it.
+
+Cordially,
+
+Vint Cerf (bd)
+
+------------------------------
+
+From: Mark Crispin <Admin.MRC at SU-SCORE>
+Postal-Address: 725 Mariposa Ave. #103; Mountain View, CA 94041
+Phone: (415) 497-1407 (Stanford); (415) 968-1052 (residence)
+Subject: TOPS-20 TCP Implementation
+
+     It has been mentioned on several occasions that there is a
+TOPS-20 (and Tenex) TCP implementation from BBN; and some people
+have treated it as a foregone conclusion that TCP work on TOPS-20
+is "done".  I would like to comment on this, and state why I
+believe the 1983 deadline for NCP to TCP conversion will not be
+met.  I have worked with BBN's TCP at the user program level;
+specifically I have implemented user TELNET for TCP as part of a
+general multiple-network TELNET for TOPS-20.
+
+     Briefly, the TOPS-20 TCP implementation in its present form
+is unacceptable to Stanford and many other TOPS-20 sites.  It is
+sad that so many bright people at BBN have had to maintain this
+dog instead of working on a complete rewrite.  There are several
+reasons as to why we feel the present BBN implementation of TCP
+is unacceptable:
+
+ (1) Performance problems.  Reports have varied, but the general
+concensus seems to be that the TCP process consumes between 40%
+to 60% of the CPU.  We simply cannot sacrifice that much of an
+already-loaded CPU to implement a network; in fact, we find that
+NCP's overhead on our system is at times excessive.  Last spring
+Dan Lynch mentioned that he was going to try to get some more
+specific performance figures of TCP at ISI; I don't know whether
+he has or not.
+
+ (2) User code implementation details.  TOPS-20 TCP's interface
+to user processes is completely non-standard from the way any
+other network (or device) works on TOPS-20.  In TELNET, there are
+two major paths for network I/O; one is for TCP, the other is for
+every other network (9 at last count).  This wouldn't be so
+objectionable if the TCP path were simpler; it isn't.  TOPS-20
+TCP's system calls not only do not use the filesystem and
+associated buffer management, they also require the user program
+to implement its own buffer management.  The actual details of
+how to write an efficient user mode data stream driver for
+TOPS-20 TCP are complex; the obvious straightforward algorithm is
+incredibly slow.
+
+     The cause of this is well-known; TCP on TOPS-20 was
+originally implemented as a user-mode process written in BCPL
+which did user-mode system call trapping; due to the complexities
+of simulating the filesystem under these conditions impromptu
+pseudo-system calls were written for the user process to use.
+This was fine as a temporary testbed, but the user process
+interface should have been redesigned.  Instead, TCP's
+implementation in the TOPS-20 kernel was essentially converting
+the BCPL code to assembly code and inserting it in the kernel.
+
+     At a gathering of ARPANET users last spring at the DECUS
+symposium, DEC indicated its plans to redesign the TCP user
+interface.  That solves that objection, but it wasn't at all
+clear (on DEC's part -- it was quite clear on the users' part)
+that they were going to improve TCP's internal performance.  My
+understanding is that this project still is not completed.  I do
+not see how an acceptable implementation of TCP for TOPS-20 could
+possibly be ready in time for the 1983 deadline.
+
+     I also do not see how ARPA/DCA/whomever intends to enforce
+the non-use of NCP.  The NCP/TCP conversion is of far greater
+complexity than conversion from 32-bit to 96-bit leaders; the
+latter was done by myself on WAITS (SU-AI's operating system) and
+Dave Moon on ITS (MIT's operating system) in a matter of a few
+days in 1978.  Also, the 32-bit/96-bit conversion was to some
+extent a change in the "hardware" implementation and required
+next to no change in the actual protocol code.
+
+     It will be technically difficult to enforce the non-use of
+NCP unless the IMPs are somehow modified to intercept and
+disallow NCP messages; NCP is at a higher level than the IMPs
+think.  The worst that I envision could happen if a host does not
+go to TCP is that a user on a TIP won't be able to contact that
+host; with the present problems with high-school kids on TIPs
+some of us would consider that a benefit!
+
+     I hope that due consideration is being given to this
+problem.  There are a lot of PDP-10's on the ARPANET right now,
+and they aren't about to vanish in a corner.  To my knowledge,
+there is no project at all to implement TCP on WAITS, ITS, or
+TOPS-10; and the Tenex/TOPS-20 implementation has significant
+problems for a site which wants to implement it.  Some people
+feel that a "network front end" is the right long-term solution
+for this problem; but we can't just go and build a network front
+end in 14 months.
+
+-- Mark --
+
+------------------------------
+
+From: nowicki@Diablo at Sumex-Aim
+Subject: Throughput
+
+There was a brief mention of throughput in the last TCP digest.
+For what it's worth, we are getting about 120Kbits/second through
+our PUP FTP running between Vaxes on 3Mbit Ethernet.  This is bits in
+the file divided by wall clock time in seconds, so it is not very precise
+(but accurate for large files).  All the protocols are done in user
+programs, nothing in the kernel, with a window size of one (ACK per packet).
+With fancy buffer management in the kernel and larger windows, TCP
+should give much better performance.  We'll see.
+	-- Bill
+
+------------------------------
+
+From: Robert Elton Maas <REM at MIT-MC>
+Subject: TCP/IP Digest, V1 #1
+
+I've reviewed much of Internet Protocol and found it to be very lacking.
+I have consequently rejected it for use in making networks of personal
+computers/workstations for the general public to all link up with.
+I have sent numerous gripes to Jon Postel and other authors of
+parts of the IP but they just beg the questions.
+
+One document in that group is however interesting/useful, the
+RFC about connectionless data transfer. I'd like to see more
+work in that direction.
+
+------------------------------
+
+From: Robert Elton Maas <REM at MIT-MC>
+Subject: Internet Protocol Losses?
+
+My major complaint is with mailbox addressing.
+The assumption of IP is that every node is on some official network,
+that such nodes are known in exhaustion to that network bureaucracy
+so that in particular node-id numbers can be assigned to each node.
+Nodes join the Internet not individually but by being officially
+registered with a network that has joined.
+I don't want that kind of personal-computer network.  I want nodes
+to be able to join a network just by getting software and starting
+to send messages to well-known nodes and getting replies from them
+and from nodes they are referred to (introduced to).  A node shouldn't
+have to apply for membership, and a network shouldn't have to maintain
+a list of all legal members, and every node on a network shouln't
+have to have a table that gives for each node-id number the next-hop
+for forwarding to that node (I envision several million nodes on
+one network, most nodes being merely 32k or 48k microcomputers with
+small floppy disks, no way such a small machine can list all other nodes).
+PCNET uses latitude and longitude, with phone number, for identifying
+a node.  Any node can look on a USGS or aircraft map to get its
+coordinates.  Forwarding a message can be done directly by the phone
+number or indirectly by the latitude and longitude.  IP doesn't
+have enough bits in the allowed node-address to support this method.
+(PCNET needs at the very least:
+  Longitude, 360 degrees * 60 minutes/degree = 21600 (appx 2^15)
+  Latitude, +/- 90 degrees (180 deg) * 60 m/d =10800 (appx 2^14)
+  Phone number, XxX-XXX-XXXX = 2*10^9 = (appx 2^31)
+ Total 60 bits.  There's redundancy in lat/long vs. telephone area
+  code, but to take advantage of that requires a gigantic table
+  of locations of telephone area codes and prefixes.  I think IP
+  allows only 32 bits for node-number-on-network, right?)
+
+Another gripe is the extreme amount of overhead in each packet.
+If you're doing packet switching thru internets, maybe that overhead
+is needed.  But it's totally inappropriate for two nodes talking
+directly to each other thru modems. PCNET gets by with 6 bytes of
+packet overhead instead of IP's 64 (2 bytes of CRC, 1 byte of sequence
+numbering mod 8, and 1 byte of process-number and flags for directing the
+packet to up to 127 user channels, and 2 guard-bytes between packets
+to reframe the UART and signal the break between packets) which supports
+very rapid interactive turnaround even on slow modems.
+
+END OF TCP-IP DIGEST
+********************
+

@@ -1,0 +1,670 @@
+Return-Path: @C.ISI.EDU:NIC@SRI-NIC.ARPA
+Posted-Date: Tue 24 Feb 87 09:19:13-PST
+Received-Date: Tue, 24 Feb 87 15:11:49 PST
+Received: from C.ISI.EDU by venera.isi.edu (5.54/5.51)
+	id AA23148; Tue, 24 Feb 87 15:11:49 PST
+Received: FROM SRI-NIC.ARPA BY C.ISI.EDU WITH TCP ; 24 Feb 87 14:12:53 PST
+Date: Tue 24 Feb 87 09:19:13-PST
+From: DDN Reference <NIC@SRI-NIC.ARPA>
+Subject: DDN News #52
+To: DDN-NEWS:;
+Cc: nic@SRI-NIC.ARPA
+Message-Id: <12281635585.27.NIC@SRI-NIC.ARPA>
+
+The following DDN DCS newsletter was issued in hardcopy on 28 Nov
+1986.  It has just been transferred to online format for release to
+the DDN Newsletter distribution list as of today's date (24 Feb 87).
+
+- -The DDN Network Information Center
+
+======================================================================
+DDN NEWS 52, SPECIAL ISSUE       DCA DDN Defense Communications System
+28 Nov 86                        Published by: DDN Network Info Center
+                                    (NIC@SRI-NIC.ARPA)  (800) 235-3155
+
+
+                        DEFENSE  DATA  NETWORK
+
+                              NEWSLETTER
+
+
+Maximum Distribution Requested.  The DDN NEWSLETTER is distributed
+online by the DDN Network Information Center under DCA contract.  For
+addition to the online mailing list, contact NIC@SRI-NIC.ARPA.  Back
+issues may be read through the TACNEWS server ("@n" command at the
+TAC) or may be obtained via FTP (or Kermit) from the SRI-NIC host
+[26.0.0.73 or 10.0.0.51] using login="anonymous" and password="guest".
+The pathname for newsletters is DDN-NEWS:DDN-NEWS-nn.TXT (where "nn"
+is the newsletter number).
+======================================================================
+
+
+Section I. OFFICIAL
+
+		Topic:	1. DDN QUALIFIED HOST INTERFACES
+			2. DDN TECHNICAL DOCUMENTATION
+			3. ARPANET PERFORMANCE IMPROVEMENTS
+			4. DDN NODE INSTALLATION STATUS
+
+
+
+
+         DEFENSE DATA NETWORK (DDN) QUALIFIED HOST INTERFACES
+         ----------------------------------------------------
+
+DDN link and network qualification test information source for 1822/HDH,
+X.25 Basic, and X.25 Standard protocols is DCA circular "DDN Host
+Interface Qualification Testing - Link and Network Layers" (DCAC
+370-P195-X (DRAFT)).
+
+The following list contains interfaces which have successfully passed the
+link and network Qualification Tests required prior to permitting a host
+to connect to the DDN.  This list is current as of 24 Oct 86 and
+supersedes all previous lists.  Interfaces qualified for X.25 Standard
+are also qualified for basic operation.  Interfaces are qualified for
+operation at or below the specified baud rate.  Operation above the
+specified baud rate is undetermined.  This list is not intended to be a
+qualified products list.  This list identifies interface equipment which
+has successfully passed the testing outlined in the circular in para #1
+above.  No restriction in the selection of equipment is intended.  Other
+equipment, while not currently qualified for DDN use, can be qualified at
+a later date.  However, procurement offices may make timely completion of
+Qualification Testing a contract requirement.
+
+ADAX INC.
+- ---------
+
+	- X.25 STANDARD
+	- X.25 PACKAGE: "DDN X.25" VERSION 1.0, RELEASE 1.0;
+	  INTERFACE FOR SPERRY 5000 SERIES COMPUTERS, MODELS 20,
+	  40, 60, 80, AND 90 USING ADAX, INC. SCC MC68000 X.25 I/F
+	  BOARD AND UNIX 5, VERSION 5.2 OPERATING SYSTEM.
+	- QUAL AT 19.2 KBPS
+	- QUAL DATE: 18 FEB 86
+
+ADVANCED COMPUTER COMMUNICATIONS (ACC)
+- --------------------------------------
+
+	(1) IF-11/X.25
+	- X.25 BASIC
+	- X.25 PACKAGE: "IF-11/X.25" VERSION 3.7 (2 BOARDS, Z-80
+	  BASED), USED WITH DEC PDP-11 AND VAX SYSTEMS.
+	- QUAL AT 19.2 KBPS
+	- QUAL DATE: 2 FEB 85
+	(2) ACP 625
+	- X.25 BASIC
+	- X.25 PACKAGE: ACP 625 (1 BOARD, DIGITAL UNIBUS), USED WITH
+	  DEC PDP-11 AND VAX SYSTEMS.
+	- QUAL AT 19.2 KBPS
+	- QUAL DATE: 2 FEB 85
+	(3) IF-370/DDN
+	- 1822/HDH
+	- IF-370/DDN; SOFTWARE: (A) DDN MVS REVISION 1.5
+	- (NETWORK SOLUTIONS PACKAGE); (B) ACP REVISION 1.51
+	  (ACC PACKAGE); HARDWARE/FIRMWARE: "V/HSDDN" REVISION
+	  2.0. HOST INTERFACE FOR IBM MVS SYSTEMS.
+	- QUAL AT 64 KBPS
+	- QUAL DATE: 30 APR 86
+
+	(4) IF-370/DDN
+	- X.25 STANDARD
+	- IF-370/DDN HARDWARE/FIRMWARE PACKAGE: "V/HSDDN" REVISION
+	  2.0. HOST INTERFACE FOR IBM MVS/VM SYSTEMS.
+	- QUAL AT 64 KBPS
+	- QUAL DATE: 30 APR 86
+	(5) ACP 5250
+	- X.25 STANDARD
+	- ACP 5250 VERSION 1.0 FOR Q-BUS SYSTEMS; TESTED ON
+	  MICROVAX 2 WITH MICRO VMS 4.2.
+	- QUAL AT 64 KBPS
+	- QUAL DATE: 27 MAR 86
+	(6) ACP 6250
+	- X.25 STANDARD
+	- ACP 6250 VERSION 1.0 FOR UNIBUS SYSTEMS; TESTED ON DEC VAX
+	  11/730 WITH VMS 4.2.
+	- QUAL AT 64 KBPS
+	- QUAL DATE: 27 MAR 86
+	(7) ACS 1000 PRODUCT LINE
+	- X.25 STANDARD
+	- ACS 1030 X.25 HARDWARE/FIRMWARE PACKAGE: "V/HSDDN"
+	  VERSION 2.0. ACS 1030 PROVIDES TRANSPARENT SERVICE
+	  TO SDLC AND ASYNCHRONOUS SUBSCRIBERS.
+	- QUAL AT 64 KBPS
+	- QUAL DATE: 30 APR 86
+
+AT&T INFORMATION SYSTEMS
+- ------------------------
+
+	- X.25 STANDARD
+	- X.25 PACKAGE: "1.1 VERSION X.25". INTERFACE FOR USE WITH
+	  AT&T 3B15 AND 3B5 COMPUTER SYSTEMS.
+	- QUAL AT 56KBPS
+	- QUAL DATE: 29 AUG 86
+
+AYDIN MONITOR SYSTEMS
+- ---------------------
+
+	- X.25 STANDARD
+	- AMS X.25 DDN-NAC INTERFACE, SOFTWARE VERSION 2.0, REL 1.0.
+	- QUAL AT 56KBPS
+	- QUAL DATE: 31 JUL 86
+
+BBN COMPUTER CORPORATION (BBNCC)
+- --------------------------------
+
+	- X.25 STANDARD
+	- X.25 PACKAGE: BBN C10/X.25 PAD, SOFTWARE "C10/X.25 VERSION
+	  1.5".
+	- QUAL AT 64 KBPS
+	- QUAL DATE: 5 SEP 86
+
+CHANNEL SYSTEMS INTERNATIONAL (CSI)
+- -----------------------------------
+
+	- X.25 STANDARD
+	- X.25 INTERFACE PACKAGE: SI/CNA, CNASUB VERSION 9.0,
+	  MICROCODE CNA.X25. USED WITH IBM SERIES/1.
+	- QUAL AT 56KBPS.
+	- QUAL DATE: 17 SEP 86
+
+CHI CORPORATION
+- ---------------
+
+	- X.25 STANDARD
+	- X.25 INTERFACE PACKAGE: CHI COMMUNICATIONS PROCESSOR
+	  VERSION S125-01 USED AS FEP ON SPERRY UNIVAC MACHINES.
+	- QUAL AT 64KBPS
+	- QUAL ON: 12 SEP 86
+
+COMMUNICATION MACHINERY CORPORATION (CMC)
+- -----------------------------------------
+
+	(1) DNP/30 X.25 VERSION 1.0
+	- X.25 STANDARD
+	- DNP/30 X.25 VERSION 1.0; MULTIBUS INTERFACE-TESTED WITH
+	  CALLAN UNISTAR 300 AND UNIX SYSTEM 5 OPERATING SYSTEM.
+	- QUAL AT 64KBPS
+	- QUAL DATE: 15 AUG 86
+	(2) MNP/30
+	- X.25 STANDARD
+	- X.25 VERSION 1.0; MULTIBUS INTERFACE, TESTED WITH CALLAN
+	  UNISTAR 300 AND UNIX SYSTEM 5 OPERATING SYSTEM.
+	- QUAL AT 64 KBPS
+	- QUAL DATE: 16 OCT 86
+	(3) MVME 333
+	- X.25 STANDARD
+	- MVME 333 VERSION 1.0 "FEDERAL DATA FEP FOR TANDEM COMPUTERS"
+	- QUAL AT 9.6 KBPS
+	- QUAL DATE: 15 AUG 86
+
+COMPUTER CONSOLES INC. (CCI)
+- ----------------------------
+
+	- X.25 STANDARD
+	- X.25 INTERFACE PACKAGE: X.25 SOFTWARE RELEASE 1.0. USED
+	  WITH CCI 632 MACHINE RUNNING UNIX SYSTEM 5 OPERATING SYSTEM.
+	- QUAL AT 56 KBPS
+	- QUAL ON: 16 SEP 86
+
+COMPUTER SYSTEM SOLUTIONS, INC.
+- --------------------------------
+
+	- X.25 STANDARD
+	- CSS DDN X.25 FEP 3270/TAC 3270; ROM VERSION 1.0
+	- QUAL AT 9.6 KBPS
+	- QUAL DATE: 24 JAN 86
+
+DATA GENERAL CORPORATION
+- ------------------------
+
+	- X.25 BASIC
+	- X.25 PACKAGE: XTS/X25 REVISION 5-10; AOS/VS OPERATING
+	  SYSTEM; INTERFACE FOR DATA GENERAL ECLIPSE MV/FAMILY
+	  COMPUTERS.
+	- QUAL AT 9.6 KBPS
+	- QUAL DATE: 26 FEB 86
+
+DATAPOINT CORP
+- --------------
+
+	- X.25 BASIC
+	- WIDE AREA NETWORK FOR DATAPOINT'S VIRTUAL COMMUNICATIONS
+	  FACILITY "WAN X.25 (VCF) 1.2.2', RMS 2.5 OPERATING SYSTEM
+	  RUNNING ON A DATAPOINT 8600/8800.
+	- QUAL AT 9.6 KBPS
+	- QUAL DATE: 12 DEC 85
+
+FORD AEROSPACE & COMMUNICATIONS CORP.
+- -------------------------------------
+
+	- X.25 STANDARD
+	- X.25 INTERFACE PACKAGE: MULTINET GATEWAY X.25 VERSION 3.0
+	- QUAL AT 56 KBPS
+	- QUAL DATE: 30 JUN 86
+
+GEAC COMPUTER CORP LIMITED
+- --------------------------
+
+	- X.25 BASIC
+	- GEAC 8000 SERIES COMPUTER DDN X.25 INTERFACE RUNNING ASTRO
+	  RELEASE 3.0 SOFTWARE AND GEAC 8212 CLUSTER COMMUNICATIONS
+	  CONTROLLER RUNNING OS8212 RELEASE 1.2 SOFTWARE.
+	- QUAL AT 19.2 KBPS
+	- QUAL DATE: 8 NOV 85
+
+GOULD INC
+- ---------
+
+	- X.25 STANDARD
+	- GOULD DDN X.25 INTERFACE, VERSION 1.0, RELEASE 1.0,
+	  PRODUCT NUMBER UTX 1.2 FOR THE GOULD POWER NODE 6000.
+	- QUAL AT 56 KBPS
+	- QUAL DATE: 16 MAY 86
+
+HARRIS CORPORATION
+- ------------------
+
+	- X.25 STANDARD
+	- VOS X.25 NETWORK, RELEASE 1.0; FOR USE WITH HARRIS "H"
+	  SERIES COMPUTER SYSTEM DIVISION PRODUCTS.
+	- QUAL AT 64 KBPS
+	- QUAL DATE: 12 MAY 86
+
+HEWLETT PACKARD
+- ---------------
+
+	- X.25 BASIC
+	- HP X.25 INTERFACE, DS X.25 PRODUCT NO. 32187A, LINK LEVEL
+	  SOFTWARE VERSION 1.14; MPE-V OPERATING SYSTEM FOR THE HP
+	  3000 SERIES FAMILY OF COMPUTERS.
+	- QUAL AT 9.6 KBPS
+	- QUAL DATE: 17 DEC 85
+
+HONEYWELL INFO SYS
+- --------------------
+
+	- X.25 STANDARD
+	- HIS COMMUNICATIONS SERVER 1 (CS/l-DDN) RUNNING SOFTWARE
+	  RELEASE 1, VERSION 1 FOR HIS DPS6 AND DPS8/DN8 HOST
+	  FAMILIES.
+	- QUAL AT 56 KBPS
+	- QUAL DATE: 4 NOV 85
+
+IBM/CSI
+- --------
+
+	- X.25 STANDARD
+	- IBM SERIES/1 AND CSI (S1/CNA CONTROLLER AND LINE CARDS)
+	  WITH CSI X.25 PACKAGE (DATED 22 NOV 85 INCLUDING
+	  MICROCODE AND DRIVER) AND IBM SERIES/l MCPX25 (NOTE: THE
+	  IBM/CSI INTERFACE REQUIRES MICROCODE WRITTEN BY IBM IN
+	  ADDITION TO THAT PROVIDED BY CSI).
+	- QUAL AT 64 KBPS
+	- QUAL DATE: 19 SEP 86
+
+ITT/FEDERAL ELECTRIC CORP.
+- --------------------------
+
+	- X.25 STANDARD
+	- X.25 PACKAGE: ADAX "DDN X.25" VERSION 1.0, RELEASE 1.0;
+	  TESTED WITH PLEXUS P60/P35/P20 COMPUTERS USING ADAX SCC
+	  MC68000 X.25 I/F BOARD AND UNIX 5, VERSION 5.2 OPERATING
+	  SYSTEM.
+	- QUAL AT 19.2 KBPS
+	- QUAL DATE: 18 FEB 86
+
+MEMOTEC DATA INCORPORATED
+- -------------------------
+
+	- X.25 STANDARD
+	- X.25 PACKAGE: X25-MARCH86 VERSION MARCH86. INTERFACE
+	  USED WITH 8000 SERIES DATA COMMUNICATIONS PROCESSORS,
+	  CONCENTRATORS, PADS, AND MULTI-NODE PROTOCOL PRODUCTS.
+	- QUAL AT 56 KBPS
+	- QUAL DATE: 20 MAR 86
+
+NCR COMTEN
+- ------------
+
+	- X.25 STANDARD
+	- COMTEN "X.25-1 DDN SOFTWARE". INTERFACE USED WITH NCR 3600
+	  SERIES COMPUTERS RUNNING WITH SCS63 AND COS2 OPERATING
+	  SYSTEMS; AND NCR 5600 SERIES COMPUTERS RUNNING COS2
+	  OPERATING SYSTEM.
+	- QUAL AT 56 KBPS
+	- QUAL DATE: 7 AUG 86
+
+PRIME COMPUTER INC.
+- -------------------
+
+	- X.25 STANDARD
+	- X.25 PACKAGE: "PRIMENET/X.25" REVISION 19 (20) IMBEDDED
+	  IN "PRIMOS" OPERATING SYSTEM. INTERFACES WITH PRIME 50
+	  SERIES MACHINES.
+	- QUAL AT: 64 KBPS
+	- QUAL DATE: 1 MAY 86
+
+PROTOCOM DEVICES
+- ----------------
+
+	(1) P2500 PAD
+	- X.25 STANDARD
+	- P2500 X.25 PACKAGE: LEVEL 2, VERSION 1.03; LEVEL 3, VERSION
+	  1.05.
+	- QUAL AT 56 KBPS
+	- QUAL DATE: 23 MAY 86
+	(2) P250 PAD
+	- X.25 STANDARD
+	- P250 X.25 PACKAGE: LEVEL 2, VERSION 1.03; LEVEL 3,
+	  VERSION 1.05.
+	- QUAL AT 56 KBPS
+	- QUAL DATE: 23 MAY 86
+	(3) P160 PAD
+	- X.25 STANDARD
+	- P160 X.25 PACKAGE: "P160 X.25 RELEASE 3.0"
+	- QUAL AT 56 KBPS
+	- QUAL DATE: 23 MAY 86
+
+PYRAMID TECHNOLOGY INC.
+- -----------------------
+
+	- X.25 STANDARD
+	- X.25 PACKAGE: X.25/X.29 GPSC VERSION 1.0; TESTED ON
+	  PYRAMID 90X AND 98X COMPUTERS WITH OPERATING SYSTEM OSX.
+	- QUAL AT 56KBPS
+	- QUAL DATE: 8 APR 86
+
+SCOPE INC.
+- -----------
+
+	- X.25 STANDARD
+	- SCOPE DDN MICROGATEWAY MULTIBUS INTERFACE CARD RUNNING
+	  SOFTWARE VERSION 1, RELEASE 1.
+	- QUAL AT 19.2 KBPS
+	- QUAL DATE: 1 OCT 85
+
+SIMPACT ASSOCIATES, INC.
+- -------------------------
+
+	(1) UNIBUS/VMS INTERFACE
+	- X.25 STANDARD
+	- SIMPACT "CPI-PSVI-1600-VMS"
+	- QUAL AT 64 KBPS
+	- QUAL DATE: 11 APR 86
+	(2) UNIBUS/RMS INTERFACE
+	- X.25 STANDARD
+	- SIMPACT "CPI-PSVI-1600-RSX"
+	- QUAL AT 64 KBPS
+	- QUAL DATE: 11 APR 86
+	(3) Q-BUS/MICRO VAX INTERFACE
+	- X.25 STANDARD
+	- SIMPACT "CPI-PSVI-1622S-UVMS'
+	- QUAL AT 64 KBPS
+	- QUAL DATE: 11 APR 86
+	(4) Q-BUS/RSX INTERFACE
+	- X.25 STANDARD
+	- SIMPACT "CPI-PSVI-1622S-RSX"
+	- QUAL AT 64 KBPS
+	- QUAL DATE: 11 APR 86
+
+SPERRY CORPORATION COMPUTER SYSTEMS
+- -----------------------------------
+
+	- X.25 STANDARD
+	- X.25 INTERFACE PACKAGE: "DDN-IR2". USED WITH SPERRY 1100
+	  DATA PROCESSING SYSTEM AND DATA COMMUNICATIONS PROCESSOR DCP
+	  40/20/10.
+	- QUAL AT 56KBPS
+	- QUAL DATE: 26 JUN 86
+
+SUN MICRO SYSTEMS FEDERAL, INC.
+- ---------------------------------
+
+	(1) X.25 STANDARD "SUNLINK DDN VERSION 4.0"
+	- X.25 STANDARD
+	- X.25 INTERFACE: "SUNLINK DDN VERSION 4.0"; X.25 STANDARD OR
+	  1822/HDH (SWITCH SELECTABLE) USED ON SUN MACHINES, VERSION
+	  SUN 2 AND SUN 3.
+	- QUAL AT 56 KBPS
+	- QUAL DATE: 20 AUG 86
+	(2) 1822/HDH "SUNLINK DDN VERSION 4.0"
+	- 1822/HDH
+	- "SUNLINK DDN VERSION 4.0" 1822/HDH OR X.25 STANDARD (SWITCH
+	  SELECTABLE) USED ON SUN MACHINES; SUN 2 AND SUN 3.
+	- QUAL AT 56 KBPS
+	- QUAL DATE: 20 AUG 86
+
+SYSTEM DEVELOPMENT CORPORATION
+- ------------------------------
+
+	(1) MIL/INT 1822/HDH INTERFACE
+	- 1822/HDH
+	- SDC MIL/INT FRONT END IMP INTERFACE (SOFTWARE RELEASE
+	  1.6); USED WITH SELECTED SDC MIL/INT PRODUCTS.
+	- QUAL AT 56 KBPS
+	- QUAL DATE: 28 OCT 85
+	(2) MIL/INT X.25 INTERFACE
+	- X.25 STANDARD
+	- "MIL/INT X.25" RELEASE 3.00 USED WITH SELECTED SDC MIL/INT
+	  PRODUCTS.
+	- QUAL AT 56KBPS
+	- QUAL DATE 2 JUN 86
+	(3) CP 2000 FEP
+	- X.25 STANDARD
+	- FRONT END PROCESSOR (FEP) X.25 INTERFACE PACKAGE, VERSION
+	  3.6 X.25 OPERATES WITH ALL BURROUGHS LARGE MAIN FRAMES.
+	- QUAL AT 56 KBPS
+	- QUAL DATE: 11 OCT 86
+	(4) BNA 1
+	- X.25 STANDARD
+	- X.25 SOFTWARE PACKAGE: BNA VERSION 1.0. USED WITH
+	  BURROUGHS B5900, B6900, B7900 SERIES COMPUTERS AND ALL "A"
+	  SERIES MACHINES RUNNING MCP OPERATING SYSTEM SOFTWARE.
+	- QUAL AT 56KBPS
+	- QUAL ON 22 OCT 86
+
+TANDEM COMPUTERS
+- ----------------
+
+	- X.25 STANDARD
+	- TANDEM TNS-2 RELEASE GUARDIAN BOO FOR TANDEM TXP MACHINES
+	  USING COMMUNICATIONS CONTROLLER T-16/6203 OR 6204.
+	- QUAL AT 64 KBPS
+	- QUAL DATE: 28 APR 86
+
+WANG COMPUTER SYSTEMS
+- ---------------------
+
+	(1) VS SYSTEMS
+	- X.25 STANDARD
+	- VS SYSTEMS INTERFACE: HARDWARE: VS-TC1 128K COMM.
+	  CONTROLLER; VS6550 ONE LINE INTERNAL TC PROCESSOR; 25V76-lA
+	  SINGLE PORT TC CONTROLLER VS15/65; 25V76-1B SINGLE PORT TC
+	  CONTROLLER VS5/6. SOFTWARE: VS-WSNT-DDN RELEASE 3.50.00;
+	  (OPERATES WITH ALL CURRENT VS PROCESSOR AND OPERATING
+	  SYSTEMS).
+	- QUAL AT 64 KBPS
+	- QUAL DATE: 14 OCT 86
+	(2) PROFESSIONAL/ADVANCED PROFESSIONAL COMPUTER
+	  SYSTEMS
+	- X.25 STANDARD
+	- PROF/ADV PROF COMPUTER SYSTEM INTERFACE: HARDWARE:
+	  MODEL NO. PC-PM040 (PC REMOTE COMM. OPTION); SOFTWARE:
+	  PC-WSNT-DDN RELEASE 3.50.00 (OPERATES WITH ALL CURRENT PC
+	  PROCESSORS AND OPERATING SYSTEMS).
+	- QUAL AT 64 KBPS
+	- QUAL DATE: 10 OCT 86
+
+XEROX CORP.
+- -----------
+
+	- X.25 STANDARD
+	- XEROX X.25 INTERFACE: "INTERNETWORK ROUTING SYSTEM (IRS)"
+	  RUNNING WITH "PILOT" OPERATING SYSTEM. IRS INTERFACE
+	  OPERATES WITH ALL XEROX MACHINES.
+	- QUAL AT 56 KBPS
+	- QUAL DATE: 15 OCT 86
+	  (MR. CHUCK ELY/B613/(703) 285-5033 (AV) 356-5033)
+
+
+                     DDN TECHNICAL DOCUMENTATION
+                     ---------------------------
+
+DCA Circular 270-P120-3 "Logistics Support Plan for the Defense
+Data Network (DDN)" dated September 1986 has been distributed.  The
+cognizant office within the DCS Data Systems Directorate for this
+document is B630.
+
+DCA Circular 370-P195-4 "DDN Installation, Test and Acceptance
+Procedures" dated September 1986 is currently being printed with
+distribution expected shortly.  The DCS Data Systems Directorate
+cognizant office is Code B642.
+
+DCA Circular 310-P 70-76 "Node Site Coordinator Guide" dated
+September 1986 is currently undergoing distribution.  The
+cognizant office within the DCS Data Systems Directorate is Code
+B652. (Ms. Gloria Spellman/B621/(703) 285-5612 (AV) 356-5612)
+
+
+                   ARPANET PERFORMANCE IMPROVEMENTS
+                   --------------------------------
+
+A marked increase in ARPANET congestion was noted during September.
+Based upon an evaluation of the situation, the following specific
+actions were accomplished.
+
+	- TAC 113 was installed on ARPANET TACs, reducing
+          character-at-a-time traffic.
+
+	- Network parameters were adjusted to provide more even
+          sharing of cross-country bandwidth.
+
+	- Wideband Network gateways were modified to favor the
+          Wideband Net over the ARPANET for cross-country traffic
+          between some LANs.
+
+	- Additional network performance statistics were collected in
+          early October (as reported earlier).
+
+	- A link was restored between the Purdue and Wisconsin nodes.
+
+In addition, and most significantly, a 56Kb line was put into service
+last week between USC and CIT.  This line effectively bypasses a 19.2b
+line that had created a bottleneck in one of the ARPANET's three
+cross-country paths.
+
+Finally, the ARPANET was upgraded to PSN 6, and Mailbridges were
+upgraded to MB1008.1.
+
+On Friday, 7 November, all of these changes were in place together for
+the first time.  Performance measurement data taken on Friday and on
+Monday, 10 November indicate significant improvement in three key
+measures: mean round trip delay, mean number of hops taken by data
+packets, and number of performance-related traps received by the
+ARPANET Monitoring Center.
+
+Mean round trip delay and mean number of hops have returned
+approximately to their June 1986 levels, and are down significantly
+from levels measured in early October (Mean round trip delay, in
+particular, has dropped from 1215 ms on 2 October and 625 ms on 3
+October to 298 ms on 7 November). "Traps" reported by network nodes to
+the Monitoring Center indicating congestion and other performance
+problems have decreased by more than an order of magnitude -- from
+80K-150K per day in October to 5K-10K on November 7 and 10.
+
+>From this data we can conclude that the ARPANET is past its most
+immediate crisis.  However, the network has little reserve capacity,
+and performance is still critical.  Some congestion still occurs, and
+loss of a single trunk or node could still bring the network into a
+very congested state.  Thus, further steps to improve network
+performance, such as the provision of additional cross-country
+bandwidth and additional processing capacity at several key nodes,
+must still be taken in order to restore the ARPANET to longterm good
+health.  (John Thomas, Jr/DCA/B601/285-5010, (AV) 356-5010)
+
+
+            DDN NODE INSTALLATION STATUS - NOVEMBER 1985
+            --------------------------------------------
+
+The following reflects the status of DDN Nodes scheduled for
+installation during the period April 1985 through November 1985.
+
+
+Apr 85 Installations
+
+1. Pentagon 1 - DISNET - Operational
+2. Pentagon 2 - DISNET - Installation Complete - Awaiting IST'S
+3. Andrews - DISNET - Installation Complete - Awaiting IST'S
+
+
+May 85 Installations
+
+1. Langley AFB - MILNET - Installation Complete - Awaiting Clocking
+   from C&P Telephone Co.
+2. Corpus Christi - MILNET - Installation Complete - No Tariffs for
+   50 or 56 KB Service - DDN Preparing Test of Mini Satellite Terminal
+3. McClellan - DISNET - Operational
+
+
+Jun 85 Installations
+
+1. Ft Sill - MILNET - Installation Complete - Awaiting NCD
+2. Langley - SCINET - Installation Complete - Awaiting IST'S
+3. Ft Belvoir - MILNET - Installation Complete - IST Awaiting NCD
+
+
+Jul 85 Installations
+
+1. Ft Belvoir 1 and 2 - DISNET - Installation Complete - Awaiting IST'S
+2. Eglin - SCINET - Installation Complete - Awaiting IST'S
+3. Camp Roberts - MILNET - Installation Complete - IST'S Under Testing
+
+
+Aug 85 Installations
+
+1. Ft Hood - DISNET - Installation Complete - Awaiting IST'S
+2. WPAFB - SCINET - Installation Complete - Awaiting IST'S
+3. Suitland - SCINET - Installation Complete - Awaiting IST'S
+
+
+Sep 85 installations
+
+1. Ft Huachuca - DISNET - Installation Complete - Awaiting IST'S
+2. CP Smith, HI - SCINET - Installation Complete - IST'S to Bolling 
+   in Testing
+3. Makalapa (Pearl Harbor) - SCINET - Installation Complete -
+   Awaiting IST'S
+4. Ft Shafter HI - SCINET - Installation Complete - Awaiting IST'S
+5. Hickam, HI - SCINET - Installation Complete - Awaiting IST'S
+6. Ft Lewis - MILNET - Installation Complete - Test Underway to
+   Great Lakes
+7. Ft Benning - MILNET - Installation Complete - Army E & I not completed
+8. Ft Campbell - MILNET - Installation Complete - Awaiting IST'S
+9. Trident - MILNET - Installation Complete - Awaiting IST'S
+
+
+Oct 1985 Installations
+
+1. Ft McPherson - DISNET - Awaiting Army E & I
+2. Port Hueneme - MILNET - Installation Complete - Awaiting IST'S
+3. Site TANGO - SCINET - Installation Underway - Working on Fibre
+   Optics System
+4. Osan - SCINET - Installation Underway - Air Force E & I Not
+   Completed (REF 1843EIG 100130Z JUL 86)
+5. Sharpe - MILNET - Installation Complete - Under Testing
+6. Bangor - MILNET - Installation Complete - Awaiting IST
+7. Sheppard - MILNET - Installation Complete - Awaiting IST'S
+8. Kelly - MILNET - Installation Complete - Awaiting IST'S
+9. Kessler - MILNET - Installation Complete - Awaiting IST'S
+
+
+Nov 1985 Installations
+
+1. Ft Sheridan - MILNET - Installation Complete - Awaiting IST'S
+2. Keyport - DISNET - Installation Complete - Under Testing
+3. Keyport - MILNET - Installation Complete - Awaiting IST'S
+4. FNOC - MILNET - Installation Complete - Awaiting IST'S
+- -------
+
+------- End of Forwarded Message
+

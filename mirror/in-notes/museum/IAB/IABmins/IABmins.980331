@@ -1,0 +1,192 @@
+
+Date: Tue, 14 Apr 1998 09:42:18 -0700
+From: Abel Weinrib <AWeinrib@jf.intel.com>
+Subject: Minutes for March 31 IAB Biz. meeting
+
+============
+
+MINUTES FOR MARCH 31, 1998 IAB BUSINESS MEETING
+
+PRESENT:
+Fred Baker
+Steve Bellovin
+Brian Carpenter
+Jon Crowcroft
+Steve Deering
+Robert Elz
+Ned Freed
+Tony Hain
+Don Heath
+Tim Howes
+Erik Huizer
+Cyndi Jung
+John Klensin
+Keith Moore
+Robert Moskowitz
+Charlie Perkins
+Radia Perlman
+Jon Postel
+Abel Weinrib
+
+NEXT MEETING:
+Teleconference Tuesday May 12, 10-12 Eastern Time.
+
+NEW ACTION ITEMS:
+Charlie Perkins and Bob Moskowitz:  Draft document on tunnelling issues,
+architectures, etc.  Send to IAB list.
+Keith Moore and Charlie Perkins :  Draft document on "finding stuff"
+issues, architectures, etc.  Send to IAB list. 
+
+OLD ACTION ITEMS:
+* Brian Carpenter:  Send note to IETF list outlining IAB role and response
+re. green paper issues.
+* Jon Postel (IANA): Build consensus on how to assign IPv6 addresses--get
+the registries to do something or perhaps form a BOF on the issue.
+* Tony Hain:  Put together a crisp problem statement for the NAT/VPN/IPv6
+problem.
+
+DRAFTS IN PROGRESS:
+* Charlie Perkins, Radia Perlman, Sue Hares:  Routing workshop report.
+* Brian Carpenter and Erik Huizer:  IAB charter (updated RFC 1601).
+* Radia Perlman:  What should be in protocols.
+* Steve Bellovin: Security workshop report.
+* Charlie Perkins: Technical value of IPv6.
+
+Review actions
+-------------------------------
+* Brian Carpenter:  Send note to IETF list outlining IAB role and response
+re. green paper issues.--done
+* Jon Postel (IANA): Build consensus on how to assign IPv6 addresses--get
+the registries to do something or perhaps form a BOF on the issue.--Postel
+and Hinden had a meeting with representatives of the registries to discuss
+draft proposal.  It will be published as an Internet Draft; the registries
+will take it to their members for comment.  Finally, will probably be
+published as an informational RFC documenting the agreement among the
+registries.
+* Tony Hain:  Put together a crisp problem statement for the NAT/VPN/IPv6
+problem.--done
+===============================
+
+Review drafts in progress
+-------------------------------
+* Brian Carpenter and Erik Huizer:  IAB charter (updated RFC 1601).--on hold
+* Radia Perlman:  What should be in protocols.--suffering from lack of
+interest on mailing list.  Radia will post to IETF list with a pointer to
+discussion list.
+* Steve Bellovin: Security workshop report.--with RFC editor, waiting for
+IPSEC documents to clear.
+* Charlie Perkins: Technical value of IPv6.--draft published; shorten;
+informally ask IPng list for comments on accuracy
+
+Welcome/introduction for new members (Brian)
+-------------------------------
+Welcome to Ned Freed and Tim Howes.
+Fond farewells to Radia Perlman and Robert Elz.
+===============================
+
+Review of routing workshop (Radia/Steve D)
+-------------------------------
+After the workshop, there was one rather vociferous complaint regarding the
+closed nature of the invitation-only workshop.  However, limited attendance
+by a set of experts is both the only way to hold a valuable workshop, and
+is entirely within the IAB charter, RFC 1601.  Remember, neither the IAB
+nor IAB workshops set standards.
+
+Radia and Steve previewed their overview of the workshop for Friday's IAB
+open plenary.  See the notes and presentation slides from the plenary.
+
+Thanks to Steve Deering and Radia Perlman for setting up the workshop, to
+Cyndi Jung for taking care of local arrangements, and to Charlie Perkins
+and Sue Hares for taking detailed minutes!
+===============================
+
+Round table to list IAB work items for 1998/99
+-------------------------------
+what do we need for routing in five years... how do we get there
+million-entry router table entries (or achieving the same effect)
+QOS multicast routing
+multicast key management
+rationalization of RAP, RTFM, etc.--working on similar problems, but
+unaware of each other
+finding stuff (which to use: dhcp, multicast, ldap, etc.)
+roadmap for all the ways you can find things
+naming things, URI
+directory services
+indexing and searching
+tunneling
+VPN tunnels:  naming, addressing, routing
+NAT
+firewalls--make them part of the architecture
+applicability statements for the security building blocks we have--a living
+document
+security: actually making applications secure
+object security
+authorization and access control framework
+policy beyond RAP
+network management in heterogeneous environments; paradigms beyond SNMP; DEN;
+network applications management--more than just instrumentation
+IPv6
+in-home and to-the-home
+root server architectures; is there any way to flatten the hierarchy
+document things that are commonly done wrong (implementation and
+configuration)
+new transport protocol
+
+These items will be clarified and prioritized by email discussion going
+forward.
+===============================
+
+Report from POC appointees Rob Austein and Patrik Faltstrom
+-------------------------------
+Things were going fairly smoothly until December, when the US Federal
+Government got involved.  Green paper comment period just closed.  Unclear
+what will happen next.  POC has been doing very little technical work.
+
+Question from the IAB:  Should the IETF take on specifying a protocol for
+interactions between registrars and registries?  Yes, this would be a
+useful thing to do now.  All existing proposals on the table require this
+functionality.  Protocols for maintaining consistent copies of a registry
+would also be interesting.
+
+Question from appointees:  Does the IAB want to relinquish the voting
+rights of its appointees to the POC when the POC changes its constitution?
+The POC appointees pointed out that everything is done by consensus anyway,
+and this would be a politically good thing to do.  The IAB's proper role is
+to make sure that reasonable technical solutions are pursued--voting rights
+appear irrelevant to executing this role.  Issue is when should this be
+done, and should this be unilateral or conditional on everyone else giving
+up their vote?
+
+The IAB in general felt that the voting rights of its appointees is not
+that important--we want to advise, not vote.  However, we do not want this
+to be taken as a repudiation of the POC.  A decision on this will be taken
+when the revised constitution of the POC is decided.
+===============================
+
+Whither NAT? (Tony)
+-------------------------------
+Tony reported on the NAT working group meeting today.  The working group is
+focused on making NATs as good as possible.  The IAB needs to focus on the
+areas where NATs impact the architecture of the Internet.  We need to
+document the long-term consequences of NATs, so that people don't
+erroneously conclude that NATs preclude the need for IPv6.  More broadly,
+as with firewalls, perhaps we should also explore ways that applications
+and NATs can work together better. 
+===============================
+
+Straw poll on 1998/99 IAB Chair (conducted by Abel)
+-------------------------------
+Brian Carpenter agreed to continue to serve as chair; his offer was met
+with enthusiasm.
+===============================
+
+Future Meetings
+-------------------------------
+Regular teleconference second Tuesday of the month at 10:00 AM Eastern Time.
+===============================
+===============================
+These minutes were prepared by Abel Weinrib, weinrib@intel.com.  An online
+copy of these and other minutes are available at ftp://ftp.isi.edu:pub/IAB.
+Also, visit the IAB Web page at http://www.iab.org/iab.
+
+[]

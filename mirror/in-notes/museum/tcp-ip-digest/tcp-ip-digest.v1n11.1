@@ -1,0 +1,230 @@
+11-Jan-82 19:18:50-PST,9695;000000000001
+Mail-from: ARPANET host BRL rcvd at 11-Jan-82 1918-PST
+Date:      11 Jan 82 17:52:48-EST (Mon)
+From:      Mike Muuss <tcp-ip@brl>
+To:        list: 
+Subject:   TCP-IP Digest, Vol 1 #11
+Bcc:       
+
+TCP/IP Digest            Monday, 11 Jan 1981       Volume 1 : Issue 11
+
+Today's Topics:
+                   Administrivia && The Use of Dot (.)
+                   Languages for Implementing TCP-IP?
+                  Common Law Copyrights for the Digest?
+    Formal Copyrights for the Digest? && TCP Digest as a Public Forum
+                        COMSAT Information Update
+----------------------------------------------------------------------
+
+From: Mike Muuss <Mike@BRL>
+Subject: Administrivia
+
+Well, the source of the leak to ComputerWorld has been found, so that
+we have some breathing space to mull over the implications (it was an
+ArpaNet recipient, so USENET sites need not worry).  It is certainly
+clear that anything that goes out in a Digest will reach a large audience,
+not all of whom are involved with the ArpaNet (USENET, for example).  At
+some time, material WILL fall into "outside" hands.  The question becomes
+a choice between:
+
+    1)  Being more careful, so that anything said is quotable, or
+    2)  Publishing a "restricted rights" notice on the top of the digest
+	as a deterent to re-publication.
+
+Under no circumstances do I want to restrict the membership or distribution
+of this Digest.  I hope that we can get over these political problems, and
+get back to discussing technical issues once again.
+					Thoughts?
+					  -Mike
+
+------------------------------
+
+From: ROODE at SRI-KL (David Roode)
+Subject: use of .
+
+Why not use ! instead of . for routing in network addresses.
+It seems a much wiser choice.
+
+------------------------------
+
+From: cak at PURDUE
+Subject: Overloading .
+
+Many other systems use . as a separator; PhoneNet for CSNET uses it
+as in cak.purdue@udel, the Berkeley local network can use it, as in
+csvax.cak, PUP uses it, as in clark.WBST@Parc-Maxc, ad nauseum....
+
+Chris Kent
+
+[ I believe that the CSNET usage of User.Host@Forwarder is the RFC733
+  approved addressing format for sites which can't take User@Host@Forwarder.
+  The choice of the dot does seem rather unfortunate.  The British have
+  adopted RF733 for their mail standard, but selected the percentage symbol
+  "%" rather than the dot ".".  -Mike ]
+
+------------------------------
+
+Subject: TCP-IP implementations
+From: AVRUNIN at USC-ECLB
+
+In implementing TCP-IP in various computer systems it would be helpful
+to have an implementation to start with.  There seems to be severaly "C"
+versions.  I would like to know what other languages have
+been used for implementations.  I would especially like to know if anyone
+has or is using Fortran 77 for implementation.
+
+Thanks
+
+Larry Avrunin
+
+[ I believe that the Tektronix implementation for the CDC NOS system is
+  written in RATFOR (Rational FORTRAN).  -Mike ]
+
+------------------------------
+
+From: Walt <Haas at UTAH-20>
+Subject: Re:   TCP-IP Digest, Vol 1 #10
+To: tcp-ip at BRL
+
+Would claiming a common law copyright on this digest stop ComputerWorld
+from printing quotes?
+
+------------------------------
+
+From: Geoffrey H. Cooper <GEOF at MIT-XX>
+Subject: Re:   TCP-IP Digest, Vol 1 #10
+
+    If there is really a concern about having TCP-IP entries published
+on paper-based media, it would help some to put a copyright notice on
+each digest:
+	(C) Copyright 1982, DARPA, all rights reserved.  The material
+	    in this digest may not be copied, in whole or in part, for
+	    purposes of commercial publication without the written
+	    permission of the moderator.  Individual sections of the digest
+	    may contain copyright notices which supercede this notice.
+This would at least make editors of computerworld and the like hesitate if
+given the entire digest.
+				- geof cooper
+
+------------------------------
+
+From: cbosgd!mark at Berkeley
+To: ucbvax!tcp-ip@Berkeley
+Subject: TCP digest as a public forum
+
+I just want to make sure the people on this list are aware that each
+TCP digest is fed into USENET on newsgroup fa.tcp-ip.  This is sent to
+(currently) about 120 machines across the US and Canada.  (For those
+who don't know about USENET, it's a distributed bulletin board system.)
+USENET specifically has a policy that anything posted to net and fa
+newsgroups is public information that can be redistributed to whoever
+wants it.  The point is that if you have anything you consider secret,
+it probably shouldn't be mailed to the list.
+
+While I am under the impression that this policy is consistent with the
+intent of the TCP-IP digest, if I'm wrong, it may be necessary to
+remove the USENET feed from the mailing list.
+
+It is possible that ComputerWorld got their information from USENET,
+but from the wording of the article, they seem to have gotten it from
+somewhere on the Arpanet.
+
+It is easy to confuse private mail and public mailing lists/newsgroups,
+and it seems clear that the quote from the digest was written in a
+"I'm talking privately to friends" frame of mind.  Clearly he didn't
+intend his words to be printed in ComputerWorld.  But it is important
+to remember that anything which is mass-mailed is effectively published.
+
+	Mark Horton
+
+------------------------------
+
+Return-path: Mills@COMSAT
+Mail-from: [29.4.6.2] received at USC-ISIE  5-Jan-82 11:46:01
+From: Mills at COMSAT
+Subject: IP-TCP Digest info update
+cc:   Mills at ISIE
+Via:  Usc-Isie; 5 Jan 82 18:28-EDT
+
+Mike,
+
+Following is an extract of a recent report on the status of our
+IP/TCP implementation which may be of interest to your readers.
+
+The COMSAT IP/TCP implementation, which was sponsored by DARPA,
+was developed over the last three years and used extensively for
+testing, evaluation and experimentation with other
+implementations. This implementation runs in a sizable number of
+PDP11s and LSI-11s with varying configurations and applications.
+It consists of a package of MACRO-11 modules structured into
+levels corresponding to local-net, IP and TCP levels, with user
+interfaces at each level. It is designed to be incorporated
+either into a special operating system built for a multi-media
+internet workstation (so-called "fuzzball," based on RT-11
+emulation) or into the RSX-11 operating system as part of a
+package to support the INTELPOST electronic-mail network.
+
+The local-net level supports several comunication devices,
+including synchronous and asynchronous serial lines, 16-bit
+parallel links and 1822 interfaces. Hosts using this package have
+been connected to ARPANET IMPs, Satellite IMPs, internet
+gateways, port expanders and to the DCNET local network. It
+provides optional automatic routing, time synchronization and
+error-reporting functions. The IP level conforms to the RFC-791
+specification, including fragmentation, reassembly, extended
+addressing and options, but currently does not interpret options.
+A full set of ICMP features compatible with RFC-792 is available,
+including destination-unreachable, timestamp, redirect and
+source-quench messages. Support for an IEN-142 compatible time
+server and an IEN-109 (as amended) compatible internet gateway
+can be included on an optional basis. The internet-gateway
+support can be configured to include hierarchically structured
+gateways and subnets. Destination-unreachable and source-quench
+information is conveyed to the user level via the TCP and
+raw-datagram protocol modules.
+
+The TCP level conforms to the RFC-793 specification, including
+PUSH, URGENT and options, but currently does not interpret
+options. Its structure is based on circular buffers for
+reassembly and retransmission, with repacketizing on each
+retransmission. Retransmission timeouts are dynamically
+determined using measured roundtrip delays, as adjusted for
+backoff. Data flow into the network is controlled by measured
+network bandwidth, as adjusted by source-quench information.
+Features are included to avoid excessive packet fragmentation and
+retransmission into zero windows. The user interface level
+provides error and URGENT notification, as well as a means to set
+outgoing IP/TCP options.
+
+A raw-datagram interface is available for XNET (IEN-158), UDP
+(RFC-768) and similar protocols. It includes internal congestion
+and fairness controls, multiple-connection management and
+timestamping. A number of user-level protocol modules have been
+built and tested with other internet hosts, including user/server
+TELNET (RFC-764) user/server FTP (RFC-765), user/server MTP
+(RFC-780) and various utility file-transfer, debugging and
+control/monitoring protocols.
+
+Code sizes and speeds depend greatly on the system configuration
+and features selected. A typical 30K-word LSI-11/2 single-user
+configuration with all features selected and including the
+operating system, device drivers and all buffers and control
+blocks, leaves about 16K words for user-level application
+programs and protocol modules. A typical 124K-word LSI-11/23
+configuration provides the same service to a half-dozen
+individually relocated users. Disk-to-disk FTP transfers across a
+DMA interprocessor link between LSI-11/23s operate in the range
+20-30 Kbps with 576-octet packets. The 124K-word PDP11/34
+INTELPOST adaptation supports two 56-Kbps lines and a number of
+lower-speed lines.
+
+Further information is available from D. Mills (Mills@ISIE) on
+the IP/TCP implementation and D. Jupin (Jupin@ISIE) on the RSX-11
+adaptation.
+
+Regards,
+Dave Mills
+
+END OF TCP-IP DIGEST
+********************
+

@@ -1,0 +1,78 @@
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+                             RTR INDEX
+                           -------------
+
+This file contains citations for RTRs that have also appeared as RFCs.
+
+RTR citations appear in this format:
+
+####  Title of RTR.  Author 1, Author 2, Author 3.  Issue date.
+      (Format: ASCII) (Obsoletes xxx) (Obsoleted by xxx) (Updates xxx)
+      (Updated by xxx) (Also RFC ####)
+
+Key to citations:
+
+#### is the RTR number.
+
+Following the number are the title (terminated with a period), the
+author, or list of authors (terminated with a period), and the date
+(terminated with a period).
+
+The format and byte information follows in parenthesis.  The format,
+either ASCII text (TXT) or PostScript (PS) or both, is noted, followed
+by an equals sign and the number of bytes for that version.  For
+example (Format: TXT=aaaaa, PS=bbbbbb bytes) shows that the ASCII text
+version is aaaaa bytes, and the PostScript version of the RTR is
+bbbbbb bytes.  The (Also RFC ##) phrase gives the equivalent RFC.
+
+
+    For example:
+
+    0012    Writing X.400 O/R Names. H. Alvestrand, August 1994.
+            (Format: TXT 21242 bytes) (Also RFC1685)
+
+Details on obtaining RTRs via FTP or EMAIL may be obtained by sending
+an EMAIL message to:  rfc-info@ISI.EDU 
+with the message body help: ways_to_get_rtrs.  
+
+For example:
+
+	To: rfc-info@ISI.EDU
+	Subject: getting rtrs
+
+	help: ways_to_get_rtrs
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+                                RTR INDEX
+                                ---------
+   
+
+
+0006 A Tutorial on Gatewaying between X.400 and Internet Mail. J.
+     Houttuin. September 1993. (Format: TXT=85550 bytes) (Also RFC1506)
+
+0008 Network Access to Multimedia Information. C. Adie. May 1994.
+     (Format: TXT=187253 bytes) (Also RFC1614)
+
+0009 Migrating from X.400(84) to X.400(88). J. Houttuin & J. Craigie.
+     May 1994. (Format: TXT=39693 bytes) (Also RFC1615)
+
+0010 X.400(1988) for the Academic and Research Community in Europe.
+     RARE WG-MSG Task Force 88, E. Huizer & J. Romaguera, Editors. May
+     1994. (Format: TXT=107432 bytes) (Also RFC1616)
+
+0011 Naming and Structuring Guidelines for X.500 Directory Pilots. P.
+     Barker, S. Kille & T. Lenggenhager. May 1994. (Format: TXT=56739
+     bytes) (Obsoletes RFC1384) (Also RFC1617)
+
+0012 Writing X.400 O/R Names. H. Alvestrand. August 1994. (Format:
+     TXT=21242 bytes) (Also RFC1685)
+
+0013 A Status Report on Networked Information Retrieval: Tools and
+     Groups. J. Foster. August 1994. (Format: TXT=375469 bytes) (Also
+     RFC1689, FYI0025)

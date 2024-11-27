@@ -1,0 +1,397 @@
+ 4-Nov-82 04:10:36-PST,15056;000000000001
+Mail-from: ARPANET host BRL rcvd at 4-Nov-82 0405-PST
+UUCP-From: decvax!brl-bmd!tcp-ip
+Sender:    Mike Muuss <TCP-IP@BRL>
+From:      TCP-IP at BRL
+To:        TCP-IP at BRL
+Date:      1 Nov 1982
+Subject:   TCP-IP Digest, Vol 1 #24
+Via:  Brl-Bmd; 4 Nov 82 0:25-EST
+
+TCP/IP Digest             Monday, 1 Nov 1982       Volume 1 : Issue 24
+
+Today's Topics:
+       SRI 2.8 BSD with TCP/IP for PDP-11s now being distributed.
+             Clarification about DTI TCP/IP product "ACCESS"
+       Courier: The Remote Procedure Call Protocol:  In InterNet?
+                 TCP-only throughput figures of ArpaNet
+                       DCEC gateway up on SatNet!
+                      Results of DCEC Gateway Test
+            Looking for DECNet between UNIX and VMS on VAXen.
+               Looking for TCP/IP for Bell UNIX System III
+----------------------------------------------------------------------
+                         LIMITED DISTRIBUTION
+          For Research Use Only --- Not for Public Distribution
+----------------------------------------------------------------------
+Date: 13 Oct 1982 at 2322-PDT
+From: Bill Croft <croft@Sri-Tsc>
+Subject: distribution announcement
+
+Distribution of 2.8 BSD with TCP/IP.
+
+Our port of the 4.1a BSD VAX networking code to the PDP11/44 or /70 is now
+essentially complete.  We have been running the software on our SRI-PRMH
+and SRI-WARF systems for about a month now with very good results.  The
+local net drivers tested and running at this time are:  INTERLAN 10 megabit
+ethernet, ACC LH-DH, and our locally built SRI1822.  Converting an existing
+VAX network device driver to run with the 11 requires editing just a few
+lines.  The DEC IMP11A driver has been converted but not yet tested.
+
+I wish we had the time to make this distribution a really polished one, but
+we don't.  We make the assumption that you already have installed 2.8 BSD
+on your machine, and understand kernel configuration and debugging.  If you
+brought up an early 2.8 distribution, I think you qualify.
+
+To avoid licensing difficulties, we are restricting distribution to holders
+of Berkeley UNIX licenses (x.x BSD).  Within a few months we hope that the
+PDP11 group at Berkeley can take over and incorporate this distribution
+into their next 2.82 release.  We are making this release available from
+SRI due to the fast approaching ARPA TCP conversion deadline.  The tape we
+can send you contains the new kernel, user level network code, and other
+necessary tools (such as "cpp" from the VAX that understands long
+identifier names).
+
+Here is a copy of the entry recently submitted to SRI-NIC, for the
+"tcp-ip-status.txt" document:
+
+5. SRI UNIX 11/44,11/70  V7 (2.8 BSD)
+
+   Date:  13 October 1982
+   From:  Bill Croft <croft at sri-tsc>
+
+   This TCP was ported from the Berkeley VAX 4.1a version.  IP, TCP, ICMP,
+   UDP, and RAW layers are all kernel resident.  This means we can run
+   faster than older PDP11 TCPs that require auxiliary daemons (such as
+   BBN's V6 or 3COM's UNET).  Typical TCP interprocess thruput between a VAX
+   750 running 4.1a BSD and the 11/44 running 2.8 BSD is 300000 baud;
+   this was measured with INTERLAN 10 megabit ethernet hardware.
+
+   For programmers, there is easy access to all layers of protocol, so
+   that (e.g.) IP or UDP services can be written.  Service protocols
+   available are all of those supplied with the VAX version:  FTP, TELNET,
+   ECHO, rlogin, rsh, rexec, talk, routing daemons.
+
+   1.  Hardware - currently requires an I/D machine, such as an 11/44
+       or 11/70 with at least a half megabyte of memory.  The total kernel
+       size (text, data, and buffers) is about 200K bytes;  so it won't
+       fit if you have only 256K bytes.  Although this sounds like a lot
+       of bytes, comparison with our older 2.8 BSD NCP-only system shows
+       that the kernel has only grown by about 60K bytes.  This is very
+       reasonable considering that the entire network is now resident
+       versus the NCP case which used a hulking NCP daemon.
+
+       A number of net interfaces are supported.  See the Berkeley VAX
+       documentation.  The ones specifically ported to the 11 are:
+       INTERLAN 10 megabit ethernet, ACC LH/DH, SRI 1822, DEC IMP11A.
+       Porting a new VAX interface driver to the 11 involves changing
+       less than 10 lines of code.
+
+   2.  Software - ported from the 4.1a Berkeley VAX UNIX system.
+       Manipulates I and D space mapping registers to reference more than
+       65K bytes of instructions and data at a time.
+
+   3.  Documentation - supplied on tape as manual pages.
+
+   Contact for further information:  Dan Chernikoff, dan@sri-tsc, (415) 859
+   4144.  We can mail a copy of our distribution tape.  Eventually the
+   software will be incorporated in Berkeley's next PDP11 distribution
+   (2.82 BSD).  This tape is supplied as-is to 2.8 BSD licenses, with no
+   warrantees or support expressed or implied.  The terms of your original
+   Berkeley license apply:  the software cannot be resold or redistributed.
+
+To get the software, send a magnetic tape and a copy of your 2.8 or 4.x
+license to:
+
+	Dan Chernikoff
+	SRI International
+	333 Ravenswood Ave.
+	Menlo Park, CA  94025
+
+As far as updates and bug fixes go, this mailing list (ucbtcp11@sri-tsc)
+can be used as a distribution point.  Send a note to dan@sri-tsc to
+add or delete names from the list.
+
+------------------------------
+
+Date: Mon, 27 Sep 1982 1703-CDT
+From: grg at Dti (Gary Grossman)
+Subject: TCP/IP for VAX/VMS
+
+This is to clarify a misconception that might be fostered by the note
+from Y. Pin Foo in TCP-IP Digest #1:23.  Digital Technology Incorporated (DTI)
+does indeed market software including TCP/IP under the name "ACCESS".
+Our software is available for connection to the ARPANET via the ACC LH/DH-11.
+It is also available in an Ethernet version using 3COM's Unibus Ethernet
+interface.
+
+The only 3COM software that we use is the device driver that is supplied
+with the 3COM hardware.  All other software, including IP, TCP, TELNET,
+FTP, and MAIL, was produced at DTI.
+
+The first copy of the software package costs $15K.  Additional copies
+to the same site cost $6K.
+
+	Gary Grossman
+
+------------------------------
+
+Date: 18 Oct 1982 13:10:48-EST
+From: Chris Kent <cak@Purdue>
+Via:  Brl; 18 Oct 82 15:20-EDT
+
+Am in the process of reading this "Xerox System Integration Standard",
+and was wondering if anyone had thought about implementing this on top
+of IP and/or TCP... and what progress you've made.
+
+Cheers,
+chris
+
+------------------------------
+
+Date:  7 Oct 1982  9:01:06 EDT (Thursday)
+From: Andrew Malis <malis at BBN-UNIX>
+Subject: TCP-only throughput figures
+
+Mike,
+
+Vint Cerf suggested that you may be interested in including the
+following figures in some form in the TCP-IP digest.  Basically,
+they are a comparison of the number of packets going through the
+net during the TCP-only test, as compared to the previous day
+during the same time period.  They show that during the test, the
+network had about 47% of the number of packets flowing as it did
+during the previous day at the same time. 
+
+You may want to include the figures as is, or you may want to
+just present the totals.  I'll leave that up to you. 
+
+Andy Malis
+
+			HOST THROUGHPUT SUMMARY, OCTOBER 1ST
+
+				Packets Received
+			Inter-node      Intra-Node       Total
+
+From Fri Oct  1 12:13:51 1982
+To   Fri Oct  1 13:02:44 1982
+Net Totals:               338765            33679        372444 
+                  
+From Fri Oct  1 13:02:46 1982
+To   Fri Oct  1 13:51:39 1982
+Net Totals:               336164            82056        418220 
+                  
+From Fri Oct  1 13:51:39 1982
+To   Fri Oct  1 14:40:32 1982
+Net Totals:               446443            40376        486819 
+                  
+From Fri Oct  1 14:40:34 1982
+To   Fri Oct  1 15:29:27 1982
+Net Totals:               451627            66647        518274 
+                  
+From Fri Oct  1 15:29:27 1982
+To   Fri Oct  1 16:00:00 1982
+Net Totals:               399462            42043        441505 
+                  
+			________________________________________
+
+Net Totals:              1972461           264801       2237262
+                  
+	========================================================
+
+
+			HOST THROUGHPUT SUMMARY, SEPTEMBER 30TH
+
+				Packets Received
+			Inter-node      Intra-Node       Total
+
+From Thu Sep 30 12:17:18 1982
+To   Thu Sep 30 13:06:11 1982
+Net Totals:               662445            74644        737089 
+
+From Thu Sep 30 13:06:19 1982
+To   Thu Sep 30 13:55:12 1982
+Net Totals:               671169           174553        845722 
+
+From Thu Sep 30 13:55:14 1982
+To   Thu Sep 30 14:44:07 1982
+Net Totals:               823234           156222        979456 
+
+From Thu Sep 30 14:44:17 1982
+To   Thu Sep 30 15:33:10 1982
+Net Totals:               905026           138187       1043213 
+
+From Thu Sep 30 15:33:07 1982
+To   Thu Sep 30 16:00:00 1982
+Net Totals:               987427           132308       1119735 
+
+			________________________________________
+
+
+Net Totals:              4049301           675914       4725215
+
+
+------------------------------
+
+Date: 26 Oct 1982 18:55:33 EDT (Tuesday)
+From: Michael Brescia <brescia@Bbn-Unix>
+To: Cain at Edn-Unix, mcneill at Bbn-Unix, control at Bbn-Unix
+Subject: DCEC gateway up on satnet
+Redistributed-by: Bob Hinden <hinden@Bbn-Unix>
+Redistributed-to: gateway-info at BBN-UNIX
+Redistributed-date: 27 Oct 1982  8:49:50 EDT (Wednesday)
+
+Gateway 15 DCEC 10.1.0.20 (Arpanet)	Tue Oct 26 18:47:25 1982
+
+Version 1002
+
+Interfaces:
+	UP:	DCEC 4.0.0.24 (Satnet)          !!!!!!!!
+	UP:	DCEC 10.1.0.20 (Arpanet)
+	UP:	DCEC 21.0.0.2 (EDN)
+
+Neighbors:
+	UP:	NTARE 4.0.0.38 (Satnet)         !!!!!!
+	UP:	UCL 4.0.0.60 (Satnet)            !!!!
+
+	...
+
+gstatus terminated at Tue Oct 26 18:47:26 1982
+
+------
+thanks to dale, peter, mike, mike, bill, cathy, &c, and WUI
+
+The line from DCEC to ETAM has come up for real.  DCEC gateway sees the
+satnet, and also its satnet neighbors.  That ought to create real fun for
+the gateway routing.
+
+We expect to watch this for a while to make sure it settles in for good.
+
+Mike
+
+------------------------------
+
+Date: 29 Oct 1982 11:18:37 EDT (Friday)
+From: Bob Hinden <hinden@Bbn-Unix>
+Subject: Results of DCEC Gateway Test
+To: gateway-info at Bbn-Unix
+
+Yesterdays test, which consisted of looping away the VDH line of the
+BBN gateway, was very successfull.  All the traffic which normally
+used the BBN gateway as a route between Satnet and the Arpanet was
+redirected to the DCEC gateway.  I have included throughput data for
+the period before and during the test, showing that the traffic
+load switched to the DCEC gateway after the VDH line was looped.
+
+[ Here is the correct throughput data for the DCEC gateway test.
+  The first message included the data for the period before the
+  test twice.  -Bob Hinden ]
+
+Throughput Summary from 0300 to 0900 EST 28 Oct 82
+
+GWY GWY         RCVD           RCVD     IP       % IP         DEST   % DST
+NO. NAME        DGRAMS         BYTES    ERRORS  ERRORS       UNRCH   UNRCH
+
+ 2  BBN         77,702     3,328,454         0   0.00%           8   0.01%
+15  DCEC        54,625     2,342,132         0   0.00%          13   0.02%
+TOTALS         132,327     5,670,586         0   0.00%          21   0.02%
+
+GWY GWY         SENT           SENT    DROPPED    % DROPPED
+NO. NAME        DGRAMS         BYTES   DGRAMS        DGRAMS
+
+ 2  BBN         82,797     3,417,237         0        0.00%
+15  DCEC        53,983     2,222,390         0        0.00%
+TOTALS         136,780     5,639,627         0        0.00%
+
+
+Throughput Summary 0900 to 1500 EST   28 Oct 82
+
+GWY GWY         RCVD           RCVD     IP       % IP         DEST   % DST
+NO. NAME        DGRAMS         BYTES    ERRORS  ERRORS       UNRCH   UNRCH
+
+ 2  BBN         43,025     1,265,324         1   0.00%          19   0.04%
+15  DCEC       101,881     4,979,852         1   0.00%         154   0.15%
+TOTALS         144,906     6,245,176         2   0.00%         173   0.12%
+
+GWY GWY         SENT           SENT    DROPPED    % DROPPED
+NO. NAME        DGRAMS         BYTES   DGRAMS        DGRAMS
+
+ 2  BBN         49,409     1,402,482         0        0.00%
+15  DCEC       102,607     4,873,176         4        0.00%
+TOTALS         152,016     6,275,658         4        0.00%
+
+We are now seeing evidence that having two gateways between the
+Arpanet and Satnet is improving the quality of service for the Satnet
+users.  This in conjuction with some TCP fixes made to the TAC
+software should result in more reliable service.
+
+Bob
+
+------------------------------
+
+Date: Wed, 06 Oct 82 15:46:52 CDT
+From: estell at NWC-387B
+Subject: VMS to UNIX software for DECNet
+
+We are looking for a reliable and affordable software package that implements
+a "DEC Net" interface between a UNIX host and a VMS host (both VAX computers).
+
+The idea is that, if we must have UNIX as an ARPANET interface, we want to
+be able to connect that host VAX to our other VAX computers, via DECNet.
+
+Also, we have a VAX here at NWC that is running UNIX now; someday they may
+want to join our NWCNet (LAN), via "DEC Net."
+
+Do you know of such software?
+
+If not, do you WANT to know about it? (i.e., If I go hunting, do you want
+to be informed of my findings?)
+
+Please reply to ESTELL at NWC-387B.
+
+Thanks,
+Bob
+
+------------------------------
+
+Date:     15 Oct 82 13:42:29-EDT (Fri)
+From:     Rick <rturner.xls-onyx02@Udel-Relay>
+To:       tcp-ip at BRL
+cc:       unix-wizards at Sri-Unix
+Subject:  TCP/IP &/or NCP for 3.0 UNIX
+
+We are running UNIX 3.0 on an 11/70 and we're trying to get it running on the
+net. We are currently using the CSNET as a gateway to Arpanet, but want
+to get our system(s) directly into it.
+
+We are looking at various places to get a reasonable NCP (short-term) and
+TCP/IP (longer) that we can port over to 3.0. Is there anyone else out
+there in UNIX-land who is trying to get to NCP and/or TCP/IP under these
+circumstances?
+
+rick
+
+------------------------------
+
+Date: 18 Oct 1982 23:28:47-EST
+From: Chris Kent <cak@Purdue>
+Reply-to: cak at Purdue
+To: rturner.xls-onyx02 at Udel-Relay, tcp-ip at BRL
+Subject: Re:  TCP/IP &/or NCP for 3.0 UNIX
+
+Seems like you could get the Greep NCP front end that runs on VAXen
+to work. But I'm not sure it would be worth the effort for a little
+over two months of access.
+
+As for TCP, you might want to look at the work that Bill Croft has
+just completed. Are you tied to a 3.0 kernel? If not, you can
+just put his up (it's based on 2.8bsd). Otherwise, you have some
+work to do, but his code should be a good guideline.
+
+Cheers,
+chris
+
+------------------------------
+
+END OF TCP-IP DIGEST
+********************
+

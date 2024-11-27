@@ -1,0 +1,497 @@
+11-Oct-83 08:34:41-PDT,22342;000000000001
+Return-Path: <tcp-ip@brl-vgr>
+Received: FROM BRL-VGR BY USC-ISIF.ARPA WITH TCP ; 11 Oct 83 05:41:03 PDT
+Received: From Brl-Vgr.ARPA by BRL-VGR via smtp;  11 Oct 83 6:09 EDT
+Sender:    Mike Muuss <TCP-IP@brl>
+From:      TCP-IP@brl
+To:        TCP-IP@brl
+Date:      11 Oct 1983 00:00 EST
+Subject:   TCP-IP Digest, Vol 2 #18
+
+TCP/IP Digest            Tuesday, 11 Oct 1983      Volume 2 : Issue 18
+
+Today's Topics:
+        Queries about 4.2 BSD, TCP/IP, and Ethernet Availability
+              Where to Get a List of TCP/IP Implementations
+          Implementation of TCP/IP for TANDEM NonStop Computers
+            Comments on TCP/IP on the Perkin Elmer Computers
+           Looking for Low-Cost Ethernet Terminal Controllers
+                    The MILNET Split: One Perspective
+             After the MILNET Split:  Where will the NIC Be?
+                    Do Gateways Read the NIC Tables?
+      On the Undesirability of "Mail Bridges" as a Security Measure
+----------------------------------------------------------------------
+                  TCP/IP Digest --- The InterNet Digest
+                         LIMITED DISTRIBUTION
+          For Research Use Only --- Not for Public Distribution
+----------------------------------------------------------------------
+
+Date:  27 September 1983 21:22 mdt
+From:  RSanders.Pascalx@denver
+Subject:  4.2 BSD/TCP-IP/Ethernet queries
+To:  info-micro@brl-vgr, unix-wizards@brl-vgr, tcp-ip@brl, info-pc@usc-isib
+
+  Three questions on availablity:
+
+1)  Is anyone implementing, or planning to implement, 4.2 BSD Unix on
+    a micro - besides Sun Microsystems?
+
+2)  Is anyone selling/implementing/planning to implement TCP/IP on
+    Ethernet for the IBM-PC - besides MIT?  I believe the 3Com stuff uses XNS.
+
+3)  Is there a commercially available Unix microsystem running TCP/IP
+    on Ethernet, or can one be *easily* (no kernal hacking) put together?
+
+  Thanks for any advice or pointers.
+
+-- Rex    RSanders.Pascalx@Denver (Arpanet)    ucbvax!menlo70!sanders (uucp)
+
+------------------------------
+
+
+Date: 29 Sep 1983 0545-PDT (Thursday)
+From: mo@LBL-CSAM
+To: RSanders.Pascalx@denver
+Cc: info-micro@brl-vgr, unix-wizards@brl-vgr, tcp-ip@brl, info-pc@usc-isib
+Subject: Re: 4.2 BSD/TCP-IP/Ethernet queries
+
+Unisoft has announced TCP-IP support based on Berkeley Unix code.
+I don't have a phone number, but you can get it from information.
+Unisoft is in Berkeley.
+	-Mike O'Dell
+
+------------------------------
+
+Date: 27 Sep 83 13:48:10 EDT (Tue)
+From: Mark Horton <cbosgd!mark@berkeley>
+Subject: list of tcp/ip implementations wanted
+To: tcp-ip-request@brl.ARPA
+
+Is there a list somewhere of what TCP/IP implementations currently exist?
+Also, I'd be interested in a list of "vendor supported" implementations
+of TCP/IP (and, of course, for what hardware/software).  I know about
+3COM and Sun, and would like to know if there are others.
+
+If you don't know the answer to this offhand, could you please put a copy
+in the next TCP-IP digest?  Thanks.
+
+	Mark Horton
+	mark@Berkeley.ARPA
+
+[ The Network Information Center (NIC), host SRI-NIC, maintains
+  an up-to-date listing of all TCP implementations
+  in the file <netinfo>tcp-ip-implementations.txt
+  which can be retrieved with FTP using the "anonymous" account with any
+  password.  Or, mail a request for a copy to ARPA: <NIC@NIC>,
+  USENET: ...!decvax!brl-bmd!nic, or phone (415)-859-3695.  -Mike ]
+
+------------------------------
+
+Date: 3 October 1983 21:23 EDT
+From: John S. Labovitz <HNIJ@mit-ml>
+To: tcp-ip@sri-nic
+
+Does anyone know of an implementation of TCP/IP for the TANDEM NonStop
+I or II, and/or FTP, TELNET, etc., for same?
+
+	Thanks in advance,
+
+	John Labovitz
+	HNIJ @ MIT-ML
+
+------------------------------
+
+Date:  3 Oct 1983 20:18:55 PDT
+From: POSTEL@usc-isif
+Subject: IP & TCP for Tandem NonStop
+To:   tcp-ip@sri-nic
+
+Tandem is developing an implementation of IP and TCP.
+Contact Mike Choi (408-748-2666).
+
+--jon.
+
+------------------------------
+
+Date:     Mon, 3 Oct 83 22:38:59 EDT
+From:     Doug Kingston  <dpk@BRL-VGR>
+To:       tcp-ip@BRL-VGR
+Subject:  TCP/IP on Perkin/Elmer
+
+	We have a Perkin/Elmer here at BRL, and we had also heard that
+TCP/IP was available for the 32xx series.  Indeed it is, but only on
+RS232 lines!!  They won't talk to an Ethernet, 1822 interface, or
+even a direct HDLC line between two hosts.  Essentially there is no
+good way to talk to them.  TCP/IP over RS232 lines is a poor excuse
+for networking for a machine like that.  I rattled their cage that
+something should happen in time, but I don't know what form it will
+take.  If you hope to hook you PE to the ARPANET or even a local
+net with TCP/IP, good luck.  While the software is probably good
+enough (or at least close), the hardware just isn't there and interfaced
+to the network code.
+
+					Cheers,
+						-Doug-
+
+------------------------------
+
+Date: Wed, 5 Oct 83 11:43 PDT
+From: Bill Croft <croft%Safe@su-score>
+Subject: low cost ethernet terminal cluster controller
+To: tcp-ip@brl
+Cc: croft@BRL.ARPA
+
+Does anyone sell an "inexpensive" box that allows RS232
+terminals access to internet hosts via a local ethernet?
+These boxes typically contain a CPU, some number of
+UARTs (8 to 16) and an ethernet interface.  In PROM
+(or downloaded by PROM) would be code for IP/TCP/TELNET
+and simple terminal driving software.
+
+Boxes like this are currently on the market, but with
+protocols other than TCP.  It seems to me that using
+single board construction and the new Ethernet chip-sets,
+it should be possible to get the cost of a connection
+to the internet down to a few hundred dollars.
+Such a box would even be a good way to connect local
+terminals to local hosts, being cheaper than a
+"port selector" or running hardwired lines all over
+your campus.
+
+Stanford has a SUN based "Ethertip", but it
+is currently: (1) somewhat expensive (around $6000?)
+since it uses multiple boards.  (2) PUP based (instead
+of TCP) at the moment.
+
+	--Bill Croft
+
+------------------------------
+
+Date:     Tue, 11 Oct 83 4:30:44 EDT
+From:     Mike Muuss <mike@brl-bmd>
+To:       tcp-ip@brl-bmd
+Subject:  The MILNET Split: One Perspective
+
+I write this letter almost a full week from the initiation of the MILNET
+split, after having spent yet another night riding shotgun on the mail
+queues, trying to make sure that we re-establish connectivity before our
+11-day "failed mail" timer goes off.  Most of the effort lies in running
+endless series of tests to determine which hosts STILL have non-functional
+routing tables between them and us.
+
+Sadly, this digest will only be received by people who are doing things
+right, so I have to resort to other techniques for getting routing tables
+updated.  Perhaps if we all apply enough gentle persuasion, things
+can get tidied up in a hurry.
+
+The problem, you see, is that we at BRL have really, truely *believed*
+in the viability of the InterNet concept.  Of course, we still do,
+although we certainly have felt rather lonely in our little corner of
+the InterNet here, only being able to communicate with a "select few".
+A good thing that ONE of our machines remains connected to the backbone
+(MILNET, in this case), or we would not even had any place to send
+our complaints from!  All of our machines save that one are safely tucked
+away behind our own local gateway, so that we can engineer our own
+solutions to our communications difficulties.  And, therein lies the
+rub.
+
+To begin by giving credit where credit is due:  Mike Brescia and the
+PRIME Gateway crew at BBN had their act together.  Pop a packet for
+BRLNET off to a BBN Prime gateway, and things work perfectly
+(except for the MILARPA IMP blowing up unexpectedly, but that's another
+story).
+
+A great deal of the difficulty seems to be that absolutely nobody
+expected to find a GATEWAY on MILNET!  Ho hum;  well, here we are.
+About the only people who could talk to BRLNET after the split were
+hosts which didn't bother making routing decisions, and instead
+use the rather pragmatic "wildcard routing" algorithm:
+
+  "Gee, this packet isn't for anybody I know -- let's send it to BBN!"
+
+Worked splendidly.  Now, for the rest of the world.  When half the "10"s
+became "26"s, everybody diligently updated their host tables.  But,
+not so many sites remembered to (usually manually) extract the
+current network topology from the GATEWAY section of the NIC tables,
+and to reflect those changes in their routing table entries.
+I suppose that it was easy to be lulled into a false sense of security,
+because most gateways stayed put.  Only about 5 moved from the ARPANET
+to MILNET, and the BRL-GATEWAY was probably one of the more noticable
+ones.
+
+  "Where did our UNIX-Wizards mail go? ...."
+
+We heard the cries, and noticed the megabytes of accumulation in our
+mail queues.  (And noticed our packet counts down by more than 50%).
+Want to know how Ron Natalie (my "partner in packets") and I spent
+our week?  Phoning and writing to host administrators, trying to help
+them figure out how to update their routing tables (a startling number
+needed a good deal of help to discover what to change).  Running
+tests:  Can we hit them from BRLNET2?  BRLNET?  A MILNET host?
+A MILNET TAC?  How about an ARPA host?  Humbug.
+
+(A big round of thanks to Jake and the crew at the NIC -- without the
+network directory and WHOIS service, we would have been sunk.
+ThankYouThankyouthankythankyouthankyouthankyouthankyou.)
+
+TCP and IP work.  We know that, it's a fact.  But, there seems to
+be an almost totally manual mechanism involved when it comes time
+to "program" the IP routings.  Disapointing.  (I'd like to note in
+passing that, except for loading new host tables into all our hosts,
+the only thing Ron had to do was pop a new routing table into our
+Gateway.  Our part was easy).  If somebody ever 'nukes the InterNet
+until it glows, nothing will work.  Not unless we all take a serious
+look at improving the IP routing mechanisms that exist in each and
+every host.
+
+BBN-supplied PRIME gateways for everybody probably is not the answer;
+either is the long awaited EGP protocol.  But, hopefully, someday,
+somebody will work it out.
+
+I'd like to see the next few issues of the digest concentrate on
+how the InterNet as an integrated communications system should
+"become aware" of changes in the underlying communications configuration,
+so that in the future the configuration of the network can undergo
+rapid changes (planned and unplanned) and still continue operating.
+Think of the flexability this affords: responding to administrative
+edicts.  Government foolishness.  Natural disaster.  And yes, even *war*.
+
+(Pardon the rather flippant tone of this message, but I've been chasing
+packets across the network all night, and this is my therapy.)
+			Cheers,
+			 -Mike
+
+------------------------------
+
+Date: Tue, 4 Oct 83 11:06:20 EST
+From: Christopher A Kent <cak@purdue>
+To: tcp-ip@nic
+Subject: Milnet split
+
+As I was istalling the new host table, I noticed for the first time
+that the NIC is going to be on "the other side" of the net from me.
+Does this mean that, once the mail bridges are installed, I won't
+be able to make TCP connections for host tables and such? Or will
+there be a net 10 NIC, too?
+
+Cheers,
+chris
+
+------------------------------
+
+Date: Tue 4 Oct 83 11:55:59-PDT
+From: Mary Stahl <STAHL@sri-nic>
+Subject: Re: Milnet split
+To: ahill@bbn-unix
+cc: cak@purdue, tcp-ip@sri-nic, STAHL@sri-nic
+
+The NIC's ARPANET interface has just recently arrived and is
+undergoing testing, so please do not try to connect to us at
+10.0.0.51.  When we are up on both nets, our entry in the host table
+will contain both net addresses.  In the meantime, there should be no
+problem connecting to SRI-NIC to get tables or other files, whether
+you are on net 10 or net 26.
+
+- Mary
+
+------------------------------
+
+Date: Tue, 4 Oct 83 15:19:31 EST
+From: Christopher A Kent <cak@purdue>
+To: tcp-ip@nic
+Subject: Net 10 NIC?
+
+Thanks to all who wrote and told me that 10.0.0.51 (ST-NIC) will be the
+Arpanet connection to the NIC, and that the interface just arrived and
+isn't available for use yet, but when it does, it will appear as a
+second address for SRI-NIC.
+
+Cheers,
+chris
+
+------------------------------
+
+Date: Wed 5 Oct 83 07:50:11-PDT
+From: Jake Feinler <FEINLER@sri-nic>
+Subject: Re: Hedrick's conclusions from the pinging discussion
+To: hedrick@rutgers, tcp-ip@sri-nic
+cc: feinler@sri-nic, klh@sri-nic, stahl@sri-nic
+
+Charles,
+
+I  have been reading the 'pinging' dialog as it goes along and
+in your message of 8-sep-83 you state "our experience suggests that
+this [updating one's tables from the NIC tables on a regular basis]
+is not happening". Our experience here at the NIC is just the opposite.
+We logged several thousand accesses to the NIC host name server in
+August and we expect September and October to be heavier due to the
+need to refresh tables due to the network split.  If you are a recipient
+of the DDN-News you are aware that DCA has requested that all hosts
+implement the Hostnames Server protocol (RFC 811) and the RFC is included
+in the Protocol Handbook.    Further, DCA has asked BBN to register all
+gateways with the NIC and to make sure that they do not assign any names
+to gateways that have not been registered first.  The NIC has been designated
+the official registrar for naming entities on both MILNET and ARPANET
+and we are tasked with providing name service to users.  We have also
+registered any information from 'foreign' nets that has been provided to
+us.
+
+There has been a lot of confusion about host name tables, and I am the
+first to admit that in the past the whole issue of gateway names and
+addresses and whether they were prime or dumb was very murky.  Also,
+we have just gotten our new equipment installed, and once the second
+interface is in place (hopefully in a couple of weeks) we will be
+accessible from both MILNET and ARPANET.  I believe some of the issues
+have been resolved, that our tables are the most current with respect
+to ARPANET and MILNET hosts, that FTPing host name files is more tedious
+than using the host name service, and that we are now providing good
+service.  I urge you to use our table as the reference table for local
+tables and to collaborate with us to make the service and the information
+even better.  
+
+One other piece of information in case it was missed by some of you.
+We now have set up a mailbox called HOSTMASTER@SRI-NIC so that host name
+info goes directly to Mary Stahl without stopping off in my mail or
+in the NIC mail.  This has helped speed up the addition of new data
+tremendously.  There is also a template called 'Host-approve' for persons
+making changes to host names or addresses on MILNET or ARPANET.  All
+changes should be reported using this template.  New hosts will not
+be enabled until this template has been approved by DCA.  Although this
+adds some formality to the process, it has actually worked reasonably
+well in that there is now a known and published procedure and we no
+longer get the info on the back of envelopes or scribbled on someone's
+business card.  It also means that DCA, BBN, and the NIC are in much
+better sync than was true in the past.
+
+I hope this update of where things stand has been useful to the 
+community with respect to host names in general and gateway names
+in particular.  Ken Harrenstien (KLH@SRI-NIC) is the NIC contact for
+the Host Name Server and Mary Stahl (Dyer) (STAHL@SRI-NIC) is the
+Hostmaster (or actually mistress).  We appreciate the feedback and
+discussion we have received from many of you and request that you
+keep those cards and letters and host names coming in.
+
+Regards,
+
+Jake Feinler/NIC
+
+P.M. (for post mortem)  Yesterday was the day the network split into
+two networks - ARPANET and MILNET and I am pleased to report that
+things went rather well.  The major problem we saw with respect to
+host naming, etc., was that TAC users had not been informed to use
+the net number in trying to log in which meant that sometimes they
+could not get in.  The NIC is currently 26.0.0.73 and will also be
+10.0.0.51 in the near future.  We will keep you posted on this.
+
+J.
+
+------------------------------
+
+Date: 5 Oct 83 14:40:10 EDT
+From: Charles Hedrick <HEDRICK@RUTGERS.ARPA>
+Subject: Re: Hedrick's conclusions from the pinging discussion
+To: FEINLER@SRI-NIC.ARPA
+cc: tcp-ip@SRI-NIC.ARPA, klh@SRI-NIC.ARPA, stahl@SRI-NIC.ARPA
+
+The claim was not that you were out of date but that apparently some
+gateways were.  I concluded this for two reasons:
+  - that NYU's gateway was not known by the prime gateways when I
+	last tested it.  (Presumably it is now, but I am no longer
+	depending upon prime gateways for routing.)
+  - that one of the managers of a prime gateway (I think a BBN gateway)
+	described the problem from his end, and he did not seem to be
+	using the NIC host tables.
+  - I said that I would be happy to hear from the manager of any gateway
+	that was in fact updating itself regularly from the NIC tables.
+	I have not heard from any, nor have any sent mail to the
+	mailing list.
+I believe I am justified in concluding from this that the gateways
+do not automatically update themselves from your tables.  As I am sure
+you know, N thousand accesses to your host tables does not prove that
+any particular set of systems (i.e. the prime gateways) are using them.
+Rutgers does update its tables regularly from yours.  We use FTP, as we
+want to have the rest of the <NETINFO> directory, i.e. the RFC's and
+other random stuff.  Our host and gateway tables are based on yours.  To
+the host tables we add 3 additional nicknames that you did not accept
+but are essential for local operation.  We change most of the entries in
+the gateway table to always-up, to minimize pinging.  But we certainly
+are using your work.  I have no complaints about your service.  I know
+you have been working very hard to track all of the changes that are
+going on.  The only question is whether the gateways are using your
+work.
+
+By the way, it turns out that this issue is not really crucial to us. We
+ping only 3 selected prime gateways and other gateways that are on
+alternative routes.  We would have to ping these even if the prime
+gateways were completely up to date.  The purpose of pinging is not to
+find routes, but rather to see whether routes are in service or not. The
+only way prime gateways could help us is if they would somehow tell us
+whenever another gateway went down.  This is probably not a reasonable
+request.
+
+------------------------------
+
+From:     Mike Muuss <Mike@BRL>
+To:       TCP-IP@BRL
+Subject:  On the Undesirability of "Mail Bridges" as a Security Measure
+
+Seeing the last few messages brings back to mind the ugly prospect
+looming ever larger:  that we will not have ONE InterNet, and we will
+not have TWO InterNets, but we will in fact have One-and-a-Half
+InterNets, stuck together with mail-only "bridges" (ie Data Fences),
+which will prevent the ARPA EXPNET and the MILNET communities from
+exchanging data with each other.  In my nightmares, I see things
+degenerating to much the same level of service as where the InterNet
+touches on "foreign" (non-TCP) networks today.  Unable to retrieve
+files, important data will be shipped as mail, and will suffer the
+indelicacies of having headers and trailers slapped on it, spaces and
+dots and tabs munged with, etc.  Reprehensible kludges like
+UUENCODE/UUDECODE will have to become commonplace again.  It's bad
+enough having to mail files to USENET, CSNET, etc; but between the
+EXPNET and MILNET?  Come on!
+
+I'm entirely in favor of separating the backbones of the two networks;
+in addition to giving DCA a much greater degree of control over engineering
+the MILNET portion, it also permits the ARPANET portion to do horrible
+things to their IMPs, to play partitioning experiments, and generally
+have enough of a reprieve from operational considerations to be able
+to do meaningful experiments again.  All this is good.
+
+Forcing the split was a good thing, too.  It polished off NCP once-and-for-all,
+and it demonstrated that the IP protocol really *does* operate as claimed.
+Funneling all IP communications through ``n'' gateways (n=5 at present)
+is good, too.  Gets people thinking about multi-path routing algorithms,
+and provides a good "safety valve", just in case there should ever be
+valid military reasons for separating the networks.
+
+I even believe that TAC access controls (TACACS) are a good thing; I
+look forward to the day when (most) all the TAC phone numbers are
+published, and freely availible.  But it is important not to be lulled
+into a false sense of "security" by measures like TACACS and the
+mail-only bridges.  Every host on the network is still required, by
+regulation, to take a comprehensive approach to system security.  (The
+relevant Army regulation is AR 380-380, similar regulations exist for
+the other services).  Every military host is obligated to observe
+sercurity procedures as carefully in normal operations as if 50,000
+TACACS cards had just been issued to the public school system.  Hiding
+ourselves behind mail-only bridges is only asking for trouble, later on.
+Being on the MILNET isn't significantly different from offering commercial
+(or AUTOVON or FTS) dial-up service, in terms of the threat posed by an
+outsider trying to get in.  Now the CLASSIFIED community, that's different.
+But there's none of that sort of information on the MILNET, right?
+
+So, here is a loud plea from one (military) researcher who says
+"Don't cut the lines of communication!"  An emphatic YES to
+security.  Do it by the regulations!  But don't depend on partial
+network connectivity as a security measure -- it won't help, and it sure
+can hurt.  (Ouch!).
+
+	Your (Civil) Servant,
+	  -Mike Muuss
+	   Leader, Advanced Computer Systems Team
+	   U. S. Army Ballistic Research Laboratory
+
+------------------------------
+
+END OF TCP-IP DIGEST
+********************

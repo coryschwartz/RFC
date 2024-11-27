@@ -1,0 +1,51 @@
+[RFC2119]            N 01 265    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+[RFC2119]            X 01 113    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+[RFC3973]            I 01 287    [RFC3973]  Adams, A., Nicholas, J., and W. Siadak, "Protocol
+[RFC3973]            X 01 201    [RFC3973].
+[RFC3973]            X 01 217     | 0          | Hello         | 0-7: Reserved | [RFC3973][RFC7761] |
+[RFC3973]            X 01 223     | 3          | Join/Prune    | 0-7: Reserved | [RFC3973][RFC7761] |
+[RFC3973]            X 01 229     | 5          | Assert        | 0-7: Reserved | [RFC3973][RFC7761] |
+[RFC3973]            X 01 231     | 6          | Graft         | 0-7: Reserved | [RFC3973]          |
+[RFC3973]            X 01 233     | 7          | Graft-Ack     | 0-7: Reserved | [RFC3973]          |
+[RFC3973]            X 01 238     | 9          | State Refresh | 0-7: Reserved | [RFC3973]          |
+[RFC3973]            X 01 95    This document updates [RFC7761] and [RFC3973] by defining the use of
+[RFC3973]            X 01 97    further updates [RFC7761] and [RFC3973], along with [RFC5015],
+[RFC5015]            I 01 292    [RFC5015]  Handley, M., Kouvelas, I., Speakman, T., and L. Vicisano,
+[RFC5015]            X 01 163    PIM message type 10 (DF Election) [RFC5015] specifies that the four
+[RFC5015]            X 01 240     | 10         | DF Election   | 0-3: Reserved | [RFC5015]          |
+[RFC5015]            X 01 242     |            |               | 4-7: Subtype  | [RFC5015]          |
+[RFC5015]            X 01 97    further updates [RFC7761] and [RFC3973], along with [RFC5015],
+[RFC5059]            I 01 297    [RFC5059]  Bhaskar, N., Gall, A., Lingard, J., and S. Venaas,
+[RFC5059]            X 01 157    PIM message type 4 (Bootstrap) [RFC5059] defines flag bit 7 as No-
+[RFC5059]            X 01 225     | 4          | Bootstrap     | 0-6: Reserved | [RFC5059][RFC7761] |
+[RFC5059]            X 01 227     |            |               | 7: No-Forward | [RFC5059]          |
+[RFC5059]            X 01 98    [RFC5059], [RFC6754], and [RFC8364], by specifying the use of the
+[RFC6166]            I 01 302    [RFC6166]  Venaas, S., "A Registry for PIM Message Types", RFC 6166,
+[RFC6166]            X 01 103    reserved by [RFC6166] for type space extension.  In Section 5, this
+[RFC6166]            X 01 106    obsoletes [RFC6166].
+[RFC6754]            I 01 306    [RFC6754]  Cai, Y., Wei, L., Ou, H., Arya, V., and S. Jethwani,
+[RFC6754]            X 01 244     | 11         | ECMP Redirect | 0-7: Reserved | [RFC6754]          |
+[RFC6754]            X 01 98    [RFC5059], [RFC6754], and [RFC8364], by specifying the use of the
+[RFC7761]            N 01 270    [RFC7761]  Fenner, B., Handley, M., Holbrook, H., Kouvelas, I.,
+[RFC7761]            X 01 118    The common PIM header is defined in Section 4.9 of [RFC7761].  This
+[RFC7761]            X 01 200    impact on security or changes to the considerations in [RFC7761] and
+[RFC7761]            X 01 217     | 0          | Hello         | 0-7: Reserved | [RFC3973][RFC7761] |
+[RFC7761]            X 01 219     | 1          | Register      | 0-7: Reserved | [RFC7761]          |
+[RFC7761]            X 01 221     | 2          | Register Stop | 0-7: Reserved | [RFC7761]          |
+[RFC7761]            X 01 223     | 3          | Join/Prune    | 0-7: Reserved | [RFC3973][RFC7761] |
+[RFC7761]            X 01 225     | 4          | Bootstrap     | 0-6: Reserved | [RFC5059][RFC7761] |
+[RFC7761]            X 01 229     | 5          | Assert        | 0-7: Reserved | [RFC3973][RFC7761] |
+[RFC7761]            X 01 235     | 8          | Candidate RP  | 0-7: Reserved | [RFC7761]          |
+[RFC7761]            X 01 90    common PIM header [RFC7761] as "PIM message type Flag Bits" or,
+[RFC7761]            X 01 95    This document updates [RFC7761] and [RFC3973] by defining the use of
+[RFC7761]            X 01 97    further updates [RFC7761] and [RFC3973], along with [RFC5015],
+[RFC8126]            N 01 276    [RFC8126]  Cotton, M., Leiba, B., and T. Narten, "Guidelines for
+[RFC8126]            X 01 137    Reserved [RFC8126].  They MUST be set to zero on transmission, and
+[RFC8126]            X 01 208    remains IETF Review [RFC8126].  Assignments into this registry MUST
+[RFC8174]            N 01 281    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+[RFC8174]            X 01 113    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+[RFC8364]            I 01 311    [RFC8364]  Wijnands, IJ., Venaas, S., Brig, M., and A. Jonasson, "PIM
+[RFC8364]            X 01 170    PIM message type 12 (PIM Flooding Mechanism) [RFC8364] defines flag
+[RFC8364]            X 01 246     | 12         | PIM Flooding  | 0-6: Reserved | [RFC8364]          |
+[RFC8364]            X 01 248     |            |               | 7: No-Forward | [RFC8364]          |
+[RFC8364]            X 01 98    [RFC5059], [RFC6754], and [RFC8364], by specifying the use of the

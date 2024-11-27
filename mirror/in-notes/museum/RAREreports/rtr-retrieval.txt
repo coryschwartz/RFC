@@ -1,0 +1,55 @@
+
+                   Where and how to get RTRs
+                   =========================
+
+Some RARE Technical Reports (RTRs) are also published as subset of the
+RFCs.  Once you know the RFC number of the document describing an RTR
+you may obtain that document by getting the RFC.  RFCs may be obtained
+from http://www.rfc-editor.org/, or from many other mirror sites around
+the world.
+
+For convenience the RTR document that were RFCs are also grouped and
+listed by their RTR numbers, and these may be obtained via EMAIL or FTP
+from RTR Repositories.
+
+Many of these repositories also now have World Wide Web servers. Try
+the following URL as a starting point to locate these servers.
+
+                http://www.rfc-editor.org/
+
+In particular, they can be obtained from the RFC Editor Web site
+as follows.
+
+1.  Via Anonymous FTP
+
+RTRs are available via anonymous FTP from FTP.ISI.EDU, with the
+pathname: in-notes/rtr/rtrNN.txt (where "NN" is the number of the RTR).
+
+For example rtr8.txt is titled "Network Access to Multimedia
+Information".  Login with FTP username "anonymous" and password "ftp".
+
+2. Via Email
+
+RTRs can also be obtained via electronic mail to "rfc-info@isi.edu"
+with a message body of:
+
+	 Retrieve: RTR
+	   Doc-ID: RTRnnnn
+
+(Here "nnnn" refers to the number of the RTR; always use 4 digits, so
+RTR 6 is RTR0006 in the RFC-INFO service).
+
+The RFC-INFO@ISI.EDU server provides other ways of selecting RTRs based
+on date ranges and such; for more information send a message to
+"rfc-info@isi.edu" with the message body "help: help".
+
+Note that RTRs may be very large (greater than 100,000 characters), the
+RFC-INFO service will return large documents in sections of less than
+50,000 characters each.
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Contact: RFC-Editor@RFC-Editor.org
+Last update: 03-Jan-2000
+
+

@@ -1,0 +1,2642 @@
+
+
+
+
+
+
+
+
+                                   -- Proteon
+                            -- Nine Technology Drive
+                         -- Westborough, MA 01581-5008
+
+
+
+
+
+
+
+                         -- Proteon Specific Variables
+                           -- in the SNMP MIB for the
+                                    -- p4100
+
+
+
+
+
+
+
+
+
+                                                         -- Revision I
+                                                      -- Release 13.0b
+
+                                         -- File Name Ref: provars.def
+
+                              -- Rev By: Arun  Mahajan  Date: 03/17/93
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   -- Proteon
+                            -- Nine Technology Drive
+                         -- Westborough, MA 01581-5008
+
+
+
+
+
+
+
+                         -- Proteon Specific Variables
+                          -- in the SNMP MIB for the
+                                    -- p4100
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                      Page 2
+
+
+           -- This document describes the variables in the
+           -- Enterprise-specific Proteon MIB. The variables are
+           -- structured based on the RFC for the Structure of
+           -- Management Information (SMI), RFC1155, and the format
+           -- of the definitions is as per RFC1212, the Concise MIB
+           -- Defintions RFC
+
+           -- THIS FILE IS MACHINE GENERATED. DO NOT EDIT!!
+
+          PROTEON-MIB  {  iso  org(3)  dod(6)  internet(1)  private(4)
+          enterprises(1) 1 }
+
+          DEFINITIONS    ::= BEGIN
+
+          IMPORTS
+              enterprises, NetworkAddress, IpAddress, Counter,  Gauge,
+          TimeTicks
+                                FROM RFC1155-SMI
+                            OBJECT-TYPE
+                                FROM RFC-1212;
+
+                    -- textual conventions
+
+                    DisplayString ::=
+                        OCTET STRING
+                    -- This data type is used to model textual
+                    -- information taken from the NVT ASCII
+                    -- character set.  By convention, objects
+                    -- with this syntax are declared as having
+                    -- SIZE (0..255)
+
+
+          proteon    OBJECT IDENTIFIER ::= { enterprises 1 }
+
+                    -- groups in the PROTEON-MIB
+
+           admin    OBJECT IDENTIFIER ::= { proteon 1 }
+           xface    OBJECT IDENTIFIER ::= { proteon 2 }
+           proto    OBJECT IDENTIFIER ::= { proteon 3 }
+
+
+           -- object types
+
+           -- the admin group
+
+          objid    OBJECT IDENTIFIER ::= { admin 1 }
+
+           -- There are no variables under this branch of the tree.
+           -- It is used to assign unique sysObjectID's to the
+           -- Proteon Routers.
+
+           -- the status group
+
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                      Page 3
+
+
+          status        OBJECT IDENTIFIER ::= { admin 2 }
+
+          proAdminStatusReloadTime OBJECT-TYPE
+              SYNTAX    TimeTicks
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The time (in hundredths of a second) since the last
+                  time the router software was reloaded."
+              ::= { status 1 }
+
+          proAdminStatusStarts OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The number of times the router has started since
+                  the last reload.  This is number of restarts plus
+                  one."
+              ::= { status 2 }
+
+          proAdminStatusCrashes OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The number of times the router has crashed since
+                  the last reload."
+              ::= { status 3 }
+
+          proAdminStatusCrashMsg OBJECT-TYPE
+              SYNTAX    OCTET STRING
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The last crash message.  If the router has not
+                  crashed since the last reload, the message will
+                  so indicate."
+              ::= { status 4 }
+
+           -- the event logging system group
+
+          els        OBJECT IDENTIFIER ::= { admin 3 }
+
+          proAdminElsPin OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-write
+              STATUS    mandatory
+              DESCRIPTION
+                  "The number of ELS alerts which may be generated per
+                  second.  A value of zero indicates no limit."
+              ::= { els 1 }
+
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                      Page 4
+
+
+          proAdminElsDroppeds OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The number of ELS alerts which have been dropped
+                  because the pin has been reached."
+              ::= { els 2 }
+
+          proAdminElsDisplay OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-write
+              STATUS    mandatory
+              DESCRIPTION
+                  "This object is a control switch for the displaying
+                  of logging messages on the router's console.  It is
+                  instanced by the ELS event number.
+                  It assumes the following values,
+                  '0' for inactive, do not display messages,
+                  '1' for active, display messages."
+
+              ::= { els 3 }
+
+          proAdminElsAlert OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-write
+              STATUS    mandatory
+              DESCRIPTION
+                  "This object is a control switch for the sending of
+                  logging messages with SNMP alerts.  It is instanced
+                  by the ELS event number.
+                  It assumes the following values,
+                  '0' for inactive, do not send alerts,
+                  '1' for active, send alerts."
+              ::= { els 4 }
+
+          proAdminElsMeters OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "This object is a counter of the number of times an
+                  ELS event occured.  It is instanced by the ELS event
+                  number."
+              ::= { els 6 }
+
+           -- generic interface group
+
+          generic        OBJECT IDENTIFIER ::= { xface 1 }
+
+          proXfaceGenericType OBJECT-TYPE
+              SYNTAX    INTEGER {
+                  vi(1),        -- VI LNI
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                      Page 5
+
+
+                  pn10(2),      -- ProNET-10
+                  pn80(3),      -- ProNET-80
+                  chaos(4),     -- CHAOSnet
+                  xeth(5),      -- Experimental Ethernet (3Mb)
+                  m1822(6),     -- ACC M/1822
+                  scc(7),       -- On-board SCC on HK68ME
+                  ieth(8),      -- Interlan Ethernet
+                  peth(9),      -- Proteon Ethernet
+                  com2(10),     -- COM-2
+                  com4(11),     -- COM-4
+                  omn(12),      -- Omninet
+                  pn4(13),      -- ProNET-4
+                  wdeth(15),    -- Western Digital Ethernet
+                  gwslc(16),    -- Gateway Serial Line Controller
+                  x25(17),      -- X.25
+                  pqsx(18),     -- Proteon QPSX MAN
+                  atr(19),      -- Apollo Token Ring
+                  fddi(20),     -- p4200 FDDI
+                  pn16(23),     -- ProNET-16
+                  atcomsl(24),  -- AT COM-2
+                  ceth(25),     -- CNX500/DNX300 Single/Dual Ethernet
+                  csl(26),      -- CNX500/DNX300 T1/E1 serial
+                  seth(27),     -- Interlan NP-600 smart Ethernet
+                  srlygwsl(28), -- SDLC Relay on a gwslc
+                  srlyatc2(29), -- SDLC Relay on a atcomsl
+                  srlycsl(30),  -- SDLC Relay on a csl
+                  srbtnl(31),   -- SRB Tunnel over a protocol net
+                  sdlcrly(32),  -- SDLC Relay over a protocol net
+                  nseth(33),    -- National Semiconductor Ethernet
+                  x25atc2(34),  -- x25 on a atcomsl
+                  x25csl(35),   -- x25 on a CNX csl
+                  x25dcsl(36),  -- x25 on a DNX300 csl
+                  qsl(37)       -- CNX500 Quad Serial Controller
+                  }
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The type of the interface, according to the link
+                  level protocol."
+              ::= { generic 1 }
+
+          proXfaceGenericCSR OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The Command and Status Register address for the
+                  interface."
+              ::= { generic 2 }
+
+          proXfaceGenericIntVec OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                      Page 6
+
+
+              STATUS    mandatory
+              DESCRIPTION
+                  "The multi-bus interrupt vector for the interface."
+              ::= { generic 3 }
+
+          proXfaceGenericMaintInt OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The number of seconds before the next interface
+                   maintenance."
+              ::= { generic 4 }
+
+          proXfaceGenericMaintLim OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The number of maintenance check failures permitted
+                  before a self test is run."
+              ::= { generic 5 }
+
+          proXfaceGenericNextTest OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The number of seconds before the next self test."
+              ::= { generic 6 }
+
+          proXfaceGenericNextMaint OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The number of seconds between maintenance checks."
+              ::= { generic 7 }
+
+          proXfaceGenericMaintCnt OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The number of failed maintenance checks since the
+                  last successful maintenance check."
+              ::= { generic 8 }
+
+          proXfaceGenericMaintFails OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                      Page 7
+
+
+                  "The total number of maintenance failures on this
+                   interface."
+              ::= { generic 9 }
+
+          proXfaceGenericTestPasses OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The total number of self test successes on this
+                  interface."
+              ::= { generic 10 }
+
+          proXfaceGenericTestFails OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The total number of self test failures on this
+                  interface."
+              ::= { generic 11 }
+
+          proXfaceGenericModuleId OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The module identifier of this interface, this
+                  object is relevant only to the CNX and DNX
+                  platforms. It uniquely identifies the interface
+                  card-type.
+
+                  It will always be '0' for the p4100+ platform."
+              ::= { generic 12 }
+
+           -- the token ring interface group
+
+          tokenr        OBJECT IDENTIFIER ::= { xface 2 }
+
+          proXfaceTokenrRingState OBJECT-TYPE
+              SYNTAX    INTEGER {
+                  sigloss(32768), -- signal loss
+                  harderr(16384), -- hard error
+                  softerr(8192),  -- soft error
+                  beacon(4096),   -- transmit beacon
+                  lwf(2048),      -- lobe wire fault
+                  are(1024),      -- auto-removal error
+                  remrcvd(512),   -- remove received
+                  cntovrf(256),   -- counter overflow
+                  snglsta(128),   -- single station
+                  ringrcvr(64)    -- ring recovery
+                  }
+              ACCESS    read-only
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                      Page 8
+
+
+              STATUS    optional
+              DESCRIPTION
+                  "The current ring status SSB posted by the TMS380.
+                  This object will be 0 unless there is a serious
+                  error on the ring which causes a ring status
+                  interrupt."
+              ::= { tokenr 1 }
+
+          proXfaceTokenrCheckState OBJECT-TYPE
+              SYNTAX    INTEGER {
+                  dioparity(32768), -- DIO parity
+                  dmaread(16384),   -- DMA read abort
+                  dmawrite(8192),   -- DMA write abort
+                  illopcode(4096),  -- Illegal Op code
+                  lbparity(2048),   -- Comm. Proc. detects
+                            -- Adapter Bus parity error
+                  sifparity(512),   -- SIF detects AB parity error
+                  phparity(256),    -- PH detects AB parity error
+                  recvparity(128),  -- parity error during copy
+                  xmitparity(64),   -- parity error during xmit
+                  ringurun(32),     -- DMA underrun during xmit
+                  ringorun(16),     -- DMA overrun during recv
+                  invintrpt(8),     -- invalid interrupt
+                  inveintrpt(4),    -- invalid error interrupt
+                  invxop(2)         -- invalid XOP request
+                  }
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The adapter check status information read from the
+                  TMS380. This value is zero until an adapter check
+                  interrupt occurs."
+              ::= { tokenr 2 }
+
+          proXfaceTokenrSigLosses OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times that the adapter detected a
+                   loss of signal on the ring (a ring status
+                   interrupt with the Signal Loss bit set)."
+              ::= { tokenr 3 }
+
+          proXfaceTokenrHardErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times the adapter was transmitting or
+                  receiving beacon frames (a ring status interrupt
+                  with the Hard Error bit set)."
+              ::= { tokenr 4 }
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                      Page 9
+
+
+          proXfaceTokenrXmitBeacons OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times the adapter posted a ring
+                  status interrupt with the Transmit Beacon bit
+                  set."
+              ::= { tokenr 5 }
+
+          proXfaceTokenrLobeWireFaults OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times the adapter detected an open or
+                  short circuit in the lobe data path."
+              ::= { tokenr 6 }
+
+          proXfaceTokenrAutoremovalErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times the adapter has detected an
+                  internal hardware error following a Beacon
+                  Auto-removal."
+              ::= { tokenr 7 }
+
+          proXfaceTokenrRemovesReceives OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of Remove Ring Station MAC frame
+                  requests received."
+              ::= { tokenr 8 }
+
+          proXfaceTokenrRingRecoveries OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times the adapter was transmitting or
+                  receiving Claim Token MAC frames."
+              ::= { tokenr 9 }
+
+          proXfaceTokenrLineErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times any of the following conditions
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 10
+
+
+                  are detected: a frame was repeated or duplicated,
+                  the EDI was zero, a code violation existed between
+                  the SDEL and EDEL, a code violation existed within
+                  a token, or an FCS error existed."
+              ::= { tokenr 10 }
+
+          proXfaceTokenrBurstErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times the adapter detected the
+                  absence of transitions for five half bit times
+                  between the SDEL and EDEL."
+              ::= { tokenr 11 }
+
+          proXfaceTokenrLostFrames OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times the adapter failed to receive
+                  the end of the frame it was transmitting."
+              ::= { tokenr 12 }
+
+          proXfaceTokenrReceiveCongestions OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times the adapter, in repeat mode,
+                  recognised a frame with its specific address but
+                  had no buffer space into which the frame could
+                  be copied."
+              ::= { tokenr 13 }
+
+          proXfaceTokenrFrameCopyErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times the adapter recognized a frame
+                  with its specific address but finds the ARI bits
+                  set to 00."
+              ::= { tokenr 14 }
+
+          proXfaceTokenrTokenErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times the adapter detected the any of
+                  the following conditions: a token with non-zero
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 11
+
+
+                  priority and monitor count bit set to 1, a frame and
+                  the monitor count bit is set to 1, no token or frame
+                  received within 10ms, or the starting
+                  delimiter/token sequence had a code violation."
+              ::= { tokenr 15 }
+
+          proXfaceTokenrDMAbusErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times an error was detected on the
+                  internal internal DMA bus. This is a normal event
+                  for the TMS380. It is expected to count during
+                  operation."
+              ::= { tokenr 16 }
+
+          proXfaceTokenrDMAparityErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of parity errors detected on the
+                  internal DMA bus."
+              ::= { tokenr 17 }
+
+          proXfaceTokenrARIFCIerrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times the adapter detected that the
+                  upstream neighbor station was unable to set the ARI
+                  or FCI bits in received frames."
+              ::= { tokenr 18 }
+
+          proXfaceTokenrInputOverflowErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "Input Overflow. The number of packets recieved
+                  which are larger than our buffer size."
+              ::= { tokenr 19 }
+
+          proXfaceTokenrOutputErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "Output Errors. The number of times that the frame
+                  transmit or strip process was in error."
+              ::= { tokenr 20 }
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 12
+
+
+          proXfaceTokenrXmitCongestions OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "Transmit Congestion. The number of times that a
+                  frame was sent and the ARI bit was set and the
+                  FCI bit cleared in the Frame Status. This
+                  indicates congestion at the recieving node."
+              ::= { tokenr 21 }
+
+          proXfaceTokenrMedias OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "Media type used for the token ring connection
+                  '1' for shielded twisted pair, STP
+                  '2' for unshielded twisted pair, UTP."
+              ::= { tokenr 22 }
+
+           -- the pronet-10/80 interface group
+           -- relevant only to the p4100 and p4200
+           -- and not for the CNX500 and DNX300
+
+          pronet        OBJECT IDENTIFIER ::= { xface 3 }
+
+          proXfacePronetDataPresents OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times that unread data was present in
+                  the input packet buffer.  It indicates that an
+                  incomming packet was larger than the buffer size
+                  being used by the router."
+              ::= { pronet 1 }
+
+          proXfacePronetOverruns OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times that a packet copied from the
+                  ring exceeded the size of the input packet buffer
+                  in the interface."
+              ::= { pronet 2 }
+
+          proXfacePronetOddByteCounts OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 13
+
+
+                  "The number of times that a packet with an odd byte
+                  length was received.  This is not an error
+                  condition."
+              ::= { pronet 3 }
+
+          proXfacePronetParityErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "For ProNet-10, this is the number of times that a
+                  parity error was detected in a packet copied from
+                  the ring. For ProNet-80, this is the number of
+                  Data Link errors (repeated frames with 4-into-6
+                  code violations)."
+              ::= { pronet 4 }
+
+          proXfacePronetInBadFormats OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times that a formatting error was
+                  detected in a packet copied from the ring."
+              ::= { pronet 5 }
+
+          proXfacePronetNotInRings OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times that the Not In Ring bit was
+                  set in the CSR."
+              ::= { pronet 6 }
+
+          proXfacePronetOutRingInits OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times that the ring may have needed
+                  initialization when a frame was sent."
+              ::= { pronet 7 }
+
+          proXfacePronetOutBadFormats OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times that a frame being sent was not
+                  correctly formatted when it was being drained after
+                  going around the ring."
+              ::= { pronet 8 }
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 14
+
+
+          proXfacePronetOutTimeouts OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times that an attempt to put a packet
+                  onto ring failed after waiting more than 700ms for
+                  the token."
+              ::= { pronet 9 }
+
+           -- the interlan Ethernet interface group
+           -- relevant only for the p4200 and not
+           -- for the CNX500, the DNX300 and
+           -- the p4100
+
+          ieth        OBJECT IDENTIFIER ::= { xface 4 }
+
+
+           -- the Proteon/Western Digital/National Semiconductor
+           -- Ethernet interface group, relevant for the p4100
+           -- and the p4200 and not relevant for the CNX500 and
+           -- the DNX300
+
+          peth        OBJECT IDENTIFIER ::= { xface 5 }
+
+          proXfacePethSpuriousInts OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times the interrupt sense routine
+                  was entered but there were no Ethernet events to
+                  process."
+              ::= { peth 1 }
+
+          proXfacePethInOverruns OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of received frames whose length was
+                  greater than the maximum ethernet frame size."
+              ::= { peth 2 }
+
+          proXfacePethInDroppeds OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times that the adapter asserted an
+                  overwrite warning, which is posted when the
+                  receive buffer is full. It does not necessarily
+                  mean that a frame was lost."
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 15
+
+
+              ::= { peth 3 }
+
+          proXfacePethFrameLosses OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of frames lost due to insufficient
+                  buffer space, as counted by the DP8390."
+              ::= { peth 4 }
+
+          proXfacePethCRCerrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times that a frame received contained
+                  a CRC error, as counted by the DP8390."
+              ::= { peth 5 }
+
+          proXfacePethAlignErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of frames received which were
+                  misaligned, as counted by the DP8390. A
+                  frame is misaligned if its received length
+                  is not a multiple of 8 bits."
+              ::= { peth 6 }
+
+          proXfacePethInFifoOverruns OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times the input FIFO in the adapter
+                  overflowed while copying a frame from the line."
+              ::= { peth 7 }
+
+          proXfacePethInMulticasts OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of frames received which were addressed
+                  to one of the controller's multicast addresses."
+              ::= { peth 8 }
+
+          proXfacePethJabberConditions OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 16
+
+
+              DESCRIPTION
+                  "The number of times that the transceiver reported a
+                  jabber condition due to expiration of its transmit
+                  jabber timer."
+              ::= { peth 9 }
+
+          proXfacePethOutSuccessWretries OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of frames which were successfully
+                  transmitted after one or more collisions."
+              ::= { peth 10 }
+
+          proXfacePethOutExcessColls OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times that a frame destined for the
+                  line incurred 16 collisions and was discarded."
+              ::= { peth 11 }
+
+          proXfacePethOutCarrierSenseLosses OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times that the transmit carrier sense
+                  was lost."
+              ::= { peth 12 }
+
+          proXfacePethOutFifoUnderruns OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times the output FIFO in the adapter
+                  underflowed while putting a frame on the line."
+              ::= { peth 13 }
+
+          proXfacePethOutCDheartbeatErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times that a heartbeat was not
+                  detected after transmitting a frame."
+              ::= { peth 14 }
+
+          proXfacePethOutWindowColls OBJECT-TYPE
+              SYNTAX    Counter
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 17
+
+
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times that a frame in the process of
+                  being put on the line collided with another frame
+                  after the first 51.2 microseconds of transmission."
+              ::= { peth 15 }
+
+           -- the com-2/4 serial line interface group
+           -- relevant only for the p4200 and not
+           -- relevant for the CNX500, the DNX300 and
+           -- the p4100
+
+          comsl        OBJECT IDENTIFIER ::= { xface 6 }
+
+
+           -- the Gateway serial line interface group
+           -- relevant only for the p4100 and not
+           -- relevant for the p4200, the DNX300 and the CNX500
+
+          gwsl        OBJECT IDENTIFIER ::= { xface 7 }
+
+
+          proXfaceGWslSends OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of frames transmitted."
+              ::= { gwsl 1 }
+
+          proXfaceGWslBlocked1s OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of frames which could not be transmitted
+                  because no DCD or CTS was detected."
+              ::= { gwsl 2 }
+
+          proXfaceGWslBlocked2s OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of frames which could not be transmitted
+                  because no DSR was detected."
+              ::= { gwsl 3 }
+
+          proXfaceGWslValids OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 18
+
+
+              DESCRIPTION
+                  "The number of valid frames received."
+              ::= { gwsl 4 }
+
+          proXfaceGWslOverflows OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of retailer buffer overflows."
+              ::= { gwsl 5 }
+
+          proXfaceGWslCRCerrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of frames received with CRC errors."
+              ::= { gwsl 6 }
+
+          proXfaceGWslOverruns OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number incomming overruns."
+              ::= { gwsl 7 }
+
+          proXfaceGWslAborts OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of incoming aborts."
+              ::= { gwsl 8 }
+
+          proXfaceGWslTooLongs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of received frames of excessive length."
+              ::= { gwsl 9 }
+
+          proXfaceGWslModemSignals OBJECT-TYPE
+              SYNTAX    INTEGER {
+                  nodcd(1),-- no data carrier detect
+                  nocts(2),-- no clear to send
+                  nodsr(4) -- no data set ready
+                  }
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 19
+
+
+                  "An indication of the state of certain modem
+                  signals."
+              ::= { gwsl 10 }
+
+           -- the X.25 interface group
+           -- relevant for the p4100 and the p4200 and
+           -- not relevant for the CNX500 and the DNX300
+
+          prox25        OBJECT IDENTIFIER ::= { xface 8 }
+
+          proXfaceX25PhyInBytes OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of bytes received by the physical
+                  layer."
+              ::= { prox25 1 }
+
+          proXfaceX25PhyOutBytes OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of bytes transmitted by the physical
+                  layer."
+              ::= { prox25 2 }
+
+          proXfaceX25PhyCRCerrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of frames recieved with CRC errors."
+              ::= { prox25 3 }
+
+          proXfaceX25PhyModemFloods OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of modem floods."
+              ::= { prox25 4 }
+
+          proXfaceX25PhyInAborts OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of abort frames received."
+              ::= { prox25 5 }
+
+          proXfaceX25PhyInOverruns OBJECT-TYPE
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 20
+
+
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of incoming frame overruns."
+              ::= { prox25 6 }
+
+          proXfaceX25PhyOutAborts OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of abort frames transmitted."
+              ::= { prox25 7 }
+
+          proXfaceX25PhyOutUnderruns OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of outgoing frame underruns."
+              ::= { prox25 8 }
+
+          proXfaceX25FrmInIframes OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of information frames received."
+              ::= { prox25 9 }
+
+          proXfaceX25FrmInRRcmds OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of receiver ready command frames
+                  received."
+              ::= { prox25 10 }
+
+          proXfaceX25FrmInRRresps OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of receiver ready response frames
+                  received."
+              ::= { prox25 11 }
+
+          proXfaceX25FrmInRNRcmds OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 21
+
+
+              DESCRIPTION
+                  "The number of receiver not ready command frames
+                  received."
+              ::= { prox25 12 }
+
+          proXfaceX25FrmInRNRresps OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of receiver not ready response frames
+                  received."
+              ::= { prox25 13 }
+
+          proXfaceX25FrmInREJcmds OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of reject command frames received."
+              ::= { prox25 14 }
+
+          proXfaceX25FrmInREJresps OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of reject response frames received."
+              ::= { prox25 15 }
+
+          proXfaceX25FrmInSABMs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of set asynchronous balanced mode
+                  command frames received."
+              ::= { prox25 16 }
+
+          proXfaceX25FrmInSABMEs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of set asynchronous balanced mode
+                  extended command frames received."
+              ::= { prox25 17 }
+
+          proXfaceX25FrmInUAs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 22
+
+
+                  "The number of unnumbered acknowledgement frames
+                  received."
+              ::= { prox25 18 }
+
+          proXfaceX25FrmInDISCs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of disconnect command frames received."
+              ::= { prox25 19 }
+
+          proXfaceX25FrmInDMs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of disconnect mode response frames
+                  received."
+              ::= { prox25 20 }
+
+          proXfaceX25FrmInFRMRs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of frame reject response frames
+                  received."
+              ::= { prox25 21 }
+
+          proXfaceX25FrmOutIframes OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of information frames transmitted."
+              ::= { prox25 22 }
+
+          proXfaceX25FrmOutRRcmds OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of receiver ready command frames
+                  transmitted."
+              ::= { prox25 23 }
+
+          proXfaceX25FrmOutRRresps OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of receiver ready response frames
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 23
+
+
+                  transmitted."
+              ::= { prox25 24 }
+
+          proXfaceX25FrmOutRNRcmds OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of receiver not ready command frames
+                  transmitted."
+              ::= { prox25 25 }
+
+          proXfaceX25FrmOutRNRresps OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of receiver not ready response frames
+                  transmitted."
+              ::= { prox25 26 }
+
+          proXfaceX25FrmOutREJcmds OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of reject command frames transmitted."
+              ::= { prox25 27 }
+
+          proXfaceX25FrmOutREJresps OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of reject response frames transmitted."
+              ::= { prox25 28 }
+
+          proXfaceX25FrmOutSABMs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of set asynchronous balanced mode
+                  command frames transmitted."
+              ::= { prox25 29 }
+
+          proXfaceX25FrmOutSABMEs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of set asynchronous balanced mode
+                  extended command frames transmitted."
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 24
+
+
+              ::= { prox25 30 }
+
+          proXfaceX25FrmOutUAs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of unnumbered acknowledgement response
+                  frames transmitted."
+              ::= { prox25 31 }
+
+          proXfaceX25FrmOutDISCs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of disconnect command frames
+                  transmitted."
+              ::= { prox25 32 }
+
+          proXfaceX25FrmOutDMs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of disconnect mode response frames
+                  transmitted."
+              ::= { prox25 33 }
+
+          proXfaceX25FrmOutFRMRs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of frame reject response frames
+                  transmitted."
+              ::= { prox25 34 }
+
+          proXfaceX25FrmT1timeouts OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of T1 timeouts which have occured."
+              ::= { prox25 35 }
+
+          proXfaceX25FrmT2timeouts OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of T2 timeouts which have occured."
+              ::= { prox25 36 }
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 25
+
+
+          proXfaceX25FrmN2timeouts OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of N2 timeouts which have occured."
+              ::= { prox25 37 }
+
+          proXfaceX25FrmBadAddresses OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of received frames with bad addresses."
+              ::= { prox25 38 }
+
+          proXfaceX25FrmFbits OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of received frames with an unsolicited
+                  F-bit."
+              ::= { prox25 39 }
+
+          proXfaceX25FrmInvalidCtls OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of received frames with invalid control
+                  fields."
+              ::= { prox25 40 }
+
+          proXfaceX25FrmQueuedOutput OBJECT-TYPE
+              SYNTAX    Gauge
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of queued output information frames."
+              ::= { prox25 41 }
+
+          proXfaceX25FrmSendSeq OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The current information frame next send sequence
+                  number."
+              ::= { prox25 42 }
+
+          proXfaceX25FrmPLstate OBJECT-TYPE
+              SYNTAX    INTEGER
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 26
+
+
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The protocol layer state.
+                   It assumes the following values,
+                  '0' for link-setup,
+                  '1' for disconnect,
+                  '2' for frame-reject,
+                  '3' for data-transfer,
+                  '6' for disconnect-phase."
+
+              ::= { prox25 43 }
+
+          proXfaceX25FrmRecvSeq OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The current information frame next receive sequence
+                  number."
+              ::= { prox25 44 }
+
+          proXfaceX25PktInCallReqs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of call request packets received."
+              ::= { prox25 45 }
+
+          proXfaceX25PktInCallAccepts OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of call accept packets received."
+              ::= { prox25 46 }
+
+          proXfaceX25PktInClearReqs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of clear request packets received."
+              ::= { prox25 47 }
+
+          proXfaceX25PktInClearConfirms OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of clear confirm packets received."
+              ::= { prox25 48 }
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 27
+
+
+          proXfaceX25PktInIntrptReqs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of interrupt request packets received."
+              ::= { prox25 49 }
+
+          proXfaceX25PktInIntrptConfirms OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of interrupt confirm packets received."
+              ::= { prox25 50 }
+
+          proXfaceX25PktInRRs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of receiver ready packets received."
+              ::= { prox25 51 }
+
+          proXfaceX25PktInRNRs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of receiver not ready packets received."
+              ::= { prox25 52 }
+
+          proXfaceX25PktInREJs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of reject packets received."
+              ::= { prox25 53 }
+
+          proXfaceX25PktInResetReqs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of reset request packets received."
+              ::= { prox25 54 }
+
+          proXfaceX25PktInResetConfirms OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 28
+
+
+                  "The number of reset confirm packets received."
+              ::= { prox25 55 }
+
+          proXfaceX25PktInRestartReqs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of restart request packets received."
+              ::= { prox25 56 }
+
+          proXfaceX25PktInRestartConfirms OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of restart confirm packets received."
+              ::= { prox25 57 }
+
+          proXfaceX25PktInDiags OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of diagnostic packets received."
+              ::= { prox25 58 }
+
+          proXfaceX25PktInDataPkts OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of data packets received."
+              ::= { prox25 59 }
+
+          proXfaceX25PktInBytes OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of information packet data bytes
+                  received."
+              ::= { prox25 60 }
+
+          proXfaceX25PktInBuffQd OBJECT-TYPE
+              SYNTAX    Gauge
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of input buffers queued."
+              ::= { prox25 61 }
+
+          proXfaceX25PktOutCallReqs OBJECT-TYPE
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 29
+
+
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of call request packets transmitted."
+              ::= { prox25 62 }
+
+          proXfaceX25PktOutCallAccepts OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of call accept packets transmitted."
+              ::= { prox25 63 }
+
+          proXfaceX25PktOutClearReqs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of clear request packets transmitted."
+              ::= { prox25 64 }
+
+          proXfaceX25PktOutClearConfirms OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of clear confirm packets transmitted."
+              ::= { prox25 65 }
+
+          proXfaceX25PktOutIntrptReqs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of interrupt request packets
+                  transmitted."
+              ::= { prox25 66 }
+
+          proXfaceX25PktOutIntrptConfirms OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of interrupt confirm packets
+                  transmitted."
+              ::= { prox25 67 }
+
+          proXfaceX25PktOutRRs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 30
+
+
+              DESCRIPTION
+                  "The number of receiver ready packets transmitted."
+              ::= { prox25 68 }
+
+          proXfaceX25PktOutRNRs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of receiver not ready packets
+                  transmitted."
+              ::= { prox25 69 }
+
+          proXfaceX25PktOutREJs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of reject packets transmitted."
+              ::= { prox25 70 }
+
+          proXfaceX25PktOutResetReqs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of reset request packets transmitted."
+              ::= { prox25 71 }
+
+          proXfaceX25PktOutResetConfirms OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of reset confirm packets transmitted."
+              ::= { prox25 72 }
+
+          proXfaceX25PktOutRestartReqs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of restart request packets transmitted."
+              ::= { prox25 73 }
+
+          proXfaceX25PktOutRestartConfirms OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of restart confirm packets transmitted."
+              ::= { prox25 74 }
+
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 31
+
+
+          proXfaceX25PktOutDiags OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of diagnostic packets transmitted."
+              ::= { prox25 75 }
+
+          proXfaceX25PktOutDataPkts OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of data packets transmitted."
+              ::= { prox25 76 }
+
+          proXfaceX25PktOutBytes OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of information packet data bytes
+                  transmitted."
+              ::= { prox25 77 }
+
+          proXfaceX25PktOutBuffQd OBJECT-TYPE
+              SYNTAX    Gauge
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of output buffers queued."
+              ::= { prox25 78 }
+
+          proXfaceX25PktInvalidPkts OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of invalid packet packets received."
+              ::= { prox25 79 }
+
+          proXfaceX25PktOpenSVCs OBJECT-TYPE
+              SYNTAX    Gauge
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of opened switched virtual circuits."
+              ::= { prox25 80 }
+
+           -- FDDI interface group
+           -- relevant only for the p4200 and not
+           -- relevant for the p4100, the DNX300 and the CNX500
+           -- the p4100 and the DNX300 have no FDDI interface
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 32
+
+
+           -- the CNX500 FDDI variables are as per rfc 1285
+
+          profddi        OBJECT IDENTIFIER ::= { xface 9 }
+
+
+           -- the AT COM-2 serial line interface group
+           -- relevant only for the p4100 and not
+           -- relevant for the p4200, the DNX300 and the CNX500
+
+          atcomsl        OBJECT IDENTIFIER ::= { xface 12 }
+
+
+          proXfaceAtcomslXmitFramingErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of framing errors which occured during
+                  transmission."
+              ::= { atcomsl 1 }
+
+          proXfaceAtcomslXmitUnderruns OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of underrun errors which occured during
+                  transmission."
+              ::= { atcomsl 2 }
+
+          proXfaceAtcomslXmitNoDCDerrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of transmissions which failed due to the
+                  absence of the EIA data carrier detect signal."
+              ::= { atcomsl 3 }
+
+          proXfaceAtcomslXmitNoCTSerrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of transmissions which failed due to the
+                  absence of the EIA clear to send signal."
+              ::= { atcomsl 4 }
+
+          proXfaceAtcomslXmitNoDSRerrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 33
+
+
+                  "The number of transmissions which failed due to the
+                  absence of the EIA data set ready signal."
+              ::= { atcomsl 5 }
+
+          proXfaceAtcomslRecvFramingErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of framing errors which occured during
+                  reception."
+              ::= { atcomsl 6 }
+
+          proXfaceAtcomslRecvOverruns OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of overrun errors which occured during
+                  reception."
+              ::= { atcomsl 7 }
+
+          proXfaceAtcomslRecvAborts OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of aborted frames received."
+              ::= { atcomsl 8 }
+
+          proXfaceAtcomslRecvCRCerrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of frames received with CRC errors."
+              ::= { atcomsl 9 }
+
+          proXfaceAtcomslRecvBufferOverflows OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of received frames whose length was
+                  greater than the maximum allowed."
+              ::= { atcomsl 10 }
+
+          proXfaceAtcomslRecvBufferLockeds OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of frames lost due to a lack of buffer
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 34
+
+
+                  space."
+              ::= { atcomsl 11 }
+
+          proXfaceAtcomslModemSignals OBJECT-TYPE
+              SYNTAX    INTEGER {
+                  nodcd(1),-- no data carrier detect
+                  nocts(2) -- no clear to send
+                  }
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "An indication of the state of  certain  modem  sig-
+          nals."
+              ::= { atcomsl 12 }
+
+           -- the CNX500/DNX300 Ethernet interface group
+           -- relevant only for the CNX500 and the DNX300 and not
+           -- relevant for the p4100 and the p4200
+
+          ceth        OBJECT IDENTIFIER ::= { xface 13 }
+
+
+           -- the CNX500/DNX300 T1/E1 Serial Line interface group
+           -- relevant only for the CNX500 and the DNX300 and not
+           -- relevant for the p4100 and the p4200
+
+          csl        OBJECT IDENTIFIER ::= { xface 14 }
+
+
+           -- the NP-600/XL Smart Ethernet interface group
+           -- relevant only for the p4100 and not
+           -- relevant for the CNX500, the DNX300 and the p4200
+
+          seth        OBJECT IDENTIFIER ::= { xface 15 }
+
+
+          proXfaceSethVers OBJECT-TYPE
+              SYNTAX    OCTET STRING
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The revision level of the firmware in the NP-600
+                  interface card."
+              ::= { seth 1 }
+
+          proXfaceSethInFrames OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "Total frames sucessfully received by the interface,
+                  before bridging filtering."
+              ::= { seth 2 }
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 35
+
+
+          proXfaceSethInMulticastFrames OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "Number of multicast frames sucessfully received by
+                  the router, after bridging filtering by the
+                  interface."
+              ::= { seth 3 }
+
+          proXfaceSethInMulticastBytes OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "Number of multicast bytes sucessfully received by
+                   the router, after bridging filtering by the
+                   interface."
+              ::= { seth 4 }
+
+          proXfaceSethInCRCErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "Number of properly aligned frames received with a
+                  CRC error, before bridging filtering."
+              ::= { seth 5 }
+
+          proXfaceSethInAlignErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "Number of misaligned frames recieved (not a
+                  multiple of 1 byte in length), before
+                  bridging filtering."
+              ::= { seth 6 }
+
+          proXfaceSethInResourceErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "Number of correct incoming frames discarded by the
+                  Ethernet chip due to lack of memory resources
+                  (buffer space or Receive Frame Descriptors)."
+              ::= { seth 7 }
+
+          proXfaceSethInOverrunErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 36
+
+
+              DESCRIPTION
+                  "Number of receive frame sequences lost because the
+                  Ethernet memory bus was not available to the
+                  Ethernet chip in time to transfer them. This will
+                  occur ocassionally on back-to-back packets."
+              ::= { seth 8 }
+
+          proXfaceSethInTooLongErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "Number of frames discarded because they were longer
+                  than the maximuum Ethernet frame length."
+              ::= { seth 9 }
+
+          proXfaceSethInFiltereds OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "Number of packets dropped by the transparent
+                  bridging filter in the board software because
+                  they are to a MAC address connected to this
+                  interface."
+              ::= { seth 10 }
+
+          proXfaceSethInDroppeds OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "Number of frames dropped after bridging filtering
+                  due to the lack of available buffers in the
+                  router."
+              ::= { seth 11 }
+
+          proXfaceSethOutFrames OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "Number of sucessfully transmitted frames."
+              ::= { seth 12 }
+
+          proXfaceSethOutDeferreds OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "Number of times transmission had to defer to
+                  traffic on the Ethernet."
+              ::= { seth 13 }
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 37
+
+
+          proXfaceSethOutSingleColls OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of frames transmitted with one
+                  retransmission due to a collision on the
+                  Ethernet."
+              ::= { seth 14 }
+
+          proXfaceSethOutMultipleColls OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of frames transmitted with multiple
+                  retransmissions due to collisions on the Ethernet."
+              ::= { seth 15 }
+
+          proXfaceSethOutNoSQEs OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The number of times that transmission was not
+                  followed by a SQE TEST signal. This is an
+                  error only of the trasnceiver is configured
+                  for SQE TEST (heartbeat)."
+              ::= { seth 16 }
+
+          proXfaceSethOutErrorFrames OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "Number of frames not sent due to transmit errors."
+              ::= { seth 17 }
+
+          proXfaceSethOutErrorBytes OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "Number of bytes not sent due to transmit errors."
+              ::= { seth 18 }
+
+          proXfaceSethOutCarrierSenseErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "Number of frames not sent due to no carrier sense
+                  during transmission (between beginning of
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 38
+
+
+                  Destination Address and end of Frame Check
+                  Sequence)."
+              ::= { seth 19 }
+
+          proXfaceSethOutClearToSendErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "Number of frames not sent due to the loss of the
+                  clear-to-send signal in the Ethernet chip. (This
+                  test is disabled inside the chip, so this error
+                  should not happen.)"
+              ::= { seth 20 }
+
+          proXfaceSethOutUnderrunErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "Number of frames not sent due to DMA underrun, when
+                  data is not supplied by the hardware to the Ethernet
+                  chip fast enough."
+              ::= { seth 21 }
+
+          proXfaceSethOutExcessCollErrors OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "Number of frames not sent due to excess
+                  collisions."
+              ::= { seth 22 }
+
+           -- the general (across all protocols) group
+
+          general        OBJECT IDENTIFIER ::= { proto 1 }
+
+          -- there are no general variables defined at this time.
+
+           -- the IP protocol group
+
+          proip         OBJECT  IDENTIFIER  ::=  {  proto  2  }  defgw
+          OBJECT IDENTIFIER ::= { proip 1 }    -- default gateway
+
+          proProtoIpDefGwAddress OBJECT-TYPE
+              SYNTAX    IpAddress
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The Internet address of the default gateway for the
+                  router."
+              ::= { defgw 1 }
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+
+
+
+
+          -- p4100 Specific SNMP Variables                     Page 39
+
+
+          proProtoIpDefGwCost OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The cost of the default gateway for the router."
+              ::= { defgw 2 }
+
+          proProtoIpDefGwAge OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The age of the default gateway for the router."
+              ::= { defgw 3 }
+
+          END
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                    -- rev I Rel 13.0b
+
+
+
+

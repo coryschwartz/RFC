@@ -1,0 +1,95 @@
+
+
+
+		Procedures to set up the RIPE NCC
+		---------------------------------
+
+			R. Blokzijl
+
+		       June 10, 1991
+
+		    (annex to ripe-w07)
+
+
+   1. Status
+   ---------
+
+      The need for a RIPE Network Coordination Center is described in
+      document ripe-w06. The activity plan for the NCC is defined in
+      ripe-w07. 
+
+      At the 8th RIPE meeting it was decided to request RARE to act as the
+      organisation that provides the legal environment for the RIPE NCC. This
+      has been accepted by the RARE CoA meeting of May 16-17. Also it was
+      reconfirmed that RARE has no resources to fund the NCC centrally.
+
+      This document describes the procedures that are necessary for setting
+      up the NCC. The three main elements are: 
+
+	  - finance
+
+	  - selection of personel
+
+	  - selection of site
+
+   
+   2. Finance.
+   -----------
+
+      A first estimate of the budget follows from the activity plan, section
+      5, where the technical requirements of the NCC are outlined. The
+      figures below should be regarded as a first approximation that clearly
+      needs further fine tuning. On the other hand it does give the finacial
+      goals to be reached before the NCC goes into operation.
+
+      Staff		180.000 ECU
+
+      Equipment          30.000 ECU
+
+      Office space       15.000 ECU
+      plus overheads
+
+      Travel budget      15.000 ECU
+			-------
+      Total             240.000 ECU  per annum
+
+      The goal is to secure funding for an initial period of three years;
+      so arrangements for 720.000 ECU must be found.
+
+      Proposed is, to invite organisations active within and outside RIPE
+      to participate in funding arrangements.
+
+   
+   3. Staff
+   --------
+
+      The NCC staff wil be invited by open sollicitation. A selection board
+      consisting of representatives from RIPE and the RARE EC will appoint
+      the NCC staff. 
+
+      - Open sollicitation: proposed is that the announcements of NCC
+        positions will be made on the RIPE and RARE CoA distribution lists.
+
+      - In the selection board, RIPE must have a strong voice, to ensure
+	an excellent working relationship between RIPE and the NCC.
+
+      - The first appointment will be the NCC manager. This manager will
+        subsequently be involved in the selection of NCC staff.
+
+      - The appointed NCC manager will be involved in the final selection of
+        the site that houses the NCC.
+
+
+   4. Site
+   -------
+
+      The selection of the NCC site will be done by open sollicitation. A
+      selection board consisting of representatives of RIPE, the RARE REC
+      and the NCC manager will do the final selection.
+
+      - A detailed description of the site requirements will be produced.
+
+      - An invitation to propose sites will be published on the RIPE and RARE
+        CoA distribution lists.
+
+      - The above defined selection board will select the NCC site.

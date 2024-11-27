@@ -1,0 +1,397 @@
+7-Jun-83 15:16:23-PDT,19681;000000000001  
+Return-path: <tcp-ip@brl-vgr>
+Mail-From: SMTP created at  7-Jun-83 09:47:43
+Received: FROM BRL-VGR BY USC-ISIF.ARPA WITH TCP ; 7 Jun 83 09:48:06 PDT
+Received: From Brl-Vgr.ARPA by BRL-VGR via smtp;  7 Jun 83 7:05 EDT
+Sender:    Mike Muuss <TCP-IP@brl>
+From:      TCP-IP@brl
+To:        TCP-IP@brl
+Date:      7 June 1983 00:00 EST
+Subject:   TCP-IP Digest, Vol 2 #8
+
+TCP/IP Digest            Tuesday, 7 June 1983      Volume 2 : Issue 8
+
+Today's Topics:
+                     Digest Numbering Mixup on V2#06
+                       Comments on Host-Table RFC
+                      InterNet -vs- SubNet Routing
+                         More on SubNet Routing
+                    Network Humor:  C/30 Power Wiring
+----------------------------------------------------------------------
+                  TCP/IP Digest --- The InterNet Digest
+                         LIMITED DISTRIBUTION
+          For Research Use Only --- Not for Public Distribution
+----------------------------------------------------------------------
+
+Date:     7 Jun 83 6:11:27 EDT (Tue)
+From:     Mike Muuss (TCP-IP Digest)  <tcp-ip@BRL-VGR>
+To:       tcp-ip@brl
+Subject:  TCP-IP Digest Numbering Error
+
+The 24-May issue was incorrectly marked as being V2#05
+when it was in fact V2#06.
+
+	V2#05 was published on 26-Apr
+	V2#06 was published on 24-May
+ and	V2#07 was published on 25-May.
+
+My thanks to the many people who pointed out this error.
+
+		Best,
+		 -Mike
+
+------------------------------
+
+Date:     6 Jun 83 5:20:18 EDT (Mon)
+From:     Ron Natalie <ron@brl-bmd>
+To:       tcp-ip@brl-bmd
+Subject:  Host table RFC
+
+Since M. Crispin put out a real request for comments, I'm commenting.
+He has many good points, but I don't feel that his preferred solution is
+optimal.  He points out that the NIC is not always careful of notifying
+users of host table updates.  He suggests that the NIC send out the
+individual updates to the hosts as the database is modified.  My
+observation is that the NIC is very reliably mailing me letters about
+the tables being modified, but they batch up the submissions before
+entering them in the database.  Every day I load up the host list using
+the provided server.  It generally is identical every time except for
+the biweekly (or whatever) event when they put in the new entries.  If
+this mode of operation is to be continued, I suggest that Mark's
+suggestion #2 is better.  This allows a host to query version number of
+the hosts database as many times per day as he feels necessary and only
+transfer the entire file when it has been changed.  This can easily be
+done without altering any of the existing or creating any new protocols
+by adding a "VERSION" keyword to the RFC811 hostnames server.  This will
+return some string that is guaranteed to be different for each revision
+of the database.  In this way a majority of the inquiries are very short
+TCP connections rather than the time it takes to retrieve an entire copy
+of the table.
+
+VERSION		--> To nic host server
+VERSION : 1234	<-- Back to host.
+
+-Ron
+
+------------------------------
+
+Date: Thu, 26 May 83 17:38 PDT
+From: Taft.PA@PARC-MAXC.ARPA
+Subject: Internet vs. subnet routing
+To: TCP-IP@Brl.ARPA
+
+This has been a most interesting and constructive discussion.  I would
+like to compliment the participants for their careful, well thought-out
+presentations, and to offer a somewhat different approach to the
+problem.
+
+There are good arguments on both sides of the issue of Internet vs.
+subnet routing:
+
+  -- Assigning each local network its own IP network number has the
+virtues of simplicity and of taking maximum advantage of the Internet
+routing algorithm, but the disadvantage of propagating excessively large
+amounts of detailed routing information to all parts of the Internet.
+
+  -- Adopting a hierarchical structure, with each cluster of local
+networks treated as a single IP network, reduces the spread of
+irrelevant routing information, but has the disadvantages of requiring
+duplication of routing mechanisms and of making poor routing decisions
+when clusters are interconnected in more than one way.
+
+In the design of the Pup Internet protocols, we used the first approach
+(which I believe is still used in the Xerox NS protocols).  We regularly
+have over 100 networks up at a time, and the distribution of routing
+information is still manageable.  However, if we had an opportunity to
+do the design over again, we would likely try to combine the best
+features of both approaches.
+
+The main problem with simple "area routing" strategies is that, in the
+absence of knowledge about the internal structure of an area, they can't
+know how to select the correct gateway into it.  If the area in fact has
+a rich internal structure and has many gateways into it, the routing
+algorithm will make bad choices and the resulting performance will be
+very poor.
+
+Suppose, for example, we carried DOD IP traffic in the Xerox Internet
+(we don't, but there's no reason in principal that we couldn't).  And
+suppose the DOD and Xerox internets were interconnected not just in Palo
+Alto, California but also in Webster, New York.  It would clearly matter
+a great deal which of the two gateways you chose to route packets to
+when sending to a destination within Xerox.  This means that some
+aspects of the internal structure of the Xerox Internet would have to be
+distinguishable from the rest of the DOD Internet, which in turn means
+that it would have to be assigned more than one IP network number.
+Well, how many?  Two?  Ten?  A number that varies as the topology
+changes?  You see the problem.
+
+An alternative way of approaching this is not to adopt a hierarchical
+structure for network addressing as a whole, but only for the
+propagation of routing information.  That is, routing information flows
+only along the branches of the hierarchy, but the routes computed for
+transport of IP packets are not so constrained.
+
+Each network in a "cluster" gets its own unique network number,
+addressable from anywhere within the Internet.  The normal IP routing
+algorithms are used for communication within the cluster.
+
+However, detailed routing information about individual networks in this
+cluster is NOT automatically propagated throughout the Internet.  What
+is instead propagated everywhere is a route to some gateway (or more
+precisely, some routing information server) that has enough local
+knowledge to compute a good route to the precise desired network.  This
+information is cached by the gateways along the route, maintained until
+it falls into disuse or stops working, and then forgotten.
+
+In this way we decouple the structure of the routing information
+hierarchy from the actual structure of the Internet as embodied in IP
+addresses.  This is just as well, since "clusters" may often represent
+administrative entities that bear little relation to the overall
+Internet topology.
+
+Of course, there are many details I haven't discussed here (indeed, I
+haven't worked them out), and much careful design work would have to be
+done to make such a scheme work smoothly.  However, it does seem
+promising as a way of combining most of the good features of the two
+approaches previously discussed.  Additionally, it is entirely
+transparent to host software and requires new routing update algorithms
+to be implemented only in gateways.
+
+By the way, as someone pointed out, the parallels between this and the
+domain naming issue are striking.  Much confusion may be avoided if we
+maintain a clean separation between names, addresses, and routes.  I
+highly recommend John Shoch's paper, "Internetwork naming, addressing,
+and routing", which appeared in the 1978 IEEE CompCon proceedings.  It
+was also distributed as IEN-019; I haven't been able to find it on-line
+anywhere, but I expect Jon can.
+
+	Ed Taft
+
+------------------------------
+
+Date: 27 May 1983 0857-EDT (Friday)
+From: Thomas Rodeheffer@cmu-cs-a
+To: TCP-IP@brl
+Subject: subnet routing
+
+Well, I'm real glad to see subnet routing get some air time, because
+there are a lot of tricky issues involved and I'd like to see some of
+them sorted out before we at CMU have to plunge into building our own
+implementation (which is imminent).
+
+In TCP-IP 2(7) Larry Allen and Mike O'Dell described what is happenning
+at MIT and LBL, respectively.  I'll call these the MIT and LBL schemes.
+Since I like to rehash the issues, I'll summarize both of these schemes
+and state what I see as their advantages and disadvantages.
+
+
+The MIT scheme can be summarized as postulating a function
+
+	ExtractNetworkNumber: IPaddress -> IPaddress
+
+that is used in the internet module everywhere that network numbers are
+contemplated:  principally, during IP routing.  The MIT scheme requires
+that this function be changed so that, when in the context of MIT,
+addresses that refer to MIT's particular network are treated specially,
+in that some of the "rest" bits, which everywhere else in the world
+would be ignored as not relevant, are treated as part of the network
+number.  Although gateways between MIT and the rest of the world have to
+be moderately schizoid (because "the context of MIT" changes from one
+side to the other), everybody completely inside or outside of MIT can
+just swim right along, and everything will work perfectly.
+
+This is essentially the same scheme as propounded by Chris Kent of
+Purdue.  It has the advantage that within MIT all of the routing
+mechanisms of IP are applied to the problem of moving a datagram from
+one place to another.  You don't need to implement any local routing
+mechanisms.  Indeed, assuming that the gateway-to-gateway protocol sent
+around routing updates without attempting to compress the data based on
+"knowing" what class A, B, and C network numbers looked like, internal
+gateways at MIT could be identical to their brethern everywhere else in
+the world.
+
+The disadvantage is that because the special treatment of MIT addresses
+is not part of the IP standard, all code that is imported to MIT has to
+be "upgraded" before it will work at MIT.  Because the necessary change
+may require rooting around all through the internet module to find the
+places where network numbers are used (not necessarily so nicely
+modularized as an ExtractNetworkNumber function), even when source code
+is available it may be quite difficult to carry out.
+
+
+The LBL scheme can be summarized as postulating an external mechanism
+for translating IP addresses to local network addresses (the address
+resolution protocol) and a local system of gateways that
+"transparently" route packets around between various subnets so as to
+give the impression to the internet module that it's looking at a flat,
+completely connected network.  The gateways respond to address
+resolution requests on behalf of hosts on other subnets, giving the
+local network address of the best first-hop gateway.  Thus packets
+destined for other subnets get sent right to the appropriate gateway
+without the host even having to know what is going on.  
+
+Because some sort of address resolution protocol is needed anyway in
+order to do anything intelligent with IP packets on the popular 10mb
+Ethernet, there is a good chance that the LBL scheme will not require
+modifying the software of any host that is to be plugged into it.  This
+is a major advantage.
+
+The major disadvantage is that you have to your own local gateway code
+and routing update algorithms.  This may not be so hard if you have
+friends at other sites who have already done exactly the same thing.
+
+A second disadvantage is the presence of a very subtle violation of the
+Internet Protocol specification.  The problem arises in connection with
+the separation between the internet layer and the local network layer.
+The way I read RFC 791, the internet module has the responsibility of
+deciding for each datagram what address inside the network it should be
+sent to and the local network interface has the responsibility of
+getting it there.  This is not quite what happens in the LBL scheme.
+
+An example should help illustrate the situation.  Suppose that A1, C1,
+and D1 are stations on network 1, and D2 and Z2 stations on network 2.
+D1 and D2 are two halves of an internet gateway.  Network 1 is actually
+divided into two subnets, connected by B1a and B1b.  I will denote the
+physical network's address corresponding to an internet address X as
+@X.
+
+ ====+======+========+===     ==+==========+=====
+     |      |        |          |          |
+     A1     C1       B1a~~~~~~~~B1b        D1
+              *                              *
+               C3                             D2        Z2
+               |                              |         |
+             ==+==                        ====+=========+==
+
+Suppose that A1 wants to send a datagram to Z2.  Noticing the different
+network number, A1 consults its routing tables and decides that D1 is
+an appropriate gateway.  A1's internet module calls up its local network
+interface, and says:
+
+	Send "SRC=A1,DEST=Z2,DATA=xxx" to D1
+
+A1's local network interface does address resolution on D1 and gets
+@B1a.  So off goes the packet:
+
+	To: @B1a, From: @A1, Type: DoDIP, Data: "SRC=A1,DEST=Z2,DATA=xxx"
+
+Observe that at this point all knowledge of D1 has been lost.  What B1a
+has to do is peek inside the datagram and recompute the IP routing for
+Z2.  With any luck, it will come up with the same answer that A1 did.  Of
+course, it might come up with C1 instead.  That would be unfortunate,
+especially if C1 were an ordinary internet gateway that didn't
+understand about the fancy subnet routing that was going on.  You might
+see a whole slew of ICMP redirect messages come piling into A1 as C1
+valiantly tried to push the datagram through B1a.  At the IP level the
+problem would be characterized as a persistent delivery error in the
+local network.
+
+The problem is that the local network interface isn't acting as a
+transparent delivery mechanism for the internet layer.  It is usurping
+some of the routing responsibility that according to the specification
+ought to be performed by the internet module.  The IP specification
+assumes that if a datagram is wandering off course inside the same
+network as the datagram's source, then it's the fault of the source,
+who was supposed to route the datagram properly in the first place.
+This is the position taken by the ICMP redirect message, whose purpose
+is to correct such misroutings.  As my example shows, it wouldn't be
+safe to use ordinary internet gateways with the LBL scheme because the
+responsibility for routing errors is not always vested where the
+gateway would expect.
+
+I should note that if you only have one external gateway the misrouting
+problem never comes up (at the IP level).
+
+As a side issue, if subnet routers are going to have to perform IP
+routing anyway in order to second guess where packets are supposed to
+go, why not go the whole hog and punt IP routing from hosts entirely.
+Let the address resolution take any random IP address and return an
+appropriate physical network address.  Of course, the host software
+wouldn't be complete IP implementations any more.  I'm not saying this
+is bad, but it is not an implementation of IP according to the full
+specification.
+
+There are two ways one could modify the LBL scheme in order to make the
+local network delivery transparent to the internet layer.  Neither of
+these are very attractive.  The first way is to change the encapsulation
+of IP packets by adding a field to the physical packet to carry the
+local network destination address through the subnets.  In my example,
+this would mean arranging for A1's local network interface to transmit
+the packet:
+
+	To: @B1a, From: @A1, Type: DoDIPx, DeliverTo: D1,
+		Data: "SRC=A1,DEST=Z2,DATA=xxx"
+
+This of course means changing all local network interfaces everywhere
+on the local network, which erases the major advantage of the LBL
+scheme of not requiring any host software modifications.  Back when I
+gave my example, I sneaked the issue of packet encapsulation past you,
+assuming an encapsulation that was similar to those used by all
+implementations I am familiar with, one which is indeed the obvious
+encapsulation to use under the assumption that the local area network
+implements an entire IP network.  I am not aware of any formal
+specifications of IP packet encapsulations, although of course such
+specifications are necessary if IP implementations are ever really
+going to be compatible.
+
+The second way is to require that the address resolution function be
+one-to-one instead of many-to-one.  In other words, address resolution
+must produce a physical local network address that uniquely identifies
+the desired IP address, at least when considered within the subnet in
+which the address resolution was performed.  In this situation, the
+subnet gateways could rederive the local network destination address by
+inverting the address resolution on the physical destination address of
+the packet.  The physical address space of the 10mb Ethernet is so large
+that imbedding an entire IP network within it is no problem, but this
+could be impossible on other kinds of local area networks.  Of course,
+subnet gateways would have to attend to some potentially very large set
+of addresses to which packets could be sent.
+
+The question remains whether the original LBL scheme is suitable, even
+though it violates the separation between the internet and local
+network layers.  It might be that the benefit from being able to attach
+hosts with software written according to the existing IP specification
+and common-law packet encapsulations overweighs the disadvantage of
+having slightly illegal routing behaviour.
+
+		-Tom Rodeheffer
+
+------------------------------
+
+[ While this message does indeed detail an error in the C/30 documentation,
+  it is published here because of the humorous nature of the mixup.  -Mike ]
+
+Date:     6 Jun 83 5:34:02 EDT (Mon)
+From:     Ron Natalie <ron@brl-bmd>
+To:       tcp-ip@brl-bmd
+cc:       romash@bbn-unix, brescia@bbn-unix, taccers@bbn-unix
+Subject:  C-30 Site Preparation
+
+BRL has taken delivery of eight C-30 processors to act as IMPs and TACs
+on our CAN [Campus Area Network -Mike].  While reading the site
+preparation guide provided by BBN, I came across some unusal problems
+that I had not planned for.  The first line in section 2.2 (page 2-3)
+states that "The receptacle MUST be wired as shown in figure 2.2."
+
+Figure 2.2 (same page, labeled "Wiring of Power Receptacle) indicates
+some interesting power considerations to which I was unacustomed.  I had
+no problem figuring out what to do with contact number 1 labled "frame
+ground", and I assume that I can jumper "request to send" to "clear to
+send", since I always want power flowing, but contacts 2 and 3 for
+"received data" and "transmitted data" really have me confused.
+
+Figure 2.2, although labeled "Wiring of Power Receptacle", depicts how to
+turn two DB-25's into an RS-232 null modem.  Interesting, since the only
+other place that this figure appears is on page 3-9 where it is identified
+as Figure 3.6 and again as "Wiring of Power Receptacle", this time for
+the C-60 and C-70 processors.
+
+I suggest that BBN would be better off if they adopted the more standard
+three wire (hot, neutral, and ground) system of power.
+
+-Ron
+
+------------------------------
+
+END OF TCP-IP DIGEST
+********************

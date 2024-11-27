@@ -1,0 +1,1337 @@
+
+
+        CTRON-COMMON-MIB DEFINITIONS ::= BEGIN
+
+	--  ctron-common-mib.txt
+	--  Revision: 1.01
+	--  Date: August 14, 1992
+
+	--  Cabletron Systems, Inc.
+	--  35 Industrial Way, P.O. Box 5005
+	--  Rochester, NH 03867-0505
+	--  (603) 332-9400
+	--  support@ctron.com
+
+	--  This module provides authoritative definitions for Cabletron's
+	--  enterprise-specific common MIB.
+	--
+	--  This module will be extended, as required.
+	--
+
+	--  Cabletron Systems reserves the right to make changes in 
+	--  specification and other information contained in this document 
+	--  without prior notice.  The reader should consult Cabletron Systems
+	--  to determine whether any such changes have been made.
+	--
+	--  In no event shall Cabletron Systems be liable for any incidental, 
+	--  indirect, special, or consequential damages whatsoever (including 
+	--  but not limited to lost profits) arising out of or related to this
+	--  document or the information contained in it, even if Cabletron
+	--  Systems has been advised of, known, or should have known, the 
+	--  possibility of such damages.
+	--
+	--  Cabletron grants vendors, end-users, and other interested parties
+	--  a non-exclusive license to use this Specification in connection
+	--  with the management of Cabletron products.
+
+	--  Copyright August 92 Cabletron Systems
+
+        IMPORTS
+                enterprises, NetworkAddress     FROM RFC1155-SMI
+                OBJECT-TYPE                     FROM RFC-1212;
+
+
+        --  Updated to Revision 1.01 on January 31, 1992.  Added
+        --  download group.
+
+
+        --  This MIB module uses the extended OBJECT-TYPE macro as defined
+        --  in [9];
+
+        --  Textual convention
+
+        DisplayString   ::= OCTET STRING
+        --  This data type is used to model textual information taken from
+        --  the NVT ASCII character set.  By convention, objects with this
+        --  syntax are declared as having:
+        --
+        --  SIZE (0..255)
+
+        PhysAddress     ::= OCTET STRING
+        --  This data type is used to model media addresses.  For many
+        --  types of media, this will be in a binary representation.  For
+        --  example, an Ethernet address would be represented as a string
+        --  of 6 octets.
+
+
+        cabletron               OBJECT IDENTIFIER ::= { enterprises 52 }
+
+        commsDevice             OBJECT IDENTIFIER ::= { cabletron 1 }
+
+        layerMgmt               OBJECT IDENTIFIER ::= { cabletron 2 }
+
+        common                  OBJECT IDENTIFIER ::= { commsDevice 1 }
+
+        repeater                OBJECT IDENTIFIER ::= { commsDevice 2 }
+
+        bridge                  OBJECT IDENTIFIER ::= { commsDevice 3 }
+
+        router                  OBJECT IDENTIFIER ::= { commsDevice 4 }
+
+        product                 OBJECT IDENTIFIER ::= { commsDevice 5 }
+
+        subsystem               OBJECT IDENTIFIER ::= { commsDevice 6 }
+
+        subSysMMAC              OBJECT IDENTIFIER ::= { subsystem 1 }
+
+        subSysDevice            OBJECT IDENTIFIER ::= { subsystem 2 }
+
+        fnb2                    OBJECT IDENTIFIER ::= { subSysMMAC 2 }
+
+
+        --  groups in CTRON-COMMON-MIB
+        --  System Object Identifier(OID) Definitions
+
+        sysOIDs                 OBJECT IDENTIFIER ::= { common 2 }
+
+        sysOtherType            OBJECT IDENTIFIER ::= { sysOIDs 1 }
+                                --  Devices that do fit in the
+                                --  following categories
+
+        sysChassis              OBJECT IDENTIFIER ::= { sysOIDs 2 }
+                                --  Chassis' and enclosures
+
+        sysRepeaters            OBJECT IDENTIFIER ::= { sysOIDs 3 }
+                                --  Standalone repeater devices
+
+        sysBridges              OBJECT IDENTIFIER ::= { sysOIDs 4 }
+                                --  Standalone bridge devices
+
+        sysRouters              OBJECT IDENTIFIER ::= { sysOIDs 5 }
+                                --  Standalone router devices
+
+        sysIntDev               OBJECT IDENTIFIER ::= { sysOIDs 6 }
+                                --  Integrated devices
+
+
+        --  groups in CTRON-COMMON-MIB
+
+        commonRev1              OBJECT IDENTIFIER ::= { common 1 }
+
+        fnbTR                   OBJECT IDENTIFIER ::= { fnb2 1 }
+
+        fnbCSMACD               OBJECT IDENTIFIER ::= { fnb2 2 }
+
+        chassis                 OBJECT IDENTIFIER ::= { subSysMMAC 3 }
+
+        environment             OBJECT IDENTIFIER ::= { subSysMMAC 4 }
+
+        iRBM                    OBJECT IDENTIFIER ::= { subSysDevice 1 }
+
+        iRM2                    OBJECT IDENTIFIER ::= { subSysDevice 2 }
+
+        nB55                    OBJECT IDENTIFIER ::= { subSysDevice 3 }
+
+        nB2X                    OBJECT IDENTIFIER ::= { subSysDevice 4 }
+
+        mINIMMAC                OBJECT IDENTIFIER ::= { subSysDevice 5 }
+
+        mRXI                    OBJECT IDENTIFIER ::= { subSysDevice 6 }
+
+        iRM3                    OBJECT IDENTIFIER ::= { subSysDevice 7 }
+
+        tRMM                    OBJECT IDENTIFIER ::= { subSysDevice 8 }
+
+        eMME                    OBJECT IDENTIFIER ::= { subSysDevice 9 }
+
+        fPRedundancy            OBJECT IDENTIFIER ::= { subSysDevice 10 }
+
+        ups                     OBJECT IDENTIFIER ::= { subsystem 3 }
+
+        upsVersion              OBJECT IDENTIFIER ::= { ups 1 }
+
+        upsRevision             OBJECT IDENTIFIER ::= { upsVersion 1 }
+
+        dl                      OBJECT IDENTIFIER ::= { subsystem 4 }
+
+
+        --  The commonRev1 group
+
+        --  Implementation of this group is mandatory for all Cabletron
+        --  devices.
+
+        deviceType  OBJECT-TYPE
+            SYNTAX  INTEGER {
+                    other(1),       --  none of the following
+                    iRM2(176),      --  integrated repeater and
+                                    --  management subsystem, version 2
+                    iRBM(177),      --  integrated repeater, bridge,
+                                    --  and management subsystem
+                    iRM3(178),      --  integrated repeater and
+                                    --  management subsystem, version 3
+                    tRMBM-R(179),   --  token ring repeater, management,
+                                    --  and bridge subsystem, type R
+                    tRMBM-S(180),   --  token ring repeater, management,
+                                    --  and bridge subsystem, type S
+                    emm-E(185),     --  ethernet repeater, management,
+                                    --  and bridge subsystem
+                    tRMM(187),      --  token ring repeater and
+                                    --  management subsystem
+                    mrxi24(65569),  --  integrated repeater and
+                                    --  management subsytem with 24 
+                                    --  10BaseT ports (RJ45), 2 EPIMs
+                    mrxi22(65570),  --  integrated repeater and
+                                    --  management subsytem with 12 
+                                    --  10BaseT ports (RJ45), 1 EPIM
+                    mrxi34(65571),  --  integrated repeater and
+                                    --  management subsytem with 24
+                                    --  10BaseT ports (50-POS CHAMP), 1 EPIM
+                    mrxi38(65572)   --  integrated repeater and
+                                    --  management subsytem with 48
+                                    --  10BaseT ports (50-POS CHAMP), 2 EPIMs
+                    }
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "The type of management board."
+            ::= { commonRev1 1 }
+
+        deviceName  OBJECT-TYPE
+            SYNTAX  DisplayString
+            ACCESS  read-write
+            STATUS  mandatory
+            DESCRIPTION
+                    "A textual description on the entity managed by the
+                    resident agent.  It is mandatory that this only con-
+                    tain printable ASCII characters."
+            ::= { commonRev1 2 }
+
+        deviceIPAddress OBJECT-TYPE
+            SYNTAX  NetworkAddress
+            ACCESS  read-write
+            STATUS  mandatory
+            DESCRIPTION
+                    "The Network address, in this case the IP address,
+                    of the device.  This object is required for use by
+                    the Local Management Interface."
+            ::= { commonRev1 3 }
+
+        deviceTime OBJECT-TYPE
+            SYNTAX  DisplayString (SIZE(8))
+            ACCESS  read-write
+            STATUS  mandatory
+            DESCRIPTION
+                    "The current time of day, in 24 hour format, as
+                    measured by the device.  The representation shall
+                    use the standard HHMMSS format."
+            ::= { commonRev1 4 }
+
+        deviceDate  OBJECT-TYPE
+            SYNTAX  DisplayString (SIZE(8))
+            ACCESS  read-write
+            STATUS  mandatory
+            DESCRIPTION
+                    "The current date, as measured by the device.  The
+                    representation shall use the standard MMDDYY for-
+                    mat."
+            ::= { commonRev1 5 }
+
+
+        --  The fnbTR group
+
+        --  Implementation of this group is mandatory for Token Ring
+        --  subsystems on devices that incorporate the FNB.
+
+        fnbTRTable  OBJECT-TYPE
+            SYNTAX  SEQUENCE OF FnbTREntry
+            ACCESS  not-accessible
+            STATUS  mandatory
+            DESCRIPTION
+                    "A list of entries that provide connection status of
+                    Token Ring subsystems, for the FNB."
+            ::= { fnbTR 1 }
+
+        fnbTREntry  OBJECT-TYPE
+            SYNTAX  FnbTREntry
+            ACCESS  not-accessible
+            STATUS  mandatory
+            DESCRIPTION
+                    "An entry in the fnbTRTable containing objects that
+                    provide FNB connection status for a Token Ring sub-
+                    system."
+            INDEX  { fnbTRIndex }
+            ::= { fnbTRTable 1 }
+
+
+        FnbTREntry ::=
+            SEQUENCE {
+                 fnbTRIndex
+                      INTEGER,
+                 fnbConnectLeft
+                      INTEGER,
+                 fnbConnectRight
+                      INTEGER,
+                 fnbBypass
+                      INTEGER
+            }
+
+        fnbTRIndex  OBJECT-TYPE
+            SYNTAX  INTEGER
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "An unique value for each Token Ring subsystem.  Its
+                    value ranges between 1 and chassisSlots.  The value
+                    for each interface must remain constant, at least,
+                    from one re-initialization of the entity's network
+                    management system to the next re-initialization."
+            ::= { fnbTREntry 1 }
+
+        fnbConnectLeft  OBJECT-TYPE
+            SYNTAX  INTEGER {
+                        other(1),       --  none of the following
+                        detached(2),
+                        attached(3),
+                        faulted(4)
+                    }
+            ACCESS  read-write
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the connection status of the Token Ring
+                    board to the left of the current one.  An attempt to
+                    set a value of 1 or 4 will result in an error code
+                    of badValue."
+            ::= { fnbTREntry 2 }
+
+        fnbConnectRight  OBJECT-TYPE
+            SYNTAX  INTEGER {
+                        other(1),       --  none of the following
+                        detached(2),
+                        attached(3),
+                        faulted(4)
+                    }
+            ACCESS  read-write
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the connection status of the Token Ring
+                    board to the right of the current one.  An attempt
+                    to set a value of 1 or 4 will result in an error
+                    code of badValue."
+            ::= { fnbTREntry 3 }
+
+        fnbBypass  OBJECT-TYPE
+            SYNTAX  INTEGER {
+                        other(1),       --  none of the following
+                        disabled(2),
+                        enabled(3)
+                    }
+            ACCESS  read-write
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the bypass status of the current Token Ring
+                    board."
+            ::= { fnbTREntry 4 }
+
+
+        --  The fnbCSMACD group
+
+        --  Implementation of this group is mandatory for CSMA/CD
+        --  subsystems on devices that incorporate the FNB.
+
+        fnbCSMACDTable  OBJECT-TYPE
+            SYNTAX  SEQUENCE OF FnbCSMACDEntry
+            ACCESS  not-accessible
+            STATUS  mandatory
+            DESCRIPTION
+                    "A list of entries that provide connection status of
+                    CSMA/CD subsystems, for the FNB."
+            ::= { fnbCSMACD 1 }
+
+        fnbCSMACDEntry  OBJECT-TYPE
+            SYNTAX  FnbCSMACDEntry
+            ACCESS  not-accessible
+            STATUS  mandatory
+            DESCRIPTION
+                    "An entry in the fnbCSMACDTable containing objects
+                    that provide FNB connection status for a CSMA/CD
+                    subsystem."
+            INDEX  { fnbCSMACDIndex }
+            ::= { fnbCSMACDTable 1 }
+
+        FnbCSMACDEntry ::=
+            SEQUENCE {
+                 fnbCSMACDIndex
+                      INTEGER,
+                 fnbConnect
+                      INTEGER
+            }
+
+        fnbCSMACDIndex  OBJECT-TYPE
+            SYNTAX  INTEGER
+            ACCESS  read-write
+            STATUS  mandatory
+            DESCRIPTION
+                    "An unique value for each CSMACD subsystem.  Its
+                    value ranges between 1 and chassisSlots.  The value
+                    for each interface must remain constant, at least,
+                    from one re-initialization of the entity's network
+                    management system to the next re-initialization."
+            ::= { fnbCSMACDEntry 1 }
+
+        fnbConnect  OBJECT-TYPE
+            SYNTAX  INTEGER {
+                        connectB(1),
+                        connectC(2),
+                        disconnect(3)
+                    }
+            ACCESS  read-write
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the connection status of the CSMA/CD board
+                    to the inter-RIC bus."
+            ::= { fnbCSMACDEntry 2 }
+
+
+        --  The chassis group
+
+        --  Implementation of this group is mandatory for all cabletron
+        --  devices
+
+        chassisHWRev  OBJECT-TYPE
+            SYNTAX  INTEGER
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Define the hardware revision of the device or sys-
+                    tem chassis."
+            ::= { chassis 1 }
+
+        chassisType  OBJECT-TYPE
+            SYNTAX  INTEGER  {
+                    other(1),       -- none of the following
+                    mMAC8FNB(2),
+                    mMAC5FNB(3),
+                    mMAC3FNB(4),
+                    mINIMMAC(5),
+                    mRXI(6),
+                    m3FNB(7),
+                    m5FNB(8),
+                    m8FNB(9),
+                    nonFNB(10)
+                    }
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the type of chassis."
+            ::= { chassis 2 }
+
+        chassisSlots  OBJECT-TYPE
+            SYNTAX  INTEGER
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the number of available chassis slots."
+            ::= { chassis 3 }
+
+        chassisFNB  OBJECT-TYPE
+            SYNTAX  INTEGER  {
+                        absent(1),
+                        present(2)
+                    }
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the presence or absence of the FNB."
+            ::= { chassis 4 }
+
+        chassisAlarmEna  OBJECT-TYPE
+            SYNTAX  INTEGER  {
+                        disable(1),
+                        enable(2)
+                    }
+            ACCESS  read-write
+            STATUS  mandatory
+            DESCRIPTION
+                    "Allow an audible alarm to be either enabled or dis-
+                    abled."
+            ::= { chassis 5 }
+
+        chassisAlarmState  OBJECT-TYPE
+            SYNTAX  INTEGER  {
+                        off(1),
+                        on(2)
+                    }
+            ACCESS  read-write
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the state of the audible alarm."
+            ::= { chassis 6 }
+
+
+        --  The environment group
+
+        --  Implementation of this group is mandatory for devices that
+        --  incorporate environmental support.
+
+        powerTable  OBJECT-TYPE
+            SYNTAX  SEQUENCE OF PowerEntry
+            ACCESS  not-accessible
+            STATUS  mandatory
+            DESCRIPTION
+                    "A list of power supply entries."
+            ::= { environment 1 }
+
+        powerEntry  OBJECT-TYPE
+            SYNTAX  PowerEntry
+            ACCESS  not-accessible
+            STATUS  mandatory
+            DESCRIPTION
+                    "An entry in the powerTable providing objects for a
+                    power supply."
+            INDEX  { powerSupplyNum }
+            ::= { powerTable 1 }
+
+        PowerEntry ::=
+            SEQUENCE  {
+                 powerSupplyNum
+                      INTEGER
+            }
+
+        powerSupplyNum  OBJECT-TYPE
+            SYNTAX  INTEGER {
+                        powersupply1(1),
+                        powersupply2(2),
+                        powersupply3(3),
+                        powersupply4(4)
+                    }
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the power supply that may have failed.
+                    This OID exists solely for the Trap information.
+                    It can not be read."
+            ::= { powerEntry 1 }
+
+
+        --  The iRBM group
+
+        --  Implementation of this group is mandatory for the iRBM device.
+
+
+        iRBMHWAddress  OBJECT-TYPE
+            SYNTAX  PhysAddress
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "The device's MAC address."
+            REFERENCE
+                    "This value is the same as ifPhysAddress in RFC
+                    1213."
+            ::= { iRBM 1 }
+
+        iRBMHWRev  OBJECT-TYPE
+            SYNTAX  INTEGER
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the revision of the IRBM board. A value of
+                    one denotes Revision 1, a value of two denotes Revi-
+                    sion 2, and so on."
+            ::= { iRBM 2 }
+
+        iRBMFWRev  OBJECT-TYPE
+            SYNTAX  OCTET STRING (SIZE(2))
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the revision of firmware in the module.
+                    The first octets provides the version, and the
+                    second provides the revision."
+            ::= { iRBM 3 }
+
+        iRBMPortAssoc  OBJECT-TYPE
+            SYNTAX  INTEGER  {
+                        other(1),       --  none of the following
+                        abrFoff(2),     --  AUI is bridge, fiber is
+                                        --  off
+                        aoffFbr(3),     --  AUI is off, fiber
+                                        --  is bridge
+                        abrFrp(4),      --  AUI is bridge, fiber is
+                                        --  repeater
+                        arpFbr(5),      --  AUI is repeater, fiber
+                                        --  is bridge
+                        aoffFrp(6),     --  AUI is off, fiber
+                                        --  is repeater
+                        arpFoff(7)      --  AUI is repeater, fiber
+                                        --  is off
+                    }
+            ACCESS  read-write
+            STATUS  mandatory
+            DESCRIPTION
+                    "Controls how the front panel ports are associated
+                    with the bridge and/or repeater."
+            ::= { iRBM 4 }
+
+
+
+        iRM2HWAddress  OBJECT-TYPE
+            SYNTAX  PhysAddress
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "The device's MAC address."
+            REFERENCE
+                    "This value is the same as ifPhysAddress in RFC
+                    1213."
+            ::= { iRM2 1 }
+
+        iRM2HWRev  OBJECT-TYPE
+            SYNTAX  INTEGER
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the revision of the IRM2 board. A value of
+                    one denotes Revision 1, a value of two denotes Revi-
+                    sion 2, and so on."
+            ::= { iRM2 2 }
+
+        iRM2FWRev  OBJECT-TYPE
+            SYNTAX  OCTET STRING (SIZE(2))
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the revision of firmware in the module.
+                    The first octets provides the version, and the
+                    second provides the revision."
+            ::= { iRM2 3 }
+
+        iRM2PortAssoc  OBJECT-TYPE
+            SYNTAX  INTEGER  {
+                        other(1),        --  none of the following
+                        aoffFrp(2),      --  AUI is off, fiber
+                                         --  is repeater
+                        arpFoff(3)       --  AUI is repeater, fiber
+                                         --  is off 
+                    }
+            ACCESS  read-write
+            STATUS  mandatory
+            DESCRIPTION
+                    "Controls how the front panel ports are associated
+                    with the repeater."
+            ::= { iRM2 4 }
+
+
+        --  The nB55 group
+
+        --  Implementation of this group is mandatory for the nB55 device.
+
+        nB55HWAddress  OBJECT-TYPE
+            SYNTAX  PhysAddress
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "The device's MAC address."
+            REFERENCE
+                    "This value is the same as ifPhysAddress in RFC
+                    1213."
+            ::= { nB55 1 }
+
+        nB55HWRev  OBJECT-TYPE
+            SYNTAX  INTEGER
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the revision of the nB55 board. A value of
+                    one denotes Revision 1, a value of two denotes Revi-
+                    sion 2, and so on."
+            ::= { nB55 2 }
+
+        nB55FWRev  OBJECT-TYPE
+            SYNTAX  OCTET STRING (SIZE(2))
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the revision of firmware in the module.
+                    The first octets provides the version, and the
+                    second provides the revision."
+            ::= { nB55 3 }
+
+
+        --  The nB2X group
+        --  Implementation of this group is mandatory for the nB2X device.
+
+        nB2XHWAddress  OBJECT-TYPE
+            SYNTAX  PhysAddress
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "The device's MAC address."
+            REFERENCE
+                    "This value is the same as ifPhysAddress in RFC
+                    1213."
+            ::= { nB2X 1 }
+
+        nB2XHWRev  OBJECT-TYPE
+            SYNTAX  INTEGER
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the revision of the nB2X board. A value of
+                    one denotes Revision 1, a value of two denotes Revi-
+                    sion 2, and so on."
+            ::= { nB2X 2 }
+
+        nB2XFWRev  OBJECT-TYPE
+            SYNTAX  OCTET STRING (SIZE(2))
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the revision of firmware in the module.
+                    The first octets provides the version, and the
+                    second provides the revision."
+            ::= { nB2X 3 }
+
+
+        --  The mINIMMAC group
+
+        --  Implementation of this group is mandatory for the
+        --  mINIMMAC device.
+
+        mINIMMACHWAddress  OBJECT-TYPE
+            SYNTAX  PhysAddress
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "The device's MAC address."
+            REFERENCE
+                    "This value is the same as ifPhysAddress in RFC
+                    1213."
+            ::= { mINIMMAC 1 }
+
+        mINIMMACHWRev  OBJECT-TYPE
+            SYNTAX  INTEGER
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the revision of the mINIMMAC board. A value
+                    of one denotes Revision 1, a value of two denotes
+                    Revision 2, and so on."
+            ::= { mINIMMAC 2 }
+
+        mINIMMACFWRev  OBJECT-TYPE
+            SYNTAX  OCTET STRING (SIZE(2))
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the revision of firmware in the module.
+                    The first octets provides the version, and the
+                    second provides the revision."
+            ::= { mINIMMAC 3 }
+
+
+        --  The mRXI group
+
+        --  Implementation of this group is mandatory for the mRXI device.
+
+        mRXIHWAddress  OBJECT-TYPE
+            SYNTAX  PhysAddress
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "The device's MAC address."
+            REFERENCE
+                    "This value is the same as ifPhysAddress in RFC
+                    1213."
+            ::= { mRXI 1 }
+
+        mRXIHWRev  OBJECT-TYPE
+            SYNTAX  INTEGER
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the revision of the mRXI board. A value of
+                    one denotes Revision 1, a value of two denotes Revi-
+                    sion 2, and so on."
+            ::= { mRXI 2 }
+
+        mRXIFWRev  OBJECT-TYPE
+            SYNTAX  OCTET STRING (SIZE(2))
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the revision of firmware in the module.
+                    The first octets provides the version, and the
+                    second provides the revision."
+            ::= { mRXI 3 }
+
+
+        --  The iRM3 group
+
+        --  Implementation of this group is mandatory for the iRM3 device.
+
+        iRM3HWAddress  OBJECT-TYPE
+            SYNTAX  PhysAddress
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "The device's MAC address."
+            REFERENCE
+                    "This value is the same as ifPhysAddress in RFC
+                    1213."
+            ::= { iRM3 1 }
+
+        iRM3HWRev  OBJECT-TYPE
+            SYNTAX  INTEGER
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the revision of the IRM3 board. A value of
+                    one denotes Revision 1, a value of two denotes Revi-
+                    sion 2, and so on."
+            ::= { iRM3 2 }
+
+        iRM3FWRev  OBJECT-TYPE
+            SYNTAX  OCTET STRING (SIZE(2))
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the revision of firmware in the module.
+                    The first octets provides the version, and the
+                    second provides the revision."
+            ::= { iRM3 3 }
+
+
+        iRM3PortAssoc  OBJECT-TYPE
+            SYNTAX  INTEGER  {
+                        aoffFrp(5),      --  AUI is repeater, fiber
+                                         --  is off
+                        arpFoff(6)       --  AUI is off, fiber
+                                         --  is repeater
+                    }
+            ACCESS  read-write
+            STATUS  mandatory
+            DESCRIPTION
+                    "Controls how front panel ports are associated 
+                    with the Irm3."
+            ::= { iRM3 4 }
+
+        --  The tRMM group
+        --  Implementation of this group is mandatory for the tRMM device.
+
+        tRMMHWAddress  OBJECT-TYPE
+            SYNTAX  PhysAddress
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "The device's MAC address."
+            REFERENCE
+                    "This value is the same as ifPhysAddress in RFC
+                    1213."
+            ::= { tRMM 1 }
+
+        tRMMHWRev  OBJECT-TYPE
+            SYNTAX  INTEGER
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the revision of the tRMM board. A value of
+                    one denotes Revision 1, a value of two denotes Revi-
+                    sion 2, and so on."
+            ::= { tRMM 2 }
+
+        tRMMFWRev  OBJECT-TYPE
+            SYNTAX  OCTET STRING (SIZE(2))
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the revision of firmware in the module.
+                    The first octets provides the version, and the
+                    second provides the revision."
+            ::= { tRMM 3 }
+
+
+        --  The eMME group
+
+        --  Implementation of this group is mandatory for the eMME device.
+
+        eMMEHWAddress  OBJECT-TYPE
+            SYNTAX  PhysAddress
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "The device's MAC address."
+            REFERENCE
+                    "This value is the same as ifPhysAddress in RFC
+                    1213."
+            ::= { eMME 1 }
+
+        eMMEHWRev  OBJECT-TYPE
+            SYNTAX  INTEGER
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the revision of the eMME board. A value of
+                    one denotes Revision 1, a value of two denotes Revi-
+                    sion 2, and so on."
+            ::= { eMME 2 }
+
+        eMMEFWRev  OBJECT-TYPE
+            SYNTAX  OCTET STRING (SIZE(2))
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the revision of firmware in the module.
+                    The first octets provides the version, and the
+                    second provides the revision."
+            ::= { eMME 3 }
+
+        eMMEBoardMap  OBJECT-TYPE
+            SYNTAX  INTEGER
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes a bit encoded representation of the slots that
+                     contain MIM boards.  If a bit is a one then the board
+                     is present."
+            ::= { eMME 4 }
+
+
+        --  The fPredund group
+
+        --  Implementation of this group is mandatory for devices with
+        --  front panel redundancy.
+
+        fPRedund          OBJECT IDENTIFIER ::= { fPRedundancy 1 }
+
+        fPRedundReset     OBJECT-TYPE
+            SYNTAX  INTEGER {
+                    noReset(1),
+                    reset(2)
+                    }
+            ACCESS      read-write
+            STATUS      mandatory
+            DESCRIPTION
+                    "If this object is set to Reset it will cause a reset
+                     of the front panel redundancy. Setting this object to
+                     NoReset will do nothing. This object will always be 
+                     read as NoReset."
+             ::= {fPRedund 1}
+ 
+        fPRedundPollInterval  OBJECT-TYPE
+            SYNTAX      INTEGER
+            ACCESS      read-write
+            STATUS      mandatory
+            DESCRIPTION
+                    "Get/Set the number of seconds between polls for front
+                     panel redundancy."
+             ::= {fPRedund 2}
+        
+        fPRedundRetrys    OBJECT-TYPE
+            SYNTAX      INTEGER
+            ACCESS      read-write
+            STATUS      mandatory
+            DESCRIPTION
+                    "Get/Set the the number of unanswered polls allowed for
+                     the front panel redundancy before it switches ports."
+            ::= {fPRedund 3}
+        
+        fPRedundNumAddr   OBJECT-TYPE
+            SYNTAX      INTEGER
+            ACCESS      read-only
+            STATUS      mandatory
+            DESCRIPTION
+                    "Get the number of IP Addresses associated with front panel
+                     redundancy."
+            ::= {fPRedund 4}
+        
+        fPRedundAddAddr   OBJECT-TYPE
+            SYNTAX      NetworkAddress
+            ACCESS      read-write
+            STATUS      mandatory
+            DESCRIPTION
+                    "Add an IP Address to the polling list for the front panel
+                     redundancy."
+            ::= {fPRedund 5}
+          
+        fPRedundDelAddr   OBJECT-TYPE
+            SYNTAX      NetworkAddress
+            ACCESS      read-write
+            STATUS      mandatory
+            DESCRIPTION
+                    "Delete an IP Address from the polling list for the 
+                     front panel redundancy."
+            ::= {fPRedund 6}
+
+        fPRedundActivePort  OBJECT-TYPE
+            SYNTAX      INTEGER
+            ACCESS      read-write
+            STATUS      mandatory
+            DESCRIPTION
+                    "Get/Set the front panel port you want to be active 
+                     when front panel redundancy is enabled."
+            ::= {fPRedund 7}
+        
+        fPRedundEnable    OBJECT-TYPE
+            SYNTAX      INTEGER {
+                        disable(1),
+                        enable(2)
+                        }
+            ACCESS      read-write
+            STATUS      mandatory
+            DESCRIPTION
+                    "If this object is set to enable, the front panel
+                     redundancy will be activated. If this object is set 
+                     to disable,  the front panel redundancy will be 
+                     deactivated.  When read, this object will returns the 
+                     state of the object based on the last request 
+                     made."
+            ::= {fPRedund 8}
+        
+        
+        --  The fPredundAddr group
+
+        --  Implementation of this group is mandatory for devices with
+        --  front panel redundancy.
+
+        fPRedundAddrTable OBJECT-TYPE
+            SYNTAX      SEQUENCE OF FPRedundAddrEntry
+            ACCESS      not-accessible
+            STATUS      mandatory
+            DESCRIPTION
+                    ""
+            ::= { fPRedundancy 2 }
+        
+        fPRedundAddrEntry OBJECT-TYPE
+            SYNTAX      FPRedundAddrEntry
+            ACCESS      not-accessible
+            STATUS      mandatory
+            DESCRIPTION
+                    ""
+            INDEX       { fPRedundAddrId }
+            ::= { fPRedundAddrTable 1 }
+        
+        FPRedundAddrEntry ::=
+          SEQUENCE {
+             fPRedundAddrId
+                  INTEGER,
+             fPRedundAddrIPAddr
+                  NetworkAddress
+          }
+        
+        fPRedundAddrId    OBJECT-TYPE
+            SYNTAX      INTEGER
+            ACCESS      read-only
+            STATUS      mandatory
+            DESCRIPTION
+                    "A unique value identifying an element in a sequence of
+                     member IP Addresses which belong to the front panel 
+                     redundancy.  This value goes from 1 to the maximum 
+                     number of IP Addresses which may be included in  
+                     front panel redundancy."
+            ::= {fPRedundAddrEntry 1}
+          
+        fPRedundAddrIPAddr    OBJECT-TYPE
+            SYNTAX      NetworkAddress
+            ACCESS      read-only
+            STATUS      mandatory
+            DESCRIPTION
+                    "Returns an IP Address associated with the front panel
+                     redundancy."
+            ::= {fPRedundAddrEntry 2}
+        
+
+        --  The ups group
+
+        --  Implementation of this group is mandatory for devices that
+        --  incorporate uninterruptible power supplies.
+
+
+        upsID  OBJECT-TYPE
+            SYNTAX  INTEGER  {
+                        other(1),       -- none of the following
+                        aPCModel370(257),
+                        aPCModel400(258),
+                        aPCModel600(259),
+                        aPCModel900(260),
+                        aPCModel1250(261),
+                        aPCModel2000(262)
+                    }
+            ACCESS  read-write
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes a type code which refers to the manufactur-
+                    ers and model of the UPS."
+            ::= { upsRevision 1 }
+
+        upsUpTime  OBJECT-TYPE
+            SYNTAX  INTEGER
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the operating time, in hours, since the UPS
+                    was last powered on."
+            ::= { upsRevision 2 }
+
+        upsDisable  OBJECT-TYPE
+            SYNTAX  INTEGER
+            ACCESS  read-write
+            STATUS  deprecated
+            DESCRIPTION
+                    "Allows the UPS to be disabled.  A set turns of the
+                    UPS for those systems, so equipped.  A get/get-next
+                    always returns 0."
+            ::= { upsRevision 3 }
+
+        upsDisconnect  OBJECT-TYPE
+            SYNTAX  INTEGER
+            ACCESS  read-write
+            STATUS  mandatory
+            DESCRIPTION
+                    "Allows the UPS backup power system to conserve its
+                    battery.  A set turns off the power system.  A
+                    get/get-next always retuns a 0."
+            ::= { upsRevision 4 }
+
+        upsTest  OBJECT-TYPE
+            SYNTAX  INTEGER  {
+                    unitOK(1),
+                    unitFailed(2),
+                    badBattery(3),
+                    noRecentTest(4),  --  no test performed in the last five
+                                      --  minutes
+                    underTest(5)
+                    }
+            ACCESS  read-write
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the status performed on the UPS.  A write
+                    intiates the test.  A read indicates status of
+                    test."
+            ::= { upsRevision 5 }
+
+        upsBatteryCapacity  OBJECT-TYPE
+            SYNTAX  INTEGER
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the percentage of battery capacity left,
+                    100% being a fully-charged battery."
+            ::= { upsRevision 6 }
+
+        upsACLineVoltsIn  OBJECT-TYPE
+            SYNTAX  INTEGER
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the input AC utility line voltage."
+            ::= { upsRevision 7 }
+
+        upsBatteryVoltsOut  OBJECT-TYPE
+            SYNTAX  INTEGER
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the battery voltage."
+            ::= { upsRevision 8 }
+
+
+        --  The dl group
+
+        --  Implementation of this group is mandatory for systems
+        --  that provide the ability to download firmware."
+
+
+        dlForceOnBoot  OBJECT-TYPE
+            SYNTAX  INTEGER
+            ACCESS  read-write
+            STATUS  mandatory
+            DESCRIPTION
+		    "When set to a 1, the system will request a
+		     download, during the next system restart.
+                     If no server is found and the current image
+		     in flash memory is valid, the system will boot
+		     using the flash-resident image."
+            ::= { dl 1 }
+
+        dlCommitRAMToFlash  OBJECT-TYPE
+            SYNTAX  INTEGER
+            ACCESS  read-write
+            STATUS  mandatory
+            DESCRIPTION
+                    "When written with a 1, the boot software will erase
+                    flash memory, compress the downloaded code, and save
+                    the compressed image into flash memory.  Upon com-
+                    pletion of this operation, the flash memory driver
+                    resets this object to 0, indicating completion of
+                    the programming operation.
+
+                    When read, a value of 0 indicates the download to be
+                    complete; a value of 1 indicates a download to be in
+                    progress."
+            ::= { dl 2 }
+
+        dlInitiateColdBoot  OBJECT-TYPE
+            SYNTAX  INTEGER
+            ACCESS  read-write
+            STATUS  mandatory
+            DESCRIPTION
+                    "When written with a 1, the boot software intiates a
+                    system reboot.  All MIB variables used to control
+                    the exact nature of the download should be set,
+                    prior to activating a system reset.
+
+                    A read always returns a 0."
+            ::= { dl 3 }
+
+        dlTFTPRequestHost  OBJECT-TYPE
+            SYNTAX  NetworkAddress
+            ACCESS  read-write
+            STATUS  mandatory
+            DESCRIPTION
+                    "The IP address of the server to be used, when
+                    firmware is to be loaded across the network."
+            ::= { dl 4 }
+
+        dlTFTPRequest  OBJECT-TYPE
+            SYNTAX  DisplayString
+            ACCESS  read-write
+            STATUS  mandatory
+            DESCRIPTION
+                    "The filename requested of the server, when firmware
+                    is to be loaded across the network."
+            ::= { dl 5 }
+
+        dlLastImageFilename  OBJECT-TYPE
+            SYNTAX  DisplayString
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Filename of the last image to be successfully
+                    loaded into memory."
+            ::= { dl 6 }
+
+        dlLastServerIPAddress  OBJECT-TYPE
+            SYNTAX  NetworkAddress
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "The IP address of the server used to load the
+                    present image in flash memory."
+            ::= { dl 7 }
+
+        dlFlashSize  OBJECT-TYPE
+            SYNTAX  INTEGER
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the size, in bytes, of flash memory con-
+                    tained on this module."
+            ::= { dl 8 }
+
+        dlFlashCount  OBJECT-TYPE
+            SYNTAX  INTEGER
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the number of times that flash memory has
+                    been reprogrammed.  This value is initialzed to 1,
+                    when the module is initially powered up."
+            ::= { dl 9 }
+
+        dlFirmwareBase  OBJECT-TYPE
+            SYNTAX  INTEGER
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the starting address of the firmware in
+                    RAM."
+            ::= { dl 10 }
+
+        dlFirmwareTop  OBJECT-TYPE
+            SYNTAX  INTEGER
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the ending address of firmware in RAM."
+            ::= { dl 11 }
+
+        dlFirmwareStart  OBJECT-TYPE
+            SYNTAX  INTEGER
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the start address of the firmware, in RAM,
+                    as established by the boot process."
+            ::= { dl 12 }
+
+        dlBootRev  OBJECT-TYPE
+            SYNTAX  OCTET STRING (SIZE(2))
+            ACCESS  read-only
+            STATUS  mandatory
+            DESCRIPTION
+                    "Denotes the revision of boot firmware in the module.
+                    The first octets provides the version, and the
+                    second provides the revision."
+            ::= { dl 13 }
+
+        --  Enterprise specific trap definitions
+
+--        aPCLineFail  OBJECT-TYPE
+--            ENTERPRISE  cabletron
+--            DESCRIPTION
+--                    "This trap is generated in the event of an AC util-
+--                    ity line failure."
+--            ::= 0x1101
+--
+--        aPCLineFailRecovery  OBJECT-TYPE
+--            ENTERPRISE  cabletron
+--            DESCRIPTION
+--                    "This trap is generated when the UPS switches back
+--                    to line, and only if the aPCLineFail trap was issued
+--                    first."
+--            ::= 0x1102
+--
+--        aPCLowBattery  OBJECT-TYPE
+--            ENTERPRISE  cabletron
+--            DESCRIPTION
+--                    "This trap is generated in the event that the UPS'
+--                    battery is found to be low."
+--            ::= 0x1103
+--
+--        aPCLowBatteryRecovery  OBJECT-TYPE
+--            ENTERPRISE  cabletron
+--            DESCRIPTION
+--                    "This trap is generated when the UPS' battery has
+--                    charged above the low-battery point, and only if the
+--                    aPCLowBattery trap was issued first."
+--            ::= 0x1104
+--
+--        aPCAbnormalCondition  OBJECT-TYPE
+--            ENTERPRISE  cabletron
+--            DESCRIPTION
+--                   "This trap is generated in the event that the UPS
+--                    has entered an abnormal condition, such as an over-
+--                    load or trip on low battery.  This trap is also
+--                    sent, when the UPS is first turned on."
+--            ::= 0x1105
+--
+--        aPCAbnormalConditionRecovery  OBJECT-TYPE
+--            ENTERPRISE  cabletron
+--            DESCRIPTION
+--                    "This trap is generated when the UPS has recovered
+--                    from an abnormal condition, and only if the aPCAb-
+--                    normalCondition trap was issued first."
+--            ::= 0x1106
+--
+--        aPCShuttingDown  OBJECT-TYPE
+--            ENTERPRISE  cabletron
+--            DESCRIPTION
+--                    "This trap is generated in the event that the UPS
+--                    has been ordered to shut itself, or the load, off
+--                    over the serial line."
+--            ::= 0x1107
+--
+--
+
+END
+

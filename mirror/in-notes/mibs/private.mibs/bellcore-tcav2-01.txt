@@ -1,0 +1,1042 @@
+
+
+          Bellcore       Threshold Crossing Alert Objects      June 1994
+
+
+                          Definitions of Managed Objects
+                          for Threshold Crossing Alerts
+                                    SNMPv2 MIB
+                              bellcore-tcav2-01.txt
+                    (See bellcore-tcav1-01.mib for SNMPv1 MIB)
+
+                                    June 1994
+                                   Version 1.1
+
+
+                       Tracy A. Brown, Kaj Tesink (editors)
+                           Bell Communications Research
+                             331 Newman Springs Road
+                               Red Bank, NJ  07701
+
+                   tacox@mail.bellcore.com, kaj@cc.bellcore.com
+
+
+
+
+
+
+          1.  Status of this Memo
+
+          This document is a private extension to the SNMP MIB.
+          Distribution of this memo is unlimited.  Please send comments
+          to the editor.
+
+
+          2.  Abstract
+
+          This memo defines a private portion of the Management
+          Information Base (MIB) for use with network management
+          protocols in TCP/IP-based internets.  In particular, it
+          defines objects for managing Threshold Crossing Alert
+          information for managed interfaces. An interface can for
+          example be an SMDS Subscriber-Network Interface or Inter-
+          Carrier Interface (SNI/ICI), Frame Relay User-Network
+          Interface or Inter-Carrier Interface (UNI/ICI), or ATM-based
+          CRS User-Network Interface or Inter-Carrier Interface
+          (UNI/ICI).
+
+          This memo does not specify a standard for the Internet
+          community.
+
+
+
+
+
+
+          Tracy A. Brown, Kaj Tesink (editors)                  [Page 1]
+
+
+
+
+
+
+          Bellcore       Threshold Crossing Alert Objects      June 1994
+
+
+          3.  The Network Management Framework
+
+          The SNMPv2 Network Management Framework consists of four major
+          components.  They are:
+
+           o    RFC 1442 which defines the SMI, the mechanisms used for
+                describing and naming objects for the purpose of
+                management.
+
+           o    RFC 1213 defines MIB-II, the core set of managed objects
+                for the Internet suite of protocols.
+
+           o    RFC 1445 which defines the administrative and other
+                architectural aspects of the framework.
+
+           o    RFC 1448 which defines the protocol used for network
+                access to managed objects.
+
+          The Framework permits new objects to be defined for the
+          purpose of experimentation and evaluation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          Tracy A. Brown, Kaj Tesink (editors)                  [Page 2]
+
+
+
+
+
+
+          Bellcore       Threshold Crossing Alert Objects      June 1994
+
+
+          4.  Object Definitions
+
+          Managed objects are accessed via a virtual information store,
+          termed the Management Information Base or MIB.  Objects in the
+          MIB are defined using the subset of Abstract Syntax Notation
+          One (ASN.1) defined in the SMI.  In particular, each object
+          object type is named by an OBJECT IDENTIFIER, an
+          administratively assigned name.  The object type together with
+          an object instance serves to uniquely identify a specific
+          instantiation of the object.  For human convenience, we often
+          use a textual string, termed the descriptor, to refer to the
+          object type.
+
+          5.  Overview
+
+          These objects are used in the context of a SNMP-based Customer
+          Network Management (CNM) service and Exchange Access
+          Operations Management (XA-OM) that can be provided by networks
+          supporting SMDS, Frame Relay Service, and Cell Relay Service.
+          See references [5] - [8].
+
+          This MIB provides Threshold Crossing Alert (TCA) information
+          to a CNM or XA-OM subscriber.  A Threshold Crossing Alert is a
+          message that is sent from a switching system to an OS (e.g.,
+          SNMP agent) whenever a counter value crosses a predefined
+          threshold.  The switching system collects information over a
+          15-minute interval, and the threshold value is an absolute
+          value for the counter over that 15-minute interval.
+          Therefore, each counter value can only cross a threshold once
+          over a 15-minute period. This MIB represents what TCAs have
+          been received for each interface sublayer.  An interface
+          sublayer can be the protocol sublayers of an SMDS Subscriber-
+          Network Interface or Inter-Carrier Interface (SNI/ICI), Frame
+          Relay User-Network Interface or Inter-Carrier Interface
+          (UNI/ICI), or ATM-based CRS User-Network Interface or Inter-
+          Carrier Interface (UNI/ICI).  See References [5] - [8] for the
+          definitions of the protocol sublayers for each service
+          interface.  Capturing TCA information in this MIB is
+          necessary, because many Fast Packet Switching Systems are not
+          capable of meeting the data currency objective of 180 seconds
+          as described in the Bellcore Technical Advisories/References.
+          However, the Switching Systems are capable of alerting the
+          SNMP agent when a counter value exceeds a predefined threshold
+          via the TCA mechanism.  These TCAs can be translated into SNMP
+          objects that can be provided to the CNM or XA-OM subscriber.
+
+
+
+
+
+          Tracy A. Brown, Kaj Tesink (editors)                  [Page 3]
+
+
+
+
+
+
+          Bellcore       Threshold Crossing Alert Objects      June 1994
+
+
+          Therefore, even though CNM or XA-OM subscribers do not have
+          access to current counter values, they will have access to
+          information regarding what counters have crossed a threshold
+          within a 15-minute interval.  Therefore, threshold crossing
+          information provides these subscribers with a timely fault
+          detection/isolation capability.  A CNM subscriber may use this
+          information for multiple network management functions and
+          capabilities.  In addition to TCAs, this MIB module allows the
+          definition of other thresholding conditions that are unrelated
+          to 15 minute intervals.
+
+          There are two mechanisms in which a CNM and XA-OM subscriber
+          receives TCA information.  One mechanism is by polling the
+          objects defined in this TCA MIB (primarily the tcaCounts
+          object), and the other is by being asynchronously alerted of a
+          TCA via an SNMP trap message called the fyiTrap. See Reference
+          [10] for a description of the fyiTrap.  However, to control
+          the potential flood of traps being sent to a CNM and XA-OM
+          subscriber, some TCA information may not cause a trap to be
+          automatically generated.  See the tcaTrapEnabler object.  This
+          object is read-write.  However, initially the object has a
+          minimum access of read-only.  It is envisioned that in the
+          future, the CNM and XA-OM subscriber may change the value of
+          the tcaTrapEnabler, thus requesting what TCAs should generate
+          traps.
+
+          The counters being thresholded are defined in the following
+          Bellcore documents:
+
+          --  TR-TSV-001062, SMDS CNM Service
+
+          --  GR-1371-CORE, Frame Relay PVC CNM Service
+
+          --  GR-1117-CORE, CNM Service for Exchange PVC Cell Relay Service
+
+          --  TA-TSV-001237, SMDS XA-OM Service
+
+          --  TA-NWT-001430, Frame Relay PVC XA-OM Service
+
+          Each document will also specify a default value for the
+          tcaTrapEnabler object for each counter.
+
+          When the service is defined, this MIB may also be used for
+          XA-OM service for Exchange Access PVC Cell Relay Service.
+
+
+
+
+
+
+          Tracy A. Brown, Kaj Tesink (editors)                  [Page 4]
+
+
+
+
+
+
+          Bellcore       Threshold Crossing Alert Objects      June 1994
+
+
+          To obtain Bellcore documents, contact:
+
+                       Bellcore
+                       Customer Service
+                       8 Corporate Place - Rm. 3C-183
+                       Piscataway, NJ 08854-4156
+                       1 (800) 521-CORE
+                       (908) 699-5800 (For Foreign Calls)
+          See bellcore-tcav1-01.mib for the SNMPv1 equivalent of this
+          SNMPv2 MIB.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          Tracy A. Brown, Kaj Tesink (editors)                  [Page 5]
+
+
+
+
+
+
+          Bellcore       Threshold Crossing Alert Objects      June 1994
+
+
+          6.  Object Definitions
+
+          TCAv2-MIB DEFINITIONS ::= BEGIN
+
+          IMPORTS
+             MODULE-IDENTITY, OBJECT-TYPE,
+             Counter32, Integer32,
+             enterprises                              FROM SNMPv2-SMI
+             DisplayString, TimeStamp                 FROM SNMPv2-TC
+             MODULE-COMPLIANCE, OBJECT-GROUP          FROM SNMPv2-CONF;
+
+            bellcore         OBJECT IDENTIFIER ::= { enterprises 148 }
+            requirements     OBJECT IDENTIFIER ::= { bellcore 1 }
+
+            tcaMIB MODULE-IDENTITY
+               LAST-UPDATED "9312101200Z"
+               ORGANIZATION "Bellcore"
+               CONTACT-INFO
+                     "   Tracy A. Brown
+                         Bellcore
+                         331 Newman Springs Rd.
+                         Red Bank, NJ 07701 USA
+
+                         Tel: 1-908-758-2107
+                         Fax: 1-908-758-4177
+                         E-mail: tacox@mail.bellcore.com."
+               DESCRIPTION
+                        "The MIB module to describe generic objects for
+                        Threshold Crossing Alerts (TCAs) for CNM
+                        and XA-OM for
+                        SMDS, Frame Relay Service,
+                        and Cell Relay Service."
+              ::= { requirements 5 }
+
+              tcaObjects  OBJECT IDENTIFIER ::= { tcaMIB 1 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          Tracy A. Brown, Kaj Tesink (editors)                  [Page 6]
+
+
+
+
+
+
+          Bellcore       Threshold Crossing Alert Objects      June 1994
+
+
+          -- The Threshold Crossing Alert Group
+
+          tcaTable OBJECT-TYPE
+              SYNTAX  SEQUENCE OF TcaEntry
+              MAX-ACCESS  not-accessible
+              STATUS  current
+              DESCRIPTION
+                      "The Threshold Crossing Alert table."
+              ::= { tcaObjects 1 }
+
+          tcaEntry OBJECT-TYPE
+              SYNTAX  TcaEntry
+              MAX-ACCESS  not-accessible
+              STATUS  current
+              DESCRIPTION
+                      "An entry in the Threshold Crossing Alert table."
+              INDEX   { tcaIfIndex, tcaIndex }
+              ::= { tcaTable 1 }
+
+          TcaEntry ::=
+              SEQUENCE {
+                  tcaIfIndex
+                      Integer32,
+                  tcaIndex
+                      Integer32,
+                  tcaObject
+                      OBJECT IDENTIFIER,
+                  tcaObjectDesc
+                      DisplayString,
+                  tcaThreshold
+                      Integer32,
+                  tcaSampleType
+                      INTEGER,
+                  tcaCounts
+                      Counter32,
+                  tcaTimeStamp
+                      TimeStamp,
+                  tcaTrapEnabler
+                      INTEGER
+                  }
+
+          tcaIfIndex OBJECT-TYPE
+              SYNTAX  Integer32
+              MAX-ACCESS  not-accessible
+              STATUS  current
+
+
+
+
+
+          Tracy A. Brown, Kaj Tesink (editors)                  [Page 7]
+
+
+
+
+
+
+          Bellcore       Threshold Crossing Alert Objects      June 1994
+
+
+              DESCRIPTION
+                      "The value of this object is equal to MIB II's
+                      ifIndex value for this interface sublayer
+                      (ifEntry)."
+              ::= { tcaEntry 1 }
+
+          tcaIndex OBJECT-TYPE
+              SYNTAX  Integer32
+              MAX-ACCESS  not-accessible
+              STATUS  current
+              DESCRIPTION
+                      "The value of this object is used as one of the
+                      indices for this table.  It is a unique identifier
+                      for this row in the table for this interface
+                      (ifIndex).  The value of this object can be from 1
+                      to N, where N is the number of potential TCAs for
+                      this interface sublayer (ifEntry)."
+              ::= { tcaEntry 2 }
+
+          tcaObject OBJECT-TYPE
+              SYNTAX  OBJECT IDENTIFIER
+              MAX-ACCESS  read-only
+              STATUS  current
+              DESCRIPTION
+                      "The value of this object is the OBJECT IDENTIFIER
+                      of the counter object being thresholded.  The
+                      counter objects being thresholded are defined in
+                      other MIB Modules."
+              ::= { tcaEntry 3 }
+
+          tcaObjectDesc OBJECT-TYPE
+              SYNTAX  DisplayString
+              MAX-ACCESS  read-only
+              STATUS  current
+              DESCRIPTION
+                      "The value of this object is a description of the
+                      counter object being thresholded.  For example,
+                      DS1 Coding Violations."
+              ::= { tcaEntry 4 }
+
+          tcaThreshold OBJECT-TYPE
+              SYNTAX  Integer32
+              MAX-ACCESS  read-only
+              STATUS  current
+              DESCRIPTION
+
+
+
+
+
+          Tracy A. Brown, Kaj Tesink (editors)                  [Page 8]
+
+
+
+
+
+
+          Bellcore       Threshold Crossing Alert Objects      June 1994
+
+
+                      "The value of this object is the threshold value
+                      of the counter object being thresholded."
+              ::= { tcaEntry 5 }
+
+          tcaSampleType OBJECT-TYPE
+              SYNTAX  INTEGER  {
+                        intervalAbsoluteValue(1),
+                        intervalDeltaValue(2),
+                        intervalFallingAlarm(3),
+                        intervalRisingAlarm(4),
+                        intervalAtValueAlarm(5),
+                        intervalNotAtValueAlarm(6),
+                        intervalIncludesValue(7),
+                        intervalIncludesNotValue(8)
+                      }
+              MAX-ACCESS  read-only
+              STATUS  current
+              DESCRIPTION
+                      "The value of this object is the sample type of
+                      the object being thresholded from the
+                      perspective of the CNM or XA-OM customer.
+                      This object can be used for the following
+                      data types:
+                      (a) Counters
+                      (b) Counters measured over certain intervals,
+                          where the Counters are reset to zero at the end
+                          of the interval and as a result have the
+                          syntax Gauge.
+                      (c) Gauges (other than (b))
+                      (d) (Enumerated) INTEGER
+                      (e) (Enumerated) INTEGER that is used as a bitmap.
+                      The enumerated values of this object apply to
+                      these data types as follows:
+
+                                          |        possible values        |
+                          data type       | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+                      --------------------+---+---+---+---+---+---+---+---+
+                      (a) Counter         |   | X |   |   |   |   |   |   |
+                      (b) IntervalCounter | X |   |   |   |   |   |   |   |
+                      (c) Gauge           |   |   | X | X |   |   |   |   |
+                      (d) Enum INT        |   |   |   |   | X | X |   |   |
+                      (e) Enum INT(bitmap)|   |   |   |   |   |   | X | X |
+                      --------------------+---+---+---+---+---+---+---+---+
+
+                      (a) Counter values can only rise. An
+
+
+
+
+
+          Tracy A. Brown, Kaj Tesink (editors)                  [Page 9]
+
+
+
+
+
+
+          Bellcore       Threshold Crossing Alert Objects      June 1994
+
+
+                          alarm may be triggered when the value has
+                          risen a delta amount within a sample period.
+                      (b) IntervalCounter values can only rise within an
+                          interval and are reset at the end of the
+                          interval. An alarm may be triggered when
+                          the value has exceeded an absolute value.
+                      (c) A Gauge value may rise and fall. An alarm
+                          may be triggered when the value has risen or
+                          fallen a certain amount.
+                      (d) An INTEGER may assume values in any sequence.
+                          An alarm may be triggered when the value
+                          does equal or doesnot equal a certain
+                          specified value.
+                      (e) A bitmap may assume values that represent
+                          one or more bits to be set. An alarm may be
+                          triggered when the value does include or not
+                          include the combined value of certain bits.
+                          Note that for (c), (d), and (e) only one alarm
+                          needs to be generated, i.e., at first detection
+                          of this event."
+              ::= { tcaEntry 6 }
+
+          tcaCounts OBJECT-TYPE
+              SYNTAX  Counter32
+              MAX-ACCESS  read-only
+              STATUS  current
+              DESCRIPTION
+                      "The value of this object is the number of times
+                      the threshold was crossed for this counter object,
+                      since sysUpTime was initialized or restarted.
+                      This counter is a continuous counter.  It should
+                      be noted that as this object has a SYNTAX of
+                      Counter, that it does not have a defined initial
+                      value.  However, it is recommended that this
+                      object be initialized to zero."
+              ::= { tcaEntry 7 }
+
+          tcaTimeStamp OBJECT-TYPE
+              SYNTAX  TimeStamp
+              MAX-ACCESS  read-only
+              STATUS  current
+              DESCRIPTION
+                      "The value of this object is equal to the value of
+                      MIB-II's sysUpTime object at which last (latest)
+                      threshold was crossed for this counter object.
+
+
+
+
+
+          Tracy A. Brown, Kaj Tesink (editors)                 [Page 10]
+
+
+
+
+
+
+          Bellcore       Threshold Crossing Alert Objects      June 1994
+
+
+                      The value of this object is set to zero at
+                      (re)initialization."
+              ::= { tcaEntry 8 }
+
+          tcaTrapEnabler OBJECT-TYPE
+              SYNTAX  INTEGER  {
+                        enabled(1),
+                        disabled(2)
+                      }
+              MAX-ACCESS  read-write
+              STATUS  current
+              DESCRIPTION
+                      "Indicates whether fyiTraps should be generated
+                      for this threshold crossing count (tcaObject).
+                      The physical layer counters' and gauges' (e.g.,
+                      DS1, DS3, SONET, and PLCP) TCAs should have a
+                      default value of disabled(2).  The SMDS service
+                      violations and higher layer protocol violations
+                      counters' TCAs should have a default value of
+                      enabled(1).  A fyiTrap, when generated, shall have
+                      the following varBind list: tcaObject,
+                      tcaObjectDesc, tcaThreshold, and tcaTimeStamp."
+              ::= { tcaEntry 9 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          Tracy A. Brown, Kaj Tesink (editors)                 [Page 11]
+
+
+
+
+
+
+          Bellcore       Threshold Crossing Alert Objects      June 1994
+
+
+          -- Conformance Information
+
+          tcaConformance  OBJECT IDENTIFIER ::= { tcaMIB 2 }
+
+          tcaGroups       OBJECT IDENTIFIER ::= { tcaConformance 1 }
+          tcaCompliances  OBJECT IDENTIFIER ::= { tcaConformance 2 }
+
+          -- Compliance Statements
+
+          tcaCompliance MODULE-COMPLIANCE
+                STATUS  current
+                DESCRIPTION
+                  "The compliance statement for SNMPv2 entities
+                  which support Threshold Crossing Alert Information.
+                  This MIB module will be used primarily for SMDS,
+                  Frame Relay Service, and Cell Relay CNM and XA-OM Services."
+
+                MODULE -- this module
+                    MANDATORY-GROUPS { tcaGroup }
+
+                    OBJECT  tcaTrapEnabler
+                    MIN-ACCESS  read-only
+                    DESCRIPTION
+                        "Write access is not required."
+               ::= { tcaCompliances 1 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          Tracy A. Brown, Kaj Tesink (editors)                 [Page 12]
+
+
+
+
+
+
+          Bellcore       Threshold Crossing Alert Objects      June 1994
+
+
+          -- Units of Conformance
+
+          tcaGroup  OBJECT-GROUP
+                OBJECTS { tcaObject, tcaObjectDesc,
+                          tcaThreshold, tcaSampleType, tcaCounts,
+                          tcaTimeStamp, tcaTrapEnabler }
+                STATUS  current
+                DESCRIPTION
+                      "A collection of objects providing information
+                      applicable
+                      to Threshold Crossing Alert Information."
+                ::= { tcaGroups 1 }
+
+
+
+          END
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          Tracy A. Brown, Kaj Tesink (editors)                 [Page 13]
+
+
+
+
+
+
+          Bellcore       Threshold Crossing Alert Objects      June 1994
+
+
+          7.  Acknowledgments
+
+          This document was produced by the Bellcore CNM/XA-OM Team:
+
+          Masuma Ahmed, Ted Brunner, Tracy Brown, Chuck Davin, Taso
+          Devetzis, Thom Farese, Shannon Hansen, Alan Hermelee, Sherri
+          Hiller, Deirdre Kostick, Dave Piscitello, Rich Reimer, Cathy
+          So, and Kaj Tesink.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          Tracy A. Brown, Kaj Tesink (editors)                 [Page 14]
+
+
+
+
+
+
+          Bellcore       Threshold Crossing Alert Objects      June 1994
+
+
+          8.  References
+          [1]  Case, J., McCloghrie, K., Rose, M., and S. Waldbusser,
+               "Structure of Management Information for version 2 of the
+               Simple Network Management Protocol (SNMPv2)", RFC 1442, SNMP
+               Research, Inc., Hughes LAN Systems, Dover Beach Consulting,
+               Inc., Carnegie Mellon University, April 1993.
+
+          [2]  Galvin, J., and K. McCloghrie, "Administrative Model for
+               version 2 of the Simple Network Management Protocol
+               (SNMPv2)", RFC 1445, Trusted Information Systems, Hughes LAN
+               Systems, April 1993.
+
+          [3]  Case, J., McCloghrie, K., Rose, M., and S. Waldbusser,
+               "Protocol Operations for version 2 of the Simple Network
+               Management Protocol (SNMPv2)", RFC 1448, SNMP Research, Inc.,
+               Hughes LAN Systems, Dover Beach Consulting, Inc., Carnegie
+               Mellon University, April 1993.
+
+          [4]  McCloghrie, K., and M. Rose, "Management Information Base for
+               Network Management of TCP/IP-based internets - MIB-II", RFC
+               1213, Hughes LAN Systems, Performance Systems International,
+               March 1991.
+
+          [5]  Generic Requirements For Phase 1
+               SMDS Customer Network Management Service,
+               Bellcore TR-TSV-001062, Issue 1, March 1993, and Supplement 1,
+               December 1993.
+
+          [6]  Generic Requirements for Phase 1 Frame Relay PVC
+               Customer Network Management Service, Bellcore GR-1371-CORE,
+               Issue 1, March 1994.
+
+          [7]  Generic Requirements for Phase 1 Exchange PVC CRS Customer
+Network
+               Management Service, Bellcore
+               GR-1117-CORE, Issue 1, June 1994.
+
+          [8]  SMDS Generic Requirements for Initial
+               Operations Management Capabilities in Support of
+               Exchange Access and Intercompany Service Arrangements,
+               Bellcore GR-1237-CORE, Issue 1, June 1994.
+
+          [8]  Generic Requirements for Initial Frame Relay PVC
+               Exchange Access Operations Management
+               (XA-OM) Service, Bellcore TA-NWT-001430, Issue 1,
+               to be published.
+
+
+
+
+
+          Tracy A. Brown, Kaj Tesink (editors)                 [Page 15]
+
+
+
+
+
+
+          Bellcore       Threshold Crossing Alert Objects      June 1994
+
+
+          [10] Definition of the Enterprise-specific fyiTrap (SNMPv1), Kaj
+Tesink (editor),
+               Bellcore Enterprise-specific MIB (posted on venera.isi.edu as
+               bellcore-fyitrapv1.txt),
+               Version 1.0, December 1993.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          Tracy A. Brown, Kaj Tesink (editors)                 [Page 16]
+
+
+
+
+
+
+          Bellcore       Threshold Crossing Alert Objects      June 1994
+
+
+          Table of Contents
+
+
+          1 Status of this Memo ...................................    1
+          2 Abstract ..............................................    1
+          3 The Network Management Framework ......................    2
+          4 Object Definitions ....................................    3
+          5 Overview ..............................................    3
+          6 Object Definitions ....................................    6
+          6.1 The Threshold Crossing Alert Group Group ............    7
+          6.2 Conformance Information .............................   12
+          7 Acknowledgments .......................................   14
+          8 References ............................................   15
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          Tracy A. Brown, Kaj Tesink (editors)                 [Page 17]
+
+
+
+
+
+--========================_4084092==_
+Content-Type: text/plain; charset="us-ascii"
+
+
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+_/                                                                      _/
+_/  Kaj Tesink                                                          _/
+_/  Bellcore                                                            _/
+_/  - Broadband Data Services & Consulting  vmail (908) 758-5254        _/
+_/    331 Newman Springs Rd.                email kaj@cc.bellcore.com   _/
+_/    Red Bank, NJ 07701                  faxmail (908) 758-4196        _/
+_/                                                                      _/
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
+
+
+--========================_4084092==_--
+
+

@@ -1,0 +1,3271 @@
+From Feinler@SRI-KL Tue Jul 1 02:34:00 1980
+Date: Tuesday, 1 July 1980 02:34-PDT 
+From: Feinler at SRI-KL 
+To: [SRI-KL]<NIC-WORK>liaison.txt: 
+cc: bboard, callan, raphael, kunzelman, nielson, jgoldberg,
+      hart, pwok at SRI-KL 
+Re: ARPANET NEWS from DCA
+
+Dear Liaison,
+
+Maj. Haughney of the Defense Communications Agency (DCA) has asked me
+to distribute the following ARPANET newsletter to all of you.  Will
+you please pass it on to administrators and systems people who may not
+otherwise see it.  Send questions and replies to DCACODE535@ISI.
+Thanks.
+
+Jake
+
+---------------------------------------------------------------------
+
+GENTLEPERSONS:
+
+     There are several changes forthcoming to the ARPANET over the
+next couple of years which will have considerable impact upon the
+ARPANET community.  Since you, the liaisons, are the primary point of
+contact for users, DCA believes that it is a good idea to keep the
+liaisons better informed of actions that will affect you and your
+users over the next few years.  To achieve this goal, DCA will publish
+a network newsletter which will provide management and technical
+information and guidance to you, the liaisons.  This net message is
+DCA's first newsletter.  Future newsletters will be provided through
+the ARPANET on an as needed basis.  Widest dissemination of pertinent
+information contained in this newsletter to ARPANET users by the
+liaisons is requested.
+
+   Maj. Joseph Haughney
+   DCA
+
+
+
+
+---------------------------------------------------------------------
+
+ANEWS-1                                                   DCA Code 531
+1 July 1980                                           (DCACODE535@ISI)
+                                                        (202) 692-6175
+
+                          ARPANET NEWSLETTER
+
+
+---------------------------------------------------------------------
+
+     Over the past eleven years, the ARPANET has grown considerably
+and has become the major U. S. Government research and development
+communications network.  The ARPANET liaisons have made significant
+contributions to the network's success.  Your efforts are voluntary,
+but are critical to successful operation of each Host, IMP, and TIP.
+Your continued support of the ARPANET is greatly appreciated and will
+facilitate continued smooth ARPANET operation.
+
+     To aid you in performance of your duties, DCA will attempt to
+provide you with the latest information in network improvements.  This
+information is grouped into two major areas: management and technical
+improvements.  However, a brief discussion of where we are going with
+the ARPANET is in order.
+
+     The ARPANET is still a rapidly growing network.  It provides a
+service which is both cost and operationally effective.  We predict
+the ARPANET will grow to approximately 100 nodes by 1983, when we will
+begin transferring some of the subscribers to DOD's AUTODIN II
+network.
+
+     While the ARPANET is quite successful, it does have some
+problems.  The basic hardware and software are becoming obsolete.  The
+nodes use minicomputers developed in the 1960s which no longer have
+sufficient memory and other capabilities to support technical
+improvements to the network.  In addition, the ultimate goal of our
+planning is to provide for an ARPANET II which will be a virtual
+network and make use of several different physical networks (e.g.
+AUTODIN II, residual ARPANET, and commercial networks to provide
+interconnectivity between users while still maintaining network
+transparency.  This goal is subject, as usual, to cost, schedule and
+technical constraints.
+
+     The meshing of our immediate problems with our long term goal has
+produced the following course of action.  The ARPANET will be
+"modernized" over the next three years to eliminate immediate
+problems.  We will also develop the capability to readily transfer
+ARPANET nodes and users to AUTODIN II, and possibly commercial
+networks, when this is financially and operationally feasible.
+
+     Now that we have stated our goal, we will address the various
+supporting actions that we are undertaking which will have an impact
+on you, the liaisons.
+
+
+
+
+                          MANAGEMENT ACTIONS
+
+ACCESS POLICY
+
+     The ARPANET is not meant to compete with commercial networks.
+Commercial networks should be used whenever there is not any
+requirement to communicate with ARPANET hosts and/or subscribers.
+There have been some developments in work being done on gateways
+between commercial networks and the ARPANET.  Some hosts have
+implemented such gateways.  However, such interfaces are proscribed
+unless specifically authorized by DCA.  Access problems with internet
+gateways, as recently evidenced by the illegal access of a Canadian
+Firm's computer by someone operating a New York high school's computer
+system through a TELENET/DATAPAC gateway, show that technical problems
+must still be resolved.  Hence, if you have an unauthorized gateway in
+your Host computer, DCA should be informed immediately, and the
+gateway terminated or suspended until DCA can review the access
+controls for gateways.
+
+     DCA has recently asked the ARPANET Sponsors for a detailed survey
+of all ARPANET users.  This survey information will be added to the
+Network Information Center (NIC) Identification Data Base.  The reason
+for the expanded data base is to provide an all encompassing
+description of who, where, and why a user is on the ARPANET.  This
+information will be used for planning to move users onto AUTODIN II
+and as a validation mechanism for the TIP Log-in program, which we
+will discuss later.  To reduce workload on the liaisons, we plan to
+send out quarterly updates of the master file which the host and TIP
+liaison will be responsible for verifying and updating.  This report
+will, hopefully, be initially published in June of 1981.  It will
+replace the TIP inventory report which TIP liaisons now send us.  Host
+systems which do not have any mechanism for managing backside
+terminal/user validation and verification, should establish procedural
+or software control mechanisms to obtain the required information.
+
+     You may wonder why we are placing such emphasis on knowing who is
+on the ARPANET.  When the network was small, a decentralized
+management approach was established due to the nature of the network
+and the small community of users. This promoted flexibility and
+synergy in network use.  Now that the network has grown to over 66
+nodes and an estimated four to five thousand users, flexibility must
+be tempered with management control to prevent waste and misuse.  The
+decentralized management of network access and resources is still our
+objective.  We just want to ensure that we can verify proper resource
+utilization and prevent unauthorized penetrations.  We believe that
+the data base that we are establishing, can be used as a tool for
+improving your and our management control.  We deal in gross
+quantities, you deal in the particulars.
+
+     DCA will be publishing a new Host/TIP Liaison Responsibilities
+letter in July 1980 which will describe these new reporting
+requirements.
+
+
+
+
+TIP LOG IN
+
+     ARPA has let a contract to Bolt Beranek and Newman, Inc. (BBN) to
+study and develop, if feasible, a TIP Log-In program and data base.
+By mid 1982 this effort should, hopefully, result in a means to
+directly control access to TIPS.  The design will take into account
+the problems encountered with a previous TIP Log-in effort made on the
+ARPANET several years ago.
+
+     The present design suggests an approach where a user would log
+into a TIP when he wants access to the network.  The TIP would
+transmit the log-in information to a regional data base node, which
+would verify the user and validate to the TIP that that user is
+allowed network access.  In some cases, this may result in a double
+log-in, depending upon the host password system design.  The regional
+data bases would be updated on a daily basis from a master data base.
+This data base would be constructed based on a permission tree
+structure where permissions are delegated down the tree.  For example,
+a sponsor would grant permission to a contract monitor to connect a
+certain number of users.  The contract monitor would then grant
+permissions for that number of users to a contractor, who would then
+delegate these permissions to his program manager.  The program
+manager could delegate permissions down to the project leader or the
+individual users.  When the contract is terminated, the contract
+monitor revokes his permission, which deletes the contractor
+personnel's access to the ARPANET.
+
+     The previously-mentioned ARPANET NIC Data Base will be used
+initially to cross-check the TIP Log-in data base, and hence it's
+accuracy is critical to preventing valid users from being temporarily
+without service when TIP Log-in is implemented.  The TIP Log-in data
+base will be managed by the NIC when it becomes operational.  The TIP
+Log-in data base will eventually replace all or part of the NIC data
+base, depending upon whether or not we are successful in our
+development effort to incorporate terminals which access the network
+through hosts into the TIP Log-in software.
+
+     BBN is also studying the feasibility of applying TIP Log-in
+mechanisms to host computer users.  Hence, host liaisons should also
+ensure that their terminals and users are included in the NIC Data
+Base to preclude problems with service, if TIP Log-in is implemented
+for the Hosts.
+
+TIP INVENTORY
+
+     For TIP liaisons, we have mentioned that we intend to eliminate
+the TIP Quarterly Inventory and replace it with a NIC Data Base
+Update. You should be sure of the accuracy of your inputs, because we
+intend to structure the TIP buffering mechanism to support only those
+TIP ports which are reflected in the NIC Data Base.  All new TIP users
+will have to have a complete entry in the NIC Data Base and be
+approved by DCA before these users will be permitted access to the
+TIP.  NOTE: This procedure includes dial-in users.  Guidelines for
+approval and procedures for requesting new user access will be
+outlined in the new ARPANET Host/TIP Liaison Responsibilities letter
+which will be sent to you in July 1980 as mentioned above, and the TIP
+buffering allocation scheme will be enforced as of 1 February 1981.
+
+
+
+
+96 BIT HEADERS
+
+     DCA recently announced by net note that only 96-bit headers will
+be accepted by the network nodes as of 1 January 1981.  This date
+still stands.  Users, when reviewing the impact of the header change
+upon them, should also review their applications software to ensure
+their compatibility with 96-bit headers.  We have received some
+queries from liaisons who did not realize the possible impacts on
+their applications software of the 96-bit headers.
+
+LIAISON MEETINGS
+
+     In order to improve information dissemination between DCA and the
+liaisons, we plan to hold a series of one day meetings for liaisons.
+These meetings will cover the items discussed in this newsletter plus
+any topics, problems, etc., that the liaisons wish to discuss.  These
+meetings will occur in the Fall of 1980.  Tentative scheduling for the
+meetings are:
+
+GEOGRAPHICAL AREA   DATE       MEETING SITE
+
+New England         21 Nov     To be determined
+Washington D.C.     18 Nov     DCA Headquarters
+West Coast          30 Sept    Naval Postgraduate School, Monterey, CA
+Mid West             3 Dec     St Louis Area
+
+     Proposed agenda items, comments, etc., should be forwarded by net
+mail to DCACODE535@ISI no later than 15 September 80.
+
+SPONSOR RELATIONS
+
+     The ARPANET has Sponsors who represent the various communities of
+interest found on the network.  These Sponsors handle funding and
+management of community resources.  DCA Code 535 attempts to assist
+the liaisons whenever possible with problem areas and questions that
+are not resolved by the NCC or the NIC.  However, your first point of
+contact in such situations, should be your ARPANET Sponsor.  In some
+cases, the Sponsor may still refer the liaison to DCA.  However, the
+Sponsor can sometimes handle the situation within his own resources.
+Such contacts can also keep the Sponsor better aware of the services
+being provided to his users and enable him to more effectively
+represent them.  In other words, it pays to know your Sponsor and work
+with him.
+
+CIRCUIT FORECASTING
+
+     AT&T has stated a twelve to eighteen month lead time to provide
+wideband 50/56KB service.  This lead time may be even longer in
+California.  To provide timely service, they have asked us to forecast
+our requirements as much as possible.  These forecasts are not firm
+orders, but are used by AT&T for planning purposes to estimate such
+things as modem production requirements and transmisssion overbuilds.
+If you have, or know of, any new node or high speed VDH requirements
+which are being contemplated or discussed, please let DCA know
+immediately. These requirements may just be in the discussion stage
+and unfunded.  However, by including such possible requirements in our
+forecast, we hope to reduce circuit, and hence node/VDH installation
+lead times, to a more reasonable time frame.
+
+
+
+
+
+                              TECHNICAL
+
+NEW ARPANET PROTOCOLS
+
+     The Office of the Secretary of Defense has directed that a set of
+DOD Standard Protocols be used on all Department of Defense
+communications networks. This directive applies to the ARPANET.  The
+ARPANET Host protocols will be replaced over the next three years with
+the new DOD Standard Protocol set.  This has a direct impact on host
+operating systems and some applications programs that use the ARPANET.
+The ARPANET Network Control Program (NCP) will be replaced by two DOD
+protocols, the DOD Standard Transmission Control Protocol (TCP) and
+the Internet Protocol (IP).  ARPANET FTP and TELNET protocols will
+also be updated and standardized.  Planning for this transition is
+still under development.  The NIC plans to publish for DCA a new
+Protocol Handbook by the end of this year, which will provide details
+on the new protocol specifications.
+
+     DCA also intends to provide an ARPANET online protocol
+clearinghouse which will provide a repository for already developed
+implementations of these protocols and act as a clearinghouse to
+resolve problem areas and coordinate new protocol implementation
+development.  As soon as the planning is finished, we will publish the
+details.  In the meantime, unless you have already begun development
+of the protocols, you may want to start budgeting for the protocol
+software development for your host.  NOTE: H316 TIP protocol
+development is being addressed by an ARPA contract with BBN, and
+involves a hardware addition to the TIP which will be discussed later.
+DOD Standard Protocol Development for the PLURIBUS TIP is still being
+studied as to the most cost and operationally effective way to
+implement the protocols.
+
+C/30 PROCURMENT
+
+     The new BBN C/30 IMP and TIP can now be ordered.  These computers
+are direct replacements for the Honeywell 316 hardware, and run the
+existing IMP and TIP software in an emulation mode.  The C/30 costs
+from $20,000 to $35,000 depending upon configuration.  These new
+systems will begin to be installed as new nodes in late fall of 1980.
+We hope to eventually replace all Honeywell equipment with the C/30s
+depending, of course, on funding availability.  Unless there is a need
+for a node which requires a large amount of processing power, the BBN
+C/30 or equivalent will be the only type of node hardware procurred in
+the future.
+
+     The C/30 will also be used to support the DOD Standard TCP and
+Internet Protocol implementation in the TIP.  This will be
+accomplished by removing the IMP software from the H316 TIP and
+placing it in a C/30.  The removal of the IMP software will make room
+in the TIP for the installation of the programs to support the new and
+existing protocols in the TIP.  All H316 TIPs will require
+installation of the C/30 IMP to support the DOD protocols by late
+1983.  DCA will contact the Sponsors when an installation schedule is
+known.  Sponsor's will approve C/30 procurement.  However, for those
+sites which must fund for hardware node procurement, approximately
+$20,000 should be budgeted in Fy 1981 or 1982, to support procurement
+of the C/30 Protocol TIP expansion hardware.
+
+
+
+
+SUMMARY
+
+     We have attempted to address items which will have a direct
+impact on liaisons and their users for the next few years.  If you
+have any questions on these subjects, drop DCA and your Sponsor a net
+note.  Due to the fact that some of our actions are still in the
+planning and development stage, some of the information that we
+provided you is nebulous.  However, at least, you have an approximate
+idea of what is planned for the network.  We will try to provide the
+specifics as they develop and incorporate them in our next newsletter.
+If you have any items that you wish addressed in the next newsletter,
+please let us know.  We will attempt to address them wherever
+possible.
+----------------------------------------------------------------------
+
+
+
+From Feinler@SRI-KL dow Aug ? 00:00:00 1980
+Date: ? Aug 1980 00:00PDT 
+To: Arpanet community
+Subject: ARPANET NEWSLETTER; ANEWS 2
+
+------------------------------------------------------------------------
+
+   ANEWS-2                                                August 1980
+
+                      ARPANET NEWSLETTER
+
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+TOPIC: TIP Login Addendum. Send replies to DCACODE535@ISI, (202)692-6175
+------------------------------------------------------------------------
+
+   The following is further discussion from Maj. Joseph Haughney at 
+   Defense Communications Agency (DCA) regarding TIP Login.
+
+      Regards,
+      Jake
+
+   ---------
+
+   ADDENDUM TO 1 July 1980 DCA Newsletter
+
+        We have received several messages from users who are concerned 
+   with our TIP Login development efforts.  We hope this message will 
+   clarify or allay a number of these concerns.  The ARPANET is 
+   comprised of a large number of sophisticated users.  We appreciate 
+   their interest and advice on possible network improvements and will 
+   take these into consideration in making network decisions.  The 
+   ARPANET Newsletter was published in part to obtain user reaction and 
+   in light of comments received, it has achieved it's purpose.
+
+        The ARPANET currently has an operational budget of approximately
+   $5,000,000 per year and represents and investment of over $50,000,000
+   in hardware and software by the government.  TIP Login is a method to
+   control access to resources so that they can be more effectively 
+   utilized.  Our initial efforts are directed to controlling access to 
+   the TIPs to prevent unauthorized users from dialing in.  It will 
+   permit publishing of TIP phone numbers and allow users to be given 
+   access to several TIPs as long as they have authorization for those 
+   TIPs in the TIP Login data base.  This concept will be of great 
+   advantage to those  authorized users who travel a lot, since they 
+   would have a list of phone numbers that they can call anywhere in the
+   country, and, if their data base record contains the proper 
+   authorization, they can access any local TIP.  This is one advantage 
+   of the TIP Login.  Other advantages are:
+
+      a. Accurate representation of network users.  This information
+         will increase the accuracy of the WHOIS program and provide
+         readily available management information without the necessity
+         of the user surveys which we now require.
+
+      b. Development of regional TIPs to support the many users who are
+         not associated with TIP sponsoring organizations.  With the
+         present situation, we cannot spread the TIP access load among
+         several TIPs in the same geographical area.  Knowing who the
+         dial in users are, would enable us to shift them to TIPS that
+         have spare capacity or justify a regional TIP if the load is
+         too heavy.
+
+   
+
+        Another area of TIP Login which is of concern to some users is 
+   our mention of the inclusion of controls similar to TIP login for 
+   hosts.  The first point to be made is that TIP Login will study what 
+   needs to be done and what can be done to control host terminal 
+   access.  From our viewpoint, we wish to control unauthorized dial-in 
+   access to the ARPANET through the Host front ends.  We are not trying
+   to provide a statment of requirements or a design at this time.  As 
+   part of the design effort we need to know the magnitude and types of 
+   users, so that we can make reasonable decisions on what can and 
+   should be done.  That is the reason behind our request for accurate 
+   input data.
+
+        In conclusion, TIP Login is being developed to provide the 
+   authorized user with improved services.  We have attempted to reduce 
+   administrative overhead while improving management control.  Some 
+   thought was given to introducing a charging system similar to 
+   commercial networks (e.g. by packet, or access period).  Such a 
+   system would add economic realism to network use.  However, such 
+   mechanisms would be costly to implement and add a lot of needless 
+   administrative overhead to the ARPANET.  TIP Login will be designed 
+   to support the middle road between minimal network controls that 
+   presently exist on the network and complete network access and 
+   billing controls as might be found on a commercial network.
+
+
+From Feinler@SRI-KL dow Sep 10 00:00:00 1980
+Date: 10 Sept 1980 00:00PDT 
+To: Arpanet community
+Subject: ARPANET NEWSLETTER; ANEWS 3
+
+ANEWS-3                                                   DCA Code 531
+10 September 1980                      (DCACODE535@ISI) (202) 692-6175
+
+                       ARPANET NEWSLETTER
+
+---------------------------------------------------------------------
+
+Gentlemen/Ladies:
+
+     Enclosed is an announcement of a seminar to discuss the 
+implementation of the new DOD Standard Protocols.  Since these protocols
+will replace the existing NCP on the ARPANET in the next two years, this
+seminar is of importance to those personnel at ARPANET hosts who will be
+concerned with implementing the DOD standard Protocols.  For those who 
+can attend this seminar, it should be highly educational and 
+informative.  We also wish to note that you or your organization will 
+have to defray any travel and conference costs involved with your 
+attendance.  This seminar will go into much greater detail on the higher
+level protocols then we hope to cover in the proposed liaison meetings 
+(See recent DCA Newsletter).  In addition, due to funding and scheduling
+problems, the liaison meeting schedule presented in the newsletter is 
+under revision.  We will make distirbution of a finalized schedule as 
+soon as we can firm it up.
+
+Regards,
+Joe Haughney  Major USAF
+DCA Code 535
+
+
+
+---------------------------------------------------------------------
+
+  IMPLEMENTATION OF THE INTERNET AND TRANSMISSION CONTROL PROTOCOLS
+
+   SEMINAR ON THE DEPARTMENT OF DEFENSE
+   DATA COMMUNICATIONS HOST-TO-HOST
+   PROTOCOL STANDARDS
+
+---------------------------------------------------------------------
+
+TIME: November 24-25, 1980
+
+LOCATION: National Bureau of Standards
+          Gaithersburg, Maryland
+
+SPONSORED BY: U. S. DEPARTMENT OF DEFENSE
+
+   Defense Communications Agency
+   Defense Communications Engineering Center
+   Computer Systems Division
+
+   Office of the Secretary of Defense
+   Under Secretary of Defense for
+   Research and Engineering
+   Information Systems Directorate
+
+   Defense Advanced Research
+   Projects Agency
+   Information Processing Techniques Office
+
+------------------------------------------------------------------------
+
+OBJECTIVE OF THE SEMINAR
+
+     The objective of this seminar is to assist personnel who will 
+implement the Department of Defense (DoD) Standard Host-to-Host Data 
+Communications Protocols.  The seminar will also provide information of 
+interest to protocol designers, computer vendors, and others who are 
+active in the field.  This two-day seminar will present the technical 
+experience gained from DoD research and the corresponding implementation
+efforts related to two specific protocols, the DoD Standard Transmission
+Control Protocol (TCP), and the DoD Standard Internet Protocol (IP).
+
+     The sessions will concentrate on the TCP and IP specifications (1, 
+2), and the implementation of these protocols on different operating 
+systems.  On the first day, the seminar will present the motivation for 
+the DoD Standardization effort, and will describe the approach for 
+managing this effort.  The design concepts and models for TCP and IP 
+will be discussed in detail. On the second day, the seminar will address
+issues resulting from implementation of TCP and IP on different computer
+host and operating systems.  Audience participation and interaction will
+be encouraged.
+
+References:
+
+     Attendees are encouraged to become familar with the material in the
+references (1,5) in order to obtain the maximum benefit from the 
+seminar; each registered attendee will receive a copy of these five 
+references.  Reference (6), A Practical View of Communication Protocols,
+is an additional source of background material, but it is not required 
+for the seminar.
+
+   (1)  Defense Advanced Research Project Agency, DoD Standard
+        Transmission Control Protocol, January 1980.
+
+   (2)  Defense Advanced Research Project Agency, DoD Standard
+        Internet Protocol, January 1980.
+
+   (3)  Cerf, V. and Kahn, R., "A Protocol for Packet Network
+        Interconnection," IEEE Tranactions on Communications,
+        Feb., Vol. COM-22, pp. 637-641, l974.
+
+   (4)  Cerf, V.  and Kirstein, P., "Issues in Packet-Network
+        Interconnection," Proceedings of the IEEE, Vol. 66,
+        No.  11, November, 1978, pp.  1386-1408.
+
+   (5)  Strazisar, V., "How to Build a Gateway," Internet
+        Experimental Note 109, August 31, 1979.
+
+   (6)  Cerf, V., and McQuillan, J., A Practical View of
+        Communications Protocols, IEEE Computer Society, l978.
+
+---------------------------------------------------------------
+
+ABOUT THE DOD DATA COMMUNICATIONS STANDARDIZATION EFFORT
+
+     The Department of Defense (DoD) Data Communications Standardization
+Effort was formally initiated in 1978 by the Assistant Secretary of 
+Defense for Communications, Command and Control and Intelligence 
+(ASD(C3I)) when he directed the adoption of a set of DoD Standard 
+host-to-host protocols based on protocols developed by the Defense 
+Advanced Research Projects Agency.  These protocols are the DoD Standard
+Transmission Control Protocol (TCP) and the Internet Protocol (IP).  The
+Office of ASD(C3I) requested and received from DCA a plan for performing
+the function of Executive Agent for DoD Data communications protocol 
+Standardization.
+
+     The Defense Communications Engineering Center of the Defense 
+Communications Agency and the Defense Advanced Research Projects Agency 
+have active programs to provide standard protocols for current and 
+future DoD data communications systems.  The protocol standardization 
+initiative is intended to reduce costs, increase interoperability, and 
+facilitate the extendibility of systems.  The goal is to develop 
+standard protocols that ensure that DoD interoperability, survivability,
+robustness, security, precedence, and compartmentation requirements are 
+supported.  Furthermore, part of this goal is the proper coordination of
+DoD requirements to ensure that the appropriate services are considered 
+by the pertinent standardization forums, and to ensure that DoD 
+host-to-host standard protocols are responsive to emerging federal, 
+national, and international standards.
+
+     This seminar will provide a vehicle to distribute documentation and
+convey knowledge essential for developing expertise within industry and 
+educational institutions that support current and efficient 
+implementation of DoD communications systems.  Future seminars will be 
+planned to provide a forum for exchange of information and ideas.
+
+-----------------------------------------------------------------------
+
+TENTATIVE PROGRAM
+
+Seminar on The Department of Defense
+Data Communications Host-To-Host
+Protocol Standards
+
+NOVEMBER 24, 1980 - RED AUDITORIUM
+
+   AGENDA:  Concepts and Models
+
+   09:30  Welcome to National Bureau of Standards
+
+   09:40  Opening Remarks
+
+      Mr. Steve Walker
+      Office of the Assistant Secretary of Defense
+        for Communications, Command and
+        Control and Intelligence
+
+   09:50  Synopsis of Seminar
+
+      Dr. Robert Lyons
+      Division Chief, Computer Systems Division
+      Defense Communications
+        Engineering Center
+
+   10:10  The DoD Data Communication Protocol Standardization Program
+
+      Dr. Robert Lyons
+
+   10:40  Break
+
+   11:10  Basic Service Features of Different
+          Transmission Control Protocols
+
+      Mr. Greg Pearson
+      Bolt Beranek and Newman, Inc.
+
+   12:05  The Conception and Evolution of Internetting within DoD,
+          and the Internet Model
+
+      Dr. Vinton Cerf, Manager  
+      Information Processing Techniques Office
+      Defense Advanced Research Projects Agency
+
+   1:00   Lunch
+
+   2:00   The Design of the DoD Standard TCP and IP--Concepts,
+          Issues, and Tradeoffs
+
+      Dr. Jon Postel
+      Information Sciences Institute
+      University of Southern California
+
+   3:15   Break
+
+   3:30   The Design of the DoD Standard TCP and IP--Concepts,
+          Issues, and Tradeoffs (continued)
+
+      Dr. Jon Postel
+
+   4:15   DoD Standard Host-to-Host Protocol Implementation
+          Considerations Using a Network Front-End
+
+      Mr. John Day
+      Digital Technology Inc.
+
+   5:00   End of First Day Activities
+
+NOVEMBER 25, 1980 - RED AUDITORIUM
+
+   AGENDA:  Implementations
+
+   9:30   Implementation of DoD Standard TCP and IP on the
+          Multics Operating System
+
+      Mr. David Clark
+      Massachusetts Institute Technology
+
+   10:30  Implementation of DoD Standard TCP and IP on
+          IBM Operating System MVT
+
+      Mr. Bob Braden
+      University of California at
+        Los Angeles
+
+   11:30  Break
+
+   11:45  Implementation of DoD Standard TCP and IP on the
+          DEC PDP-11 Operating System, UNIX
+
+      Mr. Jack Haverty
+      Bolt Beranek and Newman, Inc.
+
+   1:00   Lunch
+
+   2:00   Implementation of DoD Standard TCP and IP on the
+          DEC System 20 Operating System, TOPS-20
+
+      Mr. Raymond Tomlinson
+      Bolt Beranek and Newman, Inc.
+
+   3:00   Break
+
+   3:20   Implementation of Gateways
+
+      Ms. Virginia Strazisar
+      Bolt Beranek and Newman, Inc.
+
+   4:00  Implementation of DoD Standard TCP and IP on the DEC LSI-11
+
+      Dr. David Mills
+      COMSAT Laboratories
+
+   5:00  End of Seminar
+
+
+
+--------------------------------------------------------------------
+
+   Place in an envelope with your registration fee (checks made payable 
+   to "DoD Protocol Standards") and mail to:
+
+      Ms. Fran Nielsen
+      Technology Building, Room B-212
+      National Bureau of Standards
+      Washington,D.C.  20234
+
+-------------------------------------------------------------------
+
+   REGISTRATION FORM
+
+   Seminar on the Department of Defense Data Communications
+     Host-To-Host Protocol Standards
+   National Bureau of Standards
+   Gaithersburg, Maryland
+
+   Nov. 24-25, l980
+
+   Name ____________________________________________________
+
+   Organization  ___________________________________________
+
+   Street Address __________________________________________
+
+   City ___________________ State ____________Zip __________
+
+   Telephone _____________
+
+      Registration Fee Enclosed -- $25   OFFICIAL USE ONLY
+
+                                         x Csh.  x Ck.
+
+                                         Date ________
+
+                                           By ________
+
+-------------------------------------------------------------------
+
+
+
+   Mail reservations for BELTWAY LIMOUSINE to the following:
+
+      BELTWAY LIMOUSINE SERVICE INC.
+      12051 Tech Road
+      Silver Spring, Maryland 20904
+
+___________________________________________________________________
+
+   Please make a reservation for me on the BELTWAY LIMOUSINE as follows:
+
+   Name: ___________________________________________________
+
+   No. in Party: ___________________________________________
+
+   Time of Arrival: _____________________________________ AM
+
+      ______________________________________ PM
+
+   At _____________________________________________National Airport
+
+      _______________________________________________Dulles Airport
+
+   Airlines and Flight No. _______________________________________
+
+   Destination (hotel) ___________________________________________
+
+   BELTWAY LIMOUSINE, the only airport limousine service between 
+   National and Dulles Airports and Rockville, Gaithersburg & Prince 
+   Georges County can be reached by calling (301) 622-0700.
+
+   
+
+___________________________________________________________________
+
+   SCHEDULE OF FARES-ONE WAY; PER PERSON
+
+      NATIONAL  DULLES
+
+Holiday Inn, Gaithersburg           $10    $10
+
+Washingtonian, Gaithersburg          10     10
+
+Sheraton-Potomac Inn, Gaithersburg  10     10
+
+Ramada Inn, Rockville                10     10
+
+Holiday Inn, Capital Beltway         10     12
+
+Holiday Inn, College Park            10     12
+
+Interstate Inn, College Park         10     12
+
+Quality Inn, College Park            10     12
+
+Adult Ed. Ctr., Univ. of Maryland    10     12
+
+Hampshire Motor Inn                  10     12
+
+Ramada Inn, Lanham                   10     12
+
+Sheraton Inn, Lanham                 10     12
+
+Inn State Inn, Camp Springs          10     12
+
+Holiday Inn, Camp Springs            10     12
+
+*PASSENGERS ARE MET AT THEIR TICKET COUNTER.
+
+------------------------------------------------------------------
+
+
+
+GENERAL INFORMATION
+
+REGISTRATION
+
+     A registration fee of $25 is being charged to all attendees to help
+defray the costs of conducting the Seminar.  Advanced registration is 
+requested in order to complete local arrangements.  Please send the 
+enclosed registration form along with your registration fee (checks made
+payable to DoD Protocol Standards, no purchase orders, please) to:
+
+   Ms. Fran Nielsen
+   Technology Building, Room B-212
+   National Bureau of Standards
+   Washington,D.C. 20234
+
+The Seminar registration desk will be open at NBS beginning at 8:30 
+a.m., Nov. 24, outside the Green Auditorium.
+
+HOUSING
+
+     Although the sponsors of the Seminar do not recommend these hotels 
+over other available lodging in the area, for your convenience, a block 
+of rooms at special rates has been reserved at the Washingtonian ($38 
+single and $46 double) and at the Sheraton-Potomac Inn ($46 single, $56 
+double) for Seminar attendees.  Please call the Washingtonian 
+(301/948-2200) or the Sheraton (301/840-0200) to make reservations 
+before Nov. 10, l980. When calling the Washingtonian, please refer to 
+"DoD Protocol Standards" room block, calling the Sheraton, refer to 
+Group #766.  This will identify you as a participant and therefore 
+eligible for the special rates.
+
+TRANSPORTATION
+
+     The Washingtonian and the Sheraton-Potomac Inn are accessible from 
+National and Dulles Airports via the Beltway Limousine Service.  A 
+reservation card is enclosed in the brochure for your convenience.  
+Please call the limousine service upon arrival at the airport to 
+reconfirm your pick-up time.
+
+     Daily bus service will be provided between the Seminar hotels and 
+NBS.  A bus schedule will be available in the lobby of each hotel.
+
+LUNCHEONS
+
+     Fixed-menu lunches, included as part of the Conference activities, 
+will be served in the NBS Cafeteria.
+
+MEETING ROOMS
+
+     All sessions will be held in the Green Auditorium of the 
+Administration Building, National Bureau of Standards, Gaithersburg, 
+Maryland.
+
+FOR FURTHER TECHNICAL INFORMATION:
+
+   Ms. Fran Nielsen
+   (301) 921-2601
+
+
+From Unknown dow Oct 22 00:00:00 1980
+Date: 22 Oct 1980 00:00PDT 
+To: Arpanet community
+Subject: ARPANET NEWSLETTER; ANEWS 4
+
+---------------------------------------------------------------------
+
+ANEWS-3 [sic]                                            DCA Code 531
+22 October 1980                       (DCACODE535@ISI) (202) 692-6175
+
+                       ARPANET NEWSLETTER
+
+---------------------------------------------------------------------
+
+Dear Liaison,
+
+It is time to remind all of you that Extended (New) Leader format must 
+be implemented by all ARPANET hosts as of January 1, 1981.  Although we 
+can determine that the host interface software is working with the 
+extended leaders, we cannot determine if application software has been 
+changed to accommodate the extended leader format.  Please review 
+application software packages on your host(s) with the proper contacts 
+to be sure the packages are compatible with the new format, thus 
+avoiding cutover problems.
+
+Enclosed is a list of hosts that are not yet supporting Extended (New) 
+Leader format for your information.  The list was compiled by Bob Hinden
+at BBN.
+
+Again I urge you to review any problems you may have locally with 
+extended leader incompatibilities, and to be prepared to make the 
+cutover by Jan. 1.
+
+Maj. Joe Haughney
+DCA
+
+************************************************************************
+
+Hosts Not Supporting Extended (new) Leader Format Status as of 10/16/80
+( * indicates Host has not been up to check )
+
+IMP# SITE NAME  HOST# INT. HOST NAME       HOST CPU TYPE
+
+ 1   UCLA       HOST 0  L  UCLA-ATS        PDP-11/45
+                HOST 2  D  UCLA-SECURITY   PDP-11/45
+
+ 2   SRI2       HOST 0  L  SRI-TSC         PDP-11/40
+                HOST 2  D  SRI-VIS11       PDP-11/10
+              * HOST 3  D  SRI-NSC11       PDP-11/40 -> SPS-41
+
+ 3   NOSC       HOST 2  V  LOGICON         PDP-11/45
+
+ 4   UTAH       HOST 0  L  UTAH-11         PDP-11/45 -> FPS AP-120B
+
+ 7   RAND       HOST 3  L  RAND-UNIX
+
+ 8   NRL        HOST 2  V  NSWC-WO         CDC-6500
+
+ 9   HARVARD    HOST 0  L  HARV-10         DEC-10
+                HOST 2  V  NUSC-NPT        PDP-11/70
+
+10   LINCOLN    HOST 3  D  LL-11           PDP-11/45
+
+13   GUNTER     HOST 0  D  GUNTER-UNIX     PDP-11/35
+
+15   AMES15   * HOST 2  L  I4B-TENEX
+
+16   AMES16     HOST 0  L  AMES-67         IBM 360/67
+
+17   MITRE      HOST 0  L  MITRE           PDP-11/70
+              * HOST 1  V  CTO-DDF         PDP-11/70
+
+18   RADC       HOST 1  D  RADC-XPER       PDP-11/40
+
+19   NBS        HOST 0  L  NBS-10          DEC-1050T
+                HOST 1  V  WHARTON         VDA -> DEC-10
+                HOST 3  L  NBS-UNIX        PDP-11/45 -> INTERNAL NETWORK
+
+21   LLL        HOST 0  D  LLL-COMP        PDP-11/70
+                HOST 1
+
+22   ISI22      HOST 0  L  ISI-SPEECH11    PDP-11/45 -> FPS AP-120B
+
+23   USC        HOST 3  L  USC-ECL         DEC-10
+
+25   DOCB       HOST 1  V  USAFA-GATEWAY   PDP-11/40
+
+26   PENTAGON * HOST 3  L  PENT-UNIX       PDP-11/35
+
+28   ARPA       HOST 3  L  ARPA-XGP11      PDP-11/40 -> XGP
+
+29   ABERDEEN   HOST 0  L  BRL             PDP-11/40
+
+31   CCA        HOST 0  L  CCA-TENEX       DEC-10 -> DATACOMPUTER
+              * HOST 1  D  CCA-SPEECH      PDP-11/40
+                HOST 3  D  CCA-SIP         PDP-11/40
+
+32   XEROX      HOST 0  L  PARC-MAXC       MAXC
+              * HOST 1  L  PARC-GATEWAY    NOVA-800 -> INTERNAL NETWORK
+                HOST 2  L  PARC-MAXC2      MAXC
+                HOST 3  L  SCI-ICS         FOONLY F-2
+
+33   NPS      * HOST 1  V  FNWC            PDP-11/60 -> CDC-6500
+
+34   LBL        HOST 1  D  LBL-UNIX        PDP-11/34
+                HOST 2  V  BERKELEY        PDP-11/70
+
+35   ACCAT      HOST 1  V  NOSC-SDL        PDP-11/40
+
+39   SDAC       HOST 0  L  SDAC-CCP        CCP -> PLURIBUS
+              * HOST 2  L  SDAC-NEP        IBM 360/40
+                HOST 3  L  SDAC-44         IBM 360/44
+
+41   NORSAR     HOST 0  L  NORSAR-40A      IBM 360/40
+              * HOST 1  V  NDRE            NORD-10
+
+42   LONDON     HOST 0  L  LONDON          PDP-9 -> (360/195s)
+                                           (GEC 4080)
+                HOST 1  V  LONDON-VDH      PDP-9 -> EPSS ->
+
+44   MIT44      HOST 1  V  LL-ASG          PDP-11/50
+
+45   MOFFETT  * HOST 0  L  MOFFETT-ARC     DEC-10
+
+48   AFWL     * HOST 1  V  ASL             PDP-11/10
+
+49   RCC49      HOST 2  L  BBN-SPEECH11    PDP-11/40 -> SPS-41 ->
+                                           FPS AP-120B
+
+51   SRI51      HOST 2  D  SRI-UNIX        PDP-11/40
+
+52   ISI52      HOST 0  L  ISI-XGP11       PDP-11/40 -> XGP
+
+54   CIT        HOST 1  D  CIT-11          PDP-11/34
+
+56   SUMEX      HOST 0  L  SUMEX-AIM       DEC-1077
+
+58   NYU        HOST 1  V  BNL             PDP-11/34 -> 2 CDC-6600s
+
+59   SCOTT      HOST 0  D  ETAC            PDP-11/45
+
+
+From Unknown dow Oct 28 00:00:00 1980
+Date: 28 Oct 1980 00:00PDT 
+To: Arpanet community
+Subject: ARPANET NEWSLETTER; ANEWS 5
+
+Gentlepeople:
+
+Per our previous newsletter, we have enclosed a new Host/TIP Liaison 
+Duties letter.  We hope that it clarifies your responsibilities better 
+than the previous one.  Two items of importance to TIP Liaisons are that
+the TIP Inventories will still be required for the immediate future.  
+The October report for 1980 should be submitted not later than 15 
+November 1980 if you have not already done so.  TIP phone numbers for 
+dial in service will also be changed.  Some sites have not been doing 
+this.  We will publish a schedule next month stating when sites should 
+change their numbers.  Changes will start 1 January 1981.
+
+You have all received in a previous message the list of hosts which have
+not implemented 96 bit leaders.  With the changeout of IMP software on 1
+January 1981 to support 96 bit leaders, hosts with 32 bit leader 
+software will not be able to interact with the network.  That means no, 
+repeat no, ARPANET service for such Hosts.  Liaison should inform their 
+system software personnel to proceed posthaste to implement the 
+necessary software, if they have not already done so.
+
+DCA CODE 535
+
+
+
+---------------------------------------------------------------------
+
+ANEWS-5                                                  DCA Code 531
+28 October 1980                                      (DCACODE535@ISI)
+                                                       (202) 692-6175
+
+                 ARPANET TECHNICAL LIAISON DUTIES
+
+---------------------------------------------------------------------
+
+The ARPANET Technical Liaison act as advisors to network users, the 
+Network Information Center (NIC), the Network Control Center (NCC), and 
+the Defense Communications Agency (DCA) on technical matters relating to
+the ARPANET.  The liaison are the chief source of information about 
+individual ARPANET hosts.  They often contribute to the design of 
+network protocols and related software and make suggestions for needed 
+changes and improvements through memos, RFCs (network technical notes), 
+and participation in network working groups.  The liaison are a valuable
+network resource and the first point of contact for most ARPANET users.
+
+The liaison are traditionally individuals trained in computer science, 
+telecommunications, or a related field, and are familiar with the 
+resources available at the hosts they represent.  Each host on the 
+network has no more than one technical liaison; however, the same person
+may serve as liaison for more than one host.  The technical liaison are 
+coordinated by the Manager of the ARPANET Network Information Center, 
+currently Elizabeth Feinler (FEINLER@SRI-KL).
+
+LIAISON DUTIES AND RESPONSIBILITIES:
+
+1.  The primary responsibilities of the Host/TIP liaison are to help 
+monitor the ARPANET against unauthorized use and to provide assistance 
+and guidelines to ARPANET users.  The liaison is frequently the first 
+person approached by potential ARPANET users, or the first person to 
+become aware of unauthorized use of network resources.  Liaison are 
+expected to adhere to the following guidelines and procedures in 
+carrying out these responsibilities:
+
+   A.  ATTACHING HOSTS OR TERMINALS TO THE ARPANET -  Permission to 
+   connect hosts or terminals to the ARPANET can only be granted by a 
+   sponsoring agency through DCA.  The liaison or host administrator 
+   should obtain permission to occupy a host port from the ARPANET 
+   sponsor of the node to which a host or terminal is to be connected.  
+   The node in question may belong to a sponsor other than the one 
+   sponsoring the work to be done on the host or terminal to be 
+   connected.  If this is the case, approval must be obtained from the 
+   controlling sponsor who will determine whether the requirement is 
+   valid, the port is free, and the resources are available to support 
+   the interface.  The controlling sponsor will in turn submit a request
+   to initiate the connection to DCA.  Only after all of these 
+   permissions are obtained may a host or terminal be added or changed 
+   on an IMP or TIP.  The liaison should inform any individuals at their
+   facilities who may wish to connect hosts or terminals to the ARPANET,
+   of this procedure.
+
+   B.  PROVIDING HOST INFORMATION TO THE NIC AND DCA -  Upon completion 
+   of the host installation and prior to the host passing traffic, the 
+   liaison must contact DCA Code 535 (DCACODE535@ISI) via the ARPANET 
+   for final validation.  DCA will then instruct BBN to set the IMP's 
+   host access permission words to allow traffic to pass to and from the
+   host.  Before this validation can occur, the host liaison must 
+   provide the NIC and DCA Code 535 via ARPANET with his or her full 
+   name, U.S. mailing address, phone number, and network mailbox (if 
+   this has not already been done), as well as the host name, host 
+   address, operating system, computer configuration, and network 
+   sponsor for the newly installed host.  NOTE:  Please choose the host 
+   name carefully so that it does not need to be changed.  Unnecessary 
+   host name changes create confusion and require considerable extra 
+   data maintenance throughout the network. 
+
+   C.  AUTHORIZING USERS FOR ARPANET ACCESS - Permission to use the 
+   ARPANET can only be granted by authorized host administrators to 
+   users with valid accounts.  The liaison should refer all requests for
+   such access to the proper administrators or the principal 
+   investigators of government contracts before permitting a user to 
+   access the ARPANET.  ARPANET users must provide the NIC with their 
+   name, address, phone number and network mailbox.  They must also 
+   include the name of the government agency sponsoring their use of the
+   ARPANET.   Users who are not members of U.S. government agencies must
+   also provide the contract number under which they are working and its
+   expiration date to the NIC before using the ARPANET.  (TIP users 
+   should include in addition the name of the TIP that they normally use
+   for access.)  This information will be used to produce the ARPANET 
+   Directory and will be listed in the NIC's ARPANET Directory Data 
+   Base.  Liaison should periodically review accounts with ARPANET 
+   access.  Users whose access to the ARPANET is no longer required or 
+   valid should be removed, and the NIC should be so informed.
+
+   The host account administrator or principal investigator is required 
+   to validate his users or contractors, and to see that the NIC is 
+   informed of any changes either directly or through the host liaison. 
+   The host liaison will inform all local account administrators or 
+   principal investigators of this procedure and assist them in keeping 
+   the user information updated.  If, after following this procedure, 
+   there are still doubts about whether a user can have ARPANET access, 
+   contact DCA Code 535 for final arbitration.  NOTE:  If an individual 
+   has not been approved by the proper administrator and has not been 
+   listed in the NIC data base, he or she should not be using the 
+   ARPANET.  All unauthorized use of the ARPANET is prohibited.
+
+   D.  MONITORING GATEWAY ACCESS -  If it is possible to gain access to 
+   the ARPANET from another network (gateway) or from a tributary 
+   terminal of a host via the IMP-host connection, it is the 
+   responsibility of that host to provide software protection which will
+   permit only authorized ARPANET users to access the network.  These 
+   interfaces must be documented by letter to DCA for approval.  The 
+   letter should provide a brief description of the interface, who uses 
+   it, and the software and/or hardware protection mechanism.  DCA 
+   reserves the right to disapprove such gateways.  The liaison should 
+   inform administrators of local or 'foreign' networks, who might wish 
+   to establish gateway connections to the ARPANET, of this procedure, 
+   and disallow any gateway access until it has been approved.
+
+   E.  DISTRIBUTION OF TIP PHONE NUMBERS - Distribution of TIP dial-in 
+   numbers is entrusted to the TIP liaison.  These numbers should not be
+   released to requesting users unless the release has been authorized 
+   by the TIP's sponsor.  TIP numbers will be changed annually on a 
+   schedule published by DCA.  Evidence of unauthorized use of these 
+   numbers should be reported to DCA.  The liaison should emphasize to 
+   the user when providing the dial-in number, that the number is for 
+   his use alone.  If it is found that the user has passed the number to
+   unauthorized parties, the user's access rights will be revoked.
+
+   F.  AUTHORIZING DEDICATED TIP PORTS - Prior to a TIP port being 
+   activated to support a dedicated terminal access, the TIP liaison 
+   should contact DCA for final validation.  The request should contain 
+   the information outlined in the TIP inventory below.  It should also 
+   include the desired activation date so that DCA can request that the 
+   NCC enable the TIP port on that date.
+
+2.  The liaison help to coordinate equipment moves or installations, or 
+circuit moves or installations affecting the ARPANET backbone or the 
+IMPs and/or TIPS.  Info copies of Telecommunications Service Requests 
+(TSR's) will be sent to the liaison from DCA, informing them of any 
+changes in backbone circuitry, terminal and/or host additions/deletions.
+The liaison should help coordinate access to the IMP or TIP by TEL CO or
+BBN to perform actions called for in the TSRs.  Unless a TSR has been 
+received authorizing equipment moves/installations or circuit 
+moves/additions, no such moves or installations should be made without 
+contacting DCA Code 535 for authorization.  Normal maintenance actions 
+are excluded.  NOTE:  Liaison for hosts/TIPS on Army installations 
+should be aware that circuit changes/connections must be coordinated 
+with the U.S. Army Communications Command (USACC) and copies of TSRs 
+provided to the post C-E officer.
+
+3.  TIP liaison are required to forward to DCA Code 535 a quarterly TIP 
+inventory in the format outlined below (RCS #DCA(Q)530-49).  The 
+inventory is due by the 15th of January, April, July, and October of 
+each year. Transmission via ARPANET is acceptable.  A copy of the 
+inventory should also be provided to the agency sponsoring the TIP.  
+NOTE:  A report is required indicating that no changes have occurred if 
+this happens to be the case.
+
+4.  In the first five working days of each month the NIC will provide 
+via the ARPANET, a table of ARPANET Host Names, Liaison, and Sponsors.  
+Liaison will be asked to review entries on this list pertaining to their
+TIPs or Hosts for accuracy, and to provide changes as soon as possible 
+to the NIC.  If host or TIP liaison are changed, the old liaison should 
+provide the name, address, telephone number, and network mailbox of the 
+new liaison to both the NIC and DCA Code 535 as soon as possible.
+
+5.  Each liaison is expected to provide the NIC with a description of 
+equipment, software, people, and interests pertaining to their 
+designated hosts in accordance with the formats outlined by the NIC.
+
+6. In addition each liaison is responsible for providing the NIC with 
+updated personnel information for the ARPANET Directory and online 
+ARPANET Directory Data Base.  This may be done in coordination with 
+sponsors, host administrators, and principal investigators.  For very 
+large organizations this activity may be delegated to an individual 
+other than the liaison.  Also, individual users may send their own 
+information via the network to the NIC.  However, it is the 
+responsibility of the liaison to coordinate the flow of this information
+from his or her host(s) to the NIC.
+
+7.  The liaison is expected to keep local users informed about 
+procedures and happenings related to the ARPANET (such as announcements 
+in the ARPANET Newsletter).  The Liaison will be the recipient of 
+official messages pertaining to the ARPANET.  These messages should be 
+'posted' and/or passed on to local users, administrators, or other 
+personnel who may have an interest or a need to know.  Unless otherwise 
+specified, messages sent to the liaison are considered general 
+information messages which can be widely distributed to user and 
+administrative constituencies.
+
+8.  The liaison serve as the local ARPANET contact for their respective 
+host(s).  The liaison provide information to their local users about 
+ARPANET procedures, and they also provide information to non-local 
+ARPANET users about local host procedures and resources.  They often 
+assist in bringing up new hosts by providing network software and 
+folklore.  The liaison can either provide help directly or refer users 
+to the proper local contact.  Requests by users for information about 
+other ARPANET hosts may be referred to the liaison of the host in 
+question or to the NIC.  (As a rule of thumb the NIC answers general 
+questions about contacts, procedures, and resources on the ARPANET, and 
+the liaison answer specific questions about their own hosts.)
+
+9.  Liaison should inform the NCC and DCA of network backbone problems 
+and network software bugs, and generate Unsatisfactory Service Reports 
+if necessary.  They ensure that ARPANET protocols are implemented 
+properly at the host level.  (This activity may be delegated if the 
+liaison is not the maintainer of the network software.  However, the 
+liaison is expected to be the contact for protocol information 
+distributed to the hosts and to see that the right person receives it.)
+
+10.  If an illegal access to the host occurs through the ARPANET, the 
+liaison will advise DCA of the pertinent details in addition to 
+following normal host security procedures.
+
+11.  Contacts
+
+   DCA Code 535
+   Telephone:  (202) 692-6175/6176
+   AUTOVON:    222-6175/6176
+   ARPANET:    DCACODE535@USC-ISI
+
+   Network Information Center (NIC)
+   Telephone:  (415) 326-6200 ext 3695
+   ARPANET:    FEINLER@SRI-KL
+
+   BBN Network Control Center (NCC)
+   Telephone:  (617) 661-0100
+   ARPANET:    POWERS@BBN-TENEXE
+
+   
+
+    
+
+    
+
+                         QUARTERLY TIP INVENTORY
+                          (RCS# DCA(Q) 530-49)
+
+   TIP Name______________________________              Date_____________
+
+   Octal        TYPE               Modem            User (if leased)
+   MLC      D-Dial R-Room   Bit    Mfgr &   Telco  Sponsor (if dial-up)
+   Port       L-Leased      Rate   Model    Ckt #
+
+   1
+
+   2
+
+   3
+
+   4
+
+   5
+
+   6
+
+   7
+
+   10
+
+   11
+
+   .
+
+   .
+
+   .
+
+   77
+
+   In addition provide a list of users who have received TIP dial up 
+   access phone numbers, along with their network mailbox addresses and 
+   their organizations.
+
+   USER                   MAILBOX                  ORGANIZATION
+   
+   
+
+   Signed____________________________________________    (TIP Liaison)
+
+   * User information for dedicated circuits should contain 
+   organization, terminal location and type, and contract number if 
+   non-government agency.
+
+ 
+---------------------------------------------------------------------
+
+From Unknown dow Mar 30 00:00:00 1981
+Date: 30 Mar 1981 00:00PDT 
+To: Arpanet community
+Subject: ARPANET NEWSLETTER; ANEWS 6
+
+ ANEWS-6                                                DCA Code 531
+ 30 March 1981                       (DCACODE535@ISI) (202) 692-6175
+
+                       ARPANET NEWSLETTER
+   
+
+---------------------------------------------------------------------
+
+GREETINGS:
+
+Once again we provide "pearls of wisdom" on actions and planning for the
+ARPANET which directly concern your hosts and you as Liaison.  Pleading 
+ignorance of the items discussed will no longer be considered a valid 
+excuse for liaison nonparticipation.
+
+CIRCUIT INSTALLATION
+
+We have had some problems recently with Telephone Company personnel 
+arriving at a site to install a circuit, only to have the liaison refuse
+them entrance.  When DCA issues a Telecommunications Service Request 
+(TSR) for a new circuit, we provide an information copy to the liaison. 
+Granted these TSRs are not always easily understandable since they are 
+in a machine input format; however, block 401 is the 'remarks' section, 
+and we normally attempt to explain in that section what is going on.  
+You should keep all copies of TSRs for reference so that if the 
+telephone company calls up to install, remove, or change a circuit, you 
+are aware of what is going on.  If you have any questions or do not have
+a record of the TSR, please call us or send us a letter.  We will 
+attempt to answer your questions and provide clarification.
+
+An example of a situation which has recently caused confusion is one in 
+which a site has all of its host ports filled, and the Liaison there is 
+puzzled as to why we are ordering an additional wideband circuit.  The 
+added circuit is needed for the planned expansion of the network which 
+will require the installation of additional backbone circuits at 
+existing sites (most nodes can take three or more).
+
+NODE RELOCATIONS
+
+Over the next two years, we will replace all of the H316s and H516s on 
+the network with C/30's.  If you are planning to move your existing 
+node, you may want to plan to have the move coincide with the C/30 
+installation.  If you do plan to move the node, please let your Sponsor 
+know, so that he can advise us.  The C/30 installation TSR will not 
+cover the move of the supporting circuitry.  Based upon the Spronsor's 
+request we will write additional TSRs to move the backbone circuits, and
+any other circuits that we ordered, to the new location.  Local circuit 
+relocations are your responsiblity and will normally be performed 
+through the telephone company and/or the local  government telephone 
+management office.
+
+TIP INVENTORY
+
+We recently put out new guidelines in a past newsletter on TIP inventory
+reporting.  TIP Inventory Reports last quarter were noticeable by their 
+absence.  These reports are NOT opitonal.  If there is no change to the 
+previous report, so state.  In addition, the NIC will now be responsible
+for maintaining the TIP inventory data base.  Thus, all TIP Inventory 
+Reports should go directly to the NIC with an information copy to DCA.  
+NOTE:  Those TIP ports for which TIP inventory information is not 
+provided will be considered not in use and will be software disabled as 
+of 1 August 1981.  Ports can be reenabled by providing the required TIP 
+inventory information to the NIC and DCA who, upon receipt of the 
+information, will direct the NCC to reenable the port.
+
+96 BIT HEADER
+
+The 96 bit header software has been fully implemented on the network. 
+Congratulations and thanks to those of you who worked to make the 
+cutover successful.  Our next major netwide effort will be to cutover 
+all hosts to the new DOD Standard Protocols by 1 January of 1983.  This 
+is the cutoff date and it will be enforced.  Network implementation 
+details will be made available in follow-on newsletters.
+
+TIP ACCESS
+
+The advent of lowcost, home computer systems has subjected the ARPANET 
+to increased probing by computer freaks.  We are implementing in the 
+near future, a TIP Log-in which will provide additional network access 
+control.  At present, however, only procedural controls can be 
+implemented.  When TIP Liaison pass out TIP dial-up phone numbers, they 
+should advise the user that the number is for his or her use only and 
+should not be passed on to anyone else (co-worker, relative, etc.).  It 
+should also be pointed out that by passing out the number to 
+unauthorized persons, that the user is denying service to himself.  The 
+unauthorized user can hog the dial-up port, thus preventing legitimate 
+user access.  Further, dial-up access may be cut off until the advent of
+TIP Log-in, for those sites where it is established that illegal use 
+continues to cause problems.  Thus it is in the user's best interests to
+keep his or her dial-in number secure.
+
+Maj. Joe Haughney
+DCA Code 531
+Defense Communications Agency
+
+----------
+
+NOTE:  Previous issues of the ARPANET Newsletter are online on the 
+SRI-KL machine as <netinfo>anews-1.txt, <netinfo>anews-2.txt, etc.  They
+may be FTPed from your local host using username 'anonymous' and 
+password 'guest'.
+
+
+From Feinler@SRI-KL dow Jun 19 02:34:00 1981
+Date: 19 Jun 1981 1750-PDT
+From: Feinler at SRI-KL
+Subject: Netnews - Goodbye KL, hello NIC
+To:   ARPANET-8:
+Redistributed-To: bboard at USC-ISIB
+Redistributed-By: HOLG at USC-ISIB
+Redistributed-Date: 22 Jun 1981
+
+----------------------------------------------------------------------
+
+ ANEWS-7                                   NETWORK INFORMATION CENTER
+ 20 June 1981                            (NIC@SRI-NIC) (415) 859-3695
+
+                       NETWORK NEWSLETTER
+   
+
+----------------------------------------------------------------------
+
+Dear Net Users
+
+As of Wednesday, June 24, 1981, the Network Information Center (NIC) will leave
+the SRI-KL machine and move to a new location on the SRI-NIC machine (0/73 
+dec).  After this date the <NETINFO> directory containing RFCs and IENs, 
+Network News, Protocols, and other files of network interest; and services such
+as NIC/Query and the WHOIS server and data base will only be accessible on 
+SRI-NIC.  (PLEASE NOTE: This host is on a high-numbered IMP.  Unfortunately, 
+those of you who are on machines which have not fully implemented 96-bit 
+leaders will be unable to reach the NIC.  All I can suggest is that you 
+complain to your local systems programmer.  I have pleaded with my Project 
+Monitor for a low-numbered IMP to no avail!)
+
+We also have a new direct-dial phone number - (415) 859-3695.
+
+The NIC gets a large volume of network mail.  In the past most of it has been 
+directed to FEINLER@SRI-KL.  From now on we would like to ask any of you 
+sending mail to the NIC to address it to.....NIC@SRI-NIC.  This will keep me 
+from being a bottleneck, and hopefully will expedite handling of bugs and 
+requests for documents or information.  Mail sent to SRI-KL will be forwarded 
+for a brief interim period.
+
+I would like to take this opportunity to introduce you to the NIC staff.  These
+are the people behind NIC@SRI-NIC:
+
+   Mary Dyer - Technical editor
+   Ken Harrenstien - Systems programmer
+   Hal Huntley - Technical editor
+   Johanna Landsbergen (Jojo) - Programming assistant
+   Francine Perillo - Library assistant
+   Glenn Sherwood - Consultant
+   Vic White - Systems programmer
+
+We hope you will bear with us as we settle into our new 'digs', and  please 
+contact us if we can be of service to you.
+
+Regards,
+Elizabeth Feinler, Mgr.
+Network Information Center
+
+P.S.  Please don't try to use SRI-NIC before June 24th.
+
+ 
+
+
+-------
+
+From Feinler@SRI-NIC dow Sep 15 19:18:00 1981
+Mail-from: ARPANET host SRI-NIC rcvd at 15-Sep-81 1918-PDT
+Date: 15 Sep 1981 1856-PDT
+From: FEINLER at SRI-NIC
+Subject: Network Newsletter
+To: Netnews-Group: ;
+
+---------------------------------------------------------------------
+ANEWS-8                                                  DCA Code 232
+15 Sept 1981                                         (DCACODE232@ISI)
+                                                       (202) 692-6175
+                  DoD NETWORK NEWSLETTER
+
+---------------------------------------------------------------------
+
+USE OF THE ARPANET
+
+The following is in answer to the many requests for guidelines as to who
+may use the ARPANET:
+
+   Only military personnel or ARPANET sponsor-validated persons working 
+   on government contracts or grants may use the ARPANET.
+
+DCA access enforcement policy will consist of the following procedure. 
+If unauthorized users are found on the net because of a weak or 
+nonexistant host access control mechanism, we will review the host's 
+access mechanisms and request improvements.  If the host refuses a 
+review or refuses to make the suggested improvements, we will take 
+action to terminate its network access.  This is a club of last resort, 
+but we will use it to protect other network users who have invested time
+and money to bring their controls up to par.
+
+If Sponsors have delegated access authority to host and TIP liaison or 
+host managers, it is the duty of these delegates to enforce access 
+control mechanisms for their connected systems and subsystems.  All 
+hosts connected to the ARPANET...and that includes GATEWAY hosts and 
+hosts with forwarding mechanisms...will implement access controls so 
+that unauthorized traffic is stopped.
+
+Files should not be FTPed by anyone unless they are files that have been
+announced as ARPANET-public or unless permission has been obtained from 
+the owner.  Public files on the ARPANET are not to be considered public 
+files outside of the ARPANET, and should not be transferred, or their 
+contents given or sold to the general public without permission of DCA 
+or the ARPANET sponsors.  Hosts which use a "guest" or "anonymous" FTP 
+login convention should inform their local users about the ramifications
+of this convention with respect to unprotected files, as the users are 
+not always aware that their files can be FTPed.
+
+NETWORK INFORMATION GATHERING:
+
+The NIC has been designated by DCA to run a yearly survey to obtain 
+information for the ARPANET Directory.  Providing information for this 
+survey is a requirement levied on all users who have ARPANET access. 
+Some hosts have run similar surveys which have confused users and 
+created a lot of duplicative reporting, not to mention a burden on the 
+user.  In the future, we request that any survey of users for directory 
+purposes, other than a survey of users on a local host, be coordinated 
+through DCA and the NIC.
+
+In addition, the NIC is authorized by DCA to collect information for the
+ARPANET Resource Handbook.  Liaison or other host designates are 
+expected to make this information available to the NIC on request.
+
+TIP INVENTORY
+
+The NIC has also been designated as the central repository for the TIP 
+Inventory Data Base.  The NIC will be sending out a TIP Inventory Update
+Request in the next week.  All TIP liaisons will be responsible for 
+updating these reports or filling in the report where no prior input 
+exists.  Response time on these reports is 9 October 1981.  If no report
+is received after this period, DCA will direct BBN to software disable 
+those TIP ports for which no input has been received.  If no change has 
+occurred in the TIP inventory since the last report, you should send DCA
+(DCACODE252@ISI) a message stating that with cc: to NIC (NIC@NIC).  Our 
+new database capability will permit us to better enforce this reporting 
+and make the updates hopefully, much easier.  Your cooperation is 
+requested and appreciated.
+
+----------
+
+FAREWELL
+
+I will be leaving for civilian life, and wish to announce a change of 
+personnel at DCA, the ARPANET Network Manager.  Cmdr Kirkwood and Capt. 
+Parker will be assuming the management role.  In my two years as manager
+the network has grown to approximately a 100 nodes and is in the process
+of hardware and protocol modernization.  I hope it will continue to grow
+in the future and provide better services and capabilities to you the 
+user.  The next two years will be a time of great change and many 
+interesting improvements. I really hate to leave but I must.
+
+Good Luck,
+
+Joe Haughney Major USAF
+
+-------
+
+From Feinler@SRI-NIC dow Oct 21 18:49:00 1981
+Mail-from: ARPANET host SRI-NIC rcvd at 21-Oct-81 1849-PDT
+Date: 21 Oct 1981 1337-PDT
+From: Francine Perillo <PERILLO at SRI-NIC>
+Subject: ANEWS-9
+To: anews1: ;
+
+
+                  The ARPANET HDH Host Interface
+ 
+There is a new alternative host interface for the ARPANET C/30 IMPs
+called HDH (HDLC Host).  This interface method is similar to the
+existing VDH (Very Distant Host) interface in that it provides for
+reliable transmission of messages between the host and its IMP over a
+communication circuit of arbitrary length.  As with VDH, the HDH
+interface can be used with communication circuits that range in speed
+from 9.6KB to 56KB. 
+ 
+HDH is superior to the VDH interface in that it uses as a reliable
+transmission protocol the HDLC protocol which is the link level control
+procedure of the CCITT international standard X.25.  HDLC is supported
+by a much wider range of vendor equipment than the special ARPANET VDH
+protocol.  It is also technically superior to VDH in that it provides
+for a window of up to seven outstanding frames instead of the two
+allowed by VDH, thus increasing the potential throughput.  The HDH
+interface is also capable of accepting a full-length ARPANET host/IMP
+message in a single frame, where VDH always requires fragmentation into
+buffer-sized frames.
+ 
+The HDH protocol is composed of three layers: the reliable transmission
+protocol layer (HDLC), an encapsulation layer, and the host/IMP layer
+(1822).  The HDLC layer is a full implementation of the CCITT X.25 Level
+2 only, it does NOT extend to the X.25 Level 3 protocol. The HDH level 2
+is capable of operating in either LAPB or LAP mode.  In addition, the
+framing and data transparency scheme can be either bit-oriented (HDLC)
+or byte-oriented (Bisynch).  The encapsulation layer provides some
+additional link-level functions not provided by the standard HDLC layer.
+These include line quality monitoring and loopback mode.  This layer
+operates in one of two modes, packet or message.  In packet mode,
+host/IMP messages are segmented into a series of frames containing a
+separate host/IMP leader and data packets no larger than 128 data bytes,
+requiring up to nine frames per host/IMP message.  In message mode,
+complete host/IMP messages can be sent in a single frame.  The host/IMP
+layer is the standard ARPANET host/IMP protocol (1822) with 96-bit
+leaders. 
+ 
+The HDH interface will be available only on C/30 IMPs equipped with a
+specialized I/O board that can accomodate up to 16 HDH ports.  Although
+the VDH protocol will continue to be supported for some time, new hosts
+are encouraged to adopt the HDH interface in order to gain increased
+performance and to take advantage of standard vendor host hardware and
+software.  The entire HDH protocol is documented in BBN Report 1822, the
+host/IMP layer in Section 3, the encapsulation layer in Appendix J, and
+the HDLC layer in Appendix K.  For more information contact Nancy Mimno
+(Mimno@BBN-UNIX or 617-497-3623). 
+ 
+-------
+-------
+From NIC@SRI-NIC dow Feb 15 21:26:00 1982
+15-Feb-82 21:26:52-PST,10728;000000000001
+Mail-from: ARPANET host SRI-NIC rcvd at 15-Feb-82 2126-PST
+Date: 15 Feb 1982 2014-PST
+From: Nic at SRI-NIC
+Subject: Network News #10
+To:   Arpanet-Liaison:
+cc:   nic
+
+=====================================================================
+ANEWS-10                                                 DCA Code 252
+12 Feb 1982                                           (DCACODE252@ISI)
+                                                       (202) 692-6175
+
+                  DoD NETWORK NEWSLETTER
+
+=====================================================================
+
+   TOPICS:  - Liaison Meetings to discuss TCP/IP transition
+            - C/30 IMP/TIP/TAC conversions
+            - TCP/IP online digest
+
+---------------------------------------------------------------------
+
+ARPANET LIAISON INVITED TO MEETINGS TO DISCUSS TCP/IP TRANSITION
+
+   The ARPANET Liaison are cordially invited to attend one of two 
+   meetings scheduled for March 1982 - one on the East Coast and one on 
+   the West Coast - to discuss the planned transition from the NCP 
+   protocols to the TCP/IP protocols during 1982.  This transition is 
+   part of a larger DoD standardization activity which was set into 
+   motion in April 1980 by Gerald Dinneen, then the Assistant Secretary 
+   of Defense for Command, Control, Communications and Intelligence.  In
+   his April 3, 1980 directive, Dr. Dinneen identified the Transmission 
+   Control Protocol and Internet Protocol as ratified DoD standards and 
+   placed DCA in charge of managing their further development, 
+   specification, and application in multinetwork environments.
+
+   Since that time, DCA, DARPA, and other DoD representatives have 
+   worked to refine the specifications and to test a variety of 
+   implementations on a wide range of computers, operating systems, and 
+   networks.  Just as it did a decade ago, tha ARPANET community is 
+   leading the way into a new networking territory of great importance 
+   to the future of US military command and control systems.  This 
+   transition effort on the ARPANET has the sanction and encouragement 
+   of the DCA ARPANET Management Branch and the DoD protocol 
+   standardization organization as well as the support of the Office of 
+   the Undersecretary of Defense for Command, Control, Communications 
+   and Intelligence.
+
+   Glynn Parker, Major, US Air Force
+   Manager, ARPANET
+   DCA Code 252
+   
+
+----------
+
+TIME AND PLACE OF MEETINGS
+
+        **** NOTE: ****   Please RSVP via network mail by 1 March 82
+
+   EAST COAST
+
+      TIME:     Friday -- March 26, 1982 -- 10 A.M.
+      PLACE:    Bolt, Beranek, and Newman, Inc.
+                70 Fawcett Street
+                Cambridge, MA
+                First floor auditorium
+      CONTACT:  Margaret Alexander, (ALEXAND@BBN-UNIX), (617) 491-1850
+
+   WEST COAST
+
+      TIME:     Monday -- March 29, 1982 -- 10 A.M.
+      PLACE:    SRI International
+                333 Ravenswood Avenue
+                Menlo Park, CA
+                Keidanren Conf. Room IS109, Intnl Bldg.
+      CONTACT:  Elizabeth Feinler, (FEINLER@SRI-NIC), (415) 859-3695
+
+      **** Note: ****  See below for further travel instructions
+      
+
+----------
+
+THE C/30 UPGRADE ON THE ARPANET
+
+   The ARPANET IMPs and TIPs are based on Honeywell 516 and 316 
+   computers which are reaching the limit of their useful lifetimes.  
+   Bolt Beranek and Newman has developed a replacement processor called 
+   a C/30 which has already been installed at a number of sites on the 
+   ARPANET.  The ARPANET sponsors are generally planning to order 
+   replacements through DCA for all the Honeywell IMPs on the network. 
+   ARPA has ordered a number of C/30 IMPs to replace existing ones. In 
+   addition, the ARPANET TIPs are being upgraded to include both NCP and
+   TCP/IP software along with TELNET protocol as part of the general 
+   transition into the internet environment.
+
+   The upgraded TIPs are being re-named TACs (Terminal Access 
+   Controller) and perform only host functions.  A Honeywell TIP becomes
+   a TAC when it is plugged into an IMP host port and its software is 
+   re-loaded to include both NCP and TCP/IP protocols.  BBN has also 
+   developed a C/30 TAC and there are a few of these on the net as well.
+
+   Over the course of calendar 1982 and probably into early 1983, the 
+   Honeywell IMPs will be replaced with C/30 IMPs.  Also, all the 
+   Pluribus TIPs and IMPs will be replaced with C/30 IMPs and C/30 TACs.
+
+   As an ARPANET sponsor, DARPA/IPTO has ordered or will order C/30 IMPs
+   during 1982 to replace all the Honeywell or Pluribus IMPs for which 
+   it is responsible.  Honeywell TIPs will be converted to TACs.  In 
+   1983, DARPA will begin replacing the Honeywell TACs with C/30 TACs so
+   that, by the end of calendar 1983, the DARPA/IPTO sites will have 
+   been fully converted to C/30 equipment.  The other ARPANET sponsors 
+   have similar plans, although I cannot vouch for the precise timing of
+   their actions.
+
+   I have requested that BBN send to each site liaison a configuration 
+   plan for the C/30 IMP replacements for which DARPA/IPTO is 
+   responsible.  Ms. Judy Gordon (JGordon@BBN) has or will shortly be 
+   sending to a subset of the liaisons, the configurations we are 
+   ordering for those sites.  I would appreciate liaison review of the 
+   configurations and response to Judy Gordon if there are questions or 
+   problems.  Particular attention should be paid to planning for 
+   connector and cable arrangements as these have often been a problem 
+   area in the past when a C/30 replacement IMP arrives at a site.
+
+   If you are a liaison who has not or does not within a couple of weeks
+   received such a configuration plan, I urge you to get into contact 
+   with your ARPANET sponsor to determine the plans for your C/30 IMP 
+   replacement.
+
+   Details about the C/30 product line can be obtained from Judy Gordon.
+
+   Vint Cerf
+   Principal Scientist
+   DARPA/IPTO
+
+----------
+
+TCP/IP DIGEST
+
+   Mike Muuss at the Ballistics Research Lab., Md. has started a special
+   interest group on TCP/IP protocols which you may want to join.   He 
+   would be happy to add you to the distribution list for his TCP/IP 
+   Digest, and would like to receive current information on TCP 
+   implementations and questions/answers on status and issues.  The NIC 
+   would also like to be cc:ed (NIC@SRI-NIC) on the latter.  
+
+   Contact Mike@BRL.
+
+----------
+
+TRAVEL INSTRUCTIONS FOR LIAISON MEETINGS
+
+   GETTING TO SRI INTERNATIONAL
+
+   Most of the Liaison can either drive in or fly in for the day.  The 
+   meeting does not start until 10 AM to give people from Southern 
+   California time to get to SRI from the airport.  Hotels are listed 
+   below for anyone who plans to stay overnight.
+
+   Menlo Park is about equidistant between San Francisco or San Jose 
+   airports, so flights to either airport are OK.  To get to SRI in 
+   Menlo Park take Freeway 101 (also called The Bayshore) north from San
+   Jose, or south from San Francisco, to the Willow Road/Menlo Park 
+   (west) exit (don't take the Willow Road/Dumbarton Bridge exit or you 
+   will be headed in the wrong direction).  Drive up Willow Road to the 
+   3rd traffic light which will be Middlefield Road.  Turn right on 
+   Middlefield Road.  At the 2nd traffic light turn left onto Ravenswood
+   Ave.  SRI is a red brick building on the left.  Turn into the main 
+   entrance, enter the main door behind the white pillars, and check in 
+   with the receptionist.  Visitor parking is on the left facing the 
+   building.
+
+   To reach the hotels, continue over the railroad tracks to the next 
+   light which will be El Camino.  Turn left if staying at the Mermaid 
+   Inn or Holiday Inn and right if staying at the Menlo Motor Lodge.
+
+   If you are not renting a car, it is best to book a limosine in 
+   advance.  The limos are fairly expensive...about $18.  There are some
+   buses, but the schedules are not good for reaching Menlo Park, 
+   unfortunately.
+
+   Hotels in the area are:
+
+   Walking distance
+
+      The Mermaid Inn, ($25-30 range)
+      727 El Camino Real
+      Menlo Park, CA 94025
+      (415) 323-9481
+
+   Close by (less than a mile)
+
+      Menlo Motor Lodge,  ($25-30 range)
+      1315 El Camino Real
+      Menlo Park, CA 94025
+      (415) 326-7530
+
+      Holiday Inn, ($50 range)
+      625 El Camino Real
+      Palo Alto, CA 94035
+      (415) 328-2800
+
+   TO GET TO BOLT, BERANEK, AND NEWMAN, INC.
+
+      From Logan Airport, take Sumner Tunnel to Southeast Expressway - 
+      North (2nd exit up the ramp after tunnel).  Take Storrow Drive 
+      exit, and follow Storrow Drive to end, and then follow Rt. 2-3 
+      (Fresh Pond Parkway) to Howard Johnson's.  Bear left at traffic 
+      rotary, so ARCO service station is on your right.  Second right is
+      Fawcett Street.  Parking is available in the small lot in front of
+      the building.
+
+      Hotels near BBN
+
+      Harvard Motor Inn
+      ll0 Mt. Auburn Street
+      Cambridge, MA
+      617-864-5200
+      Rates:  single $53; double $59
+      (in Harvard Square, approximately 4 miles from BBN; Bus #74 or 
+      #78)
+
+      Hotel Commander
+      16 Garden Street
+      Cambridge, MA
+      617-547-4800
+      Rates:  single $58; double $78 (25% discount coupons #74 or #78 
+      thru 3/31/82) (near Harvard Square; approximately 2 1/2 miles from
+      BBN; bus #74 or #78)
+
+      Brattle Green Motor Inn
+      1720 Massachusetts Avenue
+      Lexington, MA
+      617-862-6100
+      Rates:  single $33; double $37.50
+      (in Lexington Center, approximately 8 miles from BBN; Need 
+      car/taxicab)
+
+      Holiday Inn of Cambridge
+      1651 Massachusetts Avenue
+      Cambridge, MA
+      617-491-1000
+      Rates:  single $48; double $58
+      (just outside Harvard Sq., approximately 2 1/2 miles to BBN; Bus 
+      #74 or #78)
+
+      Sonesta Hotel
+      5 Cambridge Parkway
+      Cambridge, MA
+      Rates:  single $78.50; double $85+
+      (about 10 minutes by car/taxicab to BBN)
+
+      Ramada Inn
+      1234 Soldiers Field Road
+      Brighton, MA
+      617-254-1234
+      Rates:  single $48-$59; double $56-$67
+      (about 10 minutes by car/taxicab to BBN)
+
+      Howard Johnson Motor Lodge
+      777 Memorial Drive
+      Cambridge, MA
+      617-492-7777
+      Rates:  single $49-$61; double $57-$71
+      (about 10 minutes by car/taxicab to BBN)
+
+      NOTE:  all rates quoted above are plus tax
+
+       
+
+-------
+
+From NIC@SRI-NIC dow Mar 2 13:11:00 1982
+2-Mar-82 13:11:55-PST,1740;000000000001
+Mail-from: ARPANET host SRI-NIC rcvd at 2-Mar-82 1311-PST
+Date:  2 Mar 1982 1147-PST
+From: Nic at SRI-NIC
+Subject: Network News #11
+To:   Netnews-Dist:
+cc:   nic
+
+=====================================================================
+ANEWS-11                                                 DCA Code 252
+2 Mar 1982                                           (DCACODE252@ISI)
+                                                       (202) 692-6175
+
+                  DoD NETWORK NEWSLETTER
+
+=====================================================================
+
+             TOPIC:  - Misuse of the ARPANET
+
+---------------------------------------------------------------------
+
+Dear Liaison,
+
+We have received many complaints from users about a chain letter that 
+has circulated around the ARPANET since mid February.  Such use of the 
+Net is contrary to DoD policy, and those who participate in such or who 
+permit it's continued occurrence via facilities under their control do 
+so at risk.  Early efforts to stop the circulation of this chain letter 
+have been ineffective, and more drastic measures are being considered, 
+up to and including the possibility of removing entire facilities from 
+the net if appropriate.
+
+Please assist us by informing your users that they must not forward such
+messages under any circumstances, and that they risk loss of Net 
+privileges by so doing.  Some users already have lost their access to 
+the Net because of this matter.
+
+We greatly prefer to see matters of this nature corrected at the 
+liaison/host level, but will not hesitate to act if results are not 
+forthcoming.
+
+Major Glynn Parker
+ARPANET Management Branch
+Defense Communications Agency
+
+-------
+
+From NIC@SRI-NIC dow Jun 18 15:55:00 1982
+18-Jun-82 15:55:41-PDT,3235;000000000001
+Mail-from: ARPANET host SRI-NIC rcvd at 18-Jun-82 1555-PDT
+Date: 18 Jun 1982 1510-PDT
+From: Nic at SRI-NIC
+Subject: NETWORK NEWSLETTER
+To:   ANEWS-DIST:
+
+=====================================================================
+ANEWS-12                                                 DCA Code 252
+11 June 1982                                           (DCACODE252@ISI)
+                                                       (202) 692-6175
+                  DoD NETWORK NEWSLETTER
+
+=====================================================================
+             TOPICS:  - DCA Reorganizes
+                      - TIP Inventory Reports
+                      - C/30 Upgrade
+---------------------------------------------------------------------
+DCA REORGANIZES
+
+   DCA is being reorganized to carry out the DoD decision to cancel 
+   AUTODIN II in favor of an ARPANET-based system, known as the Defense 
+   Data Network (DDN).  As part of this reorganization, the ARPANET 
+   Management Branch has become a part of the DDN Program Managers 
+   Staff.  This action has been taken to insure that actions to 
+   implement the DDN will have minimum impact upon services to ARPANET 
+   users.  As a result, Code 252 is now Code B645.  Messages addressed 
+   to DCACODE252 at USC-ISI will continue to reach us.
+   
+CHANGES TO PROCEDURES FOR SUBMISSION OF TIP INVENTORY REPORT
+
+   The following changes have been made in the procedures for submission
+   of the TIP Inventory Report:
+   
+   1.  SUBMISSION OF REPORTS:  Reports are to be submitted to a new 
+   address: TACSTATRPT@BBNB.  Previous addressees (i.e., NIC@NIC, 
+   Huntley@SRI-NIC, etc.) should no longer be cc:ed.  Reports are to be 
+   submitted during the first week of each quarter, i.e., the first week
+   of January, April, July, and October.  Each quarterly report should 
+   be complete within itself, even though the information is unchanged 
+   from the previous quarterly report.
+   
+   2.  FORMAT CHANGES:  Facilities will be identified both by name and 
+   address, e.g. DCEC-TIP, 2/20. Under the column heading, "TYPE", use 
+   the following codes to indicate the type of port:
+      H = Hard wired
+      D = Dial-up.
+   Other codes may be used in addition to these if needed; however, such
+   other codes as are used must be explained at the bottom of the 
+   report.
+   
+C\30 UPGRADE
+
+   Most sites have already placed their orders with BBN for C\30 
+   equipment to replace the older Honeywell H316 and H516, and BBN 
+   Pluribus nodes on the ARPANET.  There are still a few stragglers, 
+   however, who have not yet placed their orders.  Although we can 
+   understand the budgetary constraints which some of you are under, we 
+   cannot allow the Network as a whole to suffer as a result of a few. 
+   Some have wondered what will happen if a given node has not been 
+   upgraded by the January 83 deadline.  Such nodes will, of necessity, 
+   be reconfigured out of the network for the benefit of those who have 
+   upgraded.  We regret this necessity, but will have no choice in the 
+   matter.
+   
+   Sincerely,
+   
+   Major Glynn Parker
+   DCA Code B645
+   ARPANET Management Section
+-------
+
+From NIC@SRI-NIC dow Jul 14 03:00:00 1982
+14-Jul-82 03:00:28-PDT,4500;000000000001
+Mail-from: ARPANET host SRI-NIC rcvd at 14-Jul-82 0300-PDT
+Date: 14 Jul 1982 0206-PDT
+From: Nic at SRI-NIC
+Subject: Network Newsletter # 13
+To:   ANEWS-DIST:
+
+=====================================================================
+ANEWS-13                                                DCA Code B645
+12 July 1982                                         (DCACODE252@ISI)
+                                                       (202) 692-6175
+
+                  DoD NETWORK NEWSLETTER
+
+
+=====================================================================
+
+             TOPICS:  - TIP Inventory Reports Needed ASAP
+                      - NIC Host Name Servers are now up
+                      - Call for Papers ACM SIGCOMM '83
+
+---------------------------------------------------------------------
+
+TIP/TAC INVENTORY REPORTS ARE NEEDED NOW, PLEASE
+
+There are a number of TIP/TAC inventory reports which are overdue.  
+Those TIP/TAC Liaison who have not yet submitted their input should do 
+so immediately.
+
+   ===> NOTE:  Send reports online to TACSTATRPT@BBNB  <===
+
+               Do NOT send them to the NIC
+
+The new procedures for submitting TIP/TAC Inventory Reports was outlined
+in ANEWS-11 for those of you that are new or missed reading it.
+
+
+NIC HOST NAME SERVERS AND TCP/IP NOW AVAILABLE
+
+TCP/IP is now supported by the SRI-NIC AUGUST(TENEX) monitor, and TCP 
+Telnet can be used to access NIC services online.
+
+The first version of the DoD internet Hostnames Service is now available
+from the ARPANET/DDN Network Information Center machine, SRI-NIC, via 
+NCP, TCP, or UDP.  The NCP and TCP versions meet or exceed the 
+specifications outlined in RFC 810 and 811 (cpu type has been added).  
+The UDP version meets the basic IEN 116 specification, and is a simple 
+binary query/response name/address service. 
+
+We request (with some trepidation) that you try the servers and send 
+additional information and feedback to NIC@NIC.  The NIC will maintain 
+the old-format (Host#/IMP#) host table for a period of 2 months.  The 
+old table now has the pathname [SRI-NIC]<NETINFO>OHOSTS.TXT.  The 
+new-format table is in the file [SRI-NIC]<NETINFO>HOSTS.TXT and also in 
+<NETINFO>NHOSTS.TXT.  We continue to depend on all of you to provide the
+NIC with information on ARPANET/DDN hosts and other pertinent hosts, 
+nets, and gateways,  while work progresses toward development of name 
+domains.
+
+The SRI staff involved were: Ken Harrenstien - protocols, servers, and 
+UDP; Mary Dyer - host table; Henry Miller - TCP/IP;  Geoff Goodfellow, 
+Jim Mathis, Holly Nelson, Zaw-Sing Su, and Bill Westfield also 
+contributed.
+
+This work was funded by DCA and was a joint effort of the SRI Network 
+Information Center (NIC), the DARPA Internet Working Group, the Network 
+Liaison, the BBN Network Operations Center (NCC), and the Defense 
+Communications Engineering Center (DCEC).  Jon Postel of USC-ISI, Deputy
+Director of the DARPA Internet User's Group and Internet Configuration 
+Control Board, consulted with the NIC on the protocols and helped edit 
+the gateway and network names and numbers.  ISI, DCEC, and BBN helped 
+with TCP/IP testing.  The Network Liaison provided the host information,
+as did many others representing 'foreign' nets.  Thanks to all.
+  
+
+ACM SIGCOMM '83 SYMPOSIUM ON COMMUNICATIONS ARCHITECTURES AND PROTOCOLS
+
+Dr. Vint Cerf from DARPA would like to call to your attention the Call 
+for Papers and upcoming ACM SIGCOMM '83 Symposium on Communications 
+Architectures and Protocols.  The symposium will cover such topics as: 
+network and communications software applications; new architectures; 
+protocols and network algorithms; standards; techniques for design, 
+testing, validation and performance evaluation; models for verification 
+and specification; and distributed systems for message-switched 
+networks. 
+
+   Deadline for full paper submission    Sept. 1, 1982
+   Notification of acceptance            Oct. 15, 1982
+   Camera-ready manuscripts due           Dec. 1, 1982
+   Symposium itself                    March 8-9, 1983
+
+Submit 5 copies of each paper by Sept. 1, 1982 to
+
+   Prof. Simon S. Lam
+   (Attn: SIGCOMM Symposium)
+   Department of Computer Sciences
+   University of Texas at Austin
+   Austin, Texas 78712
+
+The Symposium will be held at the University of Texas at Austin.
+
+-------
+
+Sincerly,
+
+Jake Feinler/NIC for
+Defense Communications Agency
+
+-------
+
+From NIC@SRI-NIC dow Sep 6 16:30:00 1982
+Mail-from: ARPANET host SRI-NIC rcvd at 6-Sep-82 1630-PDT
+Date:  6 Sep 1982 1521-PDT
+From: Nic at SRI-NIC
+Subject: Network News No. 14 - Please Read - Important Announcement!!
+To:   ANEWS-DIST:
+cc:   NIC-STAFF:
+
+=====================================================================
+ANEWS-14                                                DCA Code B645
+6 August 1982                                        (DCACODE252@ISI)
+                                                     (202) 692-6175/6
+
+                  DoD NETWORK NEWSLETTER
+
+
+=====================================================================
+
+      ATTENTION!  - Netwide TCP Experiment - October 1, 1982
+
+---------------------------------------------------------------------
+
+On October 1, from 12:00 to 16:00 EDT, a TCP-only experiment will be 
+conducted on the ARPANET.  During this period, the ARPANET IMPs will be 
+disabled from sending NCP Host-to-Host traffic, and network traffic 
+measurements will be made.
+
+The method that will be used to disable the NCP traffic will be for the 
+IMPs to reject any messages submitted by the hosts that use link 0 
+(i.e., that have bits 65-72 in the 1822 leader set to zero).  If an IMP 
+receives such a message, it will respond to the host with a type 7 
+(destination host or IMP dead) subtype 3 (communication with the 
+destination host is administratively prohibited) message (see BBN Report
+1822, Page 3-30).  This response is consistent with the IMP's present 
+behavior, and this is similar to the method that was used when short 
+leaders were removed from the network.
+
+During the test, hosts that are running NCP and TCP in parallel with 
+shared remote host state tables may encounter some problems unless their
+NCP is turned off for the duration.  Several TOPS-20 TCP implementations
+fall into this category, and other hosts may as well.  TCP-only hosts 
+should encounter no difficulties, and NCP-only hosts will be unable to 
+use the network.
+
+It is important to note that this method of disabling NCP traffic will 
+be used once the network passes the TCP-only date next year (1 Jan 83), 
+so your host software should (if it cannot now) be able to correctly 
+recognize and handle type 7, subtype 3 messages from the IMP.
+
+Any technical questions concerning the test may be directed to Andrew 
+Malis (Malis@bbn-unix).  Any administrative questions should be directed
+to DCA Code B645 (formerly Code 252) (DCACODE252USC-ISI).
+
+Regards,
+Jack Snively
+DCA Code B645(252)
+ARPANET Managment
+
+Telephone: (202) 692-6175/6176 or (AV) 222-6175/6176.
+
+-------
+
+From NIC@SRI-NIC dow Sep 24 00:43:00 1982
+Mail-from: ARPANET host SRI-NIC rcvd at 24-Sep-82 0043-PDT
+Date: 23 Sep 1982 2342-PDT
+From: Nic at SRI-NIC
+Subject: Network Newsletter No. 15
+To:   ANEWS-DIST:
+cc:   feinler
+
+=====================================================================
+ANEWS-15                                                DCA Code B645
+23 Sept 1982                                         (DCACODE252@ISI)
+                                                       (202) 692-6175
+
+                  DoD NETWORK NEWSLETTER
+
+
+=====================================================================
+
+             TOPIC:  - Vint Cerf leaves DARPA
+
+---------------------------------------------------------------------
+
+To all my friends and colleagues in the DARPA/DoD community:
+
+As many of you now know, I have accepted a new position with MCI 
+Telecommunications beginning on November 1.  I will be responsible for 
+data network development.  I will leave DARPA on October 15 (leaving 2 
+weeks to clean my basement...).  I will remain in the Washington area, 
+so I will be reachable in person if necessary.
+
+My association with DARPA began in 1967 at UCLA when I worked on a 
+computer performance monitoring project sponsored by DARPA.  Shortly 
+thereafter, I worked with Len Kleinrock on the ARPANET Network 
+Measurement Center and with Steve Crocker, Jon Postel, the BBN guys, and
+a lot of you out there on the ARPANET protocols.  At Stanford, I began 
+work on a project started by Bob Kahn called the Internet Project.  This
+effort occupied much of my time at Stanford and, after I came to DARPA, 
+much of my time there.  So the last 15 years of my professional career I
+count as DARPA years (9 in universities and 6 at DARPA).
+
+It has been a very special honor for me to have worked with all of you. 
+Your enthusiasm, expertise, energy and vision have been a source of 
+motivation for me both personally and professionally.  I count many of 
+you now as special personal friends as a result of our work together.
+
+I will miss the pace of DARPA's world and its special people, 
+particularly the guidance, advice and stimulation of Bob Kahn, the 
+Director of the Information Processing Techniques Office.  It is indeed 
+rare to find anyone with such breadth and depth, and it is a source of 
+great pride to me to have worked for and with him for so long.
+
+I can be reached after November 1 at the following address:
+
+MCI Telecommunications Inc.
+MCI Building
+1133 19th Street NW
+Washington, DC 20036
+
+(202) 872-1600
+
+As to electronic access, I am less sure.  My ISI mailbox will be retired
+on 1 November, allowing 2 weeks to clean it out.
+
+The Internet Project at DARPA will be handled personally by Bob Kahn. 
+The Network Security effort will be the responsibility of Barry Leiner. 
+Others not quite fitting into either category should raise any questions
+or issues with Bob Kahn.  Queries about ARPANET access, if they must be 
+answered by DARPA rather than DCA, should be sent to Mrs. Dona 
+McKenney-Vance (McKenney@ISIA).
+
+Technical issues relating to the Internet Project should be raised with 
+Dave Clark, the Internet Architect, at MIT (DCLARK@MIT-MULTICS) or with 
+Jon Postel, the Internet Numbers CZAR, at ISI (POSTEL@ISIF).  Jon and 
+Dave can also help you with any NCP->TCP transition questions.
+
+Documentation on the Internet is available from the NIC (NIC@SRI-NIC).
+
+I want to thank you all for making the last 15 years such memorable ones
+for me.  I shall miss you, and I truly hope that our professional and 
+personal paths will cross often in the years ahead.
+
+Vint Cerf
+
+-------
+
+From NIC@SRI-NIC dow Oct 1 02:56:00 1982
+Mail-from: ARPANET host SRI-NIC rcvd at 1-Oct-82 0256-PDT
+Date: 30 Sep 1982 2201-PDT
+From: FEINLER at SRI-NIC
+Subject: Network Newsletter No. 16
+To: list-l at SRI-NIC
+
+=====================================================================
+ANEWS-16                                      NETWORK INFO CENTER for
+30 Sept 1982                              DCA DDN Program Mgmt Office
+                                                        (NIC@SRI-NIC)
+                                                       (415) 859-3695
+
+                  DoD NETWORK NEWSLETTER
+
+
+=====================================================================
+
+         TOPIC:  - Reminder of TCP/IP test, 1 Oct 1982
+                 - SMTP implementations needed by Jan. 1983
+                 - Documents available from NIC
+                 - Implementation survey being taken
+
+---------------------------------------------------------------------
+
+REMINDER - TCP/IP TEST FRIDAY, 1 OCT 1982
+
+   You are all reminded again that a netwide test of TCP/IP will be 
+   conducted Friday, 1 Oct 1982 from 12:00 to 16:00 EDT, during which 
+   time NCP will be disabled in the IMPS.  Those hosts which have not 
+   implemented TCP/IP will not be able to communicate via the ARPANET 
+   during the test period.
+
+   Will those of you participating in this bakeoff please report 
+   problems or useful observations to POSTEL@ISIF with cc: to the NOC 
+   (JGORDON@BBN-UNIX) and the NIC (NIC@SRI-NIC)
+
+   If you have NOT implemented TCP/IP, the end of the world is near!
+         ***** 1 Jan 1983 is the cutover date, folks! *****
+   
+
+SMTP MUST BE IMPLEMENTED BY 1 JAN 1983
+
+   SMTP will become the official network mail protocol.  All hosts with 
+   mail service should plan on implementing SMTP by 1 Jan. 1983 for 
+   sending and receiving network mail.  SMTP is completely separate from
+   FTP, and is handled by a distinct server.  This is quite different in
+   detail from the current mail-handling procedures.  Questions about 
+   implementation of the mail protocol should be addressed to Jon Postel
+   (POSTEL@ISIF).
+
+   In addition, all hosts must be able to understand the 4-octet host 
+   addressing scheme outlined in RFC-796 and RFC-810.
+   
+
+DOCUMENTS AVAILABLE ONLINE FROM NIC
+
+   The documents you will need, if you do not already have them, are the
+   following:
+
+   1. The Internet Protocol Transition Workbook (IPTW).
+
+      Most of you have this volume which contains many of the needed 
+      protocols.  However, new versions of SMTP and other mail-related 
+      protocols have been issued since this book was published.  
+      References to the updated mail protocols are listed below and are 
+      available online at the NIC.  If you do not have the IPTW, copies 
+      may be obtained from the NIC (NIC@SRI-NIC).
+
+      The IPTW contains TCP/IP/UDP/ICMP, the application level 
+      protocols, discussion of the address mappings and host table 
+      specification, and related information.
+
+   2. RFC-821 - Simple Mail Transfer Protocol (68 pp)
+      (Note:  This is a new version that obsoletes RFC-788 contained
+      in the IPTW.  Pathname = [SRI-NIC]<Netinfo>RFC821.txt)
+
+   3. RFC-822 - Standard for the Format of ARPA Internet Text Messages
+      (47 pages)  (Note:  This is a new version that obsoletes RFC-733
+      contained in the IPTW.  Pathname = [SRI-NIC]<Netinfo>RFC822.txt)
+
+   4. RFC-819 - The Domain Naming Convention for Internet User
+      Applications (18 pp).  Pathname = [SRI-NIC]<Netinfo>RFC819.txt)
+
+   5. Internet Protocol Implementor's Guide - This document gives an
+      overview of the protocols and some general implementation
+      guidelines.  Copies have been sent to everyone who has a copy
+      of the IPTW and should be arriving soon.  This document is not
+      necessary to the implementation of the protocols, but is very
+      useful.  Additional copies are available from NIC@SRI-NIC.
+   
+
+   Changes are taking place rapidly.  We will try to keep you informed 
+   of events and necessary documentation (new or updated) via this 
+   newsletter.  Please see that implementors at your site are added to 
+   the Network Newsletter distribution list (ANEWS) by sending a request
+   to NIC@SRI-NIC, or otherwise see that they are notified of 
+   newsletters as they are published.
+
+   Documents online at the NIC can be obtained via FTP from your local 
+   host using username 'anonymous' and pw=guest.
+
+TCP IMPLEMENTATION SURVEY BEING CONDUCTED
+
+   The NIC is conducting a survey on behalf of DCA, of who has TCP/IP 
+   and related software implementations and products.  Questionnaires 
+   have been included in the current mailing of the Internet Protocol 
+   Implementation Guide.  A copy of the questionnaire is also online at 
+   SRI-NIC (10.0.0.73) as file <NETINFO>TCP-QUESTIONNAIRE.TXT if you 
+   prefer to submit the information online.  Return completed 
+   questionnaires to NIC@SRI-NIC or to E. Feinler, SRI International, 
+   Room EJ221, 333 Ravenswood Ave., Menlo Park, CA, 94025.
+
+   If you have promotional or descriptive literature for any of the 
+   implementations or products, please send copies to the NIC for 
+   reference, and keep us on your mailing list for future announcements,
+   advertising, or descriptive brochures.
+
+-------
+
+From NIC@SRI-NIC dow Nov 2 10:19:00 1982
+Mail-from: ARPANET host SRI-NIC rcvd at 2-Nov-82 1019-PST
+Date:  2 Nov 1982 0212-PST
+From: FEINLER at SRI-NIC
+Subject: Network Newsletter No. 17
+To: ANEWS-DIST: ;
+
+=====================================================================
+ANEWS-17                                      NETWORK INFO CENTER for
+1 Nov 1982                                DCA DDN Program Mgmt Office
+                                                        (NIC@SRI-NIC)
+                                                       (415) 859-3695
+
+                  DoD NETWORK NEWSLETTER
+
+
+=====================================================================
+
+         TOPIC:  - More TCP/IP tests, Nov 15; Dec 13,14, 1982
+                 - Next Sponsor's Meeting, Dec. 2, 1982
+                 - SMTP implementations needed by Jan. 1983
+                 - TAC User Guide now available
+                 - AAAI Conf. - Call for papers
+
+---------------------------------------------------------------------
+
+ATTENTION - NETWIDE TCP EXPERIMENT - NOV 15, DEC 13 & 14, 1982
+
+On November 15, December 13, and December 14, 1982, for a 24-hour period
+each day (00:01 to 24:00 EST), a TCP-only experiment will be conducted 
+on the ARPANET.  During this period, the ARPANET IMPS will be disabled 
+from sending NCP Host-to-Host traffic, and network traffic measurements 
+will be taken.
+
+The method that will be used to disable the NCP trafic will be for the 
+IMPS to reject any messages submitted by the hosts that use link 0 
+(i.e., that have bits 65-72 in the 1822 leader set to zero).  If an IMP 
+receives such a message, it will respond to the host with a type 7 
+(destination host or IMP dead) subtype 3 (communication with the 
+destination host is administratively prohibited) message (see BBN Report
+1822, page 3-30).  This response is consistent with the IMP's present 
+behavior, and this is similar to the method that was used when short 
+leaders were removed from the network.
+
+During the test, hosts that are running NCP and TCP in parallel with 
+shared remote host state tables may encounter some problems unless their
+NCP is turned off for the duration.  Several TOPS-20 TCP implementations
+fall into this category, and other hosts may as well.  TCP-only hosts 
+should encounter no difficulties, and NCP-only hosts will be unable to 
+use the network.
+
+It is important to note that this method of disabling NCP traffic will 
+be used once the network pases the TCP-only date next year (1 Jan 83), 
+so your host software should (if it cannot now) be able to correctly 
+recognize and handle type 7, subtype 3 messages from the IMP.
+
+Any technical questions concerning the test may be direct to Andrew 
+Malis (Malisatbbn-unix), (617) 497-3419.  Any administrative questions 
+should be directed to DCA Code B645 (formerly Code 252) 
+(DCACODE252ATUSC-ISI).
+
+Regards,
+Jack Snively
+DCA Code B645
+ARPANET MANAGEMENT
+TELEPHONE: (202) 692-6175/6176 or
+(AV) 222-6175/6176.
+
+SPONSORS MEETING TO BE HELD DEC. 2, 1983
+
+The Sponsors Meeting will be held on Dec. 2, 1983 in Washington, D.C.  
+Time and place to be announced in a future message.
+
+We anticipate spending some time at the meeting on the subject of the 
+DDN, particularly as it affects the ARPANET and the Sponsors.  We would 
+also like to include other imporatant topics, time permitting.  
+Suggested topics for discussion, along with their relative importance, 
+who should present them, and about how much time is required should be 
+sent to us here at DCA (GPARK@BBNC).  The agenda will be prepared from 
+these suggestions.  We may not be able to cover everything, but will try
+to include the things which you consider most important.
+
+Regards,
+
+Glynn Parker
+DCA Code B627
+
+2ND REMINDER - SMTP MUST BE IMPLEMENTED BY 1 JAN 1983
+
+SMTP will become the official network mail protocol.  All hosts with 
+mail service should plan on implementing SMTP by 1 Jan. 1983 for sending
+and receiving network mail.  SMTP is completely separate from FTP, and 
+is handled by a distinct server.  This is different in detail from the 
+current mail-handling procedures.  Questions about implementation of the
+mail protocol should be addressed to Jon Postel (POSTEL@ISIF).
+
+In addition, all hosts must be able to understand the 4-octet host 
+addressing scheme outlined in RFC-796 and RFC-810.
+
+TAC USER GUIDE ONLINE AT THE NIC
+
+Robin Clifford of BBN has just published a revised TAC User Guide (BBN 
+Rept. 4780, Oct. 1982).  Contact your local TAC Liaison first for 
+hardcopies.  If the TAC Liaison is out of copies, contact Judy Gordon at
+BBN (jgordon@bbn-unix) on the East Coast and NIC@SRI-NIC on the West 
+coast for hardcopies.  The User Guide is also online on SRI-NIC 
+(10.0.0.73) in the file <NETINFO>TAC-USER-GUIDE.DOC.  It can be FTPed to
+your local host using username=anonymous, pw=guest.
+
+AAAI CALL FOR PAPERS
+
+The 3rd National Conference on Artificial Intelligence will be held in 
+Washington, D.C., Aug. 22-26, 1983 at the Washington Hilton.  Authors 
+are invited to submit short papers on original research covering any 
+aspect of artificial intelligence.  Submit papers to:  American 
+Association for Artificial Intelligence, 445 Burgess Drive, Menlo Park, 
+Ca 94025, (415) 328-3123, AAAI-OFFICE@SUMEX-AIM.  Program Chairman is 
+Michael R. Genesereth, Computer Science Dept., Stanford University, 
+Stanford, CA, (415) 497-0324, CSD.Genesereth@SU-SCORE.  Watch your 
+electronic bulletin board for further details.
+
+-------
+
+From NIC@SRI-NIC dow Dec 20 16:12:00 1982
+Mail-from: ARPANET host SRI-NIC rcvd at 20-Dec-82 1612-PST
+Date: 20 Dec 1982 1227-PST
+From: NIC at SRI-NIC
+Subject: Network Newsletter No. 18
+To: ANEWS-DIST: ;
+cc: DCA: ;
+
+=====================================================================
+ANEWS-18                                      NETWORK INFO CENTER for
+17 Dec 1982                               DCA DDN Program Mgmt Office
+                                                        (NIC@SRI-NIC)
+                                                       (415) 859-3695
+
+                  DoD NETWORK NEWSLETTER
+
+
+=====================================================================
+
+         PLEASE NOTE:  - New Policy for Enabling IMP Ports
+
+---------------------------------------------------------------------
+
+TO:  All ARPANET Sponsors, Host Administrators, and Technical Liaison.
+
+As the impending split of the ARPANET into the MILNET and the 
+EXPERIMENTAL ARPANET draws nearer, it is increasingly important that we 
+have a completely accurate data base of which hosts are on which IMP 
+ports. An error could easily result in inadvertently denying service to 
+a user, which we want to avoid.
+
+Accordingly, we are asking that all new additions of hosts to the 
+network, and port changes of existing hosts be coordinated with the 
+Defense Data Network Program Management Office (DDN-PMO) prior to 
+implementation.  BBN has been instructed to disable all currently unused
+ports, and to enable them only upon approval from the DDN-PMO.
+
+Requests for port assignment and activation should be sent to the 
+following netmail addresses for action:
+
+   DCACODE252 at USC-ISI
+   DCACODEB627 at BBNB
+   GPARK at BBNB.
+
+Info copy should be sent to
+
+   NIC at NIC
+   CONTROL at BBN-UNIX.
+
+Allow at least one week prior to the desired activation date.
+
+-------
+
+HEIDI B. HEIDEN
+Colonel, USA
+Program Manager
+Defense Data Network
+-------
+
+From NIC@SRI-NIC dow Dec 21 20:32:00 1982
+Mail-from: ARPANET host SRI-NIC rcvd at 21-Dec-82 2032-PST
+Date: 21 Dec 1982 1720-PST
+From: NIC at SRI-NIC
+Subject: Network Newsletter No. 19
+To: ANEWS-DIST: ;
+cc: DCA: ;
+
+=====================================================================
+ANEWS-19                                      NETWORK INFO CENTER for
+22 Dec 1982                               DCA DDN Program Mgmt Office
+                                                        (NIC@SRI-NIC)
+                                                       (415) 859-3695
+
+                     DoD NETWORK NEWSLETTER
+
+
+=====================================================================
+
+       PLEASE NOTE:  - TCP/IP Cutover Takes Place 1 Jan. 1983
+
+---------------------------------------------------------------------
+
+The Defense Data Network Program Management Office (DDN-PMO) is 
+committed to the implementation of TCP/IP and related protocols 
+effective 1 Jan 1983.  Starting 00:01 (est) 1 Jan 1983 use of NCP will 
+not be permitted unless specific exception is granted by the DDN-PMO. 
+Reclama requesting exceptions to this policy may be submitted via the 
+network prior to 1 Jan 1983.  Address the reclama to:
+
+   to: dcacodeB627@bbnb
+   cc: dcacode252@usc-isi, nic@sri-nic
+
+After 1 Jan 1983, if you are unable to use the network, reclamas may be 
+submitted via U.S.Mail to:
+
+   HQDCA
+   CodeB610 (WUB)
+   Washington, D.C. 20305
+
+The reclama must provide:
+
+   - A sufficiently detailed justification of your requirement to
+     allow a case by case evaluation to be made.
+   - A schedule of TCP/IP conversion.
+   - The source of your TCP/IP implementation - if known
+   - A list of the other hosts with which you require interoperability.
+
+Should further information be required, points of contact in this matter
+are
+
+   Maj. Bruce Sweeney  703-285-5020   or
+   Mr.  Darryl Henry  703-285-5038    or
+   Mr.  Wayne Grindle  703-285-5045
+
+-----
+
+Heidi B. Heiden
+Colonel, USA
+Program Manager
+Defense Data Network
+
+-------
+
+13-Jan-83 19:19:37-PST,5542;000000000001
+Mail-From: SMTP created at 13-Jan-83 19:15:19
+Return-path: NIC@SRI-NIC
+Received: FROM SRI-NIC BY USC-ISIF.ARPA WITH TCP ; 13 Jan 83 19:14:28 PST
+Date: 13 Jan 1983 1543-PST
+From: NIC at SRI-NIC
+Subject: Network Newsletter No. 20
+To: ANEWS-DIST: ;
+cc: Dcacodeb627 at BBNA
+
+=====================================================================
+ANEWS-20                                      NETWORK INFO CENTER for
+13 Jan 1983                               DCA DDN Program Mgmt Office
+                                                        (NIC@SRI-NIC)
+                                                       (415) 859-3695
+
+                     DoD NETWORK NEWSLETTER
+
+
+=====================================================================
+
+             TCP/IP Conversion Effective 1 Jan 83
+
+---------------------------------------------------------------------
+
+
+1. The network  transition to exclusive  use of TCP/IP  took place  as
+scheduled.  The  net is  up with  relatively few  NCP-only  exemptions
+granted.  Individual host  TCP implementation  problems have  occurred
+and  exemptions  were  granted  to  those  sites  experiencing  severe
+disruption of service.  The exemptions are temporary and firm  cutover
+dates (to TCP-only operation) have been published (see Table 1).
+
+2.  To  support those  users  whose hosts  are  still using  NCP,  the
+ARPANET terminal access controllers (TAC) will continue to support NCP
+through January 1983.  This will allow hosts using NCP an  opportunity
+to transition  to TCP  without  seriously disrupting  remote  terminal
+service.  Terminal users will have to enter an additional command when
+connecting to a TAC in order to  communicate with NCP hosts.  As of  1
+Feb 83, all TACs will run TCP/IP only.
+
+3.  The University of Delaware (UDEL)  has agreed to serve as a  mail-
+forwarding relay  during the  transition  period.  A  modification  to
+normal addressing is necessary as described below:	
+
+   a.  A TCP user with mail for an NCP user will address
+        TO: <Account-Name>.<NCP-HostName>@UDEL-RELAY. 
+           Example:  PVAYDA.OFFICE-10@UDEL-RELAY.
+       Important:  The origin host must be TCP.
+
+   b.  An NCP user with mail for a TCP user will address
+        TO: <Account-Name>.<TCP-HostName>@UDEL-TCP.
+           Example:  DHENRY.BBNC@UDEL-TCP. 
+       Important:  The origin host must be NCP.
+
+   c.  UDEL will  return incorrectly addressed  messages.  Should  the
+destination host protocol not be known, or be transitioning, UDEL will
+complete the transaction  (TCP to TCP, or  NCP to NCP).  The  critical
+point is the correct protocol of the sender.
+
+   d.   POC  at  UDEL is Mr. Brendan  Reilly,  (302) 738-1266,
+Reilly@UDEL-RELAY.
+
+4.  The list of TCP exemptions is included for your information (Table
+1) to enable effective use of the UDEL relay.
+
+5.  Should  unforeseen  problems  result  in a  need  to  request  NCP
+enablement,  Newsletter   No.  19   establishes  reclama   procedures.
+Briefly, reclamas  should  provide your  justification,  schedule  for
+TCP-only implementation, source of TCP  conversion effort, and a  list
+of the hosts you  communicate with. TCP exemptions  are granted on  an
+individual host basis  and each host  administrator must  individually
+request NCP  enablement.  POC  for all  such requests  is Major  Bruce
+Sweeny, DCACODEB627@BBN-TENEXB, or by phone, (703) 285-5020.
+
+6. Thank you for your patience and cooperation.
+
+-----
+      Table 1.   NCP Enabled Hosts
+
+ADDRESS        HOST NAME        CUTOVER
+-------        ---------        -------
+10.0..2        SRI-NSC11        1 Apr 83
+10.1..2        SRI-KL           1 Mar 83
+10.2..2        SRI-CSL          1 Feb 83
+
+10.0..6        MIT-MULTICS      1 Feb 83
+10.1..6        MIT-DMS          1 Feb 83
+10.2..6        MIT-AI           1 Feb 83
+10.3..6        MIT-ML           1 Feb 83
+
+10.2..9        YALE             1 Feb 83
+
+10.0..11       SU-AI            15 Mar 83
+10.3..11       SU-SCORE         1 Feb 83
+
+10.0..14       CMUB             1 Apr 83
+10.1..14       CMUA             1 Apr 83
+
+10.3..16       AMES11           1 Feb 83
+
+10.4..18       ROCHESTER        1 May 83
+
+10.0..23       USC-ECLB         1 May 83
+10.1..23       USC-ECLC         1 May 83
+10.3..23       USC-ECL          1 May 83
+
+10.3..24       WHARTON          1 Mar 83
+
+10.0..27       USC-ISID         16 Jan 83
+
+10.3..32       KESTREL          1 Feb 83
+
+10.0..43       OFFICE-1         1 Feb 83
+10.1..43       OFFICE-2         1 Feb 83
+
+10.0..44       MIT-XX           1 Feb 83
+10.3..44       MIT-MC           1 Feb 83
+
+10.3..53       MARTIN           1 Feb 83
+
+10.2..54       ACC              1 Feb 83
+10.3..54       JPL-VAX          4 Feb 83
+
+10.0..58       NYU              1 Feb 83
+
+10.0..65       AFSC-SD          15 Feb 83
+
+10.0..66       MITRE-BEDFORD    1 Apr 83
+
+10.0..67       AFSC-HQ          15 Feb 83
+
+10.0..73       SRI-NIC          1 Feb 83
+10.2..73       SRI-AI           1 Mar 83
+
+10.1..77       testing port     1 Feb 83
+10.3..77       testing port     1 Feb 83
+
+10,0..87       SANDIA           1 Feb 83
+
+10.2..92       NUSC-NPT         1 Feb 83
+
+10.0..93       OFFICE-8         1 Feb 83
+10.1..93       OFFICE-10        1 Feb 83
+10.2..93       OFFICE-22B       1 Feb 83
+
+10.0..95       S1-Gateway       Unknown
+10.1..95       S1-A             1 Mar 83
+10.3..95       S1-C             1 Feb 83
+
+10.1..96       UDEL-TCP         1 Mar 83
+
+
+-------
+
+24-Feb-83 17:24:42-PST,4483;000000000001
+Return-path: <NIC@SRI-NIC>
+Mail-From: SMTP created at 24-Feb-83 17:21:14
+Received: FROM SRI-NIC BY USC-ISIF.ARPA WITH TCP ; 24 Feb 83 17:21:26 PST
+Date: 24 Feb 1983 1450-PST
+From: NIC at SRI-NIC
+Subject: Network Newsletter No. 21
+To: ANEWS-DIST: ;
+
+
+=====================================================================
+ANEWS-21                                      NETWORK INFO CENTER for
+22 Feb 1983                               DCA DDN Program Mgmt Office
+                                                        (NIC@SRI-NIC)
+                                                       (415) 859-3695
+
+                     DoD NETWORK NEWSLETTER
+
+
+=====================================================================
+
+   TOPIC:  - Revised Procedures for Requesting New Host Approval
+             and Port Activation
+
+   NOTE:  This revision obsoletes procedures outlined in ANEWS-18
+
+------------------------------------------------------------------------
+
+REVISED PROCEDURES FOR REQUESTING NEW HOST APPROVAL AND PORT ACTIVATION:
+
+In DoD Network Newsletter # 18, we established a procedure for 
+requesting approval of new hosts on the net and activation of the 
+desired IMP port.  This procedure has worked well, and has been helpful 
+in maintaining an accurate data base.  We have found some ways of 
+improving it, however, and are therefore asking you to follow the 
+revised procedure described below rather than that of newsletter 18, 
+which is superseded by this newsletter.
+
+------------------------------------------------------------------------
+
+WHERE TO ADDRESS THE REQUEST:  Requests for new host approval and port 
+activation, and for host change on an already activated port, should be 
+addressed to the following network mailbox:
+
+   HOST-APPROVE@SRI-NIC
+
+WHAT INFORMATION IS NEEDED:  All such requests should contain the 
+following information:
+
+   HOST DATA:                             EXAMPLE:
+
+      Host Name:                          - SRI-NIC
+      Host Address:                       - 10.0.0.73
+      Location:                           - SRI International 
+                                            Network Information Center
+                                            Menlo Park, CA 94025
+      CPU Type:                           - Foonly-F3 (System-XXV)
+      Operating System:                   - TENEX (AUGUST)
+      Nickname (if any):                  - NIC
+      Sponsor:                            - DCA
+      Protocols:                          - TCP/TELNET,TCP/FTP,TCP/SMTP,
+                                            ICMP, etc.  (See RFC-810)
+
+   TECHNICAL LIAISON DATA:                EXAMPLE:
+
+      Name:                               - Feinler, Elizabeth J.
+      U. S. Mail Address:                 - SRI International
+                                            Network Information Center
+                                            EJ221
+                                            333 Ravenswood Avenue
+                                            Menlo Park, CA 94025
+      Telephone (commercial & AUTOVON)):  - (415) 859-3695
+                                          - (AV) xxx-3695
+      Network Mailbox:                    - NIC@SRI-NIC
+
+   HOST ADMINISTRATOR DATA:               EXAMPLE:
+
+      Name:                               - Feinler, Elizabeth J.
+      U. S. Mail Address:                 - SRI International
+                                            Network Information Center
+                                            EJ221
+                                            333 Ravenswood Avenue
+                                            Menlo Park, CA 94025
+      Telephone (commercial & AUTOVON)):  - (415) 859-3695
+                                          - (AV) xxx-3695
+      Network Mailbox:                    - NIC@SRI-NIC
+
+OTHER INFORMATION NEEDED:
+
+   Date port activation is required:
+
+   Date port activation is no longer required: (If time required is 
+   expected to exceed six months, enter "indefinite".)
+
+WHEN TO SUBMIT REQUESTS: Requests should be submitted at least two weeks
+prior to the desired date of port activation.  Approved requests will be
+forwarded by DCA to the NOC and the NIC for action as rapidly as 
+possible after receipt.
+
+-----
+
+Your assistance in following this revised procedure is appreciated.
+
+HEIDI B. HEIDEN
+DCA Code B610
+Program Manager
+Defense Data Network
+
+-------
+
+7-Apr-83 22:54:12-PST,4354;000000000001
+Return-path: <FEINLER@SRI-NIC>
+Mail-From: SMTP created at  7-Apr-83 22:50:23
+Received: FROM SRI-NIC BY USC-ISIF.ARPA WITH TCP ; 7 Apr 83 22:51:37 PST
+Date:  7 Apr 1983 2132-PST
+From: FEINLER at SRI-NIC
+Subject: DoD Network Newsletter No. 23
+To: ANEWS-DIST: ;
+cc: ddn-navy at BBNA, walker at SRI-NIC, sweeny at SRI-NIC, bpowell at BBNA
+
+========================================================================
+ANEWS-23                                      NETWORK INFO CENTER for
+7 Apr 1983                                DCA DDN Program Mgmt Office
+                                                        (NIC@SRI-NIC)
+                                                       (415) 859-3695
+
+                     DoD NETWORK NEWSLETTER
+
+
+========================================================================
+
+                 TOPIC:  - ARPANET IMPs and TACs
+
+------------------------------------------------------------------------
+
+    On 30 March 83, a letter was sent to the Military Services and Government 
+Agencies which participate in the ARPANET, announcing the establishment of the 
+Defense Data Network - MILNET, and assumption of responsibility by the Defense 
+Communications Agency for the IMPS and TACs, currently on the ARPANET, which 
+are to become part of the MILNET. The text of that letter is quoted below.
+
+   HEIDI B. HEIDEN Colonel, USA Program Manager Defense Data Network
+
+------------------------------------------------------------------------
+
+SUBJ:  ESTABLISHMENT OF THE DEFENSE DATA NETWORK - UNCLASSIFIED SEGMENT
+       (MILNET)
+
+1. Effective 4 April 1983 the MILNET, a functional part of the Defense Data 
+Network (DDN), is established.  The MILNET, serving the computer systems listed
+in Enclosure 1, will provide reliable, survivable, unclassified communications 
+between host computers throughout the United States and, in the near future, 
+will expand services overseas.  MILNET nodes and TACs transitioning to DCA 
+management are listed in Enclosure 2.
+
+2. Initially the MILNET will be fully integrated with the ARPANET until ARPANET
+and MILNET resources can be reconfigured into separate networks. The 
+reconfiguration will be evolutionary, resulting in physically separate networks
+in early 1984.  This separation is being undertaken for two reasons:
+
+   a. To increase the level of resource protection afforded to MILNE
+      hosts while providing reliable, survivable service; and,
+
+   b. To return the ARPANET to its original purpose as a small
+      experimental research network upon which to develop and test
+      new computer and communications concepts and protocols.
+
+3. Once the networks are separated all MILNET hosts will continue to exchange 
+electronic mail with the ARPANET, and those MILNET hosts which require full 
+internet communications with the ARPANET including file transfer and terminal 
+access will be provided those services via mail bridges installed by the DCA.  
+While mail bridges derive their name from the fact that they pass electronic 
+mail between the two networks without restrictions, they also have the 
+capability, on a host-pair permission basis, to function as full internet 
+gateways.  Four such bridges are being installed between the MILNET and the 
+ARPANET to ensure that approved MILNET hosts have full communications services 
+with the ARPANET where required.
+
+4. MILNET hosts whose requirements dictate a more restricted operational 
+environment may, at their request, be placed in a separate, closed community of
+interest.  Hosts within this closed community will have full communications 
+services among themselves, but will only have electronic mail service to and 
+from hosts which are not part of the closed community.
+
+5. Information concerning requests for new service will be forthcoming by 
+separate letter.
+
+                                      /signed/
+
+2 Enclosures a/s                      HEIDI B. HEIDEN
+                                      Colonel, USA
+                                      Program Manager
+                                      Defense Data Network
+
+(The Enclosures are not included in the Newsletter since they contain 
+information which is available in the file <NETINFO>MILNET-ARPANET.LIST
+on the SRI-NIC (10.0.0.73) machine).
+
+ 
+
+-------
+
+10-Apr-83 20:22:01-PST,10747;000000000001
+Return-path: <FEINLER@SRI-NIC>
+Mail-From: SMTP created at 10-Apr-83 20:17:17
+Received: FROM SRI-NIC BY USC-ISIF.ARPA WITH TCP ; 10 Apr 83 20:17:25 PST
+Date: 10 Apr 1983 1744-PST
+From: FEINLER at SRI-NIC
+Subject: DoD Network Newsletter No. 24 - Again (Long!)
+To: ANEWS-DIST: ;
+cc: bboard at MIT-ML
+
+=====================================================================
+ANEWS-24                                      NETWORK INFO CENTER for
+7 Apr 1983                                DCA DDN Program Mgmt Office
+                                                        (NIC@SRI-NIC)
+                                                       (415) 859-3695
+
+                     DoD NETWORK NEWSLETTER
+
+========================================================================
+
+                 TOPIC:  - ARPANET/MILNET CONTACTS
+
+========================================================================       
+            Contacts at DDN PROGRAM MANAGEMENT OFFICE 
+========================================================================
+
+The Defense Communications Agency, Defense Data Network Program Management 
+Office (DDN-PMO) is responsible for overall management and policy for the DDN 
+Unclassified Segment (MILNET) and for the ARPANET Experimental Network.
+
+Listed below are key contacts at the DDN-PMO.
+
+   NOTE:  When addressing mail to an office mailbox (e.g., DCACodeB613) please 
+   indicate to whom the message is intended at the beginning of the message.
+
+CODE B610.  PROGRAM MANAGER
+
+   Col Heidi B. Heiden   (703)285-5013 (AV)356-5013  Heiden@BBNG
+
+CODE B611.  DEPUTY PROGRAM MANAGER
+
+   Mr. John Thomas       (703)285-5022 (AV)356-5022  JEThomas@BBNB
+
+CODE B612.  TECHNICAL ADVISOR
+
+   Mr. Michael Corrigan  (703)285-5030 (AV)356-5030  Corrigan@MITRE
+
+CODE B613.  BUSINESS MANAGEMENT OFFICE
+
+   Mr. James Powell      (703)285-5101 (AV)356-5101  DCACODEB613@BBNB
+   LtCol Curt Foiles     (703)285-5032 (AV)356-5032  DCACODEB613@BBNB
+   Major Larry Wheeler   (703)285-5032 (AV)356-5032  DCACODEB613@BBNB
+   Ms. Charlotte Hart    (703)285-5031 (AV)356-5031  DCACODEB613@BBNB
+
+CODE B614.  DATA BASE AND CONFIGURATION MANAGEMENT OFFICE
+
+   Mr. Alvin Cochel      (703)285-5100 (AV)356-5100  DCACODEB614@BBNB
+   Mr. Ronald Gutschmidt (703)285-5017 (AV)356-5017  DCACODEB614@BBNB
+
+CODE B615.  USER REQUIREMENTS AND INTEGRATION DIVISION
+
+   LtCol John Wegl       (703)285-5027 (AV)356-5027  DCACODEB615@BBNB
+                                                     DDN-NAVY@BBNB
+   Mr. Vic Russell       (703)285-5028 (AV)356-5028  DDN-DOD@BBNB
+   Major Bob Farmer      (703)285-5037 (AV)356-5037  DDN-ARMY@BBNB
+   Major Mike Allen      (703)285-5025 (AV)356-5025  DDN-USAF@BBNB
+   Mr. Pat Sullivan      (703)285-5036 (AV)356-5036  DCA-PGS@BBNC
+   Mr. Jack Eberhardt    (703)285-5026 (AV)356-5026  Jack@bbnc
+
+CODE B625.  SYSTEM ACQUISITION AND DEVELOPMENT DIVISION
+
+   Dr. Thomas Harris     (703)285-5039 (AV)356-5039 THarris@BBNB
+
+CODE B626.  SYSTEM ACQUISITION BRANCH
+
+   LTC William Parrish   (703)285-5019 (AV)356-5019  DCACODEB626@BBNB
+   Major Nick Salatti    (703)285-5106 (AV)356-5106  Salatti@BBNB
+   Mr. John Claitor      (703)285-5012 (AV)356-5012  DCACODEB626@BBNB
+   Mr. Ron Hyrkas        (703)285-5105 (AV)356-5105  DCACODEB626@BBNB
+   Mr. John Walker       (703)285-5104 (AV)356-5104  Walker@SRI-NIC
+
+CODE B627.  SYSTEM DEVELOPMENT BRANCH
+
+   Mr. Wayne Grindle     (703)285-5045 (AV)356-5045  DCACODEB627@BBNB
+   Major Glynn Parker    (703)285-5133 (AV)356-5133  GPark@BBNC
+   Major Bruce Sweeny    (703)285-5007 (AV)356-5007  Sweeny@SRI-NIC
+   Major Steven Wold     (703)285-5020 (AV)356-5020  DCACODEB627@BBNB
+   Capt Gerald Doyle     (703)285-5018 (AV)356-5018  Doyle@MITRE
+   Mr. Darryl Henry      (703)285-5038 (AV)356-5038  DHENRY@BBNC
+   Mr. Dennis Morris     (703)285-5021 (AV)356-5021  DCACODEB627@BBNB
+
+CODE B635.  TEST AND EVALUATION DIVISION
+
+   Mr. Robert Philbrook  (703)285-5035 (AV)356-5035  Philbrook@BBNC
+   Mr. Bobby Powell      (703)285-5137 (AV)356-5137  BPowell@BBNB
+
+CODE B645.  OPERATIONS AND MAINTENANCE DIVISION
+
+   Mr. John Milton       (202)692-2879 (AV)222-2879  DCACODE252@USC-ISI
+   Capt Anthony Mlinar   (202)692-3462 (AV)222-3462  DCACODE252@USC-ISI
+   LTJG Bob Selby        (202)692-2879 (AV)222-2879  DCACODE252@USC-ISI
+   Mr. Jerry Phillips    (703)437-5045 (AV)364-2481  DCACODE252@USC-ISI
+   Mr. Paul Farrington   (202)692-5045 (AV)222-5045  DCACODE252@USC-ISI
+   Mr. Jack Snively      (703)692-5045 (AV)222-5045  DCACODE252@USC-ISI
+   Mr. Carleton Woodard  (703)285-5040 (AV)356-5040  DCACODE252@USC-ISI
+
+========================================================================       
+       Contacts at the NETWORK OPERATIONS CENTER (NOC) at BBN 
+========================================================================
+
+   Bolt Beranek and Newman (BBN) is responsible for hardware and software 
+   maintenance for ARPANET/MILNET and manages the Network Operations Center 
+   (NOC) under contract to the DCA DDN-PMO.
+
+   Key contacts and how to reach them are listed below:
+   
+
+   NETWORK OPERATIONS CENTER         (617)-661-0100   control@bbn-unix
+                                  or (617)-497-3571
+
+      Contact the NOC for all network hardware problems, for field service 
+      hardware assistance, for problems with host interfaces, or suspected node
+      software problems.  Inform the NOC of any extended outages at your site, 
+      especially those that will affect the IMP.
+
+      The NOC is available 24 hours a day, 7 days a week.  Call the numbers 
+      above with any network problem that is outside of normal workday hours.
+
+   BILL JONES, Manager NOC           (617)-497-3580   bjones@bbn-unix
+
+      Contact the NOC Mgr. complaints about service from the NOC or field 
+      service.  Routine problems should be directed to the general NOC numbers 
+      above.
+
+   ROBIN CLIFFORD, TAC Liaison       (617)-497-2874   tacbugs@bbn-unix
+                                                   or rclifford@bbn-unix
+
+      The TAC Liaison handles any problems using the network TACs including 
+      requests to change parameters on TAC ports, diagnosing terminal problems,
+      and explaining the TAC commands and their use. The TAC Liaison will 
+      direct reported TAC software problems to the appropriate TAC software 
+      maintainer.
+
+   MARK WHITNEY, IMP Liaison         (617)-497-2836   gripes@bbn-unix
+                                                   or whitney@bbn-unix
+
+      The IMP Liaison handles any network problem that does not need the 
+      immediate attention of the NOC such as hardware, software or interface 
+      problems.  The IMP Liaison works closely with the NOC and the IMP 
+      software team, and will direct problems to the correct individuals.  He 
+      also maintains the list of outstanding network problems which is reviewed
+      by field service, the NOC, and the software teams.
+
+   JUDY GORDON, New Subscriber Liaison (617)-497-3827   jgordon@bbn-unix
+
+      The New Subscriber Liaison handles questions about ordering new 
+      equipment, about installations and retrofits, and is also the point of 
+      contact for descriptions of the various options for connecting to the 
+      network.  She works closely with the DDN-PMO and the NIC to coordinate 
+      configuration changes and to help new users and subscribers.
+
+   JIM HERMAN, Mgr ARPANET/MILNET    (617)-497-3117  herman@bbn-unix
+            Operations and Maintenance
+
+      Available for contact whenever service from the other members of the NOC 
+      team is unsatisfactory.  Before complaining to DCA or your sponsor or 
+      superior, please review your problem with us and attempt to resolve it 
+      here.  We are a service organization and are committed to providing the 
+      best possible service to our users.
+
+========================================================================       
+       Contacts at the NETWORK INFORMATION CENTER (NIC) at SRI 
+========================================================================
+
+   SRI International (SRI), under contract to the DDN-PMO, provides general 
+   network information and assistance to new network users and manages the 
+   ARPANET/MILNET Network Information Center (NIC).   The NIC works closely 
+   with the DCA DDN-PMO, the NOC, the Network Technical Liaison, the Network 
+   Host Administrators, network protocol groups, vendors, and military agencies
+   to help direct new users to the right contact or source of information.  The
+   NIC maintains data bases and information servers of general interest to 
+   network users, and publishes and/or distributes publications on behalf of 
+   DCA.  The NIC also maintains the WHOIS registry of network users, the 
+   official DoD Host Name Table, and the DoD Protocol Repository.
+
+   In general, contact the NIC if you are unsure of where to obtain 
+   information.  The NIC reference staff will attempt to direct you to the 
+   proper contact or source of information.
+
+   For specific questions about programs or policies at a given host, contact 
+   the Network Technical Liaison or Host Administrator for that host.  A list 
+   of these people can be obtained online from the SRI-NIC (10.0.0.73) machine 
+   as <NETINFO>Liaison.txt and <NETINFO>Host-Administrators.txt via FTP from 
+   your local host.
+
+   NETWORK INFORMATION CENTER (NIC)    (415) 859-3695    NIC@SRI-NIC
+
+      This is the general 'hotline' for network information.  Phone service is 
+      available from 8 am until 5 pm PST.  In cases where it is available, 
+      electronic mail is the preferred method of contact, since this provides a
+      record of the question or information being supplied.
+
+      All requests for online service should be directed to NIC@SRI-NIC.  Each 
+      request will be distributed to the staff member best able to handle the 
+      request.
+
+   NIC staff include:
+
+   ELIZABETH FEINLER, NIC Mgr.            (415) 859-3695 FEINLER@SRI-NIC
+   KEN HARRENSTIEN, NIC System Architect  (415) 859-6552 KLH@SRI-NIC
+   HENRY MILLER, Systems Programmer       (415) 859-5303 MILLER@SRI-NIC
+   DAVID ROODE, Systems Programmer        (415) 859-2774 ROODE@SRI-NIC
+   MARY DYER, Host Names data base        (415) 859-4775 DYER@SRI-NIC
+   JOHANNA LANDSBERGEN, WHOIS data base   (415) 859-3965 JOJO@SRI-NIC
+   FRANCINE PERILLO, NIC Feedback, Query  (415) 859-6134 PERILLO@SRI-NIC
+   LEDA VOROPAEFF, Documents              (415) 859-2434 LEDA@SRI-NIC HAL 
+   HUNTLEY, Interpreter, Query            (415) 859-2236 HAL@SRI-NIC
+
+-------

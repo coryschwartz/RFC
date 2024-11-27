@@ -1,0 +1,23 @@
+
+Terms enclosed in <em> in draft-ietf-gnap-core-protocol-19
+----------------------------------------------------------
+
+accepted
+approved
+Approved
+Assertion Formats
+continuation access token
+finalized
+Finalized
+grant endpoint URI
+Interaction Finish Methods
+Interaction Hash Algorithms
+Interaction Start Methods
+JOSE Signature Algorithm
+Key Formats
+Key Proofing Methods
+pending
+Pending
+processing
+Processing
+Subject Identifier Formats

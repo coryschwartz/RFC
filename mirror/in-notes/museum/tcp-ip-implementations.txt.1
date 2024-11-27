@@ -1,0 +1,8508 @@
+
+
+
+                                                               NIC 50002
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                         TCP/IP IMPLEMENTATIONS
+                                  AND
+                             VENDORS GUIDE
+
+
+
+                             September 1985
+
+
+
+                         TCP/IP IMPLEMENTATIONS
+                                  AND
+                             VENDORS GUIDE
+
+
+
+
+                             September 1985
+
+
+
+                                Editors:
+                               Anne Sauer
+                            Francine Perillo
+
+
+
+
+
+
+
+Additional  copies of this document may be obtained from the DDN Network
+Information Center,  SRI  International,  333  Ravenswood  Avenue,  Room
+EJ291, Menlo Park, CA 94025.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+The  TCP/IP  Implementations  and Vendors Guide was published by the DDN
+Network Information Center, SRI International, Menlo Park, CA using  the
+Scribe  document production system.  Camera ready copy was produced with
+an Imagen laser printer.
+
+
+Scribe is a  registered  trademark  of  Unilogic,  Ltd.    Imagen  is  a
+trademark of the Imagen Corporation.
+
+
+Date:  September 1985
+
+                                   ii
+
+
+
+                            ACKNOWLEDGEMENTS
+
+
+
+
+The  TCP/IP  Implementations  and  Vendors Guide was prepared by the DDN
+Network  Information  Center  for  the  Defense  Data  Network   Program
+Management  Office  of  the Defense Communications Agency under contract
+number DCA-200-84-C-0024, CDRLs E009 and E009A.  This Guide was compiled
+with  the  assistance  of many people, most of whom are the contacts for
+products listed  within  this  document.    The  NIC  appreciates  their
+contributions.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  iii
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   iv
+
+
+
+INTRODUCTION
+
+        This  is a guide to implementations and products associated with
+the Department of  Defense  (DoD)  Defense  Data  Network  (DDN)  TCP/IP
+protocols.    It is published for informational purposes only by the DDN
+Network Information Center (NIC) at SRI International on behalf  of  the
+Defense  Data  Network Program Management Office (DDN PMO) and in no way
+endorses or officially recommends any implementation or product  on  the
+part  of  the  Defense Communications Agency (DCA), the Defense Advanced
+Research Projects Agency (DARPA), the NIC or DoD.  It is  not  complete.
+Omission  of  any  vendor or implementor has no significant implication,
+other than that  the  NIC  has  no  information  about  that  vendor  or
+implementor,  or  that  the information was not available at the time of
+this printing.  Likewise, only completed fields of the product templates
+are  included,  and unfilled fields have been deleted to conserve space.
+Anyone planning to use either a product or an implementation is urged to
+do  their  own  investigation  of the details, costs, and support of the
+product.
+
+
+        This guide is  divided  into  software  implementations  (listed
+alphabetically  by  machine  type)  and hardware implementations (listed
+alphabetically by company).  The guide  is  also  indexed  by  operating
+system, with the machine type listed under each and by company name.
+
+
+        Vendors  who  wish  to  have  their  TCP/IP  products tested and
+certified for use on the DDN should contact  Code  B617,  the  Test  and
+Evaluation Branch of the DDN PMO for details.
+
+
+        Throughout  the  document, references are made to RFCs and IENs.
+RFCs, or  Requests  for  Comments,  are  network  technical  notes  used
+primarily  to  introduce proposed internet protocols and related network
+topics to the DDN.  IENs, or Internet  Experiment  Notes,  are  Internet
+Working  Group technical notes.  Both RFCs and IENs are available on the
+SRI-NIC host.  You  may  obtain  copies  of  either  by  using  the  FTP
+facility,  if it is available at your host.  Connect to the SRI-NIC host
+[10.0.0.51 or 26.0.0.73] and log in as ANONYMOUS with GUEST as password.
+RFC  filenames are of the format RFC:RFCxxx.TXT (where xxx is the number
+of the RFC) and IENs are of the format IEN:IEN-xxx.TXT (where xxx is the
+number of the IEN -- note the dash in the IEN filename.)
+
+        Online copies of the guide are available through FTP in the file
+named NETINFO:TCP-IP-IMPLEMENTATIONS.TXT.  For those who are not on  the
+network, contact the DDN Network Information Center to request copies of
+RFCs, IENs or this guide by calling our toll-free number 1-800-235-3155.
+Network   users   without   FTP   capability   may   send   requests  to
+NIC@SRI-NIC.ARPA.
+
+        The NIC also welcomes your comments, additions and  corrections.
+The  last  page  of  this  document  contains  a  Feedback form for your
+                                   1
+
+
+
+convenience in sending us your comments.
+
+
+        Note: UNIX is a trademark  of  AT&T  Information  Systems;  VAX,
+TOPS-10 and TOPS-20 are trademarks of Digital Equipment Corporation.
+
+
+    Key to Symbols:
+
+v               Taken from vendor literature
+
+[ ]             Not yet available
+
+Last edit:      September, 1985
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   2
+
+
+
+1. TCP/IP SOFTWARE IMPLEMENTATIONS BY MACHINE TYPE
+
+1.1. APPLE
+
+
+
+1.1.1. v STANFORD ETHERNET APPLETALK GATEWAY
+PRODUCT-OR-PACKAGE-NAME:        STANFORD   ETHERNET   APPLETALK  GATEWAY
+(SEAGATE)
+
+TYPE:    Gateway
+
+DESCRIPTION:
+
+       SEAGATE is a gateway (Apple term: bridge)  that  connects  an
+    Ethernet   using   the   internet   protocols,  to  an  applebus
+    (AppleTalk) using Apple or IP protocols.  The IP protocol family
+    was  chosen  because  many  campuses  and engineering groups are
+    using it on their Ethernets; most such  groups  have  access  to
+    Berkeley  UNIX.    With  such  a  gateway  in  place, it becomes
+    possible  to  create  UNIX  server  daemons  to  provide   file,
+    printing, mail, etc. services for the Macintoshes.
+
+       In  addition,  it  would  be possible for the UNIX systems to
+    become integrated into a Macintosh Office such that  UNIX  users
+    could  access  Apple-provided  services  such  as  printing on a
+    LaserWriter or sending mail to Macintosh users via an Apple file
+    server.
+
+       This distribution of SEAGATE provides all the information and
+    software you should need to setup your own gateway.  Please bear
+    in  mind  that  this distribution is not 'supported' and that we
+    can't give extensive help about the mechanics  of  putting  your
+    gateway  together.    I  would like to hear about bug reports or
+    enhancements however.
+
+       To assemble your own gateway, you  will  need  at  least  the
+    items below:
+
+       - The  hardware  is a 3 card multibus system:  A 'SUN' 68000
+         CPU  board,  an  Interlan  NI3210  Ethernet  card,  and  a
+         homebrew  applebus  card  (about  8  chips) which takes an
+         afternoon to wirewrap.
+
+       - A UNIX (usually VAX) running 4.2 BSD, 4.1 BSD  or  Eunice.
+         This  is  because the source distributed is written in the
+         PCC/MIT 68000 C compiler.   [This  is  the  same  compiler
+         included  with  the  SUMACC  Mac C cross development kit.]
+         You can probably make due with  any  68K  C  compiler  and
+         assembler, but it will be harder.
+
+       - Inside   Mac,   update   service,  and  the  Mac  software
+                                   3
+
+
+
+         supplement.
+
+       - Applebus Developer's  Kit,  includes:    protocol  manual,
+         applebus  taps  and  interconnecting  cable,  Mac applebus
+         drivers on SONY disks.
+
+       - Dartmouth's    IP    package     from     Mark     Sherman
+         (mss%dartmouth@CSNET-relay).    The  gateway  distribution
+         includes the binary for TFTP, but if you  want  the  whole
+         package (and source), you should get it from Mark.
+
+       - A  Lisa Workshop system is handy to have around; you would
+         need it to compile Mark's sources.  Even if you are  doing
+         development  in  C,  Apple  releases Applebus updates as a
+         combination of Mac and Lisa disks.  The Mac disks  contain
+         the  'driver'  binary  resources.   The Lisa disks contain
+         source for header files.
+
+       The current software on the Macintosh is the IP TFTP program.
+    As  mentioned  above,  the  gateway  also  has the capability to
+    translate Apple DDP datagrams into IP UDP  datagrams,  and  vice
+    versa.    We  are now writing some UNIX (user-level) UDP daemons
+    that directly provide AppleTalk ATP services (such  as  external
+    file system access.)
+
+       Using  Mark  Sherman's  (Dartmouth) TFTP and the Berkeley 4.2
+    BSD TFTP daemon, we made some simple timings.  On the Mac  side,
+    TFTP used a ramdisk to avoid any delays induced by the slow SONY
+    drive.  For a UNIX to Mac transfer, we found that the  Mac  took
+    43 ms between data received and ack sent, while UNIX spent 25 ms
+    between ack received and next data sent.
+
+       Most of the transfer occurred at 512 data bytes every 70ms  =
+    7314 bytes/sec = 58K baud.
+
+       Note  however  that  the  IP  TFTP  protocol  is just that, a
+    'trivial' FTP.  It is purely half-duplex in  nature.    When  we
+    start  using  Apple's  ATP, which can stream several packets per
+    acknowledgement,  it  should  boost  throughput   significantly.
+    Gursharan  Sidhu  tells  me  that  their  process-to-process (no
+    disks) ATP throughput is 180K baud (out of the 230K available on
+    the  cable).   This is very good, considering many TCP's running
+    on 10 megabit Ethernet are lucky to get a few  hundred  kilobits
+    of throughput.
+
+DOCUMENTATION:
+
+       On [SUMEX]<info-mac> the files are:
+
+    seagate.ms    documentation in -ms format
+    seagate.hard  the wirelist for the applebus interface
+    seagate.shar1 the main gateway sources (including above docs)
+                                   4
+
+
+
+    seagate.shar2 the ddt, dlq, testscc, and tftp subdirectories
+
+       All  these  files are plain ASCII and can be FTP'd from SUMEX
+    with the 'anonymous' login.  The two shar (shell archive)  files
+    are  each  about  170K  bytes,  so we would appreciate it if you
+    would avoid transfers during 9 AM to 5 PM PST.
+
+CPU:
+
+       Apple Macintosh
+
+O/S:
+
+       UNIX and others
+
+IMPLEMENTATION-LANGUAGE:
+
+       C
+
+CONTACT:
+
+       Bill Croft, (croft@sumex.arpa), SUMEX, Stanford University
+
+PROPRIETY-STATUS:
+
+       Public domain (Copyrighted by Stanford; may be used, but  not
+    sold without permission)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   5
+
+
+
+1.2. BOLT, BERANEK AND NEWMAN
+
+
+
+1.2.1. BBN-C/70
+PRODUCT-OR-PACKAGE-NAME:   BBN-C/70
+
+TYPE:   TCP/IP Implementation
+
+DESCRIPTION:
+
+       The  C/70  processor  is  a BBN-designed system with a native
+    instruction set oriented toward executing the C  language.    It
+    supports  UNIX  Version 7 and provides for user processes with a
+    20-bit address space.  The TCP/IP implementation  for  the  C/70
+    was  ported  from  the  BBN  VAX  TCP/IP,  and shares all of its
+    features.  This version of TCP/IP is running  experimentally  at
+    BBN,  but  is  still  under  development.  Performance tuning is
+    underway, to make it more  compatible  with  the  C/70's  memory
+    management system.
+
+CPU:
+
+       C/70
+
+O/S:
+
+       UNIX
+
+IMPLEMENTATION-LANGUAGE:
+
+       C
+
+CONTACT:
+
+       Dennis Rockwell, (drockwel@BBN-UNIX.ARPA), 617-497-2643
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   6
+
+
+
+1.2.2. BBN-GATEWAYS
+TYPE:   TCP/IP Implementation
+
+DESCRIPTION:
+
+       In  an  effort  to  provide  improved service in the gateways
+    maintained at BBN,  a  new  gateway  implementation  written  in
+    MACRO-11  instead  of  BCPL  has  been  developed.  The MACRO-11
+    gateway  provides  users   with   internet   service   that   is
+    functionally  equivalent  to  that  provided by the current BCPL
+    gateways with the following exceptions:
+
+       - Packets with options will be fragmented if necessary.
+
+       - ICMP protocol is supported.
+
+       - The gateway sends Time Exceeded, Parameter Problem,  Echo,
+         Information Request, Destination Unreachable, and Redirect
+         ICMP messages.
+
+       - Initially, Source Quench and Timestamp packets will not be
+         supported.
+
+       - Class  A, B, and C Network Address formats as specified in
+         the  September  1981   Internet   Protocol   Specification
+         (RFC791) are supported.
+
+       The  gateway  contains  an  internetwork debugger (XNET) that
+    allows the gateway to be examined while it is running.    Buffer
+    space is greatly expanded to provide better throughput.  ARPANET
+    RFNMs are counted so the gateway  will  not  send  more  than  8
+    outstanding messages to an ARPANET host.
+
+IMPLEMENTATION-LANGUAGE:
+
+       MACRO-11
+
+CONTACT:
+
+       Alan Sheltzer, (ASheltzer@BBN-UNIX.ARPA), 617-491-1850 x3876
+
+HOSTS:
+
+       BBN-PR-GATEWAY,  BBN-RING-GATEWAY,  BBN-TIU-GATEWAY, BBN-NET-
+    GATEWAY,  NDRE-GATEWAY,  UCL-GATEWAY,   BBN-GATEWAY,   SRI-C3PO,
+    DCEC-GATEWAY
+
+
+
+
+
+
+                                   7
+
+
+
+1.3. BURROUGHS
+
+
+
+1.3.1. [B5000]
+TYPE:    DDN-contracted TCP/IP Implementation
+
+DESCRIPTION:
+
+       This  will  be  a  package  of software and technical support
+    services for interfacing Burroughs computing environments to the
+    Defense  Data Network.  The contract has not yet been awarded as
+    of this writing.
+
+CPU:
+
+       B5000 family
+
+DISTRIBUTOR:
+
+       Not yet determined
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   8
+
+
+
+1.3.2. [BURROUGHS/HYPERLINK]
+PRODUCT-OR-PACKAGE-NAME:   Hyperlink/DDN Software
+
+TYPE:    TCP/IP/X.25 Implementation
+
+DESCRIPTION:
+
+       Hyperlink/DDN is being implemented  in  accordance  with  the
+    ARPANET Upper Layer Protocols (presentation/application layers),
+    Transmission Control Protocol  (session/transport  layers),  and
+    Internet  Protocol  (network  layer  functions  for internetwork
+    communications).  The software includes the host driver  (either
+    with Ethernet or Hyperchannel connections), transmission control
+    protocol,   internet   protocol,   network   administrator   and
+    application  software.    Applications  include  file  transfer,
+    electronic mail and Telnet.
+
+       Hyperlink/DDN integrates ARPANET's packet switching  protocol
+    standards   with   Internet  Systems  Corporation's  proprietary
+    Ethernet-based  hardware  connection  devices  or  with  Network
+    Systems   Corporation's   HYPERchannel  connection  devices  for
+    complete connections between LANs and/or long-haul networks.   A
+    product  option  is  available which provides an LSI 11/73 based
+    host front-end processor which  will  contain  the  TCP  and  IP
+    layers  and  an  X.25  communications  subsystem.  Internet also
+    offers high  speed  local-area  network  solutions  for  non-DDN
+    requirements which can be integrated with DDN offerings.
+
+DOCUMENTATION:
+
+       A full set of documentation is in process
+
+CPU:
+
+       Burroughs
+
+O/S:
+
+       Burroughs MCP
+
+IMPLEMENTATION-LANGUAGE:
+
+       C or Pascal
+
+DISTRIBUTOR:
+
+       Internet Systems Corporation
+       8360 Oakland Park Blvd.
+       Sunrise, Florida  33321
+
+CONTACT:
+
+                                   9
+
+
+
+       Kerry A. Hartley, Director of Sales
+       313-357-1370
+       Jerry Lieberman, Product Marketing Manager
+       305-742-0301
+
+ORDERING-PROCEDURE:
+
+       See above contacts
+
+PROPRIETY-STATUS:
+
+       Product of Internet Systems Corporation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   10
+
+
+
+1.4. CONTROL DATA CORPORATION
+
+
+
+1.4.1. [CDC-CYBER]
+TYPE:    DDN-contracted TCP/IP Implementation
+
+DESCRIPTION:
+
+       This  will  be  a  package  of software and technical support
+    services for interfacing Cyber  computing  environments  to  the
+    Defense  Data  Network.   The expected date of completion is the
+    end of 1985.
+
+CPU:
+
+       Cyber 170
+
+O/S:
+
+       NOS
+
+DISTRIBUTOR:
+
+       Control Data Corporation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   11
+
+
+
+1.5. DATA-GENERAL
+
+
+
+1.5.1. [DATA-GENERAL]
+TYPE:   TCP/IP Implementation
+
+DESCRIPTION:
+
+       The TCP/IP product  currently  supports  Ethernet  under  the
+    DG/UX  operations system and will run under the AOS/VS operating
+    system in the future.  Support for  the  DDN  implementation  is
+    forthcoming.   Presently the product includes implementations of
+    FTP and Telnet  protocols.    TCP/IP  tracks  the  Berkeley  4.2
+    implementation.
+
+DOCUMENTATION:
+
+       Contact Data General
+
+CPU:
+
+       DS/4000 family, and MV product line
+
+O/S:
+
+       DG/VX-today; AOS/VS-future
+
+DISTRIBUTOR:
+
+       Data General
+       Data General Sales Force
+       4400 Computer Drive
+       Westboro, MA 01580
+
+CONTACT:
+
+       Robert Ritter, Product Marketing Manager
+       Distributed Systems
+       617-366-8911
+
+
+
+
+
+
+
+
+
+
+
+
+                                   12
+
+
+
+1.6. DATAPOINT
+
+
+
+1.6.1. [DATAPOINT]
+TYPE:   TCP/IP implementation
+
+DESCRIPTION:
+
+       Bill  Wimp  is  the manager of this task.  The implementation
+    has not yet been written (as of May 1983.)
+
+DISTRIBUTOR:
+
+       Datapoint Corporation
+       9725 Datapoint Drive
+       MS - M95
+       San Antonio, TX 78284
+
+CONTACT:
+
+       Bill Wimp, 512-699-5242
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   13
+
+
+
+1.7. DIGITAL EQUIPMENT CORPORATION
+
+
+
+1.7.1. BRL GATEWAY
+PRODUCT-OR-PACKAGE-NAME:   BRL Gateway
+
+TYPE:    TCP/IP Implementation
+
+DESCRIPTION:
+
+       The BRL Gateway is a total redesign.  None  of  the  original
+    MIT  code  was  used.    The gateway runs as a set of tasks on a
+    simple multiprocessing operating system called LOS.    Both  LOS
+    and  the  gateway  code as described here were entirely designed
+    and written by Ron Natalie.
+
+       This is an IP gateway with EGP support. The gateway will  run
+    on most PDP-11 series processors, but is designed to be portable
+    to other machines that have C compilers.  Point-to-point  serial
+    links,  DEC  PCL-11/B,  and  the  ACC  LH-DH/11  interfaces  are
+    currently supported.  Work is in process to support the Interlan
+    Ethernet  interfaces  with  the Address Resolution Protocol, the
+    Network Systems Corporations's  HYPERchannel,  and  the  Proteon
+    Ringnet hardware.
+
+       All  gateway  functions  and  features  of  the  IP  and ICMP
+    protocols are supported with the following exceptions.  The ICMP
+    timestamp  packet  is  not  implemented  and  ICMP source quench
+    messages are ignored.  IP  timestamp  and  routing  options  are
+    supported.    The  Exterior  Gateway  Protocol  is  supported as
+    described in RFC904.  Deviations from the specification are made
+    to  optimize  the performance as a stub system from the existing
+    core networks.  The gateway also uses its own  UDP  based  debug
+    and monitoring protocol.  GGP echo packets are also answered.
+
+       In  addition, the gateway provides Virtual-Host service.  TCP
+    connections to be dynamically directed to an active host on  the
+    BRLNET.    This  allows the host "BRL" to appear to always be up
+    for mail purposes.
+
+       The original BRL gateway was an early version  of  the  MIT-C
+    gateway  modified  to  know about class B and C addresses and to
+    work with the previously mentioned network interfaces.  With the
+    advent  of  EGP,  higher  network  traffic,  and greater routing
+    intelligence, the modified MIT gateway became ineffective.
+
+DOCUMENTATION:
+
+       Not yet
+
+CPU:
+                                   14
+
+
+
+       Any  PDP-11  processor  that  has  memory  management.    The
+    machines  currently  in  use  are  a PDP-11/34 and LSI-11/23.  A
+    console terminal interface and a clock are required, as well  as
+    any  network  interfaces.   The built-in line frequency clock on
+    the LSI-11 processors may be  used  in  lieu  of  an  additional
+    clock.
+
+O/S:
+
+       LOS (the Little Operating System) is a small message-passing,
+    multitasking operating system written for the implementation  of
+    the  gateway, but is also being planned for use in real-time and
+    file server applications.  The Gateway code runs in the hardware
+    user mode, while LOS itself runs in kernel mode.  Interrupts are
+    serviced in real-time by the user code.
+
+IMPLEMENTATION-LANGUAGE:
+
+       With the exception of small parts of the operating system and
+    some  bit manipulation routines, which are written in assembler,
+    both LOS and the Gateway code are written in the C language.
+
+DISTRIBUTOR:
+
+       U.S. Army Ballistic Research Laboratory
+       ATTN:  AMXBR-SECAD/R. Natalie
+       APG, MD  21005-5066
+
+CONTACT:
+
+       Ron Natalie, (RON@BRL.ARPA), 301-278-6678 or above address
+
+ORDERING-PROCEDURE:
+
+       Send mail to RON@BRL.ARPA for more information
+
+PROPRIETY-STATUS:
+
+       Both LOS and the Gateway are the property of  the  Department
+    of  the  Army.   They are available for public use at no charge.
+    They may be distributed with  commercial  products  with  slight
+    restrictions.
+
+
+
+
+
+
+
+
+
+
+                                   15
+
+
+
+1.7.2. SRI-LSI-11
+PRODUCT-OR-PACKAGE-NAME:   SRI-LSI-11
+
+TYPE:   TCP/IP Implementation
+
+DESCRIPTION:
+
+       The  IP/TCP  implementation  for  the  Packet  Radio terminal
+    interface unit is intended to run on an  LSI-11  under  the  MOS
+    real-time  operating  system.    The  TCP is written in MACRO-11
+    assembler language.  The IP is currently  written  in  assembler
+    language;  but  being  converted  into  C. There are no plans to
+    convert the TCP from assembler into C.
+
+       TCP implements the full specification, although  the  current
+    user  interface  lacks a mechanism to communicate URGENT pointer
+    information between the TCP and the higher-level software.   The
+    code for rubber-EOL has been removed in anticipation of a change
+    to the specification.    The  TCP  appears  to  be  functionally
+    compatible with all other major implementations.  In particular,
+    it is used on a daily basis to  provide  communications  between
+    users  on  the  Ft.  Bragg  PRNET  and  ISID on the DDN.  The IP
+    implementation is reasonably complete,  providing  fragmentation
+    and  reassembly;  routing  to  the first gateway; and a complete
+    host-side GGP process.  Currently the source quench  message  is
+    ignored.  No  IP  options are generated and all received options
+    are ignored.
+
+       A  measurement  collection  mechanism  is   currently   under
+    development to collect TCP and IP statistics and deliver them to
+    a measurement host for data reduction.
+
+CPU:
+
+       LSI-11
+
+O/S:
+
+       MOS
+
+IMPLEMENTATION-LANGUAGE:
+
+       PDP-11 assembler
+
+CONTACT:
+
+       Jim Mathis, (Mathis@SRI-KL.ARPA), 415-859-5150
+
+PROPRIETY-STATUS:
+
+       Developed with DARPA funds
+
+                                   16
+
+
+
+1.7.3. LSI-11/PDP11/LINKABIT
+PRODUCT-OR-PACKAGE-NAME:   LINKABIT-DCNET-FUZZBALL
+
+TYPE:   TCP/IP Implementation
+
+DESCRIPTION:
+
+       The DCNET internet software system has  been  developed  with
+    DARPA sponsorship over the last three years and used extensively
+    for  testing,  evaluation   and   experimentation   with   other
+    implementations.    It  currently  runs  in  a sizable number of
+    PDP11s and LSI-11s with varying configurations and applications.
+    The  system  is designed to be used with the DCNET local network
+    and  BOS/VOS  operating  system  for  a   multi-media   internet
+    workstation   (so-called   "fuzzball"),   which  operates  using
+    emulation  techniques  to  support  ordinary  RT-11  system  and
+    application programs.  However, the system has also been used on
+    other networks, including the  DDN,  and  with  other  operating
+    systems,   including   RSX-11.      An   RSX-11   based  version
+    incorporating only IP/TCP modules is presently used  to  support
+    the INTELPOST electronic-mail network.
+
+       The  software  system consists of a package of MACRO-11 and C
+    modules structured into levels corresponding to  local-net,  IP,
+    TCP  and application levels, with user interfaces at each level.
+    The local-net  level  supports  several  communication  devices,
+    including  synchronous  and  asynchronous  serial  lines, 16-bit
+    parallel links and 1822 interfaces.  Hosts using  these  devices
+    have  been  connected  to  DDN  IMPs,  Satellite  IMPs, MACRO-11
+    Internet Gateways, SRI Port Expanders and  to  the  DCNET  local
+    network.    When  used  on  DCNET  the system provides automatic
+    routing,  time-synchronization  and  error-reporting  functions.
+    The  IP  level  conforms  to the RFC791 specification, including
+    fragmentation, reassembly, extended addressing and options,  but
+    currently  does  not  interpret  options.    A  full set of ICMP
+    features  compatible  with  RFC792   is   available,   including
+    destination-unreachable,  timestamp,  redirect and source-quench
+    messages.  Destination-unreachable and source-quench information
+    is  conveyed  to  the  user  level  via the TCP and raw-datagram
+    protocol modules.  Internet gateway  (routing  and  non-routing)
+    facilities compatible with RFC823 can be included on an optional
+    basis.  This support can be configured to include hierarchically
+    structured gateways and subnets.
+
+       The TCP level conforms to the RFC793 specification, including
+    PUSH, URGENT and options.  Its structure is  based  on  circular
+    buffers for reassembly and retransmission, with repacketizing on
+    each retransmission.  Retransmission  timeouts  are  dynamically
+    determined  using  measured  roundtrip  delays,  as adjusted for
+    backoff.  Data flow into the network is controlled  by  measured
+    network  bandwidth,  as  adjusted  by source-quench information.
+    Features are included to avoid excessive  segment  fragmentation
+                                   17
+
+
+
+    and  retransmission into zero windows.  The user interface level
+    provides error and URGENT notification, as well as  a  means  to
+    set outgoing IP/TCP options.
+
+       A  raw-datagram  interface is available for non-TCP protocols
+    such as (RFC768).  It includes internal congestion and  fairness
+    controls,   multiple-connection   management  and  timestamping.
+    Protocols above UDP supported in the present system include Time
+    Server  (IEN-142) and Name Server (IEN-116).  Other raw-datagram
+    services include XNET (IEN-158),  GGP  Gateway  (RFC823),  along
+    with  developmental  versions  of  an EGP Gateway (RFC827) and a
+    DECnet Gateway.  A number of user-level protocol  modules  above
+    TCP  have  been  built  and  tested  with  other internet hosts,
+    including user/server Telnet (RFC764) user/server FTP  (RFC765),
+    user/server  SMTP  (RFC788)  and  various  other  file-transfer,
+    debugging and control/monitoring protocols.
+
+       Code  sizes  and  speeds  depend  greatly   on   the   system
+    configuration   and  features  selected.    A  typical  30K-word
+    LSI-11/2 single-user configuration with  all  features  selected
+    and  including  the  operating  system,  device  drivers and all
+    buffers  and  control  blocks,  leaves  about  16K   words   for
+    user-level application programs and protocol modules.  A typical
+    124K-word LSI-11/23 configuration provides the same service to a
+    half-dozen  individually  relocated  users.    Disk-to-disk  FTP
+    transfers across a DMA interprocessor  link  between  LSI-11/23s
+    operate  in  the  range  30-50 Kbps with 576-octet packets.  The
+    124K-word PDP11/34 INTELPOST  adaptation  supports  two  56-Kbps
+    lines and a number of lower-speed lines.
+
+DOCUMENTATION:
+
+       Online  help  files  distributed  with  system plus annotated
+    source code
+
+CPU:
+
+       LSI-11 or PDP11 with disk, EIS  and  28K  or  more  words  of
+    memory
+
+O/S:
+
+       None (self-contained)
+
+IMPLEMENTATION-LANGUAGE:
+
+       MACRO-11 and C
+
+DISTRIBUTOR:
+
+       Linkabit Corporation
+       Eastern Operations
+                                   18
+
+
+
+       1517 Westbranch Drive
+       McLean, VA 22102
+
+CONTACT:
+
+       Dave Mills, (Mills@ISID.ARPA), 703-734-8660
+
+ORDERING-PROCEDURE:
+
+       Source  and/or  object  modules  on  double-density  DEC RX02
+    diskettes only.  DARPA approval required and  redistribution  is
+    limited.    Contact  R.  Kahn (Kahn@ISI.ARPA) for approval only;
+    contact D. Mills (Mills@ISID.ARPA) for distribution.
+
+PROPRIETY-STATUS:
+
+       DARPA
+
+HOSTS:
+
+       DARPA Internet system:  8  (Linkabit),  10  (Ford  Scientific
+    Research Labs), 1 (Ford Aerospace), 4 University of Maryland), 1
+    (Purdue), 1  (Norwegian  Telecommunications  Administration),  4
+    (DFVLR  -  Germany),  1  (University  College  London), 1 (Royal
+    Signals and Radar Establishment  -  UK);  INTELPOST  system:  13
+    worldwide
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   19
+
+
+
+1.7.4. RSX-11M
+TYPE:   TCP/IP Implementation
+
+DESCRIPTION:
+
+       This  TCP/IP Implementation supports file transfer operations
+    between DEC RSX-11M, RSX-11M-PLUS  and  IAS  operating  systems.
+    Both  user  and  server  FTP  are  implemented.  Full support is
+    included for Ethernet (DEUNA and DEQNA) as well as  proNET  ring
+    hardware  interfaces.    Process Software Corporation can modify
+    the software for other interfaces.
+
+DOCUMENTATION:
+
+       Fully documented; supplied with User's Manual
+
+CPU:
+
+       PDP-11 and LSI-11
+
+O/S:
+
+       RSX-11M, RSX-11M-PLUS, IAS
+
+IMPLEMENTATION-LANGUAGE:
+
+       Macro-11
+
+DISTRIBUTOR:
+
+       Process Software Corporation
+       P. O. Box 746
+       35 Montague Road
+       Amherst, MA 01004
+
+CONTACT:
+
+       Phil Denzer
+       413-549-6994
+       Telex 517891
+
+ORDERING-PROCEDURE:
+
+       Contact Process Software Corporation
+
+
+
+
+
+
+
+
+                                   20
+
+
+
+1.7.5. UNIX 2.9BSD
+TYPE:   TCP/IP Implementation
+
+DESCRIPTION:
+
+       2.9BSD TCP/IP is an adaptation  of  Berkeley's  original  VAX
+    TCP/IP  (running  under  BSD  4.1B  UNIX)  which  in  turn is an
+    offshoot of BBN's VAX TCP/IP.  2.9BSD TCP/IP runs on  PDP-11/44s
+    and  PDP-11/70s.    The 2.8 version from SRI was adapted by Bill
+    Croft (formerly at SRI), then  Tektronix  adapted  it  for  2.9.
+    Berkeley  took  over modification of the software and brought it
+    back to SRI where Dan Chernikoff and Greg Satz adapted it for  a
+    later  release  of 2.9.  In addition to TCP/IP, UDP, ARP and the
+    raw packet  interface  is  available.  ICMP  redirects  are  not
+    supported.    User  software  implementations include Telnet and
+    FTP, plus Berkeley-developed local  net  protocols,  RWHO,  RSH,
+    RLOGIN, and RCP.
+
+       2.9BSD  with  TCP/IP support could probably be made to run on
+    smaller PDP-11s although the address space would be  very  tight
+    and might present problems.
+
+DOCUMENTATION:
+
+       Some documentation available; will be sent with tape request
+
+CPU:
+
+       PDP-11/44, PDP-11/70 [PDP-11/45 ?]
+
+O/S:
+
+       2.9 UNIX
+
+IMPLEMENTATION-LANGUAGE:
+
+       C (some system-dependent sections written in assembler)
+
+CONTACT:
+
+       For technical information:
+       Carl Smith, (Carl@BERKELEY.ARPA)
+       415-644-1230
+
+ORDERING-PROCEDURE:
+
+       For distribution, contact the PDP-11 Distribution office at:
+
+          Valerie Hanson
+          University of California
+          Berkeley, CA
+          415-642-6258
+                                   21
+
+
+
+PROPRIETY-STATUS:
+
+       Governed by stipulations of Berkeley BSD license
+
+HOSTS:
+
+       SRI-TSC, SRI-PRMH
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   22
+
+
+
+1.7.6. Venix/11 TCP/IP
+PRODUCT-OR-PACKAGE-NAME: Venix/11 TCP/IP
+
+DESCRIPTION:
+
+       This  is  based  on  the "PDP-11/45" implementation available
+    from the MIT Laboratory for  Computer  Science.    It  has  been
+    ported  to  a V7 UNIX system, in particular VenturCom's Venix/11
+    V2.0.
+
+       As little of the processing as possible takes  place  in  the
+    kernel,   to   minimize  the  code  space  required.    It  fits
+    comfortably on I&D machines,  but  is  almost  hopeless  on  the
+    smaller  machines.   The kernel includes a proNET device driver,
+    IP fragment reassembly, IP header processing,  local-net  header
+    processing,  and simple routing.  The rest of the IP processing,
+    and all of the UDP and TCP functions,  are  in  user  libraries.
+    The psuedo-teletype driver is also in the kernel, and is used by
+    Server TELNET.
+
+       User programs handle ICMP processing; User and Server TELNET,
+    SMTP,  TFTP,  Finger,  and Discard.  There are User programs for
+    Nicname and Hostname.   IEN-116  nameservers  are  used  by  all
+    programs,  and  an IEN-116 nameserver is also provided.  The TCP
+    used is very simple, not very fast, and lies about windows.   No
+    FTP is available, nor is one currently planned.
+
+DOCUMENTATION:
+
+       There  is  a  full  set  of  manual pages, and some internals
+    documentation.  The kernel code is well commented.
+
+CPU:
+
+       PDP-11/44, 45, 70, 73, 84
+
+O/S:
+
+       Venix/11 V2.0, should be simple to  port  to  other  V7  UNIX
+    systems.
+
+IMPLEMENTATION LANGUAGE:
+
+       C
+
+DISTRIBUTOR:
+
+       Proteon, Inc.
+       4 Tech Circle
+       Natick, MA  01760
+
+CONTACT:
+                                   23
+
+
+
+       John Shriver, jas@proteon.ARPA, 617-655-3340
+
+ORDERING-PROCEDURE:
+
+       Vendor product, available only in source form.
+
+PROPRIETARY-STATUS:
+
+       Improvements are proprietary to Proteon.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   24
+
+
+
+1.7.7. PDP-11/45
+TYPE:   TCP/IP Implementation
+
+DESCRIPTION:
+
+       In the UNIX kernel we have modules to drive a "Pronet" device
+    (10  Mb/s  token-passing  ringnet),  to  transmit  and   receive
+    internet  packets,  to demultiplex incoming TCP and UDP packets,
+    to reassemble internet fragments, and to  maintain  a  cache  of
+    internet  hosts  and their best first hop gateways.  Kernel code
+    and data use from 9k to 10.5k bytes depending on the size of the
+    receive packets buffer.
+
+       Outside  the  kernel  we  have:  TCP, user and server Telnet,
+    SMTP, ICMP, and TFTP.  All are running but are in varying stages
+    of development.
+
+DOCUMENTATION:
+
+       Some  documentation about the user/kernel interface and about
+    the kernel code
+
+CPU:
+
+       PDP-11/45
+
+O/S:
+
+       Version 6 UNIX
+
+IMPLEMENTATION-LANGUAGE:
+
+       C
+
+DISTRIBUTOR:
+
+       Laboratory for Computer Science
+       MIT
+       545 Technology Square
+       Cambridge, MA  02139
+
+CONTACT:
+
+       Liza Martin, (martin@MIT-CSR.ARPA)
+       Larry Allen, (lwa@MIT-CSR.ARPA)
+       617-253-6011
+
+ORDERING-PROCEDURE:
+
+       We are willing to give this software to anyone who wants  it,
+    has  a UNIX source license, and will agree to a few constraints.
+    We should point out that it would be difficult for  someone  who
+                                   25
+
+
+
+    is  not  a  UNIX  wizard to install this code.  To find out more
+    about the  software  send  mail  to  martin@MIT-CSR.ARPA  or  to
+    lwa@MIT-CSR.ARPA.
+
+PROPRIETY-STATUS:
+
+       Copyright MIT Laboratory for Computer Science
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   26
+
+
+
+1.7.8. BBN-V6-UNIX
+PRODUCT-OR-PACKAGE-NAME:   EDN-V6-UNIX
+
+TYPE:   TCP/IP/ICMP implementation
+
+DESCRIPTION:
+
+       This  TCP/IP/ICMP  implementation  runs  as a user process in
+    version 6 UNIX, with modifications obtained from BBN for network
+    access.  IP  reassembles  fragments  into  datagrams, but has no
+    separate IP user  interface.    TCP  supports  user  and  server
+    Telnet,  echo,  discard,  internet  SMTP  mail,  and  FTP.  ICMP
+    generates replies to Echo Requests, and sends Source-Quench when
+    reassembly buffers are full.
+
+       1. Hardware  -  PDP-11/70 and PDP-11/45 running UNIX version
+          6, with BBN IPC additions.
+
+       2. Software - written in C, requiring 25K instruction space,
+          20K  data  space.    Supports  10  connections (including
+          "listeners").
+
+       3. Unimplemented protocol features:
+
+             - TCP - Discards out-of-order segments.
+
+             - IP - Does not handle some options and ICMP messages.
+
+CPU:
+
+       DEC PDP-11/70 and PDP-11/45
+
+O/S:
+
+       V6-UNIX
+
+IMPLEMENTATION-LANGUAGE:
+
+       C
+
+CONTACT:
+
+       Ed Cain, (Cain@EDN-UNIX.ARPA), 703-437-2578
+
+ORDERING-PROCEDURE:
+
+       Contact Ed Cain
+
+
+
+
+
+                                   27
+
+
+
+1.7.9. v 3COM-UNET
+PRODUCT-OR-PACKAGE-NAME:   UNET
+
+TYPE:   TCP/IP Implementation
+
+DESCRIPTION:
+
+       UNET is a communication software package which  enables  UNIX
+    systems  to  communicate  using  TCP/IP  protocols.    UNET will
+    utilize any physical communications media, from low speed  links
+    such as twisted pair RS-232C to high speed coaxial links such as
+    Ethernet.  All layers of the UNET package are directly available
+    to   the  user.    The  highest  layer  provides  user  programs
+    implementing  ARPA  standard  File  Transfer  Protocol   (UFTP),
+    Virtual  Terminal  Protocol  (UVTP), and Mail Transfer Protocols
+    (UMTP).  These programs in  turn  utilize  the  virtual  circuit
+    services  of the TCP.  The TCP protocol is implemented on top of
+    the IP.  Finally, IP can simultaneously  interface  to  multiple
+    local  networks.    UNET  implements  5  of  the 7 layers of the
+    International    Standards     Organization     Open     Systems
+    Interconnection  Reference  Model,  layers  2  through  6: Link,
+    Network, Transport, Session, and Presentation.  Features of  TCP
+    6   not   yet   implemented   are   Precedence   and   Security,
+    End-of-Letter, and Urgent.  Feature of IP 4 not yet  implemented
+    is Options.
+
+DOCUMENTATION:
+
+       UNET   Networking   Software   Reference   Manual,   Training
+    Documents, Users Manual
+
+CPU:
+
+       DEC PDP-11s, VAX-11/780 and 11/750s
+
+O/S:
+
+       UNIX and UNIX-based systems (UNIX V7, Sys 3,  Sys  5,  ZENIX,
+    ONYX)
+
+IMPLEMENTATION-LANGUAGE:
+
+       C
+
+DISTRIBUTOR:
+
+       3Com Corporation
+       1365 Shorebird Way
+       Mountain View, CA 94043
+
+CONTACT:
+
+                                   28
+
+
+
+       Pamela Lawson, 415-961-9602
+
+ORDERING-PROCEDURE:
+
+       Contact 3COM directly
+
+PROPRIETY-STATUS:
+
+       A  Program  License Agreement between 3Com and UNET purchaser
+    is required
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   29
+
+
+
+1.7.10. v UNIQ-SYS5
+PRODUCT-OR-PACKAGE-NAME:    PASSAGE TCP/IP
+
+TYPE:    TCP/IP Implementation
+
+DESCRIPTION:
+
+       PASSAGE TCP/IP is a complete implementation  of  TCP/IP  that
+    allows  a  UNIX  System  V  (5.2) to participate as a routing or
+    nonrouting (end) host over  a  wide  spectrum  of  communication
+    systems  ranging  from hard-wired connections to packet-switched
+    or circuit-switched networks.   It  communicates  with  adjacent
+    hosts  over synchronous communication lines, Ethernet, LANs, and
+    standard 1822 interface to an IMP.    Features  include  TCP/IP,
+    ICMP,  Telnet,  FTP, UDP, and SMTP.  Plans are to implement X.25
+    in the near future.
+
+DOCUMENTATION:
+
+       Included in package
+
+CPU:
+
+       DEC VAX (PDP-11 in the future)
+
+O/S:
+
+       UNIX System V (5.2)
+
+IMPLEMENTATION-LANGUAGE:
+
+       C
+
+DISTRIBUTOR:
+
+       UNIQ Digital Technologies        UNIQ Digital Technologies
+       28 S. Water St.                  37 Wheaton Drive
+       Batavia, Ill  60510              Nashua, NH  03063
+       312-879-1008                     603-883-4860
+
+       UNIQ Digital Technologies        UNIQ Digital Technologies
+       8150 Leesburg Pike               2040 Avenue of the Stars
+       Suite 600                        Suite 400
+       Vienna, VA  22180                Los Angeles, CA  90067
+       703-448-8508                     213-277-6288
+
+CONTACT:
+
+       Sales department (see above)
+
+ORDERING-PROCEDURE:
+
+                                   30
+
+
+
+       Contact distributors
+
+PROPRIETY-STATUS:
+
+       PASSAGE is a product of UNIQ Digital Technologies
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   31
+
+
+
+1.7.11. PURDUE
+TYPE:   TCP/IP/X.25 Implementation
+
+DESCRIPTION:
+
+       The IP/X.25 effort  is  supported  at  Purdue  by  CSNET  for
+    distribution  to  CSNET  sites.    It  is  based  on  the TCP/IP
+    implementation from BBN (for 4.1BSD) or Berkeley  (for  4.2BSD).
+    A  device  driver was added which allows IP datagrams to be sent
+    over X.25 virtual circuits.  An Interactive  Systems  INcard  is
+    required.
+
+DOCUMENTATION:
+
+       Complete manual available if CSNET subscriber
+
+CPU:
+
+       VAX-11/750 and VAX-11/780
+
+O/S:
+
+       Berkeley UNIX 4.1BSD and 4.2BSD
+
+IMPLEMENTATION-LANGUAGE:
+
+       C
+
+DISTRIBUTOR:
+
+       CSNET CIC
+       Bolt, Beranek and Newman Inc.
+       10 Moulton Street
+       Cambridge, MA 02238
+       (CIC@CSNET-SH.ARPA)
+       617-497-2777
+
+CONTACT:
+
+       Tim Korb, (JTK@PURDUE.ARPA)
+       Computer Science Dept.
+       Math Bldg.
+       Purdue University
+       West Lafayette, IN  47909
+       317-494-6184
+
+ORDERING-PROCEDURE:
+
+       Contact CIC (see above under DISTRIBUTOR)
+
+PROPRIETY-STATUS:
+
+                                   32
+
+
+
+       For CSNET users only
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   33
+
+
+
+1.7.12. BBN-VAX-UNIX
+PRODUCT-OR-PACKAGE-NAME:   BBN-VAX-UNIX
+
+TYPE:   TCP/IP Implementation
+
+DESCRIPTION:
+
+       BBN  has  developed  an  implementation  of  TCP/IP for DEC's
+    VAX(TM) family of  processors,  that  runs  under  the  Berkeley
+    4.1BSD  version  of UNIX(TM).  The development effort was funded
+    by DARPA. Some important features of the BBN VAX TCP/IP are that
+    it  runs  in  the  UNIX kernel for enhanced performance, it is a
+    complete  implementation  of  the  TCP  and  IP  protocols,  and
+    provides  facilities  for  direct  user  access  to  the  IP and
+    underlying network protocols.  The IP module supports checksums,
+    option  interpretation,  fragmentation  and reassembly, extended
+    internet address support, gateway communication with  ICMP,  and
+    support  of  multi-homing  (multiple interfaces and addresses on
+    the same or different networks).  The  TCP  supports  checksums,
+    sequencing, the ability to pass options through to the IP level,
+    and advanced windowing and adaptive  retransmission  algorithms.
+    Support is also provided for the User Datagram Protocol (UDP).
+
+       In  addition  to  the  TCP/IP  software  for the VAX, BBN has
+    developed  implementations  of  the  Telnet   Virtual   Terminal
+    Protocol, File Transfer Protocol (FTP), and Simple Mail Transfer
+    Protocol (SMTP), for use with TCP.  These protocols are operated
+    as  user  level programs.  Also provided are network programming
+    support  tools,  such  as  network   name/address   manipulation
+    libraries, status, tracing, and debugging tools.
+
+       The  TCP/IP  and  higher  level  protocol  software  are  now
+    available direct from BBN.  The software  is  distributed  on  a
+    1600  bpi  tar  format tape, containing the sources and binaries
+    for a 4.1BSD UNIX kernel containing  the  network  modifications
+    and  the sources and binaries for the higher level protocols and
+    support software.  Documentation is provided in the  form  of  a
+    set  of  UNIX  manual  pages for the network access device, user
+    programs, and libraries.  In addition, a  detailed  installation
+    document  is  provided.  Device drivers are supplied for the ACC
+    LH-DH/11 IMP interface,  the  Proteon  Associates  PRONET  Local
+    Network Interface, the ACC IF-11 IMP interface, and the Interlan
+    10MB Ethernet interface.
+
+CPU:
+
+       DEC VAX-11 series
+
+O/S:
+
+       UNIX (4.1BSD)
+
+                                   34
+
+
+
+IMPLEMENTATION-LANGUAGE:
+
+       C
+
+DISTRIBUTOR:
+
+       BBN (see above)
+
+CONTACT:
+
+       Dennis Rockwell, (drockwel@BBN-UNIX.ARPA), 617-497-2643
+
+ORDERING-PROCEDURE:
+
+       The tape is  available  for  a  $300.00  duplication  fee  to
+    Berkeley 4.1BSD licensees.  To order the tape, contact:
+
+          Ms. Judy Gordon (jgordon@BBN-UNIX.ARPA)
+          Bolt Beranek and Newman, Inc.
+          10 Moulton St.
+          Cambridge, MA 02238
+          617-497-3827
+
+       You  will  then  receive  a  copy of the licensing agreement.
+    Tapes will be mailed upon receipt of a completed  agreement  and
+    the distribution fee.
+
+       This  tape  is  supplied  as-is  to 4.1BSD licensees, with no
+    warranties or support  expressed  or  implied.    BBN  would  be
+    pleased   to   arrange   separate   agreements   for   providing
+    installation assistance and/or  software  support  services,  if
+    desired.
+
+PROPRIETY-STATUS:
+
+       Requires a 4.1BSD license from U.C. Berkeley
+
+HOSTS:
+
+       BBN-VAX (development site)
+
+
+
+
+
+
+
+
+
+
+
+
+                                   35
+
+
+
+1.7.13. BERKELEY-VAX-UNIX-4.2
+PRODUCT-OR-PACKAGE-NAME:   BERKELEY-VAX-UNIX-4.2
+
+TYPE:   TCP/IP implementation
+
+DESCRIPTION:
+
+       This  implementation  was  developed by the Computer Research
+    Group of the University of California at Berkeley as part  of  a
+    number   of   research   projects.   It  is  based  on  the  BBN
+    implementation for the VAX.  It provides support  for  TCP,  IP,
+    ICMP,  and  UDP  with  user and server programs for Telnet, FTP,
+    TFTP and SMTP.  Hardware supported includes ACC and DEC/CSS  Imp
+    Interfaces, 10M bit/s and 3M bit/s Ethernet, and Proteon PRONET.
+
+DOCUMENTATION:
+
+       Online   documentation   of   user   programs,   system  call
+    interfaces, etc.; "4.2BSD Networking Implementation Notes", CSRG
+    TR/6
+
+CPU:
+
+       VAX-11/780, 11/750, 11/730
+
+O/S:
+
+       UNIX-4.2
+
+IMPLEMENTATION-LANGUAGE:
+
+       C
+
+DISTRIBUTOR:
+
+       Computer Systems Research Group
+       Computer Science Division
+       University of California
+       Berkeley, CA  94720
+
+CONTACT:
+
+       Pauline Schwartz, (Pauline@BERKELEY.ARPA)
+       Distribution Coordinator
+       415-642-7780
+
+ORDERING-PROCEDURE:
+
+       Contact Distribution Coordinator
+
+PROPRIETY-STATUS:
+
+                                   36
+
+
+
+       Requires  a  4.2BSD  license  agreement  and Western Electric
+    UNIX/32V, System III, or System V UNIX license
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   37
+
+
+
+1.7.14. v GOULD-ACCESS-VAX
+PRODUCT-OR-PACKAGE-NAME:   ACCESS
+
+TYPE:   TCP/IP implementation
+
+DESCRIPTION:
+
+       ACCESS is a TCP/IP implementation for DEC VAX/VMS users.   It
+    features  TCP/IP,  ICMP, Telnet, STMP, FTP and UDP.  It requires
+    no modification to the VMS operating system.    Installation  is
+    straight  forward,  using command procedures.  The protocols are
+    implemented in software modules.  The  network  interfaces  that
+    ACCESS uses are ACC LH-DH/11 (for DDN), 3Com (for Ethernet), and
+    Interlan (for Ethernet).
+
+       Protocol features supported:
+
+       - IP:      Supports  Fragmentation  and  Reassembly;   fixed
+         reassembly  time  out; oldest fragments are discarded when
+         buffers fill up; address  translation  by  hostname  table
+         and/or   Plummer's  Address  Resolution  Protocol;  no  IP
+         options.
+
+       - TCP:   URGENT, PUSH supported  per  specification;  Maxseg
+         Option  generated  and  understood; dynamic retransmission
+         timeout based on smoothed  round  trip  delay;  advertised
+         window is larger than actual available buffer space by the
+         maximum   size   of   an    internal    buffer;    delayed
+         acknowledgements.
+
+DOCUMENTATION:
+
+       Supplied with software
+
+CPU:
+
+       DEC VAX computers
+
+O/S:
+
+       DEC standard VAX/VMS Release 3.0 and above
+
+IMPLEMENTATION-LANGUAGE:
+
+       Mostly C, with some MACRO
+
+DISTRIBUTOR:
+
+       GOULD Corporation
+       GOULD Software Division
+       1101 East University Avenue
+       Urbana, IL 61801
+                                   38
+
+
+
+       800-952-8888
+
+CONTACT:
+
+       Steve Yasukawa, ARPANET technical liaison, 217-384-8500
+
+ORDERING-PROCEDURE:
+
+       Contact Sales/Marketing Dept. at Gould
+
+PROPRIETY-STATUS:
+
+       GOULD proprietary product
+
+HOSTS:
+
+       AEROSPACE, WPAFB-JALCF, PAXRV-NES, ISI-VAXA
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   39
+
+
+
+1.7.15. [VAX-VMS/HYPERLINK]
+PRODUCT-OR-PACKAGE-NAME:   Hyperlink/DDN Software
+
+TYPE:    TCP/IP/X.25 Implementation
+
+DESCRIPTION:
+
+       Hyperlink/DDN  is  being  implemented  in accordance with the
+    ARPANET Upper Layer Protocols (presentation/application layers),
+    Transmission  Control  Protocol  (session/transport layers), and
+    Internet Protocol  (network  layer  functions  for  internetwork
+    communications).   The software includes the host driver (either
+    with Ethernet or Hyperchannel connections), transmission control
+    protocol,   internet   protocol,   network   administrator   and
+    application  software.    Applications  include  file  transfer,
+    electronic mail and Telnet.
+
+       Hyperlink/DDN  integrates ARPANET's packet switching protocol
+    standards  with  Internet  Systems   Corporation's   proprietary
+    Ethernet-based  hardware  connection  devices  or  with  Network
+    Systems  Corporation's  HYPERchannel  connection   devices   for
+    complete  connections between LANs and/or long-haul networks.  A
+    product option is available which provides an  LSI  11/73  based
+    host  front-end  processor  which  will  contain  the TCP and IP
+    layers and an X.25  communications  subsystem.    Internet  also
+    offers  high  speed  local-area  network  solutions  for non-DDN
+    requirements which can be integrated with DDN offerings.
+
+DOCUMENTATION:
+
+       A full set of documentation is in process
+
+CPU:
+
+       DEC/VAX
+
+O/S:
+
+       VMS
+
+IMPLEMENTATION-LANGUAGE:
+
+       C or Pascal
+
+DISTRIBUTOR:
+
+       Internet Systems Corporation
+       8360 Oakland Park Blvd.
+       Sunrise, Florida  33321
+
+CONTACT:
+
+                                   40
+
+
+
+       Kerry A. Hartley, Director of Sales
+       313-357-1370
+       Jerry Lieberman, Product Marketing Manager
+       305-742-0301
+
+ORDERING-PROCEDURE:
+
+       See above contacts
+
+PROPRIETY-STATUS:
+
+       Product of Internet Systems Corporation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   41
+
+
+
+1.7.16. TEKTRONIX-VAX
+PRODUCT-OR-PACKAGE-NAME:   VAX/VMS
+
+TYPE:   TCP/IP implementation
+
+DESCRIPTION:
+
+       This implementation  runs  under  VAX  780/VMS.    It  has  a
+    hyperchannel  interface  with  a  home-grown VMS driver.  TCP/IP
+    from 3COM interoperates with VMS TCP/IP over HYPERchannel.  They
+    have  added  TCP and IP options to UNET.  Currently, there is no
+    plan to market TCP/IP software, although it is available to  the
+    network  research  community for internal use only.  Support has
+    been added for Ethernet using an Interlan driver.
+
+       - TCP:   Has no security or precedence.
+
+       - IP:     No datagram reassembly or fragmentation.   Neither
+         Internet  control  protocol nor gateway protocol have been
+         implemented.     There   are   no   plans   to   implement
+         fragmentation.
+
+       - FTP:     Not  compatible  with  Berkeley's  4.2  UNIX  but
+         compatible with 3COM's implementation of FTP.   There  are
+         plans, however, to make it compatible with 4.2 UNIX.
+
+DOCUMENTATION:
+
+       Source is well-commented
+
+CPU:
+
+       VAX/780,750  and  any  DEC  machine  running  VMS  (including
+    micros)
+
+O/S:
+
+       UNIX for UNET, VMS for homegrown TCP/IP
+
+IMPLEMENTATION-LANGUAGE:
+
+       BLISS (an equivalent of C) and some MACRO
+
+DISTRIBUTOR:
+
+       TEKTRONIX
+       PO Box 500
+       Stop 50/454
+       Beaverton, OR 97077
+
+CONTACT:
+
+                                   42
+
+
+
+       Tim Fallon, (timf.tek@RAND-RELAY.ARPA)
+       503-627-5471
+       Stan Smith, (stans.tek@RAND-RELAY.ARPA)
+       503-627-5347
+
+ORDERING-PROCEDURE:
+
+       Contact Tim Fallon
+
+PROPRIETY-STATUS:
+
+       Not available for OEM resale
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   43
+
+
+
+1.7.17. WOLLONGONG VAX-VMS
+PRODUCT-OR-PACKAGE-NAME:   WIN/MVX
+
+DESCRIPTION:
+
+       This TCP/IP implementation includes  Telnet  (remote  login),
+    FTP (file transfer), SMTP (Mail) Netstat, Finger, TFTP. Supports
+    the following network interface:  DEC DEUNA Ethernet Controller.
+
+DOCUMENTATION:
+
+       Installation Guide and Users Manual available
+
+CPU:
+
+       DEC MicroVAX I and II
+
+O/S:
+
+       Micro VMS 4.0 or greater
+
+IMPLEMENTATION LANGUAGE:
+
+       C
+
+DISTRIBUTOR:
+
+       The Wollongong Group
+       1129 San Antonio Road
+       Palo Alto, CA 94303
+
+CONTACT:
+
+       Wollongong Sales
+       415-962-7200
+
+ORDERING PROCEDURE:
+
+       Available with support from The Wollongong Group
+
+PROPRIETY STATUS:
+
+       Wollongong
+
+
+
+
+
+
+
+
+
+                                   44
+
+
+
+1.7.18. WOLLONGONG VAX-VMS
+PRODUCT-OR-PACKAGE-NAME:   WIN/VX
+
+DESCRIPTION:
+
+       This TCP/IP implementation includes  Telnet  (remote  login),
+    FTP   (file   transfer),  SMTP  (Mail)  Netstat,  Finger,  TFTP.
+    Supports the following network interfaces:
+
+       - ACC LH-DH (1822 interface)
+
+       - ACC HDH (1822-J) (For WIN/VX (DDN))
+
+       - ACC X.25 (For WIN/VX (DDN))
+
+       - Interlan Ethernet Controller
+
+       - DEC Deuna Ethernet Controller
+
+       - Ungermann-Bass
+
+       - DEC DMR-11
+
+DOCUMENTATION:
+
+       Installation Guide and Users Manual available
+
+CPU:
+
+       DEC VAX
+
+O/S:
+
+       VMS 3.1 or greater and VMS 4.x
+
+IMPLEMENTATION LANGUAGE:
+
+       C
+
+DISTRIBUTOR:
+
+       The Wollongong Group
+       1129 San Antonio Road
+       Palo Alto, CA 94303
+
+CONTACT:
+
+       Wollongong Sales
+       415-962-7200
+
+ORDERING PROCEDURE:
+
+                                   45
+
+
+
+       Available with support from The Wollongong Group
+
+PROPRIETY STATUS:
+
+       Wollongong
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   46
+
+
+
+1.7.19. WOLLONGONG-SYSTEM-V-UNIX
+PRODUCT-OR-PACKAGE-NAME:   WIN/SVX
+
+DESCRIPTION:
+
+       This TCP/IP implementation includes  Telnet  (remote  login),
+    FTP   (file   transfer),  SMTP  (Mail)  Netstat,  Finger,  TFTP.
+    Supports the following network interfaces:
+
+       - Interlan Ethernet Controller
+
+       - DEC Deuna Ethernet Controller
+
+       - EXCELAN Ethernet Controller
+
+DOCUMENTATION:
+
+       Installation Guide and Users Manual available
+
+CPU:
+
+       DEC VAX
+
+O/S:
+
+       UNIX System V2 and greater
+
+IMPLEMENTATION LANGUAGE:
+
+       C
+
+DISTRIBUTOR:
+
+       The Wollongong Group
+       1129 San Antonio Road
+       Palo Alto, CA 94303
+
+CONTACT:
+
+       Wollongong Sales
+       415-962-7200
+
+ORDERING PROCEDURE:
+
+       Available with support from The Wollongong Group
+
+PROPRIETY STATUS:
+
+       Wollongong
+
+
+
+                                   47
+
+
+
+1.7.20. SRI-TENEX/FOONEX/AUGUST
+TYPE:   TCP/IP Implementation
+
+DESCRIPTION:
+
+       SRI has implemented TCP/IP for the TENEX (FOONEX and  AUGUST)
+    operating  system  running  on  DEC-10 KA or KI and F2, F3 or F4
+    Foonly processors.  It was adapted from the BBN and ISI versions
+    of  TENEX  TCP/IP,  with contributions from Ed Taft of Xerox and
+    Phil French of Tymshare, and resides in  the  operating  system.
+    It is largely upward-compatible with TOPS-20 implementations and
+    fully compatible with AUGMENT.  Telnet, FTP, SMTP,  ICMP,  ECHO,
+    TIME,  WHOIS,  and  NAME service are available although some are
+    still under development.
+
+       This is an implementation done at BBN.    DARPA  has  dropped
+    funding  for  continued  support for Tenex development, and thus
+    the latest versions done for BBN and DEC  for  TOPS-20  are  not
+    available for Tenex.
+
+DOCUMENTATION:
+
+       None  available  at this time other than that embedded in the
+    programs
+
+CPU:
+
+       DEC-10(KA, KI) F2,F3,F4
+
+O/S:
+
+       TENEX-134,135/FOONEX/AUGUST
+
+IMPLEMENTATION-LANGUAGE:
+
+       MACRO
+
+DISTRIBUTOR:
+
+       SRI International
+       Network Information Center
+       Room EJ286
+       333 Ravenswood Ave.
+       Menlo Park, CA 94025
+
+CONTACT:
+
+       Vivian Neou, (VIVIAN@SRI-NIC.ARPA), 415-859-4871
+
+ORDERING-PROCEDURE:
+
+       FTP the appropriate files across the  network  or  provide  a
+                                   48
+
+
+
+    tape  for  tape  copy.    If number of tape requests is large, a
+    small handling charge may have to be added.
+
+PROPRIETY-STATUS:
+
+       DCA-owned software
+
+HOSTS:
+
+       SRI-NIC.ARPA, OFFICE machines, SRI-CSL.ARPA, KESTREL.ARPA
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   49
+
+
+
+1.7.21. LLL-TOPS-10
+TYPE:   TCP/IP implementation
+
+DESCRIPTION:
+
+       A TOPS-10 implementation was begun by  Don  Provan  while  at
+    WPAFB-AFWAL  and  was  completed  by him at LLL-MFE.  There have
+    been no serious problems since April of 1983.   System  supports
+    IP/ICMP  and  TCP.    User  level software available for FTP and
+    Telnet connections.
+
+DOCUMENTATION:
+
+       Scarce: existing code (both system code and user level  code)
+    is  the  only  reliable  source  of information; user level code
+    maintained by nedved@CMU-CS-A.ARPA
+
+CPU:
+
+       PDP-10 or PDP-10 look alikes
+
+O/S:
+
+       TOPS-10 (also runs under WAITS at SU-AI)
+
+IMPLEMENTATION-LANGUAGE:
+
+       MACRO-10
+
+DISTRIBUTOR:
+
+       Don Provan
+       Lawrence Livermore Laboratory
+       MFE Computer Center
+       P.O. Box 5509
+       Livermore, CA 94550
+
+CONTACT:
+
+       Don Provan, (provan@LLL-MFE.ARPA), 415-422-4474
+
+ORDERING-PROCEDURE:
+
+       All files are in [70,71,monitor]@LLL-MFE, available via  FTP.
+    Also available on 9-track tape
+
+HOSTS:
+
+       LLL-MFE running TOPS-10 7.01a on a KL-10, WPAFB-AFWAL running
+    TOPS-10 7.01 on a KL-10, CMU-CS-A running  TOPS-10  6.02a  on  a
+    KL-10,  SU-AI  running  WAITS  on  a  PDP-10 look-alike, WHARTON
+    running TOPS-10 7.01a on a KL-10
+                                   50
+
+
+
+1.7.22. MIT-ITS-10/20
+TYPE:   TCP/IP Implementation
+
+DESCRIPTION:
+
+       This is a TCP/IP  implementation  that  runs  under  the  MIT
+    Incompatible  Timesharing System (ITS) on DEC-10/20 machines (KA
+    or KL), written by Ken Harrenstien of  SRI  International  under
+    contract  to  MIT.   Includes Telnet, FTP and SMTP.  Bug reports
+    and interest group is BUG-TCP@MIT-MC.ARPA.
+
+DOCUMENTATION:
+
+       Available from contact
+
+CPU:
+
+       DEC-10/20 (KA and KL)
+
+O/S:
+
+       ITS
+
+IMPLEMENTATION-LANGUAGE:
+
+       MIDAS(PDP-10)
+
+DISTRIBUTOR:
+
+       MIT, Cambridge, MA
+
+CONTACT:
+
+       Ken Harrenstien, (KLH@SRI-NIC.ARPA)
+       SRI International
+       Room EJ280
+       333 Ravenswood Avenue
+       Menlo Park, CA 94025
+       415-859-3695
+
+ORDERING-PROCEDURE:
+
+       Appropriate files can be FTP'd across the network.    Contact
+    KLH@SRI-NIC.ARPA for more information.
+
+PROPRIETY-STATUS:
+
+       MIT-proprietary software
+
+HOSTS:
+
+       MIT-MC
+                                   51
+
+
+
+1.7.23. BBN-TOPS-20
+PRODUCT-OR-PACKAGE-NAME:   BBN-TOPS-20
+
+TYPE:   TCP/IP Implementation
+
+DESCRIPTION:
+
+       The   TOPS20   Internetworking   software  supports  multiple
+    networks, multiple interfaces on a single network, and  multiple
+    protocol  suites.   Included in the standard distribution are an
+    interface to 1822 nets via an AN20, an interface  to  a  network
+    front-end  via  a  DTE20,  and  the DARPA protocol suite (DEC is
+    developing an Ethernet interface).
+
+       The DARPA IP, ICMP, TCP, Server TELNET protocols are included
+    within  the  TOPS20  monitor; other protocols are implemented as
+    user application processes.  The IP module  supports  a  routing
+    cache  maintained  via  ICMP redirect NET and HOST messages.  It
+    performs fragmentation and reassembly,  implements  all  options
+    and  can  forward  traffic between any of the host's interfaces.
+    Applications may interface to the IP layer using User Queues.
+
+       All ICMP messages are supported; error messages may  be  sent
+    by any of the protocol layers; higher layers are notified when a
+    message is received concerning one of their packets.    Messages
+    can be sent by applications using the User Queue facility.
+
+       Applications can interface to TCP either as a read/write file
+    or via multiple buffers.  The  TCP  layer  supports  IP  routing
+    options,   ICMP  destination  unreachable,  source  quench,  and
+    redirects which specify a type-of-service, and the segment  size
+    option.    Support  for  preemption,  precedence,  and  security
+    options is  delegated  to  the  application.    Telnet  supports
+    options and subnegotiations.
+
+       There is extensive inter-layer flow control, error reporting,
+    and monitoring.  Utilities are available to provide information,
+    list monitoring data, and perform diagnostics.
+
+       DEC has distributed a prior version of this implementation as
+    part of its standard TOPS20-AN monitor; the current  version  is
+    currently being transferred to DEC.
+
+DOCUMENTATION:
+
+       User's Manual including Site Configuration Guide
+
+CPU:
+
+       DEC KL10
+
+O/S:
+                                   52
+
+
+
+       TOPS20-AN, Release 5 or 6
+
+IMPLEMENTATION-LANGUAGE:
+
+       Macro
+
+DISTRIBUTOR:
+
+       Bolt Beranek and Newman, Inc.
+       10 Moulton Street
+       Cambridge, Mass.  02238
+
+CONTACT:
+
+       Charles Lynn, (CLynn@BBNA), (617) 497-3367
+
+ORDERING-PROCEDURE:
+
+       The  latest software release should soon be available as part
+    of the standard DEC  TOPS20-AN  monitor.    Until  the  transfer
+    process  has  been  completed, the software is available via FTP
+    over the internet, or by sending a magtape to:
+
+          Bolt Beranek and Newman, Inc.
+          10 Moulton Street
+          Cambridge, Mass.  02238
+          Attn: Charles Lynn
+
+       A return mailing label should be included.  Also required  is
+    a TOPS-20 Source License and the TOPS-20 monitor sources, as the
+    implementation includes source-level changes to the standard DEC
+    monitor.
+
+PROPRIETY-STATUS:
+
+       Public domain
+
+HOSTS:
+
+       TOPS-20s  at  BBN,  ISI; DEC Customers are running a previous
+    version
+
+
+
+
+
+
+
+
+
+
+
+                                   53
+
+
+
+1.7.24. v TOPS-20AN
+PRODUCT-OR-PACKAGE-NAME:   TOPS-20AN
+
+TYPE:    TCP/IP version of the TOPS-20 monitor
+
+DESCRIPTION:
+
+       Based  on  the  DARPA  sponsored  TCP/IP  implementation  for
+    TOPS-20  with  major modifications.  The BBN TCP/IP software was
+    merged into the standard supported TOPS-20, and a different JSYS
+    interface was implemented that utilized the existing TOPS-20 I/O
+    JSYSs by adding a logical device for TCP.   Supports:  the  1822
+    interface, DEC NI20 Ethernet interface and the DEC CI20 computer
+    interconnect.
+
+CPU:
+
+       DEC KL10E or KL10R
+
+O/S:
+
+       TOPS-20, Release 6.1
+
+IMPLEMENTATION-LANGUAGE:
+
+       PDP10/TOPS-20 assembler
+
+DISTRIBUTOR:
+
+       Digital Equipment Corporation
+       200 Forest St.
+       Marlboro, MA 01752
+
+CONTACT:
+
+       Kevin W. Paetzold, (Paetzold@DEC-MARLBORO.ARPA)
+       MRO1-2/L14
+       617-467-7430
+
+ORDERING-PROCEDURE:
+
+       See your local DEC salesman
+
+PROPRIETY-STATUS:
+
+       Licensed by DEC
+
+
+
+
+
+
+                                   54
+
+
+
+1.7.25. [DEC-VMS-LAN]
+PRODUCT-OR-PACKAGE-NAME:    Virtual Transport System
+
+TYPE:    TCP/IP Compatible Local-Area Network
+
+DESCRIPTION:
+
+       This is a high performance LAN (25  Mbs)  which  will  be  in
+    commercial  production  in  second  quarter, 1985.  This product
+    will be compatible with Internet Systems Corporation's products,
+    which are TCP/IP-based.
+
+CPU:
+
+       DEC VAX
+
+O/S:
+
+       VMS
+
+DISTRIBUTOR:
+
+       Computer Network Technology
+       9440 Science Center Drive
+       New Hope, MN 55428
+
+CONTACT:
+
+       Bob Lutnicki, 800-638-8324
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   55
+
+
+
+1.7.26. FUSION-VAX
+PRODUCT-OR-PACKAGE-NAME:    FUSION
+
+TYPE:    TCP/IP Implementation
+
+DESCRIPTION:
+
+       Network  software for Ethernet, Pronet, Omninet.  Runs TCP/IP
+    and/or XNS protocols.  Provides file  transfer  (FTP/send,recv),
+    virtual  terminal  (Telnet),  network management.  Interoperates
+    with 4.2 UNIX, socket calls.  First released February 1983.
+
+DOCUMENTATION:
+
+       User manuals for VMS
+
+CPU:
+
+       PDP-11, VAX, Rainbow, DEC Pros
+
+O/S:
+
+       UNIX: 4.1, 4.2, System3, Version 7, System 5,  Xenix,  Venix,
+    VMS
+
+IMPLEMENTATION-LANGUAGE:
+
+       C, runs on system's native C compiler
+
+DISTRIBUTOR:
+
+       Direct Sales:
+       Northwest:  408-996-2056
+       Northeast:  617-229-2570
+       Southwest:  213-394-7200
+       Southeast:  703-525-4141
+
+CONTACT:
+
+       M.K. Graham, Northwest Sales Manager
+
+ORDERING-PROCEDURE:
+
+       See above
+
+PROPRIETY-STATUS:
+
+       Developed by Network Research Corporation
+
+
+
+
+                                   56
+
+
+
+1.8. ELXSI
+
+
+
+1.8.1. ELXSI
+PRODUCT-OR-PACKAGE-NAME:   ELXSI Fusion TCP/IP
+
+DESCRIPTION:
+
+       Implementation  of  FTP and Telnet for ELXSI machines running
+    release 10 or later. Also  included  are  packet-monitoring  and
+    statistics  utilities.  Later  releases  will include networking
+    libraries.
+
+DOCUMENTATION:
+
+       Manuals and on-line documentation
+
+CPU:
+
+       ELXSI 6400
+
+O/S:
+
+       Embos, Enix System V, Enix 4.2
+
+IMPLEMENTATION LANGUAGE:
+
+       C and Pascal
+
+DISTRIBUTOR:
+
+       ELXSI Inc.
+       2334 Lundy Place
+       San Jose, CA 95131
+
+CONTACT:
+
+       Bob Hedges, ELXSI
+       408-942-0900
+
+ORDERING PROCEDURE:
+
+       Through sales representatives
+
+PROPRIETY STATUS:
+
+       Source and object code for sale
+
+
+
+
+                                   57
+
+
+
+1.9. FORTUNE
+
+
+
+1.9.1. [FORTUNE]
+PRODUCT-OR-PACKAGE-NAME:   FORTUNE 32:16
+
+TYPE:   TCP/IP Implementation
+
+DESCRIPTION:
+
+       UNET was ported from 3COM in to the Fortune 32:16 system  for
+    evaluation purposes.
+
+CPU:
+
+       Fortune 32:16
+
+O/S:
+
+       FOR:PRO (TM)
+
+IMPLEMENTATION-LANGUAGE:
+
+       C
+
+DISTRIBUTOR:
+
+       Fortune Systems Corp.
+       300 Harbor Blvd.
+       Belmont, CA 94002
+
+CONTACT:
+
+       Richard Tung, 415-595-8444
+
+PROPRIETY-STATUS:
+
+       Not available as a commercial product at this time
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   58
+
+
+
+1.10. GOULD
+
+
+
+1.10.1. MPX-32
+PRODUCT-OR-PACKAGE-NAME:   MPX-32 TCP/IP
+
+DESCRIPTION:
+
+       MPS-32  TCP/IP  Rel  1.0  implements  a set of services which
+    allow an MPX-32 task to interchange data with a task in a remote
+    system.    This  release  will  operate  exclusively over MPX-32
+    Ethernet.    The  product  contains  the  standard  TCP  and  IP
+    specifications except for options, precedence, and security.  It
+    has a FORTRAN user interface.
+
+DOCUMENTATION:
+
+       MPX-32 TCP/IP Software Manual, Document number 323-003500-000
+
+CPU:
+
+       32 Bit Concept Series
+
+O/S:
+
+       MPX-32 Real-Time
+
+DISTRIBUTOR:
+
+       Gould Inc. Computer Systems Division
+       6901 West Sunrise Boulevard
+       Ft. Lauderdale, Florida 33313-4499
+
+CONTACT:
+
+       Don Zwonitser, Product Line  Manager,  Communications,  (305)
+    587-2900
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   59
+
+
+
+1.11. HEWLETT PACKARD
+
+
+
+1.11.1. BBN-HP-3000
+PRODUCT-OR-PACKAGE-NAME:   BBN-HP-3000
+
+TYPE:   TCP/IP Implementation
+
+DESCRIPTION:
+
+       HP  3000  series  III  software handles TCP, IP, 1822 and HDH
+    protocols.  The code runs under the MPE IV operating system.  It
+    is  typically  a  user mode batch job, so that it may be stopped
+    and restarted for SYSDUMPs if desired  without  having  to  shut
+    down  the rest of the system.  It uses an HP Intelligent Network
+    Processor (INP) as the HDCC (Lap B) interface  to  the  network.
+    Intrinsics  exist to access TCP or UDP IP.  The protocol process
+    includes TCP, IP, 1822 and  a  new  protocol  called  HDH  which
+    allows  1822  messages to be sent over HDLC links.  The protocol
+    process has about 8k bytes of code and at  least  20k  bytes  of
+    data depending on the number of buffers allocated.
+
+       The  TCP  code  is  believed  to  support all features except
+    rubber EOL.  The IP code currently supports fragment  reassembly
+    but  not fragmentation.  Provisions may be added to allow the IP
+    layer to act on routing and source quench  messages.    Security
+    and precedence are currently ignored.
+
+       In  addition to TCP, the HP3000 has user and server Telnet as
+    well as user FTP.  There is not a server FTP at this time.
+
+       A complete description of the implementation software can  be
+    found in IEN-167.
+
+       For  further  information  see BBN Report 4856, January 1982,
+    available from BBN.
+
+CPU:
+
+       HP 3000 Series III
+
+O/S:
+
+       MPE IV
+
+IMPLEMENTATION-LANGUAGE:
+
+       HP's Systems Programming Language (SPL)
+
+CONTACT:
+
+                                   60
+
+
+
+       Steve Blumenthal, (Blumenthal@BBN-UNIX.ARPA), 617-497-3197
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   61
+
+
+
+1.12. HONEYWELL
+
+
+
+1.12.1. [DPS6]
+PRODUCT-OR-PACKAGE-NAME:   DPS6-DDN
+
+TYPE:    DDN-contracted TCP/IP/X.25 implementation
+
+DESCRIPTION:
+
+       This will be a package  of  software  and  technical  support
+    services for interfacing Honeywell computing environments to the
+    Defense Data Network.
+
+       This implementation includes an X.25 interface.  Features are
+    FTP,  SMTP  and  Telnet  support  for asynchronous terminals and
+    Honeywell  synchronous  terminals.      It   also   includes   a
+    programmatic  interface  for applications running under Mod 400.
+    Available end of 1985.
+
+DOCUMENTATION:
+
+       Complete documentation
+
+CPU:
+
+       Honeywell DPS6
+
+O/S:
+
+       GCOS 6 Mod 400
+
+IMPLEMENTATION-LANGUAGE:
+
+       C
+
+DISTRIBUTOR:
+
+       Honeywell Information Systems
+       Federal Systems Divisions
+       7900 West Park Drive
+       McLean, VA  22102
+
+CONTACT:
+
+       Tony Concia, 703-827-3000
+
+ORDERING-PROCEDURE:
+
+       Contact Tony Concia
+
+                                   62
+
+
+
+PROPRIETY-STATUS:
+
+       Honeywell Information Systems
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   63
+
+
+
+1.12.2. [DPS8]
+PRODUCT-OR-PACKAGE-NAME:    DPS8-DDN
+
+TYPE:    DDN-contracted TCP/IP/X.25 Implementation
+
+DESCRIPTION:
+
+       This will be a package  of  software  and  technical  support
+    services for interfacing Honeywell computing environments to the
+    Defense Data Network.
+
+       This  TCP/IP  implementation  includes  an  X.25   interface.
+    Features  are  FTP,  SMTP  and  Telnet  support for asynchronous
+    terminals and Honeywell synchronous terminals.  It also includes
+    a  programmatic interface for applications running under GCOS 8.
+    Available end of 1985.
+
+DOCUMENTATION:
+
+       Complete documentation
+
+CPU:
+
+       Honeywell DPS8
+
+O/S:
+
+       GCOS 8
+
+IMPLEMENTATION-LANGUAGE:
+
+       C
+
+DISTRIBUTOR:
+
+       Honeywell Information Systems
+       Federal Systems Divisions
+       7900 West Park Drive
+       McLean, VA  22102
+
+CONTACT:
+
+       Tony Concia, 703-827-3000
+
+ORDERING-PROCEDURE:
+
+       Contact Tony Concia
+
+PROPRIETY-STATUS:
+
+       Honeywell Information Systems
+
+                                   64
+
+
+
+1.12.3. MULTICS
+PRODUCT-OR-PACKAGE-NAME:   MULTICS TCP/IP Facility
+
+TYPE:   TCP/IP implementation
+
+DESCRIPTION:
+
+       The Multics implementation includes TCP/IP as well as Telnet,
+    FTP,  and  SMTP.  Support is also available for Finger, Discard,
+    Echo, Time, and ICMP.
+
+DOCUMENTATION:
+
+       Online help file supplied
+
+CPU:
+
+       Honeywell Level 68, DPS8M
+
+O/S:
+
+       Multics MR 10.0 and beyond
+
+IMPLEMENTATION-LANGUAGE:
+
+       PL/1
+
+DISTRIBUTOR:
+
+       Honeywell Information Systems
+       Federal Systems Division
+       7900 Westpark Drive
+       McLean, VA  22102
+
+CONTACT:
+
+       Harry Quackenboss
+       Honeywell Information Systems
+       MST 60
+       P.O. Box 8000
+       Phoenix, AZ 85065
+       602-249-6629
+
+ORDERING-PROCEDURE:
+
+       Contact Honeywell marketing
+
+PROPRIETY-STATUS:
+
+       Honeywell product
+
+HOSTS:
+                                   65
+
+
+
+       CISL-SERVICE-MULTICS, HI-MULTICS, MIT-MULTICS,  RADC-MULTICS,
+    USGS1-MULTICS, USGS2-MULTICS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   66
+
+
+
+1.13. IBM
+
+
+
+1.13.1. IBM PC
+PRODUCT-OR-PACKAGE-NAME:    PC/IP
+
+TYPE:    TCP/IP Implementation
+
+DESCRIPTION:
+
+       The  TCP,  UDP,  and  IP  layers  are  designed with specific
+    tailoring to the requirements of  their  known  customers,  user
+    Telnet  and user/server tftp.  Drivers have been implemented for
+    the 3Com Etherlink card and  the  Proteon  proNET  card.    This
+    package  is  the  outgrowth of an MIT research project exploring
+    networking of small personal computers.
+
+DOCUMENTATION:
+
+       User's manual with object; Programmer's guide with source
+
+CPU:
+
+       IBM-PC, and XT, Compaq
+
+O/S:
+
+       DOS 2.0
+
+IMPLEMENTATION-LANGUAGE:
+
+       C: Portable C cross-compiler operating under  VAX  UNIX,  and
+    AB6 (Cross-assembler operating under VAX UNIX)
+
+DISTRIBUTORS:
+
+       3Com Corporation                 Proteon Associates
+       1365 Shorebird Way               24 Crescent St.
+       Mountain View, CA  94043         Waltham, MA 02134
+       415-961-9602                     617-894-1980
+
+CONTACT:
+
+       For research purposes only:
+       Prof. Jerome M. Saltzer
+       MIT/Laboratory for Computer Science
+       545 Technology Square
+       Cambridge, MA 02139
+       617-253-6016
+
+ORDERING PROCEDURE:
+                                   67
+
+
+
+       Object  software  included  in  package with hardware; source
+    available at reproduction cost
+
+PROPRIETY-STATUS:
+
+       Copyright by MIT with blanket permission to copy, modify, and
+    redistribute, so long as credit is given
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   68
+
+
+
+1.13.2. FUSION-IBM-PC
+PRODUCT-OR-PACKAGE-NAME:    FUSION
+
+TYPE:    TCP/IP Implementation
+
+DESCRIPTION:
+
+       Network  software for Ethernet, Pronet, Omninet.  Runs TCP/IP
+    and/or XNS protocols.  Provides file  transfer  (FTP/send,recv),
+    virtual  terminal  (Telnet),  network management.  Interoperates
+    with 4.2 UNIX, socket calls.  First released February 1983.
+
+DOCUMENTATION:
+
+       User manuals for MS-DOS
+
+CPU:
+
+       8088 (IBM PC and compatibles),  8086,  80186,  80286,  68000,
+    32000
+
+O/S:
+
+       MS-DOS/PC-DOS
+
+IMPLEMENTATION-LANGUAGE:
+
+       C, runs on system's native C compiler
+
+DISTRIBUTOR:
+
+       Direct Sales:
+       Northwest:  408-996-2056
+       Northeast:  617-229-2570
+       Southwest:  213-394-7200
+       Southeast:  703-525-4141
+
+CONTACT:
+
+       M.K. Graham, Northwest Sales Manager
+
+ORDERING-PROCEDURE:
+
+       See above
+
+PROPRIETY-STATUS:
+
+       Developed by Network Research Corporation
+
+
+
+
+                                   69
+
+
+
+1.13.3. KNET/PC
+PRODUCT-OR-PACKAGE-NAME:    KNET/PC
+
+TYPE:    TCP/IP Implementation
+
+DESCRIPTION:
+
+       This product enables the IBM Personal Computer to participate
+    as host on Ethernet  or  any  network  using  TCP/IP  protocols.
+    Supports  TFTP  and  Telnet.  Requires 128K bytes of memory, one
+    disk drive, mono or color monitor with  80  column  display  and
+    3Com  Etherlink  Control  Board.   Compatible with other systems
+    supporting TCP/IP.
+
+DOCUMENTATION:
+
+       Available from vendor
+
+CPU:
+
+       IBM PC, PC/XT
+
+O/S:
+
+       DOS 2.0, 2.1, 3.0
+
+IMPLEMENTATION-LANGUAGE:
+
+       C, 8086 Assembler
+
+DISTRIBUTOR:
+
+       Spartacus, Inc.
+       5 Oak Park Drive
+       Bedford, MA  01730
+
+CONTACT:
+
+       Patricia E. Lefebvre, 617-275-4220 or 800-LAN-KNET
+
+PROPRIETY-STATUS:
+
+       Source code not available for purchase
+
+
+
+
+
+
+
+
+
+                                   70
+
+
+
+1.13.4. WOLLONGONG-IBM-PC
+PRODUCT-OR-PACKAGE-NAME:   WIN/PC
+
+DESCRIPTION:
+
+       This TCP/IP implementation includes  Telnet  (remote  login),
+    TFTP  (trivial  file  transfer).  Supports the following network
+    interfaces:
+
+       - 3COM Ethernet Controller
+
+DOCUMENTATION:
+
+       Installation Guide and Users Manual
+
+CPU:
+
+       IBM PC, XT, AT, and IBM compatibles
+
+O/S:
+
+       PC-DOS (MS-DOS) 2.0 and greater
+
+IMPLEMENTATION LANGUAGE:
+
+       C
+
+DISTRIBUTOR:
+
+       The Wollongong Group
+       1129 San Antonio Road
+       Palo Alto, CA 94303
+
+CONTACT:
+
+       Wollongong Sales
+       415-962-7200
+
+ORDERING PROCEDURE:
+
+       Available with support from The Wollongong Group
+
+PROPRIETY STATUS:
+
+       Wollongong
+
+
+
+
+
+
+
+                                   71
+
+
+
+1.13.5. IBM-VM
+PRODUCT-OR-PACKAGE-NAME:   IBM VM
+
+TYPE:   TCP/IP Implementation
+
+DESCRIPTION:
+
+       The VM software is written almost entirely in Pascal, with  a
+    small amount of assembler-language support.  Some assembler code
+    running on the Series/1 interfaces with the X.25 code, which  is
+    a  standard IBM product.  Standard IBM-released software is used
+    throughout.
+
+       TCP/IP runs  in  a  separate  disconnected  virtual  machine.
+    Similarly, user SMTP, server SMTP, server FTP, and server Telnet
+    each occupies a dedicated virtual machine.  User  FTP  and  user
+    Telnet   run   within   a  user's  virtual  machine  under  CMS.
+    Communication between virtual machines is done through  the  IBM
+    Virtual  Machine  Communication  Facility  (VMCF).    A detailed
+    preliminary design document is available by  contacting  one  of
+    the  individuals listed below.  (Some details have changed since
+    it was written, but it is still mostly accurate.)
+
+       A Pronet driver has been implemented to enable the IP/TCP  to
+    use  the  PRONET  10  megabit/sec  token ring LAN.  The hardware
+    interface is via a DACU (Device Access Control Unit) provided by
+    IBM.    The  DACU enables connection of UNIBUS devices to an IBM
+    channel.  A driver for Ethernet will also be provided.
+
+       Direct connection to a C/30 IMP will  require  implementation
+    of  a  software  driver  in conjunction with a suitable hardware
+    interface (e.g., DACU--LH/DH or Series/1--HDH.)
+
+       The University of  Wisconsin  has  implemented  the  Internet
+    protocols  (FTP/SMTP/Telnet/TCP/IP)  for  IBM  VM  systems under
+    contract with IBM.  In addition, a software interface between IP
+    and  an X.25 implementation running on a Series/1 (RPS operating
+    system) has been completed.  The complete  package  will  enable
+    CSNET IBM VM hosts to connect to the DARPA Internet via TELENET.
+    This product is available on the  commercial  market  for  VM/SP
+    Release 3, Series/1 EDX Version 4, Series/1 RPS Version 5.2.
+
+CPU:
+
+       Will run on any 370 architecture using VM
+
+O/S:
+
+       VM/SP
+
+IMPLEMENTATION-LANGUAGE:
+
+                                   72
+
+
+
+       IBM Pascal and assembler
+
+DISTRIBUTOR:   IBM Corporation
+
+CONTACT:
+
+       If your site is a university:
+
+       Distribution contact:
+       Carl VanWinter
+       IBM Corporation
+       Rochester, MN
+       507-286-3378
+
+       Technical contacts:
+
+       David DeWitt, Larry Landweber, or Marvin Solomon
+       Computer Science Department
+       University of Wisconsin
+       1210 W. Dayton St.
+       Madison, WI 53706
+       608-262-1204
+
+       If your site is not a university:
+
+       IBM Corporation
+       656 Quince Orchard Place
+       Gaithersburg, MD 20878
+       ATTN:  VM Interface Program for TCP/IP Support Group
+       301-921-1931
+
+ORDERING PROCEDURE:
+
+       Contact appropriate IBM location (addresses above)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   73
+
+
+
+1.13.6. [IBM-VM]
+TYPE:    DDN-contracted TCP/IP Implementation
+
+DESCRIPTION:
+
+       This  will  be  a  package  of software and technical support
+    services for interfacing IBM-VM computing  environments  to  the
+    Defense Data Network.  It will be available early 1986.
+
+CPU:
+
+       IBM 370
+
+O/S:
+
+       VM
+
+DISTRIBUTOR:
+
+       IBM Corporation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   74
+
+
+
+1.13.7. KNET/VM
+PRODUCT-OR-PACKAGE-NAME:   KNET/VM
+
+TYPE:    Local-Area Network
+
+DESCRIPTION:
+
+       KNET/VM is a TCP/IP-based network software package supporting
+    the Ethernet local-area network, Bisync and CTCA  links.    KNET
+    conforms  to  the  ISO/OSI  Reference  Model for layered network
+    architecture and runs as an application on the mainframe.   (See
+    also "Spartacus, K200" described in the Hardware Section of this
+    document.)
+
+       Services supported include client and server  Telnet,  client
+    and  server  FTP,  client  and  server  TFTP.    An  application
+    interface to TCP virtual circuits and UDP datagram  circuits  is
+    also  available.    In addition, the following small servers are
+    available for UDP: time, discard, echo, name, and quote  of  the
+    day.    Support  for  TCP  echo  and  discard  services  is also
+    provided.  Telnet access to all VM services is provided via 3270
+    emulation.    Support is provided under FTP for both binary mode
+    and for NETASCII.  Automatic data conversion  to/from  ASCII  to
+    EBCDIC is supported.  No modification of VM/SP is required.  All
+    services run either under CMS or as  a  guest  operating  system
+    under CP.
+
+DOCUMENTATION:
+
+       Available from vendor
+
+CPU:
+
+       IBM 370 class or equivalent
+
+O/S:
+
+       VM/SP Rel 2 or later (MVS in development)
+
+IMPLEMENTATION-LANGUAGE:
+
+       Assembler and C
+
+DISTRIBUTOR:
+
+       Spartacus, Inc.
+       5 Oak Park Drive
+       Bedford, MA  01730
+
+CONTACT:
+
+       Patricia E. Lefebvre, 617-275-4220 or 800-LAN-KNET
+                                   75
+
+
+
+PROPRIETY-STATUS:
+
+       Source code not available for purchase
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   76
+
+
+
+1.13.8. IBM-UNIX
+PRODUCT-OR-PACKAGE-NAME:   IBM-FED-SYS
+
+TYPE:   front-end interface
+
+DESCRIPTION:
+
+       IBM  Fed  Sys  Division  is  working  on  a  Series 1 FEP for
+    interface to the DDN/ARPANET.  That  box  will  be  based  on  a
+    Series  1  that was done for USA DARCOM by Channel Systems, Inc.
+    as a sub to IBM.  The Channel Systems box was acquired to attach
+    to the IBM I/O channel to provide the host an HDH/HDLC interface
+    to a remote IMP.
+
+       McKay is expanding the DARCOM box to run IBM  UNIX  and  will
+    then migrate an existing UNIX-based TCP/IP to it.  The resulting
+    FEP would allow the host to implement FTP, Telnet and  Mail  and
+    rely  on  the  Series  1  for  TCP/IP and connection to the net.
+    There  are  some  efforts  to  pick  up   the   completed   UCLA
+    implementation  and  support  it  as  a  complete  package or as
+    host-based FTP, Mail and Telnet for use with the Series 1 FEP.
+
+O/S:
+
+       IBM UNIX
+
+DISTRIBUTOR:
+
+       IBM Federal Systems Division
+
+CONTACT:
+
+       Doug McKay, 301-921-1914
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   77
+
+
+
+1.13.9. [IBM-MVS-LAN]
+PRODUCT-OR-PACKAGE-NAME:    TCP/IP compatible Virtual Transport System
+
+TYPE:    Local-Area Network
+
+DESCRIPTION:
+
+       This is a high performance LAN (25  Mbs)  which  will  be  in
+    commercial  production  in  second  quarter, 1985.  This product
+    will be compatible with Internet Systems Corporation's products,
+    which are TCP/IP-based.
+
+CPU:
+
+       IBM
+
+O/S:
+
+       MVS-VM
+
+DISTRIBUTOR:
+
+       Computer Network Technology
+       9440 Science Center Drive
+       New Hope, MN 55428
+
+CONTACT:
+
+       Bob Lutnicki, 800-638-8324
+
+ORDERING-PROCEDURE:
+
+       Call for information
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   78
+
+
+
+1.13.10. UCLA-IBM/MVS
+PRODUCT-OR-PACKAGE-NAME:   UCLA ACP
+
+TYPE:   TCP/IP Implementation
+
+DESCRIPTION:
+
+       This  is  an  IP/TCP implementation for IBM 370 under OS/MVS.
+    Original development and current  enhancements  to  TCP/IP  were
+    funded  by  DARPA.    The  complete package is known as "ARPANET
+    Control Program" or ACP and was developed from UCLA NCP for  the
+    360/91 in 1969.
+
+       1. IMP Interface Hardware:  ACC-IF-IMP/370 interface, or IBM
+          Series 1 with Channel Systems  IMP  Interface  Card  (see
+          IBM-FED-SYS).
+
+       2. Installation:    Requires  no  system  modifications  for
+          installation.  The ACP operates as a user job,  but  must
+          be  declared  non-swappable and occupy a high performance
+          group to OS/MVS.  Uses ACF/VTAM for virtual terminals and
+          IPC.
+
+       3. IP Protocol Implementation:
+
+             - Fragmentation/reassembly:  performs reassembly. Does
+               not fragment, assuming  that  higher-level  protocol
+               (TCP)  will  create  suitable  size  segments during
+               packetizing.
+
+             - Options:  implements  source  routing  (strict   and
+               loose).  Other options are accepted but ignored.
+
+             - Identifier     selection:    uses    globally-unique
+               identifiers for transmitted segments, independent of
+               destination.
+
+             - Reassembly  timeout:  fixed  value  (30-60 seconds),
+               independent of  time-to-live  field.    Packets  are
+               discarded if time-to-live field is zero.
+
+             - Gateway  functions:    Uses  preset table of "smart"
+               gateways,  expects  Redirects  to  correct   choice.
+               However,  uses  gateway  from which first packet was
+               received (for remotely-initiated association).
+
+             - ICMP: Fully supported (except Time Stamps  and  Info
+               Req.)
+
+       4. TCP Protocol Implementation:
+
+             - Precedence, security fields: not set or tested.
+                                   79
+
+
+
+             - TCP  Options:   May send max packet size option, and
+               can receive it.
+
+             - Urgent: may be sent and received by user process.
+
+             - Push: may be sent or received by user process.
+
+             - Retransmission:   successive   retransmissions   use
+               exponential  backoff.  Base time is 2 times observed
+               exponentially weighted round-trip time.   Round-trip
+               time  is  measured as initial packet transmission to
+               complete  acknowledgment.  Retransmits  slowly  into
+               zero window.
+
+             - Initial Sequence Number: derived from system clock.
+
+             - Window  strategy:  uses conservative strategy, never
+               advertising a receive window larger than  the  space
+               available in the circular buffer.
+
+             - ACK  generation:  always  sends <ACK> in response to
+               receipt of a non-empty  packet.    As  user  process
+               removes  bytes  from  buffer,  optimizing  algorithm
+               determines when to generate <ACK> to  inform  sender
+               of larger window.
+
+       5. UDP:    UDP is implemented.
+
+       6. User-Level  Protocols:   User and Server Telnet, User and
+          Server FTP.  Server Telnet access to  TSO  or  any  other
+          VTAM  application that handles 3767 line terminals.  STMP
+          will be implemented in the future.
+
+       7. Packet  tracing,  Debugging,  and   Monitoring   Features
+          Extensive.
+
+DOCUMENTATION:
+
+       Considerable  documentation  comes  with  sources.    Current
+    documentation  and  update  news  available  for  FTP  over  the
+    network.
+
+CPU:
+
+       Any machine with 370 architecture
+
+O/S:
+
+       OS/MVS with ACF/VTAM
+
+IMPLEMENTATION-LANGUAGE:
+
+                                   80
+
+
+
+       Assembler H (User FTP and User Telnet mostly PL/1)
+
+DISTRIBUTOR:
+
+       Office of Academic Computing
+       MS 5628
+       UCLA
+       Los Angeles, CA 90024
+
+CONTACT:
+
+       Bob Braden, (BRADEN@USC-ISI.ARPA), 213-825-7518
+
+ORDERING-PROCEDURE:
+
+       Contact Bob Braden
+
+PROPRIETY-STATUS:
+
+       Public domain
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   81
+
+
+
+1.13.11. [IBM-MVS]
+TYPE:    DDN-contracted TCP/IP Implementation
+
+DESCRIPTION:
+
+       This  will  be  a  package  of software and technical support
+    services for interfacing IBM-MVS computing environments  to  the
+    Defense Data Network.
+
+       Initial  release  is  scheduled  for the 2nd quarter of 1985.
+    This work is being  developed  from  the  UCLA  ARPANET  Control
+    Program Release 1.50.
+
+DOCUMENTATION:
+
+       A product description document is available
+
+CPU:
+
+       IBM S/370, 43xx, 303x, 308x, and PCMs
+
+O/S:
+
+       MVS/SP Version 1 with ACF/VTAM Release 1.3
+
+IMPLEMENTATION-LANGUAGE:
+
+       BAL
+
+DISTRIBUTOR:
+
+       Network Solutions, Inc.
+       7926 Jones Branch Drive, Suite 1010
+       McLean, Virginia  22102
+
+CONTACT:
+
+       Will McDuffie, (ns-ddn@DDN2.ARPA), 703-356-1411
+
+ORDERING-PROCEDURE:
+
+       To be determined
+
+PROPRIETY-STATUS:
+
+       Modifications to UCLA ACP are copyrighted
+
+
+
+
+
+
+                                   82
+
+
+
+1.13.12. [IBM-MVS/HYPERLINK]
+PRODUCT-OR-PACKAGE-NAME:   Hyperlink/DDN Software
+
+TYPE:    TCP/IP/X.25 Implementation
+
+DESCRIPTION:
+
+       Hyperlink/DDN  is  being  implemented  in accordance with the
+    ARPANET Upper Layer Protocols (presentation/application layers),
+    Transmission  Control  Protocol  (session/transport layers), and
+    Internet Protocol  (network  layer  functions  for  internetwork
+    communications).   The software includes the host driver (either
+    with Ethernet or Hyperchannel connections), transmission control
+    protocol,   internet   protocol,   network   administrator   and
+    application  software.    Applications  include  file  transfer,
+    electronic mail and Telnet.
+
+       Hyperlink/DDN  integrates ARPANET's packet switching protocol
+    standards  with  Internet  Systems   Corporation's   proprietary
+    Ethernet-based  hardware  connection  devices  or  with  Network
+    Systems  Corporation's  HYPERchannel  connection   devices   for
+    complete  connections between LANs and/or long-haul networks.  A
+    product option is available which provides an  LSI  11/73  based
+    host  front-end  processor  which  will  contain  the TCP and IP
+    layers and an X.25  communications  subsystem.    Internet  also
+    offers  high  speed  local-area  network  solutions  for non-DDN
+    requirements which can be integrated with DDN offerings.
+
+DOCUMENTATION:
+
+       A full set of documentation is in process
+
+CPU:
+
+       IBM
+
+O/S:
+
+       IBM/MVS
+
+IMPLEMENTATION-LANGUAGE:
+
+       C or Pascal
+
+DISTRIBUTOR:
+
+       Internet Systems Corporation
+       8360 Oakland Park Blvd.
+       Sunrise, Florida  33321
+
+CONTACT:
+
+                                   83
+
+
+
+       Kerry A. Hartley, Director of Sales
+       313-357-1370
+       Jerry Lieberman, Product Marketing Manager
+       305-742-0301
+
+ORDERING-PROCEDURE:
+
+       See above contacts
+
+PROPRIETY-STATUS:
+
+       Product of Internet Systems Corporation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   84
+
+
+
+1.14. LISP MACHINE
+
+
+
+1.14.1. [LMI]
+PRODUCT-OR-PACKAGE-NAME:    LMI TCP/IP
+
+DESCRIPTION:
+
+       An Exelan-Exos-101/200  series  network  front-end  processor
+    residing on the Multibus of an LMI-Lambda family multi-processor
+    computer provides  TCP  and  UDP  services  to  the  application
+    programs;  TELNET, FTP, IMAGEN and others.  The applications are
+    integrated into the generic  device,  pathname,  filesystem,  or
+    network systems of the operating system, wherever applicable for
+    transparent and automatic usage.    The  UNIX  operating  system
+    support  provided by Excelan for the front-end is also available
+    and runs concurrently on a 68010 processor.
+
+DOCUMENTATION:
+
+       Available from vendor
+
+CPU:
+
+       LMI  Lambda  under   the   ZetaLisp-Plus   operating   system
+    concurrently with a 68010 under the UNIX operating system
+
+O/S:
+
+       ZetaLisp-Plus Release 2.0 or later, UNIX System V
+
+IMPLEMENTATION-LANGUAGE:
+
+       Lisp, C
+
+DISTRIBUTOR:
+
+       Lisp Machine, Inc.
+       1000 Massachusetts Avenue
+       Cambridge, MA 02138
+
+CONTACT:
+
+       Local  LMI  Sales Office or LMI, Inc. (Sales: Alison Woodman)
+    (617) 876-6819
+
+ORDERING-PROCEDURE:
+
+       Contact LMI Marketing
+
+PROPRIETY-STATUS:
+                                   85
+
+
+
+       Proprietary product of Lisp Machine, Inc.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   86
+
+
+
+1.15. PERKIN-ELMER
+
+
+
+1.15.1. [PERKIN-ELMER/HYPERLINK]
+PRODUCT-OR-PACKAGE-NAME:   Hyperlink/DDN Software
+
+TYPE:    TCP/IP/X.25 Implementation
+
+DESCRIPTION:
+
+       Hyperlink/DDN is being implemented  in  accordance  with  the
+    ARPANET Upper Layer Protocols (presentation/application layers),
+    Transmission Control Protocol  (session/transport  layers),  and
+    Internet  Protocol  (network  layer  functions  for internetwork
+    communications).  The software includes the host driver  (either
+    with Ethernet or Hyperchannel connections), transmission control
+    protocol,   internet   protocol,   network   administrator   and
+    application  software.    Applications  include  file  transfer,
+    electronic mail and Telnet.
+
+       Hyperlink/DDN integrates ARPANET's packet switching  protocol
+    standards   with   Internet  Systems  Corporation's  proprietary
+    Ethernet-based  hardware  connection  devices  or  with  Network
+    Systems   Corporation's   HYPERchannel  connection  devices  for
+    complete connections between LANs and/or long-haul networks.   A
+    product  option  is  available which provides an LSI 11/73 based
+    host front-end processor which  will  contain  the  TCP  and  IP
+    layers  and  an  X.25  communications  subsystem.  Internet also
+    offers high  speed  local-area  network  solutions  for  non-DDN
+    requirements which can be integrated with DDN offerings.
+
+DOCUMENTATION:
+
+       A full set of documentation is in process
+
+CPU:
+
+       Perkin-Elmer
+
+O/S:
+
+       Perkin-Elmer OS/32
+
+IMPLEMENTATION-LANGUAGE:
+
+       C or Pascal
+
+DISTRIBUTOR:
+
+       Internet Systems Corporation
+       8360 Oakland Park Blvd.
+                                   87
+
+
+
+       Sunrise, Florida  33321
+
+CONTACT:
+
+       Kerry A. Hartley, Director of Sales
+       313-357-1370
+       Jerry Lieberman, Product Marketing Manager
+       305-742-0301
+
+ORDERING-PROCEDURE:
+
+       See above contacts
+
+PROPRIETY-STATUS:    Product of Internet Systems Corporation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   88
+
+
+
+1.16. PRIME
+
+
+
+1.16.1. [PRIME]
+PRODUCT-OR-PACKAGE-NAME:    TCP/IP
+
+TYPE:    TCP/IP/X.25 implementation
+
+DESCRIPTION:
+
+       This  implementation  will  run  on  top  of  X.25  and  will
+    implement Mail, FTP and Telnet.  It will be available the end of
+    May 1985.
+
+DOCUMENTATION:
+
+       Will be available
+
+CPU:
+
+       All PRIME computers
+
+O/S:
+
+       PRIMOS
+
+IMPLEMENTATION-LANGUAGE:
+
+       Utilities in C; other code in PRIME's PLP
+
+DISTRIBUTOR:
+
+       PRIME Computer
+       Custom Systems Group
+       500 Old Connecticut Path
+       Framingham, MA 01701
+
+CONTACT:
+
+       Customs Systems Group, 617-879-2960 ext. 3869
+
+PROPRIETY-STATUS:
+
+       Product of PRIME
+
+
+
+
+
+
+
+                                   89
+
+
+
+1.17. RIDGE
+
+
+
+1.17.1. RIDGE
+PRODUCT NAME:   Ridge TCP/IP
+
+TYPE:    TCP/IP Implementation
+
+DESCRIPTION:
+
+       This  product  is based on the 4.2 BSD release which includes
+    Telnet, FTP and the 4.2 programs--rlogin, rcp, rsh, ruptime  and
+    rwho.    In addition, the CMU packet filter for Ethernet is also
+    part of the release.
+
+DOCUMENTATION:
+
+       Available
+
+CPU:
+
+       Ridge 32c, Ridge 32s
+
+O/S:
+
+       ROS 3.2
+
+IMPLEMENTATION-LANGUAGE:
+
+       C
+
+DISTRIBUTOR:
+
+       Ridge Computers
+       2451 Mission College Blvd.
+       Santa Clara, CA 95054
+
+CONTACT:
+
+       Harry   Taxin,   Vice   President,   Marketing   and   Sales,
+    408-986-8500
+
+ORDERING-PROCEDURE:
+
+       Call or write for information
+
+
+
+
+
+
+                                   90
+
+
+
+1.18. SYSTEM DEVELOPMENT CORPORATION
+
+
+
+1.18.1. v SDC
+PRODUCT-OR-PACKAGE-NAME:   SDC
+
+TYPE:   TCP/IP implementation
+
+DESCRIPTION:
+
+       SDC's implementation is part of their overall LAN product and
+    is designed to run in a variety of configurations,  particularly
+    as  a  host  NFE  resident  package  using  an 0586 (8086)-based
+    operating system.  IP provides services to the  TCP  module  and
+    depends  on  services  of  the  lower  layer protocols.  ICMP is
+    implemented as an integral part of this IP.
+
+       The TCP is designed to support a wide range of ULPs and  uses
+    a  PAR  mechanism.  Transmission timeout is dynamically adjusted
+    to approximate the segment round-trip time  plus  a  factor  for
+    internal   processing.      TCP  uses  checksum  and  sequencing
+    mechanisms  as  well  as  variable  windowing   for   acceptable
+    sequences.  As data is accepted, TCP slides the window upward in
+    sequence number space with every segment.  TCP  also  employs  a
+    multiplexing  mechanism  for  multiple ULPS within a single host
+    and multiple processes in a ULP to use TCP simultaneously.
+
+       The product is  fully  supported  and  documented  from  site
+    planning  and  preparation  to post-installation maintenance and
+    technical support.
+
+DOCUMENTATION:
+
+       Available through SDC
+
+O/S:
+
+       0586 (8086)-based
+
+DISTRIBUTOR:
+
+       System Development Corporation (SDC)
+       7929 Westpark Drive
+       McLean, VA 22102
+
+CONTACT:
+
+       Bob Miller, 703-790-9850, ext. 292
+
+
+
+                                   91
+
+
+
+1.19. SPERRY-UNIVAC
+
+
+
+1.19.1. SPERRY-UNIVAC
+PRODUCT-OR-PACKAGE-NAME:   SPERRY-UNIVAC
+
+TYPE:   TCP/IP implementation
+
+DESCRIPTION:
+
+       The  University  of  Maryland  Computer  Science  Center  has
+    implemented  TCP/IP  for  the  SPERRY 1100/60/70/80/90 machines.
+    The implementation supports IP, ICMP,  TCP,  SMTP,  and  Telnet.
+    The  link  layer  connection is made via the DCNET local-network
+    protocol.   The  IP  level  conforms  to  RFC791,  and  supports
+    reassembly   and   extended  addressing.    ICMP  functions  are
+    implemented  per  RFC792  and  support  destination-unreachable,
+    redirects,  echo and timestamps.  The TCP conforms to the RFC793
+    except that security, precedence and URGENT have  not  yet  been
+    implemented.  An STMP server is also supplied.
+
+DOCUMENTATION:
+
+       User and internals documents are included with distribution
+
+CPU:
+
+       SPERRY 1100/60, 1100/70, 1100/80, 1100/90
+
+O/S:
+
+       OS1100 (Level 37R2C or later)
+
+IMPLEMENTATION-LANGUAGE:
+
+       MASM and PLUS 5R1 or later
+
+DISTRIBUTOR:
+
+       University of Maryland
+       Computer Science Center - Systems Programming
+       College Park, MD 20742
+
+CONTACT:
+
+       Mike Petry, (PETRY@UMD-UNIVAC.ARPA)
+       Louis Mamakos, (LOUIE@UMD-UNIVAC.ARPA)
+       301-454-2946
+
+ORDERING-PROCEDURE:
+
+                                   92
+
+
+
+       Contact above-named individuals for current procedure
+
+PROPRIETY-STATUS:
+
+       Public domain (at this time)
+
+HOSTS:
+
+       UMD-UNIVAC [128.8.0.8], UMD-UNIVAC-TEST [128.8.0.7]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   93
+
+
+
+1.19.2. v SPERRY-1100
+PRODUCT-OR-PACKAGE-NAME:   SPERRY-1100
+
+TYPE:   TCP/IP/X.25 implementation
+
+DESCRIPTION:
+
+       The   following   DDN   protocols   are   supported  in  this
+    implementation: IP,  ICMP,  TCP,  Telnet,  FTP  and  SMTP.    In
+    addition,  X.25  and  HDLC  Distant Host are supported.  FTP and
+    SMTP are implemented within DDP in the 1100  host.    All  other
+    protocols   are   implemented   within  TELCON.    Two  hardware
+    configurations are required as a minimum  at  each  Series  1100
+    host  location: an 1100/60, 1100/70, 1100/80 or 1100/90 computer
+    and a Distributed Communications Processor (DCP/40  or  DCP/10A)
+    as  a  front-end.    The  DCP's may also be configured as remote
+    concentrators to provide remote terminal access to DDN hosts.  A
+    medium  or high-speed loadable line module configured to support
+    bit-synchronous communications protocols is required in the  DCP
+    to support the HDLC interface.
+
+       Full   interoperability   of   the   X.25   interface   as  a
+    heterogeneous DDN host is targeted for July 1985.
+
+DOCUMENTATION:
+
+       Available from vendor
+
+CPU:
+
+       Sperry 1100 60/70/80/90 and Sperry DCP 40/10A
+
+O/S:
+
+       OS 1100; TELCON
+
+IMPLEMENTATION-LANGUAGE:
+
+       PLUS for 1100 software; TELCON assembler for DCP
+
+DISTRIBUTOR:
+
+       Sperry Corporation
+       8008 Westpark Drive
+       McLean, VA 22102
+
+CONTACT:
+
+       Technical:
+       Dale Pluta
+       703-749-6727
+
+                                   94
+
+
+
+       Sales:
+       John Flynn
+       703-749-6701
+
+ORDERING-PROCEDURE:
+
+       Vendor restricted distribution; contact sales rep.
+
+PROPRIETY-STATUS:
+
+       Proprietary product of Sperry
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   95
+
+
+
+1.19.3. [SPERRY/HYPERLINK]
+PRODUCT-OR-PACKAGE-NAME:   Hyperlink/DDN Software
+
+TYPE:    DDN-contracted TCP/IP/X.25 Implementation
+
+DESCRIPTION:
+
+       This will be a package  of  software  and  technical  support
+    services  for  interfacing  Sperry computing environments to the
+    Defense Data Network.
+
+       Hyperlink/DDN is being implemented  in  accordance  with  the
+    ARPANET Upper Layer Protocols (presentation/application layers),
+    Transmission Control Protocol  (session/transport  layers),  and
+    Internet  Protocol  (network  layer  functions  for internetwork
+    communications).  The software includes the host driver  (either
+    with Ethernet or Hyperchannel connections), transmission control
+    protocol,   internet   protocol,   network   administrator   and
+    application  software.    Applications  include  file  transfer,
+    electronic mail and Telnet.
+
+       Hyperlink/DDN integrates ARPANET's packet switching  protocol
+    standards   with   Internet  Systems  Corporation's  proprietary
+    Ethernet-based  hardware  connection  devices  or  with  Network
+    Systems   Corporation's   HYPERchannel  connection  devices  for
+    complete connections between LANs and/or long-haul networks.   A
+    product  option  is  available which provides an LSI 11/73 based
+    host front-end processor which  will  contain  the  TCP  and  IP
+    layers  and  an  X.25  communications  subsystem.  Internet also
+    offers high  speed  local-area  network  solutions  for  non-DDN
+    requirements which can be integrated with DDN offerings.
+
+DOCUMENTATION:
+
+       A full set of documentation is in process
+
+CPU:
+
+       Sperry
+
+O/S:
+
+       Sperry OS1100
+
+IMPLEMENTATION-LANGUAGE:
+
+       C or Pascal
+
+DISTRIBUTOR:
+
+       Internet Systems Corporation
+       8360 Oakland Park Blvd.
+                                   96
+
+
+
+       Sunrise, Florida  33321
+
+CONTACT:
+
+       Kerry A. Hartley, Director of Sales
+       313-357-1370
+       Jerry Lieberman, Product Marketing Manager
+       305-742-0301
+
+ORDERING-PROCEDURE:
+
+       See above contacts
+
+PROPRIETY-STATUS:
+
+       Product of Internet Systems Corporation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   97
+
+
+
+1.20. SUN MICROSYSTEMS
+
+
+
+1.20.1. SUN-68000
+PRODUCT-OR-PACKAGE-NAME:   SUN-Workstation
+
+TYPE:   TCP/IP Implementation
+
+DESCRIPTION:
+
+       The  SUN  workstation  was  originally  designed  by Stanford
+    University and is  now  a  commercial  computer  product.    The
+    workstation uses the Motorola 68010 virtual memory processor and
+    runs 4.2 BSD VMUNIX.  The 4.2 BSD TCP/IP protocols are  used  in
+    conjunction  with a 10 mb Ethernet local-area network.  Although
+    not  currently  configured,  an  1822  interface  would  not  be
+    difficult  to  add.    In  addition  to  the  standard  internet
+    protocols, SUN supports the same services as  the  4.2  BSD  VAX
+    UNIX  network software: RLOGIN, RSH, RWHO, RUPTIME, DSH, ROUTED,
+    REXECD, COURIER.
+
+       SUN is also developing new services and protocols to  enhance
+    throughput  and  utility,  such as a net disk/file protocol that
+    allows workstations to run UNIX without a local disk.
+
+DOCUMENTATION:
+
+       Available from vendor
+
+CPU:
+
+       68010
+
+O/S:
+
+       UNIX, Berkeley 4.2 BSD
+
+IMPLEMENTATION-LANGUAGE:
+
+       C
+
+DISTRIBUTOR:
+
+       SUN Microsystems, Inc.
+       2550 Garcia Avenue
+       Mountain View, CA 94043
+
+CONTACT:
+
+       Sales and Technical:
+       John Gage or Marlene Martin
+                                   98
+
+
+
+       (Via uucp: sun!name@BERKELEY.ARPA)
+       415-960-1300
+
+ORDERING-PROCEDURE:
+
+       Available from vendor
+
+PROPRIETY-STATUS:
+
+       (Most) network  source  code  will  be  available  for  those
+    desiring to add device drivers and net utilities
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   99
+
+
+
+1.21. SYMBOLICS
+
+
+
+1.21.1. v SYMBOLICS
+PRODUCT-OR-PACKAGE-NAME:   Symbolics TCP/IP
+
+TYPE:    TCP/IP Implementation
+
+DESCRIPTION:
+
+       An   implementation  of  the  Internet  protocol  family  for
+    Symbolics Lisp Machines  running  release  5  or  later.    This
+    includes  IP,  ICMP,  TCP,  and  UDP.    Higher  level protocols
+    supported include Telnet, SUPDUP, FTP, SMTP and TFTP. TCP/IP  is
+    completely integrated in the Lisp Machine generic network system
+    and will be used by the system automatically whenever necessary.
+
+DOCUMENTATION:
+
+       Use of the generic network system is documented  in  standard
+    manuals
+
+CPU:
+
+       Symbolics Lisp Machine (3600, 3640 and 3670)
+
+O/S:
+
+       Symbolics Lisp System (Release 5 or later)
+
+IMPLEMENTATION-LANGUAGE:
+
+       Lisp Machine LISP
+
+DISTRIBUTOR:
+
+       Symbolics, Inc.
+       4 Cambridge Center
+       Cambridge, MA 02142
+
+CONTACT:
+
+       Local  Symbolics  sales  office  or  Symbolics, Inc. (Sales),
+    617-576-2600
+
+ORDERING-PROCEDURE:
+
+       Contact Symbolics Marketing
+
+PROPRIETY-STATUS:
+
+                                  100
+
+
+
+       Proprietary product of Symbolics, Inc.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  101
+
+
+
+1.22. TANDEM
+
+
+
+1.22.1. [TANDEM]
+TYPE:   TCP/IP Implementation, specifically 1822/HDH Interface
+
+DESCRIPTION:
+
+       Will be available in Spring, 1985 subject to availability  of
+    testing facilities.
+
+DOCUMENTATION:
+
+       A user manual will be available when product is released
+
+CPU:
+
+       Tandem NonStop II and Txp Processors
+
+O/S:
+
+       Guardian
+
+IMPLEMENTATION-LANGUAGE:
+
+       TAL
+
+DISTRIBUTOR:
+
+       Tandem Computers
+       2550 Walsh Avenue
+       Santa Clara, CA 95051
+
+CONTACT:
+
+       Michael Choi, 408-748-2666
+
+ORDERING-PROCEDURE:
+
+       Contact Tandem
+
+PROPRIETY-STATUS:
+
+       Tandem proprietary product
+
+
+
+
+
+
+
+                                  102
+
+
+
+1.23. MULTIPLE-MACHINE IMPLEMENTATIONS
+
+
+
+1.23.1. v EXCELAN-EXOS-8010
+PRODUCT-OR-PACKAGE-NAME:    EXOS 8010
+
+TYPE:    TCP/IP Implementation
+
+DESCRIPTION:
+
+       The  EXOS  8010 Protocol Package consists of two parts.  One,
+    the TCP/IP protocol module, is downloaded to  any  of  Excelan's
+    EXOS  101 or EXOS 200 series Ethernet Front-End Processor boards
+    (described  separately-see  the   Hardware   Section   of   this
+    document.)    Running  this  code,  the  front-end then provides
+    TCP,UDP, and IP services to  the  host  system.    The  protocol
+    module is supplied in object form.  It can be used with any host
+    system, and is independent of  operating  system  design.    The
+    second  part  of  the EXOS 8010 product consists of I/O drivers,
+    libraries, and  utilities  which  can  be  integrated  with  any
+    version  of  the  UNIX  operating system.  These emulate the BSD
+    network interface model, and include applications such  as  FTP,
+    rlogin, rsh, rcp, and mail.
+
+DOCUMENTATION:
+
+       Available from Excelan
+
+CPU:
+
+       Any
+
+O/S:
+
+       Any
+
+IMPLEMENTATION-LANGUAGE:
+
+       C language
+
+DISTRIBUTOR:
+
+       Excelan
+       2180 Fortune Drive
+       San Jose, CA  95131
+
+CONTACT:
+
+       Sue Johnson or Denise Bielan, 408-945-9526
+
+ORDERING-PROCEDURE:
+                                  103
+
+
+
+       Contact Excelan
+
+PROPRIETY-STATUS:
+
+       Excelan Product
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  104
+
+
+
+1.23.2. FUSION
+PRODUCT-OR-PACKAGE-NAME:    FUSION
+
+TYPE:    TCP/IP Implementation
+
+DESCRIPTION:
+
+       Network  software for Ethernet, Pronet, Omninet.  Runs TCP/IP
+    and/or XNS protocols.  Provides file  transfer  (FTP/send,recv),
+    virtual  terminal  (Telnet),  network management.  Interoperates
+    with 4.2 UNIX, socket calls.  First released February 1983.
+
+DOCUMENTATION:
+
+       User manuals for UNIX
+
+CPU:
+
+       8088 (IBM PC and compatibles),  8086,  80186,  80286,  68000,
+    32000, PDP-11, VAX, Rainbow, DEC Pros
+
+O/S:
+
+       UNIX:  4.1, 4.2, System 3, Version 7, System V, Xenix, Venix,
+    PC-IX
+
+IMPLEMENTATION-LANGUAGE:
+
+       C, runs on system's native C compiler
+
+DISTRIBUTOR:
+
+       Direct Sales:
+       Northwest:  408-996-2056
+       Northeast:  617-229-2570
+       Southwest:  213-394-7200
+       Southeast:  703-525-4141
+
+CONTACT:
+
+       M.K. Graham, Northwest Sales Manager
+
+ORDERING-PROCEDURE:
+
+       See above
+
+PROPRIETY-STATUS:
+
+       Developed by Network Research Corporation
+
+
+
+                                  105
+
+
+
+1.23.3. UNISOFT
+PRODUCT-OR-PACKAGE-NAME:   B-NET
+
+TYPE:   TCP/IP Implementation
+
+DESCRIPTION:
+
+       The UNIPLUS+ networking software which  offers  multiple  and
+    interactive  links  between UNIPLUS+ based systems (68000-based)
+    and other computers running TCP/IP compatible  protocols.    The
+    interconnected  systems  may  use  a  variety of physical layers
+    including  Ethernet  LAN  products  and  may  be  geographically
+    distributed   or   physically   adjacent   to  one  another  and
+    interconnected in a variety of topologies.
+
+       B-NET  features  include:  process-to-process  communication,
+    remote  file  transfer,  virtual  terminal  facilities, datagram
+    service, electronic mail, automatic  route-through,  flexibility
+    for  adding additional network drivers, and access to all levels
+    of protocols.
+
+       This software is basically an enhanced version of  Berkeley's
+    4.2 UNIX.
+
+DOCUMENTATION:
+
+       Available through vendor
+
+CPU:
+
+       68000-based systems
+
+O/S:
+
+       UNISOFT UNIX (Berkeley's 4.2 with enhancements)
+
+IMPLEMENTATION-LANGUAGE:
+
+       C
+
+DISTRIBUTOR:
+
+       Unisoft Systems
+       2405 Fourth Street
+       Berkeley, CA 94710
+
+CONTACT:
+
+       Bill Northlich, 415-644-1230
+
+
+
+                                  106
+
+
+
+2. TCP/IP HARDWARE IMPLEMENTATIONS
+
+2.1. ADVANCED COMPUTER COMMUNICATIONS
+
+
+
+2.1.1. v ACC-ECU
+PRODUCT-OR-PACKAGE-NAME:    ECU-II
+
+TYPE:   Error checking unit
+
+DESCRIPTION:
+
+       The  Error Control Unit provides an error-controlled link for
+    long distance connection of LH-DH/11 to DDN IMPs.  Data transfer
+    between  ECU-II  units  can  take place at 1.5Mb/s when directly
+    connected by a 4-pair low capacitance cable  up  to  914  meters
+    (3000  feet)  in  length.    Lower  rates  can  be  selected  or
+    determined by attached modem types 303, 209, V.35,  or  188-114.
+    Units  are  in pairs, one at each end of the communication link.
+    The data rate is enhanced by elimination of the need  for  inter
+    resource  "handshaking"  on  every  bit  transferred.  The units
+    serve as  store-and-forward  buffers,  receiving  and  buffering
+    resource-generated  data in semi-conductor RAMs, then forwarding
+    it by special protocol  to  the  ECU  near  the  other  resource
+    device.    Since  the  ECUs  have  two separate buffers they are
+    capable  of  simultaneous  receipt  and  transmission  in   each
+    direction.   ECUs are compatible with BBN-1822 or SDLC protocols
+    by direct cable or via modems. Compatible with native mode  C/30
+    IMPs and TCP/IP.
+
+DOCUMENTATION:
+
+       Fully   documented  vendor  product;  descriptive  literature
+    available
+
+DISTRIBUTOR:
+
+       ACC (Advanced Computer Communications)
+       720 Santa Barbara Street
+       Santa Barbara, CA 93101
+
+CONTACT:
+
+       Technical & Sales:
+       Gary Krall, (Gary@ACC.ARPA)
+       DDN Industry Manager
+       805-963-9431
+
+ORDERING-PROCEDURE:
+
+       Vendor product, contact sales rep.
+                                  107
+
+
+
+PROPRIETY-STATUS:
+
+       Proprietary product of ACC
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  108
+
+
+
+2.1.2. v ACC-IF-11Q/1822
+PRODUCT-OR-PACKAGE-NAME:   IF-11Q/1822
+
+TYPE:   Access controller
+
+DESCRIPTION:
+
+       Full-duplex DMA controller used to attach a DEC LSI-11  to  a
+    DDN IMP.  Operates in Local Host or Distant Host modes.  If more
+    than one IMP connection is required, optional XQ/1822 boards can
+    be added.
+
+DOCUMENTATION:
+
+       Fully   documented  vendor  product;  descriptive  literature
+    available
+
+CPU:
+
+       PDP-11/03 and PDP-11/23
+
+DISTRIBUTOR:
+
+       ACC (Advanced Computer Communications)
+       720 Santa Barbara Street
+       Santa Barbara, CA 93101
+
+CONTACT:
+
+       Technical & Sales:
+       Gary Krall, (Gary@ACC.ARPA)
+       DDN Industry Manager
+       805-963-9431
+
+ORDERING-PROCEDURE:
+
+       Vendor product, contact sales rep.
+
+PROPRIETY-STATUS:
+
+       Proprietary product of ACC
+
+
+
+
+
+
+
+
+
+
+
+                                  109
+
+
+
+2.1.3. v ACC-IF-6000/1822
+PRODUCT-OR-PACKAGE-NAME:   IF-6000/1822
+
+TYPE:   Communications interface
+
+DESCRIPTION:
+
+       Communications interface between Honeywell 6000 processor and
+    DDN-compatible  1822 devices.  Operates in Local or Distant Host
+    modes.
+
+DOCUMENTATION:
+
+       Fully  documented  vendor  product;  descriptive   literature
+    available
+
+CPU:
+
+       Honeywell 6000 series
+
+O/S:
+
+       MULTICS
+
+DISTRIBUTOR:
+
+       ACC (Advanced Computer Communications)
+       720 Santa Barbara Street
+       Santa Barbara, CA 93101
+
+CONTACT:
+
+       Technical & Sales:
+       Gary Krall, (Gary@ACC.ARPA)
+       DDN Industry Manager
+       805-963-9431
+
+ORDERING-PROCEDURE:
+
+       Vendor product, contact sales rep.
+
+PROPRIETY-STATUS:
+
+       Proprietary product of ACC
+
+
+
+
+
+
+
+
+                                  110
+
+
+
+2.1.4. v ACC-IF-370/DDN
+PRODUCT-OR-PACKAGE-NAME:    IF-370/DDN
+
+TYPE:    IBM 370 Front-end Processor
+
+DESCRIPTION:
+
+       This  implementation  provides for either X.25 or HDH (1822J)
+    connections to the block  multiplexer  I/O  channel  of  an  IBM
+    370-type system.  It contains firmware necessary to operate X.25
+    or HDH protocols.
+
+CPU:
+
+       Motorola 68000
+
+O/S:
+
+       Peer Processing Executive
+
+IMPLEMENTATION-LANGUAGE:
+
+       C
+
+DISTRIBUTOR:
+
+       ACC (Advanced Computer Communications)
+       720 Santa Barbara Street
+       Santa Barbara, CA 93101
+
+CONTACT:
+
+       Technical & Sales:
+       Gary Krall, (Gary@ACC.ARPA)
+       DDN Industry Manager
+       805-963-9431
+
+ORDERING-PROCEDURE:
+
+       See above
+
+PROPRIETY-STATUS:
+
+       Proprietary product of ACC
+
+
+
+
+
+
+
+
+                                  111
+
+
+
+2.1.5. v ACC-IF-IMP/370
+PRODUCT-OR-PACKAGE-NAME:   IF-IMP/370 (IF-370/1822)
+
+TYPE:   Communications interface
+
+DESCRIPTION:
+
+       Connects an IBM host computer to the DDN. It provides  a  DDN
+    X.25  or  HDH  (1822-J)  access  to  the  DDN  Interface Message
+    Processor  (IMP).    The  IF-370/DDN  attaches  to   the   Block
+    Multiplexer Channel of any IBM 370, 303x, 43xx, or 308x systemn,
+    or to the Block Multiplexer Channel of  plug-compatible  systems
+    produced  by  other  manufacturers (e.g. Amdahl).  Host resident
+    TCP/IP support  for  MVS  systems  to  be  provided  by  Network
+    Solutions.   Communications interface between an IBM-370 Channel
+    (Byte Multiplexer,
+
+DOCUMENTATION:
+
+       Fully  documented  vendor  product;  descriptive   literature
+    available
+
+CPU:
+
+       IBM-370, 43XX, AMDAHL, MAGNASON
+
+O/S:
+
+       MVS
+
+DISTRIBUTOR:
+
+       ACC (Advanced Computer Communications)
+       720 Santa Barbara Street
+       Santa Barbara, CA 93101
+
+CONTACT:
+
+       Technical & Sales:
+       Gary Krall, (Gary@ACC.ARPA)
+       DDN Industry Manager
+       805-963-9431
+
+ORDERING-PROCEDURE:
+
+       Vendor product, contact sales rep.
+
+PROPRIETY-STATUS:
+
+       Proprietary product of ACC
+
+
+                                  112
+
+
+
+2.1.6. v ACC-LH-DH/11
+PRODUCT-OR-PACKAGE-NAME:   LH-DH/11
+
+TYPE:   Access controller
+
+DESCRIPTION:
+
+       The  LH-DH/11  is  a  full-duplex  Direct Memory Access (DMA)
+    controller that attaches to a  DEC  PDP-11  or  VAX  Unibus  and
+    provides  external  communication according to BBN specification
+    No. 1822  (available  from  BBN  or  the  NIC).    By  means  of
+    interchange  of plug-in circuits, the controller can be used for
+    either local host (30' cable limit) or distant host (2000' cable
+    limit) applications.
+
+DOCUMENTATION:
+
+       Fully   documented  vendor  product;  descriptive  literature
+    available
+
+CPU:
+
+       PDP-11, VAX
+
+DISTRIBUTOR:
+
+       ACC (Advanced Computer Communications)
+       720 Santa Barbara Street
+       Santa Barbara, CA 93101
+
+CONTACT:
+
+       Technical & Sales:
+       Gary Krall, (Gary@ACC.ARPA)
+       DDN Industry Manager
+       805-963-9431
+
+ORDERING-PROCEDURE:
+
+       Vendor product, contact sales rep.
+
+PROPRIETY-STATUS:
+
+       Proprietary product of ACC
+
+
+
+
+
+
+
+
+                                  113
+
+
+
+2.1.7. ACC-IF-11/HDH
+PRODUCT-OR-PACKAGE-NAME:    IF-11/HDH (aka ACP 610-H)
+
+TYPE:    Communications interface
+
+DESCRIPTION:
+
+       This is a full-duplex DMA error checking  communication  unit
+    which  attaches  a  PDP-11  or  VAX to a DDN IMP (HDH protocol).
+    This is the preferred C30 IMP connection.  There  are  plans  to
+    support HDH on Wollongong's TCP/IP and Gould Software's ACCESS.
+
+DOCUMENTATION:
+
+       Fully   documented  vendor  product,  descriptive  literature
+    available
+
+CPU:
+
+       PDP-11, VAX
+
+O/S:
+
+       UNIX
+
+DISTRIBUTOR:
+
+       ACC (Advanced Computer Communications)
+       720 Santa Barbara Street
+       Santa Barbara, CA 93101
+
+CONTACT:
+
+       Technical & Sales:
+       Gary Krall, (Gary@ACC.ARPA)
+       DDN Industry Manager
+       805-963-9431
+
+ORDERING-PROCEDURE:
+
+       Vendor product, contact sales rep.
+
+PROPRIETY-STATUS:
+
+       Proprietary product of ACC
+
+
+
+
+
+
+
+                                  114
+
+
+
+2.1.8. ACC-IF-11Q/HDH
+PRODUCT-OR-PACKAGE-NAME:    IF-11Q/HDH
+
+TYPE:    Access controller
+
+DESCRIPTION:
+
+       Full-duplex DMA controller used to attach a DEC LSI-11  to  a
+    DDN  IMP  (HDH  protocol).    If more than one IMP connection is
+    required, optional XQ/HDH boards can be added.
+
+DOCUMENTATION:
+
+       Fully  documented  vendor  product;  descriptive   literature
+    available
+
+CPU:
+
+       PDP-11/03, PDP-11/23
+
+DISTRIBUTOR:
+
+       ACC (Advanced Computer Communications)
+       720 Santa Barbara Street
+       Santa Barbara, CA 93101
+
+CONTACT:
+
+       Technical & Sales:
+       Gary Krall, (Gary@ACC.ARPA)
+       DDN Industry Manager
+       805-963-9431
+
+ORDERING-PROCEDURE:
+
+       Vendor product, contact sales rep.
+
+PROPRIETY-STATUS:
+
+       Proprietary product of ACC
+
+
+
+
+
+
+
+
+
+
+
+
+                                  115
+
+
+
+2.1.9. ACC-M/1822
+PRODUCT-OR-PACKAGE-NAME:    M/1822
+
+TYPE:    Access controller
+
+DESCRIPTION:
+
+       DMA controller used to attach a MULTIBUS system to a DDN IMP.
+    Currently  implemented   on   Sun   and   Pyramid   Technologies
+    workstations.
+
+DOCUMENTATION:
+
+       Fully   documented  vendor  product;  descriptive  literature
+    available
+
+O/S:
+
+       UNIX
+
+DISTRIBUTOR:
+
+       ACC (Advanced Computer Communications)
+       720 Santa Barbara Street
+       Santa Barbara, CA 93101
+
+CONTACT:
+
+       Technical & Sales:
+       Gary Krall, (Gary@ACC.ARPA)
+       DDN Industry Manager
+       805-963-9431
+
+ORDERING-PROCEDURE:
+
+       Vendor product, contact sales rep.
+
+PROPRIETY-STATUS:
+
+       Proprietary product of ACC
+
+
+
+
+
+
+
+
+
+
+
+
+                                  116
+
+
+
+2.1.10. ACC-ACP-625
+PRODUCT-OR-PACKAGE-NAME:    ACC-ACP-625
+
+TYPE:    Communications Interface
+
+DESCRIPTION:
+
+       This is  a  full-duplex  DMA  communication  interface  which
+    attaches a PDP-11 or VAX to a DDN IMP supporting Basic Mode X.25
+    (soon to be certified for Standard Mode  operation).    The  ACC
+    implementation  is in conformance at link level to FED-STD-1041,
+    FIPS-PUB 100 and at packet level  to  DDN  X.25  Host  Interface
+    Specification,  December  1983.    The  product  is supported by
+    Wollongong and by Internet Systems.  There  are  plans  by  Uniq
+    Digital to support the product for PASSAGE.
+
+DOCUMENTATION:
+
+       Fully   documented  vendor  product;  descriptive  literature
+    available
+
+O/S:
+
+       UNIX 4.2 BSD, UNIX System V, VAX/VMS
+
+DISTRIBUTOR:
+
+       ACC (Advanced Computer Communications)
+       720 Santa Barbara Street
+       Santa Barbara, CA 93101
+
+CONTACT:
+
+       Technical & Sales:
+       Gary Krall, (Gary@ACC.ARPA)
+       DDN Industry Manager
+       805-963-9431
+
+ORDERING-PROCEDURE:
+
+       Vendor product, contact sales rep.
+
+PROPRIETY-STATUS:
+
+       Proprietary product of ACC
+
+
+
+
+
+
+
+                                  117
+
+
+
+2.1.11. ACC-V/1822
+PRODUCT-OR-PACKAGE-NAME:    V/1822
+
+TYPE:    Access Controller
+
+DESCRIPTION:
+
+       Attaches the VERSAbus to a DDN IMP.
+
+DOCUMENTATION:
+
+       Descriptive literature available
+
+DISTRIBUTOR:
+
+       ACC (Advanced Computer Communications)
+       720 Santa Barbara Street
+       Santa Barbara, CA 93101
+
+CONTACT:
+
+       Technical & Sales:
+       Gary Krall, (Gary@ACC.ARPA)
+       DDN Industry Manager
+       805-963-9431
+
+ORDERING-PROCEDURE:
+
+       Vendor product, contact sales rep.
+
+PROPRIETY-STATUS:
+
+       Proprietary product of ACC
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  118
+
+
+
+2.2. BOLT, BERANEK AND NEWMAN
+
+
+
+2.2.1. BBN-C/30
+PRODUCT-OR-PACKAGE-NAME:   BBN-C/30
+
+TYPE:   Access controller
+
+DESCRIPTION:
+
+       The Terminal Access Controller (TAC) is a  user  Telnet  host
+    that supports TCP/IP and NCP host-to-host protocols.  It runs in
+    32K H-316 and 64K C/30 computers.  It supports up to 63 terminal
+    ports,  and  connects  to  a network via an 1822 host interface.
+    The TAC TCP/IP conforms with RFC791  and  RFC793  specifications
+    with the following exceptions:
+
+       - IP options are accepted but ignored.
+
+       - All  TCP  options  except  maximum  segment  size  are not
+         accepted.
+
+       - Precedence, security, etc. are  ignored.    The  TAC  also
+         supports  Packet  core,  TAC  Monitoring, Internet Control
+         Message   Protocol   (ICMP),   and   a   subset   of   the
+         Gateway-Gateway protocols.
+
+       For  more  information on the TAC's design, see IEN-166.  All
+    major features have  been  implemented  except  Class  B  and  C
+    addressing,  IP reassembly, and TCP Urgent handling.  These will
+    be done in the near future.
+
+CONTACT:
+
+       Bob Hinden, (Hinden@BBN-UNIX.ARPA), 617-497-3757
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  119
+
+
+
+2.3. BRIDGE COMMUNICATIONS
+
+
+
+2.3.1. v BRIDGE
+PRODUCT NAME:   The Communications Server 1 (CS/1)
+
+TYPE:   Communications server
+
+DESCRIPTION:
+
+       Bridge's  CS/1  server  with  TCP/IP  software  performs  the
+    function  of  a  terminal  or  host  server,  allowing  up to 32
+    asynchronous devices (e.g.  terminals, printers,  computers)  to
+    access host computers that support TCP/IP and are attached to an
+    Ethernet LAN.  The CS/1 also supports the User Datagram Protocol
+    (UDP)  and  the  Ethernet  Address  Resolution  Protocol  (ARP).
+    Bridge Communications also offer gateway servers which interface
+    the CS/1 to X.25 public data networks and the IBM SDLC world.
+
+IMPLEMENTATION-LANGUAGE:
+
+       C
+
+DISTRIBUTOR:
+
+       Bridge Communications Inc.
+       1345 Shorebird Way
+       Mountain View, CA 94043
+
+CONTACT:
+
+       J. Patrick Malone, 415-969-4400
+
+PROPRIETY-STATUS:
+
+       Product of Bridge Communications
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  120
+
+
+
+2.4. EXCELAN
+
+
+
+2.4.1. v EXCELAN-EXOS-101
+PRODUCT-OR-PACKAGE-NAME:   EXOS/101 front-end processor
+
+TYPE:   Ethernet Front-End Processor
+
+DESCRIPTION:
+
+       The  EXOS  101  is  a single Multibus board which includes an
+    8088 CPU, 64 or 128  Kbytes  RAM,  and  an  Ethernet  Data  Link
+    controller.  An EPROM-based operating system kernel manages EXOS
+    resources,  and  provides  a  standard  high-level   programming
+    environment  for protocol code.  TCP/IP protocol code, available
+    separately from Excelan,  can  be  downloaded  to  EXOS  RAM  at
+    start-up time either by the host system, or over the Ethernet.
+
+DOCUMENTATION:
+
+       Available through Excelan
+
+CPU:
+
+       Any
+
+O/S:
+
+       Any
+
+DISTRIBUTOR:
+
+       Excelan
+       2180 Fortune Drive
+       San Jose, CA  95131
+
+CONTACT:
+
+       Sue Johnson or Denise Bielan, 408-945-9526
+
+ORDERING-PROCEDURE:
+
+       Contact Excelan
+
+PROPRIETY-STATUS:
+
+       Excelan product
+
+
+
+
+                                  121
+
+
+
+2.4.2. EXCELAN-EXOS-200
+PRODUCT-OR-PACKAGE-NAME:    EXOS 200 Series
+
+TYPE:    Ethernet Front-End Processor Boards
+
+DESCRIPTION:
+
+       The  EXOS 200 series includes boards for Multibus, VME, QBUS,
+    and UNIBUS.  The design is modular, and can be  readily  adapted
+    to  other  host  bus  designs.  Each is a single-board front-end
+    processor which includes an 80186 CPU, at least 128 Kbytes  RAM,
+    and an Ethernet Data Link controller.  In addition, a DMA-backed
+    SBX bus connector allows additional communications links  to  be
+    supported  via  off-the-shelf  daughter  boards.  An EPROM-based
+    operating system kernel manages EXOS resources, and  provides  a
+    standard  high-level  programming environment for protocol code.
+    All boards can run the same object code, and are  100%  software
+    compatible  with  Excelan's  EXOS  101 product.  TCP/IP protocol
+    code, available separately from Excelan, can  be  downloaded  to
+    EXOS RAM at start-up time either by the host system, or over the
+    Ethernet.
+
+DOCUMENTATION:
+
+       Available from Excelan
+
+CPU:
+
+       Any
+
+O/S:
+
+       Any
+
+DISTRIBUTOR:
+
+       Excelan
+       2180 Fortune Drive
+       San Jose, CA  95131
+
+CONTACT:
+
+       Sue Johnson or Denise Bielan, 408-945-9526
+
+ORDERING-PROCEDURE:
+
+       Contact Excelan
+
+PROPRIETY-STATUS:
+
+       Excelan Product
+
+                                  122
+
+
+
+2.5. IMAGEN
+
+
+
+2.5.1. IMPRINT-10
+PRODUCT NAME:   IMPRINT-10 TCP/IP Ethernet Printer
+
+TYPE:   Laser printer
+
+DESCRIPTION:
+
+       The IMPRINT-10 is an intelligent laser printer, based on a 10
+    page-per-minute,   reliable   printing   engine,  providing  the
+    page-layout language  Impress,  line-printer  emulation,  daisy-
+    wheel  printer  emulation,  and  Tektronix  4014 emulation.  The
+    IMPRINT-10 is supported by the Scribe, TeX, troff,  and  ditroff
+    document  production  systems.   Supports a full, one-connection
+    TCP and IP, along with ICMP and HARP.
+
+DOCUMENTATION:
+
+       Available from vendor
+
+CPU:
+
+       68000, multibus-based, proprietary hardware
+
+O/S:
+
+       Proprietary, not user-programmable
+
+IMPLEMENTATION-LANGUAGE:
+
+       C
+
+DISTRIBUTOR:
+
+       IMAGEN Corporation
+       2660 Marine Way
+       Mountain View, California 94043
+
+CONTACT:
+
+       Sales: David Perlmutter
+       Technical: Geoffrey H. Cooper
+       415-960-0714
+
+ORDERING-PROCEDURE:
+
+       Contact vendor for more information
+
+PROPRIETY-STATUS:
+                                  123
+
+
+
+       Proprietary product
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  124
+
+
+
+2.6. INTERLAN
+
+
+
+2.6.1. v INTERLAN-NS2010
+PRODUCT-OR-PACKAGE-NAME:   RSX-11M/S, Device Driver
+
+TYPE:   Device Driver
+
+DESCRIPTION:
+
+       RSX-11M/S,  Device  Driver  for  NI1010  and  NI2010  boards;
+    includes  user  manual  (UM-NS2010),  source code on RX01 floppy
+    disk  with  Files-11  file  structure,  and  supported  software
+    license (SL-NS2010-S).  Offers access to stream and raw datagram
+    protocol levels.  Only  a  small  amount  of  effort  should  be
+    necessary to process UDP-like datagram packets.
+
+O/S:
+
+       Most DEC OPSYS
+
+DISTRIBUTOR:
+
+       Interlan
+       3 Lyberty Way
+       Westport, MA 01886
+
+CONTACT:
+
+       William Seifert, 617-692-3900
+
+ORDERING-PROCEDURE:
+
+       Each of the above products may be ordered individually
+
+PROPRIETY-STATUS:
+
+       Interlan product
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  125
+
+
+
+2.6.2. v INTERLAN-NS2020
+PRODUCT-OR-PACKAGE-NAME:   RT-11 V4.0 (FB, SJ, XM) Device Driver
+
+TYPE:   Device Driver
+
+DESCRIPTION:
+
+       RT-11  V4.0  (FB, SJ, XM) Device Driver for NI1010 and NI2010
+    boards.    Provides  datagram  level-of-service;  includes  user
+    manual  (UM-NS2010),  source code on RX01 floppy disk with RT-11
+    file structure, and supported software license (SL-NS2020-S).
+
+DISTRIBUTOR:
+
+       Interlan
+       3 Lyberty Way
+       Westport, MA 01886
+
+CONTACT:
+
+       William Seifert, 617-692-3900
+
+ORDERING-PROCEDURE:
+
+       Each of the above products may be ordered individually
+
+PROPRIETY-STATUS:
+
+       Interlan product
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  126
+
+
+
+2.6.3. v INTERLAN-NI1010
+PRODUCT-OR-PACKAGE-NAME:    Interlan  Unibus   Ethernet   Communications
+Controller Board
+
+TYPE:   Communications Controller Board
+
+DESCRIPTION:
+
+       Unibus  Ethernet  Communications Controller Board (BD-NI1010)
+    includes User Manual (UM-NI1010), standalone diagnostic on  RX01
+    floppy  disk  (DS-NI1010-RX01),  and interface cable with mating
+    connectors (AC-NM10-10).
+
+DISTRIBUTOR:
+
+       Interlan
+       3 Lyberty Way
+       Westford, MA 01886
+
+CONTACT:
+
+       William Seifert, 617-692-3900
+
+ORDERING-PROCEDURE:
+
+       Contact distributor
+
+PROPRIETY-STATUS:
+
+       Interlan product
+
+HOSTS:
+
+       Naval Postgraduate School
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  127
+
+
+
+2.6.4. v INTERLAN-NM10
+PRODUCT-OR-PACKAGE-NAME:   Ethernet protocol module
+
+TYPE:   Ethernet Protocol Module
+
+DESCRIPTION:
+
+       Ethernet protocol  module  (BD-NM10);  includes  User  Manual
+    (UM-NM10)  and  NM10  interface  cable  with  mating  connectors
+    (AC-NM10-10).
+
+DISTRIBUTOR:
+
+       Interlan
+       3 Lyberty Way
+       Westford, MA  01886
+
+CONTACT:
+
+       William Seifert, 617-692-3900
+
+ORDERING-PROCEDURE:
+
+       Each of the above products may be ordered individually
+
+PROPRIETY-STATUS:
+
+       Interlan product
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  128
+
+
+
+2.6.5. v INTERLAN-NI2010
+PRODUCT-OR-PACKAGE-NAME:   Qbus Ethernet Communications Controller Board
+
+TYPE:   Communications Controller Board
+
+DESCRIPTION:
+
+       Qbus Ethernet Communications  Controller  Board  (BD-NI2010);
+    includes  user manual (UM-NI2010), standalone diagnostic on RX01
+    floppy disk (DS-NI2010-RX01), and interface  cable  with  mating
+    connectors (AC-NM10-10).
+
+DISTRIBUTOR:
+
+       Interlan
+       3 Lyberty Way
+       Westford, MA 01886
+
+CONTACT:
+
+       William Seifert, 617-692-3900
+
+ORDERING-PROCEDURE:
+
+       Each of the above products may be ordered individually
+
+PROPRIETY-STATUS:
+
+       Interlan product
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  129
+
+
+
+2.6.6. v INTERLAN-NI3010
+PRODUCT-OR-PACKAGE-NAME:    Multibus  Ethernet Communications Controller
+Board
+
+TYPE:   Communications Controller Board
+
+DESCRIPTION:
+
+       Multibus  Ethernet  Communications  Controller   Board   (BD-
+    NI3010);  includes  user manual (UM-HI3010), and interface cable
+    with mating connectors (AC-NM10-10).
+
+DISTRIBUTOR:
+
+       Interlan
+       3 Lyberty Way
+       Westford, MA 01886
+
+CONTACT:
+
+       William Seifert, 617-692-3900
+
+ORDERING-PROCEDURE:
+
+       Each of the above products may be ordered individually
+
+PROPRIETY-STATUS:
+
+       Interlan product
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  130
+
+
+
+2.7. MITRE
+
+
+
+2.7.1. v MITRE-NAC
+PRODUCT-OR-PACKAGE-NAME:    MITRE Network Access Component
+
+TYPE:    LAN or long-haul network interface
+
+DESCRIPTION:
+
+       This is MITRE's second  generation  network  controller  (see
+    ZILOG-Z8000).     Using  an  expanded  hardware  base,  industry
+    standard backplanes and multiple  microprocessor  boards,  MITRE
+    has  built  a  MCS-68000-based  network  access component.  This
+    network component has both MULTIBUS and  VERSABUS  form  factors
+    and broadband, Ethernet and 1822 network interfaces.
+
+       The   standard   MULTIBUS   network   component  contains  an
+    OMNIBYTE-dual-ported 68000, with 128K bytes dynamic RAM, and 96K
+    bytes  EPROM,  a  memory  board,  and  a Bridge serial i/o (SIO)
+    interface board.  The SIO board has its own 68000 cpu, 8  serial
+    ports,  4K  bytes  RAM and 32K bytes ROM.  The long-haul network
+    version contains an ACC MULTIBUS-1822 interface.   The  VERSABUS
+    version  supports  an ACC VERSABUS-1822 interface.  In addition,
+    the VERSABUS version supports an ACC  VERSABUS-UNIBUS  interface
+    for host-interfacing to DEC machines.
+
+       The  software  is  written  in 'C' and runs under CMOS, a 'C'
+    version of  SRI's  Micro  Operating  System.    In  addition  to
+    supporting  TCP,  IP,  ICMP,  and  the appropriate network level
+    protocol, the network front-end version (aka  a  host  interface
+    unit  for  the  LAN  environment) supports both the DTI-Host-to-
+    Front-End Protocol and a MITRE Network Access Protocol.
+
+DOCUMENTATION:
+
+       Some MITRE Technical Reports (also videotape  description  by
+    Steve Holmgren)
+
+CPU:
+
+       MCS-68000
+
+O/S:
+
+       CMOS
+
+IMPLEMENTATION-LANGUAGE:
+
+       C
+
+                                  131
+
+
+
+DISTRIBUTOR:
+
+       The MITRE Corporation
+       McLean, VA  22102
+
+CONTACT:
+
+       John Mullen, (jrm@MITRE.ARPA), 703-827-7476
+
+PROPRIETY-STATUS:
+
+       Public domain
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  132
+
+
+
+2.8. QMI
+
+
+
+2.8.1. v QMI
+PRODUCT-OR-PACKAGE-NAME:    QM10 Advanced Communication Controller
+
+TYPE:    TCP/IP/ICMP Peripheral Chip
+
+DESCRIPTION:
+
+       During  the  construction several TCP implementations for the
+    PDP-11 and 16-bit micros (Z8000, M68000) it became evident  that
+    two  major  elements  of  the  implementation  process  could be
+    improved.  The first is  the  problem  of  integrating  protocol
+    software into an operating system.  It was found that as much as
+    half of the software relating to a particular implementation was
+    not  really  related  to  the protocol implementation but to the
+    development  of  facilities  (e.g.    buffer   management)   and
+    interfaces  (e.g.  I/O  device  emulators)  between the protocol
+    software and a particular system.
+
+       The second problem was that each time  a  new  implementation
+    was  built  it  had  to  be  tested  locally, then with external
+    implementations, and then watched over in operation for as  much
+    as 8 months before a mature, useful system was available.
+
+       It  was felt that if a hardware peripheral could be developed
+    which in  a  system  sense  appeared  much  the  same  as  other
+    peripherals  yet  implemented  a  "device"  which was the higher
+    level protocols the integration  problem  would  be  simplified.
+    Further,  if  that  system  could  be constructed in a chip form
+    factor, much the  same  as  the  UARTS  of  today,  that  system
+    developers  would  reduce  the  problem  of  access  to  mature,
+    operational protocol software to that of a  hardware  technician
+    rather  than  a sophisticated systems implementor working for as
+    much as a year.
+
+       The QM10 is just such a chip,  implementing  as  a  "protocol
+    engine"  the  TCP/IP/ICMP  protocols.    Each  chip implements a
+    single virtual circuit and is interfaced with a shared memory.
+
+DOCUMENTATION:
+
+       Complete  hardware  and  software   interface   documentation
+    available
+
+DISTRIBUTOR:
+
+       QMI
+       262M Cedar Lane  #3
+       Vienna, VA  22180
+                                  133
+
+
+
+CONTACT:
+
+       Steve Holmgren, 703-573-5701
+
+PROPRIETY-STATUS:
+
+       The chips are sold on an OEM basis under copyright
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  134
+
+
+
+2.9. SCOPE
+
+
+
+2.9.1. DDN MICROGATEWAY
+PRODUCT-OR-PACKAGE NAME:    DDN MICROGATEWAY
+
+TYPE:    Microgateway
+
+DESCRIPTION:
+
+       The   DDN  MICROGATEWAY  is  a  single  board  product  which
+    implements the MIL Standard TCP/IP as well  as  ICMP  and  lower
+    layer  link  and  network  protocols  -  either FIPS 100/X.25 or
+    1822/HDH.
+
+       Using a Motorola 68008 microprocessor, the  DDN  MICROGATEWAY
+    provides  full-service  host support at 56K bits per second, and
+    it will accommodate up to 64 TCP/IP  sessions  with  its  shared
+    memory interface.
+
+       A  companion  DDN  MICROGATEWAY software product support host
+    TELNET, FTP,  and  SMTP  applications,  thus  offering  a  total
+    turn-key    solution   for   certain   UNIX   operating   system
+    enviornments.
+
+DOCUMENTATION:
+
+       A  user's  manual  describes  product  design  and   provides
+    information  on  how  to integrate the DDN MICROGATEWAY into the
+    user's host hardware and operating system environment.
+
+CPU:
+
+       Single board implementations for MULTIBUS  and  IBM  PC  BUS.
+    Other BUSES planned.
+
+O/S:
+
+       Board product is not O/S specific.  ULPs are based in BSD 4.2
+    or UNIX System V. Other O/S's are available.
+
+IMPLEMENTATION-LANGUAGE:
+
+       TCP/IP, X.25 are in C  firmware,  embedded  in  the  hardware
+    product.  ULPs are in C.
+
+DISTRIBUTER:
+
+       SCOPE Incorporated
+       1860 Michael Faraday Drive
+       Reston, Virginia  22090
+                                  135
+
+
+
+CONTACT:
+
+       Sue Gruszewski
+
+ORDERING PRODCEDURE:
+
+       See above contact
+
+PROPRIETARY-STATUS:
+
+       Commercially available
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  136
+
+
+
+2.10. SPARTACUS
+
+
+
+2.10.1. K200
+PRODUCT-OR-PACKAGE-NAME:    K200
+
+TYPE:    Local-Area Network Controller
+
+DESCRIPTION:
+
+       Ethernet  Controller providing a high-speed interface between
+    an IBM 370, 30xx or PCM and  the  Ethernet  local-area  network.
+    The  K200  is a microprocessor driven control unit that attaches
+    to IBM's block multiplexer channel using standard  IBM  bus  and
+    tag  cables.   K200 implements the physical and data link layers
+    of the ISO/OSI Reference  Model  for  network  architecture  and
+    conforms  to  the  specifications  for  Ethernet,  version  1.0.
+    Maximum throughput is in excess of 2.5 megabits per second.
+
+DOCUMENTATION:
+
+       Available from vendor
+
+CPU:
+
+       IBM 370, IBM 30xx, PCM
+
+DISTRIBUTOR:
+
+       Spartacus, Inc.
+       5 Oak Park Drive
+       Bedford, MA  01730
+
+CONTACT:
+
+       Patricia E. Lefebvre, 617-275-4220 or 800-LAN-KNET
+
+PROPRIETY-STATUS:
+
+       Spartacus product
+
+
+
+
+
+
+
+
+
+
+
+                                  137
+
+
+
+2.10.2. ZILOG Z8000
+PRODUCT-OR-PACKAGE-NAME:   Zilog Z8000
+
+TYPE:   network controller
+
+DESCRIPTION:
+
+       This network controller is the product of a series  of  MITRE
+    projects   aimed  at  making  network  access  (both  local  and
+    long-haul) as straightforward  as  computer  peripheral  access.
+    Some  of the new microprocessors make it possible to construct a
+    "network controller" that  handles  the  particulars  of  packet
+    ordering  and  flow  control  in  the  same  way  that  hardware
+    controllers handle the particulars of disk  cylinder  centerline
+    or  an  end  of  tap  sensor.    This TCP/IP network controller,
+    supported by a Z8000 microprocessor box, is currently interfaced
+    to  a number of UNIX systems via a UMC-Z80.  The outboard box is
+    accessed by a set of I/O-like  management  calls  (open,  close,
+    read,  write,  and  special)  which transport TCP requests via a
+    network access protocol.
+
+       The outboard box has 64K bytes of Ram, 32  bytes  of  Rom,  a
+    Z8002  micro,  and  a  serial  Usart (880K BPS max.)  All of the
+    software was written in C  using  an  in-house  version  of  the
+    portable  C  compiler.  The unit interfaces as easily to a local
+    network as it does to the DDN.  All that is necessary  for  this
+    conversion  is the addition of an ACC-1822 hardware device and a
+    new device driver.  Other than different round trip delays, host
+    user-level  software  sees no difference between the two network
+    devices.  The  resulting  set  of  Z8000-based  building  blocks
+    supports  host interface unit and a terminal concentrator on the
+    local net.
+
+       Performance with TCP/IP  has  been  measured  with  two  user
+    processes  talking via TCP/IP over the cable at 350K BPS.  Rates
+    as high as 450K BPS occur when user I/O buffer sizes are set  at
+    8K  bytes  per  I/O.   The Internet Protocol contains the lowest
+    level of  addressing.    This  allows  for  local  units  to  be
+    addressed  in  the  same way remote units, two or three networks
+    away, are addressed.  The effect of 300 bit TCP/IP  headers  has
+    negligible impact on performance.
+
+DOCUMENTATION:
+
+       Some  MITRE  Technical Reports (Also videotape description by
+    Steve Holmgren)
+
+O/S:
+
+       CMOS
+
+IMPLEMENTATION-LANGUAGE:
+                                  138
+
+
+
+       C
+
+DISTRIBUTOR:
+
+       The MITRE Corporation
+       McLean, VA 22102
+
+CONTACT:
+
+       John Mullen, (jrm@MITRE.ARPA), 703-827-7476
+
+PROPRIETY-STATUS:
+
+       Public domain
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  139
+
+
+
+                             FEEDBACK FORM
+
+                TCP/IP Implementations and Vendors Guide
+
+                             September 1985
+
+If you have a contribution, fill in the following template and  send  it
+via  the  DDN  network  to  NIC@SRI-NIC.ARPA  or  through U. S. mail to:
+Brochures of vendor products are also welcome.
+
+
+       DDN Network Information Center
+       SRI International
+       333 Ravenswood Avenue
+       Menlo Park, CA 94025
+       Attn:  Francine Perillo - EJ294
+
+
+
+PRODUCT-OR-PACKAGE-NAME:
+
+TYPE:
+
+DESCRIPTION:
+
+DOCUMENTATION:
+
+CPU:
+
+O/S:
+
+IMPLEMENTATION-LANGUAGE:
+
+DISTRIBUTOR:
+
+CONTACT:
+
+ORDERING-PROCEDURE:
+
+PROPRIETY-STATUS:
+
+HOSTS (on network using this implementation):
+
+
+-----------------------------------------------------------
+
+Comments:
+
+
+
+Index
+
+          3Com Corporation   28, 67
+
+          Advanced Computer Communications (ACC)   107, 109,  110,  111,
+                  112, 113, 114, 115, 116, 117, 118
+          AOS/VS-future
+             DS/4000 family   12
+             MV family   12
+          Apple Macintosh   3
+
+          Ballistic Research Laboratory   14
+          Bolt, Beranek and Newman   6, 7, 34, 52, 60, 119
+          Bridge Communications   120
+          Burroughs MCP
+             Burroughs   9
+
+          CMOS
+             MCS-68000   131
+             Z8000   138
+          Computer Network Technology   55, 78
+          Control Data Corporation   11
+
+          Data General   12
+          Datapoint Corporation   13
+          DG/VX
+             DS/4000 family   12
+             MV family   12
+          Digital Equipment Corporation   54
+
+          ELXSI, Inc.   57
+          Embos, Enix System V, Enix 4.2
+             ELXSI 6400   57
+          Excelan   103, 121, 122
+
+          FOONEX
+             F2, F3, F4   48
+          FOR:PRO
+             Fortune 32:16   58
+          Fortune Systems Corporation   58
+
+          GCOS 6 Mod 400
+             Honeywell DPS6   62
+          GCOS 8
+             Honeywell DPS8   64
+          GOULD
+             Computer Systems Division   59
+             Software Division   38
+          Guardian
+             NonStop II   102
+             Txp   102
+
+                                   iv
+
+
+
+          Honeywell Information Systems   62, 64, 65
+
+          IAS
+             LSI-11   20
+             PDP-11   20
+          IBM Corporation   72, 74
+             Federal Systems Division   77
+          IMAGEN Corporation   123
+          Interlan   125, 126, 127, 128, 129, 130
+          Internet Systems Corp.
+             Burroughs   9
+          Internet Systems Corporation   40, 83, 87, 96
+          ITS
+             DEC-10/20(KA, KL)   51
+
+          Lawrence Livermore Laboratory   50
+          Linkabit Corporation   17
+          Lisp Machine, Inc.   85
+          LOS
+             LSI-11/23   14
+             PDP-11   14
+
+          Massachusetts Institute of Technology (MIT)   25, 51
+          MITRE Corporation   131, 138
+          MOS
+             LSI-11   16
+          MPE IV
+             HP 3000   60
+          MPX-32
+             Concept   59
+          MS DOS
+             IBM PC   69
+          Multics
+             DPS8   65
+             Honeywell 6000   110
+          MVS
+             AMDAHL   112
+             IBM   83
+             IBM 370   112
+             MAGNASON   112
+          MVS-VM
+             IBM   78
+          MVS/SP
+             IBM 370   82
+
+          Network Research Corporation   56, 69, 105
+          Network Solutions, Inc.   82
+          NOS
+             Cyber 170   11
+
+          OS/MVS
+             IBM 370   79
+                                   v
+
+
+
+          OS1100
+             Sperry 1100   94
+             Sperry 1100/xx   92
+             Sperry DCP 40/10A   92
+
+          PC DOS
+             Compaq   67
+             IBM PC   67, 69, 70, 71
+          PC-IX
+             80x86   105
+          Peer Processing Executive
+             Motorola 68000   111
+          Perkin-Elmer OS/32
+             Perkin-Elmer   87
+          PRIME Computer   89
+          PRIMOS
+             PRIME   89
+          Process Software Corporation   20
+          Proteon Associates   67
+          Proteon, Inc.   23
+          Public Domain
+             Apple Macintosh, UNIX   3
+             DEC-10(KA,KI), TENEX/FOONEX/AUGUST   48
+             DEC-10/20 (KA, KL), ITS   51
+             IBM 370, OS/MVS   79
+             LSI-11, MOS   16
+             PDP-10, TOPS-10   50
+             PDP-11/44/45/70, UNIX 2.9BSD   21
+             PDP-11/45, UNIX Version 6   25
+             PDP-11/45/70, UNIX Version 6   27
+             PDP-11/LSI-11/23, LOS   14
+             Sperry 1100/xx, OS1100   92
+             TEKTRONIX   42
+             VAX-11/780/750/730, UNIX 4.2BSD   36
+             VAX/780/750, UNIX,VMS   42
+
+          QMI   133
+
+          Ridge Computers   90
+          ROS 3.2
+             Ridge 32   90
+          RSX-11M
+             LSI-11   20
+             PDP-11   20
+          RSX-11M-PLUS
+             PDP-11/LSI-11   20
+
+          SCOPE Incorporated   135
+          Spartacus, Inc.   70, 75, 137
+          Sperry Corporation   94
+          Sperry OS1100
+             Sperry   96
+                                   vi
+
+
+
+          SRI International   16, 48
+          SUN Microsystems, Inc.   98
+          Symbolics Lisp
+             Symbolics Lisp Machine   100
+          Symbolics, Inc.   100
+          System Development Corporation   91
+
+          Tandem Computers   102
+          Tektronix   42
+          TELCON
+             Sperry DCP   94
+          TENEX
+             DEC-10(KA, KI)   48
+          TOPS-10
+             PDP-10   50
+          TOPS-20
+             KL10   52
+             KL10E/R   54
+
+          UNIQ Digital Technologies   30
+          Unisoft Systems   106
+          University of California, Berkeley   36, 21
+          University of California, Los Angeles   79
+          University of Maryland   92
+          UNIX 4.2BSD
+             PDP-11   117
+          UNIX 4.1BSD/4.2BSD
+             80x86   105
+             VAX-11/730   36
+             VAX-11/750   36
+             VAX-11/780   36
+          UNIX
+             Apple Macintosh   3
+             BBN-C/70   6
+             IBM   77
+             PDP-11   114
+             PDP-11/44   23
+             PDP-11/45   23
+             PDP-11/70   23
+             PDP-11/73   23
+             PDP-11/84   23
+             PDP-11/x   28
+             VAX   47, 114
+             VAX-11/750/80   28
+             VAX-11/7xx   42
+          UNIX 2.9BSD
+             PDP-11/44   21
+             PDP-11/70   21
+          UNIX 4.1BSD/4.2BSD
+             PDP-11   56, 105
+             Rainbow   105
+             Rainbow, DEC Pro   56
+                                  vii
+
+
+
+             VAX   56, 105
+             VAX-11/750/80   32
+             VAX-11/xxx   34
+          UNIX 4.2BSD
+             68010   98
+          UNIX System V
+              PDP-11   117
+             68010   85
+             VAX   30
+          UNIX Version 6
+             PDP-11/45   25, 27
+             PDP-11/70   27
+          UNIX-UNISOFT
+             68000   106
+
+          VAX/VMS Release 3
+             VAX   38
+          VM
+             IBM 370   74
+          VM/SP
+             IBM 370   72, 75
+          VMS
+             DEC   42
+             MicroVAX   44
+             PDP-11   56
+             Rainbow, DEC Pro   56
+             VAX   40, 45, 55, 56, 117
+
+          Wollongong Group   44, 45, 47, 71
+
+          Xenix, Venix, PC-IX
+             80x86   105
+             PDP-11/44   23
+             PDP-11/45   23
+             PDP-11/70   23
+             PDP-11/73   23
+             PDP-11/84   23
+
+          ZetaLisp
+             LMI Lambda   85
+
+
+
+
+
+
+
+
+
+
+
+
+                                  viii
+
+
+
+                           Table of Contents
+
+INTRODUCTION  . . . . . . . . . . . . . . . . . . . . . . . . . . .    1
+
+1. TCP/IP SOFTWARE IMPLEMENTATIONS BY MACHINE TYPE  . . . . . . . .    3
+
+   1.1. APPLE  . . . . . . . . . . . . . . . . . . . . . . . . . .     3
+       1.1.1. v STANFORD ETHERNET APPLETALK GATEWAY  . . . . . . .     3
+   1.2. BOLT, BERANEK AND NEWMAN  . . . . . . . . . . . . . . . . .    6
+       1.2.1. BBN-C/70  . . . . . . . . . . . . . . . . . . . . . .    6
+       1.2.2. BBN-GATEWAYS  . . . . . . . . . . . . . . . . . . . .    7
+   1.3. BURROUGHS  . . . . . . . . . . . . . . . . . . . . . . . .     8
+       1.3.1. [B5000]  . . . . . . . . . . . . . . . . . . . . . .     8
+       1.3.2. [BURROUGHS/HYPERLINK]  . . . . . . . . . . . . . . .     9
+   1.4. CONTROL DATA CORPORATION  . . . . . . . . . . . . . . . . .   11
+       1.4.1. [CDC-CYBER]  . . . . . . . . . . . . . . . . . . . .    11
+   1.5. DATA-GENERAL  . . . . . . . . . . . . . . . . . . . . . . .   12
+       1.5.1. [DATA-GENERAL]  . . . . . . . . . . . . . . . . . . .   12
+   1.6. DATAPOINT  . . . . . . . . . . . . . . . . . . . . . . . .    13
+       1.6.1. [DATAPOINT]  . . . . . . . . . . . . . . . . . . . .    13
+   1.7. DIGITAL EQUIPMENT CORPORATION  . . . . . . . . . . . . . .    14
+       1.7.1. BRL GATEWAY  . . . . . . . . . . . . . . . . . . . .    14
+       1.7.2. SRI-LSI-11  . . . . . . . . . . . . . . . . . . . . .   16
+       1.7.3. LSI-11/PDP11/LINKABIT  . . . . . . . . . . . . . . .    17
+       1.7.4. RSX-11M  . . . . . . . . . . . . . . . . . . . . . .    20
+       1.7.5. UNIX 2.9BSD  . . . . . . . . . . . . . . . . . . . .    21
+       1.7.6. Venix/11 TCP/IP  . . . . . . . . . . . . . . . . . .    23
+       1.7.7. PDP-11/45  . . . . . . . . . . . . . . . . . . . . .    25
+       1.7.8. BBN-V6-UNIX  . . . . . . . . . . . . . . . . . . . .    27
+       1.7.9. v 3COM-UNET  . . . . . . . . . . . . . . . . . . . .    28
+       1.7.10. v UNIQ-SYS5  . . . . . . . . . . . . . . . . . . . .   30
+       1.7.11. PURDUE  . . . . . . . . . . . . . . . . . . . . . .    32
+       1.7.12. BBN-VAX-UNIX  . . . . . . . . . . . . . . . . . . .    34
+       1.7.13. BERKELEY-VAX-UNIX-4.2  . . . . . . . . . . . . . . .   36
+       1.7.14. v GOULD-ACCESS-VAX  . . . . . . . . . . . . . . . .    38
+       1.7.15. [VAX-VMS/HYPERLINK]  . . . . . . . . . . . . . . . .   40
+       1.7.16. TEKTRONIX-VAX  . . . . . . . . . . . . . . . . . . .   42
+       1.7.17. WOLLONGONG VAX-VMS  . . . . . . . . . . . . . . . .    44
+       1.7.18. WOLLONGONG VAX-VMS  . . . . . . . . . . . . . . . .    45
+       1.7.19. WOLLONGONG-SYSTEM-V-UNIX  . . . . . . . . . . . . .    47
+       1.7.20. SRI-TENEX/FOONEX/AUGUST  . . . . . . . . . . . . . .   48
+       1.7.21. LLL-TOPS-10  . . . . . . . . . . . . . . . . . . . .   50
+       1.7.22. MIT-ITS-10/20  . . . . . . . . . . . . . . . . . . .   51
+       1.7.23. BBN-TOPS-20  . . . . . . . . . . . . . . . . . . . .   52
+       1.7.24. v TOPS-20AN  . . . . . . . . . . . . . . . . . . . .   54
+       1.7.25. [DEC-VMS-LAN]  . . . . . . . . . . . . . . . . . . .   55
+       1.7.26. FUSION-VAX  . . . . . . . . . . . . . . . . . . . .    56
+
+
+
+
+
+                                   i
+
+
+
+   1.8. ELXSI  . . . . . . . . . . . . . . . . . . . . . . . . . .    57
+       1.8.1. ELXSI  . . . . . . . . . . . . . . . . . . . . . . .    57
+   1.9. FORTUNE  . . . . . . . . . . . . . . . . . . . . . . . . .    58
+       1.9.1. [FORTUNE]  . . . . . . . . . . . . . . . . . . . . .    58
+   1.10. GOULD  . . . . . . . . . . . . . . . . . . . . . . . . . .   59
+       1.10.1. MPX-32  . . . . . . . . . . . . . . . . . . . . . .    59
+   1.11. HEWLETT PACKARD  . . . . . . . . . . . . . . . . . . . . .   60
+       1.11.1. BBN-HP-3000  . . . . . . . . . . . . . . . . . . . .   60
+   1.12. HONEYWELL  . . . . . . . . . . . . . . . . . . . . . . . .   62
+       1.12.1. [DPS6]  . . . . . . . . . . . . . . . . . . . . . .    62
+       1.12.2. [DPS8]  . . . . . . . . . . . . . . . . . . . . . .    64
+       1.12.3. MULTICS  . . . . . . . . . . . . . . . . . . . . . .   65
+   1.13. IBM  . . . . . . . . . . . . . . . . . . . . . . . . . . .   67
+       1.13.1. IBM PC  . . . . . . . . . . . . . . . . . . . . . .    67
+       1.13.2. FUSION-IBM-PC  . . . . . . . . . . . . . . . . . . .   69
+       1.13.3. KNET/PC  . . . . . . . . . . . . . . . . . . . . . .   70
+       1.13.4. WOLLONGONG-IBM-PC  . . . . . . . . . . . . . . . . .   71
+       1.13.5. IBM-VM  . . . . . . . . . . . . . . . . . . . . . .    72
+       1.13.6. [IBM-VM]  . . . . . . . . . . . . . . . . . . . . .    74
+       1.13.7. KNET/VM  . . . . . . . . . . . . . . . . . . . . . .   75
+       1.13.8. IBM-UNIX  . . . . . . . . . . . . . . . . . . . . .    77
+       1.13.9. [IBM-MVS-LAN]  . . . . . . . . . . . . . . . . . . .   78
+       1.13.10. UCLA-IBM/MVS  . . . . . . . . . . . . . . . . . . .   79
+       1.13.11. [IBM-MVS]  . . . . . . . . . . . . . . . . . . . .    82
+       1.13.12. [IBM-MVS/HYPERLINK]  . . . . . . . . . . . . . . .    83
+   1.14. LISP MACHINE  . . . . . . . . . . . . . . . . . . . . . .    85
+       1.14.1. [LMI]  . . . . . . . . . . . . . . . . . . . . . . .   85
+   1.15. PERKIN-ELMER  . . . . . . . . . . . . . . . . . . . . . .    87
+       1.15.1. [PERKIN-ELMER/HYPERLINK]  . . . . . . . . . . . . .    87
+   1.16. PRIME  . . . . . . . . . . . . . . . . . . . . . . . . . .   89
+       1.16.1. [PRIME]  . . . . . . . . . . . . . . . . . . . . . .   89
+   1.17. RIDGE  . . . . . . . . . . . . . . . . . . . . . . . . . .   90
+       1.17.1. RIDGE  . . . . . . . . . . . . . . . . . . . . . . .   90
+   1.18. SYSTEM DEVELOPMENT CORPORATION  . . . . . . . . . . . . .    91
+       1.18.1. v SDC  . . . . . . . . . . . . . . . . . . . . . . .   91
+   1.19. SPERRY-UNIVAC  . . . . . . . . . . . . . . . . . . . . . .   92
+       1.19.1. SPERRY-UNIVAC  . . . . . . . . . . . . . . . . . . .   92
+       1.19.2. v SPERRY-1100  . . . . . . . . . . . . . . . . . . .   94
+       1.19.3. [SPERRY/HYPERLINK]  . . . . . . . . . . . . . . . .    96
+   1.20. SUN MICROSYSTEMS  . . . . . . . . . . . . . . . . . . . .    98
+       1.20.1. SUN-68000  . . . . . . . . . . . . . . . . . . . . .   98
+   1.21. SYMBOLICS  . . . . . . . . . . . . . . . . . . . . . . . .  100
+       1.21.1. v SYMBOLICS  . . . . . . . . . . . . . . . . . . . .  100
+   1.22. TANDEM  . . . . . . . . . . . . . . . . . . . . . . . . .   102
+       1.22.1. [TANDEM]  . . . . . . . . . . . . . . . . . . . . .   102
+   1.23. MULTIPLE-MACHINE IMPLEMENTATIONS  . . . . . . . . . . . .   103
+       1.23.1. v EXCELAN-EXOS-8010  . . . . . . . . . . . . . . . .  103
+       1.23.2. FUSION  . . . . . . . . . . . . . . . . . . . . . .   105
+       1.23.3. UNISOFT  . . . . . . . . . . . . . . . . . . . . . .  106
+
+
+
+                                   ii
+
+
+
+2. TCP/IP HARDWARE IMPLEMENTATIONS  . . . . . . . . . . . . . . . .  107
+
+   2.1. ADVANCED COMPUTER COMMUNICATIONS  . . . . . . . . . . . . .  107
+       2.1.1. v ACC-ECU  . . . . . . . . . . . . . . . . . . . . .   107
+       2.1.2. v ACC-IF-11Q/1822  . . . . . . . . . . . . . . . . .   109
+       2.1.3. v ACC-IF-6000/1822  . . . . . . . . . . . . . . . . .  110
+       2.1.4. v ACC-IF-370/DDN  . . . . . . . . . . . . . . . . . .  111
+       2.1.5. v ACC-IF-IMP/370  . . . . . . . . . . . . . . . . . .  112
+       2.1.6. v ACC-LH-DH/11  . . . . . . . . . . . . . . . . . . .  113
+       2.1.7. ACC-IF-11/HDH  . . . . . . . . . . . . . . . . . . .   114
+       2.1.8. ACC-IF-11Q/HDH  . . . . . . . . . . . . . . . . . . .  115
+       2.1.9. ACC-M/1822  . . . . . . . . . . . . . . . . . . . . .  116
+       2.1.10. ACC-ACP-625  . . . . . . . . . . . . . . . . . . . .  117
+       2.1.11. ACC-V/1822  . . . . . . . . . . . . . . . . . . . .   118
+   2.2. BOLT, BERANEK AND NEWMAN  . . . . . . . . . . . . . . . . .  119
+       2.2.1. BBN-C/30  . . . . . . . . . . . . . . . . . . . . . .  119
+   2.3. BRIDGE COMMUNICATIONS  . . . . . . . . . . . . . . . . . .   120
+       2.3.1. v BRIDGE  . . . . . . . . . . . . . . . . . . . . . .  120
+   2.4. EXCELAN  . . . . . . . . . . . . . . . . . . . . . . . . .   121
+       2.4.1. v EXCELAN-EXOS-101  . . . . . . . . . . . . . . . . .  121
+       2.4.2. EXCELAN-EXOS-200  . . . . . . . . . . . . . . . . . .  122
+   2.5. IMAGEN  . . . . . . . . . . . . . . . . . . . . . . . . . .  123
+       2.5.1. IMPRINT-10  . . . . . . . . . . . . . . . . . . . . .  123
+   2.6. INTERLAN  . . . . . . . . . . . . . . . . . . . . . . . . .  125
+       2.6.1. v INTERLAN-NS2010  . . . . . . . . . . . . . . . . .   125
+       2.6.2. v INTERLAN-NS2020  . . . . . . . . . . . . . . . . .   126
+       2.6.3. v INTERLAN-NI1010  . . . . . . . . . . . . . . . . .   127
+       2.6.4. v INTERLAN-NM10  . . . . . . . . . . . . . . . . . .   128
+       2.6.5. v INTERLAN-NI2010  . . . . . . . . . . . . . . . . .   129
+       2.6.6. v INTERLAN-NI3010  . . . . . . . . . . . . . . . . .   130
+   2.7. MITRE  . . . . . . . . . . . . . . . . . . . . . . . . . .   131
+       2.7.1. v MITRE-NAC  . . . . . . . . . . . . . . . . . . . .   131
+   2.8. QMI  . . . . . . . . . . . . . . . . . . . . . . . . . . .   133
+       2.8.1. v QMI  . . . . . . . . . . . . . . . . . . . . . . .   133
+   2.9. SCOPE  . . . . . . . . . . . . . . . . . . . . . . . . . .   135
+       2.9.1. DDN MICROGATEWAY  . . . . . . . . . . . . . . . . . .  135
+   2.10. SPARTACUS  . . . . . . . . . . . . . . . . . . . . . . . .  137
+       2.10.1. K200  . . . . . . . . . . . . . . . . . . . . . . .   137
+       2.10.2. ZILOG Z8000  . . . . . . . . . . . . . . . . . . . .  138
+
+Index  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .    iv
+
+
+
+
+
+
+
+
+
+
+
+                                   v

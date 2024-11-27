@@ -1,0 +1,1683 @@
+
+
+
+
+
+
+February 1997
+
+
+INTERNET MONTHLY REPORTS
+------------------------
+
+The purpose of these reports is to communicate to the Internet Research
+Group the accomplishments, milestones reached, or problems discovered by
+the participating organizations.
+
+Each organization is expected to submit a 1/2 page report on the first
+business day of the month describing the previous month's activities.
+These reports should be submitted via network mail to "IMR-ED@ISI.EDU".
+
+`````````````````````````````````````````````````````````````````````
+
+The Internet Monthly Report mailing list is now managed by MajorDomo at
+ISI.EDU.  The announcements of new issues on the Internet Monthly Report
+are sent to the IETF-Announce list and to this IMR list.
+
+Requests to be ADDED or DELETED from the Internet Monthly report list
+should be sent to "majordomo@isi.edu" with the message body either
+"subscribe imr" or "unsubscribe imr".
+
+Details on obtaining the current IMR, or back issues, via FTP or EMAIL
+may be obtained by sending an EMAIL message to "rfc-info@ISI.EDU" with
+the message body "help: ways_to_get_imrs".  For example:
+
+        To: rfc-info@ISI.EDU
+        Subject: getting imrs
+
+        help: ways_to_get_imrs
+
+or  URL: http://www.isi.edu/in-notes/imr/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+IMR Editor                                                      [Page 1]
+
+Internet Monthly Report                                    February 1997
+
+
+TABLE OF CONTENTS
+
+  INTERNET ARCHITECTURE BOARD
+
+     IAB MESSAGE . . . . . . . . . . . . . . . . . . . . . . . page  3
+     INTERNET ENGINEERING REPORTS  . . . . . . . . . . . . . . page  3
+
+  Internet Projects
+
+     INTERNIC. . . . . . . . . . . . . . . . . . . . . . . . . page 11
+       Registration Services . . . . . . . . . . . . . . . . . page 11
+       Directory Services. . . . . . . . . . . . . . . . . . . page 11
+       US Domain Registry. . . . . . . . . . . . . . . . . . . page 12
+     MERIT INTERNET ENGINEERING. . . . . . . . . . . . . . . . page 15
+     IANA REPORT . . . . . . . . . . . . . . . . . . . . . . . page 19
+     RFC-EDITOR REPORT . . . . . . . . . . . . . . . . . . . . page 19
+
+  CALENDAR OF EVENTS . . . . . . . . . . . . . . . . . . . . . page 21
+    TERENA List of Meetings. . . . . . . . . . . . . . . . . . page 25
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+IMR Editor                                                      [Page 2]
+
+Internet Monthly Report                                    February 1997
+
+
+
+INTERNET ARCHITECTURE BOARD
+
+     The minutes of the IAB back to 1990 are available for anonymous ftp
+     access on host ftp.isi.edu, directory /pub/IAB, or via the IAB
+     World-Wide Web page with URL http://www.iab.org/iab/.
+
+     Brian Carpenter IAB Chair
+
+INTERNET ENGINEERING REPORTS
+----------------------------
+
+               Internet Monthly Report for February, 1997
+
+
+  1. The first meeting of the year will be held in Memphis, Tennessee
+     from April 7-10, 1997. Our local host will be Federal Express.
+     Following Memphis, the IETF returns to Europe for the summer
+     meeting in Munich, Germany from August 11-15, 1997. Our hosts for
+     this meeting will be Digi/ISOC.DE. The final meeting of the year
+     will be held in the D.C. area, hosted by Newbridge.
+
+     Once all arrangements have been made, notifications will be sent
+     to the IETF Announcement list. Remember that information on
+     future meetng sites can always be found in the file
+     0mtg-sites.txt, located on the IETF shadow directories. Of
+     course, this information is provided on the Web. The IETF's URL
+     is:
+
+                          http://www.ietf.org/
+
+  2. The minutes of the IESG teleconferences be found on all the IETF
+     shadow directories in the iesg directory.
+
+     The following IESG minutes have been added:
+
+       January 9, 1997 (iesg.97-01-09)
+       January 23, 1997 (iesg.97-01-23)
+       February 6, 1997 (iesg.97-02-06)
+
+  3. The IESG approved or recommended the following seven Protocol
+     Actions during the month of February, 1997:
+
+     o The PPP Bandwidth Allocation Protocol (BAP) The PPP Bandwidth
+       Allocation Control Protocol (BACP) for publication as a
+       Proposed Standard.
+
+
+
+
+
+IMR Editor                                                      [Page 3]
+
+Internet Monthly Report                                    February 1997
+
+
+     o Microsoft Point-To-Point Compression (MPPC) Protocol for
+       publication as an Informational RFC.
+
+     o Managing the X.500 Root Naming Context for publication as an
+       Experimental Protocol.
+
+     o Issues affecting MARS Cluster Size for publication as an
+       Informational RFC.
+
+     o Traffic Flow Measurement: Experiences with NeTraMet for
+       publication as an Informational RFC.
+
+     o Secure Domain Name System Dynamic Update for publication as a
+       Proposed Standard.
+
+     o Dynamic Updates in the Domain Name System (DNS UPDATE) for
+       publication as a Proposed Standard.
+
+
+  4. Five Last Calls were issued by the IESG during the month of
+     February, 1997:
+
+     o FTP Security Extensions <draft-ietf-cat-ftpsec-09> for
+       consideration as a Proposed Standard.
+
+     o A Common Schema for the Internet White Pages Service
+       <draft-ietf-ids-iwps-schema-spec-03> for consideration as a
+       Proposed Standard.
+
+     o MAILBOX NAMES FOR COMMON SERVICES, ROLES AND FUNCTIONS
+       <draft-crocker-stdaddr-02> for consideration as a Proposed
+       Standard.
+
+     o Use of DNS Aliases for Network Services
+       <draft-ietf-ids-dnsnames-02> for consideration as a Best
+       Current Practices RFC.
+
+     o IMAP4 Referrals <draft-gahrns-imap-referrals-01> for
+       consideration as a Proposed Standard.
+
+
+  5. Four new working groups were created
+
+       QoS Routing (qosr)
+       TCP Implementation (tcpimpl)
+       Secure Shell (secsh)
+       The Internet and the millenium problem (2000)
+
+
+
+
+IMR Editor                                                      [Page 4]
+
+Internet Monthly Report                                    February 1997
+
+
+  6. There were 101 Internet-Draft Actions during the month of
+     February, 1997:
+
+     (ospf)     o OSPF Version 2 <draft-ietf-ospf-version2-10.txt>
+     (none)     o Definitions of Managed Objects for the Fabric
+                  Element in Fibre Channel Standard
+                  <draft-teow-fabric-mib-02.txt>
+     (ipsec)    o Internet Security Association and Key Management
+                  Protocol (ISAKMP) <draft-ietf-ipsec-isakmp-07.txt,
+                  .ps>
+     (atommib)  o Definitions of Supplemental Managed Objects for ATM
+                  Management <draft-ietf-atommib-atm2-08.txt>
+     (intserv)  o Specification of Guaranteed Quality of Service
+                  <draft-ietf-intserv-guaranteed-svc-07.txt>
+     (none)     o SMTP Service Extension for Authentication
+                  <draft-myers-smtp-auth-05.txt>
+     (mixer)    o MIXER (Mime Internet X.400 Enhanced Relay): Mapping
+                  between X.400 and RFC 822/MIME
+                  <draft-kille-mixer-rfc1327bis-04.txt>
+     (vgmib)    o Definitions of Managed Objects for IEEE 802.12
+                  Repeater Devices
+                  <draft-ietf-vgmib-repeater-dev-03.txt>
+     (mixer)    o Mapping between X.400 and RFC-822/MIME Message
+                  Bodies <draft-ietf-mixer-bodymap-06.txt>
+     (none)     o Simple Authentication and Security Layer (SASL)
+                  <draft-myers-auth-sasl-08.txt>
+     (mixer)    o A MIME body part for FAX
+                  <draft-ietf-mixer-fax-01.txt>
+     (mixer)    o A MIME body part for ODA
+                  <draft-ietf-mixer-oda-01.txt>
+     (pppext)   o PPP EAP RSA Public Key Authentication Protocol
+                  <draft-ietf-pppext-eaprsa-04.txt>
+     (madman)   o LDAP/CLDAP/X.500 Directory Services Monitoring MIB
+                  <draft-ietf-madman-dsa-mib-1-02.txt>
+     (pppext)   o The PPP Bandwidth Allocation Protocol (BAP) The PPP
+                  Bandwidth Allocation Control Protocol (BACP)
+                  <draft-ietf-pppext-bacp-06.txt>
+     (mixer)    o Carrying PostScript in X.400 and MIME
+                  <draft-ietf-mixer-postscript-01.txt>
+     (dnsind)   o Clarifications to the DNS Specification
+                  <draft-ietf-dnsind-clarify-05.txt>
+     (idmr)     o Distance Vector Multicast Routing Protocol
+                  <draft-ietf-idmr-dvmrp-v3-04.txt, .ps>
+     (dnssec)   o Secure Domain Name System Dynamic Update
+                  <draft-ietf-dnssec-update-04.txt>
+     (http)     + Transparent Content Negotiation in HTTP
+                  <draft-ietf-http-negotiation-00.txt>
+     (none)     o Netstrings <draft-bernstein-netstrings-02.txt>
+
+
+
+IMR Editor                                                      [Page 5]
+
+Internet Monthly Report                                    February 1997
+
+
+     (none)     o Public Information Retrieval Protocol (PIRP)
+                  <draft-bernstein-pirp-02.txt>
+     (none)     o Tools in the War on Mail Loops
+                  <draft-bernstein-mail-loops-war-02.txt>
+     (none)     o Notice-Requested-Upon-Delivery-To (NRUDT)
+                  <draft-bernstein-nrudt-02.txt>
+     (none)     o The qmail-send Bounce Message Format (QSBMF)
+                  <draft-bernstein-qsbmf-02.txt>
+     (none)     o The Hash Convention For Mail System Status Codes
+                  (HCMSSC) <draft-bernstein-hcmssc-02.txt>
+     (none)     o Easily Parsed LIST Format (EPLF)
+                  <draft-bernstein-eplf-02.txt>
+     (atommib)  o Definitions of Managed Objects for ATM Management
+                  <draft-ietf-atommib-atm1ng-03.txt>
+     (ids)      o Best Current Practice for the Internet White Pages
+                  Service <draft-ietf-ids-ds-bcp-02.txt>
+     (svrloc)   + Finding Stuff (How to discover services)
+                  <draft-ietf-svrloc-discovery-00.txt>
+     (ipsec)    o The resolution of ISAKMP with Oakley
+                  <draft-ietf-ipsec-isakmp-oakley-03.txt>
+     (urn)      o Resolution of Uniform Resource Identifiers using
+                  the Domain Name System
+                  <draft-ietf-urn-naptr-03.txt>
+     (svrloc)   o Service Location Modifications for IPv6
+                  <draft-ietf-svrloc-ipv6-01.txt>
+     (none)     o VENUS - Very Extensive Non-Unicast Service
+                  <draft-armitage-ion-venus-01.txt>
+     (oncrpc)   o RPCSEC_GSS Protocol Specification
+                  <draft-ietf-oncrpc-rpcsec_gss-02.txt>
+     (pppext)   + Microsoft Point-To-Point Compression (MPPC)
+                  Protocol <draft-ietf-pppext-mppc-00.txt>
+     (asid)     o Lightweight Directory Access Protocol (v3): UTF-8
+                  String Representation of Distinguished Names
+                  <draft-ietf-asid-ldapv3-dn-01.txt>
+     (asid)     o An Approach for Using Domains in LDAP Distinguished
+                  Names <draft-ietf-asid-ldap-domains-01.txt>
+     (none)     o The Owner Hack <draft-bernstein-owner-hack-01.txt>
+     (none)     o RTP Payload Format for Bundled MPEG
+                  <draft-civanlar-bmpeg-01.txt>
+     (none)     o Quick Mail Transfer Protocol (QMTP)
+                  <draft-bernstein-qmtp-01.txt>
+     (bmwg)     o Benchmarking Terminology for LAN Switching Devices
+                  <draft-ietf-bmwg-lanswitch-03.txt>
+     (none)     + A Framework for Providing Integrated Services Over
+                  Shared and Switched LAN Technologies
+                  <draft-ietf-issll-is802-framework-00.txt>
+     (none)     o A Mail-Safe Transformation Format of Unicode
+                  <draft-goldsmith-utf7-01.txt>
+
+
+
+IMR Editor                                                      [Page 6]
+
+Internet Monthly Report                                    February 1997
+
+
+     (none)     o Advanced Sockets API for IPv6
+                  <draft-stevens-advanced-api-01.txt>
+     (none)     o Transaction Internet Protocol
+                  <draft-lyon-itp-nodes-01.txt>
+     (none)     o Network Data Management Protocol
+                  <draft-stager-pdc-netapp-backup-01.txt>
+     (roamops)  o The Network Access Identifier
+                  <draft-ietf-roamops-nai-01.txt>
+     (none)     o POP3 AUTHentication command
+                  <draft-myers-sasl-pop3-01.txt>
+     (urn)      o A Trivial Convention for using HTTP in URN
+                  Resolution <draft-ietf-urn-http-conv-01.txt>
+     (applmib)  o Definitions of Managed Objects for WWW Servers
+                  <draft-ietf-applmib-wwwmib-01.txt>
+     (mmusic)   o Real Time Streaming Protocol (RTSP)
+                  <draft-ietf-mmusic-rtsp-01.txt, .ps>
+     (dnsind)   o Negative Caching of DNS Queries (DNS NCACHE)
+                  <draft-ietf-dnsind-ncache-02.txt>
+     (none)     o StarBurst Multicast File Transfer Protocol (MFTP)
+                  Specification <draft-miller-mftp-spec-02.txt>
+     (none)     o IMAP4 Referrals
+                  <draft-gahrns-imap-referrals-01.txt>
+     (mobileip) o Reverse Tunneling for Mobile IP
+                  <draft-ietf-mobileip-tunnel-reverse-01.txt>
+     (none)     o Extensions to the Internet Relay Chat Protocol
+                  (IRCX) <draft-pfenning-irc-extensions-01.txt>
+     (ion)      + NHRP for Destinations off the NBMA Subnetwork
+                  <draft-ietf-ion-r2r-nhrp-00.txt>
+     (http)     + HTTP State Management Mechanism (Errata)
+                  <draft-ietf-http-state-mgmt-errata-00.txt, .ps>
+     (calsch)   + Internet Calendaring and Scheduling Core Object
+                  Specification (iCalendar)
+                  <draft-ietf-calsch-ical-00.txt>
+     (calsch)   + Core Object Specification - Issues Document
+                  <draft-ietf-calsch-ical-issues-00.txt>
+     (ipngwg)   + Management Information Base for IP Version 6:
+                  Textual Conventions and General Group
+                  <draft-ietf-ipngwg-ipv6-mib-00.txt>
+     (ipngwg)   + Management Information Base for IP Version 6:
+                  ICMPv6 Group
+                  <draft-ietf-ipngwg-ipv6-icmp-mib-00.txt>
+     (ipngwg)   + Management Information Base for IP Version 6: UDP
+                  and TCP Groups
+                  <draft-ietf-ipngwg-ipv6-udp-tcp-mib-00.txt>
+     (none)     + A Framework for Inter-Domain Route Aggregation
+                  <draft-chen-aggregation-framework-00.txt>
+     (none)     + MAPOS - Multiple Access Protocol over SONET/SDH
+                  Version 1 <draft-maruyama-mapos-sonet-00.txt>
+
+
+
+IMR Editor                                                      [Page 7]
+
+Internet Monthly Report                                    February 1997
+
+
+     (none)     + Extensions for Distributed Authoring and Versioning
+                  on the World Wide Web -- WEBDAV
+                  <draft-jensen-webdav-ext-00.txt>
+     (fax)      + Tag Image File Format (TIFF) - Class F
+                  <draft-ietf-fax-tiff-00.txt>
+     (http)     + HTTP Remote Variant Selection Algorithm -- RVSA/1.0
+                  <draft-ietf-http-rvsa-v10-00.txt>
+     (frnetmib) + Frame Relay Service Extensions MIB for Switched
+                  PVCs <draft-ietf-frnetmib-spvc-00.txt>
+     (none)     + Telnet Remote Serial Port (RSP) Option
+                  <draft-rfced-info-bennett-00.txt>
+     (none)     + Electronic Part Catalog to Business System
+                  Interface <draft-rfced-info-sheppard-00.txt>
+     (find)     + A CIP-based Centroid Exchange for LDAP
+                  <draft-ietf-find-ldapc-00.txt>
+     (calsch)   + Calendaring Interoperability over HTTP (CIH)
+                  <draft-ietf-calsch-cih-00.txt>
+     (svrloc)   + Advertising Services (Providing information to
+                  support service discovery)
+                  <draft-ietf-svrloc-advertising-00.txt>
+     (svrloc)   + Defining White Pages and Yellow Pages Services
+                  <draft-ietf-svrloc-wpyp-00.txt>
+     (rsvp)     + RSVP Extensions for CIDR Aggregated Data Flows
+                  <draft-ietf-rsvp-cidr-ext-00.txt>
+     (mboned)   + Some Issues for an Inter-domain Multicast Routing
+                  Protocol
+                  <draft-ietf-mboned-imrp-some-issues-00.txt>
+     (none)     + Dublin Core Metadata for Simple Resource
+                  Description <draft-kunze-dc-00.txt>
+     (svrloc)   + Service Specific Multicast Address Assignment for
+                  use with the Service Location Protocol
+                  <draft-ietf-svrloc-service-mcast-00.txt>
+     (mobileip) + Mobile IPv4 Configuration Option for PPP IPCP
+                  <draft-ietf-mobileip-pppconf-00.txt>
+     (cat)      + Public Key Utilizing Tickets for Application
+                  Servers (PKTAPP) <draft-ietf-cat-pktapp-00.txt>
+     (none)     + Communicating Presentation Information in Internet
+                  Messages: The Content-Disposition Header Field
+                  <draft-moore-mime-cdisp-00.txt>
+     (none)     + An Extension to the Web Robots Control Method for
+                  supporting Mobile Agents
+                  <draft-giudici-web-robots-cntrl-00.txt>
+     (mboned)   + Guidelines for Rate Limits on the MBONE
+                  <draft-ietf-mboned-limit-rate-guide-00.txt>
+     (none)     + Light-weight Flow Admission Protocol Specification
+                  Version 1.0 <draft-rfced-info-amsden-00.txt>
+     (none)     + BOOTP and DHCP on Mixed Media Link-Layer Networks
+                  <draft-martel-bootp-mixedlinklayers-00.txt>
+
+
+
+IMR Editor                                                      [Page 8]
+
+Internet Monthly Report                                    February 1997
+
+
+     (none)     + Intra-LIS IP multicast among routers over ATM
+                  <draft-farinacci-intralis-multicast-00.txt>
+     (mixer)    + Use of an X.500/LDAP directory to support MIXER
+                  address mapping <draft-ietf-mixer-directory-00.txt>
+     (ipngwg)   + GSE - An Alternate Addressing Architecture for IPv6
+                  <draft-ietf-ipngwg-gseaddr-00.txt>
+     (mboned)   + PIM Multicast Border Router (PMBR) specification
+                  for connecting PIM-SM domains to a DVMRP Backbone
+                  <draft-ietf-mboned-pmbr-spec-00.txt, .ps>
+     (asid)     + Selecting a server from among many replicas
+                  <draft-ietf-asid-replica-selection-00.txt>
+     (asid)     + LDAP Control Extension for Simple Paged Results
+                  Manipulation
+                  <draft-ietf-asid-ldapv3-simplepaged-00.txt>
+     (none)     + Fine-Grained Transclusion in the Hypertext Markup
+                  Language <draft-pam-html-fine-trans-00.txt>
+     (tcplw)    + TCP Extensions for High Performance
+                  <draft-ietf-tcplw-high-performance-00.txt>
+     (none)     + UUIDs and GUIDs <draft-leach-uuids-guids-00.txt>
+     (none)     + E-mail addressing: the worst of all worlds?
+                  <draft-klyne-addressing-00.txt>
+     (rmonmib)  + Remote Network Monitoring Management Information
+                  Base for High Capacity and Switched Networks
+                  <draft-ietf-rmonmib-hcrmon-00.txt>
+     (none)     + DHCP Option for Proxy Client Configuration File
+                  <draft-kwan-proxy-client-conf-00.txt>
+     (none)     + Requirements for Distributed Authoring and
+                  Versioning on the World Wide Web
+                  <draft-slein-www-dist-author-00.txt>
+     (none)     + GSE+ - An Alternate Addressing Architecture to GSE
+                  <draft-durand-gse+-00.txt>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+IMR Editor                                                      [Page 9]
+
+Internet Monthly Report                                    February 1997
+
+
+  7. 14 RFCs were published during this period
+
+     RFC2000 S  (none)    INTERNET OFFICIAL PROTOCOL STANDARDS
+     RFC2076 I  (mailext) Common Internet Message Headers
+     RFC2085 PS (ipsec)   HMAC-MD5 IP Authentication with Replay
+                          Prevention
+     RFC2090 E  (none)    TFTP Multicast Option
+     RFC2098 I  (none)    Toshiba's Router Architecture Extensions
+                          for ATM : Overview
+     RFC2101 I  (none)    IPv4 Address Behaviour Today
+     RFC2102 I  (nimrod)  Multicast Support for Nimrod : Requirements
+                          and Solution Approaches
+     RFC2103 I  (nimrod)  Mobility Support for Nimrod : Challenges
+                          and Solution Approaches
+     RFC2104 I  (ipsec)   HMAC: Keyed-Hashing for Message
+                          Authentication
+     RFC2105 I  (none)    Cisco Systems' Tag Switching Architecture
+                          Overview
+     RFC2107 I  (none)    Ascend Tunnel Management Protocol - ATMP
+     RFC2108 PS (hubmib)  Definitions of Managed Objects for IEEE
+                          802.3 Repeater Devices using SMIv2
+     RFC2109 PS (http)    HTTP State Management Mechanism
+     RFC2113 PS (none)    IP Router Alert Option
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+IMR Editor                                                     [Page 10]
+
+Internet Monthly Report                                    February 1997
+
+
+INTERNET PROJECTS
+-----------------
+
+
+INTERNIC
+--------
+
+     REGISTRATION SERVICES
+
+     InterNIC statistics from February follows:
+
+     Current Status
+
+     February:         Email: 257,969
+             Phone: 38,318
+
+             Gopher connections: 6579        retrievals: 20,871
+             WAIS connections: 27,616        retrievals: 14,222
+             FTP connections: 90,760         retrievals: 178,580
+             Telnet: 54,174
+             Http: not available
+
+     Whois Queries: 13,148,824
+
+     Total Registrations: 90,885
+
+     Rich Landers <richl@internic.net>
+
+
+     INTERNIC DIRECTORY AND DATABASE SERVICES
+
+     We recently built a new search engine which is in service on our
+     production machines.  WebFinder is designed to help users who are
+     looking for a particular organization on the web.  It looks for
+     the organization's web servers rather than specific web pages.  It
+     uses the same seed database that we maintain for Netfind.
+
+     To try WebFinder, look at:
+
+         http://ds.internic.net/ds/webfinder/WebFinder.html
+
+     In early February one of our servers (ds2.internic.net) was moved
+     from Columbus, Ohio to Middletown, Virginia.  The machine is back
+     up and running with the same name and services but a new IP
+     address.
+
+
+
+
+
+
+IMR Editor                                                     [Page 11]
+
+Internet Monthly Report                                    February 1997
+
+
+     A reminder - if you would like to help the Internet community find
+     a resource that you offer, send mail to admin@ds.internic.net and
+     we will send information about listing your resource in the
+     Directory of Directories.  If you prefer, you can enter
+     information about your resource in our WWW suggestion form.  The
+     form can be reached through our Directory of Directories Web page
+     at:
+
+         http://ds.internic.net:80/ds/dsdirofdirs.html
+
+     by Rick Huber <rvh@ds.internic.net>
+
+
+     THE US DOMAIN REGISTRY
+     ----------------------
+
+     The US Domain has an online registration form available at
+     http://www.isi.edu/us-domain.
+
+     The US Domain administrator no longer makes direct registrations of
+     hosts, and only makes delegations of third or fourth level domain
+     names (such as localities).
+
+     Some of the processing of the requests to the third level domain
+     name is now automated. In particular, most requests to register
+     names in localities already delegated are automatically forwarded
+     to the administrator of that locality.
+
+     The policy regarding the charges for the domain name passed on
+     during delegation is that the administrator of the locality has to
+     notify one year in advance before charging for those domains.
+
+     US DOMAIN ADMINISTRATIVE INFORMATION
+     ====================================
+
+
+             EMAIL/FAX             2777
+             PHONE                  475
+             ----------------------------
+             Total Contacts        3252
+
+
+             DELEGATIONS            138
+             FORWARDED REQUESTS:    920
+             OTHER US DOMAIN MSGS: 2194
+             ---------------------------
+             Total                 3252
+
+
+
+
+IMR Editor                                                     [Page 12]
+
+Internet Monthly Report                                    February 1997
+
+
+     OTHER US DOMAIN MESSAGES include referrals to other subdomains or
+     to/from the InterNic, phone calls, modifications, application
+     requests, discussion and clarification of the requests, questions
+     about names, resolving technical problems with zone files and name
+     servers, and whois listings.
+
+
+     MAJOR SUBDOMAINS DELEGATED
+     ==========================
+
+
+     K12     CC      TEC     STATE   LIB     MUS     GEN     DST     COG
+     ===================================================================
+     51      38      34      47      39      25      25      9       5
+     ===================================================================
+
+
+     THIRD LEVEL DELEGATIONS
+     ========================
+
+     FED.US.                         Federal Governments, US.
+
+     LOCALITIES
+     ==========
+
+     WMAT.NSN.US.                    KIRTLAND.OH.US.
+     DAVIE.NC.US.                    FRANKLIN.NH.US.
+     GORHAM.ME.US.                   CAPE-ELIZEBETH.ME.US.
+     LISBON.ME.US.                   LIMESTONE.ME.US.
+     GARDINER.ME.US.                 TOPSHAM.ME.US.
+     FAIRFIELD.ME.US.                RUMFORD.ME.US.
+     PHOENIX.OR.US.                  BROWNFIELD.TX.US.
+     LEVELLAND.TX.US.                LITTLEFIELD.TX.US.
+     INTERLAKEN.NY.US.               LODI.NY.US.
+     MECKLENBURG.NY.US.              ROMULUS.NY.US.
+     WATERLOO.NY.US.                 WATKINS-GLEN.NY.US.
+     HECTOR.NY.US.                   SENECA-FALLS.NY.US.
+     OVID.NY.US.                     ULYSSES.NY.US.
+     COVERT.NY.US.                   STEPHENS.OK.US.
+     DOUGLAS.WI.US.                  LINCOLN.LA.US.
+     LEE.NC.US.                      GILA.AZ.US.
+     KENAI-PENINSULA.AK.US.          ROUTT.CO.US.
+     CEDAREDGE.CO.US.                RIFLE.CO.US.
+     YORKVILLE.IL.US.                OSWEGO.IL.US.
+     ROCK-FALLS.IL.US.               LONOKE.AR.US.
+     LAWRENCEBURG.IN.US.             CASWELL-BEACH.NC.US.
+     YAUPON-BEACH.NC.US.             ALBERTA.VA.US.
+     BOYDTON.VA.US.                  BRACEY.VA.US.
+
+
+
+IMR Editor                                                     [Page 13]
+
+Internet Monthly Report                                    February 1997
+
+
+     BRUNSWICK.VA.US.                CHARLOTTE.VA.US.
+     CHASE-CITY.VA.US.               CLARKSVILLE.VA.US.
+     CREWE.VA.US.                    GREENSVILLE.VA.US.
+     HALIFAX.VA.US.                  LAWRENCEVILLE.VA.US.
+     LUNENBURG.VA.US.                MECKLENBURG.NY.US.
+     NOTTOWAY.VA.US.                 SOUTHSIDE.VA.US.
+     HEARD.GA.US.                    HARRIS.GA.US.
+     MERIWETHER.GA.US.               TOMBSTONE.AZ.US.
+     COFFEE.AL.US.                   COFFEE.TN.US.
+     BARRON.WI.US.                   PREBLE.OH.US.
+     WEBSTER.LA.US.                  DEARBORN.IN.US.
+     DUNDEE.IL.US.                   LAURENS.GA.US.
+     BALDWIN.GA.US.                  SWEETWATER.WY.US.
+     WISE.VA.US.                     MERCER.OH.US.
+     VANCE.NC.US.                    LOWER-PAXTON.PA.US.
+     FULTON.OH.US.                   PEARL-RIVER.MS.US.
+     BINGHAM.ID.US.                  WEBSTER.IA.US.
+     DUPLIN.NC.US.                   SANILAC.MI.US.
+     ELLISVILLE.AL.US.               ERIE.OH.US.
+     MONROE.FL.US.                   HILLSBOROUGH.FL.US.
+     SIGNAL-HILL.CA.US.              EPPING.NH.US.
+     ASPEN.CO.US.                    BAILEY.CO.US.
+     MASON.WA.US.                    FRANKLIN.WA.US.
+     SOUTHBOROUGH.MA.US.
+
+     OTHER US DOMAIN DELEGATIONS THIS MONTH
+     ======================================
+
+     CASTANET.GEN.CA.US.             CI.JACKSON.WY.US.
+     CO.PATRICK.VA.US.               NID.DST.CA.US.
+     BERGIN.BOONE.NC.US.             FEML.LIB.OK.US.
+     WEALTHYPARKBAPTIST.GEN.MI.US.   CI.HOLBROOK.AZ.US.
+     CI.NORTHVILLE.MI.US.            NSCS.GUEMES.WA.US.
+     CI.FUQUAY-VARINA.NC.US.         ELLIS.CENTRE.AL.US.
+     CI.NEWTON.NC.US.                YEARROM.HAZEL-GREEN.AL.US.
+     CI.SMITHVILLE.TX.US.            SLOAPCD.DST.CA.US.
+     CO.CANADIAN.OK.US.              EUFAULA.LIB.OK.US.
+     CI.WILBER.NE.US.                CI.SILVER-CREEK.NE.US.
+     CI.OHIOWA.NE.US.                CI.GORDON.NE.US.
+     CI.ELGIN.NE.US.                 CI.PLATTSBURGH.NY.US.
+     AUGUSTA-RICHMOND.COG.GA.US.     KANZA.CO.ANMDERSON.KS.US.
+     WINDOW.SANDERSON.TX.US.         LATTA.K12.OK.US.
+     NOCROP.TEC.CA.US.               CI.SOUTHLAKE.TX.US.
+     LARPD.DST.CA.US.                EWC.CC.WY.US.
+     CUMBERLAND.TEC.NJ.US.           CCTS.TEC.NJ.US.
+     VICISCHOOLS.K12.OK.US.          MID-DEL.K12.OK.US.
+     IMAGE.TALKEETNA.AK.US.          PASADENA.LIB.CA.US.
+     CODE.TROY.SC.US.                CI.CLARKSON.NE.US.
+
+
+
+IMR Editor                                                     [Page 14]
+
+Internet Monthly Report                                    February 1997
+
+
+     CI.FAIRMONT.NE.US.              CCCSAW.DST.CA.US.
+     SJPL.LIB.CA.US.                 SPS.K12.OK.US.
+     JASMINEMORAN.MUS.OK.US.         TWP.SOUTH-BRUNSWICK.NJ.US.
+
+     -----------------------------------------------------------
+
+     URL: http://www.isi.edu/us-domain/
+
+     Shanthi Ranganathan (US-Domain@ISI.EDU)
+
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+MERIT INTERNET ENGINEERING
+--------------------------
+
+     This report summarizes February 1997 activities of Merit's Internet
+     Engineering group on behalf of the Routing Arbiter (RA) service and
+     other projects.
+
+     Merit is seeking beta testers for Trawhoisd (Trivial rawhoisd), the
+     distributed version of the Routing Arbiter Database whois server.
+     Trawhoisd allows users to cache any or all of the databases in the
+     Internet Routing Registry on local workstations, giving users
+     complete, local administrative control of their own registry. Users
+     can select a subset of the registries to be locally cached--only AS
+     objects, Route objects, or Maintainer objects, for example.  This
+     kind of flexibility brings considerable savings in cache storage
+     requirements--a major concern for users maintaining their own
+     copies of the IRR.   The streamlined Trawhoisd code is easy to
+     install, and runs under SunOS, Solaris, and Digital Unix.  If you
+     would like to test the new code, please send e-mail to db-
+     admin@radb.ra.net.
+
+     Route Server Next Generation (RSng) operations are now up and
+     running at the Digital Internet Exchange, Digital's exchange point
+     in Palo Alto CA.  Two DEC Alphas running Digital Unix are in
+     production at the site. RSng services went into production at the
+     MAE-East interconnection point in January. By taking over the task
+     of processing routing updates for ISP routers, the Route Servers
+     eliminate the need to establish separate peering sessions with
+     other routers at each exchange point.  The Route Servers boost
+     throughput for ISP routers and allow faster delivery of customers'
+     data through the Internet.
+
+
+
+
+IMR Editor                                                     [Page 15]
+
+Internet Monthly Report                                    February 1997
+
+
+     The Route Servers were developed under the NSF-supported Routing
+     Arbiter project, a partnership between Merit and the USC
+     Information Sciences Institute.  RSng, a commercial follow-on
+     activity, makes it possible for exchange point operators to
+     purchase Route Server services from Merit.
+
+     For more information, see:
+
+         http://www.rsng.net
+
+     Intensive IPv6 development work continues for Merit's Multi-
+     Threaded Routing Toolkit (MRT).  MRT now provides IPv6 supports
+     for:
+
+       - Solaris IPv6 Release 5 (Solaris 2.5 and 2.5.1)
+       - Linux IPv6 (2.1.24 and later)
+       - INRIA IPv6 (FreeBSD 2.1 and 2.1.5)
+
+     Non-IPv6-compliant versions of MRT run under:
+       - Solaris 2.5 and 2.5.1
+       - SunOS 4.1.3 and 4.1.4
+       - Linux 2.0 and later
+       - FreeBSD 2.1 and 2.1.5
+       - NetBSD 1.1 and 1.2
+
+     MRT's RIPng implementation now interoperates with DEC, Cisco, and
+     Bay Networks routers over the 6bone.  In addition, MRT's BGP
+     implementation has been extended to support the COMMUNITIES
+     attribute.  The current MRT development platforms are a four-
+     processor SPARCstation 20 running Solaris IPv6 Release 5 on Solaris
+     2.5.1 with POSIX threads support, and Intel Pentium Pro and 486DX
+     systems running INRIA IPv6 on FreeBSD 2.1.5 and Linux IPv6 2.1.24.
+
+     MRT developers Craig Labovitz and Masaki Hirabaru would like to
+     thank their colleagues in Japan, Portugal, the Netherlands, the UK,
+     and the US for their many contributions, including bug fixes,
+     patches, and Unix ports.  For more information about MRT, see:
+
+       http://www.merit.edu/~mrt/
+
+
+
+
+
+
+
+
+
+
+
+
+IMR Editor                                                     [Page 16]
+
+Internet Monthly Report                                    February 1997
+
+
+     PacBell hosted the ninth North American Network Operators' Group
+     (NANOG) meeting in San Francisco on February 10-11.  Stan Barber of
+     Academ Consulting Services has kindly made available a complete set
+     of notes and slides from the meeting; they are available through
+     Merit's Web site (http://www.nanog.org).  Bill Norton of Merit
+     moderated the meeting, which featured the following presentations
+     and BOFs:
+
+     >Common Metrics for                K. Claffy, NLANR, moderator
+      Exchange Points
+
+     >TCP Response Under Loss           Curtis Villamizar, ANS
+      Conditions
+
+     >InterNIC Update                   Mark Kosters and Kim Hubbard,
+                                        InterNIC
+
+     >Congestion in Network Switches    Stephen Polit, Digital
+
+     >End-to-End TCP Packet             Vern Paxson, Lawrence Berkeley
+      Dynamics                          Lab
+
+     >Internet II:  Pragmatic           Steve Corbato, Univ. of
+      Views from Higher Education       Washington
+                                        Dave Meyer, Univ. of Oregon
+
+     >Report on Inter-Provider          Randy Bush, WNA
+      Cooperation
+
+     >Introducing Trawhoisd             Xin Liu, Merit
+
+     >AS Object Editor                  WeeSan Lee, ISI
+
+     >Using the IRR to Assist           Curtis Villamizar, ANS
+      With Aggregation
+
+     >Consideration of Policy:          Laura Cunningham, MCI
+      What's Needed and Can RSVP Help?
+
+     >RA Update                         Bill Norton, Merit
+                                        Bill Manning, ISI
+
+     >Internet Routing                  Craig Labovitz, Merit
+      Instability
+
+     >Squid Update                      Duane Wessels, NLANR
+
+
+
+
+
+IMR Editor                                                     [Page 17]
+
+Internet Monthly Report                                    February 1997
+
+
+     >Non-BGP Multihoming for Web       Paul Vixie, CIX
+      Sites
+
+     >What can be Done About            Curtis Villamizar, ANS
+      HTTP and Small TCP Flows?
+
+     >How to be a Good MBone            Bill Fenner, Xerox PARC
+      Neighbor
+
+     >Controlling Network Abuse         Paul Vixie, CIX
+      Using BGP-4
+
+     ---------
+
+     BOFS:  TRACK 1
+
+     >Exchange Point Engineering        Bill Manning, ISI
+      Issues
+
+     >Flow Switching Analysis           John Hawkinson, BBN Planet
+                                          Daniel McRobb, ANS
+
+     BOFs:  TRACK 2
+
+     >Route Server Peering at the       Jake Khuon and
+      IXPs: Procedures, Policy,         Abha Ahuja, Merit
+      and Connectivity
+
+
+     >MLPAs: All for One, One for       Bill Woodcock, Packet Clearing
+      All                               House
+
+     Susan R. Harris (srh@merit.edu)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+IMR Editor                                                     [Page 18]
+
+Internet Monthly Report                                    February 1997
+
+
+IANA REPORT
+-----------
+
+     Here are IANA's assignments for February:
+
+     Cable Address Blocks                            1
+     Country Codes                                   3
+     INT TLDs                                        2
+     Media Types                                     18
+     Multicast Addresses: Individual Assignments     1
+     Multicast Addresses: Blocks                     4
+     Point-to-Point Protocol Assignments             3
+     Port Assignments                                21
+     SMI Numbers                                     1
+
+
+     Josh Elliott <iana@iana.org>
+
+RFC-EDITOR REPORT
+-----------------
+
+     This is a summary of Request for Comments Editor activity for the
+     month of February, 1997:
+
+                                  TIME IN QUEUE
+     DOCUMENTS        New*   30 days     60 days      90 days      TOTAL
+     ------------------------------------------------------------------
+                                                                  |
+     Beginning of                                                 |
+     month             0        13          5            21       |  39
+                                                                  |
+     New              12         0          0             0       |  12
+
+     Processed         3         1          1            17       |  22
+     ------------------------------------------------------------------
+
+     End of month      9        12          4             4       |  29
+
+     * New RFCs added to queue throughout the month
+
+
+
+
+
+
+
+
+
+
+
+
+IMR Editor                                                     [Page 19]
+
+Internet Monthly Report                                    February 1997
+
+
+     The Requests for Comments (RFCs) are a series of notes, started in
+     1969, about the Internet (originally the ARPANET). The notes
+     discuss many aspects of computing and computer communication
+     focusing in networking protocols, procedures, programs, and
+     concepts, but also including meeting notes, opinion, and sometimes
+     humor. The specification documents of the Internet protocol suite,
+     as defined by the Internet Engineering Task Force (IETF) and its
+     steering group (the IESG), are published as RFCs.
+
+     RFCs-to-be are edited by the RFC Editor.  RFCs enter the RFC
+     Editor's work queue either by an action of the IESG or by
+     independent submission.  Most independent submissions are referred
+     to the IESG to check for overlap with IETF work.  The IESG might
+     put a hold on a document to gather more input from its members.
+     The wait for an RFC to be published varies as there can be
+     unforeseen complications (typically editorial matters that need
+     clarification from the author).  Documents can be removed from the
+     publication queue if they are found to be insufficient or incorrect
+     or if the IESG asks the author to join work already in progress in
+     the IETF.
+
+     Mary Kennedy <rfc-ed@isi.edu>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+IMR Editor                                                     [Page 20]
+
+Internet Monthly Report                                    February 1997
+
+
+CALENDAR
+--------
+
+Last update 04/01/97
+
+The information below has been submitted to the IETF Secretariat
+as a means of notifying readers of future events. Readers are
+requested to send in dates of events that are appropriate for this
+calendar section. Please send submissions, corrections, etc., to:
+
+               <meeting-planning@ietf.org>
+
+Please note: The Secretariat does not maintain on-line information
+for the events listed below.
+
+A copy of this calendar is available as follows:
+
+VIA FTP
+-------
+IETF Information is available by anonymous FTP from several sites.
+
+        US East Coast Address:  ds.internic.net (198.49.45.10)
+        US West Coast Address:  ftp.isi.edu (128.9.0.32)
+        Europe Address:  nic.nordu.net (192.36.148.17)
+        Pacific Rim Address:  munnari.oz.au (128.250.1.21)
+        Africa Address:       ftp.is.co.za (196.4.160.12)
+
+cd ietf
+ls *0mtg*
+
+
+WWW
+-------
+<http://www.ietf.org/home.html> Click on the link for "meetings" and
+you should find an entry "listing of other Internet related events".
+
+
+************************************************************************
+
+1997
+-----------
+
+Apr. 2-3          Europia '97                     Edinburgh, Scotland
+Apr. 7-10         EMA'97                          Philadelphia, PA
+Apr. 7-11         38th IETF (host by Fed. Exp)    Memphis, TN
+Apr. 7-11         ANSI X3T11 (Brocade)            Palm Springs, CA
+Apr. 7-11         IEEE INFOCOM '97                Kobe, Japan
+Apr. 7-12         W3C "Accessibility" 6th Int'l   Santa Clara, CA
+
+
+
+IMR Editor                                                     [Page 21]
+
+Internet Monthly Report                                    February 1997
+
+
+Apr. 9-11         ISADS 97 - 3rd Intl Symposium on
+                  Autonmous Decentralized Sys.    Berlin, Germany
+Apr. 21-22        1st European Conf on Internet
+                   Voting and Rating              Vienna, Austria
+Apr. 22-24        DCI's Internet Expo             Chicago, IL
+Apr. 27-May 2     ATM Forum                       Chicago, IL
+Apr. 28-May 2     HPN'97 (High Performance Net)   White Plains, NY
+May  5-9          ANSI X3T10 '97
+May 5-9           NATO Workshop                   Edinburgh, Scotland
+May 12-15         8th JENC8                       Edinburgh, Scotland
+May 12-16         IFIP/IEEE                       San Diego, CA
+May 15-16         TERENA General Assembly         Edinburgh, Scotland
+May 19-21         7th Int'l Workshop on Ntwk & Oper
+                  for Digital Audio & Video       St. Louis, MO
+May 21-23         RIPE 27                         Dublin
+May 27-29         IS&N '97  4th Int'l Conf. on
+                   Intelligence in Services & Networks  Como, Italy
+May 28-30         ETW'97 IEEE Europen Test Wrkshop   Cagliari,Italy
+May 28-30         Web Developer '97               Chicago, IL
+Jun. 2-6          IEEE Multimedia Systems '97     Ottawa, CANADA
+Jun. 3-5          Internet World Mexico '97       Mexico City, Mexico
+Jun. 8-12         ICC '97 (joint with ENM)        Montreal, CANADA
+Jun. 9-13         OIW (Firm)
+Jun. 9-13         ANSI X3T11 (host by Boeing)     Seattle, WA
+Jun. 16-18        EEMA'97                         Netherlands
+Jun. 23-25        4th IEEE Wrkshp on the Architecture and
+                   Implementation of High Performance
+                   Communication Systems (HPCS'97) Sani Beach, Greece
+Jun. 24-27        INET '97                        Kuala Lumpur, Malaysia
+Jul. 7-11         IEEE 802 '97 Hyatt Regency      Maui, Lahaina HI
+Jul. 14-18        ANSI X3T10 '97
+Jul. 14-17        APPN Implementers Workshop      San Jose, CA
+Jul. 17-19        VTIC-97                         San Jose CA
+Jul. 20-25        ATM Forum                       Montreal, CANADA
+Jul. 24-25        DMS '97                         Vancouver, CANADA
+Aug. 4-8          ANSI X3T11 (host by Hitachi)    Honolulu, HI
+Aug. 11-15        39th IETF (host by German ISOC) Munich, Germany
+Aug. 12-14        DCI's Internet Expo             Boston, MA
+Aug. 13-15        IEEE 25th Annual Int'l Computer Software and
+                   Application Conference         Washington, DC
+Sep  2-5          1997 Int'l Conference
+                  Intelligent Networks and
+                  Intelligence in Networks        Paris, France
+Sep. 8-12         ANSI X3T10 '97
+Sep. 8-12         OIW (Firm)
+Sep. 8-14         TELECOM Interactive 97          Geneva, Switzerland
+Sep. 10-12        IDMS '97  w/ ACM SIGMM, GMD, IEEE
+                                                  Darmstadt, Germany
+
+
+
+IMR Editor                                                     [Page 22]
+
+Internet Monthly Report                                    February 1997
+
+
+Sep. 14-18        ACM SIGCOMM '97  Cannes, French Riviera, France
+Sep. 21-26        ATM Forum                       Paris, France
+Sep. 26-30        3rd ACM/IEEE on Mobile Computing
+                   & Networking 1997 (MobiCom'97) Budapest, Hungary
+Oct. 6-10         ANSI X3T11  (host by FSI)       Tucson, AZ
+Oct. 7-10         COMDEX Internet '97 and Object World '97
+                  Internet Forum Europe (IFE) & Object
+                     World Frankfurt (OWF)        Frankfurt, Germany
+Oct. 23-25        ETSI                            Nice, France
+Nov. 3-5          Int'l Test Conference 1997
+                  Sheraton Washington Hotel       Washington, DC
+Nov. 3-7          ANSI X3T10 '97
+Nov. 3-7          SPIE Int'l Symposium
+                   Voice, Video & Data Communications
+                   Conf. on Performance & Control of
+                   Network System - Special Session on
+                   Switching & Traffic Mgmt in
+                   High Speed Networks            Dallas, TX
+Nov. 3-7          2nd French/Brazilian Symposium
+                  on Distributed System Architectures:
+                  Telecommunication Multimedia Architectures
+                                                  Ceara, Brazil
+Nov. 8-14         ACM MULTIMEDIA '97              Seattle, WA
+Nov. 10-14        IEEE 802 Plenary  Queen Elizabeth, Montreal
+Nov. 19-21        ICCC'97                         Cannes, France
+Nov. 24-26        PROMSMmNet '97
+                   Multimedia Networking          Santiago, Chile
+Nov. 30-Dec 5     ATM Forum                       Singapore
+Dec. 1-3          30th IEEE/ACM Int'l Symposium
+                   on Microarchitecture           RTC, NC
+Dec. 1-5          ANSI X3T11 (host by DPT)        Orlando, FL
+Dec. 8-12         40th IETF (tentative)           Washington, DC
+                   Host by NewBridge
+Dec. 8-12         OIW (Firm)
+                  TELECOM '97 Asia (Venue and Dates to be Determined)
+
+1998
+-----------
+Jan 6-8           W3C Interest Group Mtg          TBA
+Feb. 8-13         ATM Forum                       TBA
+Feb 7-9           DCI'S Internet Expo             San Jose, CA
+Mar. 9-13         IEEE 802 Plenary                Irvine, CA
+Mar. 29-Apr 2     IEEE INFOCOM '98 - Hotel Nikko  San Francisco, CA
+Apr. 3-4          IEEE "OPENARCH '98"             San Francisco, CA
+Apr. 19-24        ATM Forum                       TBA
+Apr 20-22         W3C Interest Group Mtg          TBA
+SPRING 1998       TELECOM '97 Africa              Midrand, South Africa
+Jun 16-18         DCI's Internet Expo             Chicago, IL
+
+
+
+IMR Editor                                                     [Page 23]
+
+Internet Monthly Report                                    February 1997
+
+
+Jul. 6-10         IEEE 802 Plenary                San Diego, CA
+Jul. 26-31        ATM Forum                       TBA
+Aug. 23-29        15th IFIP World. Com. Conf.     Vienna, Austria and
+                                                   Budapest, Hungary
+Sep 1-3           DCI's Internet Expo             Boston, MA
+Oct. 4-9          ATM Forum                       TBA
+Oct 20-22         W3C Interest Group Mtg          TBA
+Nov. 9-13         IEEE 802 Plenary                Albuquerque, NM
+Nov. 30-Dec 4     ATM Forum                       TBA
+Dec. 6-11         43rd IETF                       Adelaide, Australia
+                   Host:  Univ. of Adelaide
+
+
+
+1999
+-----
+
+Feb 23-25         W3C Interest Group Mtg          TBA
+Jun 4-6           W3C Interest Group Mtg          TBA
+Sep 21-23         W3C Interest Group Mtg          TBA
+Oct. 8-14         TELECOM '99                     Geneva, Switzerland
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+IMR Editor                                                     [Page 24]
+
+Internet Monthly Report                                    February 1997
+
+
+TERENA CALENDAR
+---------------
+
+This list of meetings is provided for information. Many of the
+meetings are closed or by invitation; if in doubt, please contact the
+chair of the meeting or the TERENA Secretariat. If you have
+additions/corrections/comments, please mail <secretariat@terena.nl>.
+
+**********************************************************************
+
+NAME / DATE                                            LOCATION
+
+
+TERENA General Assembly
+GA7
+15-16 May                                              Edinburgh
+
+
+TERENA Technical Committee
+22 January                                             Amsterdam
+
+
+TERENA Executive Committee
+4 February                                             Amsterdam
+
+JENC8
+Programme Committee
+12 February                                            Amsterdam
+
+Conference Committee
+17 January                                             Amsterdam
+
+
+TF-CACHE
+--------
+23 January                                             Amsterdam
+
+
+EEMA
+----
+Spring Regional Conference and Exhibition
+25-26 February
+                                                       Berlin
+
+ENPG
+----
+9-10 January                                           Amsterdam
+
+
+
+
+IMR Editor                                                     [Page 25]
+
+Internet Monthly Report                                    February 1997
+
+
+European Commission
+-------------------
+Educational Multimedia Information Day
+10 January                                             Brussels
+
+ICT Partnership - General Meeting
+30 January                                             Brussels
+
+
+EWOS
+----
+EWOS Assembly 2, 25-26 February                        Brussels
+
+EWOS Assembly 3, 13-14 May                                "
+EWOS Assembly 4, 16-17 September                          "
+EWOS Assembly 5, 2-3 December                             "
+
+Workshops
+36: 20-24 January                                      Brussels
+37: 7-11 April                                            "
+38: 16-20 June                                            "
+39: 27-31 October                                         "
+
+
+
+IETF
+----
+38, 7-11 April                                         Memphis, Tenn.
+39, 11-15 August                                       Munich, Germany
+
+ISOC
+----
+Symposium
+10-11 February                                         San Diego, CA
+
+
+NATO
+----
+Workshop
+5-9 May                                                Edinburgh
+
+
+RIPE
+----
+RIPE 26
+20-22 January                                          Amsterdam
+RIPE27
+21-23 May                                              Dublin
+
+
+
+IMR Editor                                                     [Page 26]
+
+Internet Monthly Report                                    February 1997
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+TERENA CONFERENCES
+
+JENC8 - 8th Joint European Networking Conference
+
+"Diversity and Integration: The New European Networking Landscape"
+12-15 May
+Edinburgh, Scotland
+
+This conference will be the European Forum to get up-to-date
+information, to debate and assess the new deregulated
+tele-communication environment in Europe, new leading-edge
+applications, and the network/internetwork support infrastructure
+which is currently being developed
+
+Subject Areas:
+* Emerging Network Technologies and Network Engineering
+* User Support, Training and Education
+* Security and Management Issues
+* Information Systems and Distributed Applications
+* Economic and Political Issues
+
+
+For information please contact the JENC8 Secretariat at:
+
+TERENA Secretariat
+Singel 466-468
+1017 AW Amsterdam, The Netherlands
+
+tel: +31 20 6391131      fax: +31 20 6393289
+
+email: <jenc8-sec@terena.nl>
+http://www.terena.nl/jenc8
+
+or
+
+JENC8 Local Organization
+c/o Concorde Services Ltd
+Unit 5, SECC
+Glasgow, G3 8YW, Scotland
+
+email: <jenc8@ed.ac.uk>
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+
+IMR Editor                                                     [Page 27]
+
+Internet Monthly Report                                    February 1997
+
+
+OTHER CONFERENCES
+
+The Arab World and the Information Society - Regional Symposium
+---------------------------------------------------------------
+5-9 May
+Tunis, Tunisia
+Organized by ITU and UNESCO, in cooperation with the government of
+Tunisia and in the framework of RAITNET (Regional Arab Information
+Technology Network)
+For information see www site: http://www.irsit.rnrt.tn/symposium
+and/or email <symposium@irsit.rnrt.tn
+
+IS&N '97
+4th International Conference on Intelligence in Services & Networks
+-------------------------------------------------------------------
+27-29 May
+Como, Italy
+Title: "Technology for Co-operative Competition". The conference will
+provide a forum for the discussion of issues and the exchange of
+outstanding technical results related to the engineering of advanced
+communication services and experiments on their use.
+Sponsored by the European Commission and Italtel, and supported by
+ACTS projects in IS&N domain.
+Further information is available on WWW:
+http://www.uni-stuttgart.de/SONAH/Acts/domain5
+
+ECOOP'97
+11th European Conference on Object-Oriented Programming
+-------------------------------------------------------
+9-13 June
+University of Jyv=E4skyl=E4, Jyv=E4skyl=E4, Finland
+or information see www page:
+http://www.trese.cs.utwente.nl/ecoop97  or
+http://www.ecoop97.jyu.fi
+
+EEMA'97 - Annual Conference and Exhibition
+Electronic Commerce and Messaging in Europe,
+"The Premier European Forum for Advanced Business"
+-------------------------------------------------
+16-18 June
+Maastricht Exhibition and Congress Centre, Maastricht, Netherlands
+Issues of the conference will be:
+Global Security; Corporate Directories; Messaging Products & Services;
+Electronic Commerce; Global Messaging Enterprise; European
+Initiatives; Mobile Messaging Technology; Messaging Technology &
+Management Strategy; Intranet; World Wide Web & Infobots.
+For information contact WWW: http://www.eema.org/
+
+
+
+
+IMR Editor                                                     [Page 28]
+
+Internet Monthly Report                                    February 1997
+
+
+International Distributed Conference on Network Interoperability
+----------------------------------------------------------------
+16-18 June
+Madeira
+Organized by ACTS project GINA and sponsored by the European
+commission, this conference is open for all involved in networking
+solutions for information society.
+Paper submission by 28 February
+Contact for information and submissions email <rao@telscom.ch
+Local organizer email <rp@cet.pt
+
+INET'97 - Workshop
+------------------
+15-21 June
+Kuala Lumpur, Malaysia
+Focus of the workshop will be upon assisting countries that are either
+not yet connected to the Internet or are in the process of developing
+and enhancing an initial national Internet.
+For copy of announcement e-mail <workshop-apply@isoc.org>
+
+Apply for admission by 7 February 1997 to e-mail
+<workshop-application@isoc.org>
+
+INET'97
+7th Annual  Internet Society Conference
+---------------------------------------
+24-27 June
+Kuala Lumpur, Malaysia
+
+The conference will address the traditional and evolving frontiers of
+the Internet as well as its significant impact on education, commerce
+and societies throughout the world.
+-information on INET97, the K-12 workshop, the Tutorials, and the
+associated Developing Countries Workshop, along with an abstract
+submission form, can be found on the ISOC web page:
+http://isoc.org/inet
+or, for information via e-mail:
+- for details of submission procedure email
+<inet-program-interest@isoc.org>
+- for other information email <inet97@isoc.org>
+
+
+
+
+
+
+
+
+
+
+
+IMR Editor                                                     [Page 29]
+
+Internet Monthly Report                                    February 1997
+
+
+FIRST - Forum of Incident Response and Security Teams
+9th Annual Computer Security Incident Handling Workshop
+-------------------------------------------------------
+23-27 June
+Marriott Hotel, Bristol, England
+This annual workshop is part of FIRST's ongoing program of education
+and raising awareness for its members and others.
+Paper submission deadline 15 January
+For information see: http://www.first.org/
+
+FMOODS'97  -  Second IFIP Interrnational Workshop on
+Formal Methods for Open-based Distributed Systems
+----------------------------------------------------
+21-23 July
+Canterbury, United Kingdom
+Objective is to provide an integrated forum for the presentation of
+research in several related fields.
+Paper submission deadline 14 January 1997
+For all information: e-mail  <fmoods97-request@uck.ac.uk> or
+web page: http://alethea.u,c.ac.uk/Dept/Computing/Research/NDS/FMOODS/
+
+IDMS'97
+European Workshop on Interactive Distributed Multimedia Systems
+and Telecommunication Services
+---------------------------------------------------------------
+10-12 September
+Darmstadt, Germany
+In cooperation with ACM SIGM, Gesellschaft fuer Informatik, GMD, IEEE
+Computer Society and VDE ITG.
+The purpose of this 4th workshop is to provide a forum for the
+presentation, exploration and discussion of technologies and their
+advancements in the broad field of interactive distributed multimedia
+systems.
+Paper submission due 1 March 1997
+For additional information se www:  http://www.th-darmstadt.de/idms97
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+IMR Editor                                                     [Page 30]
+

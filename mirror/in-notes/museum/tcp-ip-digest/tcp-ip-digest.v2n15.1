@@ -1,0 +1,290 @@
+12-Sep-83 11:44:13-PDT,14315;000000000001  
+Return-Path: <tcp-ip@brl-vgr>
+Received: FROM BRL-VGR BY USC-ISIF.ARPA WITH TCP ; 10 Sep 83 15:09:15 PDT
+Received: From Brl-Vgr.ARPA by BRL-VGR via smtp;  9 Sep 83 21:36 EDT
+Sender:    Mike Muuss <TCP-IP@brl>
+From:      TCP-IP@brl
+To:        TCP-IP@brl
+Date:      9 Sep 1983 00:00 EST
+Subject:   TCP-IP Digest, Vol 2 #15
+
+TCP/IP Digest             Friday, 9 Sep 1983      Volume 2 : Issue 15
+
+Today's Topics:
+           IP on Ethernets && Pressure for IBM TCP Interfaces
+             A Nearly Elegant Solution to a Gateway Problem
+         TCP/IP and "Security" && Any implementations for 68000?
+                   Any implementations for the IBM PC?
+                   TCP/IP for VMS: not in Phoenix yet
+                       TCP/IP Correctness Testing
+----------------------------------------------------------------------
+                  TCP/IP Digest --- The InterNet Digest
+                         LIMITED DISTRIBUTION
+          For Research Use Only --- Not for Public Distribution
+----------------------------------------------------------------------
+
+Date: 30 Aug 1983 20:21:49 PDT
+From: POSTEL@usc-isif
+Subject: IP on Ethernets & Berkeley Hacks
+To:   tcp-ip@brl
+
+I have been told repeatly by the people from Berkeley (Bill Joy, Sam Leffler)
+that the special hacks in the transmission of IP datagrams on the Ethernet
+would only be used between consenting hosts and would never appear in a
+packet addressed to a standard IP host - even on the same Ethernet.
+
+I would like very much to have an RFC on the proper encapsulation of IP
+on an Ethernet (or any other net).  If someone send me a reasonable draft
+of an RFC on this i will get it "published".
+
+--jon.
+
+------------------------------
+
+Date: 29 August 1983 06:36 EDT
+From: ddn-army@ddn1
+Subject: IBM interfaces
+To: johnson%summex-aim.arpa@BRL.ARPA
+CC: tcp-ip@brl.arpa
+
+IBM marketeers are speaking to one of us with a forked tongue.  We in
+the DDN PMO have identified at least 250+ customers for the IBM
+interface to DDN, and have made it clear to them that we are not
+interested in a one of a kind special product.  Granted we have been
+dealing with Federal Systems Division people for the most part, but we
+have also talked to some of their private sector types as well.  We have
+been told that they are moving to market DDN interfaces as "field
+service products" initially, and are having internal corporate
+discussions re full product line support.  We are closely monitoring
+both their VM and MVS efforts, and we are directing every DoD IBM user
+to hound his local IBM rep to the grave.
+
+We had an in-depth meeting with IBM people here in the DC area, and they
+expressed concern for the strength of DoD's committment to TCP-IP.  More
+importantly, they indicated they had recently particippated in a
+corporate bloodlet in which ISO vice SNA was touted as the long range
+architecture for IBM.  They indicated great reservation for a premature
+move to tcp-ip when ISO finals appeared to be imminent.  I think
+therefore, that efforts to clarify the ISO situation, and demonstrate
+simularities between ISO and the DoD protocols would be more beneficial
+in encouraging IBM than demands from readers of the digest.
+
+bob
+
+------------------------------
+
+Date: 26 Aug 1983 11:51:34 PDT
+From: PADLIPSKY@usc-isi
+Subject: A Nearly Elegant Solution to a Gateway Problem
+To:   tcp-ip@brl
+
+By a curious coincidence, the very day I read the request for "TCP"/SNA
+"Gateway" info was the same day I (earlier) invented the solution.  As
+those of you who have read my paper on Gateways (RFC approx. 875) know,
+I think so-called Translating/Mapping Gateways are a Very Bad Thing.  As
+only one or two who weren't at Vint Cerf's "Futures" panel at INFOCOM
+'83 know, I've come to realize
+that at a sufficiently far point in the future the way to do
+"interoperability" will be by running parallel protocol suites at all
+the end points (preferably in suitable Outboard Processing Environments
+[formerly known as NFE'S, but nobody paid enough attention to the "N"]).
+That is, eventually--unless, contrary to all expectations, one protocol
+suite prevails--you'll just go off to a desired application in the
+appropriate suite for that appl., and to another appl. in its "home
+suite"....  In the meantime, however, something more clever that trying
+to yoke heterogeneous mind-sets together by the magic of the strong
+assertion that it can be done is needed.
+
+The general near-term solution that makes sense to me is what I've
+called a "Janus Host".  (Two-"faced", that is; in other words it looks
+to each of two different suites as if it's a "normal" Host.)  It has the
+nice property of terminating each suite rather than attempting the
+unattractive-in-practice "concatenation of logical connections", which
+resolves probably conflicting flow control expectations, and the
+additional nice property of allowing for/demanding where necessary
+human/"user" intervention to resolve addressing problems.  The trick is,
+in essence, to go from one suite's equivalent of User Telnet (from
+anywhere) to its Server Telnet (on the Janus Host), then, via a Janus
+Host application/process-level program (a "command", even) out the other
+suite's generic User Telnet to the desired (generic) Server Telnet.  The
+program might be thought of as a sort of transducer; anyway, if the
+generic Telnets are anywhere near rightly done, all the de- and
+re-virtualizing ought to happen "for free".  Indeed, FTP and Mail ought
+to be doable in like manner.
+
+Now that's all so concise as to be terse at best (and cryptic at worst),
+but it does seem to me to be theoretically sound.  What good it is in
+the ARM/SNA context is much more straightforward:  I know of a company
+(called Spartacus Computers, actually) which is doing the Amdahl Trick
+to/with VM (i.e., making a different hardware base for "the same"
+software), only their box is quite inexpensive.  It also comes with
+TCP/IP for their own LANning.  And there's allegedly SNA software for
+VM.  Need I say any more (other than that I wish I could claim
+royalties--especially when Compion realizes it could easily do the same
+trick for ARM/ DECNET Janus Hosts, and whoever else is out there with
+the appropriate pieces [including Dave Vinograd with HISI's own
+high-rise] realizes...)?
+
+cheers, map
+
+------------------------------
+
+Subject: IP/TCP and "Security"
+Date: Sun, 28 Aug 83 16:19:54 EDT
+From: Nathaniel Mishkin <Mishkin@YALE.ARPA>
+To: tcp-ip@BRL.ARPA
+
+Could someone explain some of the details of the MILNET split.  E.g.
+since people have been talking about "mail relays/gateways" am I to
+understand that you will not be able to have TCP connections between
+hosts in the new MILNET network and the hosts in the present Internet
+networks?  Is is the case that the new network will be an IP network,
+having a unique IP network number, but will NOT actually be connected
+to the current Internet via IP gateways?
+
+[ The NIC <NIC@NIC> has some very good materials discussing the
+  split in the latest DDN Newsletters.  If you are not getting copies
+  contact them for a subscription.  -Mike ]
+
+On a somewhat related topic:  have people thought out the issue of
+Internet access control?  I.e. suppose I have a local net running
+IP/TCP and I have all these undergraduates on machines on this net;
+according to Arpa policy, only "authorized" people are supposed to
+have access to the "Arpanet".  Now what does "Arpanet" means?  Just
+network 10?  Any Arpa-funded networks?  Am I obliged to make my IP
+gateway to network 10 prevent IP packets coming from the process of
+an "unauthorized" user from leaking out?  How would such filtering
+be implemented?
+
+                            -- Nat
+
+------------------------------
+
+Date: Mon 29 Aug 83 09:29:05-EDT
+From: Marc Shapiro <SHAPIRO@CMU-CS-C.ARPA>
+Subject: 68000 protocol implementations query
+To: human-nets@RUTGERS.ARPA, tcp-ip@BRL.ARPA, arpanet-bboards@MIT-MC.ARPA
+
+Planning to implement high-level protocols on a 68000-based card
+attachef to a 10 Mb/s Ethernet, I would like to get in contact with
+people who have implemented eihter TCP-IP or XNS protocols on 
+similar hardware (preferably in C).  We could exchnage experiences and
+possibly programs.
+
+------------------------------
+
+Date: Tue, 30 Aug 83 11:10:45 PDT
+From: Milo Medin <medin@lll-mfe>
+To: tcp-ip@brl
+Subject: IBM PC tcp/ip software
+
+We here at UCB are trying to interface a couple PC's to a vax running
+4.1c BSD unix.  We plan on using a 3com board to do this, but they
+use XNS software and we'd prefer to keep everything TCP/IP.  I talked
+to their dealer here at the PC faire, and they said MIT has the software
+we need.  Anyone here know where we can get access to the software?
+
+						Milo Medin
+						medin%ucbcory@berkeley.arpa
+					or	medin@lll-mfe.arpa (better)
+
+------------------------------
+
+Date:        Mon, 29 Aug 83 14:10:37 CDT
+From: Dave Johnson <dbj.rice@rand-relay>
+Subject:     Re: TCP/IP for VMS
+To: TCP-IP-Digest <TCP-IP@brl>
+Cc: Chris Kent <decwrl!kent%Shasta@su-score>
+
+Chris Kent's recent message that Rice was supporting Berkeley TCP/IP under
+Phoenix, our Unix emulator for VMS, was incorrect; Phoenix currently offers
+no TCP/IP support.  We are, however, working on a VMS-only TCP that does not
+require Phoenix to run, either by bringing up somebody else's implementation
+or perhaps writing our own.  We are considering, also, sometime in the future
+supporting the Berkeley 4.2 TCP/IP user interface in Phoenix by interfacing
+Phoenix to this VMS TCP.  Any comments or experiences with any of the
+versions of TCP/IP currently available for VMS would be welcome.
+
+                                        Dave Johnson
+                                        Dept. of Math Science
+                                        Rice University
+                                        dbj.rice@Rand-Relay
+
+------------------------------
+
+Date: 28 Aug 1983 23:29:56 EDT (Sunday)
+From: Linda Seamonson <ljs@bbn-unix>
+Subject: TCP/IP Correctness Testing
+To: tcp-ip@brl
+Cc: ljs@bbn-unix
+
+Over the last month, several experiments were run at BBN to determine
+the correctness of Arpanet host TCP/IP implementations.  Each test was
+run several times to minimize the probability that a host was down
+during each test; however, it is possible that some hosts scored lower
+than they deserved because they were off the network during all tests.
+
+The first experiment was conducted entirely within the Arpanet.  The
+second and third experiments, however, required another network attached
+to the Arpanet by more than one gateway (since the purpose of the
+experiments was to test hosts' abilities to talk through gateways; see
+below).  BBN has its own Arpanet-like network called the "BBNNET" which
+is currently connected to the Arpanet by three gateways.  One of these
+gateways, the BBN-GATEWAY, is known to the rest of the internet; it is
+the gateway which is normally used by traffic between the BBNNET and the
+Arpanet.  The combination of the Arpanet, the BBNNET, and the three
+gateways was used as the testbed for these inter-network experiments.
+
+There were three experiments.  The purpose of the first, Experiment A,
+was to determine which hosts are unable to talk TCP even in the simplest
+circumstances.  From an Arpanet host, an FTP connection was opened to
+every Arpanet host (not including TACs, gateways, or secure hosts).  The
+remote FTP server was then asked for "help", which causes half a screen
+or so of text to be sent from the remote host to the testing host.  The
+purpose of this was simply to cause a little traffic to flow on the FTP
+connection.  Then the connection was closed.  This test is the simplest
+possible in that it does not require the hosts to talk through a gateway
+or to use ICMP.  Hosts which failed this test are labelled "4" in the
+following list.  These hosts were excluded from other experiments.
+
+The purpose of Experiment B was to determine which hosts are unable to
+talk TCP to a host in another network.  From a BBNNET host, the same FTP
+experiment was repeated.  Hosts failing to sustain the FTP conversation
+required by this test are labelled "3" in the following list.  These
+hosts can talk to hosts in their own network, but not to hosts in other
+networks.  These hosts were excluded from Experiment C.
+
+The purpose of Experiment C was to determine which hosts deal
+incorrectly with redirect messages.  This experiment was just like
+Experiment B, with one complication.  The BBN gateway was told to
+redirect all Arpanet hosts to another gateway, "Bridge", that also
+connects the Arpanet and the BBNNET.  A program called "HTM" (Host
+Traffic Matrix) was run in the Bridge during this experiment.  HTM
+records the source and destination of every datagram that passes through
+the gateway.  Thus, after running Experiment C, the HTM results in the
+Bridge listed every host that obeyed the redirects.  HTM was also run in
+the BBN gateway during this experiment, and the results were used as
+further proof that some hosts disregarded the redirects altogether.
+Some hosts failed this test because even though they did not "choke" on
+the redirects and could carry the FTP exchange to completion, they did
+not pass any traffic through the Bridge (they ignored the redirects).
+Other hosts failed this test because they died or hung the FTP
+connection after receiving one or more redirects.  Hosts failing this
+experiment are labelled "2".  Hosts passing this experiment are labelled
+"1".
+
+In summary, of 190 hosts tested, 98 scored "1" (51%), 28 scored "2"
+(15%), 23 scored "3" (12%), and 41 scored "4" (22%).  Since these tests
+were very simple and did not exercise all capabilities of TCP (for
+example, retransmission of lost datagrams) these results are in no way
+proof that all "1" hosts have perfectly correct TCP implementations.
+
+[ The actual table was very large, and has not been included here.
+  People who don't know the outcome for their host(s) should write
+  to Linda.  -Mike ]
+
+----- End of forwarded messages
+------------------------------
+
+END OF TCP-IP DIGEST
+********************

@@ -1,0 +1,95 @@
+
+                  InterNIC Directory and Database Services
+                              Directory Services
+
+We provide several methods of free access to X.500, WHOIS and Netfind white 
+pages data on the Internet.
+
+X.500 Public access Directory User Agent (DUA):
+-----------------------------------------    
+You can use an X.500 Directory User Agent by telnet to ds.internic.net - use 
+userid "x500" with no password - and obtain information about persons and
+organizations participating in the X.500 pilot projects.  The interface
+provides on-line help and asks for a person's name, the department or unit 
+name, the organization or institution name, and the country name and then 
+responds to the query.
+
+Electronic Mail:
+----------------   
+You can send person and institution queries to a mail server that in turn 
+queries the X.500 Directory and returns a response. Send mail to 
+mailserv@ds.internic.net.  For instructions on how to use the mailserver, 
+send a message which includes the word "help" in the body of the message.  
+For a person query, the body of the message must have the keyword "person" 
+and a list of parameters in the format:
+
+	person  <name, organization, country>
+
+For an institution query, the body of the message must have the keyword
+"institution" and a list of parameters in the format:
+
+       	institution <name, country>
+
+Directory System Agent (DSA):
+-----------------------------    
+We run a QUIPU DSA named "Pied Tamarin" on the machine ds.internic.net that 
+has the following presentation address:
+
+      '0101'H/TELEX+00728722+RFC-1006+03+198.49.45.10+17003
+
+Any DUA can connect to our DSA.  We also run the Directory Assistant (DA) 
+and Lightweight Directory Access Protocol (LDAP) access protocols.
+
+The DSA "Pied Tamarin" presently stores entries of organizations that are
+listing through the InterNIC and InterNIC personnel listings.  It will 
+soon have WHOIS data collected by the Registration Services provider.
+
+InterNIC Directory and Database Services will list a maximum of 50 entries 
+for each interested organization in the X.500 Directory that we maintain. An 
+electronic order form for entries in the X.500 Directory is available via 
+anonymous FTP.  To get the order template, FTP to ds.internic.net and issue 
+the following commands.
+
+		cd internic.info 
+		get x500.org.request
+
+We will also help organizations create their own X.500 directories and link 
+them into the existing Internet Directory Tree.
+
+Public Access Netfind Client:
+-----------------------------   
+You can use our public access Netfind client by telnet to ds.internic.net - 
+use userid "netfind" with no password to get information about an individual. 
+The format of a search request is:
+
+	name keywords
+
+where name is the last name of the individual and keywords are a list of 
+words that specify the domain name.
+
+WHOIS
+-----
+
+WHOIS server, developed by AT&T, is available which provides a unified access
+point to the three official Internet WHOIS servers for person and organization
+queries.  The server, which accepts queries on the standard WHOIS port,
+searches the InterNIC Directory and DB Services (DS) server for non-MIL domain
+and non-Point-Of-Contact (nonPOC) data, the DISA NIC server for MIL domain data
+and the InterNIC Registration Services (RS) server for POC data.  The results
+from all three searches are returned to the user.
+ 
+The DS WHOIS server is accessed via the "whois" command using the
+"-h <host name>" option as follows:
+ 
+        whois -h ds.internic.net ".smith, john"
+ 
+For detailed information regarding the query syntax, as well as general server
+information, use the following command:
+ 
+        whois -h ds.internic.net help
+
+If you have any further questions or need help, please contact the Directory 
+and Database Administrator at 1-800-862-0677 or 1-908-668-6587, or send 
+electronic mail to admin@ds.internic.net.
+
+

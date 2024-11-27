@@ -1,0 +1,190 @@
+version 1.6 							ripe-w06
+
+
+                 RIPE Network Coordination Center
+
+                           (RIPE NCC)
+
+
+         R.Blokzijl, Y.Devillers, D.Karrenberg, R.Volk
+
+                       16 September, 1990
+
+
+
+1    Introduction
+
+Experience in the RIPE community, and in the Internet community at large,
+has shown that certain information and coordination services are needed for
+the proper functioning of the Internet.
+   This document proposes a way to provide these services to the RIPE
+community considering its special environment.
+
+
+2    Purpose
+
+This document proposes to create a Network Coordination Center that sup-
+ports and coordinates the management of a pan European IP network. The
+proposal also contributes a building block to the global administrative frame-
+work of the Internet which is currently being developed (c.f. RFC1174).
+   The current RIPE structure is very well suited for development type of
+work. It is less well suited for the day to day work that is of a more adminis-
+trative nature. These tasks should be handled by a dedicated technical staff
+that form the RIPE Network Coordination Center (NCC).
+   In accordance with the RIPE Terms of Reference, the main objective
+of the RIPE NCC is to give support to the networking organisations that
+cooperate in RIPE.
+   The RIPE NCC does not provide end user support services.  Also net-
+work operation functions will not be provided by the RIPE NCC as these
+functions are performed by the network operation staffs of the RIPE member
+organisations.  The RIPE NCC will however provide the necessary support
+and coordination to enable the RIPE member NOC staffs to provide these
+services.
+   The Network Coordination Center is 'embedded' in RIPE:
+
+   o RIPE defines the tasks and functions of the NCC
+
+   o the NCC reports to RIPE
+
+   o RIPE organisations participate in the work of the NCC
+
+   o RIPE regularly reviews the operations of the NCC
+
+
+3    Organisational Structure
+
+   o RIPE defines the tasks to be executed by the NCC
+
+   o these tasks can be classified as follows:
+        - centralised
+        - distributed
+
+   o centralised tasks will be executed by the NCC
+
+   o distributed tasks can be executed by participating RIPE organisations,
+     coordinated by the NCC
+
+   o the work of the RIPE NCC will be periodically evaluated by RIPE
+
+
+4    Tasks
+
+There are three distinct classes of tasks or functions foreseen for the NCC:
+  1. registry function
+
+  2. network information management
+
+  3. general RIPE support function
+
+
+4.1    Registry Function
+
+The RIPE NCC will function as a `Delegated Registry' for IP numbers in
+Europe, as anticipated and defined in RFC 1174.
+   The NCC keeps the register of IP numbers and AS numbers for the RIPE
+member organisations. This will mean that the NCC allocates blocks of num-
+bers to local registers in Europe. The local registers inherit the
+responsibility to supply the accompanying information. It remains the
+responsibility of the NCC to collect this locally gathered information, and
+make it globally available.  The local registries are set up by RIPE member
+organisations as appropriate. Particular requests that can not be catered for
+by local registries will be handled by the NCC.
+   The NCC has to coordinate closely and meet periodically with the Inter-
+net registry.
+
+
+4.2    Network Information Management
+
+The NCC keeps a database of information describing at least the following
+objects:
+
+   o IP network numbers
+
+   o AS numbers
+
+   o DNS domains
+
+   o Persons
+     Only those associated with an object of the previous classes. A general
+     white pages service is not forseen.
+
+   The NCC is responsible for four types of information exchange:
+
+   o collect RIPE information from local registries
+
+   o collect global information from organisations outside the RIPE domain
+
+   o provide global and RIPE information to local registries
+
+   o provide RIPE information to organisations outside the RIPE domain
+
+Organisations outside the RIPE domain specifically include the Internet Reg-
+istry and other outside NIC's and NOC's.
+   The RIPE NCC will be the only source of authoritative information from
+the RIPE world. The NCC will provide tools to RIPE member organisations
+to interrogate the network information databases. The network information
+databases kept by the NCC will also be available for the RARE community
+at large and other interested parties.  OSI based tools for general access to
+the databases should be supported.
+   Privacy aspects of keeping personal information in publicly accessible
+databases will be carefully studied by the NCC in the context of the prevailing
+European laws.  As a minimum safeguard against unsolicited violations of
+privacy, individual permission for keeping personal data in the database will
+be a requirement.
+
+
+4.3    General RIPE Support Function
+
+The following tasks have been defined as valuable support functions for the
+operation centers of the networks cooperating within RIPE:
+
+   o global network status information gathering
+
+   o global network performance monitoring
+
+   o support for the installation and distribution of the DNS in Europe
+
+   o collection, documenting and distribution of operation support tools
+
+   o management of the RIPE information server
+
+   These tasks must be performed in close cooperation with the RIPE mem-
+bership.
+
+
+5    Requirements for an NCC
+
+The following requirements for the running of the RIPE NCC have been
+identified:
+
+   o staff
+     - 1.0 FTE NCC manager with proven skills in:
+         * Internet network technology, applied to large scale networks
+         * Management
+         * Working in an international environment
+     - 1.0 FTE NCC technical staff with proven skills in:
+         * Internet network technology, applied to large scale networks
+         * Working in an international environment
+     - 1.5 FTE Administrative staff, with proven skills in:
+         * Administrative work
+         * Using advanced computing equipment
+         * Working in an international environment
+
+   o equipment:
+     - work-stations with X-windows capability for staff
+     - an adequate minicomputer to support the work-stations and to
+       house the databases
+     - excellent IP networking access
+     - excellent mail connectivity
+     - support for OSI based services
+
+o office space and running costs:
+     - 2 offices with the normal operational overheads
+     - communication costs allocation
+
+o travel budget
+  it is foreseen that NCC staff will have to make at least the following
+  travels on a yearly basis:
+     - attend all RIPE meetings
+     - attend 6 meetings in Europe
+     - attend 4 meetings outside Europe

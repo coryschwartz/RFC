@@ -1,0 +1,3694 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                       TCP IP Users Guide
+
+
+
+
+
+
+
+                      Charles W. Lynn, Jr.
+
+
+                  Bolt Beranek and Newman, Inc.
+                        50 Moulton Street
+                      Cambridge MA   02238
+
+
+                            May 1982
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                        Table of Contents
+
+
+        Introduction to TCP and IP  .  .  .  .  .  .  .  .  .   2
+
+        Transmission Control Protocol  .  .  .  .  .  .  .  .   3
+          Creating a TCP Connection .  .  .  .  .  .  .  .  .   4
+          Connection Descriptor Block  .  .  .  .  .  .  .  .   6
+          Sending and Receiving Data   .  .  .  .  .  .  .  .   7
+          Buffer Headers   .  .  .  .  .  .  .  .  .  .  .  .   9
+          Closing a Connection   .  .  .  .  .  .  .  .  .  .  11
+          Connection Status   .  .  .  .  .  .  .  .  .  .  .  12
+          Interrupts .  .  .  .  .  .  .  .  .  .  .  .  .  .  13
+          Error Returns and Codes   .  .  .  .  .  .  .  .  .  14
+          Options .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  17
+          TCP Retransmission Parameters   .  .  .  .  .  .  .  19
+          OPEN   JSYS 742  .  .  .  .  .  .  .  .  .  .  .  .  20
+          CLOSE  JSYS 743  .  .  .  .  .  .  .  .  .  .  .  .  23
+          SEND   JSYS 740  .  .  .  .  .  .  .  .  .  .  .  .  25
+          RECV   JSYS 741  .  .  .  .  .  .  .  .  .  .  .  .  27
+          ABORT  JSYS 747  .  .  .  .  .  .  .  .  .  .  .  .  29
+          STAT   JSYS 745  .  .  .  .  .  .  .  .  .  .  .  .  30
+          CHANL  JSYS 746  .  .  .  .  .  .  .  .  .  .  .  .  32
+          SCSLV  JSYS 744  .  .  .  .  .  .  .  .  .  .  .  .  33
+
+        TELNET Protocol    .  .  .  .  .  .  .  .  .  .  .  .  34
+          ATNVT  JSYS 274  .  .  .  .  .  .  .  .  .  .  .  .  35
+
+        Internet User Queues  .  .  .  .  .  .  .  .  .  .  .  36
+          Queue Descriptor Block .  .  .  .  .  .  .  .  .  .  38
+          Packet Buffer .  .  .  .  .  .  .  .  .  .  .  .  .  39
+          Ports   .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  41
+          ASNIQ  JSYS 756  .  .  .  .  .  .  .  .  .  .  .  .  42
+          RELIQ  JSYS 757  .  .  .  .  .  .  .  .  .  .  .  .  43
+          SNDIN  JSYS 754  .  .  .  .  .  .  .  .  .  .  .  .  44
+          RCVIN  JSYS 755  .  .  .  .  .  .  .  .  .  .  .  .  45
+
+        Appendix A  Internet Packet Header Format  .  .  .  .  46
+        Appendix B  Internet Address Formats .  .  .  .  .  .  47
+        Appendix C  IP Type of Service Field .  .  .  .  .  .  48
+        Appendix D  Logical Host Facility .  .  .  .  .  .  .  49
+        Appendix E  IP Packet Demultiplexing .  .  .  .  .  .  50
+        Appendix F  TCP Retransmission Parameters  .  .  .  .  51
+        Appendix G  TCP & IP Options   .  .  .  .  .  .  .  .  55
+        Appendix H  Status Variable Names .  .  .  .  .  .  .  59
+
+
+
+
+
+
+
+
+                              - 1 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                   Introduction to TCP and IP
+
+
+   This document describes  the  TOPS20  user  interface  to  the
+DARPA-supported  inter-networking  protocols:  Internet Protocol,
+Internet Control Message Protocol, Transmission Control Protocol,
+and related network functions.  These protocols are available  on
+several  computer  systems: HP3000, IBM, MULTICS, PDP-11, TOPS20,
+UNIX, and VAX as well as several minicomputers.
+
+   The  Internet  Protocol  (IP)   is   designed   for   use   in
+interconnected systems of packet-switched computer communications
+networks.   It  allows  the  transmission and routing of variable
+length  blocks  of  data  called  datagrams   from   sources   to
+destinations.   Sources  and destinations are hosts identified by
+fixed-length addresses.  The Internet Protocol is not designed to
+be absolutely reliable: some packets may  not  be  delivered  and
+some  may  be  duplicated.   They  may also arrive in a different
+order than that in which they were sent.
+
+   The Internet  Control  Message  Protocol  (ICMP)  is  used  to
+provide  some  feedback  about  problems  in  the  communications
+environment, to report  errors  in  datagram  processing,  or  to
+supply  more  recent  routing  and flow control information.  The
+user does not interact directly with the ICMP.
+
+   The Transmission Control  Protocol  (TCP)  uses  the  Internet
+Protocol  to  provide  users with a highly reliable, multiplexed,
+full-duplex,   connection-based,   host-to-host    communications
+service.   TCP  is  not,  however,  intended for applications for
+which  time  is  critical,  such  as  digitized  speech,  or  for
+communication between more than two processes.
+
+   User  application  programs  may  interface  at  either the IP
+level, through the use of Internet User Queues,  or  at  the  TCP
+level.   Two common applications which interface at the TCP level
+are TELNET, a remote terminal access facility, and  FTP,  a  file
+transfer  facility.   Name  and  time  servers  are  examples  of
+applications which typically interface at the IP level.
+
+   These protocols and their interfaces have evolved over several
+years.  This document describes the BBN  TOPS20  JSYS  interface.
+DEC  is  implementing  a TCP: device interface to TCP.  It is not
+described in this document.  Since the interfaces  are  evolving,
+application  programs should be written using the symbols defined
+in the MONSYM library and used in this document, instead  of  the
+symbols' numeric value, in order to reduce program maintenance if
+a value changes in a subsequent software release.
+
+
+
+
+
+                              - 2 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                       Introduction to TCP
+
+
+   The  TCP  allows two processes to create a connection in order
+to exchange zero or more octets of data, where an octet  consists
+of  eight  data  bits.  A connection is uniquely specified by the
+48-bit identifiers of its local and  foreign  ends.   The  48-bit
+identifier  is  composed  of  a  32-bit  internet  address, which
+identifies the host, and a 16-bit port number, which identifies a
+process at that host.  Since connections  are  full-duplex,  each
+end may both send and receive data.
+
+TCP  data transfer has high reliability: both the headers and all
+data octets are checksummed.  If a packet  is  received  and  its
+checksum is not correct, it is immediately discarded.
+
+   Each  octet of data is conceptually assigned a 32-bit sequence
+number.  The sequence numbers are used by the receiver to discard
+duplicated  packets  and  to  detect  lost,  or   out-of-sequence
+packets.  The receipt of data is acknowledged by returning to the
+sender  the  sequence number of the next octet the receiver wants
+to receive;  this implies that all  lower  numbered  octets  have
+been received.
+
+   The   sender   continues   to  retransmit  data  until  it  is
+acknowledged.   The  retransmission  rate  is  a   user-specified
+parameter.   If  data  unacknowledged  for  a period of time, the
+connection is broken and the user is notified of  a  Transmission
+Timeout  error.   This time period is also specified by the user.
+
+   TCP automatically provides flow control for  each  connection.
+The  data  receiving TCP periodically notifies the sending TCP of
+the number of additional data octets it is willing to accept (the
+"window").  This number is based on the amount  of  buffer  space
+available at the receiving TCP.  The sending TCP is not to exceed
+this window.
+
+   The  TOPS20  monitor  has nine TCP related JSYSi which will be
+explained in following sections.  They are:
+
+   OPEN,  to specify the ends of, and synchronize, a connection;
+   SEND,  to send data to the foreign end;
+   RECV,  to receive data from the foreign end;
+   CLOSE, to begin closing a connection;
+   ABORT, to break a connection;
+   STAT,  to obtain status information about a connection or TCP;
+   CHANL, to specify interrupt channels;
+   ATNVT, to translate a connection into an NVT descriptor; and
+   SCSLV, to specify security levels.
+
+
+
+
+                              - 3 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                    Creating a TCP Connection
+
+
+   A connection is created by passing the address of a Connection
+Descriptor  block  (which  identifies  the  two   ends   of   the
+connection),   a   Transmission  Timeout,  and  a  Retransmission
+Parameters word to the OPEN JSYS.  A successful OPEN will  return
+a   Job   Connection  Number  or  "JCN".   The  JCN  is  a  small
+job-relative number which is given to the other JSYSi to identify
+the connection.  (The  use  of  a  JCN  with  the  TCP  JSYSi  is
+analogous to the use of JFNs with the file system JSYSi.  The DEC
+user  interface  uses  JFNs  and file system JSYSi instead of the
+JSYSi documented here.)
+
+   Each connection must be unique.  This  is  guaranteed  by  the
+selection  of a 16-bit local port value.  Unfortunately, there is
+no easy way to find which port values are unused  other  than  by
+trial  and  error.   Use  of  local  port values less than 256 is
+discouraged  as  they  have  been  reserved  for   "well   known"
+functions.   A suggested local port value contains the user's job
+number  in  the  left-most  8  bits  and  anything  else  in  the
+right-most  8  bits.   If the connection is not unique, OPEN will
+return a Connection Already Exists error and another  local  port
+value should be selected and tried.
+
+   There  are three basic ways to specify a connection.  They are
+a fully specified active open, a fully  specified  passive  open,
+and a partially wild passive open.
+
+   A   fully   specified  active  open  is  used  to  initiate  a
+connection; the identifier of the foreign end of  the  connection
+must  be  known.   In  this case, the Connection Descriptor block
+contains a non-zero, 16-bit local port; the foreign host's 32-bit
+internet address; and the 16-bit foreign port.  The  TCP%FS  flag
+must  also  be  set.   It  causes  a SYN packet to be sent to the
+foreign host/port specified in the Connection  Descriptor  block.
+If  the SYN packet is acknowledged and a SYN is received from the
+foreign TCP, the connection is synchronized  and  OPEN  succeeds.
+If the foreign end of the connection does not exist, a RESET will
+be returned causing the OPEN to fail.
+
+   A  fully  specified  passive  open  is  used  to  wait  for  a
+connection  request  from  a  particular  foreign  TCP.    If   a
+connection  with a specific foreign host and port is desired, the
+Connection Descriptor block specifies  the  desired  local  port,
+foreign  host, and foreign port.  The TCP%FS flag is not set.  In
+this  case,  no  SYN  packet  will  be  sent.   TCP   will   wait
+indefinitely  until  a SYN (or RESET) packet is received from the
+foreign TCP.  When a  SYN  is  received,  an  acknowledgement/SYN
+packet is returned to the foreign TCP; its acknowledgement of the
+SYN successfully opens the connection.
+
+
+                              - 4 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                    Creating a TCP Connection
+
+
+   The  third  case is a partially wild passive open.  It is used
+to wait for a connection  request  from  any  one  of  a  set  of
+possible  foreign  hosts and ports.  If the foreign port entry in
+the Connection Descriptor block is zero, any foreign port will be
+accepted.  Similarly, if the network field and/or host  field  in
+the  foreign internet address entry is zero, a connection request
+by any foreign network and/or host will be accepted.   A  typical
+example  is  the  local  host's  Login  responder  which  accepts
+connection requests to  local  port  23  from  any  port  at  any
+internet  address.  In this case, the local port entry is 23; the
+foreign net, host, and port entries are zero.
+
+   The OPEN JSYS has both blocking and non-blocking  forms  which
+are  differentiated  by  the  setting  of  the  TCP%WT flag.  The
+blocking form (TCP%WT flag set) will not return  control  to  the
+user  program  until  either the connection has been successfully
+established or an error  has  occurred.   The  non-blocking  form
+(TCP%WT   flag   not   set)  will  return  a  success  indication
+immediately (unless there was a syntax error  or  the  Connection
+Already  Exists).   The  user  can subsequently check whether the
+connection has opened correctly by attempting to send or  receive
+data  or  requesting the connection status.   A program interrupt
+may also be enabled  for  the  connection  opening  (or  closing)
+event.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                              - 5 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                   Connection Descriptor Block
+
+
+   Information  describing  a  connection  is  passed to TCP in a
+Connection  Descriptor  block  via  the  OPEN  JSYS.   The  block
+contains  .TCPCS  words.   Unspecified  words  and bits should be
+zero.
+
+
+  Word
+ Offset  Bits                   Meaning
+
+ .TCPLH B4-35   The Local Host's internet  address  (a  host  may
+                have  more  than  one).  If the default (or only)
+                local host address is to be used,  specify  zero.
+
+ .TCPLP B20-35  A unique  non-zero  Local  Port  number.   It  is
+                recommended  the left-most eight bits contain the
+                job number in order to avoid conflicts with other
+                connections.  The  GJINF  JSYS  can  be  used  to
+                determine the job number.
+
+ .TCPFH B4-35   The Foreign Host's internet  address,  or,  in  a
+                passive  open,  zero  to accept a connection from
+                any foreign host.  It is possible to  specify  an
+                explicit  network  field and a zero host field to
+                restrict connections to hosts on a given network.
+                See Appendix B  for  a  description  of  internet
+                addresses.
+
+ .TCPFP B20-35  Either a non-zero Foreign Port number, or,  in  a
+                passive open, zero to allow a connection from any
+                foreign port.
+
+ .TCPOP B0-17   The address of an IP Option block, or zero.
+        B18-35  The address of a TCP Option block, or zero.   See
+                the section on Options and Appendix G for further
+                details about Option blocks.
+
+ .TCPIP         IP datagram parameters:
+        1B1     Do-not-Fragment this datagram.  If set, IP is not
+                allowed  to  fragment  a datagram.  Packets which
+                are too large for an intermediate network will be
+                discarded, not delivered (in fragments).
+
+        377B17  Maximum  Time-to-Live,  in  seconds.    Datagrams
+                which  have  not  been delivered in the specified
+                number of seconds will be discarded.  The default
+                value of 60 seconds is used if the field is zero.
+                         
+        377B35  IP Type-of-Service field;  See Appendix C.
+
+
+                              - 6 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                   Sending and Receiving Data
+
+
+   Data is transferred between  the  user  and  TCP  in  buffers.
+Associated  with  each  buffer  is a Buffer Header which contains
+control information.  Data to be  sent  to  the  foreign  end  is
+placed  into  one  or  more  buffers,  the associated headers are
+filled in, and the address of each Buffer Header is passed to TCP
+using the SEND JSYS.
+
+   The TCP collects data from the user buffers and decides, based
+on the current window, etc., when to create a packet and transmit
+it to the foreign end.  The user can force TCP to  transmit  data
+in  a  buffer  by  setting  the  PUSH flag, TCP%PU, in the Buffer
+Header before doing the SEND.
+
+   When TCP has finished extracting the data from a  SEND  buffer
+it  sets  the  DONE  flag,  TCP%DN,  in  the  Buffer  Header  and
+optionally generates an interrupt.  It is also possible to  cause
+a  process  to block until a buffer has been processed by setting
+the TCP%WT flag in AC1; the TCP%PU flag should also be set in the
+Buffer Header.  Beware of the  trap  of  setting  TCP%WT  without
+TCP%PU--the  process  may  be blocked forever.  The SEND will not
+return control to the user program until the data has been placed
+into a packet and, due to the presence of TCP%PU, sent.
+
+   Data is received from the foreign end  by  first  passing  TCP
+(one or more) empty buffers using the RECV JSYS.  The TCP%WT flag
+may  be  specified  if control should not be returned to the user
+program until the buffer has been filled.  When data arrives, TCP
+places it into the buffers.
+
+   RECV buffers are returned to the user either when full or when
+a packet arrives which has the PUSH flag set.  Before returning a
+buffer, TCP sets the TCP%DN flag and places an error code in  the
+Buffer  Header.   The  TCP%PU  flag  will be set if the buffer is
+being returned because the received packet had the PUSH flag set.
+(The buffer might not be full in this case.)
+
+   It is only possible to send and receive whole octets.   If  an
+application requires transfer of some number of bits which is not
+a multiple of eight, then control information must be placed into
+the data stream.  Note the PUSH function cannot be used to signal
+the  other  end  of  "record  boundaries";  the  number of (RECV)
+buffers with TCP%PU set may be less than  the  number  of  PUSHes
+received  which  may  be  less  than the number of (SEND) buffers
+which had the TCP%PU flag set.
+
+    Several buffers may be passed to TCP using SEND  and/or  RECV
+if  the  non-blocking  form of the calls is used. (TCP%WT was not
+set in AC1.)
+
+
+                              - 7 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                   Sending and Receiving Data
+
+
+   TCP also provides  an  asynchronous  signal  mechanism  called
+URGENT.   If  a  (SEND) Buffer Header has the TCP%UR flag set, an
+urgent signal is associated with  the  last  data  octet  in  the
+buffer.   Its  sequence  number  is communicated to the receiving
+TCP.  The receiving user will then find the TCP%UR  flag  set  in
+all  RECV  Buffer  Headers  whose associated data buffer contains
+lower sequence numbered octets.  An interrupt may be enabled  for
+the Urgent data has arrived event.  If the sender signals another
+URGENT,  the  new sequence number is used.  The receiver may only
+"see" one URGENT if data is being processed slowly or the  system
+is heavily loaded.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                              - 8 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                         Buffer Headers
+
+
+   Data  is  transferred  between  the  user  program  and TCP in
+buffers.  Each Data Buffer contains zero or more octets of  data,
+packed  four  octets per word, in bits 0-31.  Data is transferred
+between TCPs beginning with the left-most bit  of  the  left-most
+octet.  There is no padding between individual buffers.
+
+   Associated with each Data Buffer is a Buffer Header containing
+control  information  describing  the  data.   A Buffer Header is
+.TCPBS words long.  The address of the Buffer Header is passed to
+TCP in AC2 by the SEND and RECV JSYSi.
+
+   The format of a Buffer Header is:
+
+
+  Word
+ Offset  Bits                   Meaning
+
+ .TCPBF B0-17   Flags  (note that the following flags have  full-
+                word values, not half-word).
+
+                TCP%ER  This buffer has an error associated  with
+                        it.
+
+                TCP%LE  The error occurred at the local end,  not
+                        the foreign end.
+
+                TCP%PE  The error is permanent, not temporary.
+
+                TCP%EC  Field containing the error code.  See the
+                        Error  Codes  section  for  a  listing of
+                        error codes.
+
+                TCP%DN  Asynchronous flag, cleared by TCP when it
+                        receives the  buffer,  set  by  TCP  when
+                        processing associated with the buffer has
+                        been completed.
+
+                TCP%UR  SEND: The last octet in the buffer should
+                        be communicated to the receiver as Urgent
+                        Data.
+                        RECV: There is more Urgent Data.
+
+                TCP%PU  SEND: Promptly send  (any  buffered  data
+                        and) data in this buffer to the receiving
+                        user (do not wait for more data to fill a
+                        packet).
+                        RECV:  Sender requested that data in this
+                        buffer be delivered promptly, even if the
+                        buffer is not full.
+
+                              - 9 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                         Buffer Headers
+
+
+                TCP%WM  The Data buffer is  formatted  as  36-bit
+                        bytes.   Off  if the Data buffer has four
+                        left-justified  8-bit  bytes  per   word.
+                        Note:     36-bit    mode   is   not   yet
+                        implemented.
+
+        B18-35  Reserved for user program, not used by TCP.
+
+ .TCPBA B18-35  Address of first data octet (note that  the  Data
+                Buffer  need not follow the Buffer Header).  Each
+                word  of  the  Data  Buffer  (except  the   last)
+                contains   four   left-justified  eight-bit  data
+                octets (the last word may  contain  from  one  to
+                four octets).  Data is transmitted beginning with
+                the left-most bit of the first word.
+
+ .TCPBC B0-35   Data Buffer count.
+                SEND: The number of octets of data in the buffer.
+                Updated  when TCP has finished with the buffer to
+                the number of octets not sent (usually 0).
+                RECV:  The  number  octets  available  for  data.
+                Updated  when TCP has finished with the buffer to
+                the number of unused data octets.
+
+ .TCPBO B0-17   The address of an IP Option block, or zero.
+        B18-35  The address of a TCP Option block, or zero.
+                SEND: If the  address  is  not  zero,  merge  the
+                options  from  the  Option block with those which
+                have been  received  from  the  foreign  end  for
+                inclusion in future packets.
+                RECV:  If  the  address  is  not zero, return any
+                options from the most recently received packet in
+                the Option block.  See the section on Options and
+                Appendix  G  for  further  details  about  option
+                formats.
+
+   Any unspecified bits in the Buffer Header should be zero.
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             - 10 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                      Closing a Connection
+
+
+   When a user has no more data to be sent, the connection should
+be  "closed".  The CLOSE JSYS is used to communicate this fact to
+the foreign end of the connection.  Since CLOSE implies  a  PUSH,
+any  data  which  TCP has internally buffered will first be sent;
+then a FIN packet will be sent.  The FIN causes the foreign  user
+to  be  notified that the connection is "Closing".  After doing a
+CLOSE, no more SENDs are allowed.
+
+   CLOSE, by itself,  does  not  fully  "close"  the  full-duplex
+connection  since  there  may still be data from the other end to
+process (and the other end may even have more data to  be  sent).
+
+   There are two recommended procedures for closing a connection.
+If  the  user  is  notified  (either  by  a RECV error code or an
+interrupt) that the connection is "Closing", no more RECVs should
+be attempted.  Any data for the foreign end should be sent  using
+SEND, and then a CLOSE with the TCP%WT flag set should be issued.
+The  CLOSE will block until the connection is fully "Closed".  If
+CLOSE returns without error, it has also released the JCN.  If an
+error is returned, the JCN has not been released;  it  should  be
+released using the ABORT JSYS.
+
+   If a CLOSE is issued before being notified that the connection
+is  "Closing",  the  TCP%WT flag should not be set.  (Setting the
+TCP%WT flag in this case is  a  frequent  cause  of  "connections
+failing to close".)  Control will be returned to the user program
+to  allow  RECVs  to  be issued until the foreign end (CLOSEs and
+consequently) sends a FIN packet, which  will  cause  a  "Closed"
+error  to  be  returned.   (Failure  to  RECV  this data (or more
+frequently  "unexpected  data")  is  another  common   cause   of
+"connections failing to close".)  The JCN should then be released
+using the ABORT JSYS.
+
+   A  connection  may  be  abnormally  terminated  at any time by
+issuing the ABORT JSYS.  ABORT also releases the  JCN  associated
+with the connection.
+
+   After  a  connection  has  been  fully  CLOSEd or ABORTed, the
+internal connection block (TCB) is retained by  TCP  for  several
+seconds  to allow any packets which might still be in the network
+(e.g., old retransmissions) to arrive and be  discarded.   During
+this  period,  an  attempt to reuse the same connection (internet
+addresses and port numbers) will fail.
+
+
+
+
+
+
+
+                             - 11 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                        Connection Status
+
+
+   The status of a particular connection (or the values of  TCP's
+internal counters) may be examined using the STAT JSYS.  The most
+frequent   use  of  STAT  is  to  determine  the  addresses/ports
+associated with a connection or the state of its send and receive
+sides.  Use of the symbolic name form of STAT  call  is  strongly
+recommended  to  reduce  site  and software release dependencies.
+The following table lists  the  names  of  the  most  interesting
+variables.   Appendix  H  lists  all  the  quantities  which  are
+available.  See the description of the STAT JSYS for details.
+
+
+ASCII Name      Contents
+
+    TFH   Foreign Host internet Address
+    TLH   Local Host internet Address
+    TFP   Foreign Port
+    TLP   Local Port
+   TRSYN  Receive Side State (see below)
+   TSSYN  Send Side State (see below)
+
+
+        Receive Send
+        (TRSYN) (TSSYN)
+Value   Symbol  Symbol          Meaning
+
+  4     SYNABL  SYNABL  Waiting for SYN packet to arrive/be sent
+  5     SYNRCV  SYNSNT  SYN packet received or sent
+  7     SYNCED  SYNCED  Connection synchronized, data may be sent
+  2     FINRCV  FINSNT  FIN packet received or sent
+  0     NOTSYN  NOTSYN  FIN acknowledged, connection closed
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             - 12 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                           Interrupts
+
+
+   TCP allows the user to specify software interrupt channels for
+five TCP related  events:  Connection  open/closing/closed,  SEND
+buffer  done,  RECV  buffer  done,  presence  of URGENT data, and
+error.  They may each be left assigned to no channel, or assigned
+to separate channels, or they may share  a  common  channel.   An
+interrupt  may  be reassigned to another channel at any time; but
+once assigned, the interrupt cannot be assigned to  "no  channel"
+(although  it  may  be assigned to a channel whose interrupts are
+"ignored").
+
+   Since the TCP typically runs at a higher  priority  than  most
+user  programs, successive interrupts may occur more quickly than
+the user program can process them.  One can thus not expect,  for
+example,  that  the  number of RECV buffer full interrupts be the
+same as the number of RECVs issued; it may be less if two buffers
+were filled without the user program being run in between.
+
+   The open/closing/closed interrupt occurs when  the  connection
+has  become  fully  synchronized ("open"), when a FIN is received
+from the other end ("closing"), and when the connection is  fully
+closed  ("closed").  Note that these interrupts will NOT occur if
+the connection is being ABORTed.
+
+   The  error  interrupt  occurs  when  a   reset   is   received
+(Connection Rejected) or when a transmission timeout has occurred
+(Transmission  Timeout).   Note  that  these  interrupts will NOT
+occur if the connection is being ABORTed.
+
+   The urgent data interrupt  occurs  when  a  packet  containing
+urgent  data arrives.  If another packet arrives with more urgent
+data, a second interrupt will NOT be given unless the program has
+already RECVed all of the urgent  data  from  the  first  packet.
+Note  that  this  interrupt  will  NOT occur if the connection is
+being ABORTed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             - 13 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                     Error Returns and Codes
+
+
+   All of the TCP JSYSi are called with arguments in one or  more
+of ACs 1 through 4.  If the call is successful the JSYS will skip
+an instruction when control is returned to the user program.  The
+contents  of  ACs  1  through  4  may be changed depending on the
+particular JSYS  involved.   If  the  call  was  not  successful,
+control  is  returned  to  the  instruction in the user's program
+immediately following the JSYS.  In this  case  AC1  contains  an
+error  code which identifies the cause of the problem.  The error
+codes returned (with the exception  of  ATNVT)  are  not  in  the
+format of other TOPS20 errors, but are instead in the form of the
+Buffer Header error field.
+
+   The  error  byte consists of three flag bits and a 5-bit error
+code, right-justified in AC1.  The AC1 bits and the corresponding
+Buffer Header symbols are listed in the table below.
+
+
+ Buffer  AC1
+ Header  Bit                    Meaning
+
+ TCP%ER 1B28    Set  if  an  error  was  detected   ("E"),   zero
+                otherwise ("X").
+ TCP%LE 1B29    Set if the error was detected locally ("L"), zero
+                if  the  error  was  detected  by the foreign TCP
+                ("F").
+ TCP%PE 1B30    Set if the error is permanent ("P"), zero if  the
+                error is temporary ("T").
+ TCP%EC 37B35   Error Code.
+
+
+   The Error flag indicates an error occurred.
+
+   The  Local  flag indicates whether the problem was detected at
+the local host or the foreign host.
+
+   The Permanent flag indicates whether the problem is  permanent
+or  temporary.   Temporary  errors  are  usually  associated with
+resource shortages; repeating the request  later  is  encouraged.
+Permanent errors should not be retried.
+
+   Some  error  codes  are  only associated with a JSYS, some may
+only be returned by a JSYS if the TCP%WT flag was set in AC1, and
+some are only returned in a Buffer Header.
+
+
+
+
+
+
+
+                             - 14 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                     Error Returns and Codes
+
+
+   The Error Codes and their meanings are:
+
+  Key
+
+   j    Error can be returned in AC1 by a JSYS.
+   w    Error can be returned in AC1 by a JSYS which set  TCP%WT.
+   b    Error code can be returned in a Buffer Header.
+
+
+ Codes
+
+ 0 b    No Error.  The buffer was processed without error.
+ 1 j    Argument Error in JSYS.  An AC1  flag  (TCP%xx)  was  set
+        which   is   inappropriate  for  the  JSYS;  the  TVT  or
+        connection index or JCN is invalid.
+ 2 j    Invalid Options specified.  The routing option  does  not
+        parse  or  an  option length exceeds the amount of option
+        space available.
+ 3 j    Connection Not Open.  Attempt to CLOSE a connection which
+        is not open.
+ 4 j    Temporarily Out of Resources.  A new connection cannot be
+        created due to a lack of JCNs (for the job), free storage
+        for the TCB, an available  TVT,  or  because  the  system
+        limit on simultaneous connections would be exceeded.
+ 5      Wild foreign host/port only allowed if listening.
+ 6 j    Connection Already Exists.  Attempt to OPEN a  connection
+        which has already been OPENed.
+ 7 wb   Connection Rejected or Reset.  A RESET was  received  for
+        the connection.
+ 9 w    Transmission Timeout.
+12 wb   Connection  Closed  or  Closing.    Closed   locally   or
+        remotely;   cannot (re)activate the connection because it
+        was not fully closed.   Note:   this  code,  without  the
+        "error"  flag  set,  is  returned  in RECV Buffer Headers
+        after a  FIN  has  been  received  (the  foreign  end  is
+        closing).
+13 j    Wild local port is illegal.  A zero  local  port  is  not
+        allowed.
+14 wb   Connection Reset.  A Transmission Timeout has occurred or
+        the connection is being aborted.
+15 j    Bad Buffer Argument.  The Buffer Header count (.TCPBC) is
+        negative  or  the  end of the buffer is beyond the end of
+        memory section 0.
+16 j    Insufficient resources to process  data  buffer.   Either
+        insufficient  free  storage  or  TCP%WT was specified and
+        there are no free "wait flags".
+17 j    Invalid interrupt channel.  A channel number is  not  0-5
+        or 23-35.
+
+
+                             - 15 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                     Error Returns and Codes
+
+
+20 j    Bad  STAT  offset.   Offset  to  too  large  for  TCB  or
+        Statistics area.
+21 j    Bad STAT count.  Count is zero,  positive,  or  forms  an
+        offset which is too large.
+22 j    Bad STAT name.  An ASCII name is not in STAT's table.
+29 j    Changing security levels is not allowed.
+30 j    Use of TCP%VT not allowed.  Only Job0 (internet fork) can
+        create TVTs (Use ATNVT).
+31 j    TCP not available.  TCP has not been initialized  or  has
+        been turned off.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             - 16 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                             Options
+
+
+   Both  TCP  and  IP provide the means to include a selection of
+standard options  in  packets.   Options  are  only  required  in
+special  situations.  Most options are automatically processed by
+TCP.   In  particular,  the  routing  options  are  automatically
+inverted   without   user  intervention.   Received  options  are
+automatically merged with those specified by  the  user.   If  an
+option  is  both  specified by the user and received in a packet,
+the received version is ignored.
+
+   Options may be specified  with  OPEN  or  SEND.   Options  are
+specified  using  the  .TCPOP  word  in the Connection Descriptor
+block and the .TCPBO  word  in  the  Buffer  Header  block.   The
+left-half contains the address of a block for IP options, and the
+right-half contains the address of a block for TCP options.  Each
+block  is  .TCPOW  words  long  and  contains one to forty option
+octets, packed four left-justified octets per word.
+
+   Once specified, the options are sent in each packet generated.
+If an Option block address is  zero,  the  corresponding  options
+remain  unchanged.   The  current  options  may  be  cancelled by
+specifying an address pointing to an Option  block  which  begins
+with an End-of-Options octet (zero).
+
+   Options  contained  in  packets  which  are  received  may  be
+obtained by specifying non-zero address(es) in  the  .TCPBO  word
+associated with a RECV.
+
+   Options  have  the  form  of  a string of one to forty octets.
+Except for NOP and End-of-options which are each one octet  long,
+an  individual  option  is  a  string of two or more octets.  The
+first octet identifies the type of  option;  the  second  is  its
+length  in octets (counting the type and length octets), followed
+by additional octets relevant to the particular option.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             - 17 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                             Options
+
+
+   The currently defined TCP options are:
+
+Option
+ Code           Option (Length)  Meaning
+
+  0     End-of-Options (single  octet).   Terminates  the  option
+        string.
+
+  1     NOP (single octet).  Ignored.
+
+  2     Maximum Segment Size (four octets).  The receiver of this
+        option  should  not  generate packets whose packet length
+        exceeds the number of  octets  specified  by  the  16-bit
+        number  contained  in  the third and fourth octets.  This
+        option should be specified with OPEN.
+
+
+   The format of the IP options may be found in Appendix G.   The
+processing which TCP automatically provides for each IP option is
+listed  in  the  following table.  Note that the most significant
+bit of IP options indicates, if set,  that  the  option  must  be
+copied into each fragment of a fragmented datagram.
+
+Option
+ Code           Option  Action taken by TCP
+
+   0    End-of-Options.  None.
+
+   1    NOP.  None.
+
+   7    Record Route.  The recorded route is inverted and changed
+        into  a Strict Source Route for inclusion in subsequently
+        generated packets.
+
+  68    Internet Timestamp.  If the space reserved for timestamps
+        is not yet full, the option is copied and returned to the
+        originator.
+
+ 130    Security.  None.
+
+ 131    Loose Source Routing.  The source route is  automatically
+        inverted for inclusion in subsequently generated packets.
+
+ 136    Stream Identifier.  Copied for inclusion in  subsequently
+        generated packets.
+
+ 137    Strict Source Routing.  The source route is automatically
+        inverted for inclusion in subsequently generated packets.
+
+
+                             - 18 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                  TCP Retransmission Parameters
+
+
+   Both   OPEN  and  SEND  require  a  Transmission  Timeout  and
+Retransmission  Parameters.   The  Transmission  Timeout  is  the
+number  of  seconds  for  which retransmissions of unacknowledged
+octets  should  be  attempted  before  returning  a  Transmission
+Timeout  error  to the user program.  Permissible values are 1 to
+300 seconds, or zero.  A  zero  value  means  that  there  is  no
+timeout  and retransmissions should continue "forever" (until the
+other end sends a RESET or the program is ^C'd and the connection
+ABORTed).
+
+   If you are not interested in the details  of  retransmissions,
+use   zero  for  the  Retransmission  Parameters.   The  standard
+retransmission algorithm, based on  measured  round  trip  delay,
+will  be  used.   For  a  detailed  description  of the available
+retransmission algorithms see Appendix F.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             - 19 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                              OPEN
+
+
+                         OPEN   JSYS 742
+
+Specifies a TCP connection and returns its JCN.
+
+
+ACCEPTS IN AC1: Flags ! Address-of-Connection-Descriptor-Block
+
+                TCP%FS  Set to initiate  synchronization  (active
+                        open);    cleared    to   await   foreign
+                        connection attempt (passive open).
+
+                TCP%WT  Block until  either  the  connection  has
+                        been   synchronized   or   an  error  has
+                        occurred.
+
+                TCP%VT  Create a TCP virtual terminal connection.
+                        Note: Only Job 0 may use this flag.  User
+                        programs should use the ATNVT JSYS.
+
+                TCP%PS  If set and the connection attempt results
+                        in a failure, (wait a couple seconds and)
+                        restart  the connection procedure.  Note:
+                        Use of this flag is not recommended.
+
+                TCP%HP  Connection  should  be   high   priority.
+                        OBSOLETE, use the Type-of-Service byte in
+                        the   .TCPIP   word   of  the  Connection
+                        Descriptor block (see Appendix C).
+
+                TCP%SC  Secure connection.  Unsupported, see  the
+                        IP Security option in Appendix G.
+
+                TCP%ET  Reserved, must be 0.
+
+                TCP%PT  Reserved, must be 0.
+
+           AC2: Transmission Timeout, in seconds (5 minute max)
+
+           AC3: Retransmission Parameters Word  (See Appendix  F)
+
+                B0-9    Backoff Numerator
+                B10-17  Backoff Denominator
+                B18-35  Initial Retransmission Interval
+
+RETURNS     +1: Failure, TCP error byte in B28-35 of AC1.   If  a
+                JCN  had  been  assigned  before  the  error  was
+                detected, it is  in  the  left-half  of  AC1  (it
+                should be ABORTed).
+
+
+                             - 20 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                              OPEN
+
+
+            +2: Success, AC1 contains the JCN in  the  right-half
+                with the TCP%JS flag set.
+
+   The  format  of  the  .TCPCS-word Connection Descriptor block,
+whose  address  is  contained  in  the  right-half  of  AC1,  was
+described  in  the  Connection Descriptor block section.  The JCN
+returned in AC1 should be used to specify this connection to  the
+other TCP JSYSi.
+
+   If the TCP%WT flag is not set, control will be returned to the
+user  program  as  soon  as  the  connection parameters have been
+validated, The internal control block (TCB) created, and, if  the
+TCP%FS  flag  was  set,  the  connection  synchronization process
+begun.   The  connection  will  (probably)  not  yet   be   fully
+synchronized.   An  interrupt  may  be enabled for the connection
+fully synchronized event, or the state of the internal TSOPN flag
+may be checked using the STAT JSYS.
+
+   Note that SENDs and RECVs may be issued before a connection is
+fully synchronized.
+
+
+OPEN ERROR CODES:
+
+ELP+1   Argument Error in JSYS.  An AC1  flag  (TCP%xx)  was  set
+        which   is   inappropriate  for  the  JSYS;  the  TVT  or
+        connection index or JCN is invalid.
+ELP+2   Invalid Options specified.  The routing option  does  not
+        parse  or  an  option length exceeds the amount of option
+        space available.
+ELT+4   Temporarily Out of Resources.  A new connection cannot be
+        created due to a lack of JCNs (for the job), free storage
+        for the TCB, an available  TVT,  or  because  the  system
+        limit on simultaneous connections would be exceeded.
+ELP+6   Connection Already Exists.  Attempt to OPEN a  connection
+        which has already been OPENed.
+EFP+7   Connection Rejected or Reset.  A RESET was  received  for
+        the connection.
+ELP+9   Transmission Timeout.
+ELP+12  Connection  Closed  or  Closing.    Closed   locally   or
+        remotely;   cannot (re)activate the connection because it
+        was not fully closed.
+ELP+13  Wild local port is illegal.  A zero  local  port  is  not
+        allowed.
+ELP+14  Connection Reset.  A Transmission Timeout has occurred or
+        the connection is being aborted.
+ELP+30  Use of TCP%VT not allowed.  Only Job0 (internet fork) can
+        create TVTs (Use ATNVT).
+
+
+                             - 21 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                              OPEN
+
+
+ELT+31  TCP not available.  TCP has not been initialized  or  has
+        been turned off.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             - 22 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                              CLOSE
+
+
+                        CLOSE   JSYS 743
+
+Close a TCP connection.
+
+ACCEPTS IN AC1: TCP%JS ! Flags ! JCN
+
+                TCP%JS  Must be set since right-half has  a  JCN.
+
+                TCP%WT  Wait  for  close  to   happen   in   both
+                        directions or for an error to occur.
+
+RETURNS     +1: Failure, TCP error byte in B28-35 of AC1.
+            +2: Success.
+
+
+   The  CLOSE JSYS causes any data in TCP's buffers to be sent to
+the receiver.  A FIN is then sent to notify the receiver that  no
+more  data will be sent to it.  After a CLOSE, SENDs are illegal.
+
+   Note that if the TCP%WT flag is not set, the JCN  will  remain
+valid,  allowing  more  RECVs.   RECVs should be repeated until a
+Connection Closed error is  returned.   ABORT  is  then  used  to
+release the JCN.
+
+   If  the  TCP%WT  flag  is set, the CLOSE JSYS will block until
+FINs have been exchanged to fully close  the  connection,  or  an
+error is detected.  Note that a connection cannot be fully closed
+if  there  is  data  which  has not been RECVed.  If no error was
+detected, the JCN is also released.
+
+
+CLOSE ERROR CODES:
+
+ELP+1   Argument Error in JSYS.  An AC1  flag  (TCP%xx)  was  set
+        which   is   inappropriate  for  the  JSYS;  the  TVT  or
+        connection index or JCN is invalid.
+ELP+3   Connection Not Open.  Attempt to CLOSE a connection which
+        is not open.
+ELT+4   Temporarily Out of Resources.  A new connection cannot be
+        created due to a lack of JCNs (for the job), free storage
+        for the TCB, an available  TVT,  or  because  the  system
+        limit on simultaneous connections would be exceeded.
+EFP+7   Connection Rejected or Reset.  A RESET was  received  for
+        the connection.
+ELP+7   Connection does not exist.   There  is  no  TCB  for  the
+        specified connection.
+ELP+9   Transmission Timeout.
+
+
+
+                             - 23 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                              CLOSE
+
+
+ELP+14  Connection Reset.  A Transmission Timeout has occurred or
+        the connection is being aborted.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             - 24 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                              SEND
+
+
+                         SEND   JSYS 740
+
+Send a buffer of data over a TCP connection.
+
+ACCEPTS IN AC1: TCP%JS ! Flags ! JCN
+
+                TCP%JS  Must be set since right-half has  a  JCN.
+
+                TCP%WT  Wait for data to be copied into a packet,
+                        or for an error.  Note the packet may not
+                        be sent if the TCP%PU flag was not set in
+                        the Buffer Header.
+
+                TCP%HP  Connection  should  be   high   priority.
+                        OBSOLETE, use the Type-of-Service byte in
+                        the   .TCPIP   word   of  the  Connection
+                        Descriptor block (see Appendix C).
+
+                TCP%SC  Secure connection.  Unsupported, see  the
+                        IP Security option in Appendix G.
+
+           AC2: Buffer Header Address
+
+           AC3: Transmission Timeout, in seconds (5 minute max)
+
+           AC4: Retransmission Parameters Word  (See Appendix  F)
+
+        B0-9    Backoff Numerator
+        B10-17  Backoff Denominator
+        B18-35  Initial Retransmission Interval
+
+RETURNS     +1: Failure, TCP error byte in B28-35 of AC1.
+            +2: Success.
+
+   The  format  of  the  .TCPBS-word  Buffer  Header  block whose
+address is contained in AC2 was described in  the  Buffer  Header
+section.  Unused words and bits should be zero.
+
+   When TCP accepts the Buffer Header, the Error field and TCP%DN
+flag are cleared.  Retransmissions will occur as specified by the
+Retransmission  Parameters word, if necessary, until the data has
+been acknowledged by the receiver, the Transmission  Timeout  has
+passed, or an error is detected.  When processing of the data has
+been completed, an error code is placed into the Error field, the
+count  word is changed to the number of octets not sent (normally
+0), and the TCP%DN flag is set.
+
+
+
+
+                             - 25 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                              SEND
+
+
+   If the TCP%WT flag  is  not  specified,  control  will  return
+immediately  to  the user program.  The buffer will remain in use
+until the TCP%DN flag is set.  An interrupt may  be  enabled  for
+this event.
+
+
+SEND ERROR CODES:
+
+ELP+1   Argument Error in JSYS.  An AC1  flag  (TCP%xx)  was  set
+        which   is   inappropriate  for  the  JSYS;  the  TVT  or
+        connection index or JCN is invalid.
+ELP+2   Invalid Options specified.  The routing option  does  not
+        parse  or  an  option length exceeds the amount of option
+        space available.
+ELP+3   Connection Not Open.  Attempt to CLOSE a connection which
+        is not open.
+ELT+4   Temporarily Out of Resources.  A new connection cannot be
+        created due to a lack of JCNs (for the job), free storage
+        for the TCB, an available  TVT,  or  because  the  system
+        limit on simultaneous connections would be exceeded.
+EFP+7   Connection Rejected or Reset.  A RESET was  received  for
+        the connection.
+ELP+9   Transmission Timeout.
+ELP+12  Connection  Closed  or  Closing.    Closed   locally   or
+        remotely;   cannot (re)activate the connection because it
+        was not fully closed.
+ELP+13  Wild local port is illegal.  A zero  local  port  is  not
+        allowed.
+ELP+14  Connection Reset.  A Transmission Timeout has occurred or
+        the connection is being aborted.
+ELP+15  Bad Buffer Argument.  The Buffer Header count (.TCPBC) is
+        negative  or  the  end of the buffer is beyond the end of
+        memory section 0.
+ELT+16  Insufficient resources to process  data  buffer.   Either
+        insufficient  free  storage  or  TCP%WT was specified and
+        there are no free "wait flags".
+ELP+30  Use of TCP%VT not allowed.  Only Job0 (internet fork) can
+        create TVTs (Use ATNVT).
+ELT+31  TCP not available.  TCP has not been initialized  or  has
+        been turned off.
+
+
+
+
+
+
+
+
+
+
+                             - 26 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                              RECV
+
+
+                         RECV   JSYS 741
+
+Receive a buffer of data from a TCP connection.
+
+ACCEPTS IN AC1: TCP%JS ! Flags ! JCN
+
+                TCP%JS  Must be set since right-half has  a  JCN.
+
+                TCP%WT  Wait for data buffer to be filled, or for
+                        an error.
+
+           AC2: Buffer Header Address
+
+RETURNS     +1: Failure, TCP error byte in B28-35 of AC1.
+            +2: Success.
+
+   The  format  of  the  .TCPBS-word  Buffer  Header  block whose
+address is contained in AC2 was described in  the  Buffer  Header
+section.  Unused words and bits should be zero.
+
+   The  count  word  in  the  Buffer  Header  should  contain the
+(maximum) number of octets the Data Buffer will hold.   When  TCP
+accepts  the  Buffer  Header, the Error field and TCP%UR, TCP%PU,
+and TCP%DN flags are cleared.  Data received will be placed  into
+the  buffer  until either it is full or a PUSH is received.  When
+TCP is finished with the buffer, an error  code  will  be  placed
+into  the Error field and the TCP%DN flag will be set.  The count
+word will be set to the number of unused octets remaining in  the
+buffer.   If  there  is more Urgent data, the TCP%UR flag will be
+set.  If the buffer is being returned due to the  presence  of  a
+PUSH, the TCP%PU flag will be set.
+
+   If  the  TCP%WT  flag  is  not  specified, control will return
+immediately to the user program.  The buffer will remain  in  use
+until  the  TCP%DN  flag is set.  An interrupt may be enabled for
+this event.
+
+
+RECV ERROR CODES:
+
+ELP+1   Argument Error in JSYS.  An AC1  flag  (TCP%xx)  was  set
+        which   is   inappropriate  for  the  JSYS;  the  TVT  or
+        connection index or JCN is invalid.
+ELT+4   Temporarily Out of Resources.  A new connection cannot be
+        created due to a lack of JCNs (for the job), free storage
+        for the TCB, an available  TVT,  or  because  the  system
+        limit on simultaneous connections would be exceeded.
+
+
+
+                             - 27 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                              RECV
+
+
+EFP+7   Connection Rejected or Reset.  A RESET was  received  for
+        the connection.
+ELP+7   Connection does not exist.   There  is  no  TCB  for  the
+        specified connection.
+ELP+9   Transmission Timeout.
+ELP+12  Connection  Closed  or  Closing.    Closed   locally   or
+        remotely;   cannot (re)activate the connection because it
+        was not fully closed.   Note:   this  code,  without  the
+        "error"  flag  set,  is  returned  in RECV Buffer Headers
+        after a  FIN  has  been  received  (the  foreign  end  is
+        closing).
+XLP+12  Connection Closing.  Closed remotely, no more data to  be
+        RECVed.
+ELP+13  Wild local port is illegal.  A zero  local  port  is  not
+        allowed.
+ELP+14  Connection Reset.  A Transmission Timeout has occurred or
+        the connection is being aborted.
+ELP+15  Bad Buffer Argument.  The Buffer Header count (.TCPBC) is
+        negative  or  the  end of the buffer is beyond the end of
+        memory section 0.
+ELT+16  Insufficient resources to process  data  buffer.   Either
+        insufficient  free  storage  or  TCP%WT was specified and
+        there are no free "wait flags".
+ELP+30  Use of TCP%VT not allowed.  Only Job0 (internet fork) can
+        create TVTs (Use ATNVT).
+ELT+31  TCP not available.  TCP has not been initialized  or  has
+        been turned off.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             - 28 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                              ABORT
+
+
+                        ABORT   JSYS 747
+
+Abort a TCP connection.
+
+ACCEPTS IN AC1: TCP%JS ! JCN
+
+                TCP%JS  Must be set since right-half has  a  JCN.
+
+RETURNS     +1: Failure, TCP error byte in B28-35 of AC1.
+            +2: Success, Connection broken, JCN released.
+
+   The  local  end  of  the  connection  is forgotten:  partially
+processed packets are deleted, queued SEND and RECV  buffers  are
+returned, the retransmission queue is purged.
+
+   An  attempt  is made to send a RESET packet to the remote end.
+Should this not be delivered, the other  end  will  discover  its
+half-open connection the next time it attempts to use it.
+
+   Note  that  TCP's  internal connection block (TCB) will remain
+for several seconds to allow any packets which were in transit to
+arrive and be discarded.  An attempt to reuse the same connection
+(host addresses and ports) will fail until the waiting  time  has
+passed.
+
+
+ABORT ERROR CODES:
+
+ELP+1   Argument Error in JSYS.  An AC1  flag  (TCP%xx)  was  set
+        which   is   inappropriate  for  the  JSYS;  the  TVT  or
+        connection index or JCN is invalid.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             - 29 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                              STAT
+
+
+                          STAT JSYS 745
+
+Obtain information about either a connection  or  TCP's  internal
+counters.
+
+ACCEPTS IN AC1: Flags ! (TVT- or connection-index, or JCN, or  0)
+
+                TCP%JS  Return information about  the  connection
+                        whose JCN is in the right-half of AC1.
+
+                TCP%ST  Return TCP statistics information instead
+                        of  information  about a connection.  The
+                        right-half of AC1 is ignored.  The  names
+                        of the entries in the statistics area are
+                        listed in Appendix H (see TCP30SY).
+
+                TCP%NI  Return in AC2 an AOBJN  counter  for  the
+                        currently    active   connections.   (See
+                        TCP%IX.)
+
+                TCP%IX  Return information about  the  connection
+                        specified  by the index in the right-half
+                        of  AC1.   The  index  is  a  system-wide
+                        identifier  whose binding may change from
+                        call to call.  (See TCP%NI.)
+
+                TCP%NT  Return in AC2 an AOBJN  counter  for  the
+                        currently active TVTs.  (See TCP%TV.)
+
+                TCP%TV  Return   information   about   the    TVT
+                        specified  by the index in the right-half
+                        of  AC1.   The  index  is  a  system-wide
+                        identifier  whose binding may change from
+                        call to call.  (See TCP%NT.)
+
+                TCP%SY  The  right-half  of  AC2   contains   the
+                        address of a list of ASCII variable names
+                        associated with either a connection (TCB)
+                        or  TCP  Statistics for which information
+                        should be returned.
+
+                TCP%SD  An LDB pointer  should  be  returned  for
+                        each  of the specified symbols instead of
+                        the value.   (The  pointers  assume  AC14
+                        (octal)  is  pointing  to a TCB image and
+                        AC13 (octal) is pointing at STAT0 (offset
+                        0 of  the  statistics  area).)   Requires
+                        TCP%SY  to  be set and a valid connection
+                        identifier (e.g. TCP%IX!1).
+
+                             - 30 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                              STAT
+
+
+           AC2: -N,,Offset  into  TCB  or  Statistics  area,    N
+                successive  words  are  desired  beginning at the
+                specified; or
+           AC2: -N,,Address of symbol names,  N symbols are given
+                beginning at the specified address.
+
+           AC3: -M,,Address in user's space to which  information
+                should be returned; the area contains M words.
+
+RETURNS     +1: Failure, TCP error byte in B28-35 of AC1.
+            +2: Success, Data  copied  to  user  specified  area,
+                counts and addresses in AC2 and AC3 updated.
+
+   The  TCB offset identifies the transfer starting point and the
+Address in user  space  identifies  the  starting  point  of  the
+destination  area.   If  successful,  min(M,N)  words  have  been
+transferred from the TCB (or statistics  area)  to  the  caller's
+space.
+
+   Beware: the order/entries may be site dependent.
+
+
+STAT ERROR CODES:
+
+ELP+1   Argument Error in JSYS.  An AC1  flag  (TCP%xx)  was  set
+        which   is   inappropriate  for  the  JSYS;  the  TVT  or
+        connection index or JCN is invalid.
+ELT+4   Temporarily Out of Resources.  A new connection cannot be
+        created due to a lack of JCNs (for the job), free storage
+        for the TCB, an available  TVT,  or  because  the  system
+        limit on simultaneous connections would be exceeded.
+ELP+13  Wild local port is illegal.  A zero  local  port  is  not
+        allowed.
+ELP+20  Bad  STAT  offset.   Offset  to  too  large  for  TCB  or
+        Statistics area.
+ELP+21  Bad STAT count.  Count is zero,  positive,  or  forms  an
+        offset which is too large.
+ELP+22  Bad STAT name.  An ASCII name is not in STAT's table.
+ELT+31  TCP not available.  TCP has not been initialized  or  has
+        been turned off.
+
+
+
+
+
+
+
+
+
+
+                             - 31 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                              CHANL
+
+
+                        CHANL   JSYS 746
+
+Specify PSI channels for TCP interrupts.
+
+ACCEPTS IN AC1: TCP%JS ! JCN
+
+                TCP%JS  Must be set since right-half has  a  JCN.
+
+           AC2: Six channel numbers.
+
+                B0-5    Urgent data available
+                B6-11   RECV buffer done
+                B12-17  SEND buffer done
+                B18-23  Error
+                B24-29  Connection change (open/closing/closed)
+                B30-35  Reserved, must be 77 (octal)
+
+RETURNS     +1: Failure, TCP error byte in B28-35 of AC1.
+            +2: Success.  This fork will receive TCP PSIs for the
+                specified events.
+
+   Each of the 6-bit bytes may be either a decimal channel number
+(0-5  or  24-35)  or  77  (octal) if no change is desired for the
+corresponding event.  PSIs may be dropped  or  may  be  tardy  on
+heavily  loaded  systems.  Some defensive programming is required
+to guard against these problems.
+
+
+CHANL ERROR CODES:
+
+ELP+1   Argument Error in JSYS.  An AC1  flag  (TCP%xx)  was  set
+        which   is   inappropriate  for  the  JSYS;  the  TVT  or
+        connection index or JCN is invalid.
+ELT+4   Temporarily Out of Resources.  A new connection cannot be
+        created due to a lack of JCNs (for the job), free storage
+        for the TCB, an available  TVT,  or  because  the  system
+        limit on simultaneous connections would be exceeded.
+ELP+13  Wild local port is illegal.  A zero  local  port  is  not
+        allowed.
+ELP+17  Invalid interrupt channel.  A channel number is  not  0-5
+        or 23-35.
+ELT+31  TCP not available.  TCP has not been initialized  or  has
+        been turned off.
+
+
+
+
+
+
+
+                             - 32 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                              SCSLV
+
+
+                        SCSLV   JSYS 744
+
+Set the security level for a TCP connection.  Note: SCSLV has not
+been tested in the current release.
+
+ACCEPTS IN AC1: TCP%JS ! JCN
+
+                TCP%JS  Must be set since right-half has  a  JCN.
+
+           AC2: 36-bit security value
+
+RETURNS     +1: Failure, TCP error byte in B28-35 of AC1.
+            +2: Success, The security value has  been  associated
+                with the connection.
+
+   The  security  value  is not interpreted by the TCP (except to
+see that it matches).  The number of bits of the  security  value
+actually  used  varies depending on the actual security procedure
+in use.  In all cases, the right-most bits of the word are  used.
+
+
+SCSLV ERROR CODES:
+
+ELP+1   Argument Error in JSYS.  An AC1  flag  (TCP%xx)  was  set
+        which   is   inappropriate  for  the  JSYS;  the  TVT  or
+        connection index or JCN is invalid.
+ELT+4   Temporarily Out of Resources.  A new connection cannot be
+        created due to a lack of JCNs (for the job), free storage
+        for the TCB, an available  TVT,  or  because  the  system
+        limit on simultaneous connections would be exceeded.
+ELP+13  Wild local port is illegal.  A zero  local  port  is  not
+        allowed.
+ELP+29  Changing security levels is not allowed.
+ELT+31  TCP not available.  TCP has not been initialized  or  has
+        been turned off.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             - 33 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                         TELNET Protocol
+
+
+   The   TELNET   Protocol  is  a  general  8-bit  byte  oriented
+communications facility  intended  for  use  in  remote  terminal
+access situations.  It uses TCP as the data transfer protocol.
+
+   An  open  TCP  connection which has not been used for SENDs or
+RECVs may be converted by the ATNVT JSYS into a  Network  Virtual
+Terminal  using  the  TELNET protocol.  ATNVT is given the JCN of
+the connection (which it releases).   It  returns  a  TOPS20  TTY
+designator.   The designator can then be used to obtain input and
+output JFNs and the connection can be used as  any  other  TOPS20
+TTY.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             - 34 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                              ATNVT
+
+
+                        ATNVT   JSYS 274
+
+Attach a Network Virtual Terminal to a TCP connection.
+
+ACCEPTS IN AC1: AN%TCP ! AN%NTP ! JCN
+
+                AN%TCP  This flag is set  to  indicate  that  the
+                        right-half of AC1 has a JCN (instead of a
+                        JFN).
+
+                AN%NTP  This  flag  is  ASSUMED  since  TCP  only
+                        supports the "new" TELNET protocol.
+
+RETURNS     +1: Failure, TOPS20 error code in  AC1,  the  JCN  is
+                still valid.
+            +2: Success, The terminal designator for the  Network
+                Virtual  Terminal  is  in  AC1,  the JCN has been
+                released.
+
+   The caller must first OPEN  a  TCP  connection,  as  described
+above.   The  connection must be synchronized with no intervening
+SENDs or RECVs before the ATNVT call.  If successful, the JCN  is
+released and the connection is transferred to the Network Virtual
+Terminal   whose   TTY   designator   is  returned  in  AC1.   If
+unsuccessful, one of the error codes listed below is returned and
+the JCN remains valid. (It should probably be ABORTed.)
+
+
+ATNVT ERROR CODES:
+
+ATNX1   Invalid JCN
+ATNX2   Receive side not SYNCED
+ATNX3   User CLOSEd/ABORTed connection
+ATNX5   Receive side has been used (RECVs)
+ATNX6   Connection has been closed or has errors
+ATNX8   Send side not SYNCED
+ATNX11  Send side has been used (SENDs)
+ATNX13  No free TVTs
+
+
+
+
+
+
+
+
+
+
+
+
+                             - 35 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                      Internet User Queues
+
+
+   The Internet User Queue facility allows user programs to  send
+and  receive internet datagrams.  In order to use this facility a
+program must first assign an Internet  User  Queue  using  ASNIQ.
+ASNIQ's  argument  is  the  address  of  a Queue Descriptor block
+containing a set of mask and  value  words  that  determine  what
+messages  may  be  sent from this queue and which of the incoming
+messages will be delivered to this  queue.   A  successful  ASNIQ
+returns  an  Internet  Queue  Handle  (a small system-wide number
+identifying this queue).
+
+   Datagrams may be sent by  creating  an  IP  packet  image  and
+calling  SNDIN  with the Internet Queue Handle and the address of
+the packet image.  Various fields of the header are  checked  for
+legality.   The  source  host internet address is validated if it
+was specified, or it is filled in with the default  host  address
+if  it  was  not specified (i.e.  was zero).  The internet header
+checksum is  computed  and  placed  into  the  packet's  internet
+header.  The routing algorithms select a network interface, and a
+local  leader for that network is constructed in the packet.  The
+packet is then queued for output on the selected interface.
+
+   User programs have no control over which network or  interface
+will  be  selected for transmission of a datagram.  This decision
+will  be  made  by  the  routing  algorithms  based  on   routing
+information  supplied  by internet gateways.  This means that all
+network interfaces to which a host  is  connected  must  go  down
+before  internet  communications  will be completely stifled; and
+even then, processes within a host will be  able  to  communicate
+due  to the local delivery mechanism.  User programs also have no
+knowledge of which interface received an incoming packet.
+
+   There is an exception when a system is equipped  with  a  "Raw
+Packet  Interface"  (RPI,  which  is  used to connect to a remote
+gateway or an encryption device such as a BCR).  Flag AQ%SCR will
+mark  the  queue  as  using  the  RPI  rather  than  the   normal
+interfaces.
+
+   Datagrams  are  received  by  giving  RCVIN  an Internet Queue
+Handle and the address of an empty buffer into which an IP packet
+should  be  copied.   RCVIN  normally  blocks  if  there  are  no
+datagrams  waiting  in  the  queue.   The  non-blocking  form  is
+specified by setting the RIQ%NW  flag.   If  it  is  set  and  no
+datagrams  are  waiting,  an  error code of -1 is returned in the
+right-half of AC1.
+
+   RELIQ is used to release an Internet  Queue  Handle  when  the
+user  program  has  finished  with  it.  The argument is either a
+specific Internet Queue Handle,  or  a  job  or  (multiple)  fork
+
+
+                             - 36 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                      Internet User Queues
+
+
+handle  if  all Internet User Queues associated with the job/fork
+are to be released.
+
+   An Internet User Queue which contains a received  datagram  is
+flushed  if  the  datagram is not RCVINed within 30 seconds.  The
+number of messages which will be placed into a queue  is  limited
+to  eight.  Flooding the input queue of a slow receiver will thus
+result in dropped messages.  (Note that  the  stated  limits  are
+monitor assembly parameters and may vary from site to site.)
+
+   Datagrams  sent  from the local host to itself will ordinarily
+be delivered without  sending  them  over  any  network  and  are
+reasonably fast.
+
+   Programs  using  Internet User Queues must handle the cases of
+datagrams not being delivered in the order  in  which  they  were
+sent,  being  dropped,  or being duplicated.  Some may traverse a
+broadcast  network  and  may  be  clobbered  by  other   packets,
+lightning,  etc.   Thus,  some higher level protocol is needed in
+most cases.  TCP is  one  example,  but  there  are  others  (the
+"Datagram Protocol", XNET, etc.).
+
+  The  local  host  may  receive  ICMP error messages relating to
+datagrams for an Internet User Queue.   Normally  these  messages
+are  discarded.   The  user  may,  however,  request  that  these
+datagrams be placed into the input queue  so  that  they  may  be
+processed.   To  enable  this  option,  the  AQ%ICM  flag must be
+specified when the queue is assigned.  RCVIN may then be used  to
+read  received ICMP error messages, and SNDIN may be used to send
+ICMP error messages.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             - 37 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                     Queue Descriptor Block
+
+
+   The Queue Descriptor block is used to identify datagrams which
+may be sent from or delivered to an  Internet  User  Queue.   The
+packets are (de)multiplexed based on four fields:  the source and
+destination  internet  addresses,  the  protocol  number, and the
+source and destination port numbers.  For each  field  the  Queue
+Descriptor  block contains a value entry and a mask entry.  A one
+bit in the mask entry means that the  corresponding  bit  in  the
+value entry and the datagram must match.
+
+   ASNIQ will return an error unless the current Queue Descriptor
+block  differs  in  the  masked bits from all other Internet User
+Queues which are assigned.
+
+   The format of the Queue  Descriptor  block  is  shown  in  the
+following table.
+
+
+  Word
+ Offset  Bits           Usage
+
+ .IQPRV B24-31  Internet protocol number.
+
+ .IQFHV B0-31   Foreign host internet address.
+
+ .IQSHV B0-31   Local host internet address.
+
+ .IQPTV B0-15   Local port.
+        B16-31  Foreign port (ignored if AQ%SPT is set).
+
+ .IQPRM B24-31  Mask for internet protocol number.
+
+ .IQFHM B0-31   Mask for foreign host  internet  address.   (Zero
+                for any foreign host.)
+
+ .IQSHM B0-31   Mask for local host internet address.  (Zero  for
+                any of this host's addresses.)
+
+ .IQPTM B0-15   Mask for local port.
+        B16-31  Mask for foreign port (zero if  AQ%SPT  is  set).
+                Note B0-31 should be zero for portless protocols.
+
+
+
+
+
+
+
+
+
+
+                             - 38 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                          Packet Buffer
+
+
+   The  Packet  Buffer begins with one word containing the length
+of the buffer followed immediately by an IP  header  of  five  or
+more words and the contents of the IP datagram (the "data").
+
+   The  right-half  of  the  length word contains, for SNDIN, the
+length in words of the IP packet to be sent,  plus  one  for  the
+length word.  For RCVIN the right-half should contain the maximum
+number  of  words,  including  the  length  word, available for a
+received IP packet; the left-half will be set to  the  number  of
+words actually received plus one for the length word.
+
+   The IP header and data use the left-most 32 bits of each word.
+
+
+  Word
+ Offset  Bits                   Contents
+
+   0    B0-17   RCVIN: Number of valid words actually used by the
+                IP packet, plus one (this word).
+   0    B18-35  RCVIN: Maximum number of  words  in  the  buffer,
+                including this word.
+                SNDIN:  Number  of  words  in the IP packet to be
+                sent, plus one (this word).
+
+        Beginning of IP Header  (See Appendix A)
+
+   1    B0-3    IP Version number.  This field must contain 4.
+   1    B4-7    Data Offset.  The length of  the  IP  header,  in
+                words (5 to 15).
+   1    B8-15   Type of Service byte.  See Appendix C.
+   1    B16-31  Datagram Length, in octets, beginning  with  this
+                word (20 to 2**16-1).
+
+   2    B0-15   Segment ID. This field should be unique for  each
+                datagram  sent;  it  is  used  to  identify which
+                fragments should be  combined  to  reconstruct  a
+                fragmented datagram.
+   2    B16     Reserved, must be zero.
+   2    B17     Do-not-Fragment flag.  If set, a packet  may  not
+                be  fragmented  by  an  internet  module.  If the
+                packet is  too  large  to  process,  it  will  be
+                discarded.
+   2    B18     More-Fragments flag.  Set if this is NOT the last
+                fragment of a packet.  Since user programs do not
+                send fragments, it should be zero.
+   2    B19-31  Fragment-Offset.  Since user programs do not send
+                fragments, it should be zero.
+
+
+
+                             - 39 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                          Packet Buffer
+
+
+   3    B0-7    Time-to-Live, in seconds.  If the  packet  cannot
+                be  delivered  in  the time specified, the packet
+                should be discarded.
+   3    B8-15   Protocol number.  Protocol numbers  are  assigned
+                by Jon Postel@ISI.
+   3    B16-31  IP header checksum.  This field is filled  in  by
+                SNDIN;  the user program does not have to compute
+                it.
+
+   4    B0-31   Source host internet address.
+
+   5    B0-31   Destination host internet address.
+
+  6-15  B0-31   IP options, if desired.  If necessary,  the  last
+                word    of    options   is   padded   with   zero
+                (End-of-Options) octets to fill the word.
+
+        End of IP Header
+
+  H+1   B0-15   Port number, for single-port protocols, or source
+                port   number   for   two-port   protocols,    or
+                nonexistent for portless protocols.
+  H+1   B16-31  Destination port number for  two-port  protocols,
+                or   nonexistent   for  single-port  or  portless
+                protocols.
+
+  ...   B0-31   Data.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             - 40 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                              Ports
+
+
+   Not all internet protocols have ports.  If an application does
+not have ports, then .IQPTM in the Queue Descriptor block  should
+contain  a  zero.   If  the  protocol uses both local and foreign
+ports, they are expected to be in  the  first  two  16-bit  bytes
+following  the  internet  header (offset H+1 in the table above),
+source port in left-most 16 bits, and  destination  port  in  the
+next  16  bits.  The location of this word is found by adding the
+contents of the Data Offset field to the  address  of  the  first
+word of the internet header.
+
+   Provision  has  been  made  for protocols (such as XNET) which
+have only a local port.  Turning on the AQ%SPT control  flag  for
+ASNIQ  selects single-port mode.  The first 16-bit byte following
+the internet header is expected to contain the port.   This  port
+is used both for demultiplexing incoming packets and for checking
+access when packets are being sent.
+
+   Note  that  for a given set of addresses and protocol numbers,
+etc., a single-port protocol queue will  not  be  assigned  if  a
+dual-port  version  already  exists,  and  vice versa.  This rule
+permits an incoming packet to specify a  unique  queue.   Without
+the  rule,  either the first or second 16-bit field following the
+internet header would have to be used for demultiplexing; but  we
+cannot  know  which  unless there is something else to tell which
+queue is being addressed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             - 41 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                              ASNIQ
+
+
+                        ASNIQ   JSYS 756
+
+Assign an Internet User Queue  (NET  WIZARD  capability  must  be
+enabled)
+
+ACCEPTS IN AC1: Flags ! Address of Queue Descriptor block
+
+                AQ%SPT  Set for  single-port  protocols,  cleared
+                        for two-port or portless protocols.
+
+                AQ%ICM  Deliver  ICMP  error  datagrams  to  this
+                        queue  and allow them to be sent from it.
+
+                AQ%SCR  Use Raw Packet Interface.
+
+           AC2: Reserved, must be 0
+           AC3: Reserved, must be 0
+
+RETURNS     +1: Failure, TOPS20 error code  in  AC1,  conflicting
+                job number in AC2.
+            +2: Success, Internet Queue Handle  returned  in  AC1
+                and  maximum IP packet size (before fragmentation
+                will occur) in AC2.
+
+   The mask words specify those bit positions where  a  match  is
+required.   Thus,  one  can  make .IQFHM contain zero in order to
+communicate with any internet host.  By making, for example,  the
+low 3 bits of the local port mask word zero, the queue owns eight
+ports.  Note that an error will occur unless the Queue Descriptor
+block  differs  in  the  masked bits from all other Internet User
+Queues assigned at the instant  the  ASNIQ  is  issued.  The  job
+number  of  the job which owns a conflicting queue is returned in
+AC2.  If the queue is assigned,  the  Internet  Queue  Handle  is
+returned  in  AC1; the maximum size packet (before fragmentation)
+is returned in AC2.
+
+
+ASNIQ ERROR CODES:
+
+NTWZX1  NET WIZARD capability required
+ASNSX1  All Internet User Queues in use (or IP not initialized)
+ASNSX2  Conflict with some other job (# in AC2)
+
+
+
+
+
+
+
+
+                             - 42 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                              RELIQ
+
+
+                        RELIQ   JSYS 757
+
+Release an Internet User Queue.
+
+ACCEPTS IN AC1: An Internet Queue Handle, or -1  for  all  queues
+                owned  by  this  job,  or  a job or fork-relative
+                process handle.
+
+           AC2: Reserved, must be 0
+           AC3: Reserved, must be 0
+
+RETURNS     +1: Failure, TOPS20 error code in AC1.
+            +2: Success.
+
+   RELIQ releases ownership of an Internet  User  Queue  so  that
+other jobs can assign it.  See the TOPS20 Monitor Calls Reference
+Manual for a description of the various process handles.
+
+
+RELIQ ERROR CODES:
+
+SQX1    Internet Queue Handle out of range
+SQX2    Internet Queue Handle not assigned
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             - 43 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                              SNDIN
+
+
+                        SNDIN   JSYS 754
+
+Send an internet datagram.
+
+ACCEPTS IN AC1: Internet Queue Handle
+           AC2: Address of Packet Buffer containing the IP packet
+           AC3: Reserved, must be 0
+
+RETURNS     +1: Failure, TOPS20 error code in AC1.
+            +2: Success.
+
+   The  format  of  the Packet Buffer was described in the Packet
+Buffer section.
+
+   If port filtering is  being  used  (.IQPTM  was  non-zero  for
+ASNIQ),  the  port(s)  must  be located in the word following the
+internet header.  The address of this word is found by adding the
+address of word-1 in the Packet Buffer to the number in the  Data
+Offset field.
+
+   IP  validates the source host field in the packet and fills in
+the internet header checksum.  The rest of the header is supplied
+by the user.
+
+
+SNDIN ERROR CODES:
+
+SQX1    Internet Queue Handle out of range
+SQX2    Internet Queue Handle not assigned
+SNDIX1  Invalid message size
+SNDIX2  Insufficient resources (no buffers available)
+SNDIX4  Invalid header value for this  queue  (includes  Datagram
+        Length too big, Data Offset too small, filtering on ports
+        but  Datagram Length is too small for packet to contain a
+        port word, or header does not fit the ASNIQ arguments)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             - 44 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+                              RCVIN
+
+
+                        RCVIN   JSYS 755
+
+Receive internet datagram.
+
+ACCEPTS IN AC1: Flags ! Internet Queue Handle
+
+                RIQ%NW  Set  to  cause  fail-return  instead   of
+                        blocking when no datagram is waiting.
+
+           AC2: Address of a Packet Buffer to hold the IP  packet
+
+           AC3: Reserved, must be 0
+
+RETURNS     +1: Failure, TOPS20 error code in AC1.
+            +2: Success
+
+   Each  RCVIN gets one datagram from the specified queue.  These
+datagrams match the values in the  Queue  Descriptor  block  when
+masked  by  the mask words in the block.  The maximum size of the
+Packet Buffer (including the  count  word)  is  expected  in  the
+right-half  of  word-0  of  the  Packet  Buffer when the RCVIN is
+executed.
+
+  When a datagram is  available,  it  is  placed  into  the  user
+supplied Packet Buffer.  The number of words filled plus one (for
+the  count  word)  is set into the left-half of word-0 (the count
+word) of the Packet Buffer.  Ordinarily this can be ignored,  but
+if the datagram was too big for the Packet Buffer, this tells how
+much space would have been required.  If the datagram was too big
+(determined  by  the  Datagram  Length  field),  as  much  of the
+datagram as will fit into the Packet Buffer is transferred and an
+error is returned.  No retry for the same datagram  is  possible.
+
+
+RCVIN ERROR CODES:
+
+SQX1    Internet Queue Handle out of range
+SQX2    Internet Queue Handle not assigned
+SNDIX1  Invalid datagram size
+777777  RIQ%NW was on and no datagrams were waiting
+
+
+
+
+
+
+
+
+
+
+                             - 45 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+Appendix A        Internet Packet Header Format
+
+
+   The  following  structure definitions have been excerpted from
+the file INPAR.MAC which is used in  building  TOPS20  and  TENEX
+monitors  with  internet code.  Those who are unfamiliar with the
+structure facility should refer to SYS:MACSYM.MAC.  Briefly,
+
+        DEFSTR(Name,Location,Bit,Size)
+
+defines a field called Name.  This field  is  held  in  the  word
+(possibly indexed) at Location.  The right-most bit number is Bit
+and the field is Size bits wide.  A typical reference to the data
+offset field might be:
+
+        LOAD 1,PIDO,(PKT)
+
+where  PKT is an index register which points at the first word of
+the packet structure.
+
+Word offsets:
+
+ .IPKVR==0      ; Word with version, type of service, etc.
+ .IPKSG==1      ; Word with segmentation information
+ .IPKPR==2      ; Word with time to live, checksum, protocol
+ .IPKSH==3      ; Word with source host
+ .IPKDH==4      ; Word with destination host
+
+DEFSTR(PIVER,.IPKVR,3,4)        ; PACKET.INTERNET.VERSION
+DEFSTR(PIDO,.IPKVR,7,4)         ; PACKET.INTERNET.DATA-OFFSET
+DEFSTR(PITOS,.IPKVR,15,8)       ; PACKET.INTERNET.TYPE-OF-SERVICE
+  ; Overlays for the above:
+  DEFSTR(PIPRC,.IPKVR,10,3)     ; PACKET.IP.PRECEDENCE
+  DEFSTR(PILDY,.IPKVR,11,1)     ; PACKET.IP.LOW-DELAY
+  DEFSTR(PIHTR,.IPKVR,12,1)     ; PACKET.IP.HIGH-THROUGHPUT
+  DEFSTR(PIHRL,.IPKVR,13,1)     ; PACKET.IP.HIGH-RELIABILITY
+  ; 2 Unused bits
+DEFSTR(PIPL,.IPKVR,31,16)       ; PACKET.INTERNET.PACKET-LENGTH
+DEFSTR(PISID,.IPKSG,15,16)      ; PACKET.INTERNET.SEGMENT-ID
+DEFSTR(PIFLG,.IPKSG,18,3)       ; PACKET.INTERNET.FLAGS
+  ; Overlays for the above:
+  ; Unused bit
+  DEFSTR(PIDF,.IPKSG,17,1)      ; PACKET.INTERNET.DONT-FRAGMENT
+  DEFSTR(PIMF,.IPKSG,18,1)      ; PACKET.INTERNET.MULTIFRAGMENT
+DEFSTR(PIFO,.IPKSG,31,13)       ; PACKET.INTERNET.FRAGMENT-OFFSET
+DEFSTR(PITTL,.IPKPR,7,8)        ; PACKET.INTERNET.TIME-TO-LIVE
+DEFSTR(PIPRO,.IPKPR,15,8)       ; PACKET.INTERNET.PROTOCOL
+DEFSTR(PICKS,.IPKPR,31,16)      ; PACKET.INTERNET.HEADER-CHECKSUM
+DEFSTR(PISH,.IPKSH,31,32)       ; PACKET.INTERNET.SOURCE-HOST
+DEFSTR(PIDH,.IPKDH,31,32)       ; PACKET.INTERNET.DESTINATION-HOST
+
+
+
+                             - 46 -
+
+
+
+
+                       TCP IP Users Guide          September 1981
+Appendix B          Internet Address Formats
+
+
+   An internet  address  is  a  32-bit  quantity,  in  which  the
+left-most  one,  two,  or three octets specify the network number
+and the remaining octets identify a host on that network.
+
+
+
+   Class A addresses begin with a zero bit, followed by  a  7-bit
+network number and a 24-bit local address.
+
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|0|   Network   |                Local Address                  |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+
+
+   Class  B  addresses  begin  with bits 10, followed by a 14-bit
+network number and a 16-bit local address.
+
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|1 0|           Network         |          Local Address        |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+
+
+   Class C addresses begin with bits 110, followed  by  a  21-bit
+network number and an 8-bit local address.
+
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|1 1 0|                    Network              | Local Address |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+
+
+   Class  D addresses begin with bits 111.  The interpretation of
+the remaining bits is currently unspecified.
+
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|1 1 1|                    Unspecified                          |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+
+
+
+
+
+
+
+
+
+
+                             - 47 -
+
+
+
+
+                       TCP IP Users Guide          September 1981
+Appendix C             IP Type of Service
+
+
+The IP Type-of-Service field is composed of six  sub-fields,  two
+of which are currently undefined.
+
+   +------+------+------+------+------+------+------+------+
+   |                    | Low  | High | High |      |      |
+   |    Precedence      |Delay |Throu-|Relia-|   0  |   0  |
+   |                    |      |ghput |bility|      |      |
+   +------+------+------+------+------+------+------+------+
+
+
+  The  left-most three bits form the Precedence field.  Its eight
+possible values are:
+
+                7 - Network Control
+                6 - Internetwork Control
+                5 - CRITIC/ECP
+                4 - Flash Override
+                3 - Flash
+                2 - Immediate
+                1 - Priority
+                0 - Routine
+
+   The next bit is the Delay flag.   If  the  flag  is  set,  the
+packet  will  be  processed  in  a manner which tends to minimize
+"delay" through the internet.  If the flag is not set, the packet
+will be treated in the "standard" manner with respect  to  delay.
+
+   The  next  bit is the Throughput flag.  If the flag is set the
+packet will be processed in a  manner  which  tends  to  maximize
+"throughput"  through  the internet.  If the flag is not set, the
+packet will be treated in the "standard" manner with  respect  to
+throughput.
+
+   The next bit is the Reliability flag.  If the flag is set, the
+packet  will  be  processed  in  a  manner  tending  to  maximize
+"reliability" through the internet.  If the flag is not set,  the
+packet  will  be treated in the "standard" manner with respect to
+reliability.
+
+   The remaining two bits are reserved and should be zero.
+
+   Note that setting any of the Delay, Throughput, or Reliability
+flags may increase user "costs" in some sense;  setting all three
+flags is illegal.
+
+
+
+
+
+
+                             - 48 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+Appendix D            Logical Host Facility
+
+
+   The internet Logical Host  facility  allows  several  internet
+addresses  to  share a single (physical) network interface.  This
+is implemented by having IP modules which make routing  decisions
+"ignore"  certain  (network  dependent) bits in the local address
+field (see Appendix D).   The  destination  IP  module,  however,
+includes those bits when it demultiplexes packets.
+
+   The  TOPS20  IP is given a Logical-Host-Mask (for each network
+to which it has an interface)  which  identifies  the  particular
+bits  to  be  so  treated  (if any).  In the case of the ARPANET,
+which is Class A network 10, the logical host field is the  third
+octet in the internet address.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             - 49 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+Appendix E          IP Packet Demultiplexing
+
+
+   When  the destination IP receives a packet, it must pass it to
+the appropriate protocol module  for  further  processing.   This
+decision  is  based  on the values in three fields.  The first is
+the internet Version Number;  if it  is  not  4,  the  packet  is
+discarded.   The other two fields are the internet Protocol field
+and the Logical Host  field  in  the  destination  host  internet
+address (see Appendix B).
+
+   If  the  value in the logical host field is less than or equal
+to (an installation-dependent constant whose default value is) 3,
+the packet is passed to the internal  routine  for  the  protocol
+identified  by the internet Protocol field if one is implemented,
+or to the Internet User Queue dispatcher if it isn't implemented.
+
+   If the value in the logical host field  is  greater  than  the
+installation dependent constant, an attempt is first made to pass
+the  packet to an internal routine for the protocol identified by
+the Logical Host field value, times 256., plus the value from the
+packet's internet  Protocol  field  if  one  is  implemented,  or
+secondly,  to  the  Internet  User  Queue  dispatcher  if  such a
+protocol is not implemented.
+
+   A packet for logical host 2 protocol 6  (TCP)  would  thus  be
+passed  to  the  standard TOPS20 TCP routines since protocol 6 is
+implemented.  A packet for logical host 5  protocol  6  would  be
+passed  to an Internet User Queue if one has been assigned (which
+might be an experimental TCP implementation) since protocol  1286
+(5*256+6) is not an internally implemented protocol.
+
+   This  means  that  no  messages  of a particular protocol type
+implemented internally will be passed to users via Internet  User
+Queues.   Assigning  such  a queue will still be possible, but no
+traffic will reach the user unless the internal  protocol  module
+has been disabled.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             - 50 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+Appendix F        TCP Retransmission Parameters
+
+
+   Both  OPEN  and  SEND  require  a  Transmission  Timeout and a
+Retransmission Parameters word.  The Transmission Timeout is  the
+number  of  seconds  for  which retransmissions of unacknowledged
+octets  should  be  attempted  before  returning  a  Transmission
+Timeout  error  to the user program.  Permissible values are 1 to
+300 seconds, or zero.  A  zero  value  means  that  there  is  no
+timeout, and retransmissions should continue "forever" (until the
+other end sends a RESET or the program is ^C'd and the connection
+ABORTed).
+
+   The  Retransmission  Interval  is  the time between successive
+transmissions of a packet.  The user's choice  of  which  of  two
+algorithms to use in its computation is specified by the value of
+the Retransmission Parameters word.  Both algorithms are based on
+an   estimate  of  the  round  trip  delay  associated  with  the
+connection.  The default algorithm is used as long as  the  value
+of  the  Retransmission  Parameters  word  is zero; if a non-zero
+value is ever specified, the second algorithm  is  activated  for
+the duration of the connection.
+
+   The  default algorithm maintains an estimate of the round trip
+delay based on the equation:
+
+        ERTT  =  ERTT' * alpha  +  MRTT * (1.-alpha)
+where
+        MRTT    is the measured round trip delay of a packet,
+        ERTT'   is the prior estimate of the  round  trip  delay,
+                (initially  3  seconds),  alpha  is  a  smoothing
+                factor equal to 0.8125, and
+        ERTT    is the new estimate.
+
+The Initial Retransmission Interval for a packet is then computed
+from:
+
+        IRXI   =  ERTT * beta
+where
+        ERTT    is the current round trip delay estimate,
+        beta    is a variance factor equal to 1.5, and
+        IRXI    is the Initial Retransmission Interval.
+
+The retransmission interval is essentially doubled for successive
+retransmissions of the same packet.
+
+        NRXI  = CT - TG
+where
+        CT      is the current time,
+        TG      is the time at which the  packet  was  generated,
+                and
+
+
+                             - 51 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+Appendix F        TCP Retransmission Parameters
+
+
+        NRXI    is the Next Retransmission Interval.
+
+   A second algorithm, which allows the user specify its factors,
+is  activated  if  the  Retransmission  Parameters  word  is ever
+non-zero.   The  right-half,  if  not  zero,   is   the   Initial
+Retransmission  Interval, in seconds.  If the right-half is zero,
+the Initial Retransmission Interval will be computed based on the
+estimated round trip delay.
+
+   As each packet  is  acknowledged,  this  algorithm  updates  a
+minimum and maximum round trip delay variable.
+
+        MNRTT = MIN(MNRTT',MRTT)
+        MXRTT = MAX(MXRTT',MRTT)
+where
+        MRTT    is the measured round trip delay of a packet,
+        MNRTT'  is the  shortest  delay  encountered  during  the
+                30-second  interval  (initially  3 seconds if the
+                right-half word was 0),
+        MNRTT   is the new minimum,
+        MXRTT'  is  the  longest  delay  encountered  during  the
+                30-second  interval  (initially  3 seconds if the
+                right-half word was 0),
+        MXRTT   is the new maximum.
+
+   Every thirty seconds the minimum and maximum delay  times  are
+reset,  and  a  new  Initial  Retransmission  Interval,  IRXI, is
+computed according to the equations:
+
+        MNRTT = MNRTT + (MXRTT-MNRTT)/10.
+        MXRTT = MXRTT - (MXRTT-MNRTT)/2.
+        IRXI  = (MNRTT+MXRTT)/2 + 1/2 second.
+
+   The left-half of the Retransmission Parameters  word  contains
+two  9-bit quantities, called the Backoff Numerator (in B0-8) and
+the Backoff  Denominator  (in  B9-17).   In  computing  the  Next
+Retransmission  Interval  for  a  packet,  the  last  interval is
+multiplied by the Numerator and then divided by  the  Denominator
+(using integer arithmetic).
+
+        NRXI  = ( NRXI' * BN ) / BD
+where
+        NRXI'   is  the   last   Next   Retransmission   Interval
+                (initially IRXI),
+        BN      is the Backoff Numerator,
+        BD      is the Backoff Denominator, and
+        NRXI    is the Next Retransmission Interval.
+
+
+
+                             - 52 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+Appendix F        TCP Retransmission Parameters
+
+
+The  Backoff  Numerator  must  be  greater  than  or equal to the
+Backoff Denominator.  Default values are  used  if  a  factor  is
+zero:
+
+        Initial Interval    3 seconds
+        Backoff Numerator   3
+        Backoff Denominator 2
+
+   Both  algorithms  clamp  the retransmission interval between a
+minimum value of 1 second and a maximum value of 60 seconds.
+
+   There are several details which might  be  of  interest.   One
+involves  the computation of the measured round trip delay.  This
+delay is the time between TCP's filling a packet (and passing  it
+to  IP)  and  the  time that its last octet is acknowledged.  The
+delay thus includes the time the packet  spent in IP  waiting  to
+enter the network and the time the receiving TCP required to send
+an  acknowledgement in addition to actual "network" delays.  Note
+also that if nothing has been received (e.g.,  before  the  first
+SYN  or  ACK  arrives),  then  the  round trip estimate cannot be
+computed (and the initial guess of 3 seconds is used).
+
+   Packets are transmitted and  placed  into  the  retransmission
+queue  when  they are generated (filled).  A timer is set for the
+Initial Retransmission Interval,  and  the  Transmission  Timeout
+time  is  recorded.   If  the  retransmission timer goes off, the
+packet with the lowest unacknowledged sequence number is  checked
+to  see if it should be retransmitted.  If the packet is still in
+IP's (or the network's) output queue, the timer  is  just  reset.
+(Since  it  hasn't yet been transmitted, the network might be off
+or be blocking.)
+
+   Otherwise, if the packet has  never  been  retransmitted,  its
+Transmission Timeout time and Initial Retransmission Interval are
+recomputed  (there  may  be  better estimates now), the packet is
+retransmitted, and a timer for the interval is started.
+
+   If  a  packet  has  already  been  retransmitted,   then   the
+transmission timeout is checked; if it has passed, a Transmission
+Timeout  error  is  returned  to  the  user and the connection is
+broken.   If  the  timeout  has  not   yet   passed,   the   Next
+Retransmission  Interval  (the  elapsed time since the packet was
+generated, or the  last  interval  times  the  backoff  numerator
+divided  by  the  backoff denominator) is computed, the packet is
+retransmitted, and a timer for the interval is started.
+
+   There is also interaction  between  the  measured  round  trip
+delay  and retransmissions since TCP cannot tell which of several
+
+
+                             - 53 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+Appendix F        TCP Retransmission Parameters
+
+
+possible retransmissions of a packet is being acknowledged.   The
+prior  TCP  release  did not include retransmitted packets in its
+delay measurements.  This omission had the undesirable effect  of
+never updating the initial three-second guess if the actual delay
+was  much  greater  than  three seconds.  The current TCP release
+includes such measurements (timed from the initial transmission).
+This method seems more reasonable since it is correct if there is
+just a large delay.  On the other hand, if a retransmitted packet
+is being acknowledged, then a packet was lost  (probably  due  to
+congestion  somewhere).  Thus, slowing things down is reasonable.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             - 54 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+Appendix G              TCP & IP Options
+
+
+   Both TCP and IP provide the means to include  a  selection  of
+standard  options  in  packets.   Options  are  only  required in
+special situations.  See the section on Options for a description
+of using options with TCP;  the  section  on  the  Packet  Buffer
+should be consulted to use options with Internet User Queues.
+
+   A  TCP  or  IP option has the form of a string of one to forty
+octets.  Except for NOP and End-of-Options, which  are  each  one
+octet  long,  an  individual  option  is  a string of two or more
+octets.  The first octet  identifies  the  type  of  option,  the
+second  is  its  length  in  octets (counting the type and length
+octets), followed by additional octets relevant to the particular
+option.
+
+   The currently defined TCP options are:
+
+Option
+ Code           Option (Length)  Meaning
+
+  0     End-of-Options (single  octet).   Terminates  the  option
+        string.
+
+  1     NOP (single octet).  Ignored.
+
+  2     Maximum Segment Size (four octets).  The receiver of this
+        option  should  not  generate packets whose packet length
+        exceeds the number of  octets  specified  by  the  16-bit
+        number  contained  in  the third and fourth octets.  This
+        option should be specified with OPEN.
+
+   The most significant bit of IP options indicates, if set, that
+the option must be copied into  each  fragment  of  a  fragmented
+datagram.  The currently defined TCP options are:
+
+Option
+ Code           Option (Length)  Meaning
+
+   0    End-of-Options (single  octet).   Terminates  the  option
+        string.
+
+   1    NOP (single octet).  Ignored.
+
+
+
+
+
+
+
+
+
+                             - 55 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+Appendix G              TCP & IP Options
+
+
+   7    Record  Route  (seven  to   thirty-nine   octets).    The
+        originator  of  this  option  provides  space for each IP
+        module  which  processes  this  datagram  to  insert  its
+        (sending)  internet  address  into the Route Data area at
+        the position specified  by  the  Pointer  (whose  minimum
+        value  is  four).  As each address is added, the value of
+        the pointer is increased by four.  If the  value  of  the
+        pointer  exceeds  that of the Length, the Route Data area
+        is full and some IP modules may not  have  been  able  to
+        insert their addresses.
+
+                      +-------------+-------------+-------------+
+                      |      7      |   Length    |   Pointer   |
+        +-------------+-------------+-------------+-------------+
+        |            Route Data (internet addresses)            |
+        +-------------+-------------+-------------+-------------+
+                                   ...
+        +-------------+-------------+-------------+-------------+
+
+  68    Internet  Timestamp  (eight  to   forty   octets).    The
+        originator of this option provides space for intermediate
+        IP  modules  to  record  the  time  when  the  packet was
+        processed and, optionally, their internet  address.   The
+        option  begins  with the Type and Length octets which are
+        followed by Pointer and Control octets and a  data  area.
+        Each entry in the data area contains four octets.
+
+        +-------------+-------------+-------------+-------------+
+        |      68     |   Length    |   Pointer   | Ovfl | Frmt |
+        +-------------+-------------+-------------+-------------+
+        |          Internet Address (Frmt 1 or 3 only)          |
+        +-------------+-------------+-------------+-------------+
+        |                       Timestamp                       |
+        +-------------+-------------+-------------+-------------+
+                                   ...
+        +-------------+-------------+-------------+-------------+
+
+        The four-bit Frmt field specifies the format of  the  the
+        data  portion  of  the  packet.   Frmt  0 means that only
+        Timestamps appear;  there are no Internet Addresses.  For
+        Frmts 1 and 3, each Timestamp is preceded by an  Internet
+        Address.   Each IP module fills in its address if Frmt is
+        1.  In Frmt 3, the Internet Addresses are  pre-specified;
+        the  IP  module only enters its Timestamp if (one of) its
+        address(es) is next.
+
+        The Pointer specifies the current position  in  the  data
+        area  for the next (Internet Address and) Timestamp.  The
+
+
+                             - 56 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+Appendix G              TCP & IP Options
+
+
+        minimum value of 5 indicates the first entry  (the  octet
+        following  the  Ovfl/Frmt  octet).   It is incremented by
+        four (Frmt 0) or eight (Frmts 1 and  3).   If  it  points
+        beyond   the  last  data  entry  (i.e.,  Pointer  exceeds
+        Length), no further entries can be made. The  Ovfl  field
+        is incremented in this case (Frmts 0 and 1).
+
+        The   format   of   the   Timestamps  is  the  number  of
+        milliseconds since midnight Universal Time.  If the  time
+        is  not  known in that format, any local time may be used
+        with the left-most bit set.
+
+ 130    Security (eleven  octets).   Security,  Compartmentation,
+        Handling  Restrictions, and TCC parameters are specified.
+        The type and length octets are  followed  by  two  octets
+        which  specify one of sixteen Security levels.  The valid
+        values are:
+
+                00000000 00000000 - Unclassified
+                11110001 00110101 - Confidential
+                01111000 10011010 - EFTO
+                10111100 01001101 - MMMM
+                01011110 00100110 - PROG
+                10101111 00010011 - Restricted
+                11010111 10001000 - Secret
+                01101011 11000101 - Top Secret
+                00110101 11100010 - (Reserved for future use)
+                10011010 11110001 - (Reserved for future use)
+                01001101 01111000 - (Reserved for future use)
+                00100100 10111101 - (Reserved for future use)
+                00010011 01011110 - (Reserved for future use)
+                10001001 10101111 - (Reserved for future use)
+                11000100 11010110 - (Reserved for future use)
+                11100010 01101011 - (Reserved for future use)
+
+        Two Compartment field octets follow the Security  octets.
+        They  may  be  obtained  from  the  Defense  Intelligence
+        Agency.
+
+        Next are two Handling Restriction  octets.   The  control
+        and  release markings are given in the "Standard Security
+        Markings" section of Defense Intelligence  Agency  Manual
+        DIAM 65-19.
+
+        The  last  three octets are used to segregate Traffic and
+        define  Controlled  Communities  of  subscribers.   Their
+        values may be obtained from HQ DCA Code 530.
+
+
+
+                             - 57 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+Appendix G              TCP & IP Options
+
+
+ 131    Loose Source Routing (eleven to thirty-nine octets).  The
+        originator  of  this option specifies the addresses of IP
+        modules through which the datagram must pass on  its  way
+        to  the  destination.   The  Pointer  indicates  the Next
+        Address in the Route Data  area;  its  initial  value  is
+        four.   The  last  address in the Route Data area must be
+        the destination address.  As each entry is processed, the
+        IP module's out-going internet address replaces the  Next
+        Address,  and  the  Pointer is increased by four.  If the
+        value of Pointer exceeds that of Length, the source route
+        is exhausted and the  option  is  ignored  (sent  to  the
+        destination  in  the  IP  header).   The  route  is Loose
+        because any number of intermediate gateways may  be  used
+        between successive Route Data entries.
+
+                      +-------------+-------------+-------------+
+                      |     131     |   Length    |   Pointer   |
+        +-------------+-------------+-------------+-------------+
+        |            Route Data (internet addresses)            |
+        +-------------+-------------+-------------+-------------+
+                                   ...
+        +-------------+-------------+-------------+-------------+
+
+ 136    Stream Identifier (four octets).   The  two-octet  SATNET
+        stream  ID is passed through the internet in this option.
+
+ 137    Strict Source Routing  (eleven  to  thirty-nine  octets).
+        The  originator of this option specifies the addresses of
+        IP modules through which the datagram must  pass  on  its
+        way  to  the destination.  The Pointer indicates the Next
+        Address in the Route Data  area;  its  initial  value  is
+        four.   The  last  address in the Route Data area must be
+        the destination address.  As each entry is processed, the
+        IP module's out-going internet address replaces the  Next
+        Address,  and  the  Pointer is increased by four.  If the
+        value of Pointer exceeds that of Length, the source route
+        is exhausted and the  option  is  ignored  (sent  to  the
+        destination  in  the  IP  header).   The  route is Strict
+        because only those gateways specifically  listed  may  be
+        used.
+
+                      +-------------+-------------+-------------+
+                      |     137     |   Length    |   Pointer   |
+        +-------------+-------------+-------------+-------------+
+        |            Route Data (internet addresses)            |
+        +-------------+-------------+-------------+-------------+
+                                   ...
+        +-------------+-------------+-------------+-------------+
+
+
+                             - 58 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+Appendix H            Status Variable Names
+
+
+   The names of the the  variables  in  a  connection's  internal
+control  block  (TCB)  and  the  TCP statistics area which may be
+given to the STAT JSYS are listed below.   They  are  defined  in
+STG.MAC  (TOPS20) or STORAG.MAC (TENEX) between STAT0 and STATZZ.
+
+
+   The following TCP statistics are always collected.
+
+Statistic
+Variable                Contents
+
+ BGRNC  Number of times the TCP background process (BG) has run
+ BYTRC  Total number of data octets received
+ BYTSC  Total number of data octets sent
+ DGRNC  Number of times the TCP delayed action process  (DG)  has
+        run
+ DUPKC  Total number of duplicate packets received
+ FINRC  Total number of FIN packets received
+ FINSC  Total number of FIN packets sent
+ INTBY  -1 if the internal bypass (local delivery  mechanism)  is
+        enabled, 0 if not
+ IPPKC  Total number of packets received
+ IPRNC  Number of times the TCP input process (IP) has run
+ OPPKC  Total  number  of  packets  (instances)  sent   (includes
+        retransmissions)
+ OPRNC  Number of times the TCP output process (OP) has run
+ PZPKC  Total number of packets generated
+ PZRNC  Number of times the TCP packetizer process (PZ) has run
+ RAPKC  Total number packets reassembled
+ RARNC  Number of times the TCP reassembler process (RA) has  run
+ RSTRC  Total number of RESET packets received
+ RSTSC  Total number of RESET packets sent
+ RXPKC  Total number of packet (instances) retransmitted
+ RXRNC  Number of times the TCP retransmitter  process  (RX)  has
+        run
+ SYNRC  Total number of SYN packets received
+ SYNSC  Total number of SYN packets sent
+ TASKC  Total number of times a TCP process has been run
+
+   The  following  TCP  statistics  are not usually collected and
+will probably be zero.
+
+Statistic
+Variable  Length        Contents
+
+ ACDLA   17.    Activation delay histogram
+ BGUSE          Total time charged to background process
+ DGUSE          Total time charged to delayed action process
+
+
+                             - 59 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+Appendix H            Status Variable Names
+
+
+ IPDLA   17.    Input delay histogram
+ IPUSE          Total time charged to input process
+ OHUSE          Total time charged to TCP overhead
+ OPDLA   17.    Output delay histogram
+ OPUSE          Total time charged to output process
+ PZDLA   17.    Packetizer delay histogram
+ PZUSE          Total time charged to packetizer process
+ RADLA   17.    Reassembler delay histogram
+ RAUSE          Total time charged to reassembler process
+ RXDLA   17.    Retransmitter delay histogram
+ RXUSE          Total time charged to retransmitter process
+
+   The  internal  connection  block  (TCB)  for  each  connection
+contains:
+
+  TCB
+Variable  Length        Contents
+
+ TABTF          ForkX of fork ABORTing this connection
+ TCBIO  10.     IP options to be sent
+ TCBIR  10.     IP options received in last packet
+ TCBIU  10.     IP options specified by user program
+ TCBTO  10.     TCP options to be sent
+ TCBTR  10.     TCP options received in last packet
+ TCBTU  10.     TCP options specified by user program
+ TCTBS          (unimplemented)
+ TCTSQ          (unimplemented)
+ TERBF          (unimplemented)
+ TERJN          (unimplemented)
+ TERR           Error field
+ TERRF          Error wait bit index
+ TERRT          (unimplemented)
+ TFH            Foreign host internet address
+ TFP            Foreign port number
+ TIFDF          IP Do-not-Fragment flag
+ TIPDO          Send IP Data Offset (words)
+ TIPOR          Number of received IP option bytes
+ TIPOU          Number of user specified IP option bytes
+ TJCN           Connection's JCN
+ TLH            Local host internet address
+ TLP            Local port number
+ TMNRT          Retransmission factor "MNRTT"
+ TMXRT          Retransmission factor "MXRTT"
+ TOFRK          ForkN number of fork which owns this connection
+ TOPFH          Foreign host internet address from the Connection
+                Descriptor block
+ TOPFP          Foreign   port   number   from   the   Connection
+                Descriptor block
+
+
+                             - 60 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+Appendix H            Status Variable Names
+
+
+ TOPLH          Local host internet address from  the  Connection
+                Descriptor block
+ TOPNF          OPEN wait bit index
+ TOWNR          Job number of job owning this connection
+ TPICA          Channel to receive "reserved" interrupt
+ TPICE          Channel to receive error interrupt
+ TPICR          Channel to receive receive buffer full  interrupt
+ TPICS          Channel to receive send buffer empty interrupt
+ TPICU          Channel to receive urgent data interrupt
+ TPICX          Channel to receive open/closing/closed  interrupt
+ TPIFA          Fork to receive "reserved" interrupt
+ TPIFE          Fork to receive error interrupt
+ TPIFR          Fork to receive receive buffer full interrupt
+ TPIFS          Fork to receive send buffer empty interrupt
+ TPIFU          Fork to receive urgent data interrupt
+ TPIFX          Fork to receive open/closing/closed interrupt
+ TRBS           Amount of user receive buffer space available
+ TRCBY          Byte number of next octet to be reassembled
+ TRIS           Initial receive sequence number
+ TRLAK          Sequence number of last acknowledgement sent
+ TRLFT          Sequence number of next octet to be reassembled
+ TRLWN          Sequence number of last receive window sent
+ TRPP           Have a partially reassembled packet
+ TRSYN          State of receive side of connection
+ TRURG          Have more urgent data to be reassembled
+ TRURP          Sequence number of last (+1) receive urgent octet
+ TRWND          Receive window
+ TRXI           Retransmission factor "IRXI"
+ TRXPD          Retransmission factor "BD"
+ TRXPI          Retransmission factor Initial Interval
+ TRXPN          Retransmission factor "BN"
+ TSABT          Connection is being ABORTed (RESET/CLZFF JSYSi)
+ TSBYT          Number of octets available to be sent
+ TSCB           Current send (internal) buffer header
+ TSCR           Secure connection
+ TSEP           Packetizer is  being  encouraged  to  generate  a
+                packet
+ TSFP           Packetizer is being forced to generate a packet
+ TSLFT          Sequence number of oldest unacknowledged octet
+ TSLVC          Current security level
+ TSLVN          Next security level
+ TSMRT          Retransmission factor "ERTT"
+ TSMXB          (unimplemented)
+ TSMXP          Maximum send packet size
+ TSOPN          User has been notified connection is open
+ TSPRS          TCP%PS was set at OPEN
+ TSSEQ          Current send sequence number
+ TSSV           TSSEQ is valid
+
+
+                             - 61 -
+
+
+
+
+                       TCP IP Users Guide                May 1982
+Appendix H            Status Variable Names
+
+
+ TSSYN          State of send side of connection
+ TSTO           Retransmission timeout
+ TSUOP          User program opened connection
+ TSURG          Urgent send mode
+ TSURP          Sequence number of current send urgent octet
+ TSWND          Current send window
+ TTOS           IP Type-of-Service field
+ TTPDO          Send TCP Data Offset (words)
+ TTPOR          Number of received TCP option bytes
+ TTPOU          Number of user specified TCP option bytes
+ TTTL           Initial IP Time-to-Live
+ TTVT           Connection is a TVT
+ TVTL           Associated TVT line number
+ TWLDN          Connection was opened with wild net field
+ TWLDP          Connection was opened with wild port field
+ TWLDT          Connection was opened with wild host field
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                             - 62 -
+

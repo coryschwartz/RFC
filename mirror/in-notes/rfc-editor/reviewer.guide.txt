@@ -1,0 +1,60 @@
+
+
+GUIDELINES FOR REVIEWERS OF
+RFC INDEPENDENT SUBMISSIONS
+
+17 Jan 07
+
+
+______________________________________________________________
+
+DISSEMINATION OF REVIEWS
+
+All reviews (perhaps in summary) will be shared with the author(s), and
+many will be shared with the RFC Editorial Board for their information.
+
+By default, we will identify you the reviewer to the author.  However,
+you may request reviewer anonymity (except in the case of an
+unsolicited review).  TO REQUEST ANONYMITY, YOU MUST TELL US WHEN YOU
+SUBMIT THE REVIEW.
+
+Reviews may be posted publicly on the RFC Editor web site, with
+author approval.  In this posting, your anonymity will be respected
+if you requested it.
+
+________________________________________________________________
+
+CONTENTS OF REVIEWS
+
+Questions we would like you to answer:
+
+A. Is the subject of this document relevant to the RFC Series?
+
+	Although the series was originally broadly scoped to include
+	any aspect of computer networking, its scope has become
+	centered on the Internet.  This includes all Internet protocol
+	technology as well as related hardware issues (e.g., how to run
+	IP over X hardware).  More speculative are documents specific
+	to particular link layer or physical layer technologies.
+	Your opinion here will be useful, although the RFC Editor,
+	in consultation with the Editorial Board, will make the final
+	decision.
+
+B. Is this document technically competent, as far as you can tell?
+
+C. Is this document in reasonable (not necessarily final) editorial shape?
+
+D. Are the Abstract and Introduction of this document reasonably clear
+	for those Internet techies who may not be experts in the particular
+	subject matter?
+
+	Do the Title and Abstract fairly and accurately summarize the
+	contents?
+
+E. Does the document make clear up front how the specification
+	does/does not relate to past or current IETF activities?
+
+Any additional suggestions that you can make to improve the quality
+and clarity of the document will be welcomed by us and in most cases
+will be welcomed by the author(s).
+

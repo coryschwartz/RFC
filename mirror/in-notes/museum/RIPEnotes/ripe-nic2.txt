@@ -1,0 +1,333 @@
+
+
+
+
+                          RIPE NCC
+
+
+                        Activity Plan
+
+
+
+                         R. Blokzijl
+
+                         May 5, 1991
+
+                        ref.: ripe-w07
+
+
+
+Introduction
+
+
+This document describes the activity plan for the proposed RIPE Network Co-
+ordination Center (NCC). As such it must be regarded as a technical annex to
+the document proposing the installation of an NCC (ripe-w06).
+   In the NCC proposal it is recommended to have a separate organisation that
+is responsible for the execution of a certain number of tasks that are
+indispensible for the proper management of IP networks on a European scale.
+The nature of these tasks is such that it has proven to be extremely difficult
+to execute them as a voluntary effort on an ongoing, regular basis.  Also the
+efficiency of the work would be greatly improved with a centralised execution
+of the tasks.
+   The individual work items are described below. It should be stressed that
+regular reporting (weekly, monthly and yearly) on the progress of the work is
+foreseen for all work items.
+
+
+
+1   Technical - Coordination Activities
+
+
+  1. Maintain a database of European IP networks and their management in-
+     formation.
+     The database to be maintained will contain several classes of objects.
+     These objects are described in detail in ripe-w02.  At the moment the
+     following object classes have been defined:
+
+     (a) Networks
+
+     (b) Responsible persons
+
+     (c) Domains
+
+
+
+                                 1
+
+
+
+
+   (d) Routers
+
+   (e) International lines
+
+    (f)Name Servers
+
+   The NCC will be responsible for the database entries; this includes
+
+   (a) collection of database entries
+
+   (b) checking of individual entries
+
+   (c) checking of consistency and integrity of the database
+
+   Weekly reports on changes in the contents of the database will be pro-
+   duced, together with statistics about the number of database entries.
+
+2. Distribution of the database.
+   Secondary copies of the database can be installed at other sites upon re-
+   quest. It is the responsability of the NCC to keep track of such secondaries,
+   and to keep the contents consistent.
+   An up to date record of secondary sites will be maintained on line.
+
+3. Coordination of database exchange with other organisations.
+   The NCC will coordinate and execute the exchange of database informa-
+   tion with NCC's outside Europe. The result will be that for the end user
+   of the database one uniform set of global information will be available.
+
+4. Keep a record of existing IP connectivity in Europe, and between Europe
+   and other continents.
+   The record shall consist of a set of maps that catalogue the existing con-
+   nectivity in Europe. These maps fall into three main categories:
+
+   (a) International connectivity inside Europe
+
+   (b) Connectivity between Europe and other continents
+
+   (c) Connectivity inside European countries and or networks
+
+   The last category depends heavily on cooperation with individual NOC's.
+
+   The maps to be produced will be made available on line in the form of a set
+   of PostScript files for remote retrieval and reproduction. Adequate tools
+   for providing the maps (both hardware and software) must be available.
+
+   The updated maps will be published on a monthly basis.
+
+5. Keep an inventory of IP infrastructures not yet interconnected.
+   This information will be kept in the same format as the maps of the
+   interconnected networks. The collection and integration of the information
+   depends heavily on the cooperation of individual NOC's.
+
+   The updated maps will be published on a monthly basis.
+
+
+
+                               2
+
+
+
+
+  6. Keep a record of operational contact points.
+     This will consist of a list of NOC's and responsible people that will be
+     used as a reference list for the individual NOC's to be used in case of
+     network related incidents, including security incidents.
+
+     Individual NOC's will be able to subscribe to a weekly update service.
+
+  7. Maintain a list of recommended DNS software and known bugs.
+     The result will be available on a server in the form of software and
+     reports of known bugs, recommendations, etc.
+
+     A subscription service for change and update reports will be maintained.
+
+  8. Placement of name servers and backup servers in Europe, and beyond.
+     On a regular basis the interworking between the DNS name servers in
+     Europe, and their connections to name servers outside Europe, must be
+     checked.  Detected errors and inconsistencies must be reported to the
+     responsible persons; corrective actions must be followed. The result will
+     be a consistent set of name servers.
+
+  9. Gather traffic statistics and network performance data.
+     Traffic statistics will be gathered in an orderly way from a set of well
+     defined routers. The result will be regular reports on traffic volumes and
+     network performance.
+
+
+
+2   Technical - Development Activities
+
+
+NICs and NOCs and the NCC need special purpose software tools for their
+work. While some of these tools are available commercially others will have to
+either be obtained from the public domain or specially developed to suit local
+needs. The NCC will collect, develop, document and test such tools in order to
+make them available to the RIPE community. While some basic support will
+be given the NCC will not provide full support for these tools.
+
+
+  1. Database management tools.
+     Tools for management of the database and their maintenance are an im-
+     portant work item for the NCC. The result will be the availability of a
+     consistent database.
+
+  2. Database querying tools.
+     Development and maintenance of the whois utility. The result will be a
+     program, available from a file server, that permits remote interrogation of
+     the database.
+
+  3. Tools for gathering and presenting network usage statistics and perfor-
+     mance data.
+
+
+
+                                 3
+
+
+
+
+     Software has to be collected, developed and maintained for gathering sta-
+     tistical data. The result will be a set of tools, available from a file
+     server, together with documentation and recommendations for use.  This will
+     enable the RIPE community to gather and present statistics in a uniform
+     way.
+
+  4. DNS quality control tools.
+     Utilities for quality control of the interworking of the DNS name servers
+     will be developed and maintained. The result will be a set of software and
+     documentation, available from a server.
+
+  5. Tools for drawing network diagrams.
+     Network diagrams have become complicated objects nowadays, and the
+     amount of work needed to draw them is no longer negligible. Some effort
+     should be dedicated to study the possibility to generate them in a more
+     automatic way from existing databases.  The result will be more up to
+     date and more accurate network diagrams.
+
+
+
+3   Administrative - RIPE Activity Support
+
+
+The NCC will give the following support to the RIPE activities:
+
+
+  1. Keeping the RIPE document store.
+     The NCC will keep RIPE documents online and easily accessible to the
+     RIPE community.
+
+  2. Technical and secretarial support for studies undertaken by RIPE.
+     The NCC will provide technical and clerical support for RIPE studies and
+     task forces in order to enhance continuity and coordination of the work
+     between RIPE meetings.
+
+  3. Organisational support for RIPE meetings. RIPE meeting attendance is
+     expected to be on the order of 40 persons in the near future. The NCC
+     will provide clerical support to organise these meetings in order to keep
+     them productive.
+
+
+
+4   Administrative - Reporting
+
+
+The NCC will follow the following general reporting procedures:
+
+
+  1. quarterly reports an all activities will be produced for the RIPE partici-
+     pating organisations and the RARE CoA.
+
+  2. quarterly reports on outstanding problems will be produced for the RIPE
+     participating organisations and the RARE CoA.
+
+
+
+                                 4
+
+
+
+
+  3. the NCC reports on its ongoing work and outstanding problems also to
+     each RIPE meeting.  These meetings take currently place three times a
+     year.
+
+  4. The NCC will produce annual reports. These will be available on the 31st
+     of January following the year to be reported on.
+
+
+
+5   Requirements for an NCC
+
+
+The following requirements for the running of the RIPE NCC have been iden-
+tified:
+
+   o staff
+
+       - 1.0 FTE NCC manager with proven skills in:
+
+           *Internet network technology, applied to large scale networks
+
+           *Management and communication
+
+           *Working in an international environment
+
+         The NCC manager must be willing to take the position for a period
+         of at least 3 years.
+
+       - 1.0 FTE NCC technical staff with proven skills in:
+
+           *Internet network technology, applied to large scale networks
+
+           *Working in an international environment
+
+         The NCC technical officer must be willing to take the position for a
+         period of at least 1 year.
+
+       - 1.5 FTE Administrative staff, with proven skills in:
+
+           *Administrative work
+
+           *Using advanced computing equipment
+
+           *Working in an international environment
+
+         The NCC administrative officer must be willing to take the position
+         for a period of at least 2 years.
+
+   o equipment:
+
+       - work-stations with X-windows capability for staff
+
+       - an adequate minicomputer to support the work-stations and to house
+         the data bases
+
+       - excellent IP networking access, both European and intercontinental
+
+       - excellent mail connectivity
+
+       - support for OSI based services
+
+
+
+                                 5
+
+
+
+
+o office space:
+
+    - 2 offices with the normal operational overheads
+
+    - communication costs allocation
+
+o location:
+  It is essential that the actual place where the NCC is located, is close to an
+  operating NOC and other RIPE activities. This will make it possible to
+  keep the number of NCC staff limited, while still providing fertile grounds
+  where NCC activities will florish.
+
+o travel budget
+  it is foreseen that NCC staff will have to make at least the following travels
+  on a yearly basis:
+
+    - attend all RIPE meetings
+
+    - attend 6 meetings in Europe
+
+    - attend 4 meetings outside Europe
+
+
+
+                              6

@@ -1,0 +1,411 @@
+25-May-83 08:51:33-PDT,21829;000000000001   
+Return-path: <tcp-ip@brl-vgr>
+Mail-From: SMTP created at 25-May-83 01:13:34
+Received: FROM BRL-VGR BY USC-ISIF.ARPA WITH TCP ; 25 May 83 01:13:55 PDT
+Received: From Brl-Vgr.ARPA by BRL-VGR via smtp;  25 May 83 1:42 EDT
+Sender:    Mike Muuss <TCP-IP@brl>
+From:      TCP-IP@brl
+To:        TCP-IP@brl
+Date:      25 May 1983 00:00 EST
+Subject:   TCP-IP Digest, Vol 2 #7
+
+TCP/IP Digest           Wednesday, 25 May 1983     Volume 2 : Issue 7
+
+Today's Topics:
+           Local InterNets -- Searching for a General Solution
+                       Discourse on Subnet Routing
+               Thoughts on Large Multi-Wire Local Networks
+----------------------------------------------------------------------
+                  TCP/IP Digest --- The InterNet Digest
+                         LIMITED DISTRIBUTION
+          For Research Use Only --- Not for Public Distribution
+----------------------------------------------------------------------
+
+Date: 24 May 1983 1312-PDT
+From: POSTEL@Usc-Isif.ARPA
+Subject: "local internets"
+To:   cak@Purdue.ARPA, Thomas.Rodeheffer@Cmu-Cs-A.ARPA
+cc:   postel@Usc-Isif.ARPA, TCP-IP@Brl.ARPA
+
+Chris & Tom:
+
+I am very interested in the development of a procedure for treating
+multiple lans as one IP network.  I think a promising approach is to
+investigate the possible extension of the Plummer address resolution
+scheme (RFC 826) to cover a multi-lan situation, or an extension
+of the CRONUS scheme to cover multiple local networks.  I would be
+very interested in a solution to the problem in terms of a procedure
+like one of these.  If a procedure can be found and documented that
+solves this problem in a general way (e.g., not dependent on a
+particular type of network hardware), i would support making that a
+standard interface between IP and lans -- i would encourge the procedure
+to be incorporated in "IP products" to be used on lans.
+
+--jon.
+
+------------------------------
+
+Date: 24 May 1983 1746-EDT (Tuesday)
+From: lwa@mit-csr
+Subject: On subnet routing
+To: tcp-ip@brl
+
+I've been following the discussions of subnet routing in the digest with
+interest.  I believe that there is some confusion evident, so this note
+is an attempt to clarify some of the issues.  We started running up against
+this problem about a year ago at MIT; this note is an attempt to summarize
+what we think we've learned.   I'm afraid this is going to be a long note;
+I'll attempt to keep things interesting.
+
+For those of you who don't want to read the entire note, here's a
+summary of what I'm going to say.  I'm going to argue that the introduction
+of EGP reflects a leaning towards a particular structure for the Internet:
+namely, a collection of "core" networks comprising the trusted long-haul
+networks and interconnected by trusted gateways; and a large number of
+external networks each connected to the core by an EGP-speaking gateway.
+I'll argue that many of these external networks will in fact be a cluster
+of physical nets, and that EGP in and of itself does not solve the problems
+of routing within these clusters ("subnets" in our terminology).  I'll argue
+that the major technical issues are: designing a subnet routing algorithm
+which miminizes changes to existing host software; and propogating external
+routing information within the subnet.  I'll argue that the subnet routing
+algorithm is at least partially a political issue as well.  And finally I'll
+point out some major routing problems which remain to be solved in the Arpa
+Internet.  The note will start out by describing the current Internet
+routing structure and its problems; then talk about EGP and subnets;
+finally mention future problems.
+
+1) Discussion of original Internet routing
+
+	Routing in the Internet was originally designed with an eye towards
+isolating hosts from changes in the routing algorithms employed.  This section
+gives some background in how the original Internet routing scheme worked.
+
+ a) Routing from the host's point of view
+
+	In the Internet, it is assumed that each host is attached to a
+network which is capable of delivering packets to any other host attached to
+the same network.  The network may have an internal routing algorithm of its
+own; this is of no concern to Internet.  The Internet-level routing algorithm
+employed by the hosts is quite simple.  When a host wants to transmit a
+packet, it performs the following steps:
+
+	Look at the destination Internet address.  Is it on the same network
+	I'm on?
+	-- If so, I can send the packet directly, so pass the packet down to
+	   the local network level for transmission directly to the
+	   destination host.  (The local network may have to translate
+	   the destination Internet address into a local net address, and
+	   may have to perform local-net-specific routing.  This is of no
+	   concern to Internet).
+	-- If not, look up the destination Internet address in a cache of
+	   recently-used addresses, to see if we know of a first-hop gateway
+	   to which to send the packet.  (The first-hop gateway must (by
+	   definition) be attached to the same net I'm on).
+		-- If so, pass the packet down to the local network level
+		   for transmission to the specified first-hop gateway.
+		-- If not, find a "smart" gateway from a locally-maintained
+		   table of gateways on the network I'm attached to.  A
+		   smart gateway is one which participates in the Internet
+		   routing algorithm (GGP), and hence which knows how to get
+		   to any network (see below).  Pass the packet down to the
+		   local network level for transmission to the smart gateway.
+		   The smart gateway must know how to forward the packet to
+		   its destination.
+
+		   Now in the process of forwarding the packet, the gateway
+		   may discover that it needs to forward the packet to another
+		   gateway attached to the same network as the originating
+		   host.  If so, it sends a redirect message back to the
+		   originator, telling it that the other gateway is the
+		   appropriate first-hop gateway for the specified destination.
+		   This information is entered in the host's cache for later
+		   use.
+
+Notice that the host doesn't need to know how the smart gateway arrived at the
+correct routing decision; thus it is isolated from the details of the gateway-
+to-gateway routing algorithm.
+
+ b) Routing from the gateway's point of view
+
+	The preceding section brought up a fundamental requirement on gateways:
+each gateway must know how to route a packet to all networks.  The gateways
+maintain this information by exchanging routing packets containing information
+on the distance from each gateway to each network.  (The metric used in GGP
+is hop count, where the "hops" are gateways).  Other details of the GGP
+protocol aren't important here.
+
+2) Problems - increasing numbers of nets, and user-supplied gateways
+
+	A couple of problems began to show up as the Internet increased in
+size.  The first was the limitation on the number of networks which could
+be supported.  This limitation actually arose from two circumstances.  The
+first was the structure of an Internet address: the field reserved for
+holding the network number was only 8 bits in length.  This problem was
+solved by redefining the structure of Internet addresses to create class
+A, B, and C network numbers.  This only exacerbated the second circumstance,
+though, which was a result of the fundamental limitation of GGP that all
+gateways had to know how to reach all networks.  This limitation was not
+a problem as long as there were only 256 possible networks; each gateway
+could easily maintain routing tables listing all networks and simply
+index into the table to find a route.  Now, however, Internet addresses could
+address thousands of networks; but gateways could not hope to maintain routing
+tables that large.  Nor were table sizes the only problem; the number and
+size of routing updates needed to keep these huge tables up to date would
+have been prohibitive.
+
+	A second problem arose as a result of the desire of certain users
+of the Internet to connect their own, locally-written gateways to the
+Internet.  The problem was that GGP was designed to be used only in an
+environment of mutually trusting gateways.  Any single malfunctioning
+gateway could, by simply advertising that it had the shortest route to
+any network, effectively halt all communication in the Internet.  Other
+malfunctions (for example, sending bogus redirects) could isolate
+individual hosts.  This was clearly unacceptable.
+
+3) EGP - solving the user-supplied gateway problem
+
+	In an attempt to solve the second problem, the set of all Internet
+gateways was divided into two classes.  There would be a trusted set of
+"core" gateways, all running DoD-approved gateway code, using GGP; and
+a set of locally-written and maintained "external" gateways.  The external
+gateways would communicate with each other and with the core gateways by
+using a new routing protocol called EGP ("External Gateway Protocol").
+
+	The basis of the design was that external gateways would be used
+to connect autonomous external networks (eg. a university campus), to the core
+Internet (the Arpanet, Satnet, and other long-haul Arpa-maintained networks).
+The failure of an external gateway could only affect communications with
+the isolated network it serviced, and could not disrupt communications within
+the core Internet.
+
+	Experimental implementations of EGP are currently being tested, but
+the protocol is not yet in wide use.
+
+4) Routing inside subnets
+
+	These autonomous external networks, which are themselves connected to
+the core Internet by EGP-speaking gateways, will often in fact consist of more
+than one physical network interconnected by gateways.  Such "subnets" already
+exist at several sites around the Internet (for example, MIT and CMU); and the
+number is growing rapidly.  As the subnets themselves increase in size and
+complexity, both the hosts attached to the subnets and the gateways inside
+the subnets need to make routing decisions.  At the same time, more and more
+hosts are running vendor-supplied Internet implementations which were not
+written with this subnet organization in mind.
+
+ a) Routing from the host's point of view
+
+	Ideally, it should be possible to run a vendor-supplied Internet
+implementation in a host attached only to a subnet without modification.
+If, for example, each of the physical nets within a subnet were assigned
+a separate Internet network number, existing host Internet implementations
+would not have to change.  It has already been noted, though, that the
+size of the routing tables needed and the size and frequency of the routing
+updates required make this approach impractical.
+
+	The alternative we have adopted inside MIT is instead to assign
+a single Internet network number to the entire MIT subnet.  Thus to hosts
+outside MIT, the MIT subnet appears to be a single network.  But there is
+information "hidden" in the "rest" field of the Internet address which
+is used by hosts and gateways inside MIT to perform intra-subnet routing.
+The structure of "MIT-subnet" Internet addresses is: one byte of net,
+identifying MIT; one byte of "subnet number", identifying a physical
+net inside MIT; and two bytes of host number.
+
+	Unfortunately, this alternative requires changes to vendor-supplied
+Internet implementations.  The routing algorithm performed by hosts inside
+MIT is identical to that specified in section 1.a) above, except that the
+first test ("Is the destination host on my local net?") is changed to
+	Is the destination host on my local net/subnet pair?
+If so the packet is sent directly, if not it is sent to a gateway for
+forwarding with the expectation that a redirect may come back.
+
+	Of course, vendor-supplied software knows nothing about subnets and
+thus needs to be modified to work.  Ideally for MIT, a standard structure
+for subnet addresses would be specified; and in particular it would be very
+useful to be able to look at an Internet address and tell whether the net
+in question in fact supported subnet routing.  If these features were
+standardized as a part of all vendor's offerings, MIT and others in the
+same situation would once again be able to use standard software.
+
+ b) Routing inside subnet-only gateways
+
+	In the MIT subnet routing scheme, as in the original Internet routing,
+hosts are isolated from the details of the particular gateway-to-gateway
+routing algorithm in use.  The intra-subnet routing algorithm can be relatively
+simple; a GGP-like or Chaosnet-like routing algorithm, in which each gateway
+knows the entire structure of the subnet, would be quite adequate.  A problem
+arises, though, in the case of a subnet with more than one external gateway.
+
+	The problem here is that evidently some amount of external routing
+information needs to propogate into the subnet, otherwise packets destined
+for hosts outside the subnet may well be sent to the "wrong" external
+gateway.  Similarly, hosts outside the subnet have no way of seeing the
+internal subnet structure and hence may end up using the wrong gateway
+for incoming packets.
+
+	It is possible that this problem is not a large one.  It may well
+be that most such subnets will have only one or two connections to the
+outside world anyway; and it may be that the inefficiencies associated
+with using the wrong gateway are small.  More study is needed in this
+area.
+
+5) Future problems
+
+	There are several problems related to routing which have not yet
+been addressed in the Internet.  To begin with, the form of subnet routing
+we have been discussing in this note is an interim solution at best.  It's
+a step on the road to a more complete routing mechanism (sometimes called
+"area routing", which has the characteristic that the distance to which
+routing information is propogated is directly proportional to the granularity
+of that information.  Thus the very fine-grained routing information (say
+about the interconnectivity of Ethernets inside a single building) doesn't
+get very far outside that building, while information about which
+continents have satellite connections is disseminated to everyone.
+
+	Notice that the metric for measuring "distance" in this sort of
+scheme doesn't necessarily have to mean physical distance; it can be
+any combination of physical distance, hop count, bandwidth, delay, etc.
+This points up another serious weakness in the current Internet routing
+algorithm: the use of hop count as the only metric for comparing routes.
+A more sophisticated algorithm would include the requested type of
+service (eg. delay over bandwidth preference) and the characteristics
+of the networks being considered - their bandwidths, delays, and
+possibly congestion characteristics.
+
+	Finally, there is presently a problem with multi-homed hosts
+in the Internet - that is, hosts which are attached to more than one
+network.  This problem arises becauses an Internet address in fact
+refers not to a specific host, but rather to a specific network
+attachment point.  Thus once a packet has been transmitted, the
+routing algorithm cannot take into account the fact that a better
+route to the destination host might exist, if that route requires
+sending the packet to a different network interface on the
+destination host.  It's hard to imagine solutions to this problem
+which retain compatibility with existing Internet implementations.
+
+I hope this message has cleared up more points than it has raised.
+I expect to get a lot of flak back; feel free to reply directly
+to me rather than to the list if you want to include personal
+comments about my ancestry, personal habits, or whatever.
+
+					-Larry Allen
+
+------------------------------
+
+Date: 24 May 83 09:33:42 PDT (Tue)
+From: "Mike O'Dell [system]" <mo@Lbl-Csam.ARPA>
+Subject: thoughts on large multi-wire local networks
+To: tcp-ip@Brl.ARPA
+
+With LBL thinking very hard about wiring its entire campus,
+I have been working on an architecture which warrants exposure
+to this august group.  Some of the ideas of this scheme are
+variants of things proposed in the Cronus Network architecture
+(Pogren, et al, at BBN).
+
+The network environment at the Lab has several important characteristics:
+we have a harsh electrical environment, it is VERY expensive to run
+cables between buildings (we are on top of the Berkeley hills -
+beautiful view, rock for soil), and some of the hosts eventually
+connected to our net will be rehomed with some frequency.  This latter
+part is one of the difficulties - using name servers is fine,
+but not everything will use them because of size limitations, etc.
+
+The scheme is to take 1 class B network number and use IP addresses as 
+logical addresses.  This turns out to be quite reasonable because
+the Address Resolution Protocol developed at MIT and already in
+wide use provides the required mapping functions.  In the proposed
+network architecture, intra-building trunks would be Ethernets,
+with one or more to the building, while inter-building trunks
+would likely be a fibre-optic Pronet ring.  Connecting the Ethers
+to the Ring would be Gateway processors.  
+
+The basic requirement for hosts is that they implement the
+Address Resolution Protocol (ARP).  I believe vendors supporting IP/TCP
+on Ethernets will either (1) only be able to talk to their own
+family of hardware (2) implement some other random protocol with
+the functionality of ARP, or (3) provide ARP implementations.
+This is one place where market pressure might well cause
+people to do the "right" thing and do number 3 above.  Even if they
+don't, ARP can be slipped into the device driver for the network
+interface more easily than hacking the IP implementation.
+So, one of the important axioms of the design is that ARP is
+something vendors are likely to do (if we, the Internet community
+hound them about it), and if they don't, it isn't the worst
+thing that could happen.  The Gateway processors can provide
+bridge services for hosts which can't use them transparently.
+
+By now, you have probably figured it out for yourself.  In the case
+of talking to a host on a directly-connected wire, ARP works
+just like normal.  In the case of a host on an indirectly-connected
+wire, the Gateways processors respond to the ARP packets showing
+their Ethernet as the mapping for the IP address.  As was mentioned
+before, the Gateway processors need some kind of G-G protocol 
+which can let each Gateway keep abreast of which host is on
+which wire.  The general approach for this level is to use 
+the Xerox NS Routing Information Protocol, modified to carry 
+additional information about each host (its Internet address!).
+This makes the Gateways each contain the entire host list
+for the network, but that is ok.  Think of them as a distributed
+name server.
+
+Back to machines with no ARP implementation.  One cheap hack,
+but a quite workable hack, is to simply hardwire the outgoing
+Ethernet address for every packet to point to a Gateway.
+The Gateway's normal routing function examines the IP address
+and reencapsulates going on to the correct host.  This creates
+a star-shaped network on each wire for such machines with no
+ARP implementation, but if the IBM PC's and such really start
+generating that much traffic, then doing ARP for them would
+be worthwhile.
+
+As for the Gateway processors, very fast 68K's are now available
+with LARGE amounts of memory, so requiring large tables in the
+Gateways is not the onerous requirement it is in IMP's.  They
+will eventually need quite high packet bandwidths, but we are
+looking at ways to do that cheaply.
+
+So, the result of this scheme allows a large collection of wires
+to be treated as one Internet network, with one class B
+network number.  64K hosts is more than we see having before
+the turn of the century.  By then, everything will be ISOOSI
+and all out problems will be solved for us!  (That's a joke, son.)
+Moreover, the ability of ARP to bind addresses very late in
+interpretation allows hosts to be rehomed quite easily.  The
+only tricky part is how Gateways know when a host has rehomed.
+ARP includes a "here I am" packet which lets any interested
+party take note of the IP/Ethernet address binding of some
+newly-arrived host, so the Gateway processors simply use
+that information.  They also can routinely send ARP request
+packets to keep their view of a wire from getting stale.
+
+One other point worth mentioning - this scheme 
+has the advantage of providing both IP and Xerox NS capability.
+As described above, the Gateway did its routing based on an IP address.
+Since the tables contain everything needed to do NS routing, this
+same backbone can route traffic for NS by simply demultiplexing
+on the Ethernet "type" field and having additional code which
+knows how to extract stuff from NS headers, as well as IP headers.
+This is important in our enviroment because in spite of our
+best efforts to promote IP/TCP as a basis for compatability,
+NS-bases systems are already here, and will continue to be purchased,
+and this would allow the Ethernet cables to be usefully shared.
+
+None of this is particularly amazing, but we think it is a fairly
+clean way to handle the problem without having to hack IP
+implementations.  We do get to build and maintain the Gateway
+system, and maybe do a few ARP implementaitons,  but if that
+is the worst cost, we would be very pleased.
+
+	I hope this is of value to the readers.  Comments and
+	discussions are quite welcome.
+
+	-Mike O'Dell
+
+------------------------------
+
+END OF TCP-IP DIGEST
+********************
+

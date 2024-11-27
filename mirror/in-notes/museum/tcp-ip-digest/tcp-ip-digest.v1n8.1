@@ -1,0 +1,236 @@
+11-Dec-81 19:12:07-PST,9892;000000000001
+Mail-from: ARPANET host BRL rcvd at 11-Dec-81 1911-PST
+Date:      11 Dec 81 18:53:15-EST (Fri)
+From:      Mike Muuss <tcp-ip@brl>
+To:        list: 
+Subject:   TCP-IP Digest, Vol 1 #8
+Bcc:       
+
+TCP/IP Digest            Friday, 11 Dec 1981       Volume 1 : Issue 8
+
+Today's Topics:
+                     TCP/IP for CDC CYBER Mainframes
+            Mail Between NCP and TCP Hosts -- RFC801 Excerpts
+          Relating ArpaNet Protocols to the ISO Reference Model
+        TCP/IP Conversion Timetable & Documents  --  RFC801 again
+                      Tidbit about UK INDRA Project
+----------------------------------------------------------------------
+
+Subject: TCP/IP for CDC CYBER Mainframes
+From: SITNIK at OFFICE-8
+
+Tektronix has implemented TCP/IP on their CDC CYBER mainframe.
+The project is being directed by Tim Fallon, (415) 627-5471.  Tim
+doesn't mind being contacted and in fact, would like to
+distribute TCP to anyone who is interested with the understanding
+that there is no committment of future support by Tektronix.  He
+is currently exploring the distribution issue with the Tektronix
+legal department.
+
+The Tektronix implementation of TCP/IP runs at a System Control
+Point (SCP) under the NOS operating system.  Interface with the
+user is through SCP macro calls.  Interface to the network is via
+a Hyperchannel device drive which runs in a peripheral processor.
+
+Tim is not aware of anyone working on a NOS/BE version of TCP.
+
+Rich Sitnik
+
+------------------------------
+
+From: csk at UCLA-Security (Charley Kline)
+Subject: mail among tcp/ncp hosts
+
+A while ago, the following question was asked and I didn't see an
+answer to it in this digest.  Can someone answer it.  Thanks.
+
+As TCP/IP becomes the standard, many hosts are coming online with
+only TCP/IP protocols.  Can someone explain where and how one uses
+mail gateways to get mail to/from hosts which are using NCP
+protocols with those using TCP/IP protocols while the transition
+is taking place?
+
+--charley
+
+[ I believe that the plan for transition is well detailed in RFC801,
+  which is availible for FTP from the NIC using account "anonymous",
+  and your name for the password.  File is <netinfo>rfc801.txt
+  I have included pieces here for everybody to see.   -Mike ]
+
+------------------------------
+
+Subject:  RFC801 Excerpts about NCP <-> TCP Mail and File Transfer
+
+Network Working Group                                          J. Postel
+Request for Comments: 801                                            ISI
+
+      For FTP, there will be provided one or more relay hosts.  An FTP
+      relay host will implement both the NCP and TCP environments, both
+      user and server Telnet, and both user and server FTP in both
+      environments.  Users requiring FTP service between hosts in
+      different environments will first connect via Telnet to an FTP
+      relay host, then use FTP to move the file from the file donor host
+      to the FTP relay host, and finally use FTP to move the file from
+      the FTP relay host to the file acceptor host.  (See Appendix B.)
+
+      For Mail, hosts will implement the new Simple Mail Transfer
+      Protocol (SMTP) described in RFC 788.  The SMTP procedure provides
+      for relaying mail among several protocol environments.  For
+      TCP-only hosts, using SMTP will be sufficient.  For NCP-only hosts
+      that have not been modified to use SMTP, the special syntax
+      "user.host@forwarder" may be used to relay mail via one or more
+      special forwarding host.  Several mail relay hosts will relay mail
+      via SMTP procedures between the NCP and TCP environments, and at
+      least one special forwarding host will be provided.
+
+------------------------------
+
+From:      Michael Muuss <mike@brl>
+Subject:   Relating ArpaNet Protocols to the ISO Reference Model
+
+Whilst reading a copy of "FY80 Final Report:  Cable Bus Applications
+in Command Centers" from the Mitre Corporation which was kindly provided
+to me by Steve Holmgren <Steve@Mitre>, I discovered a most interesting
+comparison between the TCP/IP based ArpaNet, and the ISO Reference Model.
+Included is basically the following picture:
+
+    ISO Reference Model	|    ArpaNet Environment
+------------------------|-------------------------------------
+	Application	|
+------------------------|
+	Presentation	|	Virtual Terminal Protocol
+------------------------|
+	Session		|-------------------------------------
+------------------------|
+	Transport	|	Transmission Control Protocol/
+------------------------|	     InterNet Protocol
+	Network		|-------------------------------------
+------------------------|
+	Data-Link Cntrl	|	Variety of Low-Level Network
+------------------------|	     Access Mechanisms
+	Physical	|
+------------------------|-------------------------------------
+
+Also there is the following descriptive text:
+
+"At the lower protocol levels there is no natural intersection of the
+DARPA-like architectures with the ISO Reference Model (RM), but
+above layer four in the RM and the end-to-end transport layer in
+the DARPA model an eventual mergins of models is possible.
+
+TCP contains some session layer mechanisms and our Virtual Terminal
+Protocol (VTP) contains both session and presentation functions, but
+the splitting out of these functions in the VTP model is possible and
+would not significantly change the protocol itself.  Naturally, a VTP
+that fits within the open systems architecture would need to utilize
+certain data transformation services of the presentation layer and data
+transfer controlling services of the session layer.  This could be done
+by using appropriately constructed presentation and session protocols."
+[pp 17-19]
+
+------------------------------
+
+From:      Michael Muuss <mike@brl>
+Subject:   TCP-IP Conversion Timetable & Documents, from RFC801
+
+RFC 801                                                    November 1981
+                                                 NCP/TCP Transition Plan
+
+Milestones							When
+----------							----
+
+   First Internet Service                                        already
+
+      A few hosts are TCP-capable and use TCP-based services.
+
+   First TCP-only Host                                           already
+
+      The first TCP-only host begins use of TCP-based services.
+
+   Telnet and FTP Relay Service                                  already
+
+      Special relay accounts are available to qualified users with a
+      demonstrated need for the Telnet or FTP relay service.
+
+   Ad Hoc Mail Relay Service                                     already
+
+      An ad hoc mail relay service using the prototype MTP (RFC 780) is
+      implemented and mail is relayed from the TCP-only hosts to
+      NCP-only hosts, but not vice versa.  This service will be replaced
+      by the SMTP service.
+
+   Last NCP Conversion Begins                                     Jan 82
+
+      The last NCP-only host begins conversion to TCP.
+
+   Mail Relay Service                                             Jan 82
+
+      The SMTP (RFC 788) mail service begins to operate and at least one
+      mail relay host is operational, and at least one special forwarder
+      is operational to provide NCP-only host to TCP-only host mail
+      connectivity.
+
+   Normal Internet Service                                        Jul 82
+
+      Most hosts are TCP-capable and use TCP-based services.
+
+   Last NCP Conversion Completed                                  Nov 82
+
+      The last NCP-only host completes conversion to TCP.
+
+   Full Internet Service                                          Jan 83
+
+      All hosts are TCP-capable and use TCP-based services.  NCP is
+      removed from service, relay services end, all services are
+      TCP-based.
+
+Documents
+---------
+
+   The following RFCs document the protocols to be implemented in the
+   new IP/TCP environment:
+
+      IP                                                         RFC 791
+      ICMP                                                       RFC 792
+      TCP                                                        RFC 793
+      Telnet                                                     RFC 764
+      FTP                                                        RFC 765
+      SMTP                                                       RFC 788
+      Name Server                                                IEN 116
+      Assigned Numbers                                           RFC 790
+
+   These and associated documents are to be published in a notebook, and
+   other information useful to implementers is to be gathered.  These
+   documents will be made available on the following schedule:
+
+      Internet Protocol Handbook                                  Jan 82
+
+      Implementers Hints                                          Jan 82
+
+      SDC IP/TCP Specifications                                   Jan 82
+
+      Expanded Host Table                                         Jan 82
+
+------------------------------
+
+From: PKIRSTEIN at USC-ISI
+Subject: Re: TCP-IP Digest, Vol 1 #6
+
+In response to your message sent       18 Nov 81 5:39:59-EDT (Wed)
+
+Mike,
+
+There is a lot of things one can say about the INDRA project.  What level, and
+what length interests you.  The project has been going in some form for
+eight years, and we are deeply involved in providing services for UK groups
+to have terminal, file   and mail connectiviity with US groups who are
+both on ARPANET or TElENET in the US, and on SRCNET or PSS in the UK. Thus
+the project is like CSNET, but also as a considerable research congent.
+
+We are active in various Internet and satelite projects as well.
+
+Peter Kirstein
+
+END OF TCP-IP DIGEST
+********************
+

@@ -1,0 +1,232 @@
+19-Oct-84 09:39:54-PDT,11925;000000000001  
+Return-Path: <NIC@SRI-NIC.ARPA>
+Received: FROM SRI-NIC.ARPA BY USC-ISIF.ARPA WITH TCP ; 18 Oct 84 19:16:54 PDT
+Date: Wed 17 Oct 84 09:48:33-PDT
+From: DDN Reference <NIC@SRI-NIC.ARPA>
+Subject: DDN NEWS 
+To: DDN-NEWS: ;
+cc: nic@SRI-NIC.ARPA
+
+====================================================================== 
+DDN NEWS 36                                    NETWORK INFO CENTER for 
+17 Oct 1984                                DCA DDN Program Mgmt Office 
+					NIC@SRI-NIC.ARPA  415-859-3695
+
+                      DEFENSE  DATA  NETWORK
+
+                            NEWSLETTER
+
+[Maximum Distribution Requested.  The DDN NEWSLETTER is distributed by 
+the Network Information Center under DCA contract.  Back issues may be 
+obtained by FTP  from  the directory <DDN-NEWS> at SRI-NIC  [26.0.0.73 
+and 10.0.0.51].
+======================================================================
+
+                             TOPICS
+
+   1.  GUIDELINES FOR DDN TAC MANAGEMENT TO BE ANNOUNCED SOON
+   2.  ARPANET TAC ACCESS CONTROL SYSTEM IS COMING
+   3.  TAC STANDARDIZATION UNDER WAY
+   4.  DDN USER ASSISTANCE AVAILABLE FROM THE NIC
+   5.  DDN DIRECTORY NOW BEING MAILED
+
+----------------------------------------------------------------------
+
+       GUIDELINES FOR DDN TAC MANAGEMENT TO BE ANNOUNCED SOON
+       ------------------------------------------------------
+
+Procedures to provide for configuration management of the DDN Terminal
+Access Controllers (TACs), as well as to identify and justify the
+current connections to the TACs will be issued as a DDN Management
+Bulletin. These procedures will also be released via AUTODIN message to
+the MILDEPS and Service O&M commands.  The procedures will encompass TAC
+port allocation and management, processing requests for termination on a
+DDN TAC, validation of existing full period service, planned common user
+dial-access expansion, and publication of TAC dial-up phone numbers.
+Further, implementation of these procedures will eliminate the Quarterly
+Inventory Report previously submitted by the Node Site Coordinators.
+
+            ARPANET TAC ACCESS CONTROL SYSTEM IS COMING
+            -------------------------------------------
+
+Over the next several months, a system will be put into operation to
+authenticate each user who attempts to access the ARPANET via a
+Terminal Access Controller (TAC).  This is a separate system from the
+MILNET TACACS already in use to control access to the DDN through
+MILNET TACs.  The new ARPANET TACACS system will affect only ARPANET
+TACs (which currently have no access control) and the UCL-TAC in
+London.  Details of this new ARPANET TACACS system will be announced
+in future newsletters and Management Bulletins.
+
+The MILNET and ARPANET access control systems have a similar function,
+namely to restrict DDN access via TACs to authorized users, but are
+implemented differently.  In the current MILNET TACACS, identification
+of authorized users is provided by the Host Administrators, and all
+users must be registered and given TAC Access cards by the DDN Network
+Information Center.  In the new ARPANET system, a capability for
+registering authorized users will be provided to a "responsible
+person" in each government and contractor organization whose members
+need to use ARPANET TACs.
+
+Information about authorized users will be kept in a user database.  A
+"user database tool" has been developed which the responsible persons
+in various organizations will use to add, delete, and change
+identifying information on authorized TAC users.  The database tool
+resides on an ARPANET host and can be accessed by authorized persons
+over the network.
+
+Periodically, the user database information will be sent in a compiled
+form to each of several "login hosts" on the ARPANET.  When a user on a
+TAC port tries to open a connection, he or she will be prompted for a
+name and password.  The TAC will then interact with one of the login
+hosts to validate the given name and password.  Each TAC will contain a
+list of all login hosts and, if one is down, the TAC will automatically
+try another.  If the name/password pair is invalid, according to the
+login host, the TAC will give the user an error message and refuse to
+open the connection.  Thus, access will be limited to users who have
+been entered into the user database by the responsible person of their
+organization.
+
+In addition to information about authorized users, the user database
+also contains records identifying organizations and their responsible
+persons.  The organizations are arranged in a hierarchical structure,
+with DCA, due to its responsibility for operational management of the
+ARPANET, as the root organization at level zero.  DARPA and other
+government organizations will be at level one and will be responsible
+for creating the next level.  For example, IPTO will be an organization
+at level two (below DARPA).  Below IPTO will be contractor organizations
+whose members need ARPANET access to support efforts performed for
+DARPA/IPTO.  In each case, both user and organization records can only
+be created below a given organization by someone authorized to "act as"
+the organization.  The responsible person can always act as the
+organization, and can also grant to another user permission to act as
+the organization.  Thus, the responsible person can assign to a
+subordinate the job of actually manipulating the user database tool.
+
+The process is now under way of identifying responsible persons for
+organizations which use ARPANET, and sending them documentation on the
+user database tool.  Soon after receiving this documentation, the
+responsible persons will begin entering authorized users into the user
+database.  If you are an ARPANET TAC user, you should expect to be
+contacted by someone in your organization with a username and password
+prior to full activation of the access control system.  A trial period
+will begin shortly, during which access control will operate using a
+universal username and password announced in the TAC herald.  Before
+the end of this trial period, adequate notice will be given in the
+herald that individual passwords will soon be required.  This will
+give users who have not been contacted time to track down the
+responsible person in their organization to obtain a username and
+password.
+
+                 TAC STANDARDIZATION UNDER WAY
+                 -----------------------------
+
+1.  Background.  Most of the active TACs on the MILNET and ARPANET have
+been in place over one year and, despite the recent completion of the 
+project to replace all Honeywell TACS with C/30s, the back planes are 
+not arranged according to a standard.  Also, many dedicated users are 
+unknown to the DDN PMO.
+
+2.  Objective.  To standardize the physical back plane such that the 64
+ports on the 8 fantail sections increase from 00-07 at lower left 10-17
+at lower right, through 70-77 at upper right.  That way the physical 
+and logical ports will be identical.  Where possible, ports 0-17 and 
+70-77 (octal) will be reserved for dedicated terminal connections, 
+ports 20-47 for dial-up connections, and 50-67 for extra dedicated or 
+dial-up as necessary.  Also, to remove unauthorized user connections 
+from all TACS.
+
+3.  Approach.  The process will be handled by BBNCC Field Service under
+installation work orders from DCA/B647 as follows:
+
+   a.  The Installation Coordinator for B647 will obtain the latest TAC
+   Inventory Report on file at the NIC, and verify/update with the Node
+   Site Coordinator (NSC) by phone or electronic mail.
+
+   b.  The TAC Inventory Report will be forwarded to BBNCC under work 
+   order to provide the basis for scoping the job.
+
+   c.  When all is ready, BBNCC's Field Engineer (FE) will visit the site
+   on a prearranged date to accomplish phase 1 of TAC standardization.  
+   This includes reconfiguring the TAC back plane as described in 
+   paragraph 2 above.  The TAC will be off the air for a few hours at 
+   the most.  Users will be notified in advance by a TAC herald. The 
+   FE, with NSC assistance, will update the TAC Inventory Report to
+   reflect current physical/logical port correlated to type connection
+   (dedicated, dial-up) and for all connections, the user/phone/address
+   will be recorded/checked against NSC files.
+
+   d.  The completed TAC Inventory Report will be forwarded to the DDN 
+   PMO.  The PMO will decide which, if any, connections are to then be 
+   reconnected to new specific ports to conform to the scheme in 
+   paragraph 2, above.  Any dedicated connection for which no user 
+   name/phone/address can be found will be designated for 
+   disconnection.
+
+   e.  BBNCC's FE will return later to the site to execute the PMO's
+   decision per a second work order.  Again, this visit will be
+   precoordinated and announced by TAC herald.
+
+             DDN USER ASSISTANCE AVAILABLE FROM THE NIC
+             ------------------------------------------
+
+DCA has established an 800 toll-free number, 1-800-235-3155, at the DDN
+Network Information Center (NIC), in Menlo Park, California, to provide
+user assistance to DDN users.  Users who experience problems with using
+the network in general, and with terminal-to-TAC use, in particular, are
+encouraged to make use of this service.  User assistance is available
+Monday through Friday, 8 am to 5 pm Pacific time.  Users who experience
+network problems outside these hours should call the Network Monitoring
+Center in Cambridge, Massachusetts, (617) 661-0100.
+
+In addition to the 'hotline` service, the NIC provides online user
+assistance via electronic mail to NIC@SRI-NIC.ARPA.  The NIC also makes
+many online files available to users, such as protocols and host files,
+RFCs, IENs, and the TCP/IP Implementations and Vendors Guide.  It
+provides the WHOIS/NICNAM service, which is essentially an "electronic
+white-pages" server for MILNET/ARPANET.  A List-of-Lists of network
+special interest groups (SIGs) is also available, as are the archives
+for many of these groups.
+
+Other NIC activities include:
+
+   1.  Registering authorized MILNET users in the NIC database and 
+   issuing them TAC access cards.
+
+   2.  Assisting users in identifying and obtaining DoD protocols, 
+   RFCs, and other related network documents.
+
+   3.  Maintaining  and updating online databases, files and server 
+   programs to assist users in obtaining information needed to use the 
+   network effectively.
+
+   4.  Serving as network Hostmaster and providing network naming and 
+   addressing server.
+
+   5.  Producing hardcopy documents such as the DDN Directory, DoD 
+   Protocol Handbook, and the New User's Guide.
+
+   6.  Serving as a network repository for protocols and related 
+   information
+
+                   DDN DIRECTORY NOW BEING MAILED
+                   ------------------------------
+
+The 1984 DDN Directory is in the process of being mailed to many DDN
+users. This year the DDN Directory will be available for purchase to
+all non-DoD MILNET users (corporations, contractors, etc.) for a fee
+of $12 per copy, to cover the costs of reproduction and handling.
+Military personnel listed in the NIC WHOIS database at the time of
+publication will receive a complimentary copy, as will the Liaison,
+Host Administrators, and Node Site Coordinators.  A portion of the
+books will be provided for distribution to DARPA's ARPANET users now
+listed in the NIC database.  Anyone not included in the initial
+distribution can obtain a copy by sending a check for $12 to the
+Network Information Center, SRI International, 333 Ravenswood Avenue,
+Menlo Park, CA, 94025.  The book will also be deposited at the Defense
+Technical Information Center (DTIC).
+
+                           ###########
+
+-------
+-------

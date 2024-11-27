@@ -1,0 +1,2391 @@
+From MOCKAPETRIS@A.ISI.EDU Fri Jan  8 10:45:14 1988
+Posted-Date:  8 Jan 1988 13:44:02 EST
+Received-Date: Fri, 8 Jan 88 10:45:06 PST
+Message-Id: <8801081845.AA14021@venera.isi.edu>
+Received: from a.isi.edu by venera.isi.edu (5.54/5.51)
+	id AA14021; Fri, 8 Jan 88 10:45:06 PST
+Date:  8 Jan 1988 13:44:02 EST
+From: MOCKAPETRIS@A.ISI.EDU
+Subject: Its back
+To: postel@A.ISI.EDU
+Cc: PVM@VENERA.ISI.EDU
+Status: RO
+
+17-Jan-83 14:02:01-PST,7082,000000000001
+Date: 17 Jan 83 14:03 PST 
+From: Mockapetris@USC-ISIF.ARPA
+Subject: SMTP MAIL ERRORS
+
+In an effort to help mail implementers identify mail problems more
+rapidly, we have created a list of problems we have encountered,
+in the hope that others may not have to find them the same way we did.
+The file will be kept in ISIF<SMTP>mail.errors, and we encourage any
+contributions.  It at least shows you some of the armor plating you
+need on your mailer.
+
+We have also set up a list of SMTP people in ISIF:<SMTP>SMTP.PEOPLE
+which has contacts for those installations we know of.  
+
+Both files are ANONYMOUS accessible.
+
+***** Accepting paths *****
+
+	Some mailers do not accept SMTP paths.  In general,
+an SMTP receiver should always accept a path in the FROM specifiaction,
+even if it cannot relay mail, and hence can't accept paths in a TO
+specification.
+
+***** "," vs ":", bad syntax errors *****
+
+	During August 1982, the SMTP specification for
+paths was changed.  In the old specification, SMTP paths were specified
+using only commas.  For example:
+	MAIL FROM:<@ISID,MOCKAPETRIS@ISIF>
+	RCPT TO:<@ISIA,@ISIB,SMTP@ISID>
+whereas the new specification changes the last ",", if any, to a
+colon:
+	MAIL FROM:<@ISID:MOCKAPETRIS@ISIF>
+	RCPT TO:<@ISIA,@ISIB:SMTP@ISID>
+
+	Various mailers will accept only one or the other form, leading to 
+(typically) syntax errors.  The recommended approach to this
+problem is to accept both forms, and to generate ":" form addresses.
+More clever mailers will try the other form when one fails, and will
+avoid path creation when not necessary.  That is send
+	MAIL FROM:<MOCKAPETRIS@ISIF>
+rather than
+	MAIL FROM:<@ISIF,MOCKAPETRIS@ISIF>
+or
+	MAIL FROM:<@ISIF:MOCKAPETRIS@ISIF>
+where possible.
+
+***** various marginal addresses *****
+
+We have seen several instances of mail transfers with commands
+like:
+	RCPT to:<mockapetris>
+rather than :
+	RCPT to:<mockapetris@isif>
+
+We recommend that if your mailer accepts this sort of thing, it
+should rewrite the address before forwarding.  I.E. Its OK to
+accept technically bad addresses, but you should not output them.
+
+***** TCP PSH bit = timeouts *****
+
+When sending SMTP data via TCP, the PSH bit should be set on the
+last character of each command/response/DATA text.  The PSH bit forces
+the data through to the receiving SMTP.  This is absolutely necessary
+when talking to TOPS-20 SMTPs.
+
+If PSH isn't set, TCP is free to buffer that data in either the sending
+or receiving host without passing it to the SMTP receiver.
+
+***** UNIX TCP BUG = duplicated mail, timeouts *****
+
+In at least old versions of the TCP code distributed by BBN, there
+is a bug that can cause buffered data to not be sent until more data
+is transmitted.  When used by SMTP, this typically causes the end of a DATA
+transaction to appear to hang.  When the sending SMTP times out, it sends
+a QUIT.  This QUIT forces out the buffered data, and causes the receiver to
+see the end of the DATA commmand.  Thus the sender thinks the transaction has
+failed (it timed out), and the receiver thinks that the transaction has
+succeeded.  Later, the sender retransmits the whole message,
+leading to duplications.
+
+The fix is below:
+
+In tcp-states.c, procedure sss_snd, under the comment "find end of send buffer
+and append data", a while clause reading:
+
+	while (m->m_next != NULL) {
+		m = m->m_next;
+		last +=m->m_len;
+	}
+is in error.  The fix is to reverse the two statements in the clause.
+As it is it counts the last buffer twice and the first buffer not at all.
+With the fix, each buffer is counted once.
+
+***** CRLF at end of message *****
+
+There is a bug in many versions of XMAILR that will garbage the MAIL.TXT
+file if asked to store a message that does not end in CRLF.  The ISI
+SMTP adds an extra CRLF to all messages as a temporary cludge to
+avoid this problem.
+
+***** CRLF and UNIX systems *****
+
+Some UNIXes send mail that if full of LFs rather than CRLFs.  This can
+cause problems in mail reading programs such as MSG, which can type
+the mail but not locate header fields.
+
+***** Null FROM fields *****
+
+The SMTP specification allows the FROM field to be null.  Some mailers
+don't accept null fields, and others add hops to a null FROM field
+when forwarding mail.
+
+***** Domain names ******
+
+There is a great deal of disagrement regarding doamin names in host
+identifiers.  The only widely acceptable domain names are X.ARPA
+for X, where X is a valid Internet (i.e. host table from NIC) host name.
+This will undoubtedly change as domain naming is standardized.
+
+***** HELO command *****
+
+Many mailers demand a HELO command before they will accept mail.  Its
+best to give one before attempting to transmit.
+
+***** QUIT command *****
+
+Several mailers simply hang up rather than sending QUITs, particularly
+after errors.  The QUIT command, followed by a TCP close, is recommended.
+
+***** TCP close ******
+
+SMTP connections are supposed to be closed rather than aborted.  Several
+mailers don't do this, probably because TCP close can take a long
+time, i.e. 30 seconds.
+
+***** RCPT command responses in UNIX SMTP *****
+
+Some versions of SMTP derived from the BBN code don't look at
+the response to RCPT commands.
+
+***** Multi-line responses *****
+
+The SMTP protocol defines a method for giving multi-line response codes.
+Many mailers generate multi-line responses; some even use them in the
+message sent on initial connect.  
+
+Unfortunately, some mailers don't understand multi-line responses.
+We have seen UNIX mailers that take each line of a multi-line response
+as a separate response.  Thus, for example, they take a 3 line
+initial connect message and interpret it as the initial connect
+message and positive responses to the first two commands sent, and 
+stay two commands out of phase in matching up commands and responses.
+This leads to interesting behavior.
+
+We have also observed the reverse problem.  Some mailers send
+multi-line responses without the "-" which would identify the response
+as being multi-line.
+
+***** sndmsg balks *****
+
+Some versions of SMTP derived from the BBN SMTP seem to occasionally
+send SMTP responses without numeric codes.  The message typically contains
+text "sndmsg balks ...".  Other messages without codes are also seen.
+
+***** TELNET protocol in SMTP transactions *****
+
+The SMTP connection is not supposed to do TELNET negotiations, etc.
+The control codes used can make otherwise understandable transmissions
+unintelligible to SMTPs that don't implement TELNET codes.  TELNET codes
+should not be supported because they would destroy the ability
+of the SMTP protocol to send arbitrary octets in the message body.
+Admittedly this is not a real issue for DEC-10s and 20s, but could
+prevent future use of mail to send arbitrary text.
+
+***** \ and " in addresses ******
+
+The use of the \ and " in addresses should be avoided when not necessary
+because many mailers don't as yet do the right thing; those mailers
+should be fixed.
+18-Jan-83 10:45:38-PST,4224;000000000001
+Mail-From: SMTP created at 18-Jan-83 10:45:34
+Return-path: Taft.PA@PARC-MAXC.ARPA
+Received: FROM PARC-MAXC BY USC-ISIF.ARPA WITH TCP ; 18 Jan 83 10:41:54 PST
+Date: 18 Jan 1983 10:37 PST
+From: Taft at PARC-MAXC
+Subject: Re: common SMTP problems
+In-reply-to: MOCKAPETRIS' message of 17 Jan 1983 2218-PST
+To: MOCKAPETRIS@USC-ISIF
+cc: Postel@USC-ISIF, Taft
+
+Your compilation of SMTP pitfalls should be very useful.  I've already stumbled
+over many of them!
+
+A couple of comments/questions:
+
+1. QUIT command
+
+What is supposed to be the problem with simply closing the connection?  The
+QUIT handshake seems entirely redundant.  I know TCP close has rather peculiar
+semantics in some implementations (e.g., the Tops20/Tenex TCP) and is therefore
+somewhat flakey; but such problems should be fixed at the TCP level rather than
+adding useless baggage to higher-level protocols.
+
+
+2. Domain names
+
+I've been forced to adopt a rather permissive attitude about the presence or
+absence of root (top-level) domain elements such as .ARPA, since many SMTPs
+don't send them (and, for that matter, most users don't type them).  Note,
+however, that when the root domain element is considered to be optional, parsing
+of domains becomes syntactically ambiguous.  Resolving this problem requires
+applying semantic information, such as consulting the host table.
+
+For example, the names "foo@Berkeley.ARPA" and "foo@UCBVAX.Berkeley" are
+syntactically indistinguishable; but the host name of interest (for the purpose of
+making SMTP connections) is "Berkeley" in both cases.  My algorithm is to use
+the next-to-last element as the host name if the last element is "ARPA", else to
+use the last element as the host name.
+
+Also, the presence or absence of source routes in mailbox paths complicates
+matters.  In a path of the form "x@y", y is the domain of interest; but in a path
+of the form "x,y:z@w", x is the domain of interest (i.e., the one which should be
+parsed to derive the name of the host to connect to).  This means that y in the
+first case and x in the second case may be assumed to have "ARPA" as their root
+element, whether they say so or not.  But note well that in the second case,
+nothing can be assumed about y and w, and in general it would be incorrect to
+automatically append ".ARPA" to either one.
+
+For example, consider the following two pairs of paths:
+
+1a) @ISIF.ARPA:Mockapetris@ISIF
+1b) @ISIF.ARPA:Mockapetris@ISIF.ARPA
+
+2a) @Berkeley.ARPA:foo!harpo!bilbo!frodo@RandomVAX
+2b) @Berkeley.ARPA:foo!harpo!bilbo!frodo@RandomVAX.UUCP
+
+The first two paths are equivalent, and so are the second (or at least they might
+be; I'm not too familiar with the Berkeley name space).  In the first instance the
+mailbox is within the ARPA root domain, but in the second it is not.  When the
+root element is not given, it is not possible to tell on a syntactic basis what the
+root element is.  And actually there is no way of knowing whether or not a root
+element exists unless you have a table of all possible root domains (a bad idea, in
+my estimation).  Consider:
+
+2c) @Berkeley.ARPA:foo!harpo!bilbo!frodo@RandomNet1.RandomVAX2
+
+You may say that abbreviated domains shouldn't be sent; and in fact both the
+header standard and the SMTP spec say precisely this.  But a lot of
+implementations do send abbreviated domains anyway.  And even if they don't,
+PEOPLE will type abbreviated domains, and the mail-sending software can't
+always tell whether domains are abbreviated or not.  I think I have shown that
+just mindlessly pasting on ".ARPA" everywhere would be incorrect, since there
+exist root domains other than ARPA.  (UUCP and CSNET are the only ones I'm
+aware of at present, but the number is sure to grow.)
+
+What to do?  I don't see this problem being solved until name servers become
+widely available and are sufficiently robust and sufficiently available to be
+trusted.  Such servers must (a) be capable of looking up multi-element domains,
+abbreviated or not, and returning an authoritative answer as to how they should
+be parsed; and (b) be sufficiently up-to-date that they can be guaranteed to
+contain at least all the root domains.
+
+	Ed Taft
+
+25-Jan-83 01:19:18-PST,1089;000000000001
+Mail-From: SMTP created at 25-Jan-83 01:16:29
+Return-path: @USC-ISI,wales@UCLA-Net
+Received: FROM USC-ISI.ARPA BY USC-ISIF.ARPA WITH TCP ; 25 Jan 83 01:15:44 PST
+Received: FROM UCLA-SECURITY BY USC-ISI.ARPA WITH TCP ; 25 Jan 83 01:11:05 PST
+Date:           Tue, 25 Jan 1983 01:10:18 PST
+From:           Rich Wales <wales@UCLA-Net>
+To:             mockapetris@isi
+Subject:        another mail bug to add to your list
+
+When we fixed the bug in our sender-SMTP ("mailer.c") from BBN which
+prevented it from looking at the reply to an RCPT command, we found
+another bug.
+
+As distributed, the only affirmative reply BBN's "mailer.c" will take
+was a 250.  It looped forever until it got either a 250 or a rejection
+(4xx or 5xx).  If the receiver-SMTP happened to reply with a 251 ("will
+forward to ..."), our sender-SMTP would ignore that reply and timeout
+waiting for something else.
+
+Lots of mail for ISI is probably getting held up by this one, needless
+to say.
+
+The fix was fairly easy -- changing a "while (i != 250)" to "while
+(i != 250 && i != 251)".
+
+-- Rich
+
+27-Jan-83 10:59:33-PST,1323;000000000001
+Mail-From: SMTP created at 27-Jan-83 10:55:33
+Return-path: @USC-ISI,wales@UCLA-Net
+Received: FROM USC-ISI.ARPA BY USC-ISIF.ARPA WITH TCP ; 27 Jan 83 09:51:23 PST
+Received: FROM UCLA-SECURITY BY USC-ISI.ARPA WITH TCP ; 27 Jan 83 09:44:27 PST
+Date:           Wed, 27 Jan 1982 09:41:58 PST
+From:           Rich Wales <wales@UCLA-Net>
+To:             Robert Gurwitz <gurwitz@bbnv>
+CC:             Paul Mockapetris <mockapetris@isi>
+CC:             Lou Nelson <lou@aerospace>,
+                Evelyn Walton <eve@ucla-net>,
+                Charles Kline <csk@ucla-net>
+Subject:        Silly Window Syndrome in BBN TCP kernel code
+
+The BBN TCP kernel code suffers from Silly Window Syndrome.  The piece
+of code designed to combat this problem (near line 230 of bbnnet/-
+tcp_procs.c) suffers from Non-Terminated Comment Syndrome and thus
+never gets compiled into the program.
+
+	/* Avoid silly window syndrome: make sure usable window
+	   is at least 25% of offered window.  Be sure the user
+	   is not blocked for send resources. 
+	
+	else if (!tp->rexmt && !tp->ack_due && !tp->snd_fin &&
+		 up->uc_snd != up->uc_ssize && tp->snd_wnd > 0 && 
+		 100*((tp->snd_lst-tp->snd_una)/tp->snd_wnd) < 25)
+		tp->snd_lst = tp->snd_nxt; 
+
+Is this intentional?  (My initial assumption is that it isn't.)
+
+-- Rich
+
+27-Jan-83 14:45:48-PST,1278;000000000001
+Mail-From: SMTP created at 27-Jan-83 14:10:53
+Return-path: @USC-ISI,wales@UCLA-Net
+Received: FROM USC-ISI.ARPA BY USC-ISIF.ARPA WITH TCP ; 27 Jan 83 12:42:35 PST
+Received: FROM UCLA-SECURITY BY USC-ISI.ARPA WITH TCP ; 27 Jan 83 12:38:46 PST
+Date:           Thu, 27 Jan 1983 12:33:06 PST
+From:           Rich Wales <wales@UCLA-Net>
+To:             gurwitz@bbnv
+CC:             mockapetris@isi, lou@aerospace, eve@ucla-net,
+                csk@ucla-net
+Subject:        more on Silly Window Syndrome in BBN TCP kernel code
+
+Regarding the code in "tcp_procs.c" to sidestep Silly Window Syndrome,
+I just noticed what appears to be a bug.  (My apologies for not having
+noticed it when I wrote my previous message!)
+
+The computation
+
+	100*((tp->snd_lst-tp->snd_una)/tp->snd_wnd) < 25
+
+doesn't look like it will work right, since the result of the division
+will be truncated to zero before being multiplied by 100.
+
+It seems that the following modified version would work:
+
+	(100*(tp->snd_lst-tp->snd_una))/tp->snd_wnd < 25
+
+(where the outer set of parens is not really necessary, because of the
+left-to-right evaluation).
+
+For that matter, you could even use a left-shift for greater speed.
+
+	((tp->snd_lst-tp->snd_una)<<2)/tp->snd_wnd < 1
+
+-- Rich
+
+25-Jan-83 13:54:55-PST,1566;000000000001
+Mail-From: POSTEL created at 25-Jan-83 13:53:15
+Date: 25 Jan 1983 1353-PST
+From: POSTEL at USC-ISIF
+Subject: DOMAIN STYLE NAMES
+To:   "Internet-Contacts":
+
+
+
+Hello:
+
+This message is about the domain style names that were introduced with 
+the new mail system.  The domain style names will be used in the future 
+for all naming of hosts, not just in mail.
+
+Currently all host names used in the Internet must be registered and 
+kept on file at the Network Information Center.
+
+The intent is to set in place a naming convention that allows for the 
+eventual subdivision of the authority for assigning host names.  In the 
+future, the Internet will be much larger and the task of maintaining a 
+central list of all the hosts will become impossible.  The task of 
+maintaining host name to address mapping tables, and tables of other 
+information about hosts will, of necessity, be subdivided among a number
+of authorities.
+
+While policies and procedures are being developed for the use of the 
+domain style names, we must restrict the use of such names.  One of the 
+key issues to be resolved is to itemize the requirements on a naming 
+subauthority.  One requirement will be to provide online hostname to 
+address lookup servers.  Another task to be completed is the 
+specification the protocol to be used in accessing such servers.
+
+Currently the only permitted use of the domain style names is the form
+
+   "hostname.ARPA"
+
+where "hostname" is registered with the NIC and on file in the NIC's 
+HOSTS.TXT file.
+
+--jon.
+
+-------
+ 1-Feb-83 09:53:08-PST,1282;000000000001
+Mail-From: POSTEL created at  1-Feb-83 09:48:01
+Date:  1 Feb 1983 0948-PST
+From: POSTEL at USC-ISIF
+Subject: more info for mail.errors
+To:   MOCKAPETRIS at USC-ISIF
+
+Mail-From: SMTP created at  1-Feb-83 08:38:40
+Return-path: ajg@ll-vlsi
+Received: FROM LL-VLSI BY USC-ISIF.ARPA WITH TCP ; 1 Feb 83 08:32:31 PST
+Date: 1 Feb 1983 11:33:02-EST
+From: ajg at ll-vlsi
+To: dmpowles@bbn-unix
+Subject: more mail problems
+Cc: ajg@ll-vlsi, postel@isif
+
+Hi,
+  There are several additional problems with the 
+delivermail version of smtp.c.
+  If the the local mailer is delivermail smtp
+responds O.K. to any RCPT command, even if the
+recipient is not known locally. Delivermail
+then fails, and smtp issues a "451 sndmsg balks .. try again".
+The RCPT argument should be checked, anf if the user is
+unknown a 550 should be issued.
+  Also the MAIL argument is ignored, and delivermail 
+is invoked with the "a" switch, get sender from message
+header. The parser in delivermail dies on some message headers,
+which again results in a "451 sndmsg balks ..."
+Delivermail should probably be invoked with "f" switch,
+with the argument from the MAIL command.
+
+              -Tony Giovinazzo
+               MIT Lincoln Laboratory
+               617 863 - 5500 X2702
+-------
+ 6-Feb-83 10:55:30-PST,743;000000000001
+Mail-From: SMTP created at  6-Feb-83 10:53:02
+Return-path: Taft.PA@PARC-MAXC.ARPA
+Received: FROM PARC-MAXC BY USC-ISIF.ARPA WITH TCP ; 6 Feb 83 10:48:05 PST
+Date: 6 Feb 1983 10:47 PST
+From: Taft.PA@PARC-MAXC.ARPA
+Subject: Another common SMTP problem
+To: Mockapetris@ISIF.ARPA
+cc: Postel@ISIF.ARPA, Taft.PA@PARC-MAXC.ARPA
+
+Here is another problem I've been seeing quite a lot of lately: SMTP senders who
+issue a QUIT command and then (without waiting for the reply) immediately
+either close or abort the connection.  This causes the server to get an I/O error
+while trying to send the reply.  If you use QUIT at all (I still consider it entirely
+pointless), you should wait for the reply before terminating the connection.
+	Ed
+
+12-Feb-83 16:55:33-PST,2156;000000000001
+Return-path: <WWB.TYM@OFFICE-3>
+Mail-From: SMTP created at 12-Feb-83 16:51:45
+Return-path: OUT-MAIL@OFFICE-3.ARPA
+Received: FROM OFFICE-3 BY USC-ISIF.ARPA WITH TCP ; 12 Feb 83 16:47:24 PST
+Date: 12-Feb-83 16:46 PST
+From: WWB.TYM@OFFICE-3
+Subject: NOSC SMTP weirdness
+To: postel@isif, mockapetris@isif
+Cc: RLL.TYM@OFFICE-3, DAP.TYM@OFFICE-3, DIA.TYM@OFFICE-3
+Message-ID: <[OFFICE-3]TYM-WWB-1U8WH>
+
+Well.. you asked me to let you know if I saw anything weird anywhere.. and I 
+did.  We've had a message or two bottled up on office-7 for many days now for 
+NOSC.  Connections seem to get made sometimes (and not others) but it blows up 
+mysteriously.  I spotted an odd one in the logs today - happened a couple times.
+ Seems to be an instance of the missing-CR problem.  I tried to test it "by 
+hand" and the thing disconnected remotely before I got a whole message body 
+typed in!  That's too short a timeout.  Anyhow, as best I can guess from my 
+lousy logs, the thing accepts ANY address at the RCPT stage but after the DATA 
+part, it complains and presumably says NO if it doesn't like the address 
+(ARPAVAX.MAILER-DAEMON@NOSC is the specific badguy).  But the way in which it 
+says NO is weird, seeming to put out several messages that were intended to be 
+separate, separated by linefeeds.  Namely, " Mail not 
+delivered.<LF>ARPAVAX.MAILER-DAEMON... User unknown<LF>250 Mail Accepted.", 
+which is then apparently followed by a quick disconnect or something.  There 
+might have been a numeric code in front of the message; due to bad logging 
+habits I wouldn't know.
+
+The unwillingnesss of their server to listen long enough for me to send then a 
+complaint msg by hand leaves us high and dry.  Do you know anything about this 
+kind of thing?  I think they are running the BBN UNIX code, but not sure.  In 
+any case they seem screwy to me.  If you happen to try it and discover anything,
+I'd be interested in hearing of it.  -Bill
+
+PS.  Very early in the picture, I seem to remember that we did send some 
+messages successfully to NOSC.  Maybe they broke something while trying to jazz 
+up something else recently.
+
+15-Feb-83 07:07:50-PST,1188;000000000001
+Return-path: <gurwitz@BBN-UNIX>
+Mail-From: SMTP created at 15-Feb-83 06:45:26
+Return-path: gurwitz@bbn-unix
+Received: FROM BBNT BY USC-ISIF.ARPA WITH TCP ; 15 Feb 83 06:41:20 PST
+Date: 15 Feb 1983  9:27:36 EST (Tuesday)
+From: Rob Gurwitz <gurwitz at BBN-UNIX>
+Subject: Re: Bum SMTP code for VAX Unix
+In-Reply-to: Your message of 14 Feb 1983 12:14 PST
+To: POSTEL at USC-ISIF
+Cc: Gurwitz at BBN-UNIX, Postel at ISIF, Clark at MIT-MULTICS,
+    Haverty at BBN-UNIX, Kahn at ISIA
+
+Jon,
+I've got a version of SMTP that should fix all the bugs you refer to.  I have
+a good list of the sites I sent tapes of the UNIX TCP code to, but I wouldn't
+be too surprised if there were other sites running the code by now, too.  
+
+There is now a net mailing list, bbn-tcp, through which we can reach many of
+the recipients of our code.  I have not attempted to ship new code to each
+individual site, but have made its availability known through the list.  It's
+my understanding that we're not providing individual site support, except to
+ARPA VLSI and Image Understanding contractors. We are maintaining the code
+and making changes available to the non-ARPA sites, however.
+
+Rob
+
+14-Mar-83 12:34:26-PST,614;000000000001
+Return-path: <dean@cornell>
+Mail-From: SMTP created at 14-Mar-83 12:32:58
+Received: FROM CORNELL BY USC-ISIF.ARPA WITH TCP ; 14 Mar 83 12:33:08 PST
+Date: 14 Mar 1983 14:23:06-EST
+From: dean at Cornell
+To: mike@brl, postel@usc-isif
+Subject: Re: Protocol Police!
+
+I have made the fix to our SMTP server.  It now responds to an RSET with
+"250 OK" rather than the incorrect "200 OK".  This bug was in the BBN
+distribution we received for our 4.1bsd system, so it might be in other
+people's running systems as well.  Notice of the error should probably be
+distributed.
+					Dean Krafft
+					dean@cornell
+27-Feb-83 13:56:22-PST,2334;000000000001
+Return-path: <mike@brl-bmd.arpa>
+Mail-From: SMTP created at 27-Feb-83 13:51:41
+Received: FROM BRL-BMD BY USC-ISIF.ARPA WITH TCP ; 27 Feb 83 13:51:44 PST
+Date:     27 Feb 83 15:50:11 EST (Sun)
+From:     Mike Muuss <mike@Brl-Bmd.ARPA>
+To:       ucbtcp11@Sri-Tsc.ARPA
+cc:       Gurus@Brl-Bmd.ARPA, Postel@Usc-Isif.ARPA
+Subject:  TCP Retransmit Timeouts
+
+I have been watching the way our TCP has been interacting with our IMP,
+and I've noticed some really bad things.  Especially for bulk data transfers
+(SMTP, FTP) there has been a good deal of IMP Blocking.
+
+Now I know that the PDP-11 version of the code does not do RFNM counting,
+but the problem would still be there if it did -- the TCP is simply
+over-driving the ArpaNet, and going into lots of (unnecessary) retransmits
+because of it.  After some inspection of the code in tcp_timer.c, I
+have made the following mods (around line 110):
+
+
+/* Note that the formula used by tcp_timers() goes like this:
+ *	t_timer = ( (t_srtt/10) * tcp_backoff[t_rxtshift-1] ) / 10;
+ *	t_srtt ~=~ t_rtt * 10;
+ * with the result limited to the range 0.5--15 seconds.
+ * t_srrt is the "smoothed" round trip time *10, t_rtt is 1 round trip time.
+ */
+int     tcp_backoff[TCP_MAXRXTSHIFT] =          /* scaled by 10 */
+	{ 12, 20, 25, 32, 40, 50, 60, 80, 160, 320 };
+/**	{ 10, 12, 14, 17, 20, 30, 50, 80, 160, 320 };	** OLD ***/
+
+I can certainly understand retransmissions at 1x, 2x, 3x the round trip
+times, but 1.0x 1.2x 1.4x 1.7x 2.0x ??  I don't see how those intermediate
+retransmissions can hope to be ack'ed in time to prevent the next retransmit.
+So, with no empirical evidence to support my suggestions, I suggest
+using 1.2x 2.0x 2.5x 3.2x 4.0x ... as shown above.  The 1.2x gives a
+triffle extra for the first ACK, 2.0 is obvious, 2.5 is being pesimistic,
+and the rest are just for luck.
+
+I suspect that even slightly more pesimistic numbers may be appropriate
+for high-latency networks like the ArpaNet.  I have no idea what effect
+my change to the strategy will make on high-loss networks (like SATNET),
+but the penalty on local-area networks should be minimal, as retransmits
+arn't usually expected.
+
+Again, I assert that all this is completely ad-hoc, but I'm trying to
+reduce IMP blocking / output queue backlogs.
+						Cheers,
+						 -Mike
+
+25-Apr-83 12:31:03-PDT,1487;000000000001
+Return-path: <mja@cmu-cs-cad>
+Mail-From: SMTP created at 25-Apr-83 12:28:26
+Received: FROM CMU-CS-CAD BY USC-ISIF.ARPA WITH TCP ; 25 Apr 83 12:28:34 PDT
+Date: Monday, 25 April 1983 15:28:00 EDT
+From: Mike.Accetta@CMU-CS-CAD
+To: postel@isif
+Subject: SMTP question
+Message-ID: <1983.4.25.18.48.39.Mike.Accetta@CMU-CS-CAD>
+
+Jon,
+
+   We experienced problems over the weekend with mail from the
+INFO-COBOL mailing list.  Due to the number of message recipients, the
+sender was timing out before our local mailer finished delivering the
+mail (and consequently lots of CMU people received 10-20 copies of the
+same messages).  I guess this situation is really the product of the
+length of the message and the number of recipients.  Should this be
+considered a problem with the remote mailer not waiting long enough for
+delivery (i.e. they need to fix their system) or our mailer not meeting
+some maximum delivery time threshhold (i.e. we need to fix our system)?
+
+   If we are at fault, would it be legal to change our mail servers to
+limit the number of RCPT TO commands it will accept per message and
+reject any after the first N with a 452 reply (so that those addresses
+will be retried later in a subsequent attempt).  This seems to be
+reasonable according to the specification and mailers ought to be
+prepared to deal with it.  I'm told that at least XMAILR deals with
+this type of reply correctly.  It won't handle the large message case
+though.
+
+				- Mike
+ 5-May-83 20:59:40-PDT,3648;000000000001
+Return-path: <MRC@SU-SCORE.ARPA>
+Mail-From: SMTP created at  5-May-83 20:56:11
+Received: FROM SU-SCORE BY USC-ISIF.ARPA WITH TCP ; 5 May 83 20:56:17 PDT
+Date: Thu 5 May 83 20:49:57-PDT
+From: Mark Crispin <MRC@SU-SCORE.ARPA>
+Subject: [Mark Crispin <MRC@SU-SCORE.ARPA>: TCP BUGFIX: Slow TVT response]
+To: Postel@USC-ISIF.ARPA, Mockapetris@USC-ISIF.ARPA
+Postal-Address: 725 Mariposa Ave. #103; Mountain View, CA 94041
+Phone: (415) 497-1407 (Stanford); (415) 968-1052 (residence)
+
+For your information.  You might want to add this to the official log
+of patches/bugfixes that affect the mailsystem.  I would consider this
+to be a required patch for the MRC mailsystem:
+
+                ---------------
+
+Mail-From: MRC created at  5-May-83 20:43:39
+Date: Thu 5 May 83 20:43:38-PDT
+From: Mark Crispin <MRC@SU-SCORE.ARPA>
+Subject: TCP BUGFIX: Slow TVT response
+To: TOPS-20@SU-SCORE.ARPA
+Postal-Address: 725 Mariposa Ave. #103; Mountain View, CA 94041
+Phone: (415) 497-1407 (Stanford); (415) 968-1052 (residence)
+
+     This patch is based on a patch from Charlie Lynn at BBN.  It
+fixes slow TVT response when the TVT is receiving a lot of data.
+This should be considered a "required patch" for all sites
+running my SMTP server (MAISER) to remedy a performance problem
+with large incoming messages; for all other sites it is a
+"recommended patch".
+
+     This patch should improve the "slow TVT" problem.  The hook
+to refill the TTY input buffer from a packet when it is emptied
+is missing.  The current code "works" since arrivals of other
+packets (e.g. retransmissions) cause the reassembler to be run.
+
+GTTCI/	SKIPG T1,TTICT(T2)
+GTTCI+1/  RET		JRST FFF
+
+FFF/	HLRZ CX,TTSAL1(T2)
+FFF+1/	CAIN CX,TT.TVT
+FFF+2/	SKIPG TTNETW(T2)
+FFF+3/	RET
+FFF+4/	PUSH P,T2
+FFF+5/	PUSH P,TCB
+FFF+6/	JSP CX,NOSK11
+FFF+7/	HRRZ TCB,TTDEV(T2)
+FFF+10/	JUMPE TCB,.+11
+FFF+11/	HRLI TCB,INTSEC
+FFF+12/	XMOVEI T1,RA
+FFF+13/	MOVEI T2,T20
+FFF+14/	HRRZ T3,$TRCB(TCB)
+FFF+15/	HRRZ T4,TCBRPQ(TCB)
+FFF+16/	SKIPN T3
+FFF+17/	CAIE T4,TCBRPQ(TCB)
+FFF+20/	CALL SIGNAL
+FFF+21/	JSP CX,OKSK11
+FFF+22/	POP P,TCB
+FFF+23/	POP P,T2
+FFF+24/	RET
+FFF+25/	FFF:
+
+     A source version of this patch follows.  It hasn't been
+tested yet, but ought to work.
+
+     First, make the label SYMBOL in TCPTCP.MAC global (change
+SYMBOL: to SYMBOL::).  Add SYMBOL as a global in GLOBS.MAC.
+
+     Second, change the start of GTTCI from:
+GTTCI:	SKIPG 1,TTICT(2)	;ANY CHARS IN BUFFER?
+	RET			;NO
+     to:
+GTTCI:	SKIPLE 1,TTICT(2)	;ANY CHARS IN BUFFER?
+	IFSKP.			;NO, MAYBE NEED TO REFILL FROM PACKET BUFFER
+	  TDCALL D,<<TV,TVRFIL>>;DO TVT-DEPENDENT REFILL SIGNAL
+	  RET			;RETURN EMPTY
+	ENDIF.
+
+     Finally, add the following routine to TTTVDV.MAC.  Make sure
+you add it in a section that is RSCOD.  I put it in right after
+the TVMNTR routine.
+
+;TVRFIL - ROUTINE TO SIGNAL TVT BUFFER REFILL WHEN EMPTY
+;CALLED FROM GTTCI
+
+TVRFIL:	SKIPG TTNETW(T2)	;STILL CONNECTED TO NETWORK?
+	 RET			;NO, NOTHING TO DO
+	PUSH P,T2		;SAVE DYNAMIC DATA
+	PUSH P,TCB		;SAVE TTYSRV CONTEXT
+	NOSKED			;OWN THE SYSTEM
+	LOAD TCB,PTVT,(T2)	;GET TCB IF EXISTS
+	IFN. TCB		;HAVE ONE?
+	  SETSEC TCB,INTSEC	;TCB'S ARE IN INTSEC
+	  DO.
+	    IFQE. TRCB,(TCB)	;RECV% BUFFER EXISTS?
+	      LOAD T1,QNEXT,<+TCBRPQ(TCB)> ;NO, GET NEXT ITEM ON RA QUEUE
+	      CAIN T1,TCBRPQ(TCB) ;IS RA QUEUE EMPTY?
+	       EXIT.		;YES, NO NEED TO RUN REASSEMBLER
+	    ENDIF.
+	    $SIGNL(RA,20)	;RUN REASSEMBLER AFTER SHORT DELAY
+	  ENDDO.
+	ENDIF.
+	OKSKED			;RETURN THE SYSTEM
+	POP P,TCB		;RESTORE TTYSRV CONTEXT
+	POP P,T2		;RESTORE DYNAMIC DATA
+	RET
+-------
+-------
+ 5-May-83 21:43:58-PDT,1173;000000000001
+Return-path: <MRC@SU-SCORE.ARPA>
+Mail-From: SMTP created at  5-May-83 21:41:25
+Received: FROM SU-SCORE BY USC-ISIF.ARPA WITH TCP ; 5 May 83 21:41:49 PDT
+Date: Thu 5 May 83 21:38:44-PDT
+From: Mark Crispin <MRC@SU-SCORE.ARPA>
+Subject: TCP BUGFIX: ADDENDUM
+To: TOPS-20@SU-SCORE.ARPA
+cc: Postel@USC-ISIF.ARPA, Mockapetris@USC-ISIF.ARPA
+Postal-Address: 725 Mariposa Ave. #103; Mountain View, CA 94041
+Phone: (415) 497-1407 (Stanford); (415) 968-1052 (residence)
+
+Don Watrous is, of course, right that "SYMBOL" should be replaced by
+"SIGNAL" in the comment on what to make global.  Let's hear it for bad
+proofreading.
+
+I've discovered a problem in Charlie's original patch.  When MAISER
+invokes MMailbox to validate a host name, the connection starts echoing.
+Damned if I know why.  The fix, however, is to remove the POP P,T2 from
+the TVRFIL routine and replace the PUSH P,T2 with SAVET.  In the DDT
+patch, remove the POP P,T2 and replace the PUSH P,T2 with JSP CX,SAVT.
+I'll leave it as an exercise for those who are somewhat less tired than I
+am right now to figure out why this is necessary and why invoking an
+inferior fork tickles this bug.
+-------
+ 5-May-83 23:14:45-PDT,911;000000000001
+Return-path: <WATROUS@RUTGERS>
+Mail-From: SMTP created at  5-May-83 23:10:20
+Received: FROM RUTGERS BY USC-ISIF.ARPA WITH TCP ; 5 May 83 23:10:31 PDT
+Date:  6 May 1983 0206-EDT
+From: Don <WATROUS@RUTGERS>
+Subject: Re: TCP BUGFIX: ADDENDUM
+To: MRC@SU-SCORE, TOPS-20@SU-SCORE
+cc: Postel@USC-ISIF, Mockapetris@USC-ISIF
+In-Reply-To: Your message of 6-May-83 0049-EDT
+
+There's an incompatibility between TCPTCP's SIGNAL label and PROLOG's
+SIGNAL macro, causing MACRO to give one of its endearing Q errors on
+the $SIGNL macro we are adding to TTTVDV.
+
+You can get around this by entering SIGNL (rather than SIGNAL) in
+GLOBS, putting SIGNL:: right before the SIGNAL: in TCPTCP, and
+changing the CALL SIGNAL in the definition of $SIGNL in TCPPAR to
+CALL SIGNL.  (Whew!)
+
+Don
+
+P.S. - We're now running the source version of MRC's patch, including
+replacing the PUSH/POP of T2 with SAVET.
+-------
+ 6-May-83 02:32:12-PDT,1628;000000000001
+Return-path: <MRC@SU-SCORE.ARPA>
+Mail-From: SMTP created at  6-May-83 02:29:31
+Received: FROM SU-SCORE BY USC-ISIF.ARPA WITH TCP ; 6 May 83 02:29:35 PDT
+Date: Fri 6 May 83 02:32:03-PDT
+From: Mark Crispin <MRC@SU-SCORE.ARPA>
+Subject: more TVT performance fixes
+To: TOPS-20@SU-SCORE.ARPA
+cc: Postel@USC-ISIF.ARPA, Mockapetris@USC-ISIF.ARPA
+Postal-Address: 725 Mariposa Ave. #103; Mountain View, CA 94041
+Phone: (415) 497-1407 (Stanford); (415) 968-1052 (residence)
+
+     A fix that should be put into the TVT performance
+improvement patch is to check to see if the reassembler's process
+lock is running already.  Otherwise, it is possible that the
+system could get an NSKDIS bughlt if RA's PRCLCK is locked when
+TVRFIL decides to wake up RA.  Here's an updated routine, with
+that check added:
+
+;TVRFIL - ROUTINE TO SIGNAL TVT BUFFER REFILL WHEN EMPTY
+;CALLED FROM GTTCI
+
+TVRFIL:	SKIPG TTNETW(T2)	;STILL CONNECTED TO NETWORK?
+	 RET			;NO, NOTHING TO DO
+	SAVET			;SAVE TEMPS
+	PUSH P,TCB		;SAVE TTYSRV CONTEXT
+	NOSKED			;OWN THE SYSTEM
+	SKIPL RA+PRCLCK		;IS REASSEMBLER RUNNING ALREADY?
+	IFSKP.
+	  LOAD TCB,PTVT,(T2)	;NO, GET TCB IF EXISTS
+	  IFN. TCB		;HAVE ONE?
+	    SETSEC TCB,INTSEC	;TCB'S ARE IN INTSEC
+	    DO.
+	      IFQE. TRCB,(TCB)	;RECV% BUFFER EXISTS?
+		LOAD T1,QNEXT,<+TCBRPQ(TCB)> ;NO, GET NEXT ITEM ON RA QUEUE
+		CAIN T1,TCBRPQ(TCB) ;IS RA QUEUE EMPTY?
+		 EXIT.		;YES, NO NEED TO RUN REASSEMBLER
+	      ENDIF.
+	      $SIGNL(RA,20)	;RUN REASSEMBLER AFTER SHORT DELAY
+	    ENDDO.
+	  ENDIF.
+	ENDIF.
+	OKSKED			;RETURN THE SYSTEM
+	POP P,TCB		;RESTORE TTYSRV CONTEXT
+	RET
+-------
+ 6-May-83 04:32:24-PDT,746;000000000001
+Return-path: <TAPPAN@BBNG.ARPA>
+Mail-From: SMTP created at  6-May-83 04:27:56
+Received: FROM BBNG BY USC-ISIF.ARPA WITH TCP ; 6 May 83 04:28:00 PDT
+Date: Fri 6 May 83 07:29:44-EDT
+From: Dan Tappan <Tappan@BBNG.ARPA>
+Subject: Re: TCP BUGFIX: ADDENDUM
+To: MRC@SU-SCORE.ARPA
+cc: TOPS-20@SU-SCORE.ARPA, Postel@USC-ISIF.ARPA, Mockapetris@USC-ISIF.ARPA,
+    Tappan@BBNG.ARPA
+In-Reply-To: Your message of Fri 6 May 83 00:49:10-EDT
+
+The reason the connection starts echoing is that the routine INIT:
+does a RESET% which in addition to everything else resets TTY modes to
+system default. This is documented but I've long felt it's a bad idea
+for exactly this reason.
+
+However, I don't know why the patch should affect it.
+
+Dan
+-------
+ 6-May-83 08:20:46-PDT,537;000000000001
+Return-path: <WATROUS@RUTGERS>
+Mail-From: SMTP created at  6-May-83 08:19:30
+Received: FROM RUTGERS BY USC-ISIF.ARPA WITH TCP ; 6 May 83 08:19:50 PDT
+Date:  6 May 1983 1015-EDT
+From: Don <WATROUS@RUTGERS>
+Subject: Re: TCP BUGFIX: ADDENDUM
+To: MRC@SU-SCORE, TOPS-20@SU-SCORE
+cc: Postel@USC-ISIF, Mockapetris@USC-ISIF
+In-Reply-To: Your message of 6-May-83 0206-EDT
+
+Never mind all that about a SIGNAL macro in PROLOG.  I should have
+noticed it's part of a local PUP implementation.  Sorry about the
+confusion.
+
+Don
+-------
+26-Apr-83 21:13:59-PDT,3153;000000000001
+Mail-From: POSTEL created at 26-Apr-83 21:09:31
+Date: 26 Apr 1983 2109-PDT
+From: POSTEL at USC-ISIF
+Subject: Andler is right
+To:   Taft at PARC, Reilly at UDEL-RELAY
+cc:   Postel at ISIF, ANDLER.IBM-SJ at RAND-RELAY,
+cc:   FARBER at UDEL-RELAY, Landweber at UWISC
+
+
+Folks:
+
+I agree with Sten.  Every SMTP implementation should do the full protocol
+and complete the session with the Quit command.  And every SMTP implementation
+must take full responsibility for the message when it sends an OK response
+after receiving the dot at the end of the message data.
+
+--jon.
+
+*****
+
+Return-path: <@rand-relay.ARPA:ANDLER.IBM-SJ@Rand-Relay>
+Mail-From: SMTP created at 25-Apr-83 19:27:04
+Received: FROM RAND-RELAY BY USC-ISIF.ARPA WITH TCP ; 25 Apr 83 19:27:06 PDT
+Date: 25 Apr 1983 16:03:03-PST (Monday)
+From: Sten Andler <ANDLER.IBM-SJ@Rand-Relay>
+Return-Path: <ANDLER.IBM-SJ@Rand-Relay>
+Subject: Interesting SMTP interpretation problem
+To: Postel@isif
+Cc: taft@parc, reilly@udel-relay
+Via:  IBM-SJ; 25 Apr 83 19:09-PDT
+
+Here is a copy of a message I sent to Ed Taft and Brendan Reilly after
+having found that we have received no mail from Xerox PARC since 1/1/83,
+and discovering that Ed Taft's transcripts seemed to show that mail
+had been delivered correctly.
+ 
+=== Begin forwarded message ===
+Date: 13 Apr 1983 14:12:24-PST (Wednesday)
+From: Sten Andler <ANDLER@IBM-SJ>
+To: taft@parc
+Subject: Mail deliveries from PARC to CSNET
+CC: cic@csnet-sh, reilly@udel-relay
+Via:  IBM-SJ; 13 Apr 83 19:04-PST
+ 
+I have now looked at the mail transcript that you sent me together
+with Dick Edmiston of the CSNET CIC (at BBN) and Brendan Reilly of U.
+Delaware.  The reason your mail gets lost (and this has happened to
+all mail delivered by you to CSNET, as far as I can understand) is
+that there is a disagreement between you and CSNET on what commits a
+mail transaction.  You believe that the '.' at the end of the message
+data commits the transaction, whereas Brendan believes the mail
+transaction is not committed until the user quits the mail session by
+issuing the QUIT command (which is REQUIRED by the SMTP protocol as
+the way to terminate a session).  Since PARC never issues the QUIT,
+the CSNET end times out and aborts the mail transaction.
+ 
+My view on this follows:
+ 
+1) I think PARC should follow the protocol and end the session with a
+    QUIT command.
+ 
+2) I interpret the SMTP specifications to say that the receiving end
+    (CSNET) should commit the mail transaction when the DATA part of
+    the mail is terminated by the period ('.'), and not respond ' 250
+    Ok' until the transaction has been committed.  The absence of the
+    QUIT command should thus NOT cause the mail transaction to be
+    aborted.
+ 
+Either one of the two changes above would cause the immediate problem
+of lost mail to go away, and I will leave it to a shouting match between
+PARC and CIC about who should change it first.  But in my opinion, both
+changes have to be made to be able to say that both sides live up to the
+specifications.
+ 
+   Regards,
+   Sten
+=== End forwarded message ===
+-------
+ 5-May-83 20:59:39-PDT,3648;000000000001
+Return-path: <MRC@SU-SCORE.ARPA>
+Mail-From: SMTP created at  5-May-83 20:56:11
+Received: FROM SU-SCORE BY USC-ISIF.ARPA WITH TCP ; 5 May 83 20:56:17 PDT
+Date: Thu 5 May 83 20:49:57-PDT
+From: Mark Crispin <MRC@SU-SCORE.ARPA>
+Subject: [Mark Crispin <MRC@SU-SCORE.ARPA>: TCP BUGFIX: Slow TVT response]
+To: Postel@USC-ISIF.ARPA, Mockapetris@USC-ISIF.ARPA
+Postal-Address: 725 Mariposa Ave. #103; Mountain View, CA 94041
+Phone: (415) 497-1407 (Stanford); (415) 968-1052 (residence)
+
+For your information.  You might want to add this to the official log
+of patches/bugfixes that affect the mailsystem.  I would consider this
+to be a required patch for the MRC mailsystem:
+
+                ---------------
+
+Mail-From: MRC created at  5-May-83 20:43:39
+Date: Thu 5 May 83 20:43:38-PDT
+From: Mark Crispin <MRC@SU-SCORE.ARPA>
+Subject: TCP BUGFIX: Slow TVT response
+To: TOPS-20@SU-SCORE.ARPA
+Postal-Address: 725 Mariposa Ave. #103; Mountain View, CA 94041
+Phone: (415) 497-1407 (Stanford); (415) 968-1052 (residence)
+
+     This patch is based on a patch from Charlie Lynn at BBN.  It
+fixes slow TVT response when the TVT is receiving a lot of data.
+This should be considered a "required patch" for all sites
+running my SMTP server (MAISER) to remedy a performance problem
+with large incoming messages; for all other sites it is a
+"recommended patch".
+
+     This patch should improve the "slow TVT" problem.  The hook
+to refill the TTY input buffer from a packet when it is emptied
+is missing.  The current code "works" since arrivals of other
+packets (e.g. retransmissions) cause the reassembler to be run.
+
+GTTCI/	SKIPG T1,TTICT(T2)
+GTTCI+1/  RET		JRST FFF
+
+FFF/	HLRZ CX,TTSAL1(T2)
+FFF+1/	CAIN CX,TT.TVT
+FFF+2/	SKIPG TTNETW(T2)
+FFF+3/	RET
+FFF+4/	PUSH P,T2
+FFF+5/	PUSH P,TCB
+FFF+6/	JSP CX,NOSK11
+FFF+7/	HRRZ TCB,TTDEV(T2)
+FFF+10/	JUMPE TCB,.+11
+FFF+11/	HRLI TCB,INTSEC
+FFF+12/	XMOVEI T1,RA
+FFF+13/	MOVEI T2,T20
+FFF+14/	HRRZ T3,$TRCB(TCB)
+FFF+15/	HRRZ T4,TCBRPQ(TCB)
+FFF+16/	SKIPN T3
+FFF+17/	CAIE T4,TCBRPQ(TCB)
+FFF+20/	CALL SIGNAL
+FFF+21/	JSP CX,OKSK11
+FFF+22/	POP P,TCB
+FFF+23/	POP P,T2
+FFF+24/	RET
+FFF+25/	FFF:
+
+     A source version of this patch follows.  It hasn't been
+tested yet, but ought to work.
+
+     First, make the label SYMBOL in TCPTCP.MAC global (change
+SYMBOL: to SYMBOL::).  Add SYMBOL as a global in GLOBS.MAC.
+
+     Second, change the start of GTTCI from:
+GTTCI:	SKIPG 1,TTICT(2)	;ANY CHARS IN BUFFER?
+	RET			;NO
+     to:
+GTTCI:	SKIPLE 1,TTICT(2)	;ANY CHARS IN BUFFER?
+	IFSKP.			;NO, MAYBE NEED TO REFILL FROM PACKET BUFFER
+	  TDCALL D,<<TV,TVRFIL>>;DO TVT-DEPENDENT REFILL SIGNAL
+	  RET			;RETURN EMPTY
+	ENDIF.
+
+     Finally, add the following routine to TTTVDV.MAC.  Make sure
+you add it in a section that is RSCOD.  I put it in right after
+the TVMNTR routine.
+
+;TVRFIL - ROUTINE TO SIGNAL TVT BUFFER REFILL WHEN EMPTY
+;CALLED FROM GTTCI
+
+TVRFIL:	SKIPG TTNETW(T2)	;STILL CONNECTED TO NETWORK?
+	 RET			;NO, NOTHING TO DO
+	PUSH P,T2		;SAVE DYNAMIC DATA
+	PUSH P,TCB		;SAVE TTYSRV CONTEXT
+	NOSKED			;OWN THE SYSTEM
+	LOAD TCB,PTVT,(T2)	;GET TCB IF EXISTS
+	IFN. TCB		;HAVE ONE?
+	  SETSEC TCB,INTSEC	;TCB'S ARE IN INTSEC
+	  DO.
+	    IFQE. TRCB,(TCB)	;RECV% BUFFER EXISTS?
+	      LOAD T1,QNEXT,<+TCBRPQ(TCB)> ;NO, GET NEXT ITEM ON RA QUEUE
+	      CAIN T1,TCBRPQ(TCB) ;IS RA QUEUE EMPTY?
+	       EXIT.		;YES, NO NEED TO RUN REASSEMBLER
+	    ENDIF.
+	    $SIGNL(RA,20)	;RUN REASSEMBLER AFTER SHORT DELAY
+	  ENDDO.
+	ENDIF.
+	OKSKED			;RETURN THE SYSTEM
+	POP P,TCB		;RESTORE TTYSRV CONTEXT
+	POP P,T2		;RESTORE DYNAMIC DATA
+	RET
+-------
+-------
+ 6-Jun-83 09:20:13-PDT,1179;000000000001
+Mail-From: SMTP created at  6-Jun-83 09:16:20
+Received: FROM [128.16.3.4] BY USC-ISIF.ARPA WITH TCP ; 6 Jun 83 09:16:32 PDT
+Date:     2 Jun 83 12:52:13 BST (Thu)
+From:     Steve Kille <steve@ucl-cs> (44a)
+To:       knutsen @ sri-unix, dpk @ brl, mike @ brl
+cc:       robert @ UCL-CS, steve @ UCL-CS, postel @ isif
+Subject:  TCP performance across the Sattelite
+
+After finding the thoughputs we have been getting across the sattelite,
+we ran a packet trace.  By some conicidence we caught a letter from
+SRI-KL running familiar code.
+
+There are two points on the way the SMTP uses the TCP as a
+transport:
+1. The command line is split into two parts, the command and a
+<CR><LF> pair. Both parts are pushed (delivered with an EOL
+marker), this is ineficient for the receiving TCP/host.
+
+2. The data part is sent on 40 byte pieces, with an ACK
+required for each piece before sending the next. Each 40 bytes
+is pushed (EOL bit set). Thus on a call
+to the UK (3 sec approx round trip time) you get about 10
+bytes/sec. IT IS possible to put more than 40 bytes of data
+into a TCP packet, and IT IS NOT necesary to push every packet.
+
+Robert Cole + Steve Kille
+
+ 6-Jun-83 11:07:26-PDT,1093;000000000001
+Return-path: <Taft.PA@PARC-MAXC.ARPA>
+Mail-From: SMTP created at  6-Jun-83 11:06:35
+Received: FROM PARC-MAXC BY USC-ISIF.ARPA WITH TCP ; 6 Jun 83 11:06:47 PDT
+Date: Mon, 6 Jun 83 11:05 PDT
+From: Taft.PA@PARC-MAXC.ARPA
+Subject: Re: SMTP use of TCP & impact of SATNET
+In-reply-to: "POSTEL@USC-ISIF.ARPA's message of 6 Jun 83 09:36 PDT"
+To: POSTEL@USC-ISIF.ARPA
+cc: Steve Kille <steve@ucl-cs.ARPA>, Taft.PA@PARC-MAXC.ARPA
+
+The reason Tops20 and Tenex SMTP senders use small segments and push
+each one is that there is some problem in the TCP code that prevents
+progress otherwise.  This was discovered through painful trial and error
+by several people independently, including myself.
+
+I actually get reasonably good results with 256-byte segments (rather
+than 40), but I still have to push each one.
+
+I realize this is inefficient, especially in an environment with large
+round-trip delay.  But there is not much that can be done until this
+crummy TCP implementation gets cleaned up.  I don't know when that will
+be for Tops20, but I do for Tenex: probably never.
+
+	Ed
+
+25-Apr-83 19:28:40-PDT,2550;000000000001
+Return-path: <@rand-relay.ARPA:ANDLER.IBM-SJ@Rand-Relay>
+Mail-From: SMTP created at 25-Apr-83 19:27:04
+Received: FROM RAND-RELAY BY USC-ISIF.ARPA WITH TCP ; 25 Apr 83 19:27:06 PDT
+Date: 25 Apr 1983 16:03:03-PST (Monday)
+From: Sten Andler <ANDLER.IBM-SJ@Rand-Relay>
+Return-Path: <ANDLER.IBM-SJ@Rand-Relay>
+Subject: Interesting SMTP interpretation problem
+To: Postel@isif
+Cc: taft@parc, reilly@udel-relay
+Via:  IBM-SJ; 25 Apr 83 19:09-PDT
+
+Here is a copy of a message I sent to Ed Taft and Brendan Reilly after
+having found that we have received no mail from Xerox PARC since 1/1/83,
+and discovering that Ed Taft's transcripts seemed to show that mail
+had been delivered correctly.
+ 
+=== Begin forwarded message ===
+Date: 13 Apr 1983 14:12:24-PST (Wednesday)
+From: Sten Andler <ANDLER@IBM-SJ>
+To: taft@parc
+Subject: Mail deliveries from PARC to CSNET
+CC: cic@csnet-sh, reilly@udel-relay
+Via:  IBM-SJ; 13 Apr 83 19:04-PST
+ 
+I have now looked at the mail transcript that you sent me together
+with Dick Edmiston of the CSNET CIC (at BBN) and Brendan Reilly of U.
+Delaware.  The reason your mail gets lost (and this has happened to
+all mail delivered by you to CSNET, as far as I can understand) is
+that there is a disagreement between you and CSNET on what commits a
+mail transaction.  You believe that the '.' at the end of the message
+data commits the transaction, whereas Brendan believes the mail
+transaction is not committed until the user quits the mail session by
+issuing the QUIT command (which is REQUIRED by the SMTP protocol as
+the way to terminate a session).  Since PARC never issues the QUIT,
+the CSNET end times out and aborts the mail transaction.
+ 
+My view on this follows:
+ 
+1) I think PARC should follow the protocol and end the session with a
+    QUIT command.
+ 
+2) I interpret the SMTP specifications to say that the receiving end
+    (CSNET) should commit the mail transaction when the DATA part of
+    the mail is terminated by the period ('.'), and not respond ' 250
+    Ok' until the transaction has been committed.  The absence of the
+    QUIT command should thus NOT cause the mail transaction to be
+    aborted.
+ 
+Either one of the two changes above would cause the immediate problem
+of lost mail to go away, and I will leave it to a shouting match between
+PARC and CIC about who should change it first.  But in my opinion, both
+changes have to be made to be able to say that both sides live up to the
+specifications.
+ 
+   Regards,
+   Sten
+=== End forwarded message ===
+26-Apr-83 21:13:59-PDT,3153;000000000001
+Mail-From: POSTEL created at 26-Apr-83 21:09:31
+Date: 26 Apr 1983 2109-PDT
+From: POSTEL at USC-ISIF
+Subject: Andler is right
+To:   Taft at PARC, Reilly at UDEL-RELAY
+cc:   Postel at ISIF, ANDLER.IBM-SJ at RAND-RELAY,
+cc:   FARBER at UDEL-RELAY, Landweber at UWISC
+
+
+Folks:
+
+I agree with Sten.  Every SMTP implementation should do the full protocol
+and complete the session with the Quit command.  And every SMTP implementation
+must take full responsibility for the message when it sends an OK response
+after receiving the dot at the end of the message data.
+
+--jon.
+
+*****
+
+Return-path: <@rand-relay.ARPA:ANDLER.IBM-SJ@Rand-Relay>
+Mail-From: SMTP created at 25-Apr-83 19:27:04
+Received: FROM RAND-RELAY BY USC-ISIF.ARPA WITH TCP ; 25 Apr 83 19:27:06 PDT
+Date: 25 Apr 1983 16:03:03-PST (Monday)
+From: Sten Andler <ANDLER.IBM-SJ@Rand-Relay>
+Return-Path: <ANDLER.IBM-SJ@Rand-Relay>
+Subject: Interesting SMTP interpretation problem
+To: Postel@isif
+Cc: taft@parc, reilly@udel-relay
+Via:  IBM-SJ; 25 Apr 83 19:09-PDT
+
+Here is a copy of a message I sent to Ed Taft and Brendan Reilly after
+having found that we have received no mail from Xerox PARC since 1/1/83,
+and discovering that Ed Taft's transcripts seemed to show that mail
+had been delivered correctly.
+ 
+=== Begin forwarded message ===
+Date: 13 Apr 1983 14:12:24-PST (Wednesday)
+From: Sten Andler <ANDLER@IBM-SJ>
+To: taft@parc
+Subject: Mail deliveries from PARC to CSNET
+CC: cic@csnet-sh, reilly@udel-relay
+Via:  IBM-SJ; 13 Apr 83 19:04-PST
+ 
+I have now looked at the mail transcript that you sent me together
+with Dick Edmiston of the CSNET CIC (at BBN) and Brendan Reilly of U.
+Delaware.  The reason your mail gets lost (and this has happened to
+all mail delivered by you to CSNET, as far as I can understand) is
+that there is a disagreement between you and CSNET on what commits a
+mail transaction.  You believe that the '.' at the end of the message
+data commits the transaction, whereas Brendan believes the mail
+transaction is not committed until the user quits the mail session by
+issuing the QUIT command (which is REQUIRED by the SMTP protocol as
+the way to terminate a session).  Since PARC never issues the QUIT,
+the CSNET end times out and aborts the mail transaction.
+ 
+My view on this follows:
+ 
+1) I think PARC should follow the protocol and end the session with a
+    QUIT command.
+ 
+2) I interpret the SMTP specifications to say that the receiving end
+    (CSNET) should commit the mail transaction when the DATA part of
+    the mail is terminated by the period ('.'), and not respond ' 250
+    Ok' until the transaction has been committed.  The absence of the
+    QUIT command should thus NOT cause the mail transaction to be
+    aborted.
+ 
+Either one of the two changes above would cause the immediate problem
+of lost mail to go away, and I will leave it to a shouting match between
+PARC and CIC about who should change it first.  But in my opinion, both
+changes have to be made to be able to say that both sides live up to the
+specifications.
+ 
+   Regards,
+   Sten
+=== End forwarded message ===
+-------
+30-Apr-83 08:30:05-PDT,1562;000000000001
+Return-path: <@USC-ISI:Saltzer.CSR@MIT-MULTICS.ARPA>
+Mail-From: SMTP created at 30-Apr-83 08:26:28
+Received: FROM USC-ISI.ARPA BY USC-ISIF.ARPA WITH TCP ; 30 Apr 83 08:26:34 PDT
+Received: FROM [10.0.0.6] BY USC-ISI.ARPA WITH TCP ; 30 Apr 83 08:24:15 PDT
+Redistributed-Date:  30 April 1983 09:20 edt
+Redistributed-By:  Saltzer.CSR at MIT-MULTICS
+Redistributed-To:  Andler.SJRLVM1.IBM at RAND-RELAY, 
+                   Postel at USC-ISI
+Date:  29 April 1983 11:56 edt
+From:  Schiller (Jeffrey I. Schiller)
+Subject:  Re: RAND-Relay mail problems
+To:  Saltzer
+In-Reply-To:  Message of 28 April 1983 20:52 edt from Saltzer
+
+Well that sounds incredibly bogus! RFC 822 states that once the "OK"
+reply is received, the mail is committed. The "QUIT" command is used to
+gracefully shutdown the SMTP connection. To interpret this any other way
+is to say that if Multics opens a connection to Rand-Relay and sends 50
+pieces of mail down the channel, all 50 pieces aren't commited until the
+QUIT!??
+
+Btw. What Multics does is keep the connection open (ie. NOT send a quit)
+for about 3 minutes. This is a optimization in case other mail for the
+same site is encountered while scanning the mail queues. If no activity
+is found on the connection after about 3 minutes Multics sends a QUIT
+and closes the connection. Mail transacations on one connection are
+separated by "RSET" commands. Rand-Relay is probably timing out on the
+connection during the quiescent period, thus Multics never gets a chance
+to send the QUIT.
+
+                    -Jeff
+ 2-May-83 14:58:06-PDT,502;000000000001
+Mail-From: WESTINE created at  2-May-83 14:55:05
+Date: 2 May 1983 1454-PDT
+Sender: WESTINE at USC-ISIF
+Subject: Re: Rand-Relay Mail Problems
+From: Postel@isif
+To: Saltzer.CSR at MIT-MULTICS
+Bcc: postel at USC-ISIF
+Message-ID: <[USC-ISIF] 2-May-83 14:54:57.WESTINE>
+
+Jeff:
+
+I agree!  It is bogus!!!  The mail is committed when the receiver
+sends the "ok" after processing the "dot" at the end of the data.
+Sending that "ok" means the receiver takes responsibility for
+the mail.
+
+--jon.
+10-Jun-83 19:24:41-PDT,2443;000000000001
+Return-path: <@USC-ISI:Saltzer.CSR@MIT-MULTICS.ARPA>
+Mail-From: SMTP created at 10-Jun-83 19:24:23
+Received: FROM USC-ISI.ARPA BY USC-ISIF.ARPA WITH TCP ; 10 Jun 83 19:24:28 PDT
+Received: FROM MIT-MULTICS BY USC-ISI.ARPA WITH TCP ; 10 Jun 83 19:22:47 PDT
+Date:  10 June 1983 22:17 edt
+From:  Saltzer at MIT-MULTICS
+Subject:  SMTP argument again
+To:  postel at USC-ISI
+cc:  Saltzer at MIT-MULTICS, DClark at MIT-MULTICS, 
+     "andler.sjrlvm1.ibm@RAND-Relay" at MIT-MC
+
+Jon,
+Perhaps I misunderstood, but I thought you, together with
+Sten Andler, had come to a complete resolution on the
+question of when mail is committed in SMTP.  We are again having
+trouble getting the CSNET relays to accept mail from Multics sites.
+
+Would you please look over this message I just received from
+the Multics mail system maintenance person, and then refresh
+my memory as to what the official position on SMTP commit is?
+Is the position described here of the CSNET relays actually
+correct?  Or is the interpretation used by the Multics implementation
+acceptable?  What seems to be needed is a definitive handing
+down of the law.
+
+Thanks for you help.
+
+		Jerry
+
+----- ----- ----- ----- ----- -----
+
+ #17 (18 lines)  06/10/83 18:47  Mailed by: Schiller.SysMaint
+Date:  10 June 1983 18:47 edt
+From:  Schiller (Jeffrey I. Schiller)
+Subject:  Mail to UDEL-RELAY losing
+To:  Saltzer
+
+Brendan Reilly at UDEL has once again modified their mailer to drop mail
+on the floor that was sent via an SMTP connection that didn't end in a
+QUIT command. For some reason our QUITS aren't getting through to him (I
+will investigate this).
+
+Brendan told me he will be modifying his mailer to return to addressee
+any mail that was sent on an SMTP connection and was "250 OK'd" but for
+which a QUIT was not received. This is WRONG, it puts the onus of broken
+connections (which should be a temporary error) on the users by
+returning mail that was successfully sent on a connection that broke
+before the QUIT. Note: On MIT-MULTICS when we have several messages to
+go to a host we use 1 smtp connection and separate the messages by
+RSET's. His interpretation of the SMTP spec (which he claims he checked
+through with Postel) says that if we send him 39 out of 40 messages on
+an smtp connection, and then some error breaks that connection, he will
+return the 39 messages to the sender.
+
+                    -Jeff
+ ---(17)---
+
+
+10-Jun-83 19:39:49-PDT,771;000000000001
+Return-path: <@USC-ISI:POSTEL@USC-ISIF>
+Mail-From: SMTP created at 10-Jun-83 19:38:05
+Received: FROM USC-ISI.ARPA BY USC-ISIF.ARPA WITH TCP ; 10 Jun 83 19:38:10 PDT
+Received: FROM USC-ISIF.ARPA BY USC-ISI.ARPA WITH TCP ; 10 Jun 83 19:36:09 PDT
+Date: 10 Jun 1983 1933-PDT
+From: POSTEL at USC-ISIF
+Subject: Re: SMTP argument again
+To:   Saltzer at MIT-MULTICS, postel at USC-ISI
+cc:   DClark at MIT-MULTICS, "andler.sjrlvm1.ibm at RAND-RELAY,
+cc:   POSTEL at USC-ISIF, reilly at UDEL-RELAY
+
+In response to the message sent   10 June 1983 22:17 edt from Saltzer@MIT-MULTICS
+
+
+Jerry:
+
+The correct statement of the rules is that saying "OK" to the dot "." at
+the end of the mail data commits the receiver (server) to delivering the
+mail.
+
+--jon.
+-------
+10-Jun-83 18:45:02-PDT,4224;000000000001
+Return-path: <@MIT-MC:nowicki%SU-HNV.ARPA@SU-SCORE.ARPA>
+Mail-From: SMTP created at 10-Jun-83 18:43:40
+Received: FROM MIT-MC BY USC-ISIF.ARPA WITH TCP ; 10 Jun 83 18:43:48 PDT
+Received: from Diablo by Score with Pup; Fri 10 Jun 83 18:32:04-PDT
+Date: Fri, 10 Jun 83 18:31 PDT
+From: Bill Nowicki <nowicki%Diablo@SU-Score>
+Subject: Mail Loop explanation
+To: DCrocker@UDel-Relay, KLH@MIT-MC, reid@Glacier
+Cc: HEADER-PEOPLE@MIT-MC, MsgGroup@BRL, mailhax
+
+Some people have requested a few more details of our
+experience with sendmail and the disaster which caused a
+mail loop on Wednesday June 8. First some background:
+
+At Stanford we run 4.1BSD Unix with BBN TCP code, with CMU
+packet filtering on 3 Mbit Ethernets connecting about a dozen VAXes (and
+many other machines).  We would like to use 4.2 whenever (if ever?) it
+finally gets done, so we got a 4.1c beta distribution and were trying
+to phase in some of the user programs on that release, like sendmail.
+The predecessor of sendmail, delivermail, 
+we had customized slightly by changing a few tables and recompiling.
+It read the host name by the gethostname() system call, so we could
+take the program (or an entire disk pack for that matter) from one
+system to another and it would work.  Sendmail contains an SMTP server
+as well as the other mail switching and aliasing functions of
+delivermail.
+
+Integrating the SMTP server and the aliasing turns out to be a good
+idea, but all sorts of other "features" were added to sendmail in the
+mean time.  For example, instead of having compile-time tables and
+modular code, there are enormous configuration files that are read at
+run-time.  You have to specify a "program" to parse your addresses
+using an incredibly unfathomable production language.  The host name is
+hard-wired into the configuration file, so they are not portable
+between machines anymore.  Part of the confusion came from the
+distinction between switches entered on the command line, commands in
+the configuration file, options which can be given on the command line
+OR in the configuration file (with yet another strange syntax), mailer
+flags, and configuration file macros.  All five of these are
+represented by single character case sensitive identifiers, with
+different meanings for the letters in many cases.  A vertiable lesson
+in terrible user interfaces.
+
+The specific problem came when we discovered a case in which our
+TOPS-20 SMTP mailer would open a connection, send part of a message,
+and then simply give up without sending a RESET packet.  The BBN TCP
+code had no timeouts, so the connection would stay around forever,
+along with the two sendmail processes and the spool files.  I
+remembered reading about a timeout feature, and glancing at the manual
+found it was the "t" option.  So I ran sendmail with the "t" switch on
+the command line.  There were two mistakes: first, the timeout is an
+Option, not a Switch, and secondly it is upper case T not lower case
+t.  I was silly enough to think that since it gave me no error message
+that everything was OK, and went off to our research group meeting.
+
+When I came back after the meeting I looked at the log file and noted
+some suspicious behaviour.  What it was doing was sending a copy of
+each message to the people listed in the "To:" and "Cc:" fields in the
+header, as well as the person given in the RCPT TO:<> command of SMTP.
+This resulted in the loop back through our local Ethernet, the Arpanet,
+the MIT Chaos Net, as well as several nets at BRL and BBN!  I killed
+the server after about an hour, and restarted it with the right options
+(although the timeout still does not do anything), but the duplicated
+mail took at least two days to stop bouncing through the net.
+
+Morals (some are my personal opinions):  
+1. Case sensitivity is a bad idea.  
+2. Single letter identifiers are a bad idea.  
+3. Multiple notions that are similar are confusing.  
+4. Large (multi-domain) mailing lists should have a moderator.  
+5. Timeouts should be in SMTP servers and TCP implementations by default.  
+6. internet mail systems are fragile things.  
+7. "Improved" software with more "features" usually isn't.
+
+	-- Bill
+
+ 8-Jun-83  9:32:11-PDT,1919,000000000001
+Date:  8 Jun 1983  9:32:11 EDT (Wednesday)
+From: Dennis Rockwell <drockwel@bbn-vax>
+Subject: TCP problem
+To: Rob Gurwitz <gurwitz@BBN-UNIX>, dpk@brl-vgr
+
+[ This message was forwarded to the Digest by Doug Kingston, and details
+  a particularly insidious bug in the BBN VAX TCP.  Hopefully, if any site
+  using that code has not heard of this problem yet, this message will
+  have served a purpose.  Note that Berkeley 4.1a and 4.1c code does
+  not have this bug.  -Mike ]
+
+The fix for this bug is as follows: (I'm afraid I have no
+familiarity whatsoever with the TCP variants, but the
+code should be fairly easy to find)
+
+In the routine rcv_text (in tcp_procs.c in our code), the routine
+that does the resequencing, there is the following code:
+
+			/* new overlaps at beginning of successor frags */
+
+			q = savq->t_next;
+			while ((q != (struct th *)tp) && (t->t_len != 0) && 
+			       SEQ_LEQ(q->t_seq, last))
+
+				/* complete cover */
+
+        			if (SEQ_LEQ(t_end(q), last)) {
+					p = q->t_next;
+					tcp_deq(q);
+					m_freem(dtom(q));
+					q = p;
+
+				} else {		/* overlap */
+
+In your code, the first SEQ_LEQ is probably a SEQ_LT.  This is the bug.
+There is an analogous bug in ip_input.c:
+
+			/* new overlaps at beginning of successor frags */
+
+				q = savq->ip_next;
+				while ((q != (struct ip *)fp) &&
+					(ip->ip_len != 0) && 
+					(q->ip_off <= ip->ip_end)) 
+
+					/* complete cover */
+
+					if (q->ip_end <= ip->ip_end) {
+						p = q->ip_next;
+						ip_deq(q);
+						m_freem(dtom(q));
+						q = p;
+
+Again, in your code the first <= is probably a <.
+
+This fix was made just last week, and is slowly percolating out to the
+other local BBN sites.  We are trying to spread this fix around, but
+that's difficult.  Please tell everybody you know who is running this
+code about the fix.
+
+Good luck!  Feel free to write or call me at (617) 497-2643.
+
+ 8-Jul-83 16:13:10-PDT,1916;000000000001
+Return-Path: <mike@brl-vgr>
+Mail-From: SMTP created at  8-Jul-83 15:20:23
+Received: FROM BRL-VGR BY USC-ISIF.ARPA WITH TCP ; 8 Jul 83 15:20:37 PDT
+Date:     Fri, 8 Jul 83 18:11:50 EDT
+From:     Mike Muuss <mike@brl-vgr>
+To:       rogers@usc-isib, postel@usc-isif, koda@usc-isif, mike@brl-vgr
+Subject:  [dan:  tcp_subr.c bug]
+
+Here is the bug fix announcement -- observe the date on the message.
+
+If Craig is not getting the UNIX bug fixes for the 4.1a software,
+he should subscribe to "ucbtcp11@sri-tsc";  ask postmaster@sri-unix
+to get him on.
+
+			Best,
+			 -Mike
+
+PS:  I am assuming that I got a copy of the message to provide help,
+not because there is evidence that we are doing it wrong at BRL, right?
+
+----- Forwarded message # 1:
+
+Date: 20 Jan 1983 at 1455-PST
+To: ucbtcp11@Sri-Tsc.arpa
+Reply-To: dan@Sri-Tsc.arpa
+Subject: tcp_subr.c bug
+From: dan@Sri-Tsc.arpa
+Received: From Sri-Tsc.ARPA via smtptcp;  20 Jan 83 20:58 EST
+Received: From Brl.ARPA via smtptcp;  21 Jan 83 0:40 EST
+
+Clem Cole mentioned a bug to me a while ago, which I forgot to pass on.  In
+net/tcp_subr.c the variable t_maxseg should be set to 512, not 576.  The
+default packet size should be 512 + header = 576, but t_maxseg should not
+include the header in it's value.  Clem said it might affect transfers to
+and from TENEX systems, but I haven't noticed that problem.  I made the
+change, and it doesn't seem to break anything that wasn't broken before.
+
+<<<<diff tcp_subr.c tcp_subr.c->>>>
+154c154
+< 	tp->t_maxseg = 512;		/* 512+header = 576, to satisfy the rest of the world */
+---
+> 	tp->t_maxseg = 576;		/* satisfy the rest of the world */
+
+By the way, I have updated the PRMH sources (added a lot of the bug fixes
+reported through this list) -- changes are in Modlog on PRMH in case anyone is
+trying to stay in sync with us (lord knows why!).
+
+	-Dan
+
+
+----- End of forwarded messages
+ 8-Jul-83 18:16:00-PDT,2961;000000000001
+Return-Path: <@SRI-NIC:CHASE@USC-ISIB>
+Received: FROM SRI-NIC BY USC-ISIF.ARPA WITH TCP ; 8 Jul 83 18:13:16 PDT
+Received:  from USC-ISIB by SRI-NIC via DDN;   8 Jul 83 16:57:00-PDT
+Date: 8 Jul 1983 1515-PDT
+Sender: CHASE at USC-ISIB
+Subject: Re: Possible ISIB TCP bug
+From: CHASE at USC-ISIB
+To: tcp-ip at SRI-NIC
+Message-ID: <[USC-ISIB] 8-Jul-83 15:15:05.CHASE>
+In-Reply-To: Your message of 18 June 1983 02:31 EDT
+
+The problem reported by KLH with Ftp between ISIB and MIT-MC has been fixed.
+The bug was in the Tops20 monitor code.  Basically, Tops20 couldn't send a Fin
+at the time the Ftp process did its Close% because there was still data queued
+from a previous Send%, and by the time the data went out, the check for
+needing to send a Fin was missed.  Much thanks to Ken for his accurate error
+reports and assistance in tracking this down.
+
+The fix inserts new check after PKZ23A.  If the send side of the connection is
+still open but the user has done a Close%, ENCPKT is called to "encourage" a
+packet later, when the Fin can be sent.
+
+==========
+PKZ23A:
+	LOAD T1,TSSYN,(TCB)	; Get send state ;;;LDB T1,[110314,,13]
+	CAIE T1,SYNCED		; Connection synchronized? ;;;CAIE T1,7
+	 JRST PKZ24B		; No.  No FIN can be sent.
+	JN TSUOP,(TCB),PKZ24B	; Jump if connection still OPEN by user
+				;  ;;;MOVE CX,13(14)
+				;  ;;;TRNE CX,400 
+				;   ;;;JRST PKZ24B
+	MOVEI T1,^D200		; Try to send FIN later, we must have been
+	CALL ENCPKT		;  unable to send it this time through
+				;  (ie, due to presence of q'd snd data)
+PKZ24B:
+==========
+
+While putting this problem to rest, it would be appropriate to put to rest
+some misconceptions that came out of the discussion of this problem.
+The TCPSIM package from BBN running at ISI does not just abort data
+connections in place of trying to close them properly.  A Close% is done,
+and only after the Close% fails to take effect after a timeout period is an
+Abort% done to clean things up.  I'm sure that the above bug caused it to
+appear to certain sites that only the abort was done.  But although the
+package does have its shortcomings (the case in question is an example of its
+skimpy error reporting), it does the best that can be done in this case.
+
+The characterization of Tops20's TCP implementation as record oriented is not
+quite accurate.  A user program can send one byte, two, ten or a whole page
+worth, without any kind of record or segment considerations.  The monitor will
+buffer these bytes until there are enough of them for efficient transmission,
+or until the user program does a push.  The real fault with the user interface
+is that it requires a different set of monitor calls instead of the Bin/Bout
+flavor, and that these calls are very clumsy to use.  Now, however, the just
+released DEC user interface will hopefully restore consistency and simplicity
+to network i/o, and remove the need for simulation packages altogether.
+
+<>Dale Chase
+15-Jul-83 14:11:08-PDT,5415;000000000001
+Return-Path: <jbn@FORD-WDL1>
+Received: FROM BBNCCQ BY USC-ISIF.ARPA WITH TCP ; 15 Jul 83 14:09:08 PDT
+Return-Path:<>
+Date: 15-Jul-83 14:03:40-PDT
+From: jbn@FORD-WDL1.ARPA
+Subject: Outstanding TOPS-20 TCP bug remains in v5.2
+To: ICCB@BBN-UNIX.ARPA, Paetzold@DEC-MARLBORO.ARPA, CLynn@BBNA.ARPA,
+    Tappan@BBNA.ARPA
+Cc: MRC@SU-SCORE.ARPA
+
+     For some months now, we have observed that the BBN TOPS-20 implementation
+of TCP does not perform the TCP close handshake properly.  This problem has
+been documented and reported to the appropriate people as shown below.
+Crispin at SU-SCORE has just installed a new TOPS-20 monitor (5.2) and
+this outstanding problem has NOT been fixed.
+     The effect of this problem is that when a system which correctly
+performs the handshake is talking to a noncomplying TOPS-20, and the
+TCP close is initiated from the non-TOPS-20 end, the non-TOPS-20 end
+will hang in the close and eventually time out.  This tends to cause
+STOR operations in FTP to TOPS-20 sites to fail.  It also has the
+annoying property for us that every time we get mail from a TOPS-20
+site, our TCP logs a protocol violation.
+     Larson at SRI has located the defective code in TOPS-20 as shown
+below.  The messages below are the previous ones relating to this problem.
+     As we at Ford Aerospace do not run any TOPS-20 systems, we do not
+directly have this problem, but our users who need to communicate with
+some of the TOPS-20 sites find this a continual annoyance.  Because of
+the former importance of TOPS-20 in the ARPANET community, there has been
+an informal tradition that the TOPS-20 implementation has been considered
+the ``standard'' with which others were expected to interoperate.  For this
+reason, it appears that considerable effort has been expended in some of
+the newer implementations (such as the 4.2BSD systems) to interoperate with
+TOPS-20 despite this problem.  (Elaborate FTP strategies regarding data
+connection establishment are a means of getting around this problem).
+Other implementors should be aware of this problem so that such wasted
+effort can be avoided.
+
+					John Nagle
+					Ford Aerospace and Communications Corp.
+  Return-path: <Mailer@SRI-NIC>
+  Mail-From: SMTP created at 27-Apr-83 15:01:09
+  Received: FROM SRI-NIC BY USC-ISID.ARPA WITH TCP ; 27 Apr 83 15:01:22 PDT
+  Received:  from SRI-KL by SRI-NIC via ARPANET/MILNET with TCP/SMTP;
+             Wed 27 Apr 83 14:23-PDT
+  Date: Wed 27 Apr 83 14:18:48-PDT
+  From: LARSON@SRI-KL.ARPA
+  Subject: Re: need help from a tops-20 wizard
+  To: Rudy.Nedved@CMU-CS-A.ARPA
+  cc: HEDRICK@RUTGERS.ARPA, JGoldberger@USC-ISIB.ARPA, don.provan@CMU-CS-A.ARPA,
+      TCP-IP-TOPS20@SRI-NIC.ARPA
+  In-Reply-To: Your message of Tue 26 Apr 83 18:02:00-PDT
+  
+    This discussion  of  wierd  action  with  TCPSIM  related  stuff
+  prompted me to look at the close in TCPSIM.  What wonders does one
+  find!
+    The wait in the flags to the CLOSE is commented out.  Thus,  one
+  never waits for the FIN to  be returned.  If the ABORT is  reached
+  too soon, would it be possible for a queued outgoing FIN to not be
+  sent before the TCB is destroyed?  There appears to be no DISMS in
+  the direct line,  so if GETBU2  is not reached,  there will be  no
+  delay before the ABORT is reached.
+    The MOVX B,... and the AOJN pair  result in a loop that will  be
+  executed 2097152 times.  I  really do not think  this is what  was
+  intended.  AOBJN perhaps?
+  
+    I suspect  that this  may  be part  of why  foreign  connections
+  (especially to  unix  systems) may  be  being left  in  FIN_WAIT_2
+  states.
+  	Alan
+  
+  
+  TCPCLS:				; TPC and TPD should be zero here
+  	MOVE A,T.JCN(TFSB)
+  ;	MOVE B,A(TAC0)		; Flags in left half
+  ;	TXNE B,CO%WCL		; Wait?
+  ;	 TXO A,TCP%WT		; Yes
+  	CLOSE			; Tell other end to close it up
+  	  SETZ TOB,		; Error return
+  
+  	MOVX D,<<RXTMOT*2+10>/10> ; Short timeout for GETBUF here
+  	MOVX B,<-^D8,,0>	; Allow 8 buffers
+  TCLOOP:	CALL GETBUF		; Start input
+  	SKIPN A,T.JCN(TFSB)	; Is it closed yet?
+  	  JRST TCXT		; Yes, done
+  	AOJN B,TCLOOP		; No, try next buffer
+  
+  	ABORT			; Tried all 10, give up
+  	  SETZ TOB,		; Error return
+  TCXT:	SETZB TPC,TPD		; Nothing remaining
+  -------
+  Date: 29 Apr 1983 2046-PDT
+  From: MILLS at USC-ISID
+  Subject: Re: need help from a tops-20 wizard
+  To:   LARSON at KL, Rudy.Nedved at CMU-CS-A
+  cc:   HEDRICK at RUTGERS, JGoldberger at ISIF,
+  cc:   don.provan at CMU-CS-A, TCP-IP-TOPS20 at NIC,
+  cc:   MILLS at USC-ISID
+  
+  In response to the message sent  Wed 27 Apr 83 14:18:48-PDT from LARSON@SRI-KL.ARPA
+  
+  Folks,
+  
+  YE GODZ! I have been grousing about this problem for over two years. You mean
+  this is the first time anybody checked?! Your description on the close
+  is a*c*c*u*r*a*t*e.
+  
+  Regards,
+  Dave
+  
+  From root Mon May 16 18:56:21 1983
+  Return-Path: <LARSON@SRI-KL.ARPA>
+  Mail-From: SRI-KL received by FORD-WDL1 at 16-May-83 18:56:06-PDT
+  Date: Mon 16 May 83 18:52:42-PDT
+  From: LARSON@SRI-KL.ARPA
+  Subject: Re: TCP close fix
+  To: jbn@FORD-WDL1.ARPA
+  In-Reply-To: Your message of Mon 16 May 83 18:04:47-PDT
+  
+    No.  I have received no fixes to this stuff.  It is real frustrating.
+  I wish the DOD folks who think TCP/IP is such a wonderful thing would
+  figure out who is to support it.
+  	Alan
+27-Jun-84 15:30:28-PDT,1266;000000000001
+Return-Path: <@SRI-NIC.ARPA:tom@LOGICON.ARPA>
+Received: FROM SRI-NIC.ARPA BY USC-ISIF.ARPA WITH TCP ; 27 Jun 84 15:29:41 PDT
+Received: from LOGICON.ARPA by SRI-NIC.ARPA with TCP; Wed 27 Jun 84 14:28:01-PDT
+Date: 27 Jun 84 14:26 PDT
+From: Tom Perrine <tom@LOGICON.ARPA>
+To: Postmaster@COLUMBIA-20
+Cc: TCP-IP@SRI-NIC, Postmaster@LOGICON, John Codd <john@logicon>
+Subject: SMTP amd TCP problems
+
+We keep getting "nasty-grammed" by the COLUMBIA-20.ARPA SMTP mailer when
+it attempts to deliver mail to us. 
+
+The first attempt to deliver a piece of mail to us fails, and often
+hangs our SMTP server.  The second attempt usually has a header field
+called "Delivery-Notice", which informs us that it had to use "50 byte,
+pushed segments" or something similiar.
+
+>From our end (LOGICON.ARPA) we see the TCP connection closed from
+your end *before* the CRLF.CRLF sequence to terminate the SMTP 'DATA'
+protocol.  This should not be happening.
+
+Has anyone else mentioned or noticed any similiar problems?
+
+>From discussion in the sig-tcp mailing list and our trace efforts, we
+suspect that these problems (delay/timeout and segment size/push) are a
+"feature" of the gateway. What gateway are you using to reach MILNET?
+
+Thanks,
+Tom Perrine
+Logicon
+
+27-Jun-84 15:49:42-PDT,609;000000000001
+Mail-From: POSTEL created at 27-Jun-84 15:46:43
+Date: 27 Jun 1984 15:46:45 PDT
+From: POSTEL@USC-ISIF.ARPA
+Subject: SMTP problems
+To:   tom@LOGICON.ARPA
+cc:   postel@USC-ISIF.ARPA
+
+
+Tom:
+
+What version of what system are you running?  Where did you get your SMTP
+code?  We did see this problem a long time ago, and we thought that all
+instances were fixed.
+
+This problem is described in the collection of messages in the file
+<SMTP>MAIL.ERRORS on USC-ISIF.ARPA.  You should be able to copy that file
+via FTP.  Let me know if you have an trouble getting a copy of
+that file.
+
+--jon.
+-------
+27-Jun-84 16:47:51-PDT,1015;000000000001
+Mail-From: POSTEL created at 27-Jun-84 16:44:32
+Date: 27 Jun 1984 16:44:33 PDT
+From: POSTEL@USC-ISIF.ARPA
+Subject: Re: SMTP amd TCP problems
+To:   tom@LOGICON.ARPA, Postmaster@COLUMBIA-20.ARPA
+cc:   TCP-IP@SRI-NIC.ARPA, Postmaster@LOGICON.ARPA,
+cc:   john@LOGICON.ARPA, POSTEL@USC-ISIF.ARPA
+
+In response to the message sent  27 Jun 84 14:26 PDT from tom@LOGICON.ARPA
+
+
+The problem looks to me like a combination of a fast timeout and a failure
+to push the data (both on the sender side), but....  There could be other
+bugs that would produce this effect.  If the receiver side miscalculated
+something and/or failed to process a less than full buffer even if pushed,
+one might get the same effect.
+
+In general, one should look for the problem in the system that is new to the
+game, and one should test with lots of different systems.
+
+There is a file of old discussion about SMTP problems.  This can be copied
+from USC-ISIF.ARPA via FTP.  The file name is <SMTP>MAIL.ERRORS.
+
+--jon.
+-------
+28-Jun-84 11:29:47-PDT,992;000000000001
+Return-Path: <tom@LOGICON.ARPA>
+Received: FROM LOGICON.ARPA BY USC-ISIF.ARPA WITH TCP ; 28 Jun 84 11:25:59 PDT
+Date: 28 Jun 84 11:23 PDT
+From: Tom Perrine <tom@LOGICON.ARPA>
+To: Postel@USC-ISIF.ARPA
+Cc: John Codd <john@logicon>, Tom Perrine <tom@logicon>
+Subject: Re:  SMTP Problems
+In-Reply-To: Message from "Postel@USC-ISIF.ARPA" on 06/28/84 at 11:03
+
+Well, we are running the TCP implementation known to the NIC as
+BBN-V6-UNIX, on a highly-hacked PWB system.  The UNIX is fine, but it
+appears that this TCP implementation uses ports for buffering between
+TCP and the user process, and therefore effectively ignores the PSH bit
+on receives!
+
+I am considering adding code at the SMTP level to handle the kind of
+buffer disassembly that should be done by TCP, but isn't.  *sigh* If
+only our contracting officer would let is spend $4000 to upgrade to V7,
+then we could get 2.9BSD.  *moby sigh*
+
+Thanks for all the help,
+Tom Perrine
+"at the mercy of an incomplete TCP"
+
+19-Jul-84 14:30:50-PDT,1427;000000000001
+Return-Path: <@MIT-MC:Postmaster@LLL-MFE.ARPA>
+Received: FROM MIT-MC.ARPA BY USC-ISIF.ARPA WITH TCP ; 19 Jul 84 14:26:00 PDT
+Date: Thu, 19 Jul 84 14:17 PDT
+From: Postmaster@LLL-MFE.ARPA
+Subject: embedded spaces in mail addresses
+To: header-people@mit-mc.arpa
+
+i'm so sick of mailers complaining about quoted addresses with embedded
+blanks i could scream.  is it possible to get unix fixed so that it
+understands addresses of the form '"provan don"@lll-mfe.arpa', or
+should we just flush this syntax?  as long as my syntax is legal, i find
+it real hard to justify going to the lengths i'd have to go to make it
+some address without any blanks in it.  i've been waiting since i first
+brought up SMTP in march '83 for unix to be fixed, but i think it's
+time to give up waiting.  i used to send notes to postmasters telling
+them we were having problems, but i always got the response that it was
+purchased software so they couldn't fix it.  it wasn't so bad when it
+was just a couple of cases a month.  i could tell someone to use a user
+number instead of a name or change a name to not have a blank in a few
+cases.  but now there's been a great surge of interest in the arpanet
+mail system so something has to be done.  should i give up?  should i
+consider that syntax obsolete and unsupported?  should i just not let my
+users communicate with unix sites?
+
+well, to start with, i guess i'll get mad....
+
+19-Jul-84 14:59:16-PDT,556;000000000001
+Return-Path: <@MIT-MC:DP0N@CMU-CS-A.ARPA>
+Received: FROM MIT-MC.ARPA BY USC-ISIF.ARPA WITH TCP ; 19 Jul 84 14:58:54 PDT
+Date: 19 Jul 84 1749 EDT (Thursday)
+From: don.provan@CMU-CS-A.ARPA
+To: header-people@MIT-MC.ARPA
+Subject: Re: embedded spaces in mail addresses
+In-Reply-To: "Postmaster@LLL-MFE.ARPA's message of 19 Jul 84 16:17-EST"
+Message-Id: <19Jul84.174950.DP0N@CMU-CS-A.ARPA>
+
+i forgot i was in an anonymous account when i send the message titled
+"embedded spaces in mail addresses."  i hereby accept responsibility
+for that message.
+
+20-Jul-84 16:47:25-PDT,5739;000000000001
+Return-Path: <@MIT-MC:DP0N@CMU-CS-A.ARPA>
+Received: FROM MIT-MC.ARPA BY USC-ISIF.ARPA WITH TCP ; 20 Jul 84 16:43:25 PDT
+Return-Path:<@MIT-MULTICS.ARPA:WILLUT@EDUCOM.MAILNET>
+Received: from MIT-MULTICS.ARPA by CMU-CS-A.ARPA; 20 Jul 84 19:09:31 EDT
+Received: from EDUCOM.MAILNET by MIT-MULTICS.ARPA with Mailnet id <2636665689992730@MIT-MULTICS.ARPA>; 20 Jul 1984 19:08:09 edt
+Date:     20-JUL-1984 13:39 EDT
+From:     WILLUT%EDUCOM.MAILNET@MIT-MULTICS
+To:       DON.PROVAN@CMU-CS-A.ARPA
+Subject:  Quotes and spaces in usernames
+Resent-To: header-people@MIT-MC.ARPA
+Resent-From: don.provan@CMU-CS-A.ARPA
+Resent-Date: 20 Jul 84 1932 EDT (Friday)
+
+Some of our MAILNET sites have had a great deal of trouble with quoted
+usernames, too.  Thought you might enjoy Alan Hunter's assessment of
+the problem (they have now, by the way, changed their system to send
+out usernames in the firstname_lastname format)
+                                                  --Candy Willut
+----------------------------------------
+From:     MAILNET        18-MAY-1984 13:11
+To:       WILLUT
+Subj:     From:<@MIT-MULTICS.ARPA:"Alan Hunter"@Newcastle.Mailnet>
+
+Received: from Newcastle.Mailnet by MIT-MULTICS.ARPA with Mailnet id <2631138437336308@MIT-MULTICS.ARPA>; 17 May 1984 19:47:17 edt
+Date: Thu, 17 May 84 16:02:38 BST
+From: "Alan Hunter"@Newcastle.Mailnet
+To: Steve_Rothwell@UMICH-MTS.MAILNET,
+    Gavin_Eadie@UMICH-MTS.MAILNET,
+    WILLUT@EDUCOM.MAILNET,
+    RUSHBY@SRI-CSL.ARPA
+Message-ID: <79269@Newcastle.Mailnet>
+Subject: MTS network mail addresses
+
+Steve, Gav:                        cc: Candy, John Rushby
+
+ I spend a lot of time explaining this sort of thing (see following
+ message) to users.  I think perhaps the MTS NETMAIL program ought to
+ throw in the sponge and sign outgoing messages in the First_Last@Site
+ form rather than the equally correct "First Last"@Site.  A lot of our
+ mail is to ARPA and CSNET, and UNIX, TOPS and RSX systems in use on
+ those nets don't seem to like quotes, even now.  I doubt they ever will.
+
+ I have actually had complaints from SRI-CSL (a Foonly TOPS system)
+ saying we send them illegally formatted messages!  So much for the
+ success of the #822 revision!
+
+     - Alan
+---(Forwarded from: "Alan Hunter"@Newcastle, Dated: Thu, 17 May 84 15:37:28 BST
+Brian:                cc: sundry others
+
+ Once upon a time there was a mail system called ARPA.  It had network
+ mail gurus who designed a protocol for the presentation of network
+ mail messages.  They called this RFC #733 so that everyone would
+ instantly know what it was, and respect it as The Truth.
+
+ In the course of time, the gurus found that a number of groups among
+ the ARPA proletariat had actually ignored the words of wisdom, and
+ implemented what they thought it ought to be rather than what it was
+ supposed to be.  Most of these illiterate programmers ran a young
+ upstart operating system (the name escapes me) and knew, of course,
+ that personal names were things like 'brian' and 'lindsay' and never
+ had spaces in them.  So a message to:
+
+     brian randell@newcastle
+
+ clearly had two recipients; some local guy called 'brian' and somebody
+ over the net called 'randell'.  Obvious isn't it?  (Actually they were
+ supposed to use commas as separators for this case but these people
+ never did that at home and didn't see why users of lesser systems
+ should need to.)
+
+ Eventually things got so bad that the gurus got together five years
+ later and rewrote RFC #733, fixing all the problems and calling it
+ RFC #822 which is a much better title.  They said that if a local part
+ (that's what gurus have instead of names) had certain characters in
+ it, it had to be surrounded by quotes (").  Spaces are one of these
+ specials; underbars are not.
+
+ So your messages from MTS go out signed correctly as:
+
+     "Brian Randell"@Newcastle.Mailnet
+
+ Meanwhile the mail types who used that operating system had heard from
+ a friend of a friend that 822 wasn't much different to 733, so they
+ changed the comment at the head of their mail program to say '822'
+ instead of '733'.  All their friends used the same system (other
+ people didn't seem to want to talk to them) and anyway they had much
+ more fun things to do, because they'd discovered RPCs.
+
+ The gurus got very annoyed with this and have spent the last two years
+ issuing RFC's with ever more impressive numbers on them giving ever
+ receding dates by which they must comply.  Since the mail implementors
+ think they are complying they don't read these either.  They have even
+ been known to complain when more up to date sites send them correctly
+ formatted messages!
+
+ The MTS mail people, being kind, are prepared to accept recipient's
+ names with underbars representing the spaces.  Nor do they care if
+ people shout at you and call you BRIAN RANDELL at the top of their
+ voice.  Both quoted and underbarred forms are equally valid.  Few
+ non-MAILNET-or-BITNET sites can generate our (correct) quoted
+ signatures as return addresses.  So I always tell people to quote the
+ underbarred form in the message text when establishing a connection.
+ You are:
+
+     Brian_Randell@NEWCASTLE.MAILNET
+
+ but these people don't know where that is, so tell them you are:
+
+     Brian_Randell%NEWCASTLE@MIT-MULTICS.ARPA
+
+ They'll think you are being pedantic putting the ".ARPA" on the end
+ because they don't believe there is anybody else out there.  They'll
+ also think you have a funny name and must live in or near Cambridge,
+ Mass., BUT THEIR MESSAGES WILL GET THROUGH.
+
+ I suppose MTS will be reduced to signing messages with underbars one
+ day.  Sigh....
+
+       - Alan
+
+24-Jul-84 19:23:53-PDT,1134;000000000001
+Return-Path: <@MIT-MC,@MIT-MULTICS.ARPA:POSTMASTER_at_QZ@QZCOM.MAILNET>
+Received: FROM MIT-MC.ARPA BY USC-ISIF.ARPA WITH TCP ; 24 Jul 84 19:19:19 PDT
+Received: from QZCOM.MAILNET by MIT-MULTICS.ARPA with Mailnet id <2637018731564431@MIT-MULTICS.ARPA>; 24 Jul 1984 21:12:11 edt
+Date:        24 Jul 84 15:47 +0200
+From:        Jacob_Palme_QZ%QZCOM.MAILNET@MIT-MULTICS.ARPA
+Reply-to:    Jacob_Palme_QZ%QZCOM.MAILNET@MIT-MULTICS.ARPA,
+             Header_People_mailing_lists%QZCOM.MAILNET@MIT-MULTICS.ARPA
+To:          Header_People_mailing_lists%QZCOM.MAILNET@MIT-MULTICS.ARPA,
+             header-people <header-people@MIT-MC.ARPA>,
+             Postmaster@LLL-MFE.ARPA
+Subject:     embedded spaces in mail addresses
+Message-ID:  <63316@QZCOM>
+In-Reply-To: <63030@QZCOM>
+
+In the QZCOM mail network interface, I translate internal COM
+names of the format "Jacob Palme QZ" into the external mail format
+Jacob_Palme_QZ so as to avoid quotes and spaces which some mail
+systems cannot handle.
+
+I have never in my life come across a "standard" which in actual
+implementation is to blatantly disregarded as RFC822.
+
+
+
+25-Jul-84 13:00:09-PDT,1252;000000000001
+Return-Path: <@MIT-MC:DP0N@CMU-CS-A.ARPA>
+Received: FROM MIT-MC.ARPA BY USC-ISIF.ARPA WITH TCP ; 25 Jul 84 12:57:47 PDT
+Date: 25 Jul 84 1151 EDT (Wednesday)
+From: don.provan@CMU-CS-A.ARPA
+To: header-people@MIT-MC.ARPA
+Subject: re: embedded spaces in mail addresses
+Message-Id: <25Jul84.115112.DP0N@CMU-CS-A.ARPA>
+
+I went into the lll-mfe mail server to put in a underbar-equals-space hack
+and found i'd already given up on UNIX and put a hash-equals-space
+hack (hash because it's the standard around my network) in.
+i wonder how many other sites have done the same thing just to
+relieve UNIX of the need to fix it.  CMU uses a dot-equals-space
+hack, as i'm sure many other sites do from the rfc722 days, but
+that's because it's been in so long no one would think of taking
+it out.  (it's become a standard all the way to user level.)  everytime
+i bitch to a UNIX site, they say, "gee, you're the first site we've
+dealt with that had spaces in their user names."  i suspect i'm just
+the first to complain about it.
+
+the thing that pisses me off most is that i need to add hashes on
+the return addresses of out-going mail even for sites that can handle
+spaces.  i think we should all boycott UNIX until the mail system's
+fixed.
+
+25-Jul-84 17:16:40-PDT,1537;000000000001
+Return-Path: <@MIT-MC:EN0C@CMU-CS-A.ARPA>
+Received: FROM MIT-MC.ARPA BY USC-ISIF.ARPA WITH TCP ; 25 Jul 84 17:12:47 PDT
+Date: 25 Jul 84 1954 EDT
+From: Rudy.Nedved@CMU-CS-A.ARPA
+To: header-people@MIT-MC.ARPA
+Subject: Re: embedded spaces in mail addresses
+In-Reply-To: <25Jul84.115112.DP0N@CMU-CS-A.ARPA>
+Message-Id: <25Jul84.195452.EN0C@CMU-CS-A.ARPA>
+
+For the record:
+
+CMU supports the dot-equals-space hack and actually uses it as "the
+way to go" for non-CMU sites because of the belief that most sites do
+not have lexically powerful mail systems and can only handle simple
+single lexical token <user> @ <host> mail addresses.
+
+We advocate internal CMU mail to use quoted names and that mail user
+interfaces/composers are expected to work very hard to resolve a
+"name" or "nickname" into an electronic mail address (i.e. 'Mr. E. R.
+Nedved' turns into '"Rudy Nedved"@CMU-CS-A.CMU.ARPA').
+
+CMU's 4.1BSD Unix mail system (the majority around here) supports
+spaces in names and quoted names. When we upgrade to 4.2BSD or
+whatever, the mail system will support quoted names also.
+
+What you want to do is boycott simple mail delivery software that
+tries to use a hacked up version of the COPY or CAT program to
+move mail around. Given the growing importance of eletronic mail
+systems it is amazing that managers have not allocated more
+software developement resources into this area.....it still seems
+to be under the "general software maintainence" for most sites.
+
+Rudy Nedved
+CMU CS/RI Facilities Staff
+
+23-Jul-84 10:30:08-PDT,1001;000000000001
+Return-Path: <@MIT-MC:Postmaster@LLL-MFE.ARPA>
+Received: FROM MIT-MC.ARPA BY USC-ISIF.ARPA WITH TCP ; 23 Jul 84 10:25:19 PDT
+Date: Mon, 23 Jul 84 10:12 PDT
+From: Postmaster@LLL-MFE.ARPA
+Subject: where do error reports go now?
+To: header-people@mit-mc.arpa
+
+it has been pointed out to me that RFC822 (4.4.4) says that reports
+for undeliverable mail should be sent to the Sender: field (or the
+From: field if there's no sender field).  RFC821 (4.1.1, Mail command)
+says that non-delivery notices should be sent to the return path passed
+in the SMTP Mail command, which, of course, ends up as the Return-Path:
+header in the mail.  i'm sure this has been argued about before.  i don't
+remember the argument.  anyway, i'm not feeling very argumentative, so i
+just want to know which field i should use in my implementation.  presumably
+they both point back to the same mailbox, but if they don't, which should
+i choose?
+						don provan
+						provan@cmu-cs-a
+						postmaster@lll-mfe
+
+23-Jul-84 18:21:05-PDT,436;000000000001
+Return-Path: <@MIT-MC:dpk@BRL-TGR.ARPA>
+Received: FROM MIT-MC.ARPA BY USC-ISIF.ARPA WITH TCP ; 23 Jul 84 18:18:15 PDT
+Date:     Mon, 23 Jul 84 21:08:56 EDT
+From:     Doug Kingston <dpk@BRL-TGR.ARPA>
+To:       Postmaster@LLL-MFE.ARPA
+cc:       header-people@MIT-MC.ARPA
+Subject:  Re:  where do error reports go now?
+
+	The address given in the SMTP MAIL FROM: command
+is the prefered return address for errors.
+
+					-Doug-
+
+26-Jul-84 01:33:40-PDT,2157;000000000001
+Return-Path: <@MIT-MC,@MIT-MULTICS.ARPA:POSTMASTER_at_QZ@QZCOM.MAILNET>
+Received: FROM MIT-MC.ARPA BY USC-ISIF.ARPA WITH TCP ; 26 Jul 84 01:32:12 PDT
+Received: from QZCOM.MAILNET by MIT-MULTICS.ARPA with Mailnet id <2637130622486575@MIT-MULTICS.ARPA>; 26 Jul 1984 04:17:02 edt
+Date:        25 Jul 84 16:29 +0200
+From:        Jacob_Palme_QZ%QZCOM.MAILNET@MIT-MULTICS.ARPA
+Reply-to:    Jacob_Palme_QZ%QZCOM.MAILNET@MIT-MULTICS.ARPA,
+             Header_People_mailing_lists%QZCOM.MAILNET@MIT-MULTICS.ARPA
+To:          Header_People_mailing_lists%QZCOM.MAILNET@MIT-MULTICS.ARPA,
+             header-people <header-people@MIT-MC.ARPA>,
+             Postmaster@LLL-MFE.ARPA
+Subject:     where do error reports go now?
+Message-ID:  <63545@QZCOM>
+In-Reply-To: <63431@QZCOM>
+
+I would strongly urge you to send reports for undeliverable mail
+to the SMTP sender, not to the FROM or the SENDER in the RFC822
+header.
+
+When a mailing list resends a message, it usually will not munge
+the RFC822 header, but most mailing list implementations will
+put the list maintainer as the SMTP SENDER, and it is the list
+maintainer, not the original author, who should get these kind
+of messages.
+
+At the same time, I would warn you against doing what some mail
+systems do: They send a message saying that "the next message
+is a returned undeliverable mail" and then they send the undeliverable
+mail as a separate message.
+
+This causes problems at least in my mail system (QZCOM) because
+when I get the second message, I immediately note that I already
+have that message in my data base, and since there are no new
+recipients on it, I will just disregard it. Thus, people will
+get a message saying "the next message is an undeliverable mail",
+and then they will not get any next message at all.
+
+The principle of sending undeliverable mail as two separate
+messages, one with the error message and one with the returned
+message, would be a good idea, but only if the first of these
+two messages, the error message, contained some identification
+of the returned message, the message-id of it and the author
+and date fields for example.
+
+
+
+26-Jul-84 06:03:42-PDT,2806;000000000001
+Return-Path: <@MIT-MC:forwarder@wisc-crys.arpa>
+Received: FROM MIT-MC.ARPA BY USC-ISIF.ARPA WITH TCP ; 26 Jul 84 06:00:50 PDT
+Date: Thu, 26 Jul 84 07:53:46 cdt
+Message-Id: <8407261253.AA21469@wisc-crys.arpa>
+Received: by wisc-crys.arpa; Thu, 26 Jul 84 07:53:46 cdt
+To: header-people@mit-mc.arpa
+Subject: returned mail under separate cover
+Cc: implementors@csnet-sh
+Sender: forwarder@wisc-crys.arpa
+From: solomon@wisc-crys.arpa
+
+Jacob Palme points out one problem with returning undeliverable mail
+in a separate message from the error report (what I'll call "two-message
+error reports" or TMER).  I would go further than he did and assert that TMER
+is an extremely bad idea.  Another facility interfered with by TMER is 
+automated handling of errors.  Error recovery is difficult enough
+in the current chaotic mail world; TMER makes it almost impossible.  The
+latest version of the CSNET nameserver software provides an example.
+
+The software intercepts outgoing mail and tries to give the sender
+additional assistance in getting it to its destination.  It puts
+"forwarder" in the "sender" field (and in the SMTP envelope)
+so that error reports are returned to a program rather than the original
+author (see the header of this message for an example).  This program
+queries a central database to see if the failure was due to stale
+information (for example, because the recipient has moved).  Only if such
+attempts fail does it return the message to the author.  The information
+necessary to query the database, and indeed the identity of the original
+author is only in the original message.  At the very least, TMER introduces a
+headache:  One error message must be queued until the other arrives (note that
+there is no guarantee on order of delivery, so the returned mail may precede
+the error message!)  In the absence of any standards on how the two messages
+identify each other, it is impossible to deal with TMER in any reasonable way.
+
+By the way, another bogosity at some sites pointed up by the new nameserver
+software is sites that send replies (mail generated by humans using a "reply"
+command in their mail-reading software) to the address in the "sender"
+field or the SMTP envelope in clear violation of RFC 822.  From time
+to time we get mail addressed to "forwarder" with contents like
+"You're right Jim, but I disagree with the third paragraph."  In some
+cases it is impossible to figure out who the sender was trying to reach
+and we are reduced to returning the mail (by hand) to the sender,
+along with a nasty note to the postmaster at the sending site.  Luckily, 
+postmasters seem to be reasonably willing to clean up their acts when
+they have the problem pointed out.  We haven't had too many try to tell us
+they're right and we're wrong.
+
+12-Apr-85 09:34:25-PST,1348;000000000001
+Return-Path: <tcp-ip-RELAY@SRI-NIC.ARPA>
+Received: FROM SRI-NIC.ARPA BY USC-ISIF.ARPA WITH TCP ; 12 Apr 85 09:31:18 PST
+Received: from nprdc.ARPA by SRI-NIC.ARPA with TCP; Fri 12 Apr 85 08:36:37-PST
+Received: by nprdc.ARPA (4.12/4.7)
+	id AA17416; Fri, 12 Apr 85 08:36:57 pst
+Message-Id: <8504121636.AA17416@nprdc.ARPA>
+Date: 12 April 1985 0836-PST (Friday)
+From: stanonik@nprdc
+Reply-To: stanonik@NPRDC
+To: tcp-ip@sri-nic
+Subject: long delay connections
+Cc: stanonik@nprdc
+
+We've always had problems connecting to ucl-cs (we're in california,
+ucl-cs is in london).  The symptoms bounce between "host unreachable",
+"connection timed out", and "connection refused".  Mail in particular
+seems to queue for at least a day before getting through.  Is this
+response/reliability typical?  I've assumed so, because the connection
+must hop through several gateways, including a slow(?) and congested(?)
+link over/under(?) the atlantic.  We're running 4.2bsd on a vax 780.
+Back in the 4.1bsd days, we were running bbn's tcp/ip, and had gotten
+some modifications to help with long delay connections.  Has any tuning
+been done on 4.2bsd for long delay connections?  Or is this response/
+reliability the norm?  How about sites running something other than
+4.2bsd?  Fuzzballs?  Dec 10's, 20's?
+
+Thanks,
+
+Ron Stanonik
+stanonik@nprdc
+12-Apr-85 17:05:46-PST,1011;000000000001
+Return-Path: <tcp-ip-RELAY@SRI-NIC.ARPA>
+Received: FROM SRI-NIC.ARPA BY USC-ISIF.ARPA WITH TCP ; 12 Apr 85 17:04:59 PST
+Received: from USC-ISID.ARPA by SRI-NIC.ARPA with TCP; Fri 12 Apr 85 16:24:26-PST
+Date: 12 Apr 1985 19:24:42 EST
+From: MILLS@USC-ISID.ARPA
+Subject: Re: long delay connections
+To:   stanonik@NPRDC.ARPA, tcp-ip@SRI-NIC.ARPA
+cc:   MILLS@USC-ISID.ARPA
+
+In response to the message sent  12 April 1985 0836-PST (Friday) from  stanonik@NPRDC
+
+Ron,
+
+Your problems with 4.2 are well-known and documented. Fuzzballs have been
+specially built to handle long-delay paths and have several features
+designed to minimize the impact on intervening gateways of the type used
+on SATNET paths, such as the send-policy and ack-policy algorithms described
+to this list recently. According to Berkeley gurus, similar policies are
+planned for the next release.
+
+My experience has been that, with carefully engineered algorithms, SATNET
+performance can be quite satisfactory.
+
+Dave
+-------
+12-Apr-85 19:56:15-PST,3056;000000000001
+Return-Path: <tcp-ip-RELAY@SRI-NIC.ARPA>
+Received: FROM SRI-NIC.ARPA BY USC-ISIF.ARPA WITH TCP ; 12 Apr 85 19:51:39 PST
+Received: from lbl-csam.ARPA by SRI-NIC.ARPA with TCP; Fri 12 Apr 85 19:09:11-PST
+Return-Path: <van@lbl-csam>
+Received: by lbl-csam.ARPA ; Fri, 12 Apr 85 19:09:47 pst
+To: stanonik@nprdc.ARPA
+Cc: tcp-ip@sri-nic.ARPA
+Subject: Re: long delay connections
+In-Reply-To: Your message of 12 April 1985 0836-PST (Friday).
+Date: 12 Apr 85 19:09:38 PST (Fri)
+Message-Id: <1033.482209778@lbl-csam>
+From: Van Jacobson <van@lbl-csam>
+
+The problems you're seeing are probably due to mistakes in the
+round-trip-timer code of the distributed 4.2bsd.  All of the bugs
+reported to Berkeley have been fixed in 4.3bsd (& the 4.3bsd
+release is immanent).
+
+If you have source & don't want to wait for 4.3, here's a slightly
+annotated diff listing of the fixes.  The annotations are mine &
+may be neither correct nor comprehensible.  The fixes are from
+various people around the country & seem to work (we've shipped
+a lot of mail through ucl-cs with no problems).  The diff line numbers
+will probably bear no resemblance to your sources.
+
+ - Van Jacobson, Lawrence Berkeley Lab
+
+ --------------------------------
+(these lines added to tcp_timer turn off the round trip timing when you
+re-transmit):
+*** tcp_timer.c
+*** 153,163 *****
+  			    TCPTV_MIN, TCPTV_MAX);
+  		}
+  		tp->snd_nxt = tp->snd_una;
++ 		/*
++ 		 * If timing a segment in this window, stop the timer.
++ 		 */
++ 		if (tp->t_rtt && SEQ_GT(tp->t_rtseq, tp->snd_una))
++ 			tp->t_rtt = 0;
+  		(void) tcp_output(tp);
+  		break;
+  
+(deleting the following line prevents you from computing a bogus, too small
+rtt when you get a ack for less than all the outstanding data).
+*** tcp_input.c
+*** 503,509
+  		else {
+  			TCPT_RANGESET(tp->t_timer[TCPT_REXMT],
+  			    tcp_beta * tp->t_srtt, TCPTV_MIN, TCPTV_MAX);
+- 			tp->t_rtt = 1;
+  			tp->t_rxtshift = 0;
+  		}
+  		if (acked > so->so_snd.sb_cc) {
+
+(if a timeout was caused by the subnet getting overloaded & discarding packets,
+you don't want to retransmit everything because that will just make the problem
+worse.  This change limits the sender to one MSS segment per timeout interval
+until packets start getting through without timeouts)
+*** tcp_output.c
+*** 60,70 *****
+  		return (0);	/* ??? */	/* past FIN */
+  	if (len > tp->t_maxseg) {
+  		len = tp->t_maxseg;
++ 		/*
++ 		 * Don't send more than one segment if retransmitting.
++ 		 */
++ 		if (tp->t_rxtshift == 0)
++ 			sendalot = 1;
+  	}
+  
+  	flags = tcp_outflags[tp->t_state];
+***************
+(this line was just someone's mistake.  It prevents you from ever computing the
+rtt on the first packet.  In fact, it keeps you from computing the rtt on about
+half the packets).
+*** 271,277
+  		    tp->snd_nxt != tp->snd_una) {
+  			TCPT_RANGESET(tp->t_timer[TCPT_REXMT],
+  			    tcp_beta * tp->t_srtt, TCPTV_MIN, TCPTV_MAX);
+- 			tp->t_rtt = 0;
+  			tp->t_rxtshift = 0;
+  		}
+  		tp->t_timer[TCPT_PERSIST] = 0;
+-------
+

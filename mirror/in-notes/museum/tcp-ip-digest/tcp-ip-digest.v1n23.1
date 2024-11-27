@@ -1,0 +1,399 @@
+23-Sep-82 23:21:08-PDT,16748;000000000001
+Mail-from: ARPANET host BRL rcvd at 23-Sep-82 2320-PDT
+UUCP-From: decvax!brl-bmd!tcp-ip
+Sender:    Mike Muuss <TCP-IP@BRL>
+From:      TCP-IP at BRL
+To:        TCP-IP at BRL
+Date:      23 Sept 1982
+Subject:   TCP-IP Digest, Vol 1 #23
+Via:  Brl-Bmd; 23 Sep 82 17:39-EDT
+
+TCP/IP Digest           Thursday, 23 Sept 1982     Volume 1 : Issue 23
+
+Today's Topics:
+                        Comments about ACC ECU's
+                           Reliability of VDH
+                        No VDH under 4.1 BSD UNIX
+             Performance of TCP/IP on Pronet Ring (4.1a BSD)
+                Error Recovery and Host Access on the DDN
+                 Lead on TCP/IP Implementation for GCOS
+                    TCP/IP on an 11/40 class machine
+              TCP/IP for Ungermann-Bass NET/ONE?  For SELs?
+----------------------------------------------------------------------
+                         LIMITED DISTRIBUTION
+          For Research Use Only --- Not for Public Distribution
+----------------------------------------------------------------------
+
+Date:  15 September 1982 09:48 edt
+From:  Charles.Hornig at Mit-Multics
+Subject:  ACC ECU's
+Sender:  Hornig.Multics at Mit-Multics
+To:  tcp-ip at BRL
+
+I don't know about the experiences of others with ECU's, but mine have
+been rather negative.  What you ought to know about them is:
+
+(1) They do not exactly simulate a local IMP.  In particular, until you
+set HOST UP, it will not set IMP UP.  This forced us to patch out
+software to ignore the IMP state until we set HOST UP.
+
+(2) When they work, they work well.  When they break, they are very hard
+to fix.  The ACC people I met (this was a few years ago) were very good
+but they did not have the necessary tools to debug the interfaces.
+
+------------------------------
+
+Date: 15 Sep 1982 at 1011-EDT
+From: avrunin at Nalcon
+Subject: VDH vs ECU-LHDH
+To: tcp-ip at BRL
+
+We (Navy labs) have been using VDH software and Hardware for many years
+now and believe that many of the problems we have are due to glitches in
+the software even though it is very stable now.  We are in the process of
+changing to LHDH 11s from ACC at the sites where we have local IMPS and 
+the use the LHDH 11s with ECUs for the other sites.
+
+The biggest problem we have had with the VDH software is that we are 
+the only users of the software we have and therefore have to maintain it
+ourselves.  We believe we will be better off being in the mainstream and
+having more supportable software.
+
+If anyone is serious about using VDH we will soon have several VDH11Cs that
+will probably be made available to DoD through equipment reutilization
+procedures.
+
+Larry Avrunin
+
+------------------------------
+
+Date: 14 Sep 82 10:27:52-PDT (Tue)
+From: harpo!floyd!cmcl2!philabs!sdcsvax!greg at Ucb-C70
+Subject: Re: Very Distant Host support under 4.1bsd Unix.
+References: sri-unix.3199
+
+I'm sorry to report that I will NOT be doing a VDH driver for 4.1aBSD.
+The reason is not the technical difficulty, but politics -- the facility
+where I worked was transfered (over my protests) to the control of
+technically incompetent people whose ethics I find questionable.  I had
+no choice but to resign my post.  I still hope someone will do it, but
+I'm afraid it will not be me.
+
+MO is wrong on one point, though -- we found the VDH very reliable, once
+the hardware pecularities were understood.  Both the C and the E versions
+are bitches to drive, but we never had hardware problems with the E and
+only twice with the C (over a period of about eight years).  I wish the
+CPU had been that reliable.....
+
+The best bet for people who currently have a VDH is to get some
+of the magic boxes from ACC as indicated by MO and Doug (and others).
+I'm told that the measured bandwidth is about ten to fifteen percent
+less than the most recent version of the VDH driver (I've improved it
+a lot), but, of course, the host overhead is somewhat less.  You pays
+your money and you takes your choice.
+
+-- Greg Noel, now working for NCR     ...!ucbvax!sdcsvax!greg
+
+------------------------------
+
+Date: 15 Sep 1982 2204-PDT
+From: MCCUNE at Usc-Eclc
+Subject: Remote connection of VAX/UNIX to ARPAnet
+To:   Mark.UMCP-CS at Udel-Relay
+cc:   TCP-IP at BRL, UNIX-WIZARDS at Sri-Csl
+
+True VDH running in the VAX is certainly not the way to go.
+
+ECUs are somewhat tempermental and a link that uses them isn't
+considered part of the ARPAnet backbone.
+
+AIDS-UNIX is going to be a server host sometime in the next month or so
+by connecting to the SUMEX C/30 IMP.  We're using BBN's HDH
+protocol over a 9.6 kb leased phone line.  This setup requires an
+RS232C interface board in the C/30, an ACC IF-11/HDH interface
+board in the VAX, and a UNIX driver for this new interface (being
+written by BBN).  I'm not sure how production versions of the
+ACC and C/30 interfaces will compare with a pair of ECUS in price,
+but reliability and throughtput will probably be better.  DCA and
+BBN would like you more, too.
+
+	Brian McCune
+	Advanced Information & Decision Systems
+	Mt. View, CA
+
+------------------------------
+
+Date: 20 Sep 1982 10:23:58-PDT
+From: mo at Lbl-Unix (Mike O'Dell [system])
+To: TCP-IP at BRL
+Subject: ring performance numbers
+
+At the request of the Moderator, I am reporting the results of
+some VERY preliminary experiments with the Pronet ring and the 4.1a
+IP/TCP implementation.  At the outset, let me say that measuring
+protocol/network performance is very hard, and trying to attribute
+whatever you see to real mechanisms is even harder.  Therefore,
+keep in mind these numbers are tentative and should be viewed
+with healthy suspicion.
+
+The experiment:
+
+	Base software:
+	Berkeley 4.1a IP/TCP implementation
+	This version is descended from Rob Gurwitz's implementation,
+	but they are now rather different.  I won't attempt to
+	predict how the differences might affect performance.
+	The version used in the test has full IP routing and
+	class A,B, and C network address support.  Additionally,
+	the interface driver for the ring hardware support
+	"trailer protocols" (more about this below).
+
+	Network hardware:
+	Proteon "Pronet" 10 Megabit Ring. This was developed by
+	Jerome Saltzer and Ken Pogren of MIT (Ken is currently at
+	BBN) and Howard Salwan and Alan Marshall of Proteon.
+	It is a token-passing ring with a fully-distributed token
+	regeneration algorithm.  It is essentially singly-buffered
+	on the recieve side, but this was not observed to be
+	a problem, most likely because starting DMA into memory doesn't
+	require an interrupt.
+
+	Systems for test:
+	Two VAX-11/780 machines.  Each had 4 megs of memory
+	and were running off CDC 9766 disks on SI Massbus Emulator
+	9400 controller.  The systems on the two machines were
+	identical, except for trivial differences (the hostnames!).
+
+	Description of the test:
+	The test involved running the following producer and
+	consumer processes:
+
+		Producer:
+
+			char buf[1024];
+			for (i=0; i<4096; i++)
+				write(fd, buf, 1024);
+
+		Consumer:
+			char buf[1024];
+			for (;;)
+				read(fd, buf, 1024);
+
+	The tests involved running the producer on one machine,
+	and one consumer on the other, and then repeating the test
+	with one of each on each machine (connected across the net!).
+	This test caused 1024 byte TCP segments to be sent, along with
+	the TCP and IP headers, making the packet size a bit
+	less than 1100 bytes.
+
+	What we saw:
+	First, we saw no evidence of wire limiting.  The ring
+	hardware provides a "refused" notification which is used
+	in the interface driver to trigger automatic retransmission of
+	packets refused do to the single-buffered input side.  We saw
+	about 5% packets refused; in no case did TCP have to resend segments.
+	The aggregate throughput in the one-producer/one-consumer case
+	was about 90-100 kiloBYTES/second end-to-end.  This was computed by
+	dividing the transfer volume (4 megabytes) by the time
+	in seconds.  In this test, the transmit machine was running
+	95-100% cpu load, minus the error induced by "vmstat 5"
+	watching it go.  The recieve side was running about 60-70%
+	busy with no trailer protocol, and about 50-65% with tailer
+	protocols.  Don't yet know what causes the variability.
+	With two connections running, the throughput was a bit higher,
+	but we don't know if the difference is significant.
+	The two-connection case might produce very different results
+	if the reads and writes were big enough to cause "forward
+	windowing". 
+
+	Final comments:
+	Again, I cannot overstress the difficulty of comparing
+	network hardware (implementations vs. architectures)
+	and protocols (ditto; implementations vs. architectures).
+	It is EXTREMELY difficult to know what you are comparing,
+	and even more difficult to reliably attribute the cause
+	of any differences.  Additionally, these are VERY preliminary
+	results and are submitted with some reluctance, but maybe
+	some numbers are better than pure folklore.  We will be
+	conducting more, in-depth measurements of both the Pronet
+	ring implementation and the Berkeley TCP implementation,
+	and we hope to have a much better idea of what is really
+	going on when it is all over.  We will also be repeating
+	the experiment reported here in a more controlled fashion.
+
+	Finally, I repeat these numbers are tentative and are
+	only indicative of "order-of-magnitude" performance.
+	How these numbers will change as a function of machine
+	load (like doing a real "ftp") is impossible to say
+	at the moment (at least for me!).
+
+		Cautiously yours,
+		-Mike O'Dell
+
+PS - An explanation of "trailer protocols".
+
+	Because the IP/TCP headers are variable length, on the recieve
+	side, at least one copy is required if the packet is sent
+	in "normal form".  "Trailer" format takes the normal packet
+	and breaks it at the point between the header and data,
+	and sends the header after the data.  The advantage is that
+	if the data segment is a mulitple of the pagesize, or can
+	be padded to such a multiple, by reverse-mapping the recieving
+	pages, you can get the headers and data into pages
+	on page boundaries without a copy.  This lets you do
+	exchange buffering with the user's address space to
+	further reduce the number of copies.  It should be clear
+	in only wins on the recieve side, because the transmit side
+	has knowledge of of the header size and can force page
+	alignment.  The recieve side cannot, however, be aware of the
+	header size before the packet arrives, so using the 
+	trailer format allows the clever allocations.
+	Note that "trailer form" has nothing to do with IP/TCP;
+	it is purely a "local encapsulation" and is invisible
+	(above the interface driver) to IP and its clients.
+
+------------------------------
+
+Date:     15 Sep 82 17:21:18-EDT (Wed)
+From:     Michael Muuss <mike@brl-bmd>
+cc:       tcp-ip at Brl-Bmd
+Subject:  DDN Host Access, Error Correction
+
+[ I enclose the following message because some of the readers may be
+  unfamiliar with the error correction in the ArpaNet/DDN.  -Mike ]
+
+	The backbone of the DDN is fully error corrected using
+the BBN RTP (Reliable Transport Protocol) between the C/30 IMPs.
+This is documented in some detail in BBN Report 1822.
+
+	There are several host-to-IMP connection possibilities,
+with varying degrees of error correction protocol superimposed:
+
+1)  LOCAL HOST	This is a TTL-level bit-serial connection, good for
+connections less than 25 feet.  The link is assumed reliable, and
+no error correction is performed.
+
+2)  DISTANT HOST  This is a balanced line driver version of the LOCAL
+HOST, and has the same reliability assumption.  This is good to 2000
+feet, with a somewhat slower data rate than the LOCAL HOST (about 1Mbit/sec).
+
+3)  VERY DISTANT HOST (VDH)  This is roughly the same as the RTP that
+the IMPs use to talk to each other.  The Host CPU overhead required
+to run this protocol is extensive.  The link is IBM bi-sync.
+
+4)  HDLC VERY DISTANT HOST (HDH)  This is a reimplementation of the VDH
+concept, only using bit-stuffed HDLC links rather than the IBM bi-sync
+that the old VDH (above) used.  HDH is strongly prefered over VDH.
+
+5)  X.25 DISTANT HOST  This is the same idea as VHD and HDH, but using
+the X.25 (Levels 1 through 3) to provide a reliable, flow controled,
+error corrected link between the IMP and the Host.  Note that the Host
+must still implement TCP and IP modules, in addition to X.25.  The X.25
+is merely being used to provide the interface to the IMP, becuase of the
+availibility of X.25 interface hardware and drivers.
+
+[ The X.25 interface option will not be availible until sometime 1984,
+  according to current predictions. ]
+
+Of course, the IMPs provide reliable transport once they get a hold of
+the data.
+
+In addition, communications through TCP are further checksumed (16 bits)
+in each packet, so an additional level of data asurance is provided. 
+This may be excessive for the fairly reliable C/30 DDN backbone, but
+becomes necessary when less reliable (eg, packet radio) communications
+links may be traversed.
+
+I know of no plans to support SIP (from AUTODIN II) in the current DDN.
+Does anybody seriously think SIP is good for anything?
+
+[ I have been informed by DCA that SIP *will* be supported within the DDN,
+  but only as a community unto itself.  That is, the plans for interoperability
+  between SIP hosts and TCP/IP hosts are still in the formative stages.
+  It is likely to be difficult. ]
+
+				Best,
+				 -Mike
+
+------------------------------
+
+Date:  15 September 1982 09:41 edt
+From:  Charles.Hornig at Mit-Multics
+Subject:  TCP/IP on Honeywell Level-6
+Sender:  Hornig.Multics at Mit-Multics
+cc:  tcp-ip at BRL
+
+I believe that a TCP which may be portable to GCOS is being developed by
+Honeywell Federal Systems Division for WWMCCS.
+
+------------------------------
+
+Date: 16 Sep 1982 at 0732-EDT
+From: hsw at Tycho (Howard Weiss)
+Subject: TCP/IP on 11/40 class machine
+To: yale at Nosc-Sdl
+cc: tcp-ip at BRL
+
+[ Please note that Howard refers to the older V6 BBN implementation of TCP/IP
+  which operates primarily in user mode.  The Gurwitz VAX implementation
+  ported to the PDP-11s by SRI clearly will not fit in an 11/40.  -Mike ]
+ 
+You should be able to bring up TCP on your 11/40 without too much heartache.
+I have an 11/34 and an 11/23 (same class machine as your 11/40) and had
+a version of BBNs TCP sort of running a while back (I ran into problems
+because I was using a very old v6 without the new BBN IPC stuff and
+also using a different 1822 interface).  I never got the TCP to
+actually talk to anyone at that time, but I had NO problems at all
+getting it onto the machine.  Without an NCP, UNIX (at least a V6
+flavored one) fits quite nicely onto a non-split I/D machine.  We
+have been running our 11/34 with the NCP for years now - barely
+fitting everything in without yet resorting to overlays.  We even
+have a few spare bytes of kernel space left over!!  But, without
+NCP, there are little problems in getting UNIX into the 11/40
+address space.  If you try to install a BBN type TCP which is
+slow and clunky because it lives outside the kernel, you win
+big on the 11/40 type machine since no kernel space is used
+up.  I am awaiting a tape from DCEC with their improved version of
+the BBN TCP that I will be installing on my 11/23 and 11/34 and
+only eventually on my 11/70.
+ 
+Howard Weiss
+
+------------------------------
+
+Date: 22 Sep 1982 04:09:16-PDT
+From: ssc-vax!foo at Lbl-Unix
+To: lbl-unix!TCP-IP at BRL
+Subject:  IP/TCP for Ungermann-Bass NET/ONE?  For SELs?
+
+We are considering implementing IP/TCP on a local area network using
+Ungermann-Bass NET/ONE.  There will be one VAX 11/780 (running VMS)
+and at least 7 SELs (running whatever their OS is).
+
+My problem is that I don't want to re-invent the wheel for IP/TCP,
+hence I am looking for:
+	1. IP/TCP implementation for VAX/VMS.  Code should be in "C" or
+	   Fortran 77.
+	2. IP/TCP implementation for SEL.  Code should be in Fortran 77.
+
+Anyone out there willing to give, trade or sell us code?  I have already
+talked to Digital Technology in Illinois who have a VAX/VMS implementation
+for about $15K which includes higher level software for UNET from 3Com,
+about $6K for just IP/TCP.
+
+Any help will be appreciated.  Thanks in advance.
+
+					Y. Pin Foo
+					MS 8H-56
+					Boeing Aerospace Co.
+					Seattle, Wa 98124.
+					(206)773-3436
+
+			Usenet address: ...!ssc-vax!foo
+			Arpanet: ssc-vax!foo at Lbl-Unix
+
+------------------------------
+
+END OF TCP-IP DIGEST
+********************
+

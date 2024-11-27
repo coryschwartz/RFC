@@ -1,0 +1,283 @@
+    Otherwise,
+
+    first check sequence number
+
+      SYN-RECEIVED STATE
+
+      ESTABLISHED STATE
+
+      FIN-WAIT-1 STATE
+
+      FIN-WAIT-2 STATE
+
+      CLOSE-WAIT STATE
+
+      CLOSING STATE
+
+      LAST-ACK STATE
+
+      TIME-WAIT STATE
+
+        Segments are processed in sequence.  Initial tests ...
+
+        <new text in bis> 
+
+        There are four cases for the acceptability test for ...
+
+        Segment Receive  Test
+        Length  Window
+        ------- -------  ------------------------------------ ...
+
+        <new text in bis> 
+
+        If the RCV.WND is zero, no segments will be acceptable, ...
+
+        If an incoming segment is not acceptable, an ...
+
+          <SEQ=SND.NXT><ACK=RCV.NXT><CTL=ACK>
+
+        After sending the acknowledgment, drop the unacceptable ...
+
+        <new text in bis> 
+
+        In the following it is assumed that the segment is the ...
+
+    second check the RST bit,
+
+      <new text in bis> 
+
+        <new text in bis> 
+
+        <new text in bis> 
+
+        <new text in bis> 
+
+         <new text in bis> 
+
+         <new text in bis> 
+
+      SYN-RECEIVED STATE
+
+        If the RST bit is set
+
+          If this connection was initiated with a passive ...
+
+      ESTABLISHED
+
+      FIN-WAIT-1
+
+      FIN-WAIT-2
+
+      CLOSE-WAIT
+
+        If the RST bit is set then, any outstanding RECEIVEs ...
+
+      CLOSING STATE
+
+      LAST-ACK STATE
+
+      TIME-WAIT
+
+        If the RST bit is set then, enter the CLOSED state ...
+
+    third check security and precedence
+
+      SYN-RECEIVED
+
+        If the security/compartment and precedence in the segment do not ...
+
+      ESTABLISHED STATE
+
+      <new text in bis> 
+
+      <new text in bis> 
+
+      <new text in bis> 
+
+      <new text in bis> 
+
+      <new text in bis> 
+
+      <new text in bis> 
+
+        If the security/compartment and precedence in the segment do not ...
+
+      Note this check is placed following the sequence check ...
+
+    fourth, check the SYN bit,
+
+      SYN-RECEIVED
+
+         <new text in bis> 
+
+      ESTABLISHED STATE
+
+      FIN-WAIT STATE-1
+
+      FIN-WAIT STATE-2
+
+      CLOSE-WAIT STATE
+
+      CLOSING STATE
+
+      LAST-ACK STATE
+
+      TIME-WAIT STATE
+
+        If the SYN is in the window it is an error, ...
+
+        <new text in bis> 
+
+        <new text in bis> 
+
+        <new text in bis> 
+
+        If the SYN is not in the window this step would ...
+
+    fifth check the ACK field,
+
+      if the ACK bit is off drop the segment and return
+
+      if the ACK bit is on
+
+        <new text in bis> 
+
+        SYN-RECEIVED STATE
+
+          If SND.UNA =< SEG.ACK =< SND.NXT then enter ESTABLISHED ...
+
+            <new text in bis> 
+
+            <new text in bis> 
+
+            <new text in bis> 
+
+            If the segment acknowledgment is not acceptable, form ...
+
+              <SEQ=SEG.ACK><CTL=RST>
+
+            and send it.
+
+        ESTABLISHED STATE
+
+          If SND.UNA < SEG.ACK =< SND.NXT then, set SND.UNA ...
+
+          If SND.UNA < SEG.ACK =< SND.NXT, the send window ...
+
+          Note that SND.WND is an offset from SND.UNA, ...
+
+        FIN-WAIT-1 STATE
+
+          In addition to the processing for the ESTABLISHED ...
+
+        FIN-WAIT-2 STATE
+
+          In addition to the processing for the ESTABLISHED ...
+
+        CLOSE-WAIT STATE
+
+          Do the same processing as for the ESTABLISHED state.
+
+        CLOSING STATE
+
+          In addition to the processing for the ESTABLISHED ...
+
+        LAST-ACK STATE
+
+          The only thing that can arrive in this state is ...
+
+        TIME-WAIT STATE
+
+          The only thing that can arrive in this state is ...
+
+    sixth, check the URG bit,
+
+      ESTABLISHED STATE
+
+      FIN-WAIT-1 STATE
+
+      FIN-WAIT-2 STATE
+
+        If the URG bit is set, RCV.UP <- max(RCV.UP,SEG.UP) ...
+
+      CLOSE-WAIT STATE
+
+      CLOSING STATE
+
+      LAST-ACK STATE
+
+      TIME-WAIT
+
+        This should not occur, since a FIN has been received ...
+
+    seventh, process the segment text,
+
+      ESTABLISHED STATE
+
+      FIN-WAIT-1 STATE
+
+      FIN-WAIT-2 STATE
+
+        Once in the ESTABLISHED state, it is possible to ...
+
+        When the TCP takes responsibility for ...
+
+        Once the TCP takes responsibility for ...
+
+        <new text in bis> 
+
+        Please note the window management suggestions in ...
+
+        Send an acknowledgment of the form:
+
+          <SEQ=SND.NXT><ACK=RCV.NXT><CTL=ACK>
+
+        This acknowledgment should be piggybacked on a ...
+
+      CLOSE-WAIT STATE
+
+      CLOSING STATE
+
+      LAST-ACK STATE
+
+      TIME-WAIT STATE
+
+        This should not occur, since a FIN has been received ...
+
+    eighth, check the FIN bit,
+
+      Do not process the FIN if the state is CLOSED, LISTEN ...
+
+      If the FIN bit is set, signal the user "connection ...
+
+        SYN-RECEIVED STATE
+
+        ESTABLISHED STATE
+
+          Enter the CLOSE-WAIT state.
+
+        FIN-WAIT-1 STATE
+
+          If our FIN has been ACKed (perhaps in this ...
+
+        FIN-WAIT-2 STATE
+
+          Enter the TIME-WAIT state.  Start the time-wait ...
+
+        CLOSE-WAIT STATE
+
+          Remain in the CLOSE-WAIT state.
+
+        CLOSING STATE
+
+          Remain in the CLOSING state.
+
+        LAST-ACK STATE
+
+          Remain in the LAST-ACK state.
+
+        TIME-WAIT STATE
+
+          Remain in the TIME-WAIT state.  Restart the 2 MSL ...
+
+    and return.

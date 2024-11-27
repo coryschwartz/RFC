@@ -1,0 +1,380 @@
+18-Jan-82 21:49:32-PST,15354;000000000001
+Mail-from: ARPANET host BRL rcvd at 18-Jan-82 2148-PST
+Sender:    Mike Muuss <Mike@BRL>
+From:      TCP-IP at BRL
+To:        TCP-IP at BRL
+Reply-To:  TCP-IP at BRL
+Date:      18 Jan 1982
+Subject:   TCP-IP Digest, Vol 1 #13
+Via:  Brl; 18 Jan 82 19:38-EDT
+
+TCP/IP Digest             Monday, 18 Jan 1982      Volume 1 : Issue 13
+
+Today's Topics:
+                           New Digest Headers
+                     Public Distribution of Digests
+          Restricted Distribution of Mailing Lists/Digests/Etc?
+            What is PUBLIC and What is PRIVATE Distribution?
+                Precedent for Privacy of Electronic Mail
+                  Related Discussion Group Information
+                          To TCP or not to TCP?
+                InterNet Addresses && Overloading the Dot
+                            TCP/IP on a Cyber
+----------------------------------------------------------------------
+                         LIMITED DISTRIBUTION
+          For Research Use Only --- Not for Public Distribution
+----------------------------------------------------------------------
+
+From:    Mike at BRL
+Subject: New Digest Headers
+
+This digest marks the first issue with the new headers people have been
+asking for.  If this is not completely delightful to everybody, please
+let me know.
+					Cheers,
+					 -Mike
+------------------------------
+
+From: Mike Peeler <Admin.MDP at SU-SCORE>
+Subject: Public Distribution
+
+    One way we could tell people that digest material is not public
+would be first to announce the fact as an administrative note in the
+digest and then to mention it whenever introducing a new member to the
+list (by sending them a "welcome" note).  This approach is much less
+distasteful than that of putting a warning on the label.
+
+    The problem with it is that not all subscribers are added by one
+list maintainer.  In fact, many of them get the digests by mechanisms
+essentially equivalent to a bulletin board.  This means that a large
+fraction of our new readers will never get a welcome note.
+
+    If we regard the above as ineffective, then we want to make the
+warning as unobtrusive as possible.  Two possibilities present them-
+selves.  The first possibility would be to tuck it away in the header
+instead of the banner; for example
+
+        Date: Friday, 15 January 1982
+        From: PCP-IV at BAL
+        Private: Not for public distribution
+        Subject: PCP-IV Digest  V9 #23
+        To: PCP-IV at BAL
+
+The second possibility would be to place the warning at the bottom of
+the digest instead of the top; it might look like
+
+        ------------------------------
+
+        **************   End of PCP-IV Digest   **************
+        *********   (Not For Public Distribution)   **********
+        ******************************************************
+
+or perhaps something less ostentatious to the same effect.
+
+    The latter, like the warning in the banner, will break some
+undigestifying programs, but probably in a milder and more easily
+reparable way.  The former will not break most software, but may not
+be as aesthetically acceptable.
+
+                                    Yours very sincerely,
+
+                                                      Mike
+
+------------------------------
+
+From: Paul A. Karger <KARGER at DEC-MARLBORO>
+Subject: restricted distribution of mailing lists/digests/etc
+
+While putting a restricted distribution statement on a digest may be a
+psychological limitation on distribution, there a couple of problems.  First,
+since ARPA and DCA are part of the DoD, there are specific regulations
+on what may or may not be marked as FOR OFFICIAL USE ONLY.  The regulations
+are in part designed to not let people invent other kinds of markings.
+This dates back to the Ellsberg case and the desire to limit the ability
+of govt people to conceal information from the "public" (whoever that is)
+
+What happens if someone submits a Freedom of information Act request
+for Volume 2, Issue 6 of TCP-IP Digest?  Worse still, what if someone
+submits a FOIA request for SFL??
+
+My familliarity with the applicable regs is a little stale, because I left
+the Air Force over 2 years ago, but I would be very careful about developing
+new ways to restrict distribution of government information.  
+
+Paul Karger
+
+------------------------------
+
+From: V. Ellen Golden <ELLEN at MIT-MC>
+Subject: [Paul A. Karger:  restricted distribution of mailing lists/digests]
+
+THE ELLSBERG CASE?  Gosh... I am ancient.
+Daniel Ellsberg made copies of the Pentagon Papers, which were
+secret discussions about the Vietnam War.  He worked for a Harvard/MIT
+institute for Government (Political Science) sort of thing.  He thought
+"the people" should know what was going on, and so made copies of the
+reports.  The CIA etc was not enthusiased.  The group who were involved
+in stopping him were the same group which became familiar later:
+The Plumbers (they invaded his psychiatrist's office, in California, yet).
+The Pentagon Papers were published in the New York Times.  I admit I am
+not sure if this was the event which triggered the Plumbers (of later
+Watergate fame) to go to the psychiatrist's office, or if after all was
+said and done, the stuff finally made it to the public eye. (Other ancients
+like myself may recall better than I, and I beg them to correct my somewhat
+sketchy remembrance of the events.)
+
+anyway... in some way the Ellsberg case does have a bearing here in
+the Digest-people discussion.  Do "the people" have a right to "know"
+(what?).  I would say myself that what is in digests is not classified
+in any sense of the word, but I have no idea how that relates to our
+(ARPANET) status.
+
+------------------------------
+
+Subject: What is Public and what is Private distribution?
+From: TMPL at BBNG
+
+How my name got on the Digest list is a longish story, so I won't
+go into it, except to say that it had to  do  with  my  exploring
+some form of internetworking as a better way of accessing the net
+than I do currently (corporate phone lines to Boston or Telenet).
+My  main  use  of  the  net  is  as part of the computer security
+community and is fully and properly justified by the right set of
+letters from the Pentagon to BBN, DCA, etc.  ANYWAY, I have found
+the Digest most interesting and have been circulating it  to  our
+communications and systems research people, chiefly because it is
+quite clear that at some point our products will have to  support
+TCP  etc.   for our government customers at least.  I view such a
+redistribution as an acceptable  way  of  communicating  research
+results  to  those  who  can and ought to use them.  It certainly
+isn't a public distribution in the sense of the mass media, but I
+would like to be reassured that it is an acceptably private one.
+	
+Ted Lee
+Manager, Systems Security
+Sperry Univac
+Roseville, Mn.
+
+------------------------------
+
+From:      Mike Muuss <tcp-ip@brl>
+Subject:   Re:  What is Public and what is Private distribution?
+
+Ted -
+
+	I am pleased that a major manufacturer like Sperry Univac is
+looking at the TCP/IP protocols (and the Digest).  It is groups just
+like yours that everyone expects the Digests to go to.  Frequently,
+the Digest will contain status reports about on-going
+projects, or discussions of evolving featues/bugs/whatever.  This
+type of "working notes" material can often be confusing or misleading
+to the casual onlooker, and hence the concern that information which
+is going to the general public be obtained through official channels
+(Jon Postel or Vint Cerf, DCA/DARPA/ISI).
+
+	Please do not re-publish materials or statements from the Digest,
+but please DO feel free to distribute it to any interested people within
+your organization.
+					Sleepily,
+					 -Mike
+
+------------------------------
+
+Sender: TMPL at BBNG
+Subject: Precedent for Privacy of Electronic Mail
+
+There does seem to be some sort of legal basis for claiming that
+material such as the Digest is covered by existing privacy laws.
+The report in Computerworld about the US Postal Service's new
+Electronic Computer-Originated Mail (Ecom) contains the following
+interesting observation:
+
+"...because at least 50% of Ecom is electronically based, a part
+of the operation is covered under the rules of the Communications
+Act of 1934.  A sign is conspicuously posted in Ecom's Boston
+center stating that anyone who violates a message's confidence or
+removes a scrap of paper from the Ecom computer room will be
+subject to a $10,000 fine, two years in jail or both.
+
+"Once the messages are put in the bright blue and white Ecom
+envelope, they are considered as mail and covered under the
+standard postal regulations governing mail handling, an Ecom
+spokesman said."
+
+(from Computerworld, 11 Jan 1982, p. 12)
+
+Ted Lee
+Sperry Univac
+
+------------------------------
+
+From: Zellich at OFFICE-3 (Rich Zellich)
+Subject: Pointers to mail header discussions
+
+Mike -
+
+Hers is what I have on Header-People and MsgGroup lists and their
+archives.  This information is from OFFICE-3 publicly-accessible file
+<ALMSA>INTEREST-GROUPS.TXT  OFFICE-3 supports the net "standard"
+ANONYMOUS login with password ARPA.
+
+-Rich Zellich
+ ALMSA
+---
+
+HEADER-PEOPLE at MIT-MC
+
+   Interest specifically in the format of message headers and related issues 
+   such as inter-network mail formats/standards, etc.
+
+   Header-People messages are filed on MIT-MC:KSC;HEADER MINS [and MINS01, 
+   MINS02, etc.].  The ones more than 3 years old have been "reaped" but could 
+   be retrieved if anyone wants to see them.
+
+   Coordinator: David A. Moon <MOON at MIT-MC>
+
+MsgGroup at MIT-ML
+
+   Interest in electronic mail, message formats, message systems, and the 
+   sociological implications of the above.
+
+   Coordinator: EStefferud at USC-ECL/MsgGroup at USC-ECL
+
+[ In future discussions of these issues, please CC these other lists.
+  I would like to see the meta-discussion migrate to a more appropriate
+  place.  This does not remove it's vital importance to this list, however.
+    -Mike ]
+
+------------------------------
+
+From: Christopher C. Stacy <CStacy at MIT-AI>
+Subject: To TCP or not to TCP?
+
+    Date: 14 January 1982 0206-PST (Thursday)
+    From: lauren at UCLA-Security (Lauren Weinstein)
+
+    Is there some good reason that the ITS machines cannot be 
+    gatewayed through a supported machine?  Even little 11's like
+    the 24 should be able to run some sort of existing TCP/IP
+    implementation.  Rand-Unix currently talks to the ARPANET over
+    a 9600 baud tty line via an 11/34 running the NCP.
+    --Lauren--
+
+No, there is not any real reason why we cannot set up some limited
+gateway.  However, the design of really complete gateways with
+protocol translation like one would want is an unsolved research
+question.  
+
+In fact we will probably implement some limited functionality to
+connect our local network to the Internet, but we will not do any
+development which requires a major software effort.  To implement a
+real TCP for an ITS machine would require about two years of heavy
+duty full time system programming, and since we are rapidly phasing
+out our timesharing machines we are not going to undertake such work.
+We are not going to do anything until we wake up one day and discover
+our plug being pulled out.
+
+------------------------------
+
+From:      Hal.Cornell at UDel
+Subject:   Internet addresses
+
+I was bothered by the "user.host @ net" internetwork address for
+another reason:  the meaning of "@ foo" is ambiguous.  Foo could be
+either a network name or just the name of a regular ARPANET host.
+
+How about using "user @ host @@ net" for internet addresses?  The
+"@@ net" could be omitted if the user is on the same network, and
+if the user is on the same host, "@ host" could be eliminated also.
+
+                                  Hal Perkins
+                                  (Hal.Cornell @ UDel)
+
+------------------------------
+
+From: POSTEL at USC-ISIF
+Subject: Overloading the Dot
+
+In the transition plan for converting from NCP to TCP (RFC801), the
+plan for mail includes a provision for forwarding mail through a special
+forwarder program from NCP/FTP mail hosts to TCP/SMTP hosts by using the
+special forwarding address "user.host@fwdr".
+
+After considering the comments in this digest and in other inputs I
+have received, I do agree that the syntax "user.host@fwdr" will be
+awkward for some hosts to handle.  We need to select a different
+character for the separator between the "user" and "host" parts in
+this special forwarding address.  My current candidate is per cent (%).
+Are their any problems with this choice?
+
+I have discussed this with the people developing the JNT mail system in
+the UK, and this use of per cent fits in well with their syntax.
+
+--jon.
+
+------------------------------
+
+From:      Crimmins at BRL-BMD
+Subject:   TCP/IP on a CYBER
+
+	I spoke with Tim Fallon of Tektronix about implementing
+ TCP/IP on a CYBER 175 running NOS. The results of my conversation
+ are as follows.
+
+	DOCUMENTATION:
+     
+  All documentation is in the code and the Tektronix legal dept. is 
+  not ready to release the code. Therefore, no documentation is available.
+
+	IMPLEMENTATION:
+
+  IP	implemented in a PP, ~4000 lines of PP assembler code.
+
+  TCP	runs at a control point in NOS, written in SYMPL.
+        SYMPL is a CDC product.
+					TomC
+
+------------------------------
+
+[ The following letter arrived Via UUCP, and cannot be answered through the
+  BRL-BMD machine.  -Mike ]
+
+From:     steveg.Azure at BRL-BMD
+Cc:       rickk.Teklabs at BRL-BMD, timf.Teklabs at BRL-BMD,
+          clemc.Teklabs at BRL-BMD
+Subject:  Tek's implementation of tcp-ip for Cyber
+
+The statement in the digest was somewhat wrong. [Volume 1 : Issue 12]
+
+The TCP implementation is done in SYMPL (an implementation language for
+the Cyber).  The IP implementation is in Cyber Peripheral Processor
+assembler (and possibly some SYMPL code).  The upper level stuff (FTP
+et. al) is being done in Ratfor.  There are no plans to do a telnet
+server as Cyber timesharing is too heavily bound into the front-end
+hardware (psuedo terminals are very difficult to implement).  We are
+using Hyperchannel hardware and have not done any work with any other
+hardware.  Throughput looping back in the hyperchannel adapter on an
+idle Cyber 175 is in the 1Mbit range.  This is all under NOS.
+
+An implementation fo VMS is also underway here, but I'm not very up on
+that one.  I think it's being done in Ratfor (so they can use the same
+code for FTP as the Cyber).  We did write a hyperchannel driver for
+3Com's UNET on both the 11/70 and Vax Unix systems.
+
+The actual guys that did the work can be reached at:
+
+	...!teklabs!rickk   (Rick Krull - FTP, Unix stuff)
+	...!teklabs!timf    (Tim Fallon - Cyber IP, TCP, project mgr)
+	[ snail mail:
+		Box 500, M/S 50-454, Beaverton OR 97077
+		(503) 644-0161
+	]
+
+Currently, they're working with 3Com to get the Unix-TCP flow control
+code working fully as the Cyber can easily overdrive the Unix machines.
+
+Steve Glaser
+
+END OF TCP-IP DIGEST
+********************
+

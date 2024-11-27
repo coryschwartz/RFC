@@ -1,0 +1,698 @@
+
+
+
+--========================_4084092==_
+Content-Type: text/plain; charset="us-ascii"
+
+
+
+
+
+--========================_4084092==_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: binary
+
+
+
+
+
+          Bellcore            ATM Extensions Objects           June 1994
+
+
+                            Definitions of Extensions
+                                  to the ATM MIB
+                                    SNMPv2 MIB
+                              bellcore-atmext-00.txt
+
+                                    June 1994
+                                   Version 1.0
+
+
+                                    Kaj Tesink
+                           Bell Communications Research
+                             331 Newman Springs Road
+                               Red Bank, NJ  07701
+
+                               kaj@cc.bellcore.com
+
+
+
+
+
+
+          1.  Status of this Memo
+
+          This document is a private extension to the ATM MIB.
+          Distribution of this memo is unlimited.  Please send comments
+          to the editor.
+
+
+          2.  Abstract
+
+          This memo defines an experimental private portion of the
+          Management Information Base (MIB) for use with network
+          management protocols in TCP/IP-based internets.  In
+          particular, it defines objects beyond those defined in the ATM
+          MIB.
+
+          This memo does not specify a standard for the Internet
+          community.
+
+
+
+
+
+
+
+
+
+
+
+
+          Kaj Tesink                                            [Page 1]
+
+
+
+
+
+          Bellcore            ATM Extensions Objects           June 1994
+
+
+          3.  The Network Management Framework
+
+          The SNMPv2 Network Management Framework consists of four major
+          components.  They are:
+
+           o    RFC 1442 which defines the SMI, the mechanisms used for
+                describing and naming objects for the purpose of
+                management.
+
+           o    RFC 1213 defines MIB-II, the core set of managed objects
+                for the Internet suite of protocols.
+
+           o    RFC 1445 which defines the administrative and other
+                architectural aspects of the framework.
+
+           o    RFC 1448 which defines the protocol used for network
+                access to managed objects.
+
+          The Framework permits new objects to be defined for the
+          purpose of experimentation and evaluation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          Kaj Tesink                                            [Page 2]
+
+
+
+
+
+          Bellcore            ATM Extensions Objects           June 1994
+
+
+          4.  Object Definitions
+
+          Managed objects are accessed via a virtual information store,
+          termed the Management Information Base or MIB.  Objects in the
+          MIB are defined using the subset of Abstract Syntax Notation
+          One (ASN.1) defined in the SMI.  In particular, each object
+          object type is named by an OBJECT IDENTIFIER, an
+          administratively assigned name.  The object type together with
+          an object instance serves to uniquely identify a specific
+          instantiation of the object.  For human convenience, we often
+          use a textual string, termed the descriptor, to refer to the
+          object type.
+
+          5.  Overview
+
+          These objects are used in the context of a SNMP-based Customer
+          Network Management (CNM) service that can be provided by
+          networks supporting Cell Relay Service.  See reference [5].
+
+          This MIB module supports the following capabilities:
+          o    Contact and location information for Cell Relay Service provider
+               personnel in scenarios where a distributed rather than a
+centralized
+               customer contact service organization is used by the service
+provider.
+          o    Counters for UPC violations per VC for scenarios where the
+service
+               provider supports subscription per VC of these counts.
+
+          See [5] for further information on these capabilities.
+
+          To obtain Bellcore documents, contact:
+
+                       Bellcore
+                       Customer Service
+                       8 Corporate Place - Rm. 3C-183
+                       Piscataway, NJ 08854-4156
+                       1 (800) 521-CORE
+                       (908) 699-5800 (For Foreign Calls)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          Kaj Tesink                                            [Page 3]
+
+
+
+
+
+          Bellcore            ATM Extensions Objects           June 1994
+
+
+          6.  Object Definitions
+
+
+
+          -- Object Definitions
+
+                    ATM-Ext-MIB DEFINITIONS ::= BEGIN
+
+                    IMPORTS
+                       MODULE-IDENTITY, OBJECT-TYPE,
+                       Counter32, Integer32, enterprises        FROM SNMPv2-SMI
+                       DisplayString, RowStatus                 FROM SNMPv2-TC
+                       ifIndex                                  FROM RFC1213-MIB
+                       MODULE-COMPLIANCE, OBJECT-GROUP          FROM
+SNMPv2-CONF;
+
+                      bellcore         OBJECT IDENTIFIER ::= { enterprises 148 }
+                      requirements     OBJECT IDENTIFIER ::= { bellcore 1 }
+
+                      atmExtMIB MODULE-IDENTITY
+                         LAST-UPDATED "9312101200Z"
+                         ORGANIZATION "Bellcore"
+                         CONTACT-INFO
+                               "   Kaj Tesink
+                                   Bellcore
+                                   331 Newman Springs Rd.
+                                   Red Bank, NJ 07701 USA
+
+                                   Tel: 1-908-758-5254
+                                   Fax: 1-908-758-4196
+                                   E-mail: kaj@cc.bellcore.com."
+                         DESCRIPTION
+                                  "The MIB module for extensions to the ATM
+MIB for
+                                  CNM and XA-OM for Cell Relay Service."
+                        ::= { requirements 6 }
+
+                        atmExtObjects  OBJECT IDENTIFIER ::= { atmExtMIB 1 }
+
+
+                    -- The Contact Group
+
+                    atmExtContactTable OBJECT-TYPE
+                        SYNTAX  SEQUENCE OF AtmExtContactEntry
+                        MAX-ACCESS  not-accessible
+                        STATUS  current
+                        DESCRIPTION
+
+
+
+
+
+          Kaj Tesink                                            [Page 4]
+
+
+
+
+
+          Bellcore            ATM Extensions Objects           June 1994
+
+
+                                "A table with contact information for ATM
+interfaces. "
+                        ::= { atmExtObjects 1 }
+
+                    atmExtContactEntry OBJECT-TYPE
+                        SYNTAX  AtmExtContactEntry
+                        MAX-ACCESS  not-accessible
+                        STATUS  current
+                        DESCRIPTION
+                                "An entry in the Contact table."
+                        INDEX   { ifIndex }
+                        ::= { atmExtContactTable 1 }
+
+                    AtmExtContactEntry ::=
+                        SEQUENCE {
+                            atmExtContactIfInfo
+                                DisplayString,
+                            atmExtContactIfLocation
+                                DisplayString
+                            }
+
+                    atmExtContactIfInfo OBJECT-TYPE
+                        SYNTAX  DisplayString
+                        MAX-ACCESS  read-only
+                        STATUS  current
+                        DESCRIPTION
+                                "The service provider contact information for
+                                  this interface."
+                        ::= { atmExtContactEntry 2 }
+
+                    atmExtContactIfLocation OBJECT-TYPE
+                        SYNTAX  DisplayString
+                        MAX-ACCESS  read-only
+                        STATUS  current
+                        DESCRIPTION
+                                "The serving location of this interface."
+                        ::= { atmExtContactEntry 3 }
+
+
+                    atmExtVclTable OBJECT-TYPE
+                        SYNTAX  SEQUENCE OF AtmExtVclEntry
+                        MAX-ACCESS  not-accessible
+                        STATUS  current
+                        DESCRIPTION
+                                "A table with performance information for VCLs. "
+                        ::= { atmExtObjects 2 }
+
+
+
+
+
+          Kaj Tesink                                            [Page 5]
+
+
+
+
+
+          Bellcore            ATM Extensions Objects           June 1994
+
+
+                    atmExtVclEntry OBJECT-TYPE
+                        SYNTAX  AtmExtVclEntry
+                        MAX-ACCESS  not-accessible
+                        STATUS  current
+                        DESCRIPTION
+                                "An entry in the VCL table."
+                        INDEX   { ifIndex, atmExtVclVpi, atmExtVclVci }
+                        ::= { atmExtVclTable 1 }
+
+                    AtmExtVclEntry ::=
+                        SEQUENCE {
+                            atmExtVclVpi
+                                Integer32,
+                            atmExtVclVci
+                                Integer32,
+                            atmExtVclUpcViolations
+                                Counter32,
+                            atmExtVclRowStatus
+                                RowStatus
+                            }
+
+                    atmExtVclVpi OBJECT-TYPE
+                        SYNTAX  Integer32
+                        MAX-ACCESS  not-accessible
+                        STATUS  current
+                        DESCRIPTION
+                                "The VCL's VPI value."
+                        ::= { atmExtVclEntry 1 }
+
+                    atmExtVclVci OBJECT-TYPE
+                        SYNTAX  Integer32
+                        MAX-ACCESS  not-accessible
+                        STATUS  current
+                        DESCRIPTION
+                                "The VCL's VCI value."
+                        ::= { atmExtVclEntry 2 }
+
+                    atmExtVclUpcViolations OBJECT-TYPE
+                        SYNTAX  Counter32
+                        MAX-ACCESS  read-only
+                        STATUS  current
+                        DESCRIPTION
+                                "The number of cells discarded due
+                                to UPC violations on this link."
+                        ::= { atmExtVclEntry 3 }
+
+
+
+
+
+          Kaj Tesink                                            [Page 6]
+
+
+
+
+
+          Bellcore            ATM Extensions Objects           June 1994
+
+
+                    atmExtVclRowStatus OBJECT-TYPE
+                        SYNTAX  RowStatus
+                        MAX-ACCESS  read-create
+                        STATUS  current
+                        DESCRIPTION
+                                "The status of this entry."
+                        ::= { atmExtVclEntry 4 }
+
+
+
+
+                    atmExtVplTable OBJECT-TYPE
+                        SYNTAX  SEQUENCE OF AtmExtVplEntry
+                        MAX-ACCESS  not-accessible
+                        STATUS  current
+                        DESCRIPTION
+                                "A table with performance information for
+VPLs. "
+                        ::= { atmExtObjects 3 }
+
+                    atmExtVplEntry OBJECT-TYPE
+                        SYNTAX  AtmExtVplEntry
+                        MAX-ACCESS  not-accessible
+                        STATUS  current
+                        DESCRIPTION
+                                "An entry in the VPL table."
+                        INDEX   { ifIndex, atmExtVplVpi }
+                        ::= { atmExtVplTable 1 }
+
+                    AtmExtVplEntry ::=
+                        SEQUENCE {
+                            atmExtVplVpi
+                                Integer32,
+                            atmExtVplUpcViolations
+                                Counter32,
+                            atmExtVplRowStatus
+                                RowStatus
+                            }
+
+                    atmExtVplVpi OBJECT-TYPE
+                        SYNTAX  Integer32
+                        MAX-ACCESS  not-accessible
+                        STATUS  current
+                        DESCRIPTION
+                                "The VPL's VPI value."
+                        ::= { atmExtVplEntry 1 }
+
+
+
+
+
+          Kaj Tesink                                            [Page 7]
+
+
+
+
+
+          Bellcore            ATM Extensions Objects           June 1994
+
+
+                    atmExtVplUpcViolations OBJECT-TYPE
+                        SYNTAX  Counter32
+                        MAX-ACCESS  read-only
+                        STATUS  current
+                        DESCRIPTION
+                                "The number of cells discarded due
+                                to UPC violations on this link."
+                        ::= { atmExtVplEntry 2 }
+
+                    atmExtVplRowStatus OBJECT-TYPE
+                        SYNTAX  RowStatus
+                        MAX-ACCESS  read-create
+                        STATUS  current
+                        DESCRIPTION
+                                "The status of this entry."
+                        ::= { atmExtVplEntry 3 }
+
+
+
+
+
+                    -- Conformance Information
+
+                    atmExtConformance  OBJECT IDENTIFIER ::= { atmExtMIB 2 }
+
+                    atmExtGroups       OBJECT IDENTIFIER ::= {
+atmExtConformance 1 }
+                    atmExtCompliances  OBJECT IDENTIFIER ::= {
+atmExtConformance 2 }
+
+                    -- Compliance Statements
+
+                    atmExtCompliance MODULE-COMPLIANCE
+                          STATUS  current
+                          DESCRIPTION
+                            "The compliance statement for SNMPv2 entities
+                            which support Cell Relay CNM."
+
+                          MODULE -- this module
+
+                    GROUP  atmExtContactGroup
+                    DESCRIPTION
+                      "This group is mandatory only for ATM interfaces
+                       providing Cell Relay Service where distributed
+                       rather than centralized customer service support
+personnel
+                       is used for customer contacts."
+
+
+
+
+
+
+          Kaj Tesink                                            [Page 8]
+
+
+
+
+
+          Bellcore            ATM Extensions Objects           June 1994
+
+
+                    GROUP  atmExtVCCGroup
+                    DESCRIPTION
+                      "This group is mandatory only for ATM interfaces
+                       providing VCC Cell Relay Service where the capability
+                       to subscribe to UPC counts per VCC is supported."
+
+                              OBJECT      atmExtVclRowStatus
+                              SYNTAX      INTEGER {active(1)}
+                                          -- subset of RowStatus
+                              MIN-ACCESS  read-only
+                              DESCRIPTION
+                                  "Write access is not required."
+
+                    GROUP  atmExtVPCGroup
+                    DESCRIPTION
+                      "This group is mandatory only for ATM interfaces
+                       providing VPC Cell Relay Service where the capability
+                       to subscribe to UPC counts per VPC is supported."
+
+                              OBJECT      atmExtVplRowStatus
+                              SYNTAX      INTEGER {active(1)}
+                                          -- subset of RowStatus
+                              MIN-ACCESS  read-only
+                              DESCRIPTION
+                                  "Write access is not required."
+
+                     ::= { atmExtCompliances 1 }
+
+
+
+                    -- Units of Conformance
+
+                    atmExtContactGroup  OBJECT-GROUP
+                          OBJECTS { atmExtContactIfInfo,
+atmExtContactIfLocation }
+                          STATUS  current
+                          DESCRIPTION
+                                "A collection of objects providing information
+                                applicable to contact information for ATM
+interfaces."
+                          ::= { atmExtGroups 1 }
+
+                    atmExtVCCGroup  OBJECT-GROUP
+                          OBJECTS { atmExtVclUpcViolations, atmExtVclRowStatus }
+                          STATUS  current
+                          DESCRIPTION
+                                "A collection of objects the capability to
+
+
+
+
+
+          Kaj Tesink                                            [Page 9]
+
+
+
+
+
+          Bellcore            ATM Extensions Objects           June 1994
+
+
+                                 subscribe to UPC counts for specific VCCs."
+                          ::= { atmExtGroups 2 }
+
+                    atmExtVPCGroup  OBJECT-GROUP
+                          OBJECTS { atmExtVplUpcViolations, atmExtVplRowStatus }
+                          STATUS  current
+                          DESCRIPTION
+                                "A collection of objects the capability to
+                                 subscribe to UPC counts for specific VPCs."
+                          ::= { atmExtGroups 3 }
+
+
+                    END
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          Kaj Tesink                                           [Page 10]
+
+
+
+
+
+          Bellcore            ATM Extensions Objects           June 1994
+
+
+          7.  References
+          [1]  Case, J., McCloghrie, K., Rose, M., and S. Waldbusser,
+               "Structure of Management Information for version 2 of the
+               Simple Network Management Protocol (SNMPv2)", RFC 1442, SNMP
+               Research, Inc., Hughes LAN Systems, Dover Beach Consulting,
+               Inc., Carnegie Mellon University, April 1993.
+
+          [2]  Galvin, J., and K. McCloghrie, "Administrative Model for
+               version 2 of the Simple Network Management Protocol
+               (SNMPv2)", RFC 1445, Trusted Information Systems, Hughes LAN
+               Systems, April 1993.
+
+          [3]  Case, J., McCloghrie, K., Rose, M., and S. Waldbusser,
+               "Protocol Operations for version 2 of the Simple Network
+               Management Protocol (SNMPv2)", RFC 1448, SNMP Research, Inc.,
+               Hughes LAN Systems, Dover Beach Consulting, Inc., Carnegie
+               Mellon University, April 1993.
+
+          [4]  McCloghrie, K., and M. Rose, "Management Information Base for
+               Network Management of TCP/IP-based internets - MIB-II", RFC
+               1213, Hughes LAN Systems, Performance Systems International,
+               March 1991.
+
+          [5]  Generic Requirements for Phase 1 Exchange PVC CRS Customer
+Network
+               Management Service, Bellcore
+               GR-1117-CORE, Issue 1, June 1994.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          Kaj Tesink                                           [Page 11]
+
+
+
+
+--========================_4084092==_
+Content-Type: text/plain; charset="us-ascii"
+
+
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+_/                                                                      _/
+_/  Kaj Tesink                                                          _/
+_/  Bellcore                                                            _/
+_/  - Broadband Data Services & Consulting  vmail (908) 758-5254        _/
+_/    331 Newman Springs Rd.                email kaj@cc.bellcore.com   _/
+_/    Red Bank, NJ 07701                  faxmail (908) 758-4196        _/
+_/                                                                      _/
+_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
+
+
+--========================_4084092==_--
+
+

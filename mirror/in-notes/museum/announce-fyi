@@ -1,0 +1,54 @@
+
+A new For Your Information (FYI) Request for Comments is now available
+in online RFC libraries.
+
+
+        FYI: 9:
+	RFC: 1251:
+
+        Title:      Who's Who in the Internet
+                    Biographies of IAB, IESG and IRSG Members
+       	Author:     G. Malkin
+	Mailbox:    gmalkin@ftp.com
+	Pages:      
+	Characters: 
+	Obsoletes/Updates: none
+
+
+This FYI RFC contains biographical information about members of the
+Internet Activities Board (IAB), the Internet Engineering Steering
+Group (IESG) of the Internet Engineering Task Force (IETF), and the
+the Internet Research Steering Group (IRSG) of the Internet Research
+Task Force (IRTF).
+
+This memo provides information for the Internet community.  It does
+not specify an Internet standard.  Distribution of this memo is
+unlimited.
+
+This announcement is sent to the IETF list and the RFC-DIST list.
+Requests to be added to or deleted from the IETF distribution list
+should be sent to IETF-REQUEST@NRI.RESTON.VA.US.  Requests to be added
+to or deleted from the RFC-DIST distribution list should be sent to
+RFC-REQUEST@NIC.DDN.MIL.
+
+Details on obtaining RFCs via FTP or EMAIL may be obtained by sending
+an EMAIL message to "rfc-info@ISI.EDU" with the message body
+"help: ways_to_get_rfcs".  For example:
+
+        To: rfc-info@ISI.EDU
+        Subject: getting rfcs
+
+        help: ways_to_get_rfcs
+
+Requests for special distribution should be addressed to either the
+author of the FYI RFC in question, or to NIC@NIC.DDN.MIL.  Unless
+specifically noted otherwise on the FYI RFC itself, all FYI RFCs are
+for unlimited distribution.
+
+Submissions for FYI RFCs should be sent to RFC-EDITOR@ISI.EDU.  Please
+consult RFC 1150, "F.Y.I on F.Y.I: Introduction to the F.Y.I. Notes",
+for further information.
+
+
+Joyce K. Reynolds
+USC/Information Sciences Institute

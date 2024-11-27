@@ -1,0 +1,5 @@
+mirror/in-notes/tar/
+*.html
+*.pdf
+*.ps
+*.xml

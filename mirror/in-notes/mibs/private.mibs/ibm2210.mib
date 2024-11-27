@@ -1,0 +1,510 @@
+
+
+-- Proteon
+-- Nine Technology Drive
+-- Westborough, MA 01581-5008
+--
+-- Proteon Specific Variables
+-- in the SNMP MIB for the IBM2210
+--
+-- Revision A
+-- Release 1.0
+-- File Name Ref: provars.def
+-- Rev By: Jas  Parmar  Date: 11/02/94
+--
+-- This document describes the variables in the
+-- Enterprise-specific Proteon MIB. The variables are
+-- structured based on the RFC for the Structure of
+-- Management Information (SMI), RFC1155, and the format
+-- of the definitions is as per RFC1212, the Concise MIB
+-- Defintions RFC
+
+          PROTEON-MIB  {  iso  org(3)  dod(6)  internet(1)  private(4)
+          enterprises(1) 1 }
+
+          DEFINITIONS    ::= BEGIN
+
+          IMPORTS
+              enterprises, NetworkAddress, IpAddress, Counter,  Gauge,
+          TimeTicks
+                                FROM RFC1155-SMI
+                            OBJECT-TYPE
+                                FROM RFC-1212;
+
+                    -- textual conventions
+
+                    DisplayString ::=
+                        OCTET STRING
+                    -- This data type is used to model textual
+                    -- information taken from the NVT ASCII
+                    -- character set.  By convention, objects
+                    -- with this syntax are declared as having
+                    -- SIZE (0..255)
+
+
+          proteon    OBJECT IDENTIFIER ::= { enterprises 1 }
+
+                    -- groups in the PROTEON-MIB
+
+           admin            OBJECT IDENTIFIER ::= { proteon 1 }
+           xface            OBJECT IDENTIFIER ::= { proteon 2 }
+           proto            OBJECT IDENTIFIER ::= { proteon 3 }
+           pDot3ChipSets    OBJECT IDENTIFIER ::= { proteon 5 }
+
+
+           -- object types
+
+           -- the admin group
+
+          objid    OBJECT IDENTIFIER ::= { admin 1 }
+
+           systemP4100           OBJECT IDENTIFIER ::= { objid 41 }
+           systemP4200           OBJECT IDENTIFIER ::= { objid 42 }
+           systemCNX400          OBJECT IDENTIFIER ::= { objid 44 }
+           systemDNX300          OBJECT IDENTIFIER ::= { objid 43 }
+           systemCNX600          OBJECT IDENTIFIER ::= { objid 46 }
+           systemRBX200          OBJECT IDENTIFIER ::= { objid 47 }
+           systemCNX500          OBJECT IDENTIFIER ::= { objid 49 }
+           systemBOSS3Slot       OBJECT IDENTIFIER ::= { objid 53 }
+           systemBOSSs90         OBJECT IDENTIFIER ::= { objid 54 }
+
+           elsTrapVar1     OBJECT IDENTIFIER ::= { objid 5 }
+           elsTrapVar2     OBJECT IDENTIFIER ::= { objid 6 }
+           elsTrapVar3     OBJECT IDENTIFIER ::= { objid 7 }
+           elsTrapVar4     OBJECT IDENTIFIER ::= { objid 8 }
+           elsTrapVar5     OBJECT IDENTIFIER ::= { objid 9 }
+           elsTrapVar6     OBJECT IDENTIFIER ::= { objid 10 }
+           elsTrapVar7     OBJECT IDENTIFIER ::= { objid 11 }
+           elsTrapVar8     OBJECT IDENTIFIER ::= { objid 12 }
+           elsTrapVar9     OBJECT IDENTIFIER ::= { objid 13 }
+
+           elsTrapSeqs OBJECT-TYPE
+               SYNTAX    Counter
+               ACCESS    read-only
+               STATUS    mandatory
+               DESCRIPTION
+                   "ELS trap sequence number"
+               ::= { objid 1 }
+
+           elsTrapSubSystem OBJECT-TYPE
+               SYNTAX    INTEGER
+               ACCESS    read-only
+               STATUS    mandatory
+               DESCRIPTION
+                   "ELS trap sequence number"
+               ::= { objid 2 }
+
+           elsTrapEvent OBJECT-TYPE
+               SYNTAX    INTEGER
+               ACCESS    read-only
+               STATUS    mandatory
+               DESCRIPTION
+                   "ELS trap sequence number"
+               ::= { objid 3 }
+
+           elsTrapPkt OBJECT-TYPE
+               SYNTAX    OCTET STRING
+               ACCESS    read-only
+               STATUS    mandatory
+               DESCRIPTION
+                   "Partial packet dump of packet related to els  mes-
+          sage"
+               ::= { objid 4 }
+
+           -- the status group
+
+          status        OBJECT IDENTIFIER ::= { admin 2 }
+
+          proAdminStatusReloadTime OBJECT-TYPE
+              SYNTAX    TimeTicks
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The time (in hundredths of a second) since the last
+                  time the router software was reloaded."
+              ::= { status 1 }
+
+          proAdminStatusStarts OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The number of times the router has started since
+                  the last reload.  This is number of restarts plus
+                  one."
+              ::= { status 2 }
+
+          proAdminStatusCrashes OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The number of times the router has crashed since
+                  the last reload. Only those crashes that caused
+                  the router to deliberately restart due to a
+                  software error are enumerated by this object."
+              ::= { status 3 }
+
+          proAdminStatusCrashMsg OBJECT-TYPE
+              SYNTAX    OCTET STRING
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The last crash message.  If the router has not
+                  crashed since the last reload, the message will
+                  so indicate."
+              ::= { status 4 }
+
+           -- the event logging system group
+
+          els        OBJECT IDENTIFIER ::= { admin 3 }
+
+          proAdminElsPin OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-write
+              STATUS    mandatory
+              DESCRIPTION
+                  "The number of ELS alerts which may be generated per
+                  second.  A value of zero indicates no limit."
+              ::= { els 1 }
+
+          proAdminElsDroppeds OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The number of ELS alerts which have been dropped
+                  because the pin has been reached."
+              ::= { els 2 }
+
+          proAdminElsDisplay OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-write
+              STATUS    mandatory
+              DESCRIPTION
+                  "This object is a control switch for the displaying
+                  of logging messages on the router's console.  It is
+                  instanced by the ELS event number.
+                  It assumes the following values,
+                  '0' for inactive, do not display messages,
+                  '1' for active, display messages."
+
+              ::= { els 3 }
+
+          proAdminElsAlert OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-write
+              STATUS    mandatory
+              DESCRIPTION
+                  "This object is a control switch for the sending of
+                  logging messages with SNMP alerts.  It is instanced
+                  by the ELS event number.
+                  It assumes the following values,
+                  '0' for inactive, do not send alerts,
+                  '1' for active, send alerts."
+              ::= { els 4 }
+
+          proAdminElsMeters OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "This object is a counter of the number of times an
+                  ELS event occured.  It is instanced by the ELS event
+                  number."
+              ::= { els 6 }
+
+           -- generic interface group
+
+          generic        OBJECT IDENTIFIER ::= { xface 1 }
+
+          proXfaceGenericType OBJECT-TYPE
+              SYNTAX    INTEGER {
+                  vi(1),        -- VI LNI
+                  pn10(2),      -- ProNET-10
+                  pn80(3),      -- ProNET-80
+                  chaos(4),     -- CHAOSnet
+                  xeth(5),      -- Experimental Ethernet (3Mb)
+                  m1822(6),     -- ACC M/1822
+                  scc(7),       -- On-board SCC on HK68ME
+                  ieth(8),      -- Interlan Ethernet
+                  peth(9),      -- Proteon Ethernet
+                  com2(10),     -- COM-2
+                  com4(11),     -- COM-4
+                  omn(12),      -- Omninet
+                  pn4(13),      -- ProNET-4
+                  wdeth(15),    -- Western Digital Ethernet
+                  gwslc(16),    -- Gateway Serial Line Controller
+                  x25(17),      -- X.25
+                  pqsx(18),     -- Proteon QPSX MAN
+                  atr(19),      -- Apollo Token Ring
+                  fddi(20),     -- p4200 FDDI
+                  pn16(23),     -- ProNET-16
+                  atcomsl(24),  -- AT COM-2
+                  ceth(25),     -- CNX/DNX300 Single/Dual Ethernet
+                  csl(26),      -- CNX/DNX300 T1/E1 serial
+                  seth(27),     -- Interlan NP-600 smart Ethernet
+                  srlygwsl(28), -- SDLC Relay on a gwslc
+                  srlyatc2(29), -- SDLC Relay on a atcomsl
+                  srlycsl(30),  -- SDLC Relay on a csl
+                  srbtnl(31),   -- SRB Tunnel over a protocol net
+                  sdlcrly(32),  -- SDLC Relay over a protocol net
+                  nseth(33),    -- National Semiconductor Ethernet
+                  x25atc2(34),  -- x25 on a atcomsl
+                  x25csl(35),   -- x25 on a CNX csl
+                  x25dcsl(36),  -- x25 on a DNX300 csl
+                  qsl(37),      -- CNX Quad Serial Controller
+                  tsl(39),      -- CNX Twin Serial Controller
+                  qslch(40),    -- DNX Quad Serial Controller
+                  v25bis(41),   -- V.25 bis Dial
+                  hssi(42),     -- High Speed Serial Interface
+                  rbxeth(43),   -- RBX200 Ethernet
+                  rbxtkr(44),   -- RBX200 802.5 Token-Ring
+                  rbxsl(45),    -- RBX200 Serial Controller
+                  rbxbisdn(46)  -- RBX200 ISDN BRI
+                  }
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The type of the interface, according to the link
+                  level protocol."
+              ::= { generic 1 }
+
+          proXfaceGenericCSR OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The Command and Status Register address for the
+                  interface."
+              ::= { generic 2 }
+
+          proXfaceGenericIntVec OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The multi-bus interrupt vector for the interface."
+              ::= { generic 3 }
+
+          proXfaceGenericMaintInt OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The number of seconds before the next interface
+                   maintenance."
+              ::= { generic 4 }
+
+          proXfaceGenericMaintLim OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The number of maintenance check failures permitted
+                  before a self test is run."
+              ::= { generic 5 }
+
+          proXfaceGenericNextTest OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The number of seconds before the next self test."
+              ::= { generic 6 }
+
+          proXfaceGenericNextMaint OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The number of seconds between maintenance checks."
+              ::= { generic 7 }
+
+          proXfaceGenericMaintCnt OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The number of failed maintenance checks since the
+                  last successful maintenance check."
+              ::= { generic 8 }
+
+          proXfaceGenericMaintFails OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The total number of maintenance failures on this
+                   interface."
+              ::= { generic 9 }
+
+          proXfaceGenericTestPasses OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The total number of self test successes on this
+                  interface."
+              ::= { generic 10 }
+
+          proXfaceGenericTestFails OBJECT-TYPE
+              SYNTAX    Counter
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The total number of self test failures on this
+                  interface."
+              ::= { generic 11 }
+
+          proXfaceGenericModuleId OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    mandatory
+              DESCRIPTION
+                  "The module identifier of this interface, this
+                  object is relevant only to the CNX and DNX
+                  platforms. It uniquely identifies the interface
+                  card-type.
+
+                  It will always be '0' for the IBM2210 platform."
+              ::= { generic 12 }
+
+           -- the token ring interface group
+           -- relevant only to the p4100, p4200
+           -- CNX and DNX platforms, and not
+           -- any other platform types
+
+          tokenr        OBJECT IDENTIFIER ::= { xface 2 }
+
+
+           -- the pronet-10/80 interface group
+           -- relevant only to the p4100 and p4200
+           -- and not any other platform types
+
+
+          pronet        OBJECT IDENTIFIER ::= { xface 3 }
+
+
+           -- the interlan Ethernet interface group
+           -- relevant only for the p4200 and not
+           -- any other platform types
+
+          ieth        OBJECT IDENTIFIER ::= { xface 4 }
+
+
+           -- the Proteon/Western Digital/National Semiconductor
+           -- Ethernet interface group, relevant for the p4100
+           -- and the p4200 and not any other platform types
+
+          peth        OBJECT IDENTIFIER ::= { xface 5 }
+
+
+           -- the com-2/4 serial line interface group
+           -- relevant only for the p4200 and not
+           -- any other platform types
+
+          comsl        OBJECT IDENTIFIER ::= { xface 6 }
+
+
+           -- the Gateway serial line interface group
+           -- relevant only for the p4100 and not
+           -- any other platform types
+
+          gwsl        OBJECT IDENTIFIER ::= { xface 7 }
+
+
+           -- the X.25 interface group
+           -- relevant for the p4100 and the p4200 and
+           -- not any other platform types
+
+          prox25        OBJECT IDENTIFIER ::= { xface 8 }
+
+
+           -- FDDI interface group
+           -- relevant only for the p4200 and not
+           -- any other platform types
+
+          profddi        OBJECT IDENTIFIER ::= { xface 9 }
+
+
+           -- the AT COM-2 serial line interface group
+           -- relevant only for the p4100 and not
+           -- any other platform types
+
+          atcomsl        OBJECT IDENTIFIER ::= { xface 12 }
+
+
+           -- the CNX/DNX300 Ethernet interface group
+
+
+           -- relevant only for the CNX's and the DNX300 and not
+           -- any other platform types
+
+          ceth        OBJECT IDENTIFIER ::= { xface 13 }
+
+
+           -- the CNX/DNX300 T1/E1 Serial Line interface group
+           -- relevant only for the CNX's and the DNX300 and not
+           -- any other platform types
+
+          csl        OBJECT IDENTIFIER ::= { xface 14 }
+
+
+           -- the NP-600/XL Smart Ethernet interface group
+           -- relevant only for the p4100 and not any
+           -- other platform types
+
+          seth        OBJECT IDENTIFIER ::= { xface 15 }
+
+
+           -- the general (across all protocols) group
+
+          general        OBJECT IDENTIFIER ::= { proto 1 }
+
+          -- there are no general variables defined at this time.
+
+           -- the IP protocol group
+
+          proip        OBJECT IDENTIFIER ::= { proto 2 }
+
+           -- default gateway
+
+          defgw        OBJECT IDENTIFIER ::= { proip 1 }
+
+          proProtoIpDefGwAddress OBJECT-TYPE
+              SYNTAX    IpAddress
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The Internet address of the default gateway for the
+                  router."
+              ::= { defgw 1 }
+
+          proProtoIpDefGwCost OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The cost of the default gateway for the router."
+              ::= { defgw 2 }
+
+          proProtoIpDefGwAge OBJECT-TYPE
+              SYNTAX    INTEGER
+              ACCESS    read-only
+              STATUS    optional
+              DESCRIPTION
+                  "The age of the default gateway for the router."
+              ::= { defgw 3 }
+
+
+          --  Proteon 802.3 Hardware Chipsets
+
+             -- This object identifies the MAC hardware used to
+             -- communicate on an interface. The following
+             -- hardware chipset is used for 802.3:
+
+          pDot3ChipSetMC68EN360  OBJECT IDENTIFIER  ::= { pDot3ChipSets 1 }
+
+          END
+

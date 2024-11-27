@@ -1,0 +1,274 @@
+31-Aug-83 10:51:44-PDT,12147;000000000001
+Return-Path: <tcp-ip@brl-vgr>
+Received: FROM BRL-VGR BY USC-ISIF.ARPA WITH TCP ; 26 Aug 83 04:56:36 PDT
+Received: From Brl-Vgr.ARPA by BRL-VGR via smtp;  26 Aug 83 6:12 EDT
+Sender:    Mike Muuss <TCP-IP@brl>
+From:      TCP-IP@brl
+To:        TCP-IP@brl
+Date:      26 Aug 1983 00:00 EST
+Subject:   TCP-IP Digest, Vol 2 #14
+
+TCP/IP Digest             Friday, 26 Aug 1983      Volume 2 : Issue 14
+
+Today's Topics:
+                    Thank you to TCP -- A testimonial
+            Questions about TCP/IP for Various UNIX Versions
+                  4.2 BSD IEN142 Time Server Available
+               4.2 BSD UNIX Protocol Violation Discussion
+               Further Details on the MILNET/ARPANET Split
+----------------------------------------------------------------------
+                  TCP/IP Digest --- The InterNet Digest
+                         LIMITED DISTRIBUTION
+          For Research Use Only --- Not for Public Distribution
+----------------------------------------------------------------------
+
+Date: 16 August 1983 17:48 EDT
+From: Turkewitz@ddn1
+Subject: Thank you, TCP
+To: TCP-IP@brl
+
+Dear TCP designers and implementors,
+
+     This mailing list must undoubtably be a forum for many TCP
+discussions, complaints, and bugs.  You have probably all heard
+more than your share about how much slower TCP is than NCP.  This,
+however, is not one of those messages.  This is a simple thank-you.
+
+     I have been working on a TCP/IP connection from Germany over
+a satellite link back to the United States.  Unfortunately, the
+line has been pretty flakey, and we have had frequent outages.
+To my amazement, however, I have found out that when we reestablish
+connection, I can pick up right where I left off!  We had one
+outage that was about 25 minutes long.  I was in the middle of
+composing an electronic mail message at the time the line went down.
+When it came back up, I was still in the middle of composing the
+message (not even an interrupt!), and the characters that I had
+typed between the time that the line went down and the time that I
+noticed it was down suddenly echoed to me when the line came back up!
+
+     An associate tells me that this is due to the reliability of TCP.
+
+     Thank you TCP & all involved.
+          --Ken Turkewitz
+
+[ Some hosts must have *enormous* values for the retransmit timeouts!  -Mike ]
+
+------------------------------
+
+Date: 21 Jul 1983 0906-PDT
+From: MUEHLEN@sri-csl
+Subject: UNIX networking
+To: tcp-ip@brl
+cc: muehlen@sri-csl
+
+We want to start with networking different UNIX Systems (berkeley, bell,
+xenix, munix) in a local area network (ethernet). Who has done this work
+and which hardware and software can be recommended? Is there any survey
+available?  Is anybody using UNET or 3COM or Net/One ?
+
+Many thanks -Heinz
+
+[ 4.2 BSD comes with a TCP/IP that is quite good.  Presently, Bell System V
+  does *not* support TCP/IP, but Bell Labs is working on it, under contract
+  to U.S. Army DARCOM.  UNET software is also being used by some people, and
+  their latest version is reported to be useable.  -Mike ]
+
+------------------------------
+
+Date: Friday, 15 Jul 1983 14:24-PDT
+To: tcp-ip@Brl
+Subject: IEN142 time server/user for Berkeley VAX Unix
+From: Chris Kent <decwrl!kent%Shasta@sumex-aim>
+
+Just wanted to let the community know that I've written a network time
+user/server pair for 4.1cBSD Unix. I have submitted it to Berkeley for
+inclusion in 4.2, but who knows when they'll finally ship? So if people
+need it, I'll be happy to send it out.
+
+You'll have better luck mailing to me as <cak@purdue>.
+
+Cheers,
+chris
+
+------------------------------
+
+[ The following 2 messages concern a discussion of an extention to IP which
+  is used by 4.2 BSD UNIX on Ethernets.  Bill Shannon's comments on this
+  appeared in the UNIX-WIZARDS mailing list, and I enclose them here to
+  show some of the felings in the UNIX community.  -Mike ]
+
+Date:	Saturday, 20 Aug 1983 16:17-PDT
+To:	tcp-ip@brl
+Subject: 4.2 Berkeley Unix protocol violation
+From:	imagen!cpr%Shasta@su-score
+
+I've brought this up elsewhere (Unix-Wizards), but I thought I might
+mention it to the TCP/IP world directly.  I'm concerned about the Berkeley
+4.2 Unix TCP/IP Ethernet implementation, because this version of Unix
+uses a private encapsulation protocol for IP packets on 10Mbit Ether, in
+violation of the as-yet-unofficial encapsulation protocol.
+
+In detail, the problem is that this TCP implementation uses a non-standard
+(i.e., an extension of RFC 820) type of IP packet encapsulation in certain
+circumstances, in an attempt at efficiency improvement (due to Unix internal
+structures).  This happens with no warning, and with no negotation
+whatsoever with the foreign host.  To the foreign host, it simply appears
+that the connection is hung at the point the private encapsulation is first
+used.
+
+This ``feature'' can be turned off, if you have sources, or are willing to
+patch the kernel binary image, but this seems like a big mistake on
+Berkeley's part.  Those people trying to supply a product speaking TCP/IP on
+Ethernet to the 4.2 Unix world are thus forced to either support this
+extension, or else force the site to turn it off on all their 4.2 machines.
+
+Is there an ``official position'' on this type of encapsulation ``violation''
+(admittedly by extension)?  (Postel?  Clark?)
+
+/Chris Ryland, IMAGEN
+
+------------------------------
+
+Date: 9 Aug 83 12:54:15-PDT (Tue)
+To: Unix-Wizards @ Brl-Vgr
+From: sun!shannon @ Ucb-Vax
+Subject: Re: 4.2 TCP/IP/Ethernet trailers
+
+Philisophically, I don't believe there is anything wrong with the
+4.2 TCP/IP Ethernet code, it simply imposes another software layer
+(the local net encapsulation) between IP and the Ethernet.
+Practically, I think it is rather unfortunate since it destroys
+compatibility with the "obvious" implementations of IP on Ethernet.
+Having some way of negotiating for the use of trailers sounds nice
+but it also sounds like another software layer which won't be
+present in the "obvious" implementations.  The same sort of problem
+exists with ARP.  Perhaps what is needed is a "standard" for how
+to implement IP on Ethernet.
+
+In the Sun 4.2 system we've made it easy to turn off trailers in the
+driver, however ARP is mandatory.  We may provide a way to "wire down"
+ARP translations (however the ARP translation table is by nature a
+cache and therefore small) and I guess it would also be possible
+to enable trailers based on the destination address.  As we start
+talking to other TCP/IP/Ethernet implementations I suspect we will
+have to address these problems more directly.
+
+					Bill Shannon
+					sun!shannon
+					Sun Microsystems, Inc.
+
+------------------------------
+
+Date: 14 Jul 1983 1742-PDT
+From: NIC@sri-nic
+Subject: DDN Newsletter No. 28
+To: DDN-NEWS-LIST1: ;
+
+                FURTHER DETAILS ON THE MILNET/ARPANET SPLIT
+
+Testing the Logical Split
+
+The logical  split  of  the existing  ARPANET  into  the  Experimental
+ARPANET and the MILNET  is a major  change which requires  substantual
+testing to insure it will be accomplished as an orderly process.
+
+ALL HOSTS AND USERS will be impacted. The ARPANET will change from one
+network into two, and communications with hosts on the other net  will
+require a knowledge of internet procedures.  MILNET  hosts will use  a
+new network number (Network  26).  (Details of procuring  updated host
+tables from the Network Information Center will be covered in a forth-
+coming newsletter.)
+
+The MILNET and the ARPANET will remain connected via five mail bridges
+(internet gateways augmented  with a load-splitting  mechanism and  an
+access control filter). The load-splitting mechanism works as follows.
+Each bridge will contain  a table assigning  the "default" bridge  for
+each host to use in sending traffic  to the other network.  If a  host
+sends a  message  via the  wrong  bridge  and its  default  bridge  is
+operational, the host will receive an ICMP redirect message telling it
+which alternate gateway (i.e., default bridge) to use.  This mechanism
+allows the five gateways to  balance the internet traffic.  After  the
+initial default  assignment, if  one of  the bridges  is found  to  be
+carrying  a  disproportionate  share  of  the  load,  then  the   host
+assignment table will  be modified.  No changes to  host software  are
+required.  As  long  as a  host  supports  ICMP,  the  host-to-gateway
+protocol, it can  make full  use of  the bridges  without knowing  its
+default bridge assignment in advance.
+
+A schedule has been developed for  testing prior to the actual  split.
+The goals of this testing are to:
+
+     o Verify the mail bridge load-splitting mechanism and
+       access control filter.
+
+     o Test host TCP/IP and ICMP implementations.
+
+     o Test the entire system networkwide.
+
+Initial testing will use the testbed environment already available  at
+BBN.  BBN has a local  ARPANET-clone network, the BBNNET (Network  8),
+which is connected to the ARPANET via a gateway.  During daytime hours
+the BBNNET passes about 50% as much traffic as does the ARPANET,  with
+the existing gateway passing about 1,000,000 packets during an average
+day, with about 80,000 packets per hour passing through it during peak
+hours.  This represents  a significantly heavier  load than will  pass
+through any  of  the five  mail  bridges, therefore  the  BBNNET  will
+provide a realistic test environment.
+
+The testing schedule is:
+
+15 June:  Two additional gateways between the ARPANET and the BBNNET
+          are installed.
+
+30 June:  The gateway load-splitting mechanism is operational.
+
+15 June to 15 August:  Gateway load-splitting and routing between
+          the ARPANET and the BBNNET are verified.
+
+To aid users in verifying  their capabilities to communicate with  the
+MILNET, the  first MILNET  host to  receive net  number 26  will be  a
+public news host  implemented  on a C/70,  which will allow  anonymous
+logins and  will  contain  information  of  general  interest  to  the
+ARPANET/MILNET community.
+
+In addition, to assist TAC users, a TACNEWS service will be  provided.
+By typing "@n" to the TAC, a TAC user will automatically be  connected
+to the public news host wherever  it may exist without having to  know
+its actual internet address.
+
+Following are some of the major milestones of the Split.
+
+1 July - 1 September:  The mail bridges between ARPANET and MILNET
+          are installed.
+
+15 July:  The C70 public news host is installed as the first host in
+          the  MILNET COI.  Also, a  second MILNET interface will be 
+          added to SRI-NIC.  Host managers  and  technical personnel
+          should now  try to connect to the  C/70 news host  via the
+          mail bridges in order to test their  ICMP implementations.
+
+28 July - 2 August:  Network technical liaison meetings in:
+          Los Angeles and San Francisco, Cambridge and Washington DC
+
+1 September - 1 October:  The NIC  maintains the old  (ARPANET-only)
+          and  the new  (ARPANET/MILNET)  host tables  in  parallel.
+          During  this period  MILNET hosts may  voluntarily  change
+          to Network No. 26 provided their changeover is coordinated
+          with the NIC to permit timely update of the official  host
+          tables.  Two full day  tests will occur, during which  the
+          network will enforce the split, and hosts must use the new
+          host tables.
+
+4 October:  The logical split occurs.  Network IMPs will enforce the
+          proper COI for each host, and network addressing   will be
+          updated to reflect the split.
+
+1 Febuary 1984:  Access control filters  are implemented in the mail
+          bridges.  Although  this capability has  existed  for some
+          time, its implementation is deferred to reduce the problems
+          associated with the logical split on 4 October.
+
+------------------------------
+
+END OF TCP-IP DIGEST
+********************
