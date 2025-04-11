@@ -5,7 +5,7 @@
                              BCP INDEX
                            -------------
 
-CREATED ON: 11/25/2024.
+CREATED ON: 04/09/2025.
 
 This file contains citations for all BCPs in numeric order.  The BCPs
 form a sub-series of the RFC document series, specifically those RFCs
@@ -103,9 +103,9 @@ RFC Editor Web page http://www.rfc-editor.org.
 0012 [Was Internet Registry IP Allocation Guidelines. Now Historic.]
 
 0013 Multipurpose Internet Mail Extensions (MIME) Part Four:
-     Registration Procedures. N. Freed, J. Klensin, T. Hansen. December
-     2005. (Format: TXT=74243 HTML= bytes) (Obsoletes RFC2048) (Also
-     RFC4289, RFC6838)
+     Registration Procedures. N. Freed, J. Klensin, T. Hansen, M.J. Dürst.
+     December 2005. (Format: TXT=120801 bytes) (Obsoletes RFC2048) (Also
+     RFC4289, RFC6838, RFC9694)
 
 0014 Key words for use in RFCs to Indicate Requirement Levels. S.
      Bradner, B. Leiba. (Format: TXT=10853 HTML= bytes) (Also RFC2119,
@@ -264,9 +264,8 @@ RFC Editor Web page http://www.rfc-editor.org.
 0056 Building Protocols with HTTP. M. Nottingham. June 2022.
      (Obsoletes RFC3205) (Also RFC9205)
 
-0057 IANA Considerations for IPv4 Internet Group Management Protocol
-     (IGMP). B. Fenner. February 2002. (Format: TXT =6473 HTML= bytes)
-     (Also RFC3228)
+0057 IANA Considerations for Internet Group Management Protocols. B.
+     Haberman, Ed.. March 2025. (Obsoletes RFC3228) (Also RFC9778)
 
 0058 Defining the IETF. P. Hoffman, S. Bradner. February 2002.
      (Format: TXT =6401 HTML= bytes) (Also RFC3233)
@@ -554,8 +553,8 @@ RFC Editor Web page http://www.rfc-editor.org.
      Key Management. R. Housley, B. Aboba. July 2007. (Format: TXT=54927
      HTML= bytes) (Also RFC4962)
 
-0133 Specifying New Congestion Control Algorithms. S. Floyd, M.
-     Allman. August 2007. (Format: TXT=23469 HTML= bytes) (Also RFC5033)
+0133 Specifying New Congestion Control Algorithms. M. Duke, Ed., G.
+     Fairhurst, Ed.. March 2025. (Obsoletes RFC5033) (Also RFC9743)
 
 0134 Email Submission Operations: Access and Accountability
      Requirements. C. Hutzler, D. Crocker, P. Resnick, E. Allman, T.
@@ -849,8 +848,7 @@ RFC Editor Web page http://www.rfc-editor.org.
      (Format: TXT=61712 HTML= bytes) (Also RFC8084)
 
 0209 Initializing a DNS Resolver with Priming Queries. P. Koch, M.
-     Larson, P. Hoffman. March 2017. (Format: TXT=15645 HTML= bytes) (Also
-     RFC8109)
+     Larson, P. Hoffman. February 2025. (Obsoletes RFC8109) (Also RFC9609)
 
 0210 Minimal IPv6 over the TSCH Mode of IEEE 802.15.4e (6TiSCH)
      Configuration. X. Vilajosana, Ed., K. Pister, T. Watteyne. May 2017.
@@ -911,7 +909,8 @@ RFC Editor Web page http://www.rfc-editor.org.
      Jones. February 2020. (Updates RFC7519) (Also RFC8725)
 
 0226 Meeting Venue Selection and Policy. E. Lear, Ed., S. Krishnan, M.
-     Duke. (Format: bytes) (Also RFC8718, RFC8719, RFC9137)
+     Duke, J. Daley, Ed., S. Turner. (Format: bytes) (Also RFC8718,
+     RFC8719, RFC9137, RFC9712)
 
 0227 Deprecating RC4 in Secure Shell (SSH). L. Velvindron. April 2020.
      (Updates RFC4253) (Also RFC8758)
@@ -955,3 +954,10 @@ RFC Editor Web page http://www.rfc-editor.org.
 
 0239 Open Participation Principle regarding Remote Registration Fee.
      M. Kühlewind, J. Reed, R. Salz. December 2023. (Also RFC9501)
+
+0240 Best Current Practice for OAuth 2.0 Security. T. Lodderstedt, J.
+     Bradley, A. Labunets, D. Fett. January 2025. (Updates RFC6749,
+     RFC6750, RFC6819) (Also RFC9700)
+
+0241 Operational Considerations for Use of DNS in Internet of Things
+     (IoT) Devices. M. Richardson, W. Pan. March 2025. (Also RFC9726)

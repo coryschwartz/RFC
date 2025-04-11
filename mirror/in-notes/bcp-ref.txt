@@ -138,6 +138,11 @@
               RFC 6838, DOI 10.17487/RFC6838, January 2013,
               <https://www.rfc-editor.org/info/rfc6838>.
 
+              Dürst, M.J., "Guidelines for the Definition of New Top-
+              Level Media Types", BCP 13, RFC 9694,
+              DOI 10.17487/RFC9694, March 2025,
+              <https://www.rfc-editor.org/info/rfc9694>.
+
    [BCP14]    Best Current Practice 14,
               <https://www.rfc-editor.org/info/bcp14>.
               At the time of writing, this BCP comprises the following:
@@ -546,10 +551,10 @@
               <https://www.rfc-editor.org/info/bcp57>.
               At the time of writing, this BCP comprises the following:
 
-              Fenner, B., "IANA Considerations for IPv4 Internet Group
-              Management Protocol (IGMP)", BCP 57, RFC 3228,
-              DOI 10.17487/RFC3228, February 2002,
-              <https://www.rfc-editor.org/info/rfc3228>.
+              Haberman, B., Ed., "IANA Considerations for Internet Group
+              Management Protocols", BCP 57, RFC 9778,
+              DOI 10.17487/RFC9778, March 2025,
+              <https://www.rfc-editor.org/info/rfc9778>.
 
    [BCP58]    Best Current Practice 58,
               <https://www.rfc-editor.org/info/bcp58>.
@@ -1243,10 +1248,10 @@
               <https://www.rfc-editor.org/info/bcp133>.
               At the time of writing, this BCP comprises the following:
 
-              Floyd, S. and M. Allman, "Specifying New Congestion
-              Control Algorithms", BCP 133, RFC 5033,
-              DOI 10.17487/RFC5033, August 2007,
-              <https://www.rfc-editor.org/info/rfc5033>.
+              Duke, M., Ed., and G. Fairhurst, Ed., "Specifying New
+              Congestion Control Algorithms", BCP 133, RFC 9743, DOI
+              10.17487/RFC9743, March 2025,
+              <https://www.rfc-editor.org/info/rfc9743>.
 
    [BCP134]   Best Current Practice 134,
               <https://www.rfc-editor.org/info/bcp134>.
@@ -2120,6 +2125,10 @@
               Meetings", BCP 226, RFC 9137, DOI 10.17487/RFC9137,
               October 2021, <https://www.rfc-editor.org/info/rfc9137>.
 
+              Daley, J. and S. Turner, "IETF Meeting Venue Requirements
+	      Review", BCP 226, RFC 9712, DOI 10.17487/RFC9712, January
+	      2025, <https://www.rfc-editor.org/info/rfc9712>.
+
    [BCP227]   Best Current Practice 227,
               <https://www.rfc-editor.org/info/bcp227>.
               At the time of writing, this BCP comprises the following:
@@ -2234,4 +2243,22 @@
               Principle regarding Remote Registration Fee", BCP 239,
               RFC 9501, DOI 10.17487/RFC9501, December 2023,
               <https://www.rfc-editor.org/info/rfc9501>.
+
+   [BCP240]   Best Current Practice 240,
+              <https://www.rfc-editor.org/info/bcp240>.
+              At the time of writing, this BCP comprises the following:
+
+              Lodderstedt, T., Bradley, J., Labunets, A., and D. Fett,
+              "Best Current Practice for OAuth 2.0 Security", BCP 240,
+              RFC 9700, DOI 10.17487/RFC9700, January 2025,
+              <https://www.rfc-editor.org/info/rfc9700>.
+
+   [BCP241]   Best Current Practice 241,
+              <https://www.rfc-editor.org/info/bcp241>.
+              At the time of writing, this BCP comprises the following:
+
+              Richardson, M. and W. Pan, "Operational Considerations for
+	      Use of DNS in Internet of Things (IoT) Devices", BCP 241,
+              RFC 9726, DOI 10.17487/RFC9726, March 2025,
+              <https://www.rfc-editor.org/info/rfc9726>.
 

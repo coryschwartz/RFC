@@ -4,86 +4,87 @@
   To get the full list of RFCs, please look up rfc-index.txt
 ===========================================================================
 
-9661 The JSON Meta Application Protocol (JMAP) for Sieve Scripts. K.
-     Murchison. September 2024. (Format: HTML, TXT, PDF, XML) (Status:
-     PROPOSED STANDARD) (DOI: 10.17487/RFC9661) 
+9745 The Deprecation HTTP Response Header Field. S. Dalal, E. Wilde.
+     March 2025. (Format: HTML, TXT, PDF, XML) (Status: PROPOSED
+     STANDARD) (DOI: 10.17487/RFC9745) 
 
-9662 Updates to the Cipher Suites in Secure Syslog. C. Lonvick, S.
-     Turner, J. Salowey. October 2024. (Format: HTML, TXT, PDF, XML)
-     (Updates RFC5425, RFC6012) (Status: PROPOSED STANDARD) (DOI:
-     10.17487/RFC9662) 
+9746 BGP EVPN Multihoming Extensions for Split-Horizon Filtering. J.
+     Rabadan, K. Nagaraj, W. Lin, A. Sajassi. March 2025. (Format: HTML,
+     TXT, PDF, XML) (Updates RFC7432, RFC8365) (Status: PROPOSED
+     STANDARD) (DOI: 10.17487/RFC9746) 
 
-9663 Using DHCPv6 Prefix Delegation (DHCPv6-PD) to Allocate Unique IPv6
-     Prefixes per Client in Large Broadcast Networks. L. Colitti, J.
-     Linkova, Ed., X. Ma, Ed.. October 2024. (Format: HTML, TXT, PDF,
-     XML) (Status: INFORMATIONAL) (DOI: 10.17487/RFC9663) 
+9747 Unaffiliated Bidirectional Forwarding Detection (BFD) Echo. W.
+     Cheng, R. Wang, X. Min, Ed., R. Rahman, R. Boddireddy. March 2025.
+     (Format: HTML, TXT, PDF, XML) (Updates RFC5880) (Status: PROPOSED
+     STANDARD) (DOI: 10.17487/RFC9747) 
 
-9666 Area Proxy for IS-IS. T. Li, S. Chen, V. Ilangovan, G. Mishra.
-     October 2024. (Format: HTML, TXT, PDF, XML) (Status: EXPERIMENTAL)
-     (DOI: 10.17487/RFC9666) 
+9748 Updating the NTP Registries. R. Salz. February 2025. (Format: HTML,
+     TXT, PDF, XML) (Updates RFC5905, RFC5906, RFC7821, RFC7822, RFC8573)
+     (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC9748) 
 
-9667 Dynamic Flooding on Dense Graphs. T. Li, Ed., P. Psenak, Ed., H.
-     Chen, L. Jalil, S. Dontula. October 2024. (Format: HTML, TXT, PDF,
-     XML) (Status: EXPERIMENTAL) (DOI: 10.17487/RFC9667) 
-
-9668 Using Ephemeral Diffie-Hellman Over COSE (EDHOC) with the
-     Constrained Application Protocol (CoAP) and Object Security for
-     Constrained RESTful Environments (OSCORE). F. Palombini, M. Tiloca,
-     R. Höglund, S. Hristozov, G. Selander. November 2024. (Format: HTML,
-     TXT, PDF, XML) (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC9668) 
-
-9669 BPF Instruction Set Architecture (ISA). D. Thaler, Ed.. October
-     2024. (Format: HTML, TXT, PDF, XML) (Status: PROPOSED STANDARD)
-     (DOI: 10.17487/RFC9669) 
-
-9670 JSON Meta Application Protocol (JMAP) Sharing. N. Jenkins, Ed..
-     November 2024. (Format: HTML, TXT, PDF, XML) (Updates RFC8620)
-     (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC9670) 
-
-9671 Sieve Email Filtering: Extension for Processing Calendar
-     Attachments. K. Murchison, R. Signes, M. Horsfall. October 2024.
+9749 Use of Voluntary Application Server Identification (VAPID) in JSON
+     Meta Application Protocol (JMAP) Web Push. D. Gultsch. March 2025.
      (Format: HTML, TXT, PDF, XML) (Status: PROPOSED STANDARD) (DOI:
-     10.17487/RFC9671) 
+     10.17487/RFC9749) 
 
-9673 IPv6 Hop-by-Hop Options Processing Procedures. R. Hinden, G.
-     Fairhurst. October 2024. (Format: HTML, TXT, PDF, XML) (Updates
-     RFC8200) (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC9673) 
+9751 Closing the RTP Payload Format Media Types Registry. M. Westerlund.
+     March 2025. (Format: HTML, TXT, PDF, XML) (Updates RFC8088) (Status:
+     PROPOSED STANDARD) (DOI: 10.17487/RFC9751) 
 
-9675 Delay-Tolerant Networking Management Architecture (DTNMA). E.
-     Birrane III, S. Heiner, E. Annis. November 2024. (Format: HTML, TXT,
-     PDF, XML) (Status: INFORMATIONAL) (DOI: 10.17487/RFC9675) 
+9752 Conveying Vendor-Specific Information in the Path Computation
+     Element Communication Protocol (PCEP) Extensions for Stateful PCE.
+     C. Li, H. Zheng, S. Sivabalan, S. Sidor, Z. Ali. April 2025.
+     (Format: HTML, TXT, PDF, XML) (Updates RFC7470) (Status: PROPOSED
+     STANDARD) (DOI: 10.17487/RFC9752) 
 
-9677 Content Delivery Network Interconnection (CDNI) Metadata for
-     Delegated Credentials. F. Fieau, E. Stephan, G. Bichot, C. Neumann.
-     October 2024. (Format: HTML, TXT, PDF, XML) (Status: PROPOSED
-     STANDARD) (DOI: 10.17487/RFC9677) 
+9754 Extensions for Opening and Delegating Files in NFSv4.2. T. Haynes,
+     T. Myklebust. March 2025. (Format: HTML, TXT, PDF, XML) (Status:
+     PROPOSED STANDARD) (DOI: 10.17487/RFC9754) 
 
-9680 Antitrust Guidelines for IETF Participants. J. Halpern, Ed., J.
-     Daley. October 2024. (Format: HTML, TXT, PDF, XML) (Status:
-     INFORMATIONAL) (DOI: 10.17487/RFC9680) 
+9755 IMAP Support for UTF-8. P. Resnick, J. Yao, A. Gulbrandsen. March
+     2025. (Format: HTML, TXT, PDF, XML) (Obsoletes RFC6855) (Status:
+     PROPOSED STANDARD) (DOI: 10.17487/RFC9755) 
 
-9681 IS-IS Fast Flooding. B. Decraene, L. Ginsberg, T. Li, G. Solignac,
-     M. Karasek, G. Van de Velde, T. Przygienda. November 2024. (Format:
-     HTML, TXT, PDF, XML) (Status: EXPERIMENTAL) (DOI: 10.17487/RFC9681) 
+9756 Update to the IANA Path Communication Element Protocol (PCEP)
+     Numbers Registration Procedures and the Allowance of Experimental
+     Error Codes. D. Dhody, A. Farrel. March 2025. (Format: HTML, TXT,
+     PDF, XML) (Updates RFC5440, RFC8231, RFC8233, RFC8281, RFC8623,
+     RFC8664, RFC8685, RFC8697, RFC8733, RFC8745, RFC8779, RFC8780,
+     RFC8800, RFC8934, RFC9050, RFC9059, RFC9168, RFC9357, RFC9504,
+     RFC9603, RFC9604) (Status: PROPOSED STANDARD) (DOI:
+     10.17487/RFC9756) 
 
-9682 Updates to the Concise Data Definition Language (CDDL) Grammar. C.
-     Bormann. November 2024. (Format: HTML, TXT, PDF, XML) (Updates
-     RFC8610) (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC9682) 
+9757 Path Computation Element Communication Protocol (PCEP) Extensions
+     for Native IP Networks. A. Wang, B. Khasanov, S. Fang, C. Zhu. March
+     2025. (Format: HTML, TXT, PDF, XML) (Status: EXPERIMENTAL) (DOI:
+     10.17487/RFC9757) 
 
-9685 Listener Subscription for IPv6 Neighbor Discovery Multicast and
-     Anycast Addresses. P. Thubert, Ed.. November 2024. (Format: HTML,
-     TXT, PDF, XML) (Updates RFC4861, RFC6550, RFC6553, RFC8505, RFC9010)
-     (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC9685) 
+9759 Unified Time Scaling for Temporal Coordination Frameworks. K. Kuhns.
+     1 April 2025. (Format: HTML, TXT, PDF, XML) (Status: INFORMATIONAL)
+     (DOI: 10.17487/RFC9759) 
 
-9687 Border Gateway Protocol 4 (BGP-4) Send Hold Timer. J. Snijders, B.
-     Cartwright-Cox, Y. Qu. November 2024. (Format: HTML, TXT, PDF, XML)
-     (Updates RFC4271) (Status: PROPOSED STANDARD) (DOI:
-     10.17487/RFC9687) 
+9764 Bidirectional Forwarding Detection (BFD) Encapsulated in Large
+     Packets. J. Haas, A. Fu. April 2025. (Format: HTML, TXT, PDF, XML)
+     (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC9764) 
 
-9688 Use of the SHA3 One-Way Hash Functions in the Cryptographic Message
-     Syntax (CMS). R. Housley. November 2024. (Format: HTML, TXT, PDF,
-     XML) (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC9688) 
+9775 IRTF Code of Conduct. C. S. Perkins. March 2025. (Format: HTML, TXT,
+     PDF, XML) (Status: INFORMATIONAL) (DOI: 10.17487/RFC9775) 
+
+9776 Internet Group Management Protocol, Version 3. B. Haberman, Ed..
+     March 2025. (Format: HTML, TXT, PDF, XML) (Obsoletes RFC3376)
+     (Updates RFC2236) (Also STD0100) (Status: INTERNET STANDARD) (DOI:
+     10.17487/RFC9776) 
+
+9777 Multicast Listener Discovery Version 2 (MLDv2) for IPv6. B.
+     Haberman, Ed.. March 2025. (Format: HTML, TXT, PDF, XML) (Obsoletes
+     RFC3810) (Updates RFC2710) (Also STD0101) (Status: INTERNET
+     STANDARD) (DOI: 10.17487/RFC9777) 
+
+9778 IANA Considerations for Internet Group Management Protocols. B.
+     Haberman, Ed.. March 2025. (Format: HTML, TXT, PDF, XML) (Obsoletes
+     RFC3228) (Also BCP0057) (Status: BEST CURRENT PRACTICE) (DOI:
+     10.17487/RFC9778) 
 
 ===========================================================================
- - This file last updated Tue 26 Nov 2024 02:30:01 AM PST
+ - This file last updated Thu 10 Apr 2025 02:30:01 AM PDT
 

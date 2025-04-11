@@ -7,19 +7,18 @@ Request for Comments: 9676
 Category: Informational                                   E. Francesconi
 ISSN: 2070-1721                 National Research Council of Italy (CNR)
                                                                  C. Lupo
-                                                           November 2024
+                                                           February 2025
 
 
-    A Uniform Resource Name (URN) Namespace for Sources of Law (LEX)
+    LEX: A Uniform Resource Name (URN) Namespace for Sources of Law
 
 Abstract
 
-   This document describes a Uniform Resource Name (URN) namespace
-   identifier for identifying, naming, assigning, and managing
-   persistent resources in the legal domain.  This specification allows
-   adoption of a common convention by multiple jurisdictions to
-   facilitate ease of reference and access to resources in the legal
-   domain.
+   This document describes LEX, a Uniform Resource Name (URN) namespace
+   identifier that identifies, names, assigns, and manages persistent
+   resources in the legal domain.  This specification allows adoption of
+   a common convention by multiple jurisdictions to facilitate ease of
+   reference and access to resources in the legal domain.
 
    This specification is an Independent Submission to the RFC Series.
    It is not a standard and does not have the consensus of the IETF.
@@ -42,7 +41,7 @@ Status of This Memo
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -55,7 +54,7 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction
-     1.1.  Purpose of the "lex" Namespace
+     1.1.  The Purpose of Namespace LEX
      1.2.  Background
      1.3.  General Characteristics of the System
      1.4.  Linking a LEX Name to a Document
@@ -66,7 +65,7 @@ Table of Contents
      1.9.  Namespace Registration
    2.  Registration of LEX
      2.1.  Identifier Structure
-     2.2.  Jurisdiction-Code Register
+     2.2.  Jurisdiction-Code Registry
      2.3.  Conformance with URN Syntax
      2.4.  Validation Mechanism
      2.5.  Scope
@@ -85,7 +84,7 @@ Table of Contents
            Structure
      5.1.  Basic Principles
      5.2.  Model of Sources of Law Representation
-     5.3.  Structure of the Local Name
+     5.3.  Structure of the Local-Name
      5.4.  Structure of the Document Identifier at "Work" Level
      5.5.  Aliases
      5.6.  Structure of the Document Identifier at "Expression" Level
@@ -118,8 +117,7 @@ Table of Contents
      7.1.  The Version Element
        7.1.1.  Different Versions of a Legislative Document
        7.1.2.  Identification of the Version
-   8.  Summary of the Syntax of the Uniform Names of the "lex"
-           Namespace
+   8.  Summary of the Syntax of the Uniform Names of the LEX Namespace
    9.  Procedure of Uniform Names Assignment
      9.1.  Specifying the Jurisdiction Element of the LEX Identifier
      9.2.  Jurisdictional Registrar for Names Assignment
@@ -139,11 +137,11 @@ Table of Contents
 
 1.  Introduction
 
-1.1.  Purpose of the "lex" Namespace
+1.1.  The Purpose of Namespace LEX
 
-   The purpose of the "lex" namespace is to assign a unique identifier
-   in a well-defined format to documents that are sources of law.  In
-   this context, "sources of law" include any legal document within the
+   The purpose of the LEX namespace is to assign a unique identifier in
+   a well-defined format to documents that are sources of law.  In this
+   context, "sources of law" include any legal document within the
    domain of legislation, case law, administrative acts, or regulations.
    Potential sources of law (acts under the process of law formation,
    such as bills) are included as well.  "Legal doctrine", that is, the
@@ -159,10 +157,10 @@ Table of Contents
    that is not available online may, nevertheless, have a LEX URN
    identifier.
 
-   The lex URN may be used as a way to represent references (and more
+   The LEX URN may be used as a way to represent references (and more
    generally, any type of relation) among various sources of law.  In an
    online environment with resources distributed among different web
-   publishers, lex URNs allow a simplified global interconnection of
+   publishers, LEX URNs allow a simplified global interconnection of
    legal documents by means of automated resolution.  LEX URNs consist
    of persistent and location-independent identifiers and are
    particularly useful when they can be mapped into or associated with
@@ -191,15 +189,15 @@ Table of Contents
    of these identifiers are based on a URN schema.
 
    In today's information society, the processes of political, social,
-   and economic integration of European Union (EU) member states, as
+   and economic integration of European Union (EU) Member States, as
    well as the increasing integration of the worldwide legal and
    economic processes, are causing a growing interest in the exchange of
-   legal information knowledge at national and transnational levels.
-   The growing desire for improved quality and accessibility of legal
-   information amplifies the need for interoperability among legal
-   information systems across national boundaries.  A common, well-
-   defined schema used to identify sources of law at an international
-   level is an essential prerequisite for interoperability.
+   legal information at national and transnational levels.  The growing
+   desire for improved quality and accessibility of legal information
+   amplifies the need for interoperability among legal information
+   systems across national boundaries.  A common, well-defined schema
+   used to identify sources of law at an international level is an
+   essential prerequisite for interoperability.
 
    Interest groups within several countries have already expressed their
    intention to adopt a shared solution based on a URN technique.  In
@@ -220,13 +218,13 @@ Table of Contents
    including recommendations for defining naming conventions for them.
 
    Additionally, the need for unique identifiers for sources of law is
-   of particular interest in the domain of case law.  This is acutely
-   felt within both common law systems, where cases are the main law
-   sources, and civil law systems, in order to provide an integrated
-   access to cases and legislation, as well as to track the
-   relationships between them.  This domain is characterized by a high
-   degree of fragmentation in case law information systems, which
-   usually lack interoperability.
+   of particular interest in the domain of case law.  This need is
+   acutely felt within both common law systems (where cases are the main
+   law sources) and civil law systems, because unique identifiers can
+   provide integrated access to cases and legislation, as well as the
+   ability to track the relationships between them.  This domain is
+   characterized by a high degree of fragmentation in case law
+   information systems, which usually lack interoperability.
 
    In the European Union, the community institutions have stressed the
    need for citizens, businesses, lawyers, prosecutors, and judges to
@@ -237,19 +235,19 @@ Table of Contents
    the national judge in the European judicial system.  Similarly, the
    Council of the European Union has underlined the importance of cross-
    border access to national case law, as well as the need for its
-   standardization, in view of an integrated access in a decentralized
-   architecture.  In this view, the Working Party on Legal Data
-   Processing (e-Law) of the Council of the European Union formed a task
-   group to study the possibilities for improving cross-border access to
-   national case law.  Taking notice of the report of the Working
-   Party's task group, in 2009, the Council of the European Union
-   decided to elaborate on a uniform European system for the
-   identification of case law (i.e., the European Case-Law Identifier
-   (ECLI)) and a uniform set of metadata based on the Dublin Core.
+   standardization, with a vision of a decentralized architecture with
+   integrated access.  The Working Party on Legal Data Processing
+   (e-Law) of the Council of the European Union formed a task group to
+   study the possibilities for improving cross-border access to national
+   case law.  Taking notice of the report of the Working Party's task
+   group, in 2009, the Council of the European Union decided to
+   elaborate on a uniform European system for the identification of case
+   law (i.e., the European Case-Law Identifier (ECLI)) and a uniform set
+   of metadata based on the Dublin Core.
 
    The Council of the European Union invited the Member States to
    introduce the European Legislation Identifier (ELI) in the legal
-   information systems, which is an http-based, Semantic Web-oriented
+   information systems, which is an HTTP-based, Semantic Web-oriented
    identification system for legislation of the European Union and
    Member States.
 
@@ -259,12 +257,13 @@ Table of Contents
    needs for identifying legal documents of different types, namely,
    legislative, case law, and administrative acts.  Moreover, it can be
    effectively used within a federative environment where different
-   publishers (public and private) can provide their own items of a
-   legal document (that is, there is more than one manifestation of the
-   same legal document).
+   publishers (public and private) can provide their own items, in
+   [FRBR] sense (see Section 5.2), of a legal document (that is, there
+   is more than one manifestation (see Section 5.2) of the same legal
+   document).
 
    Specifications and syntax rules for the LEX identifier can also be
-   used for http-based naming conventions to cope with different
+   used for HTTP-based naming conventions to cope with different
    requirements in legal information management, for example, the need
    to have an identifier that is compliant with the Linked Open Data
    principles.
@@ -317,7 +316,7 @@ Table of Contents
    into parts.  The first part uses a preexisting standard specification
    ("country/jurisdiction name standard") to indicate the country (or
    more generally, the jurisdiction) of origin for the legal document
-   being identified; the remainder ("local name") is intended for local
+   being identified; the remainder ("local-name") is intended for local
    use in identifying documents issued in that country or jurisdiction.
 
    The second part depends only on the identification system for sources
@@ -343,8 +342,8 @@ Table of Contents
 
 1.4.  Linking a LEX Name to a Document
 
-   The LEX name is linked to the document through meta-information,
-   which may be specified as follows:
+   The LEX name is linked to the document through metadata, which may be
+   specified as follows:
 
    *  Within the document itself through a specific element within an
       XML schema or by a meta tag [W3C.HTML].
@@ -370,11 +369,11 @@ Table of Contents
       documents that are already online.
 
    *  Automatically constructing (either permanently or temporarily) the
-      link with the uniform name through reference parsers of a text.
-      This procedure offers more time savings, even if it is subject to
-      a certain percentage of errors, since references are not always
-      accurate or complete.  Nevertheless, this solution could be
-      acceptable for already-published documents.
+      link with the uniform name from references in the text using a
+      parser.  This procedure offers more time savings, even if it is
+      subject to a certain percentage of errors, since references are
+      not always accurate or complete.  This solution could nevertheless
+      be acceptable for documents that are already published.
 
    No matter which method is adopted, new documents produced in a
    certain format (for example, XML, XHTML, etc.) should express
@@ -411,8 +410,8 @@ Table of Contents
 
 1.9.  Namespace Registration
 
-   The "lex" namespace has been registered in the "Formal URN
-   Namespaces" registry.  See Section 12.
+   The LEX namespace has been registered in the "Formal URN Namespaces"
+   registry.  See Section 12.
 
 2.  Registration of LEX
 
@@ -456,7 +455,7 @@ Table of Contents
       Due to the differences in representation in the various languages
       of a country, the use of the standard [ISO.3166-1] is strongly
       RECOMMENDED for easier identification of the country.  Therefore,
-      a urn-lex ID always begins with a sequence of ASCII characters:
+      a LEX URN ID always begins with a sequence of ASCII characters:
       "urn:lex:ccTLD".  For all the other components that follow the
       jurisdiction-code, the Jurisdictional Registrar decides the mode
       of representation (ASCII or UTF-8 percent-encoding; see
@@ -474,16 +473,16 @@ Table of Contents
       specific legal system.  This additional information can be used
       when two or more levels of legislative or judicial production
       exist (e.g., federal, state, and municipality level) and the same
-      bodies may be present in each jurisdiction.  Therefore, acts of
-      the same type issued by similar authorities in different areas
-      differ for the jurisdiction-unit specification.
-
-      The following is an example:
-
-      "br:governo:decreto" (decree of federal government)
-      "br;sao.paulo:governo:decreto" (decree of SU+00E3o Paulo state)
+      bodies may be present in each jurisdiction.  Therefore, the
+      jurisdiction-unit differs for acts of the same type issued by
+      similar authorities but pertain to different jurisdictions related
+      to different geographical areas.
+      An example can be the following:
+      "br:governo:decreto" (decree of federal government),
+      "br;sao.paulo:governo:decreto" (decree of São (SU+00E3o) Paulo
+      state)
       "br;sao.paulo;campinas:governo:decreto" (decree of Campinas
-      municipality)
+      municipality).
 
    The following are fictitious examples of sources of law identifiers:
 
@@ -502,18 +501,18 @@ Table of Contents
    urn:lex:be:conseil.etat:decision:2008-07-09;185.273
        (Decision of the Belgian Council of State)
 
-2.2.  Jurisdiction-Code Register
+2.2.  Jurisdiction-Code Registry
 
    A new jurisdiction-code registry has been created.  Note that this is
    a CNR registry and *not* an IANA registry.
 
    Each entry contains the following elements:
 
-   jurisdiction-code:  The identifier of jurisdiction assigned to the
-      country or organization.
+   jurisdiction-code:  The identifier assigned to the jurisdiction
+      (i.e., to the country or organization).
 
-   jurisdiction:  The official name of the jurisdiction, country or
-      organization.
+   jurisdiction:  The official name of the jurisdiction (i.e., the
+      country or organization).
 
    registrant:  Essential information that identifies the organization
       that requested the registration of the code.  The registrant will
@@ -524,8 +523,9 @@ Table of Contents
 
    reference:  A reference to the defining document (if any).
 
-   The registry is initially empty.  The following are possible example
-   entries:
+   The table, available at the address lex-urn.nic.it, is initially
+   empty.  The registry is initially empty.  The following are possible
+   example entries:
 
    "br"; "Brazil"; "Prodasen, Federal Senate, address, contact";
          \[reference\]
@@ -548,46 +548,46 @@ Table of Contents
 
    The adopted registration policy is similar to that of the "Expert
    Review" policy specified in [RFC8126].  The designated expert(s) will
-   assign jurisdiction codes based on the following principles:
+   assign jurisdiction-codes based on the following principles:
 
    *  If a request comes from a jurisdiction that corresponds to a
-      country and the jurisdiction code is the same as a top-level
+      country and the jurisdiction-code is the same as a top-level
       Country Code Top-Level Domain (ccTLD), then the top-level ccTLD
-      should be used as the jurisdiction code.
+      should be used as the jurisdiction-code.
 
    *  If a request comes from a jurisdiction that corresponds to a
       multi-national organization (e.g., European Union) or
       international organization (e.g., United Nations and World Trade
       Organization), the Top-Level Domain Name (e.g., "eu") or the
       Domain Name (e.g., "un.org" and "wto.org") of the organization
-      should be used as the jurisdiction code.
+      should be used as the jurisdiction-code.
 
    *  If a multi-national or international organization does not have a
       registered domain, the designated expert(s) should assign
       something like "name.lex.arpa", where the name will be the acronym
       of the organization name in the language chosen by the
-      organization itself.  For example, the jurisdiction code of the
+      organization itself.  For example, the jurisdiction-code of the
       European Economic Community could be "eec.lex.arpa".  The alias
       mechanism allows for acronyms in different languages.
 
-   Jurisdiction codes MUST NOT be renamed, because that would violate
+   Jurisdiction-codes MUST NOT be renamed, because that would violate
    the rule that URN assignments be persistent.
 
-   Jurisdiction codes MUST NOT ever be deleted.  They can only be marked
+   Jurisdiction-codes MUST NOT ever be deleted.  They can only be marked
    as "obsolete", i.e., closed for new assignments within the
-   jurisdiction.  Requests to obsolete a jurisdiction code are also
+   jurisdiction.  Requests to obsolete a jurisdiction-code are also
    processed by the designated expert(s).
 
    Designated expert(s) can unilaterally initiate allocation or
-   obsolescence of a jurisdiction code.
+   obsolescence of a jurisdiction-code.
 
-   Requests for new jurisdiction code assignments must include the
+   Requests for new jurisdiction-code assignments must include the
    organization or country requesting it and contact information (email)
    of who requested the assignment.
 
 2.3.  Conformance with URN Syntax
 
-   The "lex" namespace identifier (NID) syntax conforms to [RFC8141].
+   The LEX namespace identifier (NID) syntax conforms to [RFC8141].
    However, a series of characters are reserved for identifying elements
    or sub-elements, or for future extensions of the LEX naming
    convention (see Section 3.2).
@@ -601,9 +601,9 @@ Table of Contents
 
 2.5.  Scope
 
-   Global interest.  In fact, each body that enacts sources of law can
-   identify them by this scheme.  Furthermore, other bodies (even non-
-   enacting sources of law, such as newspapers, magazine publishers,
+   The scope is global.  In fact, each Body that enacts sources of law
+   can identify them by this scheme.  Furthermore, other bodies (even
+   non-enacting sources of law, such as newspapers, magazine publishers,
    etc.) that aim to reference legal documents can unequivocally
    identify them by this scheme.
 
@@ -616,16 +616,15 @@ Table of Contents
 
    The characters are defined in accordance with [RFC8141].  For various
    reasons that are explained later, only a subset of characters is
-   allowed in the "lex" NSS.  All other characters are either eliminated
+   allowed in the LEX NSS.  All other characters are either eliminated
    or converted.
 
-   For the full syntax of the uniform names in the "lex" space, please
-   see Section 8.
+   For the full syntax of the uniform names in the LEX space, please see
+   Section 8.
 
 3.2.  Reserved Characters
 
-   The following characters are reserved in the specific "lex"
-   namespace:
+   The following characters are reserved in the specific LEX namespace:
 
    "@"   Separator of the expression that contains information on
          version and language.
@@ -657,7 +656,7 @@ Table of Contents
    "!"   Reserved for future expansions.
 
    To keep backward compatibility with existing applications in some
-   jurisdictions, the "lex" NID syntax does not include the use of the
+   jurisdictions, the LEX NID syntax does not include the use of the
    character "/" in this version.  This character is always converted
    into "-", except in the formal annexes (see Section 6.4.1).
 
@@ -665,8 +664,8 @@ Table of Contents
 
    For all the languages where different cases (uppercase or lowercase)
    or different spellings of the same word are possible, names belonging
-   to "lex" namespace are case-insensitive.  For the Latin alphabet, it
-   is RECOMMENDED that names be created in lower case, but names that
+   to LEX namespace are case-insensitive.  For the Latin alphabet, it is
+   RECOMMENDED that names be created in lower case, but names that
    differ only in case or in the spelling of the same word MUST be
    considered equivalent (e.g., "Ministry" will be recorded as
    "ministry").
@@ -677,10 +676,11 @@ Table of Contents
    resolution system, keep editing and communication more simple, and
    avoid character percent-encoding, it is RECOMMENDED that characters
    outside the ASCII range (e.g., national characters, diacritic signs,
-   etc.) be replaced by base ASCII characters.  For example, the Italian
-   term "sanitU+00E0" can be replaced by "sanita", the French term
-   "ministU+00E8re" can be replaced by "ministere", and "MU+00FCnchen"
-   can be replaced by "muenchen" (transliteration).
+   etc.) are turned into base ASCII characters (e.g. the Italian term
+   "sanità" (sanitU+00E0)" replaced into "sanita", the French term
+   "ministère" (ministU+00E8re) replaced into "ministere", in case by
+   transliteration (e.g. "München" (MU+00FCnchen) replaced into
+   "muenchen").
 
    This mapping consists of:
 
@@ -693,14 +693,14 @@ Table of Contents
       little tail), or on (e.g., oblique cut)
 
    The most suitable, well-known, and widespread mapping system for a
-   given language MUST be chosen by the jurisdiction, or in agreement
-   with this one, by the jurisdiction-unit in case of different
-   languages in various regions, also taking into account the choices
-   made for the same language by other jurisdictions.  This mapping is
-   simpler and more feasible for languages that use the Latin alphabet
-   and gradually becomes more complex for other alphabets and for
-   writing systems that use opposite orientation (from right to left) or
-   are based on ideographic symbols.
+   given language MUST be chosen by the jurisdiction or by the
+   jurisdiction-unit (in agreement with the jurisdiction) in the case of
+   different languages in various regions, also taking into account the
+   choices made for the same language by other jurisdictions.  This
+   mapping is simpler and more feasible for languages that use the Latin
+   alphabet and gradually becomes more complex for other alphabets and
+   for writing systems that use opposite orientation (from right to
+   left) or are based on ideographic symbols.
 
    If this conversion is not acceptable by a specific jurisdiction or it
    is not available in a given language, Unicode MUST be used, and for
@@ -708,27 +708,27 @@ Table of Contents
    ASCII range MUST be converted to UTF-8 percent-encoding according to
    [RFC3986] and [RFC3629] .
 
-   In this case, it should be noted that the generated URN (as some of
-   its parts) cannot be used directly for routing through the DNS.
-   Therefore, the jurisdiction must adopt one of the following
+   In this case, it should be noted that the generated URN (as well as
+   some of its parts) cannot be used directly for routing through the
+   DNS.  Therefore, the jurisdiction must adopt one of the following
    strategies:
 
    *  Convert non-ASCII characters within the DNS into IDN encoding
-      using Punycode translation [RFC5894] (e.g., mU+00FCnchen in xn--
-      mnchen-3ya) and develop a software interface that converts the URN
-      before the navigation in the DNS.
+      using Punycode translation [RFC5894] (e.g., "münchen"
+      (mU+00FCnchen) in xn--mnchen-3ya) and develop a software interface
+      that converts the URN before the navigation in the DNS.
 
    *  Create a routing service relying on a software, outside of the
       DNS, that addresses a proper resolution service.
 
-   Note that the urn:lex ID could contain groups of characters (UTF-8
+   Note that the LEX URN ID could contain groups of characters (UTF-8
    percent-encoded) of some languages with different orientations.  In
    this case, the BiDi rules apply [RFC5893].
 
    The preferred order is summarized as follows:
 
-   *  Conversion into basic ASCII is the RECOMMENDED solution (for not
-      having to make conversions for network protocols and the DNS).
+   *  Conversion into basic ASCII is the RECOMMENDED solution (because
+      conversions for network protocols and the DNS are not needed).
 
    *  Using Unicode and converting to UTF-8 percent-encoding [RFC3629]
       for accessing network protocols and to Punycode [RFC5894] only for
@@ -745,51 +745,28 @@ Table of Contents
    The following are two examples (Latin and Cyrillic alphabets)
    relating to the different solutions adopted:
 
-   *  A circular adopted by the Municipality of Munich (Rundschreiben
-      der Stadt MU+00FCnchen):
+   *  a circular adopted by the Municipality of Munich (Rundschreiben
+      der Stadt "München" (MU+00FCnchen)):
 
-      -  ASCII:
-
-         urn:lex:de:stadt.munchen:rundschreiben: ...
-
-      -  Unicode:
-
-         urn:lex:de:stadt.mU+00FCnchen:rundschreiben: ...
-
-      -  UTF-8:
-
-         urn:lex:de:stadt.m%xC3%xBCnchen:rundschreiben: ...
-
-      -  Punycode:
-
-         urn:lex:de:stadt.xn--mnchen-3ya:rundschreiben: ...
+      - ASCII: urn:lex:de:stadt.munchen:rundschreiben:...;
+      - Unicode: urn:lex:de:stadt.mU+00FCnchen:rundschreiben:...;
+      - UTF-8: urn:lex:de:stadt.m%xC3%xBCnchen:rundschreiben:...;
+      - PUNYCODE: urn:lex:de:stadt.xn--mnchen-3ya:rundschreiben:...
 
    *  A state law of the Russian Federation (Latin: gosudarstvo zakon;
-      Cyrillic: U+0441U+043EU+0441U+0442U+043EU+044FU+043DU+0438U+0435
-      U+0437U+0430U+043AU+043EU+043D):
+      Cyrillic: "состояние закон"
+      (U+0441U+043EU+0441U+0442U+043EU+044FU+043DU+0438U+0435
+      U+0437U+0430U+043AU+043EU+043D)), assuming that the Russia
+      jurisdiction-code is expressed in ASCII ("ru") (while the Cyrillic
+      version would be "рф" (U+0440U+0444)):
 
-      -  ASCII:
-
-         urn:lex:ru:gosudarstvo:zakon: ...
-
-      -  Unicode:
-
-         urn:lex:ru:U+0441U+043EU+0441U+0442U+043EU+044FU+043D
-         U+0438U+0435:U+0437U+0430U+043AU+043EU+043D: ...
-
-      -  UTF-8:
-
-         urn:lex:ru:%xD1%x81%xD0%xBE%xD1%x81%xD1%x82%xD0%xBE%xD1
-         %x8F%xD0%xBD%xD0%xB8%xD0%xB5:%xD0%xB7%xD0%xB0%xD0%xBA
-         %xD0%xBE%xD0%xBD: ...
-
-      -  Punycode:
-
-         urn:lex:ru:xn--80aebe3cdmfdkg:xn--80ankme: ...
-
-      |  Note: The above assumes that the Russia jurisdiction-code is
-      |  expressed in ASCII ("ru"), while the Cyrillic version
-      |  ("U+0440U+0444") has the Punycode "xn--p1ai".
+      - ASCII: urn:lex:ru:gosudarstvo:zakon:...
+      - Unicode: urn:lex:ru:U+0441U+043EU+0441U+0442U+043EU+044FU+043D
+                 U+0438U+0435:U+0437U+0430U+043AU+043EU+043D:...
+      - UTF-8: urn:lex:ru:%xD1%x81%xD0%xBE%xD1%x81%xD1%x82%xD0%xBE%xD1
+               %x8F%xD0%xBD%xD0%xB8%xD0%xB5:%xD0%xB7%xD0%xB0%xD0%xBA
+               %xD0%xBE%xD0%xBD:...
+      - PUNYCODE: urn:lex:ru:xn--80aebe3cdmfdkg:xn--80ankme:...
 
 3.5.  Abbreviations
 
@@ -805,48 +782,64 @@ Table of Contents
    dates.  Dates MUST always be represented in this format (4 digits for
    the year, 2 digits for the month, and 2 digits for the day):
 
-       date-iso = yyyy-mm-dd
+       date-iso = year "-" month "-" day
 
    For example, "September 2, 99" will be written as "1999-09-02".
 
    This format ensures interoperability between different representation
-   systems, and there are several programs for mapping other formats to
-   this one.
+   systems and there are several programs for mapping other formats to
+   this one.  However, to make reading and understanding such other
+   formats (e.g., Jewish calendar), the LEX URN scheme provides that the
+   date can be added in the jurisdiction's own format.  The date in the
+   previous example (1999-09-02) would be as follows:
 
-   However, to facilitate reading and understanding other formats (e.g.,
-   Jewish calendar), the urn:lex scheme allows for the date to be added
-   in the jurisdiction's own format.  For example, the date in the
-   previous example would be 21.Elul,5759, that is:
+   *  in Hebrew characters (21 Elul 5759):
 
-   *  In Hebrew characters:
+      כ״א-בֶּאֱלוּל-תשנ״ט
 
-       U+05DBU+05F4U+05D0.U+05D0U+05B1U+05DCU+05D5U+05BCU+05DC.U+05EA
-       U+05E9U+05E0U+05F4U+05D8
+      where in direction of reading, the sequence of characters is "כ"
+      (HEBREW LETTER KAF, U+05DB), "״" (HEBREW PUNCTUATION GERSHAYIM,
+      U+05F4), "א" (HEBREW LETTER ALEF, U+05D0), "-" (HYPHEN-MINUS,
+      U+002D), "בֶּ" (HEBREW LETTER BET, HEBREW POINT SEGOL, HEBREW
+      POINT DAGESH OR MAPIQ, U+05D1 U+05B6 U+05BC), "אֱ" (HEBREW LETTER
+      ALEF, HEBREW POINT HATAF SEGOL, U+05D0 U+05B1), "ל" (HEBREW LETTER
+      LAMED, U+05DC), "וּ" (HEBREW LETTER VAV, HEBREW POINT DAGESH OR
+      MAPIQ, U+05D5 U+05BC), "ל" (HEBREW LETTER LAMED, U+05DC), "-"
+      (HYPHEN-MINUS, U+002D), "ת" (HEBREW LETTER TAV, U+05EA), "ש"
+      (HEBREW LETTER SHIN, U+05E9), "נ" (HEBREW LETTER NUN, U+05E0), "״"
+      (HEBREW PUNCTUATION GERSHAYIM, U+05F4), and "ט" (HEBREW LETTER
+      TET, U+05D8).
 
-   *  In UTF-8:
+      Note that the example above uses right-to-left (RTL) script, which
+      in the context of this specification may be displayed differently
+      by different document presentation environments.  The descriptive
+      text may be more reliable to follow than the necessarily device-
+      and application-specific rendering.
 
-       %x5c%x75%x30%x35%x44%x42%x5c%x75%x30%x35%x46%x34%x5c%x75%x30%x35
-       %x44%x30%x2e%x5c%x75%x30%x35%x44%x30%x5c%x75%x30%x35%x42%x31%x5c
-       %x75%x30%x35%x44%x43%x5c%x75%x30%x35%x44%x35%x5c%x75%x30%x35%x42
-       %x43%x5c%x75%x30%x35%x44%x43%x2e%x5c%x75%x30%x35%x45%x41%x5c%x75
-       %x30%x35%x45%x39%x5c%x75%x30%x35%x45%x30%x5c%x75%x30%x35%x46%x34
-       %x5c%x75%x30%x35%x44%x38
+   *  in U+ notation:
 
-   Therefore, for all the dates in the urn:lex identifier (see Sections
+      U+05D8U+05F4U+05E0U+05E9U+05EAU+002DU+05DCU+05D5U+05BCU+05DC
+      U+05D0U+05B1U+05D1U+05B6U+05BCU+002DU+05D0U+05F4U+05DB
+
+   *  in UTF-8 code:
+
+      %d7%98%d7%b4%d7%a0%d7%a9%d7%aa-%d7%9c%d7%95%d6%bc%d7%9c%d7%
+      90%d6%b1%d7%91%d6%b6%d6%bc-%d7%90%d7%b4%d7%9b
+
+   Therefore, for all the dates in the LEX URN identifier (see Sections
    6.3 and 7.1.2), it is possible to indicate the date in the local
    format:
 
-       date = date-iso [ "|" date-loc ]
+       date = date-iso ["|" date-loc]
 
-   For example, "September 2, 99" will be written in ISO format and
-   Hebrew format as follows:
+   For example, 1999-09-02 will be written in ISO plus Hebrew format as:
 
-     1999-09-02|U+05DBU+05F4U+05D0.U+05D0U+05B1U+05DCU+05D5U+05BCU+05DC.
-     U+05EAU+05E9U+05E0U+05F4U+05D8
+   1999-09-02|כ״א-בֶּאֱלוּל-תשנ״ט
 
-   The characters that are not allowed (e.g., "/") or reserved (e.g.,
-   ",") cannot exist inside the date-loc and therefore MUST be turned
-   into ".".
+   which is to be converted into UTF-8 for network protocols and for
+   resolution (see Section 3.4).  The characters that are not allowed
+   (e.g., "/") or reserved (e.g., ",") cannot exist inside the date-loc
+   and therefore MUST be turned into ".".
 
 4.  Specific Syntax and Features of the LEX Identifier
 
@@ -875,13 +868,13 @@ Table of Contents
 
 4.3.  Ordinal Numbers
 
-   To even the representation, it is highly RECOMMENDED that any ordinal
-   number included in a component of a document name (e.g., in the
-   description of an institution body) is indicated in Western Arabic
-   numerals, regardless to the original expression, whether Roman
+   To standardise the representation, it is highly RECOMMENDED that any
+   ordinal number included in a component of a document name (e.g., in
+   the description of an institution Body) is indicated in Western
+   Arabic numerals, regardless to the original expression, whether Roman
    numerals, an adjective, Arabic numerals with an apex, etc. (such as
-   IV, third, 1U+00B0, and 2^).  For example, "Department IV" becomes
-   "department.4".
+   IV, third, 1° (1U+00B0), and 2^).  For example, "Department IV"
+   becomes "department.4".
 
 5.  Creation of the Source of Law LEX Identifier: Baseline Structure
 
@@ -913,25 +906,25 @@ Table of Contents
 
    The first two entities reflect its contents:
 
-   work:  Identifies a distinct intellectual creation; in our case, it
-      identifies a source of law both in its original form as amended
-      over time.
+   work:  Identifies a distinct intellectual creation; in this document,
+      it identifies a source of law in both its original form and its
+      amended form over time.
 
    expression:  Identifies a specific intellectual realization of a
-      work; in our case, it identifies every different (original or up-
-      to-date) version of the source of law over time and/or language in
-      which the text is expressed.
+      work; in this document, it identifies every different (original or
+      up-to-date) version of the source of law over time and/or language
+      in which the text is expressed.
 
    The other two entities relate to its form:
 
    manifestation:  Identifies a physical embodiment of an expression of
-      a work; in our case, it identifies embodiments in different media
-      (printing, digital, etc.), encoding formats (XML, PDF, etc.), or
-      other publishing characteristics.
+      a work; in this document, it identifies embodiments in different
+      media (printing, digital, etc.), encoding formats (XML, PDF,
+      etc.), or other publishing characteristics.
 
-   item:  Identifies a specific copy of a manifestation; in our case, it
-      identifies individual physical copies as they are found in
-      particular physical locations.
+   item:  Identifies a specific copy of a manifestation; in this
+      document, it identifies individual physical copies as they are
+      found in particular physical locations.
 
    In this document, the [FRBR] model has been interpreted for the
    specific characteristics of the legal domain.  In particular, apart
@@ -948,17 +941,17 @@ Table of Contents
    same text do not produce different expressions.  Instead, they
    produce different manifestations.
 
-5.3.  Structure of the Local Name
+5.3.  Structure of the Local-Name
 
-   The local-name within the "lex" namespace MUST contain all the
+   The local-name within the LEX namespace MUST contain all the
    necessary pieces of information enabling the unequivocal
    identification of a legal document.  If the local-name violates this
-   requirement, the related URN is not a valid one within the "lex"
+   requirement, the related URN is not a valid one within the LEX
    namespace.
 
    In the legal domain, three components are always present at the
-   "work" level: the enacting authority, the type of provision, and the
-   details.  A fourth component, the annex, can also be added.  It is
+   "work" level: the enacting authority, the measure type, and the
+   details.  A fourth component, the annex, is added if any.  It is
    often necessary to differentiate various expressions, that is:
 
    *  the original version and all the amended versions of the same
@@ -984,7 +977,7 @@ Table of Contents
    multiple official languages (as in Switzerland) or more involved
    jurisdictions (as in international treaties).
 
-   Therefore, the more general structure of the local name appears as
+   Therefore, the more general structure of the local-name appears as
    follows:
 
           local-name = work ["@" expression] ["$" manifestation]
@@ -1043,7 +1036,7 @@ Table of Contents
    The type of measure is important to identify case law and
    legislation, especially within legal systems where cases are
    traditionally identified only through the year of release and a
-   number.  Since the aim of the lex schema is to identify specific
+   number.  Since the aim of the LEX schema is to identify specific
    materials, the type of measure or the full date are able to
    differentiate between materials belonging to a specific case.
 
@@ -1158,7 +1151,7 @@ Table of Contents
       remain unchanged, even if the identified object is no longer
       accessible.  In this case, in order to make its materials
       accessible, the publisher will have to create a new manifestation
-      with a new domain name for each of them.
+      with a new domain name for each object.
 
    format:  The digital format (e.g., XML, HTML, PDF, etc.) expressed
       according to the MIME Content-Type standard [RFC2045], where the
@@ -1181,14 +1174,16 @@ Table of Contents
 
    To indicate possible features or peculiarities, each main element of
    the manifestation MAY be followed by further specifications
-   (separated by ";"), for example as regards editor the archive name
-   and the electronic publisher, for format the version, etc.
-   Therefore, the main elements of the manifestation will assume the
-   following forms:
+   (separated by ";"), for example, the archive name and electronic
+   publisher for the editor and the version for format.  Therefore, the
+   main elements of the manifestation will assume the following forms:
 
        editor = publisher *(";" specification)
+
        format = mime *(";" specification)
+
        component = part *(";" specification)
+
        feature = attribute *(";" specification)
 
    The syntax details of the manifestation element are shown in
@@ -1203,24 +1198,24 @@ Table of Contents
       -  PDF format (vers. 1.7) of the whole act edited by the Italian
          Parliament:
 
-           urn:lex:it:stato:legge:2000-04-03;56$application-pdf;
-           1.7:parlamento.it
+         urn:lex:it:stato:legge:2000-04-03;56$parlamento.it:
+         application-pdf;1.7:
 
       -  XML format (version 2.2 DTD NIR) of the text of the act and PDF
          format (version 1.7) of the "Figura 1" (figure 1) contained in
          the body, edited by the Italian Senate:
 
-           urn:lex:it:stato:legge:2000-04-03;56$text-xml;dtd-nir-2.2:
-           senato.it:testo
-           urn:lex:it:stato:legge:2000-04-03;56$application-pdf;1.7:
-           senato.it:figura.1
+         urn:lex:it:stato:legge:2000-04-03;56$senato.it:text-xml;
+           dtd-nir-2.2:testo
+         urn:lex:it:stato:legge:2000-04-03;56$senato.it:
+           application-pdf;1.7:figura.1
 
    *  The Spanish URN of the HTML format of the whole Judgment of the
       European Court of Justice n. 33/08 of 11/06/2009, in Spanish
       version, published in the Jurifast database in anonymized form:
 
       urn:lex:eu:tribunal.justicia:sentencia:2009-06-11;33-08
-      @original:es$text-html:juradmin.eu;jurifast:todo:anonimo
+      @original:es$juradmin.eu;jurifast:text-html:todo:anonimo
 
    It is useful to be able to assign a uniform name to a manifestation
    (or to a part of it) in case non-textual objects are involved.  These
@@ -1278,7 +1273,7 @@ Table of Contents
    of 15 May 2004, n. 106, the reference can be
    "urn:lex:fr:etat:loi:2004-05-15;106~art15;par3".
 
-   Using a different separator ("~") from the document name, the
+   If a different separator ("~") is used after the document name, the
    partition ID is not withheld by the browser but is transmitted to the
    resolution process.  If the partition syntax is compatible with the
    media type used, this enables the resolver to retrieve (for example,
@@ -1361,7 +1356,7 @@ Table of Contents
 
 6.1.5.  Indication of the Function
 
-   Generally, the function is indicated, sometimes instead of the body
+   Generally, the function is indicated, sometimes instead of the Body
    itself:
 
    *  In the case of political, representative, or elective offices
@@ -1471,7 +1466,7 @@ Table of Contents
 
    The details of a source of law usually include the date of the
    enactment and the identification number (inclusion in the body of
-   laws, register, protocol, etc.).
+   laws, registry, protocol, etc.).
 
    Some measures can have multiple dates.  There are also cases in which
    the number of the measure does not exist (unnumbered measures) or a
@@ -1491,7 +1486,7 @@ Table of Contents
    uniform name, which goes from general to specific, the sequence date-
    number has the following form:
 
-       details = (dates / period) ";" numbers
+      details = (dates / period) ";" numbers
 
    The following are examples: "2000-12-06;126" and
    "14.legislature;s.2544".
@@ -1502,7 +1497,7 @@ Table of Contents
    date.  In this case, all the given dates are to be reported and
    indicated as follows:
 
-   dates = date *("," date)
+      dates = date *("," date)
 
    For example, the measure of the Data Protection Authority of December
    30, 1999-January 13, 2000, No. 1/P/2000 has the following uniform
@@ -1552,7 +1547,7 @@ Table of Contents
    case, in the numbers field, all the identifiers are reported,
    according to the following structure:
 
-     numbers = document-id *("," document-id)
+     number = document-id *("," document-id)
 
    The following is an example: "2000-06-12;c-10-97,c-11-97,c-12-97".
 
@@ -1679,8 +1674,8 @@ Table of Contents
 
    It is possible to add further specifications that will distinguish
    each of the different versions of the text to guarantee identifier
-   unequivocalness.  For example with regard to changes of the in-force
-   or effectiveness of any partition or portion of the text itself
+   unequivocalness.  Examples include changes of the in-force or
+   effectiveness of a formal partition or portion of the text itself
    (e.g., when the amendments introduced by an act are applied at
    different times) or different events occurring on the same date.
 
@@ -1715,10 +1710,10 @@ Table of Contents
    the in-force or effective version starting on a different date
    (1/1/99).
 
-   For full compatibility, every update of text or of the effectiveness
-   of a "multi-version" document implies the creation of a new uniform
-   name, even if the object remains only one, containing the identifier
-   of the virtually generated version, exactly as in the case of a
+   For full compatibility, every update of text, or of the
+   effectiveness, of a "multi-version" document implies the creation of
+   a new uniform name, even if the object remains single, containing the
+   identifier of the virtually generated version, as in the case of a
    "single-version" document.  Specific metadata will associate every
    uniform name with the period of time during which such a name,
    together with its corresponding text, is to be considered valid
@@ -1737,23 +1732,23 @@ Table of Contents
    As specified in Section 3.6, all the dates can have the date typical
    of the jurisdiction in addition to the date in ISO format.
 
-8.  Summary of the Syntax of the Uniform Names of the "lex" Namespace
+8.  Summary of the Syntax of the Uniform Names of the LEX Namespace
 
    ;-------------------------------------------------------------------
-   ; Structure of a Uniform Resource Name (URN) of the "lex" namespace
-   ; - NID-lex = namespace
-   ; - NSS-lex = specific name
+   ; Structure of a Uniform Resource Name (URN) of the LEX namespace
+   ; - NID = LEX namespace identifier
+   ; - NSS = LEX Namespace Specific String
    ;-------------------------------------------------------------------
 
-   URN-lex = "urn:" NID-lex ":" NSS-lex
+   URN = "urn:" NID ":" NSS
 
-   NID-lex = "lex"
+   NID = "lex"
 
    ;-------------------------------------------------------------------
-   ; Structure of a "lex" specific name
+   ; Structure of a LEX specific name
    ;-------------------------------------------------------------------
 
-   NSS-lex = jurisdiction ":" local-name
+   NSS = jurisdiction ":" local-name
 
    ;-------------------------------------------------------------------
    ; Structure of the jurisdiction element
@@ -1811,7 +1806,9 @@ Table of Contents
 
    period = alf-dot
 
-   numbers = (document-id *("," document-id)) / number-lex
+   numbers = number / number-lex
+
+   number = (document-id *("," document-id))
 
    document-id = alf-dot-oth
 
@@ -1836,7 +1833,7 @@ Table of Contents
    ;-------------------------------------------------------------------
 
    version = (amendment-date / specification)
-          *(";" (event-date / event))
+             *(";" (event-date / event))
 
    amendment-date = date
 
@@ -1856,16 +1853,16 @@ Table of Contents
    ; Structure of the manifestation element
    ;-------------------------------------------------------------------
 
-   manifestation = format ":" editor
-                [":" component [":" feature]]
-
-   format = mime *(";" specification)
-
-   mime = alf-dot-hyp
+   manifestation = editor ":" format
+                   [":" component [":" feature]]
 
    editor = publisher *(";" specification)
 
    publisher = alf-dot-hyp
+
+   format = mime *(";" specification)
+
+   mime = alf-dot-hyp
 
    component = part *(";" specification)
 
@@ -1883,20 +1880,23 @@ Table of Contents
 
    date-iso = year "-" month "-" day
 
-   year  = 4DIGIT
+   year = 4DIGIT
+
    month = 2DIGIT
-   day   = 2DIGIT
+
+   day = 2DIGIT
 
    date-loc = *(alfadot / other)
 
    ;-------------------------------------------------------------------
-   ; Allowed, reserved, and future characters
+   ; Allowed, reserved and future characters
    ;-------------------------------------------------------------------
    ; - allowed = alfadot / other / reserved
    ; - reserved = ":" / "@" / "$" / "+" / "|" / ";" / "," / "~"
-   ; - future   = "*" /  "!"
+   ; - future = "*" / "!"
 
    alf-dot = alfanum *alfadot
+
    alf-dot-hyp = alfanum *(alfadot / "-")
 
    alf-dot-oth = alfanum *(alfadot / other)
@@ -1904,7 +1904,6 @@ Table of Contents
    alfadot = alfanum / "."
 
    alfa = lowercase / uppercase
-
 
    alfanum = alfa / DIGIT / encoded
 
@@ -1924,8 +1923,8 @@ Table of Contents
 
 9.1.  Specifying the Jurisdiction Element of the LEX Identifier
 
-   Under the "lex" namespace, each country or international organization
-   is assigned a jurisdiction code, which characterizes the URNs of the
+   Under the LEX namespace, each country or international organization
+   is assigned a jurisdiction-code, which characterizes the URNs of the
    source of law of that country or jurisdiction.  This code is assigned
    according to ccTLD (as well as TLDN (Top-Level Domain Name) or DN
    (Domain Name) for organizations) representation, and it is the value
@@ -1939,17 +1938,19 @@ Table of Contents
    defines the structure of the optional part (jurisdiction-unit) of the
    name, according to the organization of the state or institution (for
    details, see Section 2.2).  It must appoint a Jurisdictional
-   Registrar and inform the Designed Experts, together with the
-   registration of a jurisdiction code.  For example, in a federal
-   state, a jurisdiction-unit corresponding to the name of each member
-   state (e.g., "br;sao.paulo", "br;minas.gerais", etc.) may be defined.
+   Registrar and must apply the Designated Experts to register the new
+   jurisdiction-code.
+
+   For example, in a federal state, a jurisdiction-unit corresponding to
+   the name of each Member State (e.g., "br;sao.paulo",
+   "br;minas.gerais", etc.) may be defined.
 
    The process of assigning the local-name is managed by each specific
    country or jurisdiction under the related jurisdiction element.
 
    In any country, the Jurisdictional Registrar shares and defines the
    assignment of the primary elements (issuing authority and type of
-   legal measure) of the local names considering the characteristics of
+   legal measure) of the local-names considering the characteristics of
    its own state or institution organization.
 
    The Jurisdictional Registrar MUST establish, according to the
@@ -1969,17 +1970,17 @@ Table of Contents
    Finally, the Jurisdictional Registrar will develop and publish the
    rules and guidelines for the local-name construction as well as the
    predefined values and codes.  The Jurisdictional Registrar should
-   also promote the urn:lex identifier for the sources of law of its
+   also promote the LEX URN identifier for the sources of law of its
    jurisdiction.
 
    Such a set of rules will have to be followed by all institutional
-   bodies adopting the URN LEX identification system in a country or
+   bodies adopting the LEX URN identification system in a country or
    jurisdiction, as well as by private publishers.  Each of them will be
    responsible for assigning names to their domains.
 
 9.3.  Identifier Uniqueness
 
-   Identifiers in the "lex" namespace are defined through a jurisdiction
+   Identifiers in the LEX namespace are defined through a jurisdiction
    element assigned to the sources of law of a specific country or
    organization, and a local-name is assigned by the issuing authority
    in conformance with the syntax defined in Section 5.  The main
@@ -1990,7 +1991,7 @@ Table of Contents
    constructed and MUST update its registries and make them accessible.
 
    Any enacting authority is responsible for defining formal parameters
-   to guarantee local name uniqueness by attributing, if necessary, a
+   to guarantee local-name uniqueness by attributing, if necessary, a
    conventional internal number, which when combined with the other
    local-name components (authority, measure, and date), builds a unique
    identifier.  Uniqueness is achieved by checking against the catalogue
@@ -2038,9 +2039,9 @@ Table of Contents
    The task of the resolution service is to associate a LEX identifier
    with a specific document address on the Internet.  In contrast with
    systems that can be constructed around rigorous and enforceable
-   engineering premises, such as DNS, the "lex" namespace resolver will
-   be expected to cope with a wide variety of inputs that are incomplete
-   or partially incorrect, particularly those created by the automated
+   engineering premises, such as DNS, the LEX namespace resolver will be
+   expected to cope with a wide variety of inputs that are incomplete or
+   partially incorrect, particularly those created by the automated
    extraction of references from texts.  In this document, the result is
    a particular emphasis on a flexible and robust resolver design.
 
@@ -2059,12 +2060,12 @@ Table of Contents
    processes for their resolution and management are robust and
    followed.
 
-   For the "lex" namespace, CNR will 1) maintain the root zone of the
+   For the LEX namespace, CNR will 1) maintain the root zone of the
    chain resolution, equivalent to "lex.urn.arpa" (see [RFC3405]), in
    the lex-nameserver.nic.it (see Section 12) and 2) update the DNS
-   information with a new record to delegate the relative resolution in
-   correspondence with the adhesion (see Section 2.2) of a new country
-   (e.g., "br") or organization.  This may be obtained by a regular
+   information with a new record to delegate the relative resolution
+   when a new country (e.g., "br") or organization is added (see
+   Section 2.2).  This delegation may be obtained by a regular
    expression that matches the initial part of the URN (e.g.,
    "urn:lex:br") and redirects towards the proper zone (e.g.,
    "lex.senado.gov.br").
@@ -2079,7 +2080,7 @@ Table of Contents
 
    Such a DNS routing chain does not work for all the URN components
    containing percent-encoded characters.  Therefore, when converting a
-   "lex" URN in UTF-8 code to a DNS query, clients MUST perform any
+   LEX URN in UTF-8 code to a DNS query, clients MUST perform any
    necessary punycode conversion [RFC5891] before sending the query.
 
    The resolution service is made up of two elements: a knowledge base
@@ -2114,7 +2115,7 @@ Table of Contents
    components to the canonical form (e.g., filling out the acronyms,
    expanding the abbreviations, unifying the institution names,
    standardizing the type of measures, etc.).  For this function,
-   authorities and types of measure registers are useful.
+   authorities and types of measure registries are useful.
 
    The resolver SHOULD then query the catalogue searching for the URN
    that corresponds exactly to the given one (normalized if necessary).
@@ -2151,7 +2152,7 @@ Table of Contents
 
 12.  IANA Considerations
 
-   IANA has registered "lex" namespace in the "Formal URN Namespaces"
+   IANA has registered LEX namespace in the "Formal URN Namespaces"
    registry [RFC8141].
 
    In addition, to activate a distributed resolution system, IANA has
@@ -2161,7 +2162,7 @@ Table of Contents
        IN NAPTR  100  10  ""  ""  ""  lex-nameserver.nic.it.
 
    Note that lex-nameserver.nic.it indicates the CNR server (see
-   Section 2.2) that is responsible for the resolution of the "lex"
+   Section 2.2) that is responsible for the resolution of the LEX
    namespace at the time of this writing.
 
 13.  References
@@ -2271,7 +2272,8 @@ Table of Contents
 
    [ISO.3166-1]
               ISO, "Codes for the representation of names of countries
-              and their subdivisions - Part 1: Country codes".
+              and their subdivisions - Part 1: Country codes, ISO
+              3166-1:2020, 2020.", 2020.
 
    [LVI]      Peruginelli, G., Ed. and M. Ragona, Ed., "Law via the
               Internet. Free Access, Quality of Information,
@@ -2282,9 +2284,9 @@ Table of Contents
               Principles, Models, Standards for Document Management",
               ISBN 978-94-007-1887-6, 2011.
 
-   [SPIN]     Spinosa, P., "The Assignment of Uniform Names to Italian
-              Legal Documents, URN-NIR 1.4", ITTIG technical Report n.
-              8/2010, June 2020.
+   [SPIN]     Spinosa, P., "Identification of Legal Documents through
+              URNs (Uniform Resource Names)", Proceedings of the EuroWeb
+              2001, The Web in Public Administration , 2001.
 
    [W3C.RDF-SCHEMA]
               Brickley, D., Ed. and R. Guha, Ed., "RDF Schema 1.1", W3C

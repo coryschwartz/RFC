@@ -1,0 +1,41 @@
+RFC5849: The OAuth 1.0 Protocol
+RFC6749: The OAuth 2.0 Authorization Framework
+RFC6750: The OAuth 2.0 Authorization Framework: Bearer Token Usage
+RFC6755: An IETF URN Sub-Namespace for OAuth
+RFC6819: OAuth 2.0 Threat Model and Security Considerations
+RFC7009: OAuth 2.0 Token Revocation
+RFC7165: Use Cases and Requirements for JSON Object Signing and Encryption (JOSE)
+RFC7521: Assertion Framework for OAuth 2.0 Client Authentication and Authorization Grants
+RFC7522: Security Assertion Markup Language (SAML) 2.0 Profile for OAuth 2.0 Client Authentication and Authorization Grants
+RFC7523: JSON Web Token (JWT) Profile for OAuth 2.0 Client Authentication and Authorization Grants
+RFC7591: OAuth 2.0 Dynamic Client Registration Protocol
+RFC7592: OAuth 2.0 Dynamic Client Registration Management Protocol
+RFC7628: A Set of Simple Authentication and Security Layer (SASL) Mechanisms for OAuth
+RFC7635: Session Traversal Utilities for NAT (STUN) Extension for Third-Party Authorization
+RFC7636: Proof Key for Code Exchange by OAuth Public Clients
+RFC7662: OAuth 2.0 Token Introspection
+RFC8252: OAuth 2.0 for Native Apps
+RFC8392: CBOR Web Token (CWT)
+RFC8414: OAuth 2.0 Authorization Server Metadata
+RFC8473: Token Binding over HTTP
+RFC8628: OAuth 2.0 Device Authorization Grant
+RFC8693: OAuth 2.0 Token Exchange
+RFC8705: OAuth 2.0 Mutual-TLS Client Authentication and Certificate-Bound Access Tokens
+RFC8707: Resource Indicators for OAuth 2.0
+RFC8898: Third-Party Token-Based Authentication and Authorization for Session Initiation Protocol (SIP)
+RFC9068: JSON Web Token (JWT) Profile for OAuth 2.0 Access Tokens
+RFC9101: The OAuth 2.0 Authorization Framework: JWT-Secured Authorization Request (JAR)
+RFC9126: OAuth 2.0 Pushed Authorization Requests
+RFC9200: Authentication and Authorization for Constrained Environments Using the OAuth 2.0 Framework (ACE-OAuth)
+RFC9201: Additional OAuth Parameters for Authentication and Authorization for Constrained Environments (ACE)
+RFC9202: Datagram Transport Layer Security (DTLS) Profile for Authentication and Authorization for Constrained Environments (ACE)
+RFC9203: The Object Security for Constrained RESTful Environments (OSCORE) Profile of the Authentication and Authorization for Constrained Environments (ACE) Framework
+RFC9207: OAuth 2.0 Authorization Server Issuer Identification
+RFC9237: An Authorization Information Format (AIF) for Authentication and Authorization for Constrained Environments (ACE)
+RFC9278: JWK Thumbprint URI
+RFC9396: OAuth 2.0 Rich Authorization Requests
+RFC9430: Extension of the Datagram Transport Layer Security (DTLS) Profile for Authentication and Authorization for Constrained Environments (ACE) to Transport Layer Security (TLS)
+RFC9431: Message Queuing Telemetry Transport (MQTT) and Transport Layer Security (TLS) Profile of Authentication and Authorization for Constrained Environments (ACE) Framework
+RFC9449: OAuth 2.0 Demonstrating Proof of Possession (DPoP)
+RFC9470: OAuth 2.0 Step Up Authentication Challenge Protocol
+RFC9509: X.509 Certificate Extended Key Usage (EKU) for 5G Network Functions
