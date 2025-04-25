@@ -8,7 +8,7 @@ Category: Standards Track                                        D. Wing
 ISSN: 2070-1721                                                   Citrix
                                                              B. Anderson
                                                                    Cisco
-                                                              March 2025
+                                                              April 2025
 
 
    Manufacturer Usage Description (MUD) for TLS and DTLS Profiles for
@@ -470,7 +470,7 @@ Table of Contents
 
 5.2.  The (D)TLS Profile Extension to the ACL YANG Module
 
-   <CODE BEGINS> file "ietf-acl-tls@2025-03-10.yang"
+   <CODE BEGINS> file "ietf-acl-tls@2025-04-18.yang"
    module ietf-acl-tls {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-acl-tls";
@@ -528,7 +528,7 @@ Table of Contents
         This version of this YANG module is part of RFC 9761; see
         the RFC itself for full legal notices.";
 
-     revision 2025-03-10 {
+     revision 2025-04-18 {
        description
          "Initial revision.";
        reference
@@ -720,7 +720,7 @@ Table of Contents
    The initial version of the "iana-tls-profile" YANG module is defined
    as follows:
 
-   <CODE BEGINS> file "iana-tls-profile@2025-03-10.yang"
+   <CODE BEGINS> file "iana-tls-profile@2025-04-18.yang"
    module iana-tls-profile {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:iana-tls-profile";
@@ -761,7 +761,7 @@ Table of Contents
         The latest version of this YANG module is available at
         https://www.iana.org/assignments/yang-parameters.";
 
-     revision 2025-03-10 {
+     revision 2025-04-18 {
        description
          "Initial revision.";
        reference
@@ -900,7 +900,7 @@ Table of Contents
 
    The model is defined as follows:
 
-   <CODE BEGINS> file "ietf-mud-tls@2025-03-10.yang"
+   <CODE BEGINS> file "ietf-mud-tls@2025-04-18.yang"
    module ietf-mud-tls {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-mud-tls";
@@ -945,7 +945,7 @@ Table of Contents
         This version of this YANG module is part of RFC 9761; see
         the RFC itself for full legal notices.";
 
-     revision 2025-03-10 {
+     revision 2025-04-18 {
        description
          "Initial revision.";
        reference
@@ -1431,7 +1431,7 @@ Table of Contents
    "description":  Replicates the description from the registry.
 
    "reference":   RFC YYYY: <Title of the RFC>, where YYYY is the RFC
-                  that added the "tls-version" or "dtls-version"
+                  that added the "tls-version" or "dtls-version".
 
    When a (D)TLS parameter is added to the "ACL (D)TLS Parameters"
    registry, a new "type" statement must be added to the iana-tls-
@@ -1495,7 +1495,7 @@ Table of Contents
 
 11.5.  ACL (D)TLS Parameters Registry
 
-   IANA has created a new registry titled "ACL (D)TLS parameters".
+   IANA has created a new registry titled "ACL (D)TLS Parameters".
 
    The values for all the (D)TLS parameters in the registry are defined
    in the TLS and DTLS IANA registries
@@ -1785,9 +1785,9 @@ Table of Contents
               Bierman, A., Boucadair, M., and Q. Wu, "Guidelines for
               Authors and Reviewers of Documents Containing YANG Data
               Models", Work in Progress, Internet-Draft, draft-ietf-
-              netmod-rfc8407bis-22, 14 January 2025,
+              netmod-rfc8407bis-23, 15 April 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
-              rfc8407bis-22>.
+              rfc8407bis-23>.
 
 Acknowledgments
 

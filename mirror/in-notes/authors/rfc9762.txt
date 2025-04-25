@@ -25,8 +25,8 @@ Abstract
 
    This document updates RFC 4862 to indicate that the Autonomous flag
    in a PIO needs to be ignored if the PIO has the P flag set.  It also
-   updates RFC 4861 to specify that the P flag indicates DHCPv6 Prefix
-   Delegation support for clients.
+   updates RFC 4861 to specify that the P flag indicates DHCPv6 prefix
+   delegation support for clients.
 
 Status of This Memo
 
@@ -87,8 +87,8 @@ Table of Contents
 1.  Introduction
 
    [RFC9663] documents an IPv6 address assignment model where IPv6
-   devices obtain dedicated prefixes from the network via DHCPv6 Prefix
-   Delegation (DHCPv6-PD) [RFC8415].  This model provides devices with a
+   devices obtain dedicated prefixes from the network via DHCPv6 prefix
+   delegation (DHCPv6-PD) [RFC8415].  This model provides devices with a
    large IPv6 address space they can use to create addresses for
    communication, individually number virtual machines (VMs) or
    containers, or extend the network to downstream devices.  It also
@@ -201,9 +201,9 @@ Table of Contents
    The P flag (also called the DHCPv6-PD Preferred Flag) is a 1-bit PIO
    flag, located after the R flag [RFC6275].  The presence of a PIO with
    the P flag set indicates that the network prefers that clients use
-   Prefix Delegation instead of acquiring individual addresses via SLAAC
+   prefix delegation instead of acquiring individual addresses via SLAAC
    or DHCPv6 address assignment.  This implies that the network has a
-   DHCPv6 server capable of making DHCPv6 Prefix Delegations to every
+   DHCPv6 server capable of making DHCPv6 prefix delegations to every
    device on the network, as described in [RFC9663].
 
    Figure 1 shows the resulting format of the PIO.
@@ -232,10 +232,10 @@ Table of Contents
 
    The P flag is independent of the value of the M and O flags in the
    RA.  If the network desires to delegate prefixes to devices that
-   support DHCPv6 Prefix Delegation but do not support the P flag, it
+   support DHCPv6 prefix delegation but do not support the P flag, it
    SHOULD also set the M or O bits in the RA to 1, because some devices,
    such as Customer Edge (CE) routers [RFC7084], might not initiate
-   DHCPv6 Prefix Delegation if both the M and O bits are set to zero.
+   DHCPv6 prefix delegation if both the M and O bits are set to zero.
 
 6.  Router Behavior
 
@@ -250,8 +250,8 @@ Table of Contents
 
 7.1.  Processing the P Flag
 
-   This specification only applies to clients that support DHCPv6 Prefix
-   Delegation.  Clients that do not support DHCPv6 prefix delegation
+   This specification only applies to clients that support DHCPv6 prefix
+   delegation.  Clients that do not support DHCPv6 prefix delegation
    MUST ignore the P flag.  The P flag is meaningless for link-local
    prefixes, and any PIO containing the link-local prefix MUST be
    ignored as specified in Section 5.5.3 of [RFC4862].  In the following
@@ -346,9 +346,9 @@ Table of Contents
 7.3.  Absence of PIOs with the P Bit Set
 
    The P bit is purely a positive indicator, telling nodes that DHCPv6
-   Prefix Delegation is available and the network prefers that nodes use
-   it, even if they do not have any other reason to run a Prefix
-   Delegation client.  The absence of any PIOs with the P bit does not
+   prefix delegation is available and the network prefers that nodes use
+   it, even if they do not have any other reason to run a prefix
+   delegation client.  The absence of any PIOs with the P bit does not
    carry any kind of signal to the opposite and MUST NOT be processed to
    mean that DHCPv6-PD is absent.  In particular, nodes that run
    DHCPv6-PD due to explicit configuration or by default (e.g., to

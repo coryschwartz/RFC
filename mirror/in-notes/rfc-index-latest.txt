@@ -4,38 +4,17 @@
   To get the full list of RFCs, please look up rfc-index.txt
 ===========================================================================
 
-9745 The Deprecation HTTP Response Header Field. S. Dalal, E. Wilde.
-     March 2025. (Format: HTML, TXT, PDF, XML) (Status: PROPOSED
-     STANDARD) (DOI: 10.17487/RFC9745) 
-
-9746 BGP EVPN Multihoming Extensions for Split-Horizon Filtering. J.
-     Rabadan, K. Nagaraj, W. Lin, A. Sajassi. March 2025. (Format: HTML,
-     TXT, PDF, XML) (Updates RFC7432, RFC8365) (Status: PROPOSED
-     STANDARD) (DOI: 10.17487/RFC9746) 
-
-9747 Unaffiliated Bidirectional Forwarding Detection (BFD) Echo. W.
-     Cheng, R. Wang, X. Min, Ed., R. Rahman, R. Boddireddy. March 2025.
-     (Format: HTML, TXT, PDF, XML) (Updates RFC5880) (Status: PROPOSED
-     STANDARD) (DOI: 10.17487/RFC9747) 
-
-9748 Updating the NTP Registries. R. Salz. February 2025. (Format: HTML,
-     TXT, PDF, XML) (Updates RFC5905, RFC5906, RFC7821, RFC7822, RFC8573)
-     (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC9748) 
-
-9749 Use of Voluntary Application Server Identification (VAPID) in JSON
-     Meta Application Protocol (JMAP) Web Push. D. Gultsch. March 2025.
-     (Format: HTML, TXT, PDF, XML) (Status: PROPOSED STANDARD) (DOI:
-     10.17487/RFC9749) 
-
-9751 Closing the RTP Payload Format Media Types Registry. M. Westerlund.
-     March 2025. (Format: HTML, TXT, PDF, XML) (Updates RFC8088) (Status:
-     PROPOSED STANDARD) (DOI: 10.17487/RFC9751) 
-
 9752 Conveying Vendor-Specific Information in the Path Computation
      Element Communication Protocol (PCEP) Extensions for Stateful PCE.
      C. Li, H. Zheng, S. Sivabalan, S. Sidor, Z. Ali. April 2025.
      (Format: HTML, TXT, PDF, XML) (Updates RFC7470) (Status: PROPOSED
      STANDARD) (DOI: 10.17487/RFC9752) 
+
+9753 Extension for Stateful PCE to Allow Optional Processing of Path
+     Computation Element Communication Protocol (PCEP) Objects. C. Li, H.
+     Zheng, S. Litkowski. April 2025. (Format: HTML, TXT, PDF, XML)
+     (Updates RFC8231) (Status: PROPOSED STANDARD) (DOI:
+     10.17487/RFC9753) 
 
 9754 Extensions for Opening and Delegating Files in NFSv4.2. T. Haynes,
      T. Myklebust. March 2025. (Format: HTML, TXT, PDF, XML) (Status:
@@ -63,9 +42,27 @@
      1 April 2025. (Format: HTML, TXT, PDF, XML) (Status: INFORMATIONAL)
      (DOI: 10.17487/RFC9759) 
 
+9761 Manufacturer Usage Description (MUD) for TLS and DTLS Profiles for
+     Internet of Things (IoT) Devices. T. Reddy.K, D. Wing, B. Anderson.
+     April 2025. (Format: HTML, TXT, PDF, XML) (Status: PROPOSED
+     STANDARD) (DOI: 10.17487/RFC9761) 
+
 9764 Bidirectional Forwarding Detection (BFD) Encapsulated in Large
      Packets. J. Haas, A. Fu. April 2025. (Format: HTML, TXT, PDF, XML)
      (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC9764) 
+
+9765 RADIUS/1.1: Leveraging Application-Layer Protocol Negotiation (ALPN)
+     to Remove MD5. A. DeKok. April 2025. (Format: HTML, TXT, PDF, XML)
+     (Updates RFC2865, RFC2866, RFC5176, RFC6613, RFC6614, RFC7360)
+     (Status: EXPERIMENTAL) (DOI: 10.17487/RFC9765) 
+
+9766 Extensions for Weak Cache Consistency in NFSv4.2's Flexible File
+     Layout. T. Haynes, T. Myklebust. April 2025. (Format: HTML, TXT,
+     PDF, XML) (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC9766) 
+
+9767 Grant Negotiation and Authorization Protocol Resource Server
+     Connections. J. Richer, Ed., F. Imbault. April 2025. (Format: HTML,
+     TXT, PDF, XML) (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC9767) 
 
 9775 IRTF Code of Conduct. C. S. Perkins. March 2025. (Format: HTML, TXT,
      PDF, XML) (Status: INFORMATIONAL) (DOI: 10.17487/RFC9775) 
@@ -86,5 +83,5 @@
      10.17487/RFC9778) 
 
 ===========================================================================
- - This file last updated Thu 10 Apr 2025 02:30:01 AM PDT
+ - This file last updated Thu 24 Apr 2025 02:30:01 AM PDT
 

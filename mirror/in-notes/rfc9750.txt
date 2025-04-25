@@ -11,7 +11,7 @@ ISSN: 2070-1721
                                                                S. Inguva
                                                                         
                                                                 A. Duric
-                                                           February 2025
+                                                              April 2025
 
 
             The Messaging Layer Security (MLS) Architecture
@@ -279,31 +279,31 @@ Table of Contents
 
 Alice     Bob       Charlie                     AS        DS
 
-Create account --------------------------------->                |
-<------------------------------------- Credential                |
-          Create account ----------------------->                | Step 1
-          <--------------------------- Credential                |
-                    Create account ------------->                |
-                    <----------------- Credential                |
+Create account --------------------------------->               |
+<------------------------------------- Credential               |
+          Create account ----------------------->               | Step 1
+          <--------------------------- Credential               |
+                    Create account ------------->               |
+                    <----------------- Credential               |
 
-Initial Keying Material ----------------------------------->     |
-          Initial Keying Material ------------------------->     | Step 2
-                    Initial Keying Material --------------->     |
+Initial Keying Material ----------------------------------->    |
+          Initial Keying Material ------------------------->    | Step 2
+                    Initial Keying Material --------------->    |
 
-Get Bob Initial Keying Material --------------------------->     |
-<------------------------------- Bob Initial Keying Material     |
-Add Bob to group ------------------------------------------>     | Step 3
-Welcome(Bob) ---------------------------------------------->     |
-          <-------------------------------- Add Bob to group     |
-          <------------------------------------ Welcome(Bob)     |
+Get Bob Initial Keying Material --------------------------->    |
+<------------------------------- Bob Initial Keying Material    |
+Add Bob to group ------------------------------------------>    | Step 3
+Welcome(Bob) ---------------------------------------------->    |
+          <-------------------------------- Add Bob to group    |
+          <------------------------------------ Welcome(Bob)    |
 
-Get Charlie Initial Keying Material ----------------------->     |
-<--------------------------- Charlie Initial Keying Material     |
-Add Charlie to group -------------------------------------->     |
-Welcome(Charlie) ------------------------------------------>     | Step 4
-          <---------------------------- Add Charlie to group     |
-                     <----------------- Add Charlie to group     |
-                     <--------------------- Welcome(Charlie)     |
+Get Charlie Initial Keying Material ----------------------->    |
+<--------------------------- Charlie Initial Keying Material    |
+Add Charlie to group -------------------------------------->    |
+Welcome(Charlie) ------------------------------------------>    | Step 4
+          <---------------------------- Add Charlie to group    |
+                     <----------------- Add Charlie to group    |
+                     <--------------------- Welcome(Charlie)    |
 
                   Figure 2: Group Formation Example
 
@@ -346,7 +346,7 @@ Welcome(Charlie) ------------------------------------------>     | Step 4
 3.4.  Step 4: Adding Charlie to the Group
 
    If Alice then wants to add Charlie to the group, she follows a
-   similar procedure as with Bob. She first uses the DS to look up his
+   similar procedure as with Bob.  She first uses the DS to look up his
    initial keying material and then generates two messages:
 
    *  A message to the entire group (consisting of her, Bob, and
@@ -1070,7 +1070,7 @@ Welcome(Charlie) ------------------------------------------>     | Step 4
    actively rewrite messages with a lower protocol version than the
    messages originally offered by the endpoints.  When multiple versions
    of MLS are available, the negotiation protocol guarantees that the
-   creator is able to select the best version out of those suported in
+   creator is able to select the best version out of those supported in
    common by the group.
 
    In MLS 1.0, the creator of the group is responsible for selecting the
@@ -2265,7 +2265,7 @@ Welcome(Charlie) ------------------------------------------>     | Step 4
               DOI 10.17487/RFC9000, May 2021,
               <https://www.rfc-editor.org/info/rfc9000>.
 
-   [Tor]      "The Tor Project", n.d., <https://torproject.org/>.
+   [Tor]      "The Tor Project", <https://torproject.org/>.
 
    [WPB25]    Wallez, T., Protzenko, J., and K. Bhargavan, "TreeKEM: A
               Modular Machine-Checked Symbolic Security Analysis of

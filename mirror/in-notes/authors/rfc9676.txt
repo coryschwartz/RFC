@@ -7,7 +7,7 @@ Request for Comments: 9676
 Category: Informational                                   E. Francesconi
 ISSN: 2070-1721                 National Research Council of Italy (CNR)
                                                                  C. Lupo
-                                                           February 2025
+                                                              April 2025
 
 
     LEX: A Uniform Resource Name (URN) Namespace for Sources of Law
@@ -750,7 +750,7 @@ Table of Contents
 
       - ASCII: urn:lex:de:stadt.munchen:rundschreiben:...;
       - Unicode: urn:lex:de:stadt.mU+00FCnchen:rundschreiben:...;
-      - UTF-8: urn:lex:de:stadt.m%xC3%xBCnchen:rundschreiben:...;
+      - UTF-8: urn:lex:de:stadt.m%C3%BCnchen:rundschreiben:...;
       - PUNYCODE: urn:lex:de:stadt.xn--mnchen-3ya:rundschreiben:...
 
    *  A state law of the Russian Federation (Latin: gosudarstvo zakon;
@@ -763,9 +763,9 @@ Table of Contents
       - ASCII: urn:lex:ru:gosudarstvo:zakon:...
       - Unicode: urn:lex:ru:U+0441U+043EU+0441U+0442U+043EU+044FU+043D
                  U+0438U+0435:U+0437U+0430U+043AU+043EU+043D:...
-      - UTF-8: urn:lex:ru:%xD1%x81%xD0%xBE%xD1%x81%xD1%x82%xD0%xBE%xD1
-               %x8F%xD0%xBD%xD0%xB8%xD0%xB5:%xD0%xB7%xD0%xB0%xD0%xBA
-               %xD0%xBE%xD0%xBD:...
+      - UTF-8: urn:lex:ru:%D1%81%D0%BE%D1%81%D1%82%D0%BE%D1
+               %8F%D0%BD%D0%B8%D0%B5:%D0%B7%D0%B0%D0%BA
+               %D0%BE%D0%BD:...
       - PUNYCODE: urn:lex:ru:xn--80aebe3cdmfdkg:xn--80ankme:...
 
 3.5.  Abbreviations
@@ -778,9 +778,10 @@ Table of Contents
 
 3.6.  Date Format
 
-   [ISO.8601.1988] describes the international format for representing
-   dates.  Dates MUST always be represented in this format (4 digits for
-   the year, 2 digits for the month, and 2 digits for the day):
+   [ISO.8601-1.2019] and [ISO.8601-2.2019] describe the international
+   format for representing dates.  Dates MUST always be represented in
+   this format (4 digits for the year, 2 digits for the month, and 2
+   digits for the day):
 
        date-iso = year "-" month "-" day
 
@@ -839,7 +840,9 @@ Table of Contents
    which is to be converted into UTF-8 for network protocols and for
    resolution (see Section 3.4).  The characters that are not allowed
    (e.g., "/") or reserved (e.g., ",") cannot exist inside the date-loc
-   and therefore MUST be turned into ".".
+   and therefore MUST be turned into ".".  To be aligned with ISO
+   format, any blank between day, month, and year MUST be converted into
+   "-".
 
 4.  Specific Syntax and Features of the LEX Identifier
 
@@ -1199,7 +1202,7 @@ Table of Contents
          Parliament:
 
          urn:lex:it:stato:legge:2000-04-03;56$parlamento.it:
-         application-pdf;1.7:
+         application-pdf;1.7
 
       -  XML format (version 2.2 DTD NIR) of the text of the act and PDF
          format (version 1.7) of the "Figura 1" (figure 1) contained in
@@ -2169,10 +2172,16 @@ Table of Contents
 
 13.1.  Normative References
 
-   [ISO.8601.1988]
+   [ISO.8601-1.2019]
+              ISO, "Date and time - Representations for information
+              interchange", ISO 8601-1:2019, February 2019,
+              <https://www.iso.org/standard/70907.html>.
+
+   [ISO.8601-2.2019]
               ISO, "Data elements and interchange formats - Information
               interchange - Representation of dates and times",
-              ISO 8601:1988, June 1988.
+              ISO 8601-2:2019, February 2019,
+              <https://www.iso.org/standard/70908.html>.
 
    [RFC2045]  Freed, N. and N. Borenstein, "Multipurpose Internet Mail
               Extensions (MIME) Part One: Format of Internet Message

@@ -7,7 +7,7 @@ Request for Comments: 9753                                      H. Zheng
 Updates: 8231                                        Huawei Technologies
 Category: Standards Track                                   S. Litkowski
 ISSN: 2070-1721                                                    Cisco
-                                                              March 2025
+                                                              April 2025
 
 
     Extension for Stateful PCE to Allow Optional Processing of Path
@@ -78,10 +78,10 @@ Table of Contents
      6.4.  Verify Correct Operations
      6.5.  Requirements on Other Protocols
      6.6.  Impact on Network Operations
-   7.  Acknowledgments
-   8.  References
-     8.1.  Normative References
-     8.2.  Informative References
+   7.  References
+     7.1.  Normative References
+     7.2.  Informative References
+   Acknowledgments
    Contributors
    Authors' Addresses
 
@@ -386,17 +386,9 @@ Table of Contents
    Mechanisms defined in this document do not have any impact on network
    operations in addition to those already listed in [RFC5440].
 
-7.  Acknowledgments
+7.  References
 
-   Thanks to Jonathan Hardwick for the discussion and suggestions around
-   this document.
-
-   Thanks to Oscar Gonzalez de Dios, Mike Koldychev, Samuel Sidor, and
-   Peng Shaofu for their review comments.
-
-8.  References
-
-8.1.  Normative References
+7.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -430,7 +422,7 @@ Table of Contents
               Model", RFC 8281, DOI 10.17487/RFC8281, December 2017,
               <https://www.rfc-editor.org/info/rfc8281>.
 
-8.2.  Informative References
+7.2.  Informative References
 
    [PCEP-YANG]
               Dhody, D., Ed., Beeram, V. P., Hardwick, J., and J.
@@ -461,6 +453,14 @@ Table of Contents
               Security (TLS) and Datagram Transport Layer Security
               (DTLS)", BCP 195, RFC 9325, DOI 10.17487/RFC9325, November
               2022, <https://www.rfc-editor.org/info/rfc9325>.
+
+Acknowledgments
+
+   Thanks to Jonathan Hardwick for the discussion and suggestions around
+   this document.
+
+   Thanks to Oscar Gonzalez de Dios, Mike Koldychev, Samuel Sidor, and
+   Peng Shaofu for their review comments.
 
 Contributors
 

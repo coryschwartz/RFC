@@ -113,13 +113,13 @@ Table of Contents
    could enter their email address into an email client, the client
    could perform WebFinger discovery [RFC7033] (in a manner related to
    the description in Section 2 of [OpenID.Discovery]) to find the
-   resource server, then fetch the resource server metadata to find the
-   authorization server to use to obtain authorization to access the
-   user's email.
+   resource server, and the client could then fetch the resource server
+   metadata to find the authorization server to use to obtain
+   authorization to access the user's email.
 
    The metadata for a protected resource is retrieved from a well-known
    location as a JSON [RFC8259] document, which declares information
-   about its capabilities and optionally, its relationships to other
+   about its capabilities and, optionally, its relationships with other
    services.  This process is described in Section 3.
 
    This metadata can be communicated either in a self-asserted fashion
@@ -127,7 +127,7 @@ Table of Contents
    Web Token (JWT) [JWT].  In the JWT case, the issuer is vouching for
    the validity of the data about the protected resource.  This is
    analogous to the role that the software statement plays in OAuth
-   dynamic client registration [RFC7591].
+   Dynamic Client Registration [RFC7591].
 
    Each protected resource publishing metadata about itself makes its
    own metadata document available at a well-known location
@@ -140,10 +140,11 @@ Table of Contents
 
    Section 2 defines metadata parameters that a protected resource can
    publish, which includes things like which scopes are supported, how a
-   client can present an access token, and more.  These values may be
-   used by other specifications, such as the jwks_uri used to publish
-   public keys the resource server uses to sign resource responses, for
-   instance, as described in [FAPI.MessageSigning].
+   client can present an access token, and more.  These values, such as
+   the jwks_uri (see Section 2), may be used with other specifications;
+   for example, the public keys published in the jwks_uri can be used to
+   verify the signed resource responses, as described in
+   [FAPI.MessageSigning].
 
    Section 5 describes the use of WWW-Authenticate by protected
    resources to dynamically inform clients of the URL of their protected
@@ -167,14 +168,11 @@ Table of Contents
 
 1.2.  Terminology
 
-   This specification uses the terms "Access Token", "Authorization
-   Code", "Authorization Endpoint", "Authorization Grant",
-   "Authorization Server", "Client", "Client Authentication", "Client
-   Identifier", "Client Secret", "Grant Type", "Protected Resource",
-   "Redirection URI", "Refresh Token", "Resource Owner", "Resource
-   Server", "Response Type", and "Token Endpoint" defined by OAuth 2.0
-   [RFC6749], and the terms "Claim Name", "Claim Value", and "JSON Web
-   Token (JWT)" defined by "JSON Web Token (JWT)" [JWT].
+   This specification uses the terms "access token", "authorization
+   code", "authorization server", "client", "client authentication",
+   "client identifier", "protected resource", and "resource server"
+   defined by OAuth 2.0 [RFC6749], and the terms "Claim Name" and "JSON
+   Web Token (JWT)" defined by "JSON Web Token (JWT)" [JWT].
 
    This specification defines the following term:
 
@@ -509,12 +507,12 @@ Table of Contents
 
    protected_resources
       OPTIONAL.  JSON array containing a list of resource identifiers
-      for OAuth protected resources for protected resources that can be
-      used with this authorization server.  Authorization servers MAY
-      choose not to advertise some supported protected resources even
-      when this parameter is used.  In some use cases, the set of
-      protected resources will not be enumerable, in which case this
-      metadata parameter will not be present.
+      for OAuth protected resources that can be used with this
+      authorization server.  Authorization servers MAY choose not to
+      advertise some supported protected resources even when this
+      parameter is used.  In some use cases, the set of protected
+      resources will not be enumerable, in which case this metadata
+      parameter will not be present.
 
 5.  Use of WWW-Authenticate for Protected Resource Metadata
 
@@ -527,7 +525,7 @@ Table of Contents
    retrieved.
 
    A typical end-to-end flow doing so is as follows.  Note that while
-   this example uses the OAuth 2.0 Authorization Code flow, a similar
+   this example uses the OAuth 2.0 authorization code flow, a similar
    sequence could also be implemented with any other OAuth flow.
 
         +----------+              +----------+    +---------------+
@@ -576,6 +574,10 @@ Table of Contents
              |  11. Resource Response  |                  |
              | <---------------------- |                  |
              |                         |                  |
+        +----+-----+              +----+-----+    +-------+-------+
+        |  Client  |              | Resource |    | Authorization |
+        |          |              |  Server  |    |    Server     |
+        +----------+              +----------+    +---------------+
 
                          Figure 1: Sequence Diagram
 
@@ -592,11 +594,11 @@ Table of Contents
         metadata according to Section 3.2.
 
    5.   The client validates the protected resource metadata, as
-        described in Section 3.3.
+        described in Section 3.3, and builds the authorization server
+        metadata URL from an issuer identifier in the resource metadata
+        according to [RFC8414].
 
-   6.   The client builds the authorization server metadata URL from an
-        issuer identifier in the resource metadata according to
-        [RFC8414] and makes a request to fetch the authorization server
+   6.   The client makes a request to fetch the authorization server
         metadata.
 
    7.   The authorization server responds with the authorization server
@@ -625,14 +627,12 @@ Table of Contents
    The response below is an example of a WWW-Authenticate header that
    includes the resource identifier.
 
-   HTTP/1.1 400 Bad Request
-   WWW-Authenticate: Bearer error="invalid_request",
-     error_description="No access token was provided in this request",
-     resource_metadata=
+   HTTP/1.1 401 Unauthorized
+   WWW-Authenticate: Bearer resource_metadata=
      "https://resource.example.com/.well-known/oauth-protected-resource"
 
-   The HTTP status code and error string in the example response above
-   are defined by [RFC6750].
+   The HTTP status code in the example response above is defined by
+   [RFC6750].
 
    This parameter MAY also be used in WWW-Authenticate responses using
    authorization schemes other than "Bearer" [RFC6750], such as the DPoP
@@ -660,13 +660,13 @@ Table of Contents
    authorization server is out of scope for this specification.
 
    This specification is intended to be deployed in scenarios where the
-   client has no prior knowledge about the resource server, and the
+   client has no prior knowledge about the resource server and where the
    resource server might or might not have prior knowledge about the
    client.
 
    There are some existing methods by which an unrecognized client can
-   make use of an authorization server, such as using dynamic client
-   registration [RFC7591] to register the client prior to initiating the
+   make use of an authorization server, such as using Dynamic Client
+   Registration [RFC7591] to register the client prior to initiating the
    authorization flow.  Future OAuth extensions might define
    alternatives, such as using URLs to identify clients.
 
@@ -682,7 +682,7 @@ Table of Contents
    Processing some OAuth 2.0 messages requires comparing values in the
    messages to known values.  For example, the member names in the
    metadata response might be compared to specific member names such as
-   "resource".  Comparing Unicode strings [UNICODE], however, has
+   resource.  Comparing Unicode strings [UNICODE], however, has
    significant security implications.
 
    Therefore, comparisons between JSON strings and other Unicode strings
@@ -727,12 +727,12 @@ Table of Contents
    TLS certificate checking MUST be performed by the client as described
    in [RFC9525] when making a protected resource metadata request.
    Checking that the server certificate is valid for the resource
-   identifier URL prevents man-in-the-middle and DNS-based attacks.
-   These attacks could cause a client to be tricked into using an
-   attacker's resource server, which would enable impersonation of the
-   legitimate protected resource.  If an attacker can accomplish this,
-   they can access the resources that the affected client has access to,
-   using the protected resource that they are impersonating.
+   identifier URL prevents adversary-in-the-middle and DNS-based
+   attacks.  These attacks could cause a client to be tricked into using
+   an attacker's resource server, which would enable impersonation of
+   the legitimate protected resource.  If an attacker can accomplish
+   this, they can access the resources that the affected client has
+   access to, using the protected resource that they are impersonating.
 
    An attacker may also attempt to impersonate a protected resource by
    publishing a metadata document that contains a resource metadata
@@ -793,21 +793,23 @@ Table of Contents
    protected resource and that the client is using the correct metadata
    for each protected resource.  Implementers need to be aware that if
    an inappropriate authorization server is used by the client, an
-   attacker may be able to act as a man-in-the-middle proxy to a valid
-   authorization server without it being detected by the authorization
-   server or the client.
+   attacker may be able to act as an adversary-in-the-middle proxy to a
+   valid authorization server without it being detected by the
+   authorization server or the client.
 
    The ways to determine the appropriate authorization servers to use
    with a protected resource are, in general, application dependent.
    For instance, some protected resources are used with a fixed
-   authorization server or set of authorization servers, the locations
-   of which may be well known, or which could be published as metadata
-   values by the protected resource.  In other cases, the set of
-   authorization servers that can be used with a protected resource can
-   by dynamically changed by administrative actions or by changes to the
-   set of authorization servers adhering to a trust framework.  Many
-   other means of determining appropriate associations between protected
-   resources and authorization servers are also possible.
+   authorization server or a set of authorization servers, the locations
+   of which may be known via out-of-band mechanisms.  Alternatively, as
+   described in this specification, the locations of the authorization
+   servers could be published by the protected resource as metadata
+   values.  In other cases, the set of authorization servers that can be
+   used with a protected resource can be dynamically changed by
+   administrative actions or by changes to the set of authorization
+   servers adhering to a trust framework.  Many other means of
+   determining appropriate associations between protected resources and
+   authorization servers are also possible.
 
 7.7.  Server-Side Request Forgery (SSRF)
 
@@ -839,9 +841,10 @@ Table of Contents
 
    Unsigned metadata is integrity protected by the use of TLS at the
    site where it is hosted.  This means that its security is dependent
-   upon the Internet Public Key Infrastructure (PKI) [RFC9525].  Signed
-   metadata is additionally integrity protected by the JWS signature
-   applied by the issuer, which is not dependent upon the Internet PKI.
+   upon the Internet Public Key Infrastructure using X.509 (PKIX), as
+   described in [RFC9525].  Signed metadata is additionally integrity
+   protected by the JWS signature applied by the issuer, which is not
+   dependent upon the Internet PKI.
 
    When using unsigned metadata, the party issuing the metadata is the
    protected resource itself, which is represented by the resource value
@@ -857,24 +860,24 @@ Table of Contents
 
    Protected resource metadata is retrieved using an HTTP GET request,
    as specified in Section 3.1.  Normal HTTP caching behaviors apply,
-   meaning that the GET may retrieve a cached copy of the content,
-   rather than the latest copy.  Implementations should utilize HTTP
-   caching directives such as Cache-Control with max-age, as defined in
-   [RFC9111], to enable caching of retrieved metadata for appropriate
-   time periods.
+   meaning that the GET request may retrieve a cached copy of the
+   content, rather than the latest copy.  Implementations should utilize
+   HTTP caching directives such as Cache-Control with max-age, as
+   defined in [RFC9111], to enable caching of retrieved metadata for
+   appropriate time periods.
 
 8.  IANA Considerations
 
-   Values are registered via Specification Required [RFC8126] after a
-   two-week review period on the <oauth-ext-review@ietf.org> mailing
-   list, on the advice of one or more designated experts.  However, to
-   allow for the allocation of values prior to publication of the final
-   version of a specification, the designated experts may approve
-   registration once they are satisfied that the specification will be
-   completed and published.  However, if the specification is not
-   completed and published in a timely manner, as determined by the
-   designated experts, the designated experts may request that IANA
-   withdraw the registration.
+   Values are registered via Specification Required [RFC8126].
+   Registration requests should be sent to <oauth-ext-review@ietf.org>
+   to initiate a two-week review period.  However, to allow for the
+   allocation of values prior to publication of the final version of a
+   specification, the designated experts may approve registration once
+   they are satisfied that the specification will be completed and
+   published.  However, if the specification is not completed and
+   published in a timely manner, as determined by the designated
+   experts, the designated experts may request that IANA withdraw the
+   registration.
 
    Registration requests sent to the mailing list for review should use
    an appropriate subject (e.g., "Request to register OAuth Protected
@@ -887,10 +890,11 @@ Table of Contents
    the designated experts are not responsive, the registration
    requesters should contact IANA to escalate the process.
 
-   Criteria that should be applied by the designated experts include
-   determining whether the proposed registration duplicates existing
-   functionality, is likely to be generally applicable or useful only
-   for a single application, and makes sense.
+   Designated experts should apply the following criteria when reviewing
+   proposed registrations: They must be unique -- that is, they should
+   not duplicate existing functionality; they are likely generally
+   applicable, as opposed to being used for a single application; and
+   they are clear and fit the purpose of the registry.
 
    IANA must only accept registry updates from the designated experts
    and should direct all requests for registration to the review mailing
@@ -905,13 +909,11 @@ Table of Contents
 
    The mailing list is used to enable public review of registration
    requests, which enables both designated experts and other interested
-   parties to provide feedback on proposed registrations.  The reason to
-   allow the designated experts to allocate values prior to publication
-   as a final specification is to enable giving authors of
-   specifications proposing registrations the benefit of review by the
-   designated experts before the specification is completely done, so
-   that if problems are identified, the authors can iterate and fix them
-   before publication of the final specification.
+   parties to provide feedback on proposed registrations.  Designated
+   experts may allocate values prior to publication of the final
+   specification.  This allows authors to receive guidance from the
+   designated experts early, so any identified issues can be fixed
+   before the final specification is published.
 
 8.1.  OAuth Protected Resource Metadata Registry
 
@@ -1201,10 +1203,8 @@ Table of Contents
    [UNICODE]  The Unicode Consortium, "The Unicode Standard",
               <https://www.unicode.org/versions/latest/>.
 
-   [USA15]    Davis, M., Ed. and K. Whistler, Ed., "Unicode
-              Normalization Forms", Unicode Standard Annex #15, 1 June
-              2015, <https://www.unicode.org/reports/tr15/tr15-43.html>.
-              Latest version available at
+   [USA15]    Whistler, K., Ed., "Unicode Normalization Forms", Unicode
+              Standard Annex #15, 14 August 2024,
               <https://www.unicode.org/reports/tr15/>.
 
 9.2.  Informative References

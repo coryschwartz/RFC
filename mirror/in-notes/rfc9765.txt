@@ -1166,6 +1166,9 @@ Table of Contents
    we can note that there are no known negatives to this behavior, and
    there are definite positives, such as increased security.
 
+   Further issues related to Message-Authenticator are discussed in
+   [DEPRECATE-RADIUS].
+
 5.3.  Message-Authentication-Code
 
    Similarly, the Message-Authentication-Code attribute defined in
@@ -1628,6 +1631,13 @@ Table of Contents
    [ASLEAP]   "asleap - recovers weak LEAP and PPTP passwords", commit
               254acab, November 2020,
               <https://github.com/joswr1ght/asleap>.
+
+   [DEPRECATE-RADIUS]
+              DeKok, A., "Deprecating Insecure Practices in RADIUS",
+              Work in Progress, Internet-Draft, draft-ietf-radext-
+              deprecating-radius-05, 26 November 2024,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-radext-
+              deprecating-radius-05>.
 
    [EDUROAM]  eduroam, "eduroam", <https://eduroam.org>.
 
