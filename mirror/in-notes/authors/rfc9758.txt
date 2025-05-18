@@ -1008,7 +1008,7 @@ Table of Contents
        +------------------------+--------------+------------------+
        | 0x80000000..0xFFFFFFFF | Reserved     | Future Expansion |
        +------------------------+--------------+------------------+
-       | >= 2^32                | Reserved     |                  |
+       | >=0x100000000          | Reserved     |                  |
        +------------------------+--------------+------------------+
 
           Table 2: Registration Procedures for the 'ipn' Scheme
@@ -1082,7 +1082,7 @@ Table of Contents
              +--------------------+-------------------------+
              | 0x4000..0xFFFFFFFE | Expert Review           |
              +--------------------+-------------------------+
-             | >= 2^32            | Invalid                 |
+             | >=0x100000000      | Invalid                 |
              +--------------------+-------------------------+
 
                  Table 4: Registration Procedures for the
@@ -1127,7 +1127,7 @@ Table of Contents
           +---------------------+-------------------------------+
           | 0x10000..0xFFFFFFFF | Private Use                   |
           +---------------------+-------------------------------+
-          | >= 2^32             | Reserved for future expansion |
+          | >=0x100000000       | Reserved for future expansion |
           +---------------------+-------------------------------+
 
                Table 6: Registration Procedures for the 'ipn'

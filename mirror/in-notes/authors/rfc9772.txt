@@ -7,10 +7,10 @@ Request for Comments: 9772                                      Ericsson
 Category: Standards Track                                     S. Boutros
 ISSN: 2070-1721                                                    Ciena
                                                                 D. Black
-                                                                Dell EMC
+                                                                    Dell
                                                            S. Pallagatti
                                                                   VMware
-                                                              April 2025
+                                                                May 2025
 
 
   Active Operations, Administration, and Maintenance (OAM) for Use in
@@ -110,8 +110,8 @@ Table of Contents
    in the Geneve overlay network.  IP encapsulation meets these
    requirements and is suitable for encapsulating active OAM protocols
    within a Geneve overlay network.  Active OAM messages in a Geneve
-   overlay network are exchanged between two Geneve tunnel endpoints,
-   which may be the tenant-facing interface of the Network
+   overlay network are exchanged between two Geneve tunnel endpoints;
+   each endpoint may be the tenant-facing interface of the Network
    Virtualization Edge (NVE) or another device acting as a Geneve tunnel
    endpoint.  Testing end-to-end between tenants is out of scope.  For
    simplicity, this document uses an NVE to represent the Geneve tunnel
@@ -171,7 +171,7 @@ Table of Contents
                    the data traffic of the monitored Geneve tunnel.
                    Specifically, the OAM test packets MUST be in-band
                    with the monitored traffic and follow the same
-                   overlay and transport path as packets carrying data
+                   overlay and transport paths as packets carrying data
                    payloads in the forward direction, i.e., from the
                    ingress toward the egress endpoint(s) of the OAM
                    test.
@@ -186,8 +186,7 @@ Table of Contents
 
    Requirement 2:  The encapsulation of OAM control messages and data
                    packets in the underlay network MUST be
-                   indistinguishable from each other from the underlay
-                   network IP forwarding point of view.
+                   indistinguishable.
 
    Requirement 3:  The presence of an OAM control message in a Geneve
                    packet MUST be unambiguously identifiable to Geneve
@@ -359,14 +358,10 @@ Table of Contents
    Inner IP header:
       Destination IP:  The IP address MUST be set to the loopback
          address 127.0.0.1/32 for IPv4 version.  For IPv6, the address
-         MUST be selected from the Dummy IPv6 Prefix for IPv6 *Dummy-
-         IPv6-Prefix*.  A source-only IPv6 dummy address is used as the
+         MUST be selected from the Dummy IPv6 Prefix 100:0:0:1::/64
+         [RFC9780].  A source-only IPv6 address is used as the
          destination to generate an exception and a reply message to the
          request message received.
-
-         [Note to RFC Editor: Please replace *Dummy-IPv6-Prefix* with
-         the actual value allocated (requested in draft-ietf-mpls-p2mp-
-         bfd) in IANA IPv6 Special-Purpose Address Registry.]
 
       Source IP:  IP address of the NVE.
 
@@ -407,6 +402,12 @@ Table of Contents
               "Geneve: Generic Network Virtualization Encapsulation",
               RFC 8926, DOI 10.17487/RFC8926, November 2020,
               <https://www.rfc-editor.org/info/rfc8926>.
+
+   [RFC9780]  Mirsky, G., Mishra, G., and D. Eastlake 3rd,
+              "Bidirectional Forwarding Detection (BFD) for Multipoint
+              Networks over Point-to-Multipoint MPLS Label Switched
+              Paths (LSPs)", RFC 9780, DOI 10.17487/RFC9780, May 2025,
+              <https://www.rfc-editor.org/info/rfc9780>.
 
 5.2.  Informative References
 
@@ -484,10 +485,7 @@ Authors' Addresses
 
 
    David Black
-   Dell EMC
-   176 South Street
-   Hopkinton, MA,  01748
-   United States of America
+   Dell
    Email: david.black@dell.com
 
 

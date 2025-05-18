@@ -4,7 +4,7 @@
 
 Internet Research Task Force (IRTF)                       A. Bozhko, Ed.
 Request for Comments: 9771                                     CryptoPro
-Category: Informational                                       April 2025
+Category: Informational                                         May 2025
 ISSN: 2070-1721
 
 
@@ -198,11 +198,11 @@ Table of Contents
          the operation returns a plaintext P.
 
    We note that specifications of AEAD algorithms that use
-   authentication tags to ensure integrity MAY define it as an
-   independent output of the encryption operation and as an independent
-   input of the decryption operation.  Throughout this document, by
-   default, we consider the authentication tag as part of the
-   ciphertext.
+   authentication tags to ensure integrity may define the authentication
+   tag as an independent output of the encryption operation and an
+   independent input of the decryption operation.  Throughout this
+   document, by default, we consider the authentication tag as part of
+   the ciphertext.
 
    For more details on the AEAD definition, please refer to [RFC5116].
 
@@ -272,19 +272,19 @@ Table of Contents
       An AEAD algorithm guarantees that the plaintext is not available
       to an active, nonce-respecting adversary.
 
-   Security notion:
-      IND-CCA [BN2000] (or IND-CCA2 [S04])
+   Security notions:
+      IND-CCA [BN08] (or IND-CCA2 [S04])
 
    Synonyms:
       Message privacy
 
    Notes:
       Confidentiality against passive adversaries can also be
-      considered.  The corresponding security notion is IND-CPA [BN2000]
+      considered.  The corresponding security notion is IND-CPA [BN08]
       [R02].
 
    Further reading:
-      [R02], [BN2000], [S04]
+      [R02], [BN08], [S04]
 
 4.2.2.  Data Integrity
 
@@ -293,14 +293,14 @@ Table of Contents
       associated data have not been changed or forged by an active,
       nonce-respecting adversary.
 
-   Security notion:
-      IND-CTXT [BN2000] (or AUTH [R02])
+   Security notions:
+      INT-CTXT [BN08] (or AUTH [R02])
 
    Synonyms:
       Message authentication, authenticity
 
    Further reading:
-      [R02], [BN2000], [S04]
+      [R02], [BN08], [S04]
 
 4.2.3.  Authenticated Encryption Security
 
@@ -308,8 +308,8 @@ Table of Contents
       An AEAD algorithm provides confidentiality and data integrity
       against active, nonce-respecting adversaries.
 
-   Security notion:
-      IND-CPA and IND-CTXT [BN2000] [R02] (or equivalently, IND-CCA3
+   Security notions:
+      IND-CPA and INT-CTXT [BN08] [R02] (or equivalently, IND-CCA3
       [S04])
 
    Notes:
@@ -317,7 +317,7 @@ Table of Contents
       algorithms used in IETF protocols.
 
    Further reading:
-      [R02], [BN2000], [S04]
+      [R02], [BN08], [S04]
 
 4.3.  Security Properties
 
@@ -328,7 +328,7 @@ Table of Contents
       adaptively choose the next part of the plaintext depending on
       already-computed ciphertext parts during an encryption operation.
 
-   Security notion:
+   Security notions:
       D-LORS-BCPA for confidentiality against passive adversaries, B-
       INT-CTXT for integrity [EV17]; OAE1 [HRRV15] (a stronger notion;
       originally OAE (Online Authenticated Encryption) in [FFL12])
@@ -362,7 +362,7 @@ Table of Contents
       AEAD scheme guarantees that a ciphertext is a commitment to all
       inputs of an authenticated encryption operation.
 
-   Security notion:
+   Security notions:
       CMT-4 [BH22], generalized CMT for a restricted setting (see the
       notes below) [MLGR23]
 
@@ -395,7 +395,7 @@ Table of Contents
       AEAD scheme guarantees that a ciphertext is a commitment to the
       key used for an authenticated encryption operation.
 
-   Security notion:
+   Security notions:
       CMT-1 [BH22]
 
    Synonyms:
@@ -423,7 +423,7 @@ Table of Contents
       information about computations of an encryption (and possibly
       decryption) operation is obtained via side-channel leakages.
 
-   Security notion:
+   Security notions:
       CIL1 [GPPS19] (CIML2 [BPPS17] with leakages in decryption) for
       integrity, CCAL1 [GPPS19] (CCAmL2 [GPPS19] with leakages in
       decryption) for authenticated encryption security
@@ -482,7 +482,7 @@ Table of Contents
       The security of an AEAD algorithm degrades slower than linearly
       with an increase in the number of users.
 
-   Security notion:
+   Security notions:
       mu-ind [BT16]
 
    Examples:
@@ -490,11 +490,11 @@ Table of Contents
       AEGIS [AEGIS-AEAD]
 
    Notes:
-      It holds that for any AEAD algorithm, security degrades no worse
-      than linearly with an increase in the number of users [BT16].
-      However, for some applications with a significant number of users,
-      better multi-user guarantees are required.  For example, in the
-      TLS 1.3 protocol, AEAD algorithms are used with a randomized nonce
+      For any AEAD algorithm, security degrades no worse than linearly
+      with an increase in the number of users [BT16].  However, for some
+      applications with a significant number of users, better multi-user
+      guarantees are required.  For example, in the TLS 1.3 protocol,
+      AEAD algorithms are used with a randomized nonce
       (deterministically derived from a traffic secret and a sequence
       number) to address this issue.  Using nonce randomization in block
       cipher counter-based AEAD modes can contribute to multi-user
@@ -522,7 +522,7 @@ Table of Contents
       about the nonce in the ciphertext and doesn't require the nonce as
       input for the decryption operation.
 
-   Security notion:
+   Security notions:
       AE2 [BNT19]
 
    Examples:
@@ -553,10 +553,10 @@ Table of Contents
          encrypted with non-repeated (fresh) nonces (correctly encrypted
          messages).
 
-         Security notion:
-            CPA resilience (confidentiality), authenticity resilience
-            (integrity), CCA resilience (authenticated encryption)
-            [ADL17]
+         Security notions:
+            Chosen-Plaintext Attack (CPA) resilience (confidentiality),
+            authenticity resilience (integrity), Chosen-Ciphertext
+            Attack (CCA) resilience (authenticated encryption) [ADL17]
 
          Examples:
             ChaCha20-Poly1305 [RFC8439], AES-GCM [D07] (only
@@ -566,7 +566,7 @@ Table of Contents
          that were not encrypted with the same nonce value more than
          once.
 
-         Security notion:
+         Security notions:
             MRAE [RS06]
 
          Examples:
@@ -588,7 +588,7 @@ Table of Contents
       processes parallelization, full disk encryption
 
    Further reading:
-      [RS06], [ADL17]
+      [RS06], [ADL17], [IIM25]
 
 4.3.8.  Quantum Security
 
@@ -639,7 +639,7 @@ Table of Contents
       the algorithm has been found, it is still hard to find any
       subsequent forgery.
 
-   Security notion:
+   Security notions:
       j-Int-CTXT [FLLW17]
 
    Examples:
@@ -660,11 +660,11 @@ Table of Contents
       released for every ciphertext, including those with failed
       integrity verification.
 
-   Security notion:
+   Security notions:
       INT-RUP [A14]
 
    Examples:
-      GCM-RUP [ADL17]
+      GCM [IIM25], GCM-RUP [ADL17]
 
    Applications:
       Decryption with limited memory [FJMV2004], real-time streaming
@@ -684,7 +684,7 @@ Table of Contents
       queries".
 
    Further reading:
-      [A14], [ADL17]
+      [A14], [ADL17], [IIM25]
 
 4.4.  Implementation Properties
 
@@ -710,8 +710,8 @@ Table of Contents
       without invoking the inverse of that primitive.
 
    Examples:
-      AES-GCM [D07], ChaCha20-Poly1305 [RFC8439], OCB [RFC7253], MGM
-      [RFC9058], AEGIS [AEGIS-AEAD]
+      AES-GCM [D07], ChaCha20-Poly1305 [RFC8439], MGM [RFC9058], AEGIS
+      [AEGIS-AEAD]
 
    Notes:
       In a sponge-based AEAD algorithm, an underlying permutation is
@@ -848,8 +848,8 @@ Table of Contents
    supported in non-standardized or modified AEAD algorithms.  This
    immediately implies challenges in deployment and interoperability.
    In an application, the requirements for additional AEAD properties
-   SHOULD be highly motivated and justified, as should all trade-offs be
-   carefully considered.
+   SHOULD be highly motivated and justified, and all trade-offs should
+   be carefully considered.
 
 6.  IANA Considerations
 
@@ -983,12 +983,11 @@ Table of Contents
               693-723, DOI 10.1007/978-3-319-70694-8_24, 2017,
               <https://doi.org/10.1007/978-3-319-70694-8_24>.
 
-   [BN2000]   Bellare, M. and C. Namprempre, "Authenticated Encryption:
+   [BN08]     Bellare, M. and C. Namprempre, "Authenticated Encryption:
               Relations among Notions and Analysis of the Generic
-              Composition Paradigm", Advances in Cryptology - ASIACRYPT
-              2000, Lecture Notes in Computer Science, vol. 1976, pp.
-              531-545, DOI 10.1007/3-540-44448-3_41, 2000,
-              <https://doi.org/10.1007/3-540-44448-3_41>.
+              Composition Paradigm", Journal of Cryptology, vol. 21, pp.
+              469-491, DOI 10.1007/s00145-008-9026-x, 2008,
+              <https://doi.org/10.1007/s00145-008-9026-x>.
 
    [BNT19]    Bellare, M., Ng, R., and B. Tackmann, "Nonces Are Noticed:
               AEAD Revisited", Advances in Cryptology - CRYPTO 2019,
@@ -1120,6 +1119,12 @@ Table of Contents
               Conference on Computer and Communications Security (CCS
               '18), pp. 1429-1440, DOI 10.1145/3243734.3243816, 2018,
               <https://doi.org/10.1145/3243734.3243816>.
+
+   [IIM25]    Inoue, A., Iwata, T., and K. Minematsu, "Comprehensive
+              Robustness Analysis of GCM, CCM, and OCB3", Topics in
+              Cryptology - CT-RSA 2025, Lecture Notes in Computer
+              Science, vol. 15598, DOI 10.1007/978-3-031-88661-4_4,
+              2025, <https://doi.org/10.1007/978-3-031-88661-4_4>.
 
    [JMV2002]  Joux, A., Martinet, G., and F. Valette, "Blockwise-
               Adaptive Attackers Revisiting the (In)Security of Some
@@ -1268,15 +1273,15 @@ Appendix A.  AEAD Algorithms with Additional Functionality
 A.1.  Incremental Authenticated Encryption
 
    Definition:
-      An AEAD algorithm allows re-encrypting and authenticating a
-      message (associated data and a plaintext pair), which only partly
-      differs from some previous message, faster than processing it from
-      scratch.
+      For a message that only partly differs from some previous message,
+      an AEAD algorithm allows re-encrypting and authenticating that
+      message (associated data and a plaintext pair) faster than
+      processing it from scratch.
 
    Examples:
       Incremental AEAD algorithm of [SY16]
 
-   Security notion:
+   Security notions:
       Privacy, authenticity [SY16]
 
    Notes:
@@ -1305,8 +1310,8 @@ A.2.  Robust Authenticated Encryption
    Examples:
       AEZ [HKR2015]
 
-   Security notion:
-      RAE [HKR2015]
+   Security notions:
+      Robust Authenticated Encryption (RAE) [HKR2015]
 
    Notes:
       The security goal of robust AEAD algorithms is to ensure the best

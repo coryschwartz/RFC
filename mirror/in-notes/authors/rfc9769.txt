@@ -6,7 +6,7 @@ Internet Engineering Task Force (IETF)                        M. Lichvar
 Request for Comments: 9769                                       Red Hat
 Updates: 5905                                                A. Malhotra
 Category: Standards Track                              Boston University
-ISSN: 2070-1721                                               April 2025
+ISSN: 2070-1721                                                 May 2025
 
 
                          NTP Interleaved Modes

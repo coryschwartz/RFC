@@ -53,7 +53,7 @@ Table of Contents
    2.  Conventions and Definitions
    3.  Extensions to the Directory Object
    4.  Getting Renewal Information
-     4.1.  The "renewalInfo" Resource
+     4.1.  The RenewalInfo Resource
      4.2.  RenewalInfo Objects
      4.3.  Schedule for Checking the RenewalInfo Resource
        4.3.1.  Server Choice of Retry-After
@@ -63,7 +63,7 @@ Table of Contents
    6.  Security Considerations
    7.  IANA Considerations
      7.1.  ACME Resource Type
-     7.2.  ACME Renewal Info Object Fields
+     7.2.  ACME RenewalInfo Object Fields
      7.3.  ACME Order Object Fields
      7.4.  ACME Error Types
    8.  References
@@ -129,15 +129,15 @@ Table of Contents
 3.  Extensions to the Directory Object
 
    An ACME server that wishes to provide renewal information MUST
-   include a new field, renewalInfo, in its directory object.
+   include a new field, "renewalInfo", in its directory object.
 
-                      +=============+==============+
-                      | Field       | URL in Value |
-                      +=============+==============+
-                      | renewalInfo | Renewal info |
-                      +-------------+--------------+
+                   +=============+=====================+
+                   | Field       | URL in Value        |
+                   +=============+=====================+
+                   | renewalInfo | Renewal information |
+                   +-------------+---------------------+
 
-                                 Table 1
+                                  Table 1
 
    HTTP/1.1 200 OK
    Content-Type: application/json
@@ -160,9 +160,9 @@ Table of Contents
 
 4.  Getting Renewal Information
 
-4.1.  The "renewalInfo" Resource
+4.1.  The RenewalInfo Resource
 
-   The "renewalInfo" resource is a new resource type introduced to the
+   The RenewalInfo resource is a new resource type introduced to the
    ACME protocol.  This new resource allows clients to query the server
    for suggestions on when they should renew certificates.
 
@@ -172,9 +172,9 @@ Table of Contents
 
    The path component is a unique identifier for the certificate in
    question.  The unique identifier is constructed by concatenating the
-   base64url-encoding [RFC4648] of the keyIdentifier field of the
+   base64url encoding [RFC4648] of the keyIdentifier field of the
    certificate's Authority Key Identifier (AKI) [RFC5280] extension, the
-   period character ".", and the base64url-encoding of the DER-encoded
+   period character ".", and the base64url encoding of the DER-encoded
    Serial Number field (without the tag and length bytes).  All trailing
    "=" characters MUST be stripped from both parts of the unique
    identifier.
@@ -213,7 +213,7 @@ Table of Contents
 
 4.2.  RenewalInfo Objects
 
-   The structure of an ACME renewalInfo resource is as follows:
+   The structure of an ACME RenewalInfo object is as follows:
 
    suggestedWindow (object, required):
       A JSON object with two keys, "start" and "end", whose values are
@@ -245,7 +245,7 @@ Table of Contents
    suggested renewal window.  The following algorithm is RECOMMENDED for
    choosing a renewal time:
 
-   1.  Query the renewalInfo resource to get a suggested renewal window.
+   1.  Make a renewalInfo request to get a suggested renewal window.
 
    2.  Select a uniform random time within the suggested window.
 
@@ -268,8 +268,8 @@ Table of Contents
    need to store information about failures so that increasing their run
    frequency doesn't lead to retrying failures without proper backoff.
    Typical information stored should include: number of failures for a
-   given order (defined by the set of names on the order) and time of
-   the most recent failure.
+   given order (defined by the set of identifiers on the order) and time
+   of the most recent failure.
 
    A RenewalInfo object in which the end timestamp equals or precedes
    the start timestamp is invalid.  Servers MUST NOT serve such a
@@ -303,12 +303,12 @@ Table of Contents
    quickly to perform a revocation.  For instance, a server that needs
    to revoke certificates within 24 hours of notification of a problem
    might choose to reserve twelve hours for investigation, six hours for
-   clients to fetch RenewalInfo, and six hours for clients to perform a
-   renewal.  Setting a small value for Retry-After means that clients
-   can respond more quickly but also incurs more load on the server.
-   Servers should estimate their expected load based on the number of
-   clients, keeping in mind that third parties may also monitor
-   RenewalInfo endpoints.
+   clients to fetch updated RenewalInfo objects, and six hours for
+   clients to perform a renewal.  Setting a small value for Retry-After
+   means that clients can respond more quickly but also incurs more load
+   on the server.  Servers should estimate their expected load based on
+   the number of clients, keeping in mind that third parties may also
+   monitor renewalInfo endpoints.
 
 4.3.2.  Client Handling of Retry-After
 
@@ -340,9 +340,9 @@ Table of Contents
    *  Connection refused
    *  Non-5xx HTTP error
 
-   On receiving a long-term error, clients MUST perform the next
-   RenewalInfo fetch as soon as possible after six hours have passed (or
-   some other locally configured default).
+   On receiving a long-term error, clients MUST make the next
+   renewalInfo request as soon as possible after six hours have passed
+   (or some other locally configured default).
 
 5.  Extensions to the Order Object
 
@@ -354,11 +354,11 @@ Table of Contents
       A string uniquely identifying a previously issued certificate that
       this order is intended to replace.  This unique identifier is
       constructed in the same way as the path component for GET requests
-      described above.
+      described in Section 4.1.
 
-   Clients SHOULD include this field in New Order requests if there is a
+   Clients SHOULD include this field in newOrder requests if there is a
    clear predecessor certificate, as is the case for most certificate
-   renewals.  Clients SHOULD NOT include this field if the ACME Server
+   renewals.  Clients SHOULD NOT include this field if the ACME server
    has not indicated that it supports this protocol by advertising the
    renewalInfo resource in its Directory.
 
@@ -382,28 +382,27 @@ Table of Contents
      "signature": "H6ZXtGjTZyUnPeKn...wEA4TklBdh3e454g"
    }
 
-   Servers SHOULD check that the identified certificate and the New
-   Order request correspond to the same ACME Account, that they share at
-   least one identifier, and that the identified certificate has not
-   already been marked as replaced by a different Order that is not
-   "invalid".  Correspondence checks beyond this (such as requiring
-   exact identifier matching) are left up to Server policy.  If any of
-   these checks fail, the Server SHOULD reject the new-order request.
-   If the Server rejects the request because the identified certificate
-   has already been marked as replaced, it MUST return an HTTP 409
-   (Conflict) with a problem document of type "alreadyReplaced" (see
-   Section 7.4).
+   Servers SHOULD check that the identified certificate and the newOrder
+   request correspond to the same ACME Account, that they share at least
+   one identifier, and that the identified certificate has not already
+   been marked as replaced by a different Order that is not "invalid".
+   Correspondence checks beyond this (such as requiring exact identifier
+   matching) are left up to server policy.  If any of these checks fail,
+   the server SHOULD reject the newOrder request.  If the server rejects
+   the request because the identified certificate has already been
+   marked as replaced, it MUST return an HTTP 409 (Conflict) with a
+   problem document of type "alreadyReplaced" (see Section 7.4).
 
-   If the Server accepts a new-order request with a "replaces" field, it
+   If the server accepts a newOrder request with a "replaces" field, it
    MUST reflect that field in the response and in subsequent requests
    for the corresponding Order object.
 
    This replacement information may serve many purposes, including but
    not limited to:
 
-   *  granting New Order requests that arrive during the suggested
+   *  granting newOrder requests that arrive during the suggested
       renewal window of their identified predecessor certificate higher
-      priority or allowing them to bypass rate limits, if the Server's
+      priority or allowing them to bypass rate limits, if the server's
       policy uses such;
 
    *  tracking the replacement of certificates that have been affected
@@ -419,19 +418,19 @@ Table of Contents
    upon the security considerations and threat model defined in
    Section 10.1 of [RFC8555].
 
-   This document specifies that renewalInfo resources are exposed and
+   This document specifies that RenewalInfo resources are exposed and
    accessed via unauthenticated GET requests, a departure from the
    requirement in RFC 8555 that clients send POST-as-GET requests to
    fetch resources from the server.  This is because the information
-   contained in renewalInfo resources is not considered confidential and
-   because allowing renewalInfo to be easily cached is advantageous to
-   shed the load from clients that do not respect the Retry-After
-   header.  As always, servers should take measures to ensure that
-   unauthenticated requests for renewal information cannot result in
-   denial-of-service attacks.  These measures might include ensuring
-   that a cache does not include superfluous request headers or query
-   parameters in its cache key, instituting IP-based rate limits, or
-   other general best-practice measures.
+   contained in RenewalInfo resources is not considered confidential and
+   because allowing RenewalInfo resources to be easily cached is
+   advantageous to shed the load from clients that do not respect the
+   Retry-After header.  As always, servers should take measures to
+   ensure that unauthenticated requests for renewal information cannot
+   result in denial-of-service attacks.  These measures might include
+   ensuring that a cache does not include superfluous request headers or
+   query parameters in its cache key, instituting IP-based rate limits,
+   or other general best-practice measures.
 
    Note that this protocol could exhibit undesired behavior in the
    presence of significant clock skew between the ACME client and
@@ -455,22 +454,22 @@ Table of Contents
    (ACME) Protocol" registry group at <https://www.iana.org/assignments/
    acme>:
 
-           +=============+=====================+===============+
-           | Field Name  | Resource Type       | Reference     |
-           +=============+=====================+===============+
-           | renewalInfo | Renewal Info object | This document |
-           +-------------+---------------------+---------------+
+           +=============+====================+===============+
+           | Field Name  | Resource Type      | Reference     |
+           +=============+====================+===============+
+           | renewalInfo | RenewalInfo object | This document |
+           +-------------+--------------------+---------------+
 
-                                  Table 2
+                                 Table 2
 
-7.2.  ACME Renewal Info Object Fields
+7.2.  ACME RenewalInfo Object Fields
 
    IANA has added the following new registry to the "Automated
    Certificate Management Environment (ACME) Protocol" registry group at
    <https://www.iana.org/assignments/acme>:
 
    Registry Name:
-      ACME Renewal Info Object Fields
+      ACME RenewalInfo Object Fields
 
    Registration Procedure:
       Specification Required (see [RFC8126]).  The designated expert

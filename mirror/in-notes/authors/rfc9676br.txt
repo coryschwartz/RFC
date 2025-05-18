@@ -476,13 +476,13 @@ Table of Contents
       bodies may be present in each jurisdiction.  Therefore, the
       jurisdiction-unit differs for acts of the same type issued by
       similar authorities but pertain to different jurisdictions related
-      to different geographical areas.
-      An example can be the following:
-      "br:governo:decreto" (decree of federal government),
-      "br;sao.paulo:governo:decreto" (decree of São (SU+00E3o) Paulo
-      state)
-      "br;sao.paulo;campinas:governo:decreto" (decree of Campinas
-      municipality).
+      to different geographical areas.  An example can be the following:
+
+         "br:governo:decreto" (decree of federal government),
+         "br;sao.paulo:governo:decreto" (decree of São (SU+00E3o) Paulo
+         state)
+         "br;sao.paulo;campinas:governo:decreto" (decree of Campinas
+         municipality).
 
    The following are fictitious examples of sources of law identifiers:
 
@@ -820,19 +820,16 @@ Table of Contents
 
        date = date-iso ["|" date-loc]
 
-   For example, 1999-09-02 will be written in ISO plus Hebrew format as:
+   For example, 1999-09-02 will be written in
+   ISO plus Hebrew format as: 1999-09-02|כ״א-בֶּאֱלוּל-תשנ״ט which is to
+   be converted into UTF-8 for network protocols and for resolution (see
+   Section 3.4).  The characters that are not allowed (e.g., "/") or
+   reserved (e.g., ",") cannot exist inside the date-loc and therefore
+   MUST be turned into ".".  To be aligned with ISO format, any blank
+   between day, month, and year MUST be converted into "-".
 
-   1999-09-02|כ״א-בֶּאֱלוּל-תשנ״ט
-
-   which is to be converted into UTF-8 for network protocols and for
-   resolution (see Section 3.4).  The characters that are not allowed
-   (e.g., "/") or reserved (e.g., ",") cannot exist inside the date-loc
-   and therefore MUST be turned into ".".  To be aligned with ISO
-   format, any blank between day, month, and year MUST be converted into
-   "-".
-
-   In the above Hebrew character examples, the sequence of characters is
-   as follows: "כ" (HEBREW LETTER KAF, U+05DB), "״" (HEBREW PUNCTUATION
+   In the above Hebrew character examples, the sequence of characters
+   is "כ" (HEBREW LETTER KAF, U+05DB), "״" (HEBREW PUNCTUATION
    GERSHAYIM, U+05F4), "א" (HEBREW LETTER ALEF, U+05D0), "-" (HYPHEN-
    MINUS, U+002D), "בֶּ" (HEBREW LETTER BET, HEBREW POINT SEGOL, HEBREW
    POINT DAGESH OR MAPIQ, U+05D1 U+05B6 U+05BC), "אֱ" (HEBREW LETTER
@@ -1736,189 +1733,100 @@ Table of Contents
 
 8.  Summary of the Syntax of the Uniform Names of the LEX Namespace
 
-   ;-------------------------------------------------------------------
    ; Structure of a Uniform Resource Name (URN) of the LEX namespace
    ; - NID = LEX namespace identifier
    ; - NSS = LEX Namespace Specific String
-   ;-------------------------------------------------------------------
-
    URN = "urn:" NID ":" NSS
-
    NID = "lex"
 
-   ;-------------------------------------------------------------------
    ; Structure of a LEX specific name
-   ;-------------------------------------------------------------------
-
    NSS = jurisdiction ":" local-name
 
-   ;-------------------------------------------------------------------
    ; Structure of the jurisdiction element
-   ;-------------------------------------------------------------------
-
    jurisdiction = jurisdiction-code *(";" jurisdiction-unit)
-
    jurisdiction-code = 2*alf-dot
-
    jurisdiction-unit = alf-dot
 
-   ;-------------------------------------------------------------------
    ; Structure of the local-name element
-   ;-------------------------------------------------------------------
-
    local-name = work ["@" expression] ["$" manifestation]
 
-   ;-------------------------------------------------------------------
    ; Structure of the work element
-   ;-------------------------------------------------------------------
-
    work = authority ":" measure ":" details *(":" annex)
 
-   ;-------------------------------------------------------------------
    ; Structure of the authority element
-   ;-------------------------------------------------------------------
-
    authority = issuer *("+" issuer)
-
    issuer = (institution *(";" body-function)) / office
-
    institution = alf-dot
-
    body-function = alf-dot
-
    office = alf-dot
 
-   ;-------------------------------------------------------------------
    ; Structure of the measure element
-   ;-------------------------------------------------------------------
-
    measure = measure-type *(";" specification)
-
    measure-type = alf-dot
-
    specification = alf-dot
 
-   ;-------------------------------------------------------------------
    ; Structure of the details element
-   ;-------------------------------------------------------------------
-
    details = (dates / period) ";" numbers
-
    dates = date *("," date)
-
    period = alf-dot
-
    numbers = number / number-lex
-
    number = (document-id *("," document-id))
-
    document-id = alf-dot-oth
-
    number-lex = "lex-" 1*DIGIT
 
-   ;-------------------------------------------------------------------
    ; Structure of the annex element
-   ;-------------------------------------------------------------------
-
    annex = annex-id *(";" specification)
-
    annex-id = alf-dot
 
-   ;-------------------------------------------------------------------
    ; Structure of the expression element
-   ;-------------------------------------------------------------------
-
    expression = version [":" language]
 
-   ;-------------------------------------------------------------------
    ; Structure of the version element
-   ;-------------------------------------------------------------------
-
    version = (amendment-date / specification)
              *(";" (event-date / event))
-
    amendment-date = date
-
    event-date = date
-
    event = alf-dot
 
-   ;-------------------------------------------------------------------
    ; Structure of the language element
-   ;-------------------------------------------------------------------
-
    language = 2*3alfa *["-" extlang] / 4*8alfa
-
    extlang  = 3alfa *2("-" 3alfa)
 
-   ;-------------------------------------------------------------------
    ; Structure of the manifestation element
-   ;-------------------------------------------------------------------
-
    manifestation = editor ":" format
                    [":" component [":" feature]]
-
    editor = publisher *(";" specification)
-
    publisher = alf-dot-hyp
-
    format = mime *(";" specification)
-
    mime = alf-dot-hyp
-
    component = part *(";" specification)
-
    part = alf-dot-hyp
-
    feature = attribute *(";" specification)
-
    attribute = alf-dot-hyp
 
-   ;-------------------------------------------------------------------
    ; Structure of the date
-   ;-------------------------------------------------------------------
-
    date = date-iso ["|" date-loc]
-
    date-iso = year "-" month "-" day
-
    year = 4DIGIT
-
    month = 2DIGIT
-
    day = 2DIGIT
-
    date-loc = *(alfadot / other)
 
-   ;-------------------------------------------------------------------
    ; Allowed, reserved and future characters
-   ;-------------------------------------------------------------------
    ; - allowed = alfadot / other / reserved
    ; - reserved = ":" / "@" / "$" / "+" / "|" / ";" / "," / "~"
-   ; - future = "*" / "!"
-
+   ; - future   = "*" /  "!"
    alf-dot = alfanum *alfadot
-
    alf-dot-hyp = alfanum *(alfadot / "-")
-
    alf-dot-oth = alfanum *(alfadot / other)
-
    alfadot = alfanum / "."
-
    alfa = lowercase / uppercase
-
    alfanum = alfa / DIGIT / encoded
-
    lowercase = %x61-7A        ; lower-case ASCII letters (a-z)
-
    uppercase = %x41-5A        ; upper-case ASCII letters (A-Z)
-
    DIGIT     = %x30-39        ; decimal digits (0-9)
-
    encoded   = "%" 2HEXDIG
-
    HEXDIG = DIGIT / %x41-46 / %x61-66 ; hex digits (0-9,A-F,a-f)
-
    other    = "-" / "_" / "'" / "=" / "(" / ")"
 
 9.  Procedure of Uniform Names Assignment

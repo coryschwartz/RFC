@@ -11,7 +11,7 @@ ISSN: 2070-1721                                            Cisco Systems
                                                               A. Lingala
                                                                     AT&T
                                                                 J. Drake
-                                                        Juniper Networks
+                                                             Independent
                                                               April 2025
 
 
@@ -67,6 +67,8 @@ Table of Contents
    1.  Introduction
      1.1.  Document Structure
    2.  Requirements Language and Terminology
+     2.1.  Abbreviations
+     2.2.  Definitions
    3.  Background and Problem Statement
      3.1.  Optional MAC-Only RT-2
      3.2.  Mobility Use Cases
@@ -154,9 +156,9 @@ Table of Contents
    algorithm allows for changing MAC-IP address bindings across moves.
 
    This document updates the sequence number assignment procedures
-   defined in [RFC7432] to adequately address mobility support across
+   defined in [RFC7432] to 1) adequately address mobility support across
    EVPN-IRB overlay use cases that permit MAC-IP address bindings to
-   change across host moves and support mobility for both MAC and IP
+   change across host moves and 2) support mobility for both MAC and IP
    route components carried in an EVPN RT-2 for these use cases.
 
    Additionally, for hosts on an Ethernet Segment Identifier (ESI) that
@@ -207,27 +209,15 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-   EVPN-IRB:  Ethernet VPN Integrated Routing and Bridging.  A BGP-EVPN
-      distributed control plane that is based on the integrated routing
-      and bridging fabric overlay discussed in [RFC9135].
+2.1.  Abbreviations
 
-   Underlay:  An IP, MPLS, or SRv6 fabric core network that provides
-      routed reachability between EVPN PEs.
+   ARP:  Address Resolution Protocol [RFC0826].  ARP references in this
+      document are equally applicable to both ARP and NDP.
 
-   Overlay:  L2 and L3 VPNs that are enabled via NVO3, VXLAN, SRv6, or
-      MPLS service-layer encapsulation.
+   CE:  Customer Edge.
 
-   SRv6:  Segment Routing over IPv6 (as specified in [RFC8986]).
-
-   NVO:  Network Virtualization Overlay.
-
-   NVO3:  Network Virtualization over Layer 3 (as specified in
-      [RFC8926]).
-
-   VXLAN:  Virtual eXtensible Local Area Network (as specified in
-      [RFC7348]).
-
-   MPLS:  Multiprotocol Label Switching (as specified in [RFC3031]).
+   ES:  Ethernet Segment.  A physical ethernet or LAG port that connects
+      an access device to an EVPN PE, as defined in [RFC7432].
 
    EVPN PE:  Ethernet VPN Provider Edge.  A PE switch router in an EVPN-
       IRB network that runs overlay BGP-EVPN control planes and connects
@@ -239,58 +229,86 @@ Table of Contents
       typically also an IP or MPLS tunnel endpoint for overlay VPN
       flows.
 
-   Symmetric EVPN-IRB:  A specific design approach used in EVPN-based
-      networks [RFC9135] to handle both L2 and L3 forwarding within the
-      same network infrastructure.  The key characteristic of symmetric
-      EVPN-IRB is that both ingress and egress PE routers perform
-      routing for inter-subnet traffic.
+   EVPN-IRB:  Ethernet VPN Integrated Routing and Bridging.  A BGP-EVPN
+      distributed control plane that is based on the integrated routing
+      and bridging fabric overlay discussed in [RFC9135].
+
+   L2:  Layer 2.
+
+   L3:  Layer 3.
+
+   LAG:  Link Aggregation Group.
+
+   MC-LAG:  Multi-Chassis Link Aggregation Group.
+
+   MPLS:  Multiprotocol Label Switching (as specified in [RFC3031]).
+
+   NDP:  Neighbor Discovery Protocol (for IPv6 [RFC4861]).
+
+   NVO:  Network Virtualization Overlay.
+
+   NVO3:  Network Virtualization over Layer 3 (as specified in
+      [RFC8926]).
+
+   PE:  Provider Edge.
+
+   RT-2:  Route Type 2.  EVPN RT-2 carrying both MAC address and IP
+      address reachability as specified in [RFC7432].
+
+   RT-5:  Route Type 5.  EVPN RT-5 carrying IP prefix reachability as
+      specified in [RFC9136].
+
+   SRv6:  Segment Routing over IPv6 (as specified in [RFC8986]).
+
+   ToR:  Top-of-Rack.
+
+   VM:  Virtual Machine (or containerized workloads).
+
+   VXLAN:  Virtual eXtensible Local Area Network (as specified in
+      [RFC7348]).
+
+2.2.  Definitions
 
    Asymmetric EVPN-IRB:  A design approach used in EVPN-based networks
       [RFC9135] to handle L2 and L3 forwarding.  In this approach, only
       the ingress PE router performs routing for inter-subnet traffic,
       while the egress PE router performs bridging.
 
-   ARP:  Address Resolution Protocol [RFC0826].  ARP references in this
-      document are equally applicable to both ARP and NDP.
-
-   NDP:  Neighbor Discovery Protocol (for IPv6 [RFC4861]).
-
-   ES:  Ethernet Segment.  A physical ethernet or LAG port that connects
-      an access device to an EVPN PE, as defined in [RFC7432].
-
-   MC-LAG:  Multi-Chassis Link Aggregation Group.
-
    EVPN all-active multi-homing:  A redundancy and load-sharing
       mechanism used in EVPN networks.  This method allows multiple PE
       devices to simultaneously provide L2 and L3 connectivity to a
       single CE device or network segment.
 
-   RT-2:  Route Type 2.  EVPN RT-2 carrying both MAC address and IP
-      address reachability as specified in [RFC7432].
-
-   RT-5:  Route Type 5.  EVPN RT-5 carrying IP prefix reachability as
-      specified in [RFC7432].
+   Host:  In this document, generically refers to any user or CE
+      endpoint attached to an EVPN-IRB network, which may be a VM,
+      containerized workload, physical endpoint, or CE device.
 
    MAC-IP address:  The IPv4 and/or IPv6 address and MAC address binding
       for an overlay host.
 
-   Peer-Sync-Local MAC route:  The learned BGP EVPN MAC route for a host
-      that is directly attached to a local multi-homed ES.
+   Overlay:  L2 and L3 VPNs that are enabled via NVO3, VXLAN, SRv6, or
+      MPLS service-layer encapsulation.
 
    Peer-Sync-Local MAC-IP route:  The learned BGP EVPN MAC-IP route for
       a host that is directly attached to a local multi-homed ES.
 
-   Peer-Sync-Local MAC sequence number:  The sequence number received
-      with a Peer-Sync-Local MAC route.
-
    Peer-Sync-Local MAC-IP sequence number:  The sequence number received
       with a Peer-Sync-Local MAC-IP route.
 
-   VM:  Virtual Machine (or containerized workloads).
+   Peer-Sync-Local MAC route:  The learned BGP EVPN MAC route for a host
+      that is directly attached to a local multi-homed ES.
 
-   Host:  In this document, generically refers to any user or CE
-      endpoint attached to an EVPN-IRB network, which may be a VM,
-      containerized workload, physical endpoint, or CE device.
+   Peer-Sync-Local MAC sequence number:  The sequence number received
+      with a Peer-Sync-Local MAC route.
+
+   Symmetric EVPN-IRB:  A specific design approach used in EVPN-based
+      networks [RFC9135] to handle both L2 and L3 forwarding within the
+      same network infrastructure.  The key characteristic of symmetric
+      EVPN-IRB is that both ingress and egress PE routers perform
+      routing for inter-subnet traffic.
+
+   Underlay:  An IP, MPLS, or SRv6 fabric core network that provides
+      routed reachability between EVPN PEs.
 
 3.  Background and Problem Statement
 
@@ -313,7 +331,8 @@ Table of Contents
 
    This section outlines the IRB mobility use cases addressed in this
    document.  Detailed procedures to handle these scenarios are provided
-   in Sections 6 and 7.
+   in Sections 6 and 7.  The following IRB mobility scenarios are
+   considered:
 
    *  A host move results in both the host's IP and MAC addresses moving
       together.
@@ -684,19 +703,19 @@ Table of Contents
    routes learned on a shared ES must be advertised with the same
    sequence number by all PE devices to which the ES is multi-homed.
    This applies to local MAC-only routes as well.  MAC and MAC-IP routes
-   for a host that is attached to a local ES may be learned natively via
-   data plane and ARP/NDP, respectively, as well as via BGP EVPN from
-   another multi-homing PE to achieve local switching.  MAC and MAC-IP
-   routes learned natively via data plane and ARP/NDP are respectively
-   referred to as local MAC routes and local MAC-IP routes.  BGP EVPN
-   learned MAC and MAC-IP routes for a host that is attached to a local
-   ES are respectively referred to as Peer-Sync-Local MAC routes and
-   Peer-Sync-Local MAC-IP routes as they are effectively local routes
-   synchronized from a multi-homing peer.  Local and Peer-Sync-Local
-   route learning can occur in any order.  Local MAC-IP routes
-   advertised by all multi-homing PE devices sharing the ES must carry
-   the same sequence number, independent of the order in which they are
-   learned.  This implies that:
+   for a host that is attached to a local ES may be learned via data
+   plane and ARP/NDP, respectively, as well as via BGP EVPN from another
+   multi-homing PE to achieve local switching.  MAC and MAC-IP routes
+   learned via data plane and ARP/NDP are respectively referred to as
+   local MAC routes and local MAC-IP routes.  BGP EVPN learned MAC and
+   MAC-IP routes for a host that is attached to a local ES are
+   respectively referred to as Peer-Sync-Local MAC routes and Peer-Sync-
+   Local MAC-IP routes as they are effectively local routes synchronized
+   from a multi-homing peer.  Local and Peer-Sync-Local route learning
+   can occur in any order.  Local MAC-IP routes advertised by all multi-
+   homing PE devices sharing the ES must carry the same sequence number,
+   independent of the order in which they are learned.  This implies
+   that:
 
    *  On local or Peer-Sync-Local MAC-IP route learning, the sequence
       number for the local MAC-IP route must be compared and updated to
@@ -715,15 +734,16 @@ Table of Contents
 6.  Methods for Sequence Number Assignment
 
    The following sections specify the sequence number assignment
-   procedures required for local and Peer-Sync-Local MAC and MAC-IP
-   route learning events to achieve the outlined objectives.
+   procedures required for local MAC, local MAC-IP, Peer-Sync-Local MAC,
+   and Peer-Sync-Local MAC-IP route learning events to achieve the
+   outlined objectives.
 
 6.1.  Local MAC-IP Learning
 
    A local Mx-IPx learning via ARP or NDP should result in the
    computation or re-computation of the parent MAC route Mx's sequence
-   number, following which the MAC-IP route Mx-IPx inherits the parent
-   MAC route's sequence number.  The parent MAC route Mx sequence number
+   number.  After this, the MAC-IP route Mx-IPx inherits the parent MAC
+   route's sequence number.  The parent MAC route Mx sequence number
    MUST be computed as follows:
 
    *  It MUST be higher than any existing remote MAC route for Mx, as
@@ -828,13 +848,13 @@ Table of Contents
    handle this case, if different sequence numbers are received for
    remote MAC+IP routes and corresponding remote MAC routes from a
    remote PE, the sequence number associated with the remote MAC route
-   MUST be computed and interpreted as:
+   MUST be:
 
-   *  The highest of all received sequence numbers with remote MAC+IP
-      and MAC routes with the same MAC address.
+   *  computed and interpreted as the highest of all received sequence
+      numbers with remote MAC+IP and MAC routes with the same MAC
+      address and
 
-   *  The MAC route sequence number would be re-computed on a MAC or
-      MAC+IP route withdraw as per the above.
+   *  re-computed on a MAC or MAC+IP route withdraw as per the above.
 
    A MAC and/or IP address move to the local PE would then result in the
    MAC (and hence all MAC-IP) route sequence numbers being incremented
@@ -1092,11 +1112,12 @@ Table of Contents
 
 8.4.1.  Route Unfreezing Configuration
 
-   Unfreezing the duplicate or frozen MAC or IP route via a CLI can be
-   used to recover from the duplicate and frozen state following
-   corrective un-provisioning of the duplicate MAC or IP address.
-   Unfreezing the MAC or IP route should result in advertising it with a
-   sequence number higher than that advertised from the other location.
+   Unfreezing the duplicate or frozen MAC or IP route via a command-line
+   interface (CLI) can be used to recover from the duplicate and frozen
+   state following corrective un-provisioning of the duplicate MAC or IP
+   address.  Unfreezing the MAC or IP route should result in advertising
+   it with a sequence number higher than that advertised from the other
+   location.
 
    Two scenarios exist:
 
@@ -1228,6 +1249,11 @@ Table of Contents
               DOI 10.17487/RFC8986, February 2021,
               <https://www.rfc-editor.org/info/rfc8986>.
 
+   [RFC9136]  Rabadan, J., Ed., Henderickx, W., Drake, J., Lin, W., and
+              A. Sajassi, "IP Prefix Advertisement in Ethernet VPN
+              (EVPN)", RFC 9136, DOI 10.17487/RFC9136, October 2021,
+              <https://www.rfc-editor.org/info/rfc9136>.
+
 Acknowledgements
 
    The authors would like to thank Gunter Van de Velde for the
@@ -1302,5 +1328,5 @@ Authors' Addresses
 
 
    John Drake
-   Juniper Networks
-   Email: jdrake@juniper.net
+   Independent
+   Email: je_drake@yahoo.com

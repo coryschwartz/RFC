@@ -4,14 +4,13 @@
 
 Internet Engineering Task Force (IETF)                    R. Gandhi, Ed.
 Request for Comments: 9779                                   C. Filsfils
-Category: Standards Track                            Cisco Systems, Inc.
-ISSN: 2070-1721                                                 D. Voyer
-                                                             Bell Canada
+Category: Standards Track                                       D. Voyer
+ISSN: 2070-1721                                      Cisco Systems, Inc.
                                                               S. Salsano
                                         Universita di Roma "Tor Vergata"
                                                                  M. Chen
                                                                   Huawei
-                                                              April 2025
+                                                                May 2025
 
 
 Performance Measurement for Segment Routing Networks with the MPLS Data
@@ -312,16 +311,17 @@ Table of Contents
 
 4.2.1.  One-Way Measurement Mode
 
-   In the one-way measurement mode defined in Section 2.4 of [RFC6374],
-   the querier can receive response messages with an IP/UDP header "out-
-   of-band" by properly setting the UDP Return Object (URO) TLV in the
-   query message.  The URO TLV (Type 131) is defined in [RFC7876] and
-   includes the UDP-Destination-Port and IP address.  When the querier
-   sets an IP address and a UDP port in the URO TLV, the response
-   message MUST be sent to that IP address, with that IP address as the
-   destination address and the UDP port as the destination port.  In
-   addition, the Control Code in the query message MUST be set to Out-
-   of-band Response Requested [RFC6374].
+   In one-way measurement mode, as defined in Section 2.4 of [RFC6374],
+   the querier can set the UDP Return Object (URO) TLV in the query
+   message.  This enables the querier to receive the out-of-band
+   response message encapsulated in an IP/UDP header sent to the IP
+   address and UDP port specified in the URO TLV.  The URO TLV (Type
+   131) is defined in [RFC7876] and includes the UDP-Destination-Port
+   and IP address.  When the querier sets an IP address and a UDP port
+   in the URO TLV, the response message MUST be sent to that IP address,
+   with that IP address as the destination address and the UDP port as
+   the destination port.  In addition, the Control Code in the query
+   message MUST be set to Out-of-band Response Requested [RFC6374].
 
 4.2.2.  Two-Way Measurement Mode
 
@@ -330,7 +330,7 @@ Table of Contents
    they are sent back in-band on the same link, or they are sent back on
    the same end-to-end SR-MPLS path (i.e., the same set of links and
    nodes) in the reverse direction to the querier.  This is done in
-   order to perform accurate two- way delay measurement.
+   order to perform accurate two-way delay measurement.
 
    For links, the response message as defined in [RFC6374] is sent back
    on the same incoming link where the query message is received.  In
@@ -394,11 +394,11 @@ Table of Contents
 5.1.  Delay Measurement Message
 
    As defined in [RFC6374], MPLS Delay Measurement (DM) query and
-   response messages use the Associated Channel Header (ACH) (with the
-   value 0x000C for delay measurement).  This value identifies the
-   message type and message payload that follow the ACH, as defined in
-   Section 3.2 of [RFC6374].  For delay measurement, the same ACH value
-   is used for both links and end-to-end SR-MPLS Policies.
+   response messages use the Associated Channel Header (ACH) (with value
+   0x000C for delay measurement).  The value identifies the message type
+   and message payload that follow the ACH, as defined in Section 3.2 of
+   [RFC6374].  For delay measurement, the same ACH value is used for
+   both links and end-to-end SR-MPLS Policies.
 
 5.2.  Loss Measurement Message
 
@@ -415,21 +415,21 @@ Table of Contents
       require hardware support.
 
    As defined in [RFC6374], MPLS LM query and response messages use the
-   ACH (with the value 0x000A for direct loss measurement or value
-   0x000B for inferred loss measurement).  This value identifies the
-   message type and message payload that follow the ACH, as defined in
+   ACH (with value 0x000A for direct loss measurement or value 0x000B
+   for inferred loss measurement).  This value identifies the message
+   type and message payload that follow the ACH, as defined in
    Section 3.1 of [RFC6374].  For loss measurement, the same ACH value
    is used for both links and end-to-end SR-MPLS Policies.
 
 5.3.  Combined Loss/Delay Measurement Message
 
    As defined in [RFC6374], combined LM/DM query and response messages
-   use the ACH (with the value 0x000D for direct loss and delay
-   measurement or the value 0x000E for inferred loss and delay
-   measurement).  The value identies the message type and the message
-   payload that follows the ACH, as defined in Section 3.3 of [RFC6374].
-   For combined loss and delay measurement, the same ACH value is used
-   for both links and end-to-end SR-MPLS Policies.
+   use the ACH (with value 0x000D for direct loss and delay measurement
+   or value 0x000E for inferred loss and delay measurement).  The value
+   identifies the message type and the message payload that follows the
+   ACH, as defined in Section 3.3 of [RFC6374].  For combined loss and
+   delay measurement, the same ACH value is used for both links and end-
+   to-end SR-MPLS Policies.
 
 5.4.  Counters
 
@@ -537,10 +537,10 @@ Table of Contents
    information to the responder using the Return Path TLV.
 
    [RFC6374] defines query and response messages that can include one or
-   more optional TLVs.  This document defines the the Return Path TLV
-   (5) to carry return path information in query messages.  The Return
-   Path TLV is specific to a measurement session.  The format of the
-   Return Path TLV is shown in Figure 5 below:
+   more optional TLVs.  This document defines the Return Path TLV (5) to
+   carry return path information in query messages.  The Return Path TLV
+   is specific to a measurement session.  The format of the Return Path
+   TLV is shown in Figure 5 below:
 
     0                   1                   2                   3
     0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
@@ -765,10 +765,10 @@ Table of Contents
             | 252 - 254 | Private Use             | RFC 9779  |
             +-----------+-------------------------+-----------+
 
-                 Table 2: Return Path Sub-TLV Type Registry
+                Table 2: Return Path Sub-TLV Types Registry
 
    This document defines the following values in the "Return Path Sub-
-   TLV Type" registry:
+   TLV Types" registry:
 
         +=======+=====================================+===========+
         | Value | Description                         | Reference |
@@ -949,8 +949,9 @@ Authors' Addresses
 
 
    Daniel Voyer
-   Bell Canada
-   Email: daniel.voyer@bell.ca
+   Cisco Systems, Inc.
+   Canada
+   Email: davoyer@cisco.com
 
 
    Stefano Salsano

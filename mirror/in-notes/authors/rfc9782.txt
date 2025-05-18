@@ -15,9 +15,9 @@ ISSN: 2070-1721                                           Fraunhofer SIT
 
 Abstract
 
-   Payloads used in Remote ATtestation procedureS (RATS) may require an
-   associated media type for their conveyance, for example, when used in
-   RESTful APIs.
+   The payloads used in Remote ATtestation procedureS (RATS) may require
+   an associated media type for their conveyance, for example, when the
+   payloads are used in RESTful APIs.
 
    This memo defines media types to be used for Entity Attestation
    Tokens (EATs).
@@ -164,11 +164,12 @@ Table of Contents
    specific EAT profile need to understand in order to interoperate,
    e.g., the number and type of claims, which serialisation format, the
    supported signature schemes, etc.  EATs carry an in-band profile
-   identifier using the eat_profile claim (see Section 4.3.2 of [EAT]).
-   The value of the eat_profile claim is either an OID or a URI.
+   identifier using the "eat_profile" claim (see Section 4.3.2 of
+   [EAT]).  The value of the "eat_profile" claim is either an OID or a
+   URI.
 
    The media types defined in this document include an optional
-   eat_profile parameter that can be used to mirror the eat_profile
+   "eat_profile" parameter that can be used to mirror the "eat_profile"
    claim of the transported EAT.  Exposing the EAT profile at the API
    layer allows API routers to dispatch payloads directly to the
    profile-specific processor without having to snoop into the request
@@ -176,7 +177,7 @@ Table of Contents
    system that matches the inherent extensibility of EAT.  The
    expectation being that a certain EAT profile automatically obtains a
    media type derived from the base (e.g., application/eat+cwt) by
-   populating the eat_profile parameter with the corresponding OID or
+   populating the "eat_profile" parameter with the corresponding OID or
    URL.
 
    When the parameterised version of the EAT media type is used in HTTP
@@ -590,10 +591,6 @@ Table of Contents
               DOI 10.17487/RFC8259, December 2017,
               <https://www.rfc-editor.org/info/rfc8259>.
 
-   [JWT]      Jones, M., Bradley, J., and N. Sakimura, "JSON Web Token
-              (JWT)", RFC 7519, DOI 10.17487/RFC7519, May 2015,
-              <https://www.rfc-editor.org/info/rfc7519>.
-
    [MEDIA-TYPES]
               IANA, "Media Types",
               <https://www.iana.org/assignments/media-types>.
@@ -639,9 +636,9 @@ Table of Contents
 
    [REST-IoT] Keränen, A., Kovatsch, M., and K. Hartke, "Guidance on
               RESTful Design for Internet of Things Systems", Work in
-              Progress, Internet-Draft, draft-irtf-t2trg-rest-iot-15, 21
-              October 2024, <https://datatracker.ietf.org/doc/html/
-              draft-irtf-t2trg-rest-iot-15>.
+              Progress, Internet-Draft, draft-irtf-t2trg-rest-iot-16, 23
+              April 2025, <https://datatracker.ietf.org/doc/html/draft-
+              irtf-t2trg-rest-iot-16>.
 
    [TAG]      Kindberg, T. and S. Hawke, "The 'tag' URI Scheme",
               RFC 4151, DOI 10.17487/RFC4151, October 2005,

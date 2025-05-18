@@ -10,7 +10,7 @@ ISSN: 2070-1721                                           Kloud Services
                                                       Cisco Systems Inc.
                                                          K. Koushik, Ed.
                                                         Verizon Wireless
-                                                              March 2025
+                                                              April 2025
 
 
                 A YANG Data Model for Syslog Management
@@ -367,7 +367,7 @@ Table of Contents
    from [RFC9640], and [RFC9645].  It references [RFC5424], [RFC5425],
    [RFC5426], [RFC5848], [RFC8089], [RFC8174], and [Std-1003.1-2024].
 
-   <CODE BEGINS> file "ietf-syslog@2025-03-03.yang"
+   <CODE BEGINS> file "ietf-syslog@2025-04-30.yang"
    module ietf-syslog {
     yang-version 1.1;
     namespace "urn:ietf:params:xml:ns:yang:ietf-syslog";
@@ -436,7 +436,7 @@ Table of Contents
        (RFC 8174) when, and only when, they appear in all capitals,
        as shown here.";
 
-    revision 2025-03-03 {
+    revision 2025-04-30 {
       description
         "Initial Revision";
       reference
@@ -621,8 +621,8 @@ Table of Contents
     identity syslog {
       base syslog-facility;
       description
-        "The facility for messages generated internally by a syslogd
-         facility (numerical code 5).";
+        "The facility for messages generated internally by a syslog
+         daemon facility (numerical code 5).";
       reference
         "RFC 5424: The Syslog Protocol, Section 6.2.1.";
     }
@@ -2039,7 +2039,7 @@ B.1.  Extending Facilities
        "This module contains a collection of vendor-specific YANG type
         definitions for Syslog.";
 
-     revision 2025-03-03 {
+     revision 2025-04-30 {
        description
          "Version 1.0";
        reference

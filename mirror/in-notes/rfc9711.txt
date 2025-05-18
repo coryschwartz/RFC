@@ -5,12 +5,12 @@
 Internet Engineering Task Force (IETF)                      L. Lundblade
 Request for Comments: 9711                           Security Theory LLC
 Category: Standards Track                                     G. Mandyam
-ISSN: 2070-1721                                             Mediatek USA
+ISSN: 2070-1721                                                         
                                                            J. O'Donoghue
                                               Qualcomm Technologies Inc.
                                                               C. Wallace
                                                 Red Hound Software, Inc.
-                                                            January 2025
+                                                              April 2025
 
 
                    The Entity Attestation Token (EAT)
@@ -487,7 +487,7 @@ Table of Contents
       conveyed by the CWT or JWT.
 
    This document reuses terminology from RATS Architecture [RFC9334];
-   note that EAT does not capitalize RATS terms like “evidence” for
+   note that EAT does not capitalize RATS terms like "evidence" for
    easier readability:
 
    Attester:  A role performed by an entity (typically a device) whose
@@ -1911,7 +1911,7 @@ Table of Contents
    not.
 
    When COSE protection is used, the profile should specify whether COSE
-   tags are used or not.  Note that RFC 8392 requires COSE tags be used
+   tags are used or not.  Note that [RFC8392] requires COSE tags be used
    in a CWT tag.
 
    Often, a tag is unnecessary because the surrounding or carrying
@@ -3037,9 +3037,9 @@ Table of Contents
 11.1.  Normative References
 
    [DLOA]     GlobalPlatform, "GlobalPlatform Card: Digital Letter of
-              Approval", Public Release Version 1.0, Document Reference:
-              GPC_SPE_095, November 2015, <https://globalplatform.org/
-              wp-content/uploads/2015/12/
+              Approval", Public Release Version 1.0, GPC_SPE_095,
+              November 2015, <https://globalplatform.org/wp-
+              content/uploads/2015/12/
               GPC_DigitalLetterOfApproval_v1.0.pdf>.
 
    [IANA.cbor-tags]
@@ -3161,8 +3161,8 @@ Table of Contents
               <https://www.rfc-editor.org/info/rfc9393>.
 
    [ThreeGPP.IMEI]
-              3GPP, "Numbering, addressing and identification", 3GPP
-              TS 23.003, Version 19, September 2024,
+              3GPP, "Numbering, addressing and identification", Version
+              19, 3GPP TS 23.003, September 2024,
               <https://portal.3gpp.org/desktopmodules/Specifications/
               SpecificationDetails.aspx?specificationId=729>.
 
@@ -3199,9 +3199,8 @@ Table of Contents
               ppfiles/pp0117V2b_pdf.pdf>.
 
    [EAT-GitHub]
-              "Entity Attestation Token IETF Draft Standard", commit
-              62c726b, January 2024,
-              <https://github.com/ietf-rats-wg/eat>.
+              "The Entity Attestation Token (EAT)", commit 62c726b,
+              January 2024, <https://github.com/ietf-rats-wg/eat>.
 
    [EAT.media-types]
               Lundblade, L., Birkholz, H., and T. Fossati, "EAT Media
@@ -3213,8 +3212,8 @@ Table of Contents
    [GP-Example]
               GlobalPlatform, "GlobalPlatform Technology: TEE
               Certification Process", Public Release Version 2.0,
-              Document Reference: GP_PRO_023, January 2021,
-              <https://globalplatform.org/wp-content/uploads/2021/01/
+              GP_PRO_023, January 2021, <https://globalplatform.org/wp-
+              content/uploads/2021/01/
               GP_TEECertificationProcess_v2.0_PublicRelease.pdf>.
 
    [IEEE-RA]  IEEE, "IEEE Registration Authority",
@@ -4401,7 +4400,6 @@ Authors' Addresses
 
 
    Giridhar Mandyam
-   Mediatek USA
    Email: giridhar.mandyam@gmail.com
 
 

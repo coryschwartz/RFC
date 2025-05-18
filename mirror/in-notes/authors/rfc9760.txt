@@ -6,7 +6,7 @@ Internet Engineering Task Force (IETF)                         D. Arnold
 Request for Comments: 9760                                  Meinberg-USA
 Category: Standards Track                                    H. Gerstung
 ISSN: 2070-1721                                                 Meinberg
-                                                              April 2025
+                                                                May 2025
 
 
 Enterprise Profile for the Precision Time Protocol with Mixed Multicast
