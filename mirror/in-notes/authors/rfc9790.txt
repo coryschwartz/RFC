@@ -90,7 +90,7 @@ Table of Contents
 
    An MPLS packet consists of a label stack, an optional Post-Stack
    Header (PSH), and an optional embedded packet (in that order).
-   Examples of PSH include existing artifacts such as control words
+   Examples of PSHs include existing headers such as control words
    [RFC4385], BIER (Bit Index Explicit Replication) headers [RFC8296]
    and the like, as well as new types of PSH being discussed by the MPLS
    Working Group.  However, in the data plane, there are very few clues
@@ -166,26 +166,27 @@ Table of Contents
       Service (VPLS) [RFC4761] [RFC4762] or EVPN [RFC7432]), or some
       other type of Layer 2 frame [RFC4446].
 
-   Label Stack:  For an MPLS packet, all labels (four-octet fields)
-      after the Layer 2 header, up to and including the label with the
-      Bottom of Stack bit set [RFC3032].
+   Label Stack:  A label stack is represented as a consecutive sequence
+      of "label stack entries (four-octet fields)" after the Layer 2
+      header but before any network layer header.  The last label stack
+      entry of a label stack has its Bottom of Stack bit set.
 
    MPLS Packet:  A packet whose Layer 2 header declares the type to be
       MPLS.  For example, the Ethertype is 0x8847 or 0x8848 for
       Ethernet, and the Protocol field is 0x0281 or 0x0283 for PPP.
 
-   MPLS Payload:  All data after the label stack, including the PFN, an
-      optional post-stack header, and the embedded packet.
+   MPLS Payload:  All data after the label stack and the optional Post-
+      Stack header.
 
    Post-stack First Nibble (PFN):  The most significant four bits of the
       first octet following the label stack.
 
-   Post-Stack Header (PSH):  Optional field of interest to the egress
-      Label Switching Router (LSR) (and possibly to transit LSRs).
-      Examples include a control word [RFC4385] [RFC8964] or an
-      associated channel [RFC4385] [RFC5586] [RFC9546].  The PSH MUST
-      indicate its length, so that a parser knows where the embedded
-      packet starts.
+   Post-Stack Header (PSH):  A field containing information that may be
+      of interest to the egress Label Switching Router (LSR) or transit
+      LSRs.  Examples include a control word [RFC4385] [RFC8964] or an
+      associated channel header [RFC4385] [RFC5586] [RFC9546].  A parser
+      needs to be able to determine where the PSH ends in order to find
+      the embedded packet.
 
 1.3.  Abbreviations
 
@@ -645,7 +646,7 @@ Table of Contents
               2021, <https://www.rfc-editor.org/info/rfc8964>.
 
    [RFC9789]  Andersson, L., Bryant, S., Bocci, M., and T. Li, "MPLS
-              Network Action (MNA) Framework", RFC 9789,
+              Network Actions (MNAs) Framework", RFC 9789,
               DOI 10.17487/RFC9789, May 2025,
               <https://www.rfc-editor.org/info/rfc9789>.
 

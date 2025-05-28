@@ -5,7 +5,7 @@
 Internet Engineering Task Force (IETF)                       S. Cheshire
 Request for Comments: 9664                                      T. Lemon
 Category: Standards Track                                     Apple Inc.
-ISSN: 2070-1721                                             October 2024
+ISSN: 2070-1721                                                 May 2025
 
 
           An EDNS(0) Option to Negotiate Leases on DNS Updates
@@ -34,7 +34,7 @@ Status of This Memo
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -137,10 +137,8 @@ Table of Contents
 
    Lease Update Requests and Responses are formatted as standard DNS
    Update messages [RFC2136].  Such messages MUST include the EDNS(0)
-   OPT RR [RFC6891].  This OPT RR MUST include an EDNS(0) Option as
-   shown below.
-
-   The Update Lease EDNS(0) option is formatted as follows:
+   OPT RR [RFC6891].  This OPT RR MUST include an Update Lease EDNS(0)
+   Option as shown below:
 
    +===============+===========+======================================+
    | Field Name    | Field     | Description                          |
@@ -202,8 +200,8 @@ Table of Contents
    present on the authoritative DNS server.  A Refresh Request is
    intended simply to renew the lease on a previous Registration without
    changing anything.  Registrations and Refreshes are both Lease Update
-   Requests, so the term "Lease Update Request" is to specify behavior
-   that is the same for both types of DNS Update.
+   Requests, so the term "Lease Update Request" is used to specify
+   behavior that is the same for both types of DNS Updates.
 
    In some cases, it may be necessary to add new information without
    removing old information.  For the purpose of this document, such
@@ -302,13 +300,14 @@ Table of Contents
 
 5.1.  Refresh Request Format
 
-   Refresh Requests are formatted like Update Lease Requests and Update
-   Lease Responses (see Section 4).  The Refresh Request is constructed
-   with the assumption that the previous Registration or Refresh is
-   still in effect.  In the case that the RRs added in a previous update
-   were for some reason garbage collected (e.g., because of a server
-   reboot that resulted in loss of state), the Refresh Request will
-   result in those RRs being added again.
+   Refresh Requests and their corresponding responses are formatted like
+   Update Lease Requests and Update Lease Responses (see Section 4).
+   The Refresh Request is constructed with the assumption that the
+   previous Registration or Refresh is still in effect.  In the case
+   that the RRs added in a previous update were for some reason garbage
+   collected (e.g., because of a server reboot that resulted in loss of
+   state), the Refresh Request will result in those RRs being added
+   again.
 
    The Refresh Request SHOULD NOT include any DNS Update prerequisites
    that will fail if the Requester's previous Registration or Refresh is
@@ -323,13 +322,13 @@ Table of Contents
    state resulting from a previous Refresh or Registration is a
    Registration Request, not a Refresh Request.
 
-   The Update Lease option in a Refresh Request contains the desired new
-   lease duration for Requests, and the actual granted lease for
-   Responses.  The lease duration provided in LEASE in the Update Lease
-   option applies to all RRs in the Update section of the Refresh
-   Request, except that when the 8-byte Update Lease variant is sent,
-   the duration specified in KEY-LEASE applies to any KEY RRs included
-   in the Update section.
+   In a Refresh Request, the Update Lease option contains the desired
+   new lease duration, and in the corresponding response, the Update
+   Lease option contains the actual granted lease.  The lease duration
+   provided in LEASE in the Update Lease option applies to all RRs in
+   the Update section of the Refresh Request, except that when the
+   8-byte Update Lease variant is sent, the duration specified in KEY-
+   LEASE applies to any KEY RRs included in the Update section.
 
 5.2.  Requester Behavior
 
@@ -355,10 +354,10 @@ Table of Contents
    Lease option, as it did in the initial Registration Request.  The
    Update Lease option MAY either specify the same durations as in the
    initial Registration Request or use the values returned by the server
-   in the previous Lease Update Response.  As with responses to
-   Registration Requests, the Requester MUST use the lease durations
-   returned by the server in the response when determining when to send
-   the next Refresh Request.
+   in the previous Lease Update Response or other desired values as
+   appropriate.  As with responses to Registration Requests, the
+   Requester MUST use the lease durations returned by the server in the
+   response when determining when to send the next Refresh Request.
 
    If the Requester sends a Refresh Request message and does not receive
    a response from the authoritative DNS server, then the Requester
@@ -382,7 +381,7 @@ Table of Contents
    Refreshes.
 
    In doing so, the Requester includes in the Refresh Request all
-   existing RRs previously successfylly registered on the server,
+   existing RRs previously successfully registered on the server,
    including those not yet close to expiration, so long as at least one
    RR updated in the Refresh Request has elapsed at least 75% of its
    original lease duration.  If the Requester uses UDP, the Requester
@@ -422,8 +421,8 @@ Table of Contents
 6.  Retransmission Strategy
 
    The DNS protocol, including DNS updates, can operate over UDP or TCP.
-   When using UDP, reliable transmission must be guaranteed by
-   retransmitting if a DNS UDP message is not acknowledged in a
+   For communication using UDP, reliable transmission must be guaranteed
+   by retransmitting when a DNS UDP message is not acknowledged in a
    reasonable amount of time.  Section 4.2.1 of the DNS specification
    [RFC1035] provides some guidance on this topic, as does Section 1 of
    the IETF's guide to common DNS implementation errors [RFC1536].

@@ -1154,8 +1154,8 @@ Table of Contents
    A GET request to the TRL endpoint can include the following query
    parameters.  The AS MUST silently ignore unknown query parameters.
 
-   *  'diff': if included, it indicates that the AS should perform a
-      diff query of the TRL (see Section 8).  Its value MUST be either:
+   *  'diff': if included, it asks the AS to perform a diff query of the
+      TRL (see Section 8).  Its value MUST be either:
 
       -  the integer 0, indicating that a (notification) response should
          include as many diff entries as the AS can provide in the
@@ -1180,9 +1180,9 @@ Table of Contents
       MUST be set to 0 ("Invalid parameter value"), and the 'cursor'
       field MUST NOT be present.
 
-   *  'cursor': if included, it indicates the should perform a diff
-      query of the TRL together with the "Cursor" extension, as defined
-      in Section 9.2.  Its value MUST be either 0 or a positive integer.
+   *  'cursor': if included, it asks the AS to perform a diff query of
+      the TRL together with the "Cursor" extension, as defined in
+      Section 9.2.  Its value MUST be either 0 or a positive integer.
       If the 'cursor' query parameter is included, then the 'diff' query
       parameter MUST also be included.
 
@@ -1385,7 +1385,7 @@ Table of Contents
           "Cursor" extension (see Section 6.2.1).  Their values are set
           as specified in Section 9.2 and provide the requester with
           information for sending a new request that asks the AS to
-          perfrom a follow-up query of the TRL (see Section 9.2).
+          perform a follow-up query of the TRL (see Section 9.2).
 
           In case the AS supports diff queries but not the "Cursor"
           extension, these parameters MUST NOT be included.  In case the
@@ -2327,11 +2327,11 @@ Table of Contents
    Environments (ACE)" registry group.
 
    One of the following registration policies is used: "Standards Action
-   with Expert Review", "Specification Required" per Section 4.6 of
+   With Expert Review", "Specification Required" per Section 4.6 of
    [RFC8126], or "Expert Review" per Section 4.5 of [RFC8126].  Expert
    Review guidelines are provided in Section 15.6.
 
-   All assignments according to "Standards Action with Expert Review"
+   All assignments according to "Standards Action With Expert Review"
    are made on a "Standards Action" basis per Section 4.9 of [RFC8126]
    with Expert Review additionally required per Section 4.5 of
    [RFC8126].  The procedure for early IANA allocation of Standards
@@ -2375,11 +2375,11 @@ Table of Contents
    Environments (ACE)" registry group.
 
    One of the following registration policies is used: "Standards Action
-   with Expert Review", "Specification Required" per Section 4.6 of
+   With Expert Review", "Specification Required" per Section 4.6 of
    [RFC8126], or "Expert Review" per Section 4.5 of [RFC8126].  Expert
    Review guidelines are provided in Section 15.6.
 
-   All assignments according to "Standards Action with Expert Review"
+   All assignments according to "Standards Action With Expert Review"
    are made on a "Standards Action" basis per Section 4.9 of [RFC8126]
    with Expert Review additionally required per Section 4.5 of
    [RFC8126].  The procedure for early IANA allocation of Standards
@@ -2413,7 +2413,7 @@ Table of Contents
 15.6.  Expert Review Instructions
 
    The IANA registries established by this document use "Standards
-   Action with Expert Review", "Specification Required", or "Expert
+   Action With Expert Review", "Specification Required", or "Expert
    Review" registration procedures depending on the range of values for
    which an assignment is requested.  This section gives some general
    guidelines for what the experts should be looking for, but they are
@@ -3270,8 +3270,8 @@ C.5.  Full Query with Observe and Diff Query with "Cursor" Extension
 
    When this happens, and after a waiting time defined by the
    application has elapsed, the RS sends a GET request with no Observe
-   Option to the AS, to perform a diff query of the TRL.  In particular,
-   the RS specifies:
+   Option to the AS, asking the AS to perform a diff query of the TRL.
+   In particular, the RS specifies:
 
    *  The 'diff' query parameter with a value of 8, i.e., the maximum
       number of diff entries to be included in a response from the AS.
@@ -3542,7 +3542,7 @@ Authors' Addresses
    Marco Tiloca
    RISE AB
    Isafjordsgatan 22
-   SE-SE-164 40 Kista
+   SE-164 40 Kista
    Sweden
    Email: marco.tiloca@ri.se
 
@@ -3550,7 +3550,7 @@ Authors' Addresses
    Francesca Palombini
    Ericsson AB
    Torshamnsgatan 23
-   SE-16440 Kista
+   SE-164 40 Kista
    Sweden
    Email: francesca.palombini@ericsson.com
 

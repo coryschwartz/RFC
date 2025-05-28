@@ -277,15 +277,16 @@ Table of Contents
       already obtained via DHCPv6 are unaffected.
 
    *  If the client has already received delegated prefix(es) from one
-      or more servers, then any time a prefix is added to or removed
-      from the list, the client MUST consider this to be a change in
-      configuration information as described in Section 18.2.12 of
-      [RFC8415].  In that case, the client MUST perform a REBIND, unless
-      the list is now empty.  This is in addition to performing a REBIND
-      in the other cases required by that section.  Issuing a REBIND
-      allows the client to obtain new prefixes if necessary, for
-      example, when the network is being renumbered.  It also refreshes
-      the state related to the delegated prefix(es).
+      or more servers, then any time one or more prefix(es) are added to
+      or removed from the list, the client MUST consider this to be a
+      change in configuration information as described in
+      Section 18.2.12 of [RFC8415].  In that case, the client MUST
+      perform a REBIND, unless the list is now empty.  This is in
+      addition to performing a REBIND in the other cases required by
+      that section.  Issuing a REBIND allows the client to obtain new
+      prefixes if necessary, for example, when the network is being
+      renumbered.  It also refreshes the state related to the delegated
+      prefix(es).
 
    When a client requests a prefix via DHCPv6-PD, it MUST use the prefix
    length hint (Section 18.2.4 of [RFC8415]) to request a prefix that is
@@ -359,7 +360,7 @@ Table of Contents
 7.4.  On-Link Communication
 
    When the network delegates unique prefixes to clients, each client
-   will consider other client's destination addresses to be off-link,
+   will consider other clients' destination addresses to be off-link,
    because those addresses are from the delegated prefixes and are not
    within any on-link prefix.  When a client sends traffic to another
    client, packets will initially be sent to the default router.  The
@@ -442,16 +443,16 @@ Table of Contents
 
    |  For each Prefix Information Option in the Router Advertisement:
    |  
-   |  a)  If the P flag is set and the node implements RFC 9762, it
+   |  a)  If the prefix is the link-local prefix, silently ignore the
+   |      Prefix Information Option.
+   |  
+   |  b)  If the P flag is set and the node implements RFC 9762, it
    |      SHOULD treat the Autonomous flag as if it was unset and use
    |      prefix delegation to obtain addresses as described in RFC
    |      9762.
    |  
-   |  b)  If the Autonomous flag is not set, silently ignore the Prefix
+   |  c)  If the Autonomous flag is not set, silently ignore the Prefix
    |      Information Option.
-   |  
-   |  c)  If the prefix is the link-local prefix, silently ignore the
-   |      Prefix Information Option.
    |  
    |  d)  If the preferred lifetime is greater than the valid lifetime,
    |      silently ignore the Prefix Information Option.  A node MAY
@@ -506,8 +507,9 @@ Table of Contents
    highest 64 bits of the client's address.  Those implications and
    recommended countermeasures are discussed in Section 13 of [RFC9663].
 
-   Implementing the P flag support on a host and receiving side enables
-   DHCPv6 on that host.  Sending DHCPv6 packets may reveal some minor
+   Implementing the P flag support on a host and receiving will enable
+   DHCPv6 on that host if the host receives an RA containing a PIO with
+   the P bit set.  Sending DHCPv6 packets may reveal some minor
    additional information about the host, most prominently the hostname.
    This is not a new concern and would apply for any network that uses
    DHCPv6 and sets the M flag in RAs.
@@ -620,9 +622,9 @@ Acknowledgements
    Thanks to Nick Buraglio, Brian Carpenter, Tim Chown, David Farmer,
    Fernando Gont, Susan Hares, Mahesh Jethanandani, Suresh Krishnan, Ted
    Lemon, Andrew McGregor, Tomek Mrugalski, Erik Nordmark, Michael
-   Richardson, John Scudder, Ole Trøan, Dirk Von Hugo, Éric Vyncke and
-   Timothy Winters for the discussions, reviews, input, and
-   contributions.
+   Richardson, Patrick Rohr, John Scudder, Ole Trøan, Dirk Von Hugo,
+   Éric Vyncke and Timothy Winters for the discussions, reviews, input,
+   and contributions.
 
 Authors' Addresses
 

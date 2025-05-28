@@ -231,7 +231,7 @@ Table of Contents
 
    d.  PEs in the redundancy group leverage the DF election defined in
        [RFC8584] to determine which PE keeps the port in active mode and
-       which one(s) keep it in standby mode.  Although the DF election
+       which PE(s) keeps it in standby mode.  Although the DF election
        defined in [RFC8584] is per [ES, Ethernet Tag] granularity, the
        DF election is performed per [ES] in Port-Active redundancy mode.
        The details of this algorithm are described in Section 3.
@@ -240,7 +240,7 @@ Table of Contents
        up and forwarding active state for that ES.
 
    f.  Non-DF routers SHOULD implement a bidirectional blocking scheme
-       for all traffic comparable to the Single-Active blocking scheme
+       for all traffic comparable to the Single-Active redundancy mode
        described in [RFC7432], albeit across all VLANs.
 
        *  Non-DF routers MAY bring and keep the peering access interface
@@ -275,7 +275,7 @@ Table of Contents
 
 3.1.  Capability Flag
 
-   [RFC8584] defines a DF Election Extended Community and a Bitmap (2
+   [RFC8584] defines a DF Election Extended Community and a bitmap (2
    octets) field to encode "DF Election Capabilities" to use with the DF
    election algorithm in the DF algorithm field:
 
@@ -284,10 +284,12 @@ Table of Contents
    Bit 1:    AC-Influenced DF (AC-DF) election, as described in
              [RFC8584].
 
+   Bit 3:    Time Synchronization, as described in [RFC9722].
+
                             1 1 1 1 1 1
         0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-       |D|A|     |P|                   |
+       |D|A| |T| |P|                   |
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
        Figure 2: Amended DF Election Capabilities in the DF Election
@@ -330,9 +332,9 @@ Table of Contents
    omitted from the CRC computation and all references to (V, Es) are
    replaced by (Es).
 
-   The algorithm to determine the DF Elected and Backup-DF Elected (BDF)
-   at Section 3.2 of [RFC8584] is repeated and summarized below using
-   only (Es) in the computation:
+   The algorithm used to determine the DF and Backup Designated
+   Forwarder (BDF) per Section 3.2 of [RFC8584] is repeated and
+   summarized below using only (Es) in the computation:
 
    1.  DF(Es) = Si| Weight(Es, Si) >= Weight(Es, Sj), for all j.  In the
        case of a tie, choose the PE whose IP address is numerically the
@@ -432,8 +434,8 @@ Table of Contents
    *  The L2-Attr Extended Community in Ethernet A-D per ES route is
       ignored.
 
-   *  The remote ESI label extended community [RFC7432] signals Single-
-      Active (Section 3).
+   *  The remote ESI Label Extended Community [RFC7432] signals the
+      Single-Active redundancy mode (Section 3).
 
    *  The remote Media Access Control (MAC) and/or Ethernet A-D per EVI
       routes are unchanged; the P and B bits in the L2-Attr Extended
@@ -487,7 +489,7 @@ Table of Contents
    Such manipulation could force all PEs in the ES to revert to the
    default DF election algorithm and capabilities.  In this scenario,
    the PEs may be subject to unfair load balancing, service disruption,
-   and potential issues such as black-holing or duplicate traffic, as
+   and potential issues such as traffic loss or duplicate traffic, as
    mentioned in the security sections of those documents.
 
 8.  References
@@ -524,6 +526,11 @@ Table of Contents
               VPN Designated Forwarder Election Extensibility",
               RFC 8584, DOI 10.17487/RFC8584, April 2019,
               <https://www.rfc-editor.org/info/rfc8584>.
+
+   [RFC9722]  Brissette, P., Sajassi, A., Burdet, LA., Ed., Drake, J.,
+              and J. Rabadan, "Fast Recovery for EVPN Designated
+              Forwarder Election", RFC RFC9722, May 2025,
+              <https://www.rfc-editor.org/info/rfc9722>.
 
    [RFC9785]  Rabadan, J., Ed., Sathappan, S., Lin, W., Drake, J., and
               A. Sajassi, "Preference-Based EVPN Designated Forwarder

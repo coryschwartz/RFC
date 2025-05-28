@@ -108,10 +108,11 @@ Table of Contents
    The inter-domain path can be established using either Multi-Protocol
    Label Switching (MPLS) or the IP data plane.  In MPLS-based networks,
    the usual inter-domain approach is to establish an end-to-end Label
-   Switched Path (LSP) based on the BGP Labeled Unicast (BGP-LU)
-   mechanism as defined in [RFC8277].  Each domain's ingress border node
-   needs to perform label swapping for the end-to-end LSP, and impose
-   the label stack that is used for the LSP within its own domain.
+   Switched Path (LSP) based on the mechanism defined in [RFC8277]
+   (which is usually referred to as BGP-LU (BGP Labeled Unicast)).  Each
+   domain's ingress border node needs to perform label swapping for the
+   end-to-end LSP, and impose the label stack that is used for the LSP
+   within its own domain.
 
    In IP-based networks, the IP reachability information can be
    advertised to network nodes in different domains using BGP, so that
@@ -156,8 +157,8 @@ Table of Contents
    (PE) node needs to be allocated with N SRv6 locators, each of which
    is associated a different intent that is identified by a color value.
    One way to achieve this is by splitting the base SRv6 locator of the
-   node into N sub-locators, and these sub-locators are Colored Prefixes
-   associated with different intents.
+   node into N sub-locators, whereby these sub-locators are Colored
+   Prefixes associated with different intents.
 
    For example, a PE node is allocated with the base SRv6 Locator
    2001:db8:aaaa:1::/64.  In order to provide 16 different intents, this
@@ -173,13 +174,14 @@ Table of Contents
    and also to other domains using BGP, so that the BGP SRv6 services
    routes could be resolved using the corresponding CPR route.
 
-   In a multi-AS IPv6 network, the IPv6 Unicast Address Family /
-   Subsequent Address Family (AFI/SAFI = 2/1) [RFC2545] is used for the
-   advertisement of the Colored Prefix routes.  The color extended
-   community [RFC9012] is carried with the Colored Prefix route with the
-   color value indicating the intent [RFC9256].  The procedure of
-   Colored Prefix advertisement is described using an example with the
-   following topology:
+   In a multi-AS IPv6 network, the mechanism for IPv6 unicast routing as
+   defined in [RFC2545] is used for the advertisement of the Colored
+   Prefix routes, in which the Address Family / Subsequent Address
+   Family (AFI/SAFI = 2/1) is used.  The Color Extended Community
+   [RFC9012] is carried with the Colored Prefix route with the color
+   value indicating the intent [RFC9256].  The procedure of Colored
+   Prefix advertisement is described using an example with the following
+   topology:
 
                        Consistent Color Domain:
                                C1, C2, ...
@@ -207,9 +209,9 @@ Table of Contents
 
    *  PE3 originates BGP IPv6 unicast (AFI/SAFI=2/1) route for the
       Colored Prefixes PE3:CL1:: and PE3:CL2::. Each route should carry
-      the corresponding color extended community C1 or C2.  PE3 also
+      the corresponding Color Extended Community C1 or C2.  PE3 also
       advertises a route for the base SRv6 Locator prefix PE3:BL, and
-      there is no color extended community carried with this route.
+      there is no Color Extended Community carried with this route.
 
    *  ASBR31 and ASBR32 receive the CPR routes of PE3, and advertise the
       CPR routes further to ASBR23 and ASBR24 with next-hop set to
@@ -227,7 +229,7 @@ Table of Contents
    *  The behavior of ASBR11 and ASBR12 are similar to the behavior of
       ASBR23 and ASBR24.
 
-   In normal cases, the color value in the color extended community
+   In normal cases, the color value in the Color Extended Community
    associated with the CPR route is consistent through all the domains,
    so that the Color Extended Community in the CPR routes is kept
    unchanged.  In some special cases, one intent may be represented as a
@@ -254,13 +256,17 @@ Table of Contents
 
    A domain border node that receives a CPR route can resolve the CPR
    route to an intra-domain color-aware path based on the tuple (N, C),
-   where N is the next hop of the CPR route, and C is the color extended
-   community of the CPR route.  The intra-domain color-aware path could
+   where N is the next hop of the CPR route, and C is the Color Extended
+   Community of the CPR route.  The intra-domain color-aware path could
    be built with any of the following mechanisms:
 
-   *  SRv6 or SR-MPLS Policy
+   *  SRv6 Policy
 
-   *  SRv6 or SR-MPLS Flex-Algo
+   *  SR-MPLS Policy
+
+   *  SRv6 Flex-Algo
+
+   *  SR-MPLS Flex-Algo
 
    *  RSVP-TE
 
@@ -286,7 +292,7 @@ Table of Contents
    next hop of the SRv6 service route is set to the originating PE and
    is not changed.  Since the intent of the service is embedded in the
    SRv6 service SID, the SRv6 service route does not need to carry the
-   color extended community.
+   Color Extended Community.
 
 2.5.  SRv6 Service Steering
 
@@ -398,29 +404,29 @@ Table of Contents
 
    As described in Section 5 of [INTENTAWARE], inter-domain intent-aware
    routing may be achieved with a logical tunnel created by an SR Policy
-   across multiple ASes, and service traffic with specific intent can be
-   steered to the inter-domain SR Policy based on the intent signaled by
-   Color Extended Community.  An operator may prefer a BGP routing-based
-   solution for the reasons described in [INTENTAWARE].  The operator
-   may also consider the availability of an inter-domain controller for
-   end-to-end intent-aware path computation.  This document proposes an
-   alternate solution to signal the intent with IPv6 Colored Prefixes
-   using BGP.
+   that applies to multiple ASes.  In addition, service traffic with
+   specific intent can be steered to the inter-domain SR Policy based on
+   the intent signaled by Color Extended Community.  An operator may
+   prefer a BGP routing-based solution for the reasons described in
+   [INTENTAWARE].  The operator may also consider the availability of an
+   inter-domain controller for end-to-end intent-aware path computation.
+   This document proposes an alternate solution to signal the intent
+   with IPv6 Colored Prefixes using BGP.
 
    When Colored Prefixes are assigned as sub-locators of the node's base
    SRv6 locator, the IPv6 unicast route of the base locator prefix is
    the prefix that covers all of the Colored locator prefixes.  To make
    sure the Colored locator prefixes can be distributed to the ingress
    PE nodes along the border nodes, it is required that route
-   aggregation be disabled for IPv6 unicast routes that carry the color
-   extended community.
+   aggregation be disabled for IPv6 unicast routes that carry the Color
+   Extended Community.
 
    With the CPR mechanism, at the prefix originator, each Colored Prefix
    is associated with one specific intent (i.e., color).  In each
    domain, according to the color mapping policy, the same CPR route is
    always updated with the same color.  The case where there are
    multiple copies of CPR routes with the same Colored Prefix but
-   different color extended community is considered a misconfiguration.
+   different Color Extended Community is considered a misconfiguration.
 
    All the border nodes and the ingress PE nodes need to install the
    Colored locator prefixes in the RIB and FIB.  For transit domains
@@ -428,13 +434,14 @@ Table of Contents
    (N, C), where N is the next hop and C is the color, to resolve the
    CPR routes to intent-aware intra-domain paths.  For transit domains
    that do not support the CPR mechanism, the border nodes would ignore
-   the color extended community and resolve the CPR routes over a best-
+   the Color Extended Community and resolve the CPR routes over a best-
    effort intra-domain path to the next-hop N, while the CPR route will
    be advertised further to the downstream domains with only the next
    hop changed to itself.  This allows the CPR routes to resolve to
    intent-aware intra-domain paths in any autonomous systems that
-   support the CPR mechanism, while can fall back to resolve over best-
-   effort intra-domain path in the legacy autonomous systems.
+   support the CPR mechanism, while the CPR routes can fall back to
+   resolve over best-effort intra-domain paths in the legacy autonomous
+   systems.
 
    There may be multiple inter-domain links between the adjacent
    autonomous systems, and a border node BGP speaker may receive CPR
@@ -482,7 +489,7 @@ Table of Contents
    The mechanism described in this document provides an approach for
    inter-domain intent-aware routing based on existing BGP protocol
    mechanisms.  The existing BGP IPv6 Unicast Address Family and
-   existing Color extended community are reused without further BGP
+   existing Color Extended Community are reused without further BGP
    extensions.  With this approach, the number of IPv6 Colored Prefixes
    advertised by PE nodes is proportionate to the number of intents it
    supports.  This may introduce additional routes to the BGP IPv6

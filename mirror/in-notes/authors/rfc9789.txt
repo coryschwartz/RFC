@@ -13,7 +13,7 @@ ISSN: 2070-1721                                University of Surrey 5GIC
                                                                 May 2025
 
 
-                  MPLS Network Action (MNA) Framework
+                 MPLS Network Actions (MNAs) Framework
 
 Abstract
 
@@ -160,9 +160,9 @@ Table of Contents
       actions.  The Label, TC, and TTL values in the LSEs in the NAS may
       be redefined, but the meaning of the S bit is unchanged.
 
-   Network Action Sub-Stack Indicator (NSI):  The first LSE in the NAS
-      contains a special-purpose label that indicates the start of the
-      NAS.
+   Network Action Sub-Stack Indicator (NSI):  The first LSE in the NAS,
+      which contains a special-purpose label that indicates the start of
+      the NAS.
 
 1.3.  Abbreviations
 
@@ -257,9 +257,9 @@ Table of Contents
 
    A network action sub-stack contains:
 
-   *  Network Action Sub-Stack Indicator (NSI): The first LSE in the NAS
-      contains a special-purpose label, called the MNA label, which is
-      used to indicate the start of a network action sub-stack.
+   *  Network Action Sub-Stack Indicator (NSI): The first LSE in the
+      NAS, which contains a special-purpose label, called the MNA label,
+      that is used to indicate the start of a network action sub-stack.
 
    *  Network Action Indicators (NAIs): Optionally, a set of indicators
       that describes the set of network actions.  If the set of
@@ -704,9 +704,8 @@ Table of Contents
    first nibble is set to 5 because an Ethernet pseudowire without a
    control word might begin with a 5.  However, the BIER approach meets
    the design goal of [RFC8296] to determine that the payload is IPv4,
-   IPv6, or the header of a pseudowire packet with a control word,
-   rather than being a payload belonging to a BIER or some other type of
-   packet.
+   IPv6, or a packet with a header that includes a pseudowire control
+   word.
 
    [RFC4385] allocates 0b0000 for the pseudowire control word and 0b0001
    as the control word for the pseudowire Associated Channel Header

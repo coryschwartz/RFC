@@ -117,7 +117,8 @@ Table of Contents
       slice" interchangeably as a shorter version of the term "RFC 9543
       Network Slice".
 
-   MPLS Ancillary Data:
+   MPLS Ancillary Data (also referred to in this document as
+   "ancillary data"):
       Data that can be classified as:
 
       *  residing within the MPLS label stack (referred to as "in-stack
@@ -128,39 +129,39 @@ Table of Contents
 
 1.2.  Abbreviations
 
-   MNA:  MPLS Network Action
-
-   DEX:  Direct Export
-
-   I2E:  Ingress to Edge
-
-   HbH:  Hop by Hop
-
-   PW:  Pseudowire
+   AMM:  Alternative Marking Method
 
    BoS:  Bottom of Stack
 
-   ToS:  Top of Stack
+   DEX:  Direct Export
 
-   NSH:  Network Service Header
+   eSPL:  extended Special-Purpose Label
 
    FRR:  Fast Reroute
 
-   IOAM:  In situ Operations, Administration, and Maintenance
-
    G-ACh:  Generic Associated Channel
+
+   HbH:  Hop by Hop
+
+   I2E:  Ingress to Egress
+
+   IOAM:  In situ Operations, Administration, and Maintenance
 
    LSP:  Label Switched Path
 
    LSR:  Label Switching Router
 
+   MNA:  MPLS Network Action
+
    NRP:  Network Resource Partition
+
+   NSH:  Network Service Header
+
+   PW:  Pseudowire
 
    SPL:  Special-Purpose Label
 
-   eSPL:  extended Special-Purpose Label
-
-   AMM:  Alternative Marking Method
+   ToS:  Top of Stack
 
 2.  Use Cases
 
@@ -197,7 +198,7 @@ Table of Contents
    telemetry information while a packet traverses a particular path in a
    network domain.
 
-   IOAM can run in two modes: Ingress to Edge (I2E) and Hop by Hop
+   IOAM can run in two modes: Ingress to Egress (I2E) and Hop by Hop
    (HbH).  In I2E mode, only the encapsulating and decapsulating nodes
    will process IOAM data fields.  In HbH mode, the encapsulating and
    decapsulating nodes and intermediate IOAM-capable nodes process IOAM
@@ -269,7 +270,7 @@ Table of Contents
 
    [RFC8595] describes how Service Function Chaining can be realized in
    an MPLS network by emulating the Network Service Header (NSH)
-   [RFC8300] using only MPLS label stack elements.
+   [RFC8300] using only MPLS label stack entries.
 
    The approach in [RFC8595] introduces some limitations, which are
    discussed in [SFP-VERIF].  However, the approach can benefit from the
@@ -322,8 +323,8 @@ Table of Contents
 
    Bit Index Explicit Replication (BIER) [RFC8296] traffic can also be
    encapsulated over MPLS.  In this case, BIER has defined 0b0101 as the
-   value for the first nibble of the data that immediately follows the
-   bottom of the label stack for any BIER-encapsulated packet over MPLS.
+   value for the first nibble of the data that immediately appears after
+   the BoS for any BIER-encapsulated packet over MPLS.
 
    For PWs, the G-ACh [RFC7212] uses the first four bits of the PW
    control word to provide the initial discrimination between data
@@ -358,10 +359,9 @@ Table of Contents
 
 6.  Security Considerations
 
-   Section 7 of the MNA framework [RFC9789] outlines security
-   considerations for documents that do not specify protocols.  The
-   authors have verified that these considerations are fully applicable
-   to this document.
+   Section 7 of [RFC9789] outlines security considerations for documents
+   that do not specify protocols.  The authors have verified that these
+   considerations are fully applicable to this document.
 
    In-depth security analysis for each specific use case is beyond the
    scope of this document and will be addressed in future solution
@@ -374,7 +374,7 @@ Table of Contents
 7.1.  Normative References
 
    [RFC9789]  Andersson, L., Bryant, S., Bocci, M., and T. Li, "MPLS
-              Network Action (MNA) Framework", RFC 9789,
+              Network Actions (MNAs) Framework", RFC 9789,
               DOI 10.17487/RFC9789, May 2025,
               <https://www.rfc-editor.org/info/rfc9789>.
 
