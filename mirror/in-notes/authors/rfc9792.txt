@@ -23,7 +23,7 @@ Abstract
    unassigned in the Flags field of the OSPFv2 Extended Prefix TLV.
 
    This document solves this problem by defining a variable-length
-   Prefix Attribute Flags sub-TLV for OSPF.  This sub-TLV is applicable
+   Prefix Extended Flags sub-TLV for OSPF.  This sub-TLV is applicable
    to OSPFv2 and OSPFv3.
 
 Status of This Memo
@@ -59,15 +59,15 @@ Table of Contents
 
    1.  Introduction
      1.1.  Requirements Language
-   2.  Variable-Length Prefix Attribute Flags Sub-TLV
+   2.  Variable-Length Prefix Extended Flags Sub-TLV
    3.  Backward Compatibility
    4.  IANA Considerations
      4.1.  OSPFv2
-       4.1.1.  OSPFv2 Prefix Attribute Flags Sub-TLV
-       4.1.2.  OSPFv2 Prefix Attribute Flags Registry
+       4.1.1.  OSPFv2 Prefix Extended Flags Sub-TLV
+       4.1.2.  OSPFv2 Prefix Extended Flags Registry
      4.2.  OSPFv3
-       4.2.1.  OSPFv3 Prefix Attribute Flags Sub-TLV
-       4.2.2.  OSPFv3 Prefix Attribute Flags Registry
+       4.2.1.  OSPFv3 Prefix Extended Flags Sub-TLV
+       4.2.2.  OSPFv3 Prefix Extended Flags Registry
    5.  Security Considerations
    6.  References
      6.1.  Normative References
@@ -82,7 +82,7 @@ Table of Contents
    Prefix Options (Appendix A.4.1.1 of [RFC5340]) and the Flags field in
    the OSPFv2 Extended Prefix TLV (Section 2.1 of [RFC7684]).  The rest
    of this document refers to these 8-bit fields in both OSPFv2 and
-   OSPFv3 as the "existing fixed-size prefix attribute flags".
+   OSPFv3 as the "existing fixed-size prefix flags".
 
    However, all the OSPFv3 Prefix Options bits have already been
    assigned (see the "OSPFv3 Prefix Options (8 bits)" IANA registry
@@ -93,7 +93,7 @@ Table of Contents
 
    This document solves the problem of insufficient flag bits for the
    signaling of prefix properties in OSPF by defining a variable-length
-   Prefix Attribute Flags sub-TLV for OSPFv2 and OSPFv3.
+   Prefix Extended Flags sub-TLV for OSPFv2 and OSPFv3.
 
 1.1.  Requirements Language
 
@@ -103,15 +103,15 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-2.  Variable-Length Prefix Attribute Flags Sub-TLV
+2.  Variable-Length Prefix Extended Flags Sub-TLV
 
-   This document defines a variable-length Prefix Attribute Flags sub-
-   TLV for OSPFv2 and OSPFv3.  The sub-TLV specifies the variable-length
-   Prefix Attribute Flags field to advertise additional attributes
+   This document defines a variable-length Prefix Extended Flags sub-TLV
+   for OSPFv2 and OSPFv3.  The sub-TLV specifies the variable-length
+   Prefix Extended Flags field to advertise additional attributes
    associated with OSPF prefixes.  The advertisement and processing of
-   the existing fixed-size prefix attribute flags remain unchanged.
+   the existing fixed-size prefix flags remain unchanged.
 
-   The format of the OSPFv2/OSPFv3 Prefix Attribute Flags sub-TLV is
+   The format of the OSPFv2/OSPFv3 Prefix Extended Flags sub-TLV is
    shown in Figure 1.
 
     0                   1                   2                   3
@@ -120,30 +120,30 @@ Table of Contents
    |              Type             |            Length             |
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
    |                                                               |
-   //                 Prefix Attribute Flags (Variable)           //
+   //                 Prefix Extended Flags (Variable)            //
    |                                                               |
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-      Figure 1: Format of OSPFv2/OSPFv3 Prefix Attribute Flags Sub-TLV
+      Figure 1: Format of OSPFv2/OSPFv3 Prefix Extended Flags Sub-TLV
 
    where:
 
    Type (2 octets):  11 for OSPFv2 and 37 for OSPFv3
 
    Length (2 octets):  Variable, dependent on the included Prefix
-      Attribute Flags field.  This indicates the length of the Prefix
-      Attribute Flags field in octets.  The length MUST be a multiple of
+      Extended Flags field.  This indicates the length of the Prefix
+      Extended Flags field in octets.  The length MUST be a multiple of
       4 octets.  If the length is not a multiple of 4 octets, the Link
       State Advertisement (LSA) is malformed and MUST be ignored.
 
-   Prefix Attribute Flags (Variable):  The extended flag field.  This
+   Prefix Extended Flags (Variable):  The extended flag field.  This
       field contains a variable number of flags, grouped in 4-octet
       blocks.  The bits are numbered starting from bit 0 as the most
       significant bit of the first 32-bit block.  If the length of the
-      Prefix Attribute Flags field exceeds 4 octets, numbering for the
+      Prefix Extended Flags field exceeds 4 octets, numbering for the
       additional bits picks up where the previous 4-octet block left
       off.  For example, the most significant bit in the fifth octet of
-      an 8-octet Prefix Attribute Flags field is referred to as bit 32.
+      an 8-octet Prefix Extended Flags field is referred to as bit 32.
       Currently, no bits are defined in this document.
 
    Unassigned bits MUST be set to zero on transmission and MUST be
@@ -154,13 +154,13 @@ Table of Contents
    transmitted due to being beyond the transmitted length MUST be
    treated as being set to 0.
 
-   The OSPFv2 Prefix Attribute Flags sub-TLV is advertised as a sub-TLV
+   The OSPFv2 Prefix Extended Flags sub-TLV is advertised as a sub-TLV
    of the OSPFv2 Extended Prefix TLV defined in [RFC7684].  Additional
    OSPFv2 prefix flags SHOULD be allocated from the unused bits in the
    Flags field of the OSPFv2 Extended Prefix TLV prior to allocating
-   flags in the OSPFv2 Prefix Attribute Flags sub-TLV.
+   flags in the OSPFv2 Prefix Extended Flags sub-TLV.
 
-   The OSPFv3 Prefix Attribute Flags sub-TLV is advertised as a sub-TLV
+   The OSPFv3 Prefix Extended Flags sub-TLV is advertised as a sub-TLV
    of the following OSPFv3 TLVs:
 
    *  Inter-Area-Prefix TLV (Section 3.4 of [RFC8362])
@@ -171,7 +171,7 @@ Table of Contents
 
    *  SRv6 Locator TLV [RFC9513]
 
-   When multiple instances of the OSPFv2/OSPFv3 Prefix Attribute Flags
+   When multiple instances of the OSPFv2/OSPFv3 Prefix Extended Flags
    sub-TLVs are received within the same TLV, an implementation MUST use
    only the first occurrence of the sub-TLV and MUST ignore all
    subsequent instances of the sub-TLV.  Errors SHOULD be logged subject
@@ -179,9 +179,9 @@ Table of Contents
 
 3.  Backward Compatibility
 
-   The OSPFv2/OSPFv3 Prefix Attribute Flags sub-TLV does not introduce
+   The OSPFv2/OSPFv3 Prefix Extended Flags sub-TLV does not introduce
    any backward compatibility issues.  An implementation that does not
-   recognize the OSPFv2/OSPFv3 Prefix Attribute Flags sub-TLV would
+   recognize the OSPFv2/OSPFv3 Prefix Extended Flags sub-TLV would
    ignore the sub-TLV as per normal TLV processing operations (refer to
    Section 2.3.2 of [RFC3630] and Section 6.3 of [RFC8362]).
 
@@ -189,25 +189,25 @@ Table of Contents
 
 4.1.  OSPFv2
 
-4.1.1.  OSPFv2 Prefix Attribute Flags Sub-TLV
+4.1.1.  OSPFv2 Prefix Extended Flags Sub-TLV
 
    IANA has allocated the following codepoint in the "OSPFv2 Extended
    Prefix TLV Sub-TLVs" registry:
 
-           +=======+===============================+===========+
-           | Value | Description                   | Reference |
-           +=======+===============================+===========+
-           | 11    | OSPFv2 Prefix Attribute Flags | RFC 9792  |
-           +-------+-------------------------------+-----------+
+           +=======+==============================+===========+
+           | Value | Description                  | Reference |
+           +=======+==============================+===========+
+           | 11    | OSPFv2 Prefix Extended Flags | RFC 9792  |
+           +-------+------------------------------+-----------+
 
-                                  Table 1
+                                 Table 1
 
-4.1.2.  OSPFv2 Prefix Attribute Flags Registry
+4.1.2.  OSPFv2 Prefix Extended Flags Registry
 
-   IANA has created the "OSPFv2 Prefix Attribute Flags" registry within
+   IANA has created the "OSPFv2 Prefix Extended Flags" registry within
    the "Open Shortest Path First v2 (OSPFv2) Parameters" registry group.
-   The registry defines the bits in the Prefix Attribute Flags field in
-   the OSPFv2 Prefix Attribute Flags sub-TLV as specified in Section 2.
+   The registry defines the bits in the Prefix Extended Flags field in
+   the OSPFv2 Prefix Extended Flags sub-TLV as specified in Section 2.
    The bits are to be allocated via IETF Review [RFC8126].  Each bit
    definition will include:
 
@@ -227,27 +227,25 @@ Table of Contents
 
 4.2.  OSPFv3
 
-4.2.1.  OSPFv3 Prefix Attribute Flags Sub-TLV
+4.2.1.  OSPFv3 Prefix Extended Flags Sub-TLV
 
    IANA has allocated the following codepoint in the "OSPFv3 Extended-
    LSA Sub-TLVs" registry:
 
-           +=======+===============================+===========+
-           | Value | Description                   | Reference |
-           +=======+===============================+===========+
-           | 37    | OSPFv3 Prefix Attribute Flags | RFC 9792  |
-           +-------+-------------------------------+-----------+
+        +=======+==============================+======+===========+
+        | Value | Description                  | L2BM | Reference |
+        +=======+==============================+======+===========+
+        | 37    | OSPFv3 Prefix Extended Flags |  X   | RFC 9792  |
+        +-------+------------------------------+------+-----------+
 
                                   Table 2
 
-   The entry in the "L2BM" field is "X".
+4.2.2.  OSPFv3 Prefix Extended Flags Registry
 
-4.2.2.  OSPFv3 Prefix Attribute Flags Registry
-
-   IANA has created the "OSPFv3 Prefix Attribute Flags" registry within
+   IANA has created the "OSPFv3 Prefix Extended Flags" registry within
    the "Open Shortest Path First v3 (OSPFv3) Parameters" registry group.
-   The registry defines the bits in the Prefix Attribute Flags field in
-   the OSPFv2 Prefix Attribute Flags sub-TLV as specified in Section 2.
+   The registry defines the bits in the Prefix Extended Flags field in
+   the OSPFv2 Prefix Extended Flags sub-TLV as specified in Section 2.
    The bits are to be allocated via IETF Review [RFC8126].  Each bit
    definition will include:
 

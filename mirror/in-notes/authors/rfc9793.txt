@@ -88,15 +88,14 @@ Table of Contents
    building protocol and doesn't require intermediate routers to
    maintain per-tree multicast states.  It supports both direct and
    tunneled BIER forwarding.  This document describes BGP extensions for
-   advertising the BIER-specific information and the methods for
-   calculating BIER forwarding states with this information.  More
-   specifically, in this document, we define a new optional transitive
-   BGP attribute, referred to as the "BIER attribute", to convey the
-   BIER-specific information such as BIER Forwarding Router identifier
-   (BFR-id), BitStringLength (BSL), and so on.  The signaling is to be
-   used in a single Administrative Domain (AD), and Section 7 specifies
-   procedures to prevent the BIER attribute from "leaking out" of the
-   domain.
+   advertising the BIER information and methods for calculating BIER
+   states based on the advertisements.  More specifically, in this
+   document, we define a new optional transitive BGP attribute, referred
+   to as the "BIER attribute", to convey the BIER-specific information
+   such as Bit-Forwarding Router Identifier (BFR-ID), BitStringLength
+   (BSL), and so on.  The signaling is to be used in a single
+   Administrative Domain (AD), and Section 7 specifies procedures to
+   prevent the BIER attribute from "leaking out" of the domain.
 
 2.  Terminology
 
@@ -105,17 +104,17 @@ Table of Contents
 
    BIER:  Bit Indexed Explicit Replication
 
-   BFR:  BIER Forwarding Router
+   BFR:  Bit-Forwarding Router
 
-   BFR-ID:  BIER Forwarding Router Identifier
+   BFR-ID:  BFR Identifier
 
    BSL:  BitStringLength
 
-   BIFT:  BIER Forwarding Table
+   BIFT:  Bit Index Forwarding Table
 
-   BIFT-id:  BIER Forwarding Table Identifier
+   BIFT-id:  Bit Index Forwarding Table Identifier
 
-   BFER:  BIER Forwarding Egress Router
+   BFER:  Bit-Forwarding Egress Router
 
    BFR-prefix:  Each BFR is assigned a single "BFR-prefix" for each sub-
       domain to which it belongs.  It is recommended that the BFR-prefix
@@ -166,13 +165,13 @@ Table of Contents
    The Length field defines the length of the value portion in octets
    (thus, a TLV with no value portion would have a length of zero).  The
    TLV is not padded to 4-octet alignment.  Unknown and unsupported
-   types MUST be preserved and propagated within the BIER Attribute.
+   types MUST be preserved and propagated within the BIER attribute.
    The presence of unknown or unexpected TLVs MUST NOT result in the
-   NLRI or the BIER Attribute being considered malformed.
+   NLRI or the BIER attribute being considered malformed.
 
    When creating a BIER attribute, a BFR MUST include one BIER TLV for
-   every Sub-domain that the prefix belongs to.  The attribute type code
-   for the BIER Attribute is 41.  The value field of the BIER Attribute
+   every sub-domain that the prefix belongs to.  The attribute type code
+   for the BIER attribute is 41.  The value field of the BIER attribute
    contains one or more BIER TLVs as shown below:
 
        0                   1                   2                   3
@@ -200,10 +199,10 @@ Table of Contents
 
    Sub-TLVs:  Contains one or more sub-TLVs.
 
-   The BIER TLV MAY appear multiple times in the BIER Path Attribute,
+   The BIER TLV MAY appear multiple times in the BIER path attribute,
    one for each sub-domain.  There MUST be no more than one BIER TLV
-   with the same Sub-domain value; if there is, the entire BIER Path
-   Attribute MUST be ignored.
+   with the same Sub-domain value; if there is, the entire BIER path
+   attribute MUST be ignored.
 
    A BIER TLV may have sub-TLVs, which may have their own sub-TLVs.  All
    those are referred to as sub-TLVs and share the same Type space,
@@ -214,7 +213,7 @@ Table of Contents
    The BIER MPLS Encapsulation sub-TLV has the following format.  It MAY
    appear multiple times in the BIER TLV.
 
-   The BIER MPLS Encapsulation Sub-TLV has the following format:
+   The BIER MPLS Encapsulation sub-TLV has the following format:
 
        0                   1                   2                   3
        0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
@@ -231,9 +230,9 @@ Table of Contents
    Length:  2 octets encoding the length in octets of the Value part.
       The value is 4 or other (depending on sub-TLVs).
 
-   Max SI:  A 1-octet field encoding the maximum Set Identifier (SI)
-      (see Section 1 of [RFC8279]) used in the encapsulation for this
-      BIER sub-domain for this BitString length.
+   Max SI:  A 1-octet field encoding the Maximum Set Identifier (see
+      Section 1 of [RFC8279]) used in the encapsulation for this BIER
+      sub-domain for this BitString length.
 
    BS Len:  BitString Length.  A 4-bit field encoding the supported
       BitString length associated with this BFR-prefix.  The values
@@ -252,17 +251,17 @@ Table of Contents
    to a single label in the label range: the first label is for SI=0,
    the second label is for SI=1, etc.
 
-   If the label associated with the Maximum Set Identifier exceeds the
-   20-bit range, the BIER MPLS Encapsulation Sub-TLV containing the
-   error MUST be ignored.
+   If the label associated with the Maximum SI exceeds the 20-bit range,
+   the BIER MPLS Encapsulation sub-TLV containing the error MUST be
+   ignored.
 
    If the same BitString length is repeated in multiple BIER MPLS
-   Encapsulation Sub-TLVs inside the same BIER TLV, all BIER MPLS
-   Encapsulation Sub-TLVs in the BIER TLV MUST be ignored.
+   Encapsulation sub-TLVs inside the same BIER TLV, all BIER MPLS
+   Encapsulation sub-TLVs in the BIER TLV MUST be ignored.
 
-   Label ranges within all BIER MPLS Encapsulation Sub-TLVs advertised
+   Label ranges within all BIER MPLS Encapsulation sub-TLVs advertised
    by the same BFR MUST NOT overlap.  If an overlap is detected, all
-   BIER MPLS Encapsulation Sub-TLVs advertised by the BFR MUST be
+   BIER MPLS Encapsulation sub-TLVs advertised by the BFR MUST be
    ignored.
 
 3.2.  BIER Non-MPLS Encapsulation Sub-TLV
@@ -270,7 +269,7 @@ Table of Contents
    The BIER non-MPLS Encapsulation sub-TLV is used for non-MPLS
    encapsulation and has the following format.  It MAY appear multiple
    times within a single BIER TLV.  If the same BitString length is
-   repeated in multiple BIER non-MPLS encapsulation Sub-TLVs inside the
+   repeated in multiple BIER non-MPLS Encapsulation sub-TLVs inside the
    same BIER TLV, the BIER TLV MUST be ignored.
 
        0                   1                   2                   3
@@ -292,8 +291,8 @@ Table of Contents
       (Section 1 of [RFC8279]) used in the encapsulation for this BIER
       sub-domain for this BitString length.  The first BIFT-id is for
       SI=0, the second BIFT-id is for SI=1, etc.  If the BIFT-id
-      associated with the Maximum Set Identifier exceeds the 20-bit
-      range, the sub-TLV MUST be ignored.
+      associated with the Maximum SI exceeds the 20-bit range, the sub-
+      TLV MUST be ignored.
 
    BS Len:  BitString Length.  A 4-bit field encoding the BitString
       length (as per [RFC8296]) supported for the encapsulation.
@@ -310,18 +309,18 @@ Table of Contents
    to a single BIFT-id in the BIFT-id range: the first BIFT-id is for
    SI=0, the second BIFT-id is for SI=1, etc.
 
-   If the BIFT-id associated with the Maximum Set Identifier exceeds the
-   20-bit range, the BIER non-MPLS Encapsulation sub-TLV containing the
-   error MUST be ignored.
+   If the BIFT-id associated with the Maximum SI exceeds the 20-bit
+   range, the BIER non-MPLS Encapsulation sub-TLV containing the error
+   MUST be ignored.
 
    BIFT-id ranges within all the BIER non-MPLS Encapsulation sub-TLVs
    advertised by the same BFR MUST NOT overlap.  If an overlap is
    detected, all the BIER non-MPLS Encapsulation sub-TLVs advertised by
    the BFR MUST be ignored.  However, the BIFT-id ranges may overlap
    across different encapsulation types and that is allowed.  As an
-   example, the BIFT-id value in the non-MPLS encapsulation sub-TLV may
+   example, the BIFT-id value in the non-MPLS Encapsulation sub-TLV may
    overlap with the Label value in the Label range in the BIER MPLS
-   encapsulation sub-TLV.
+   Encapsulation sub-TLV.
 
 3.3.  BIER Nexthop Sub-TLV
 
@@ -347,14 +346,14 @@ Table of Contents
 
 4.  Originating/Propagating/Updating the BIER Attribute
 
-   A BIER Forwarding Egress Router (BFER) MUST attach a BIER attribute
-   to its own /32 (for IPv4) or /128 (for IPv6) host BFR-prefix NLRI.
-   The BIER attribute MUST include one BIER TLV for each BIER sub-domain
+   A Bit-Forwarding Egress Router (BFER) MUST attach a BIER attribute to
+   its own /32 (for IPv4) or /128 (for IPv6) host BFR-prefix NLRI.  The
+   BIER attribute MUST include one BIER TLV for each BIER sub-domain
    that it supports.  Each BIER TLV MUST include an MPLS and/or non-MPLS
    Encapsulation sub-TLV and MAY include a BIER Nexthop sub-TLV with the
    Nexthop set to the BIER prefix.  If the BIER Nexthop sub-TLV is not
    included, the BIER prefix will be used by receiving BFRs as the BIER
-   nexthop when calculating BIFT.
+   next hop when calculating BIFT.
 
    When a BFR receives an update with the BIER path attribute, the
    attribute is parsed with the following validations:
@@ -391,21 +390,22 @@ Table of Contents
    (BSLs) in the received MPLS or non-MPLS Encapsulation sub-TLVs.
    After setting/updating the BIER Nexthop sub-TLV in the top BIER TLV
    to itself, for the BSLs that it does support, the BFR MUST remove the
-   BIER Nexthop sub-TLV (if present) in the corresponding Encapsulation
-   sub-TLVs.  For the BSLs that it does not support:
+   BIER Nexthop sub-TLV (if present) in the corresponding MPLS
+   Encapsulation sub-TLVs.  For the BSLs that it does not support:
 
-   *  If a BIER Nexthop sub-TLV is included in the Encapsulation sub-
-      TLV, it MUST NOT be updated.
+   *  If a BIER Nexthop sub-TLV is included in the MPLS Encapsulation
+      sub-TLV, it MUST NOT be updated.
 
    *  Otherwise, if a BIER Nexthop sub-TLV is included in the received
       BIER TLV, its original value (before changed for supported BSLs by
-      this BFR) MUST be copied into the Encapsulation sub-TLV.
+      this BFR) MUST be copied into the MPLS Encapsulation sub-TLV.
 
-   *  Otherwise, a BIER Nexthop sub-TLV MUST be added to the
+   *  Otherwise, a BIER Nexthop sub-TLV MUST be added to the MPLS
       Encapsulation sub-TLV with its value set to the BFR-prefix.
 
-   All impacted Length fields (e.g., the Encapsulation sub-TLV Length
-   and the top-level BIER TLV Length) MUST be updated accordingly.
+   All impacted Length fields (e.g., the MPLS Encapsulation sub-TLV
+   Length and the top-level BIER TLV Length) MUST be updated
+   accordingly.
 
    Since the BIER attribute is an optional, transitive BGP path
    attribute, a non-BFR BGP speaker could still re-advertise the
@@ -426,12 +426,12 @@ Table of Contents
    TLV for the sub-domain.  For a non-zero BFR-id in the BIER TLV, a
    BIFT entry is created or updated.  The entry's BFR Neighbor (BFR-NBR)
    [RFC8279] is the Nexthop in the BIER Nexthop sub-TLV in the
-   corresponding Encapsulation sub-TLV or in the top-level BIER TLV if
-   the Encapsulation sub-TLV does not have a Nexthop sub-TLV.  If there
-   is no Nexthop sub-TLV at all, the entry's BFR Neighbor is the BIER
-   prefix itself.  The BIER label or BIFT-id for the entry is derived
-   from the label range in the MPLS Encapsulation sub-TLV or from the
-   BIFT-id range in the non-MPLS Encapsulation sub-TLV.
+   corresponding MPLS Encapsulation sub-TLV or in the top-level BIER TLV
+   if the MPLS Encapsulation sub-TLV does not have a BIER Nexthop sub-
+   TLV.  If there is no BIER Nexthop sub-TLV at all, the entry's BFR-NBR
+   is the BIER prefix itself.  The BIER label or BIFT-id for the entry
+   is derived from the label range in the MPLS Encapsulation sub-TLV or
+   from the BIFT-id range in the non-MPLS Encapsulation sub-TLV.
 
    BIER traffic is sent to the BFR-NBR either directly (BIER header
    directly follows a Layer 2 header) if the BFR-NBR is directly
@@ -467,7 +467,7 @@ Table of Contents
 
    When BFR2 receives the route, it calculates its BIFT entries.
    Because the route from BFER1 does not include a BIER Nexthop, BFR2
-   uses BFR1's BFR-prefix as the nexthop.
+   uses BFR1's BFR-prefix as the next hop.
 
    When BFR2 re-advertises the routes to the non-BFR, it adds a BIER
    Nexthop sub-TLV to the BFER1 route and updates the BIER Nexthop sub-
@@ -479,7 +479,7 @@ Table of Contents
    BFR1 with the BIER path attribute unchanged.
 
    When BFR1 receives the routes, it calculates the BIFT entries, using
-   BFR2's address encoded in the BIER Nexthop sub-TLV as the nexthop.
+   BFR2's address encoded in the BIER Nexthop sub-TLV as the next hop.
    Because BFR2 is not directly connected, a tunnel must be used.
 
 7.  Operational Considerations
@@ -507,8 +507,8 @@ Table of Contents
    default, it is NOT allowed.  If it is not allowed, the BIER attribute
    MUST NOT be sent to any EBGP peer of the session/group.  If a BIER
    attribute is received from the peer, it MUST be treated exactly as if
-   it were an unrecognized non-transitive attribute.  That is, "it MUST
-   be quietly ignored and not passed along to other BGP peers".
+   it were an unrecognized non-transitive attribute.  That is, it MUST
+   be quietly ignored and not passed along to other BGP peers.
 
 8.  IANA Considerations
 

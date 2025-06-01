@@ -86,7 +86,7 @@ Table of Contents
        2.2.1.  HP-Outer Header Field Definition
    3.  Header Confidentiality Policy
      3.1.  HCP Definition
-       3.1.1.  HCP Avoids Changing From Header Field addr-spec
+       3.1.1.  HCP Avoids Changing addr-spec of From Header Field
      3.2.  Initial Registered HCPs
        3.2.1.  Baseline Header Confidentiality Policy
        3.2.2.  Shy Header Confidentiality Policy
@@ -265,7 +265,7 @@ Table of Contents
    Appendix F.  Other Header Protection Schemes
      F.1.  Original RFC 8551 Header Protection
      F.2.  Pretty Easy Privacy (pEp)
-     F.3.  Protected Email Headers
+     F.3.  Autocrypt Protected Headers
    Acknowledgements
    Index
    Authors' Addresses
@@ -275,7 +275,7 @@ Table of Contents
    Privacy and security issues regarding email Header Protection in S/
    MIME and PGP/MIME have been identified for some time.  Most current
    implementations of cryptographically protected email protect only the
-   body of the message, which leaves significant room for attacks
+   Body of the message, which leaves significant room for attacks
    against otherwise-protected messages.  For example, lack of Header
    Protection allows an attacker to substitute the message subject and/
    or author.
@@ -305,7 +305,7 @@ Table of Contents
    into the Cryptographic Payload without using an intervening message/
    rfc822 MIME object.  In an encrypted message, some Header Fields can
    also be made confidential by removing or obscuring them from the
-   outer Header Section.
+   Outer Header Section.
 
    This specification also offers substantial security, privacy, and
    usability guidance for sending and receiving MUAs that was not
@@ -377,7 +377,7 @@ Table of Contents
    cryptographic integrity and authenticity for all Header Fields.
 
    An encrypted message produced according to this specification that
-   has some user-facing Header Fields removed or obscured may not render
+   has some User-Facing Header Fields removed or obscured may not render
    as desired in a Legacy MUA.  In particular, those Header Fields that
    were made confidential will not be visible to the user of a Legacy
    MUA.  For example, if the Subject Header Field outside the
@@ -393,7 +393,7 @@ Table of Contents
 
    Alternately, if the sender of an encrypted message is particularly
    concerned about the experience of a recipient using a Legacy MUA, and
-   they are willing to accept leaking the user-facing Header Fields,
+   they are willing to accept leaking the User-Facing Header Fields,
    they can simply adopt the No Header Confidentiality Policy (see
    Section 3.2.3).  A signed-and-encrypted message composed using the No
    Header Confidentiality Policy offers no usability risk for a reader
@@ -406,20 +406,20 @@ Table of Contents
 
 1.3.  Motivation
 
-   Users generally do not understand the distinction between message
-   body and message header.  When an email message has cryptographic
-   protections that cover the message body but not the Header Fields,
-   several attacks become possible.
+   Ordinary Users generally do not understand the distinction between
+   email message Body and Header Section.  When an email message has
+   cryptographic protections that cover the message Body but not the
+   Header Fields, several attacks become possible.
 
    For example, a Legacy Signed Message has a signature that covers the
-   body but not the Header Fields.  An attacker can therefore modify the
+   Body but not the Header Fields.  An attacker can therefore modify the
    Header Fields (including Subject) without invalidating the signature.
-   Since most readers consider a message body in the context of the
+   Since most readers consider a message Body in the context of the
    message's Subject, the meaning of the message itself could change
    drastically (under the attacker's control) while still retaining the
    same cryptographic indicators of integrity and authenticity.
 
-   In another example, a Legacy Encrypted Message has its body
+   In another example, a Legacy Encrypted Message has its Body
    effectively hidden from an adversary that snoops on the message.  But
    if the Header Fields are not also encrypted, significant information
    about the message (such as the message Subject) will leak to the
@@ -427,7 +427,7 @@ Table of Contents
 
    However, if the sending and receiving MUAs ensure that cryptographic
    protections cover the message Header Section as well as the message
-   body, these attacks are defeated.
+   Body, these attacks are defeated.
 
 1.3.1.  Backward Compatibility
 
@@ -443,10 +443,10 @@ Table of Contents
    cryptographic protections described above.
 
    This document aims for backward compatibility with Legacy MUAs to the
-   extent possible.  In some cases, like when a user-visible header like
-   the Subject is cryptographically hidden, a Legacy MUA will not be
-   able to render or reply to the message exactly the same way as a
-   conformant MUA would.  But accommodations are described here that
+   extent possible.  In some cases, like when a user-visible Header
+   Field like the Subject is cryptographically hidden, a Legacy MUA will
+   not be able to render or reply to the message exactly the same way as
+   a conformant MUA would.  But accommodations are described here that
    ensure a rough semantic equivalence for a Legacy MUA even in these
    cases.
 
@@ -497,9 +497,9 @@ Table of Contents
    between DKIM+DMARC and the specification here.
 
    Though not strictly email, similar protections have been in use on
-   Usenet for the signing and verification of message headers for years.
-   See [PGPCONTROL] and [PGPVERIFY-FORMAT] for more details.  Like DKIM,
-   these Usenet control protections offer only integrity and
+   Usenet for the signing and verification of message Header Fields for
+   years.  See [PGPCONTROL] and [PGPVERIFY-FORMAT] for more details.
+   Like DKIM, these Usenet control protections offer only integrity and
    authentication, not confidentiality.
 
 1.5.  Applicability to PGP/MIME
@@ -536,7 +536,7 @@ Table of Contents
 
    Message:  An email message consisting of Header Fields (collectively
       called "the Header Section of the message") optionally followed by
-      a message body; see [RFC5322].
+      a message Body; see [RFC5322].
 
       Note: To avoid ambiguity, this document avoids using the terms
       "Header" or "Headers" in isolation, but instead always uses
@@ -544,7 +544,7 @@ Table of Contents
       Section" to refer to the entire collection.
 
    Header Field:  A Header Field includes a field name, followed by a
-      colon (":"), followed by a field body (value), and is terminated
+      colon (":"), followed by a field Body (value), and is terminated
       by CRLF; see Section 2.2 of [RFC5322] for more details.
 
    Header Section:  The Header Section is a sequence of lines of
@@ -554,11 +554,15 @@ Table of Contents
       is, a subpart of a message) typically contains Header Fields
       associated with that particular MIME part.
 
-   Body:  The body is the part of a message that follows the Header
+   Outer Header Section:  The unprotected Header Section that MTAs and
+      MUAs unaware of Header Protection treat as the Header Section of
+      the Message.
+
+   Body:  The Body is the part of a message that follows the Header
       Section and is separated from the Header Section by an empty line
       (that is, a line with nothing preceding the CRLF); see [RFC5322].
       It is the (bottom) section of a message containing the payload of
-      a message.  Typically, the body consists of a (possibly multipart)
+      a message.  Typically, the Body consists of a (possibly multipart)
       MIME [RFC2045] construct.
 
    Header Protection (HP):  The cryptographic protection of email Header
@@ -594,8 +598,8 @@ Table of Contents
 
    Additionally, Cryptographic Layer, Cryptographic Payload,
    Cryptographic Envelope, Cryptographic Summary, Structural Header
-   Fields, Main Body Part, User-Facing Header Fields, and MUA are all
-   used as defined in [RFC9787].
+   Fields, Non-Structural Header Fields, Main Body Part, User-Facing
+   Header Fields, and MUA are all used as defined in [RFC9787].
 
    The policies "Specification Required" and "IETF Review" that appear
    in this document when used to describe namespace allocation are to be
@@ -608,17 +612,17 @@ Table of Contents
    protections, following the guidance in [RFC9787].  An implementation
    conformant to this document will produce messages that have
    cryptographic protection that covers the message's Header Fields as
-   well as its body.
+   well as its Body.
 
 1.8.1.  In Scope
 
    This document also describes sensible, simple behavior for a program
    that interprets such a message in a way that can take advantage of
-   these protections covering the Header Fields as well as the body.
+   these protections covering the Header Fields as well as the Body.
 
    The message generation guidance aims to minimize negative
    interactions with any Legacy receiving MUA while providing actionable
-   cryptographic properties for modern receiving clients.
+   cryptographic properties for modern receiving MUAs.
 
    In particular, this document focuses on two standard types of
    cryptographic protection that cover the entire message:
@@ -748,11 +752,11 @@ Table of Contents
    Observe that:
 
    *  The sender adds the removed and obscured User-Facing Header Fields
-      (see Section 1.1.2 of [RFC9787]) to the main body (note the empty
+      (see Section 1.1.2 of [RFC9787]) to the main Body (note the empty
       line after the Content-Type).  This is called the Legacy Display
       Element.  It allows a user with a Legacy MUA that doesn't
       implement this document to understand the message, since the
-      Header Fields will be shown as part of the main body.
+      Header Fields will be shown as part of the main Body.
 
    *  The hp-legacy-display="1" attribute (see Section 2.1.2) indicates
       that the sender added a Legacy Display Element.  This allows
@@ -816,12 +820,12 @@ Table of Contents
            Table 1: hp Parameter for Content-Type Header Field
 
    A sending implementation MUST NOT produce a Cryptographic Payload
-   with parameter hp="cipher" for a non-encrypted message (that is,
-   where none of the Cryptographic Layers in the Cryptographic Envelope
-   of the message provide encryption).  Likewise, if a sending
-   implementation is sending an encrypted message with Header
-   Protection, it MUST emit an hp="cipher" parameter, regardless of
-   which Header Fields were made confidential.
+   with parameter hp="cipher" for an unencrypted message (that is, where
+   none of the Cryptographic Layers in the Cryptographic Envelope of the
+   message provide encryption).  Likewise, if a sending implementation
+   is sending an encrypted message with Header Protection, it MUST emit
+   an hp="cipher" parameter, regardless of which Header Fields were made
+   confidential.
 
    Note that hp="cipher" indicates that the message itself has been
    encrypted by the sender to the recipients but makes no assertions
@@ -850,7 +854,7 @@ Table of Contents
    MUA that implements this specification, because the MUA already knows
    the correct Header Field information and can render it to the user in
    the appropriate part of the MUA's user interface rather than in the
-   body of the message.
+   Body of the message.
 
    See Section 5.2.2 for how to insert a Legacy Display Element into a
    text/plain Main Body Part.  See Section 5.2.3 for how to insert a
@@ -866,7 +870,7 @@ Table of Contents
    for signed-only messages.  It documents, with the same cryptographic
    guarantees shared by the rest of the message, the sender's choices
    about Header Field confidentiality.  It does so by embedding a copy
-   within the Cryptographic Envelope of every non-structural Header
+   within the Cryptographic Envelope of every Non-Structural Header
    Field that the sender put outside the Cryptographic Envelope.  This
    Header Field enables the MUA receiving the encrypted message to
    reliably identify whether the sending MUA intended to make a Header
@@ -879,7 +883,7 @@ Table of Contents
    confidentiality status of any given Header Field to the user.
 
    An implementation that composes encrypted email MUST include a copy
-   of all non-structural Header Fields deliberately exposed to the
+   of all Non-Structural Header Fields deliberately exposed to the
    outside of the Cryptographic Envelope using a series of HP-Outer
    Header Fields within the Cryptographic Payload.  These HP-Outer MIME
    Header Fields should only ever appear directly within the Header
@@ -888,12 +892,12 @@ Table of Contents
    evaluating the message's Header Protection if they appear in other
    places.
 
-   Each instance of HP-Outer contains a non-structural Header Field name
+   Each instance of HP-Outer contains a Non-Structural Header Field name
    and the value that this Header Field was set in within the outer
    (unprotected) Header Section.  The HP-Outer Header Field can appear
    multiple times in the Header Section of a Cryptographic Payload.
 
-   If a non-structural Header Field named Z is present in Header
+   If a Non-Structural Header Field named Z is present in Header
    Section of the Cryptographic Payload but doesn't appear in an HP-
    Outer Header Field value at all, then the sender is effectively
    asserting that every instance of Z was made confidential by removal
@@ -929,7 +933,7 @@ Table of Contents
    An MUA composing an encrypted message according to this specification
    may make any given Header Field confidential by removing it from the
    Header Section outside the Cryptographic Envelope or by obscuring it
-   by rewriting it to a different value in that outer Header Section.
+   by rewriting it to a different value in that Outer Header Section.
    The composing MUA faces a choice for any new message: Which Header
    Fields should be made confidential, and how?
 
@@ -960,11 +964,11 @@ Table of Contents
    In this document, we represent that Header Confidentiality Policy as
    a function hcp:
 
-   *  hcp(name, val_in) -> val_out: This function takes a non-structural
+   *  hcp(name, val_in) -> val_out: This function takes a Non-Structural
       Header Field identified by name with the initial value val_in as
-      arguments and returns a replacement header value val_out.  If
-      val_out is the special value null, it means that the Header Field
-      in question should be removed from the set of Header Fields
+      arguments and returns a replacement Header Field value val_out.
+      If val_out is the special value null, it means that the Header
+      Field in question should be removed from the set of Header Fields
       visible outside the Cryptographic Envelope.
 
    In the pseudocode descriptions of various choices of HCP in this
@@ -972,7 +976,7 @@ Table of Contents
    insensitively.  This is appropriate for Header Field names, as
    described in [RFC5322].
 
-   Note that hcp is only applied to non-structural Header Fields.  When
+   Note that hcp is only applied to Non-Structural Header Fields.  When
    composing a message, Structural Header Fields are dealt with
    separately, as described in Section 5.2.
 
@@ -1007,7 +1011,7 @@ Table of Contents
    control or NUL characters in val_out. val_out SHOULD match the
    expected ABNF for the Header Field identified by name.
 
-3.1.1.  HCP Avoids Changing From Header Field addr-spec
+3.1.1.  HCP Avoids Changing addr-spec of From Header Field
 
    The From Header Field should also be treated specially by the HCP to
    enable defense against possible email address spoofing (see
@@ -1119,10 +1123,10 @@ Table of Contents
    hcp_baseline provides confidentiality for the Subject Header Field by
    replacing it with the literal string "[...]".  It also provides
    confidentiality for the other less common Informational Header Fields
-   (Comments and Keywords) by removing them entirely from the outer
+   (Comments and Keywords) by removing them entirely from the Outer
    Header Section.  This is a sensible default because most users treat
    the Informational Fields of a message (particularly the Subject) the
-   same way that they treat the body, and they are surprised to find
+   same way that they treat the Body, and they are surprised to find
    that the Subject of an encrypted message is visible.
 
 3.4.  HCP Evolution
@@ -1178,7 +1182,7 @@ Table of Contents
 
    An entry should not be marked as "Recommended" unless it has been
    shown to offer confidentiality or privacy improvements over the
-   status quo and have minimal or mitigatory negative impact on messages
+   status quo and have minimal or mitigable negative impact on messages
    to which it is applied, considering factors such as message
    deliverability and security.  Only one entry in the table
    (hcp_baseline) is initially marked as "Recommended".  In the future,
@@ -1189,7 +1193,7 @@ Table of Contents
    An MUA that receives a cryptographically protected email will render
    it for the user.
 
-   The receiving MUA will render the message body, render a selected
+   The receiving MUA will render the message Body, render a selected
    subset of Header Fields, and provide a summary of the cryptographic
    properties of the message (as described in Section 3 of [RFC9787]).
 
@@ -1221,7 +1225,7 @@ Table of Contents
       Summary to indicate the types of protection that applied to each
       rendered Header Field (if any).
 
-   *  If any Legacy Display Elements are present in the body of the
+   *  If any Legacy Display Elements are present in the Body of the
       message, it does not render them.
 
    *  When replying to a message with confidential Header Fields, the
@@ -1260,11 +1264,12 @@ Table of Contents
    document (that is, the Cryptographic Envelope includes a
    Cryptographic Layer that provides encryption, and the hp parameter
    for the Content-Type Header Field of the Cryptographic Payload is
-   cipher).  It outputs a pair of lists of (h,v) Header Fields.
+   cipher).  It produces as output a pair of lists of (h,v) Header
+   Fields.
 
 4.2.1.  HeaderSetsFromMessage
 
-   Method Signature:
+   Method signature:
 
    HeaderSetsFromMessage(refmsg) -> (refouter, refprotected)
 
@@ -1346,7 +1351,7 @@ Table of Contents
 
    3.  If (h, v) is not in refprotected:
 
-       i.  Abort, v is not a valid value for header h.
+       i.  Abort, v is not a valid value for Header Field h.
 
    4.  Let is_sig_valid be false.
 
@@ -1354,13 +1359,13 @@ Table of Contents
 
        i.  Let is_sig_valid be the result of validating the signature.
 
-   6.  If the message is encrypted, ct has a parameter hp="cipher", and
-       (h,v) is not in refouter:
+   6.  If the message is encrypted, and if ct has a parameter
+       hp="cipher", and if (h,v) is not in refouter:
 
-       i.  Return signed-and-encrypted if is_sig_valid is otherwise
+       i.  Return signed-and-encrypted if is_sig_valid, otherwise return
            encrypted-only.
 
-   7.  Return signed-only if is_sig_valid is otherwise unprotected.
+   7.  Return signed-only if is_sig_valid, otherwise return unprotected.
 
    Note that:
 
@@ -1382,7 +1387,7 @@ Table of Contents
       parameter.
 
    *  The protection state of a Header Field may be weaker than that of
-      the message body.  For example, a message body can be signed-and-
+      the message Body.  For example, a message Body can be signed-and-
       encrypted, but a Header Field that is copied unmodified to the
       unprotected Header Section is signed-only.
 
@@ -1432,13 +1437,13 @@ Table of Contents
    There is no valid signature made by a certificate for which the MUA
    has a valid binding to the protected From address.  This includes:
 
-   *  the message has no signature,
+   *  the message has no signature
 
-   *  the message has a broken signature, or
+   *  the message has a broken signature
 
    *  the message has a valid signature, but the receiving MUA does not
       see any valid binding between the signing certificate and the
-      addr-spec of the inner From Header Field.
+      addr-spec of the inner From Header Field
 
    Note: There are many possible ways that an MUA could choose to
    validate a certificate-to-address binding.  For example, the MUA
@@ -1455,7 +1460,7 @@ Table of Contents
    MUA SHOULD warn the user whenever both of the following conditions
    are met:
 
-   *  From Header Field Mismatch (as defined in Section 4.4.1.1)
+   *  From Header Field Mismatch (as defined in Section 4.4.1.1) and
 
    *  No Valid and Correctly Bound Signature (as defined in
       Section 4.4.1.2)
@@ -1471,7 +1476,7 @@ Table of Contents
    From Header Field (as an exception to the guidance in the beginning
    of Section 4) if both of the following conditions are met:
 
-   *  From Header Field Mismatch (as defined in Section 4.4.1.1)
+   *  From Header Field Mismatch (as defined in Section 4.4.1.1) and
 
    *  No Valid and Correctly Bound Signature (as defined in
       Section 4.4.1.2)
@@ -1512,15 +1517,15 @@ Table of Contents
 
    First, the MUA MUST check whether the domain part of an addr-spec
    being compared contains a U-label [RFC5890].  If it does, it MUST be
-   converted to the A-label form, which is described in [RFC5891].  We
-   call a domain converted in this way (or the original domain if it
-   didn't contain any U-label) "the ASCII version of the domain part".
-   Second, the MUA MUST compare the ASCII version of the domain part of
-   the two addr-specs by standard DNS comparison: Assume ASCII text and
-   compare alphabetic characters case-insensitively, as described in
-   Section 3.1 of [RFC1035].  If the domain parts match, then the two
-   local-parts are matched against each other.  The simplest and most
-   common comparison for the local-part is also an ASCII-based, case-
+   converted to the A-label form as described in [RFC5891].  We call a
+   domain converted in this way (or the original domain if it didn't
+   contain any U-label) "the ASCII version of the domain part".  Second,
+   the MUA MUST compare the ASCII version of the domain part of the two
+   addr-specs by standard DNS comparison: Assume ASCII text and compare
+   alphabetic characters case-insensitively, as described in Section 3.1
+   of [RFC1035].  If the domain parts match, then the two local-parts
+   are matched against each other.  The simplest and most common
+   comparison for the local-part is also an ASCII-based, case-
    insensitive match.  If the MUA has special knowledge about the domain
    and, when composing, it can reasonably expect the receiving MUAs to
    have the same information, it MAY match the local-part using a more
@@ -1534,7 +1539,7 @@ Table of Contents
    When the Cryptographic Payload's Content-Type has the parameter hp
    set to "clear" or "cipher", the values of the protected Header Fields
    are drawn from the Header Fields of the Cryptographic Payload, and
-   the body that is rendered is the Cryptographic Payload itself.
+   the Body that is rendered is the Cryptographic Payload itself.
 
 4.5.1.  Example Signed-Only Message
 
@@ -1547,7 +1552,7 @@ Table of Contents
    C   ├─╴text/plain
    D   └─╴text/html
 
-   The message body should be rendered the same way as this message:
+   The message Body should be rendered the same way as this message:
 
    B └┬╴multipart/alternative
    C  ├─╴text/plain
@@ -1577,7 +1582,7 @@ Table of Contents
    H    ├─╴text/plain
    I    └─╴text/html
 
-   The message body should be rendered the same way as this message:
+   The message Body should be rendered the same way as this message:
 
    G └┬╴multipart/alternative
    H  ├─╴text/plain
@@ -1647,7 +1652,7 @@ Table of Contents
    Content-Type parameter hp-legacy-display="1", it should be processed
    before rendering in the following fashion:
 
-   *  Discard the leading lines of the body part up to and including the
+   *  Discard the leading lines of the Body part up to and including the
       first entirely blank line.
 
    Note that implementing this strategy is dependent on the charset used
@@ -1683,10 +1688,10 @@ Table of Contents
    series of messages.
 
    In another example, Section 6.2 notes that the value of the Reply-To
-   field can influence the draft reply message.  So while the user may
-   never see the Reply-To Header Field directly, it is implicitly
-   "rendered" when the user interacts with the message by replying to
-   it.
+   Header Field can influence the draft reply message.  So while the
+   user may never see the Reply-To Header Field directly, it is
+   implicitly "rendered" when the user interacts with the message by
+   replying to it.
 
    An MUA that depends on any implicitly rendered Header Field in a
    message with Header Protection MUST use the value from the protected
@@ -1720,7 +1725,7 @@ Table of Contents
    mailbox summary might change from the real message subject back to
    [...].  Or the message might be displayed outside of its current
    thread if the MUA loses access to a removed References or In-Reply-To
-   header.
+   Header Field.
 
    These behaviors are likely to surprise the user.  However, an MUA has
    several possible ways of reducing or avoiding all of these surprises,
@@ -1792,7 +1797,7 @@ Table of Contents
    to receive an end-to-end encrypted message -- for example, where the
    control messages need confidentiality guarantees -- and where the
    action taken depends on the contents of some MIME part within the
-   message body.
+   message Body.
 
    In this case, the automated system that decrypts the incoming
    messages and scans the relevant MIME part MUST identify when the MIME
@@ -1803,11 +1808,11 @@ Table of Contents
    For example, consider an administrative interface of a confidential
    issue tracking software.  An authorized user can confidentially
    adjust the status of a tracked issue by a specially formatted first
-   line of the message body (for example, severity #183 serious).  When
+   line of the message Body (for example, severity #183 serious).  When
    the user's MUA encrypts a plaintext control message to this issue
    tracker, depending on the MUA's HCP and its choice of legacy value,
    it may add a Legacy Display Element.  If it does so, then the first
-   line of the message body will contain a decorative copy of the
+   line of the message Body will contain a decorative copy of the
    confidential Subject Header Field.  The issue tracking software
    decrypts the incoming control message, identifies that there is a
    Legacy Display Element in the part (see Section 4.5.3.1), strips the
@@ -1892,9 +1897,9 @@ Table of Contents
    were a message with Header Protection as defined in this document by
    making the following adjustments:
 
-   *  Rather than rendering the message body as the Cryptographic
+   *  Rather than rendering the message Body as the Cryptographic
       Payload itself (part C in the example above), render the RFC8551HP
-      message's body as the MIME subtree that is the Cryptographic
+      message's Body as the MIME subtree that is the Cryptographic
       Payload's immediate child (part D).
 
    *  Make a comparable modification to HeaderSetsFromMessage
@@ -1914,13 +1919,13 @@ Table of Contents
       message Header Fields (those found in part A in the example above)
       rather than looking for HP-Outer Header Fields with the other
       protected Header Fields.  That is, infer Header Field
-      confidentiality based on the unprotected headers.
+      confidentiality based on the unprotected Header Fields.
 
    The inferences in the above modifications are not based on any strong
    end-to-end guarantees.  An intervening MTA may tamper with the
-   message's outer Header Section or wrap the message in an encryption
+   message's Outer Header Section or wrap the message in an encryption
    layer to undetectably change the recipient's understanding of the
-   confidentiality of the message's Header Fields or the message body
+   confidentiality of the message's Header Fields or the message Body
    itself.
 
 4.11.  Rendering Other Schemes
@@ -1959,12 +1964,12 @@ Table of Contents
    This process is described in Section 5.1 of [RFC9787].  We replicate
    it here for reference.  The inputs to the algorithm are:
 
-   *  origbody: The traditional unprotected message body as a well-
+   *  origbody: The traditional unprotected message Body as a well-
       formed MIME tree (possibly just a single MIME leaf part).  As a
-      well-formed MIME tree, origbody already has structural Header
+      well-formed MIME tree, origbody already has Structural Header
       Fields (Content-*) present.
 
-   *  origheaders: The intended non-structural Header Fields for the
+   *  origheaders: The intended Non-Structural Header Fields for the
       message, represented here as a list of (h,v) pairs, where h is a
       Header Field name and v is the associated value.  Note that these
       are Header Fields that the MUA intends to be visible to the
@@ -1985,7 +1990,7 @@ Table of Contents
 
 5.1.1.  ComposeNoHeaderProtection
 
-   Method Signature:
+   Method signature:
 
    ComposeNoHeaderProtection(origbody, origheaders, crypto) ->
    mime_message
@@ -2038,7 +2043,7 @@ Table of Contents
 
 5.2.1.  Compose
 
-   Method Signature:
+   Method signature:
 
    Compose(origbody, origheaders, crypto, hcp, respond, refmsg, legacy)
    -> mime_message
@@ -2062,16 +2067,16 @@ Table of Contents
        iii.  If ldlist is not empty:
 
              a.  Identify each leaf MIME part of newbody that represents
-                 the "main body" of the message.
+                 the "main Body" of the message.
 
              b.  For each "Main Body Part" bodypart of type text/plain
                  or text/html:
 
                  I.  Adjust bodypart by inserting a Legacy Display
-                     Element header list ldlist into its content and
-                     adding a Content-Type parameter hp-legacy-display
-                     with value 1 (see Section 5.2.2 for text/plain and
-                     Section 5.2.3 for text/html).
+                     Element Header Field list ldlist into its content
+                     and adding a Content-Type parameter hp-legacy-
+                     display with value 1 (see Section 5.2.2 for text/
+                     plain and Section 5.2.3 for text/html).
 
    3.  For each Header Field name and value (h,v) in origheaders:
 
@@ -2090,7 +2095,7 @@ Table of Contents
              newbody to cipher.
 
        ii.   If refmsg is not null, respond is not null, and refmsg
-             itself is encrypted with header protection:
+             itself is encrypted with Header Protection:
 
              a.  Let response_hcp be a single-use HCP derived from
                  respond and refmsg (see Section 6.1).
@@ -2111,7 +2116,7 @@ Table of Contents
 
                  I.  Let newval be response_hcp(h,v).
 
-             c.  If newval is not null):
+             c.  If newval is not null:
 
                  I.  Add (h,newval) to newheaders.
 
@@ -2143,7 +2148,7 @@ Table of Contents
    represented as (header, value) pairs, concatenate them as a set of
    lines, with one newline at the end of each pair.  Add an additional
    trailing newline after the resultant text, and prepend the entire
-   list to the body of the text/plain part.
+   list to the Body of the text/plain part.
 
    The MUA MUST also add a Content-Type parameter of hp-legacy-display
    with value 1 to the MIME part to indicate that a Legacy Display
@@ -2166,8 +2171,8 @@ Table of Contents
 
    I think we should skip the meeting.
 
-   Note that the Legacy Display Elements (the lines beginning with
-   Subject: and Cc:) are part of the body of the MIME part in question.
+   Note that the Legacy Display Element (the lines beginning with
+   Subject: and Cc:) is part of the Body of the MIME part in question.
 
    This example assumes that the Main Body Part in question is not the
    root of the Cryptographic Payload.  For instance, it could be a leaf
@@ -2278,9 +2283,9 @@ Table of Contents
 5.2.5.  Do Not Add a Legacy Display Element to Other Content-Types
 
    The purpose of injecting a Legacy Display Element into each Main Body
-   MIME part is to enable rendering of otherwise obscured Header Fields
-   in Legacy MUAs that are capable of message decryption but don't know
-   how to follow the rest of the guidance in this document.
+   Part is to enable rendering of otherwise obscured Header Fields in
+   Legacy MUAs that are capable of message decryption but don't know how
+   to follow the rest of the guidance in this document.
 
    The authors are unaware of any Legacy MUA that would render any MIME
    part type other than text/plain and text/html as the Main Body.  A
@@ -2329,17 +2334,17 @@ Table of Contents
    From Header Fields.  When generating the outer copy of the Header
    Field, the composing MUA first applies its own Header Confidentiality
    Policy.  If the Header Field's value is changed by the HCP, then it
-   is applied to the outside header.  If the Header Field's value is
-   unchanged, the composing MUA regenerates the Header Field using the
-   Header Fields that had been on the outside of the original message at
-   sending time.  These can be inferred from the HP-Outer Header Fields
-   located within the Cryptographic Payload of the referenced message.
-   If that value is itself different than the protected value, then it
-   is applied to the outside header.  If the value is the same as the
-   protected value, then it is simply copied to the outside header
-   directly.  Whether it was changed or not, it is noted in the
-   protected Header Section using HP-Outer, as described in
-   Section 2.2.1.
+   is applied to the Outer Header Section.  If the Header Field's value
+   is unchanged, the composing MUA re-generates the Header Field using
+   the Header Fields that had been on the outside of the original
+   message at sending time.  These can be inferred from the HP-Outer
+   Header Fields located within the Cryptographic Payload of the
+   referenced message.  If that value is itself different than the
+   protected value, then it is applied to the Outer Header Section.  If
+   the value is the same as the protected value, then it is simply
+   copied to the Outer Header Section directly.  Whether it was changed
+   or not, it is noted in the protected Header Section using HP-Outer,
+   as described in Section 2.2.1.
 
    See Appendix D.2 for a simple worked example of this process.
 
@@ -2358,11 +2363,11 @@ Table of Contents
    *  A single referenced message refmsg
 
    *  A built-in MUA respond function associated with the user's action.
-      The respond function takes a list of headers from a referenced
-      message as input and generates a list of initial candidate message
-      Header Field names and values that are used to populate the
-      message composition interface.  Something like this function
-      already exists in most MUAs, though it may differ across
+      The respond function takes a list of Header Fields from a
+      referenced message as input and generates a list of initial
+      candidate message Header Field names and values that are used to
+      populate the message composition interface.  Something like this
+      function already exists in most MUAs, though it may differ across
       responsive actions.  For example, the respond function that
       implements "Reply All" is likely to be a different from the
       respond that implements "Reply".
@@ -2519,10 +2524,10 @@ Table of Contents
    Version", "Reply List", "List Info", etc.
 
    An MUA that receives a message with Header Protection that contains
-   these Header Fields in the unprotected section and that has reason to
-   believe the message is coming through a mailing list MAY decide to
-   render them to the user (explicitly or implicitly) even though they
-   are not protected.
+   these Header Fields in the unprotected Header Section and that has
+   reason to believe the message is coming through a mailing list MAY
+   decide to render them to the user (explicitly or implicitly) even
+   though they are not protected.
 
 8.  Email Ecosystem Evolution
 
@@ -2548,7 +2553,7 @@ Table of Contents
 
    Eventually, the hope is that most decryption-capable MUAs will
    conform to this specification and there will be no need for injection
-   of Legacy Display Elements in the message body.  A survey of widely
+   of Legacy Display Elements in the message Body.  A survey of widely
    used decryption-capable MUAs might be able to establish when most of
    them do support this specification.
 
@@ -2737,7 +2742,7 @@ Table of Contents
    cryptographic protections, as well as Section 13 of [RFC9580]
    (OpenPGP itself).  In addition, these underlying security
    considerations are now also applicable to the contents of the message
-   header, not just the message body.
+   Header Section, not just the message Body.
 
 10.1.  From Address Spoofing
 
@@ -2792,7 +2797,7 @@ Table of Contents
    the unprotected (outer) From Header Field to render the outer From
    Header Field if both of the following conditions are met:
 
-   *  From Header Field Mismatch (as defined in Section 4.4.1.1)
+   *  From Header Field Mismatch (as defined in Section 4.4.1.1) and
 
    *  No Valid and Correctly Bound Signature (as defined in
       Section 4.4.1.2)
@@ -2942,11 +2947,11 @@ Table of Contents
    client.
 
    For example, if the value for a Header Field to be included in a
-   Legacy Display Element within a given body part contains folding
+   Legacy Display Element within a given Body part contains folding
    whitespace, it should be "unfolded" before generating the Legacy
    Display Element: All contiguous folding whitespace should be replaced
-   with a single space character.  Likewise, if the header value was
-   originally encoded per [RFC2047], it should be decoded first to a
+   with a single space character.  Likewise, if the Header Field value
+   was originally encoded per [RFC2047], it should be decoded first to a
    standard string and re-encoded using the charset appropriate to the
    target part.
 
@@ -2959,17 +2964,17 @@ Table of Contents
    part of the Legacy Display Element in the rendered message.
 
    When including a Legacy Display Element in a text/html part (see
-   Section 5.2.3), any material in the header values should be
+   Section 5.2.3), any material in the Header Field values should be
    explicitly HTML escaped to avoid being rendered as part of the HTML.
    At a minimum, the characters <, >, and & should be escaped to &lt;,
    &gt;, and &amp;, respectively (for example, see [HTML-ESCAPES]).  If
-   unescaped characters from removed or obscured header values end up in
-   the Legacy Display Element, a receiving MUA that follows the guidance
-   in Section 4.5.3.3 might fail to identify the boundaries of the
-   Legacy Display Element, cutting out more than it should or leaving
-   remnants visible.  And a Legacy MUA parsing such a message might
-   misrender the entire HTML stream, depending on the content of the
-   removed or obscured header values.
+   unescaped characters from removed or obscured Header Field values end
+   up in the Legacy Display Element, a receiving MUA that follows the
+   guidance in Section 4.5.3.3 might fail to identify the boundaries of
+   the Legacy Display Element, cutting out more than it should or
+   leaving remnants visible.  And a Legacy MUA parsing such a message
+   might misrender the entire HTML stream, depending on the content of
+   the removed or obscured Header Field values.
 
    The Legacy Display Element is a decorative addition solely to enable
    visibility of obscured or removed Header Fields in decryption-capable
@@ -2981,15 +2986,15 @@ Table of Contents
 
    An encrypted email message using S/MIME or PGP/MIME tends to have
    some amount of predictable plaintext.  For example, the standard MIME
-   headers of the Cryptographic Payload of a message are often a
+   Header Fields of the Cryptographic Payload of a message are often a
    predictable sequence of bytes, even without Header Protection, when
    they only include the Structural Header Fields MIME-Version and
    Content-Type.  This is a potential risk for known-plaintext attacks.
 
    Including protected Header Fields as defined in this document
-   increases the amount of known plaintext.  Since some of those headers
-   in a reply will be derived from the message being replied to, this
-   also creates a potential risk for chosen-plaintext attacks, in
+   increases the amount of known plaintext.  Since some of those Header
+   Fields in a reply will be derived from the message being replied to,
+   this also creates a potential risk for chosen-plaintext attacks, in
    addition to known-plaintext attacks.
 
    Modern message encryption mechanisms are expected to be secure
@@ -3021,7 +3026,7 @@ Table of Contents
 
    See the examples below.
 
-   This concern is true for any encrypted data, including the body of
+   This concern is true for any encrypted data, including the Body of
    the message, not just the Header Fields: If the sender isn't careful,
    the message contents or session keys can leak in many ways that are
    beyond the scope of this document.  The message recipient has no way
@@ -3037,9 +3042,9 @@ Table of Contents
    For encrypted messages, even with an ambitious HCP that successfully
    obscures most Header Fields from all transport agents, Header Fields
    will be ultimately visible to all intended recipients.  This can be
-   especially problematic for Header Fields that are not user-facing,
-   which the sender may not expect to be injected by their MUA.
-   Consider the three following examples:
+   especially problematic for Header Fields that are not User-Facing;
+   the sender may not expect such Header Fields to be injected by their
+   MUA.  Consider the three following examples:
 
    *  The MUA may inject a User-Agent Header Field that describes itself
       to every recipient, even though the sender may not want the
@@ -3047,8 +3052,9 @@ Table of Contents
       platform, or MUA.
 
    *  The MUA may have an idiosyncratic way of generating a Message-ID
-      header, which could embed the choice of MUA, time zone, hostname,
-      or other subtle information to a knowledgeable recipient.
+      Header Field, which could embed the choice of MUA, time zone,
+      hostname, or other subtle information to a knowledgeable
+      recipient.
 
    *  The MUA may erroneously include a Bcc Header Field in the
       origheaders of a copy of a message sent to the named recipient,
@@ -3086,16 +3092,16 @@ Table of Contents
 
 11.2.3.  Encrypted Header Fields May Not Be Fully Masked by HCP
 
-   In another example, if the HCP modifies the Date header to mask out
-   high-resolution timestamps (e.g., rounding to the most recent hour),
-   some information about the date of delivery will still be attached to
-   the email.  At the very least, the low-resolution, global version of
-   the date will be present on the message.  Additionally, Header Fields
-   like Received that are added during message delivery might include
-   higher-resolution timestamps.  And if the message lands in a mailbox
-   that is ordered by time of receipt, even its placement in the mailbox
-   and the unobscured Date Header Fields of the surrounding messages
-   could leak this information.
+   In another example, if the HCP modifies the Date Header Field to mask
+   out high-resolution timestamps (e.g., rounding to the most recent
+   hour), some information about the date of delivery will still be
+   attached to the email.  At the very least, the low-resolution, global
+   version of the date will be present on the message.  Additionally,
+   Header Fields like Received that are added during message delivery
+   might include higher-resolution timestamps.  And if the message lands
+   in a mailbox that is ordered by time of receipt, even its placement
+   in the mailbox and the unobscured Date Header Fields of the
+   surrounding messages could leak this information.
 
    Some Header Fields like From may be impossible to fully obscure, as
    many modern message delivery systems depend on at least domain
@@ -3192,14 +3198,17 @@ Table of Contents
           Table 2: Addition to the Permanent Message Header Field
                                Names Registry
 
-   The Author/Change Controller of these two entries (Section 4.5 of
-   [RFC3864]) should be the IETF itself.
+   Note that the Template and Trace columns are empty and therefore not
+   included in the table.
+
+   The Author/Change Controller (Section 4.5 of [RFC3864]) for this
+   entry is the IETF.
 
 12.2.  Reference Update for the Content-Type Header Field
 
    This document defines the Content-Type parameters known as hp (in
    Section 2.1.1) and hp-legacy-display (in Section 2.1.2).
-   Consequently, this document has been added as a reference for
+   Consequently, IANA has added this document as a reference for
    Content-Type in the "Permanent Message Header Field Names" registry
    as shown below.
 
@@ -3210,6 +3219,9 @@ Table of Contents
          +-------------------+----------+------------------------+
 
            Table 3: Permanent Message Header Field Names Registry
+
+   Note that the Template and Trace columns are empty and therefore not
+   included in the table.
 
 12.3.  New Mail Header Confidentiality Policies Registry
 
@@ -3476,17 +3488,17 @@ Appendix A.  Table of Pseudocode Listings
     |                           | responding to a given   |           |
     |                           | message                 |           |
     +---------------------------+-------------------------+-----------+
-    | ComposeNoHeaderProtection | Legacy message          | Section   |
+    | ComposeNoHeaderProtection | Legacy Message          | Section   |
     |                           | composition with end-   | 5.1.1     |
     |                           | to-end cryptographic    |           |
     |                           | protections (but no     |           |
-    |                           | header protection)      |           |
+    |                           | Header Protection)      |           |
     +---------------------------+-------------------------+-----------+
     | Compose                   | Compose a message with  | Section   |
     |                           | end-to-end              | 5.2.1     |
     |                           | cryptographic           |           |
     |                           | protections including   |           |
-    |                           | header protection       |           |
+    |                           | Header Protection       |           |
     +---------------------------+-------------------------+-----------+
 
                    Table 5: Table of Pseudocode Listings
@@ -3523,14 +3535,14 @@ B.2.  Problems When Rendering a Message
 
    *  Unprotected Subject is visible
 
-   *  Protected Subject (on its own) is visible in the body
+   *  Protected Subject (on its own) is visible in the Body
 
    *  Protected Subject, Date, From, and To Header Fields are visible in
-      the body
+      the Body
 
    *  User interaction needed to view the whole message
 
-   *  User interaction needed to view the message body
+   *  User interaction needed to view the message Body
 
    *  User interaction needed to view the protected Subject
 
@@ -3538,7 +3550,7 @@ B.2.  Problems When Rendering a Message
 
    *  Nuisance alarms during user interaction
 
-   *  Impossible to view the message body
+   *  Impossible to view the message Body
 
    *  Appears as a forwarded message
 
@@ -3552,13 +3564,13 @@ B.2.  Problems When Rendering a Message
    *  User has multiple different methods to reply (e.g., reply to
       outer, reply to inner)
 
-   *  User sees English "Subject:" in body despite message itself being
+   *  User sees English "Subject:" in Body despite message itself being
       in non-English
 
    *  Security indicators do not identify the protection status of
       Header Fields
 
-   *  Header Fields in the body render with local Header Field names
+   *  Header Fields in the Body render with local Header Field names
       (e.g., showing "Betreff" instead of "Subject") and dates (TZ,
       locale)
 
@@ -3587,7 +3599,7 @@ B.3.  Problems When Replying to a Message
 
    *  Protected Subject is not anywhere in UI
 
-   *  Message body is _not_ visible/quoted in UI:body
+   *  Message Body is _not_ visible/quoted in UI:body
 
    *  User cannot reply while viewing protected message
 
@@ -3597,7 +3609,7 @@ B.3.  Problems When Replying to a Message
    *  Unprotected From or Reply-To Header Field is in UI:To (instead of
       the protected From or Reply-To Header Field)
 
-   *  User's locale (lang, TZ) leaks in quoted body
+   *  User's locale (lang, TZ) leaks in quoted Body
 
    *  Header Fields not protected (and in particular, Subject is not
       obscured) by default
@@ -3624,14 +3636,14 @@ Appendix C.  Test Vectors
 
 C.1.  Baseline Messages
 
-   These messages offer no header protection at all and can be used as a
+   These messages offer no Header Protection at all and can be used as a
    baseline.  They are provided in this document as a counterexample.
-   An MUA implementer can use these messages to verify that the reported
-   cryptographic summary of the message indicates no header protection.
+   An MUA implementer can use these Messages to verify that the reported
+   Cryptographic Summary of the Message indicates no Header Protection.
 
 C.1.1.  No Cryptographic Protections over a Simple Message
 
-   This message uses no cryptographic protection at all.  Its body is a
+   This message uses no cryptographic protection at all.  Its Body is a
    text/plain message.
 
    It has the following structure:
@@ -3665,7 +3677,7 @@ C.1.2.  S/MIME Signed-Only signedData over a Simple Message, No Header
         Protection
 
    This is a signed-only S/MIME message via PKCS#7 signedData.  The
-   payload is a text/plain message.  It uses no header protection.
+   payload is a text/plain message.  It uses no Header Protection.
 
    It has the following structure:
 
@@ -3771,7 +3783,7 @@ C.1.3.  S/MIME Signed-Only multipart/signed over a Simple Message, No
 
    This is a signed-only S/MIME message via PKCS#7 detached signature
    (multipart/signed).  The payload is a text/plain message.  It uses no
-   header protection.
+   Header Protection.
 
    It has the following structure:
 
@@ -3874,7 +3886,7 @@ C.1.4.  S/MIME Signed and Encrypted over a Simple Message, No Header
 
    This is a signed-and-encrypted S/MIME message using PKCS#7
    envelopedData around signedData.  The payload is a text/plain
-   message.  It uses no header protection.
+   message.  It uses no Header Protection.
 
    It has the following structure:
 
@@ -4094,7 +4106,7 @@ C.1.4.2.  S/MIME Signed and Encrypted over a Simple Message, No Header
 
 C.1.5.  No Cryptographic Protections over a Complex Message
 
-   This message uses no cryptographic protection at all.  Its body is a
+   This message uses no cryptographic protection at all.  Its Body is a
    multipart/alternative message with an inline image/png attachment.
 
    It has the following structure:
@@ -4168,7 +4180,7 @@ C.1.6.  S/MIME Signed-Only signedData over a Complex Message, No Header
 
    This is a signed-only S/MIME message via PKCS#7 signedData.  The
    payload is a multipart/alternative message with an inline image/png
-   attachment.  It uses no header protection.
+   attachment.  It uses no Header Protection.
 
    It has the following structure:
 
@@ -4334,7 +4346,7 @@ C.1.7.  S/MIME Signed-Only multipart/signed over a Complex Message, No
 
    This is a signed-only S/MIME message via PKCS#7 detached signature
    (multipart/signed).  The payload is a multipart/alternative message
-   with an inline image/png attachment.  It uses no header protection.
+   with an inline image/png attachment.  It uses no Header Protection.
 
    It has the following structure:
 
@@ -4478,7 +4490,7 @@ C.1.8.  S/MIME Signed and Encrypted over a Complex Message, No Header
    This is a signed-and-encrypted S/MIME message using PKCS#7
    envelopedData around signedData.  The payload is a multipart/
    alternative message with an inline image/png attachment.  It uses no
-   header protection.
+   Header Protection.
 
    It has the following structure:
 
@@ -4791,8 +4803,8 @@ C.1.8.2.  S/MIME Signed and Encrypted over a Complex Message, No Header
 
 C.2.  Signed-Only Messages
 
-   These messages are signed-only, using different schemes of header
-   protection and different S/MIME structures.  They use no Header
+   These messages are signed-only, using different schemes of Header
+   Protection and different S/MIME structures.  They use no Header
    Confidentiality Policy because the HCP is only relevant when a
    message is encrypted.
 
@@ -5358,7 +5370,7 @@ C.2.5.  S/MIME Signed-Only signedData over a Complex Message, Legacy RFC
 
    This is a signed-only S/MIME message via PKCS#7 signedData.  The
    payload is a multipart/alternative message with an inline image/png
-   attachment.  It uses the legacy RFC 8551 header protection
+   attachment.  It uses the legacy RFC 8551 Header Protection
    (RFC8551HP) scheme.
 
    It has the following structure:
@@ -5545,7 +5557,7 @@ C.2.6.  S/MIME Signed-Only multipart/signed over a Complex Message,
    This is a signed-only S/MIME message via PKCS#7 detached signature
    (multipart/signed).  The payload is a multipart/alternative message
    with an inline image/png attachment.  It uses the legacy RFC 8551
-   header protection (RFC8551HP) scheme.
+   Header Protection (RFC8551HP) scheme.
 
    It has the following structure:
 
@@ -5698,7 +5710,7 @@ C.2.6.  S/MIME Signed-Only multipart/signed over a Complex Message,
 C.3.  Signed-and-Encrypted Messages
 
    These messages are signed and encrypted.  They use PKCS#7 signedData
-   inside envelopedData, with different header protection schemes and
+   inside envelopedData, with different Header Protection schemes and
    different Header Confidentiality Policies.
 
 C.3.1.  S/MIME Signed and Encrypted over a Simple Message, Header
@@ -11159,7 +11171,7 @@ C.3.17.  S/MIME Signed and Encrypted over a Complex Message, Legacy RFC
    This is a signed-and-encrypted S/MIME message using PKCS#7
    envelopedData around signedData.  The payload is a multipart/
    alternative message with an inline image/png attachment.  It uses the
-   legacy RFC 8551 header protection (RFC8551HP) scheme with the
+   legacy RFC 8551 Header Protection (RFC8551HP) scheme with the
    hcp_baseline Header Confidentiality Policy.
 
    It has the following structure:
@@ -11519,7 +11531,7 @@ Appendix D.  Composition Examples
 D.1.  New Message Composition
 
    A typical MUA composition interface offers the user a place to
-   indicate the message recipients, subject, and body.  Consider a
+   indicate the message recipients, subject, and Body.  Consider a
    composition window filled out by the user like so:
 
     .------------------------------------------------------.
@@ -11545,7 +11557,7 @@ D.1.  New Message Composition
               Figure 1: Example Message Composition Interface
 
    When Bob clicks "Send", his MUA generates values for the Message-ID,
-   From, and Date Header Fields and converts the message body into the
+   From, and Date Header Fields and converts the message Body into the
    appropriate format.
 
 D.1.1.  Unprotected Message
@@ -11646,7 +11658,7 @@ D.1.2.2.  External Header Section
 
    Note that the Subject Header Field has been obscured appropriately by
    hcp_baseline.  The output of the CMS enveloping operation is base64
-   encoded and forms the body of the message.
+   encoded and forms the Body of the message.
 
 D.2.  Composing a Reply
 
@@ -11685,9 +11697,10 @@ D.2.  Composing a Reply
             Figure 2: Example Message Reply Interface (Unedited)
 
    Note that because Alice's MUA is aware of Header Protection, it knows
-   what the correct Subject header is, even though it was obscured.  It
-   also knows to avoid including the Legacy Display Element in the
-   quoted/attributed text that it includes in the draft reply.
+   what the correct Subject Header Field is, even though it was
+   obscured.  It also knows to avoid including the Legacy Display
+   Element in the quoted/attributed text that it includes in the draft
+   reply.
 
    Once Alice has edited the reply message, it might look something like
    this:
@@ -11720,7 +11733,7 @@ D.2.  Composing a Reply
 
    When Alice clicks "Send", the MUA generates values for the Message-
    ID, From, and Date Header Fields, populates the In-Reply-To and
-   References Header Fields, and also converts the reply body into the
+   References Header Fields, and also converts the reply Body into the
    appropriate format.
 
 D.2.1.  Unprotected Message
@@ -11827,7 +11840,7 @@ D.2.2.  Encrypted with hcp_no_confidentiality and Legacy Display
 
    *  Compute the ephemeral response_hcp (see Section 6.1):
 
-      -  Note that all headers except Subject are the same.
+      -  Note that all Header Fields except Subject are the same.
 
       -  confmap contains only ("Subject", "Re: Handling the Jones
          contract") -> "Re: [...]"
@@ -11921,7 +11934,7 @@ D.2.2.2.  External Header Section
    Note that the Subject Header Field has been obscured appropriately
    even though hcp_no_confidentiality would not have touched it by
    default.  The output of the CMS enveloping operation is base64
-   encoded and forms the body of the message.
+   encoded and forms the Body of the message.
 
 Appendix E.  Rendering Examples
 
@@ -11933,7 +11946,7 @@ E.1.  Example text/plain Cryptographic Payload with Legacy Display
       Elements
 
    Here is a simple one-part Cryptographic Payload (Header Section and
-   body) of a message that includes Legacy Display Elements:
+   Body) of a message that includes Legacy Display Elements:
 
    Date: Fri, 21 Jan 2022 20:40:48 -0500
    From: Alice <alice@example.net>
@@ -11955,14 +11968,14 @@ E.1.  Example text/plain Cryptographic Payload with Legacy Display
    from there.
 
    A compatible MUA will recognize the hp-legacy-display="1" parameter
-   and render the body of the message as:
+   and render the Body of the message as:
 
    Let's meet at Rama's Roti Shop at 8pm and go to the park
    from there.
 
    A legacy decryption-capable MUA that is unaware of this mechanism
    will ignore the hp-legacy-display="1" parameter and instead render
-   the body including the Legacy Display Elements:
+   the Body including the Legacy Display Elements:
 
    Subject: Dinner plans
 
@@ -11973,7 +11986,7 @@ E.2.  Example text/html Cryptographic Payload with Legacy Display
       Elements
 
    Here is a modern one-part Cryptographic Payload (Header Section and
-   body) of a message that includes Legacy Display Elements:
+   Body) of a message that includes Legacy Display Elements:
 
    Date: Fri, 21 Jan 2022 20:40:48 -0500
    From: Alice <alice@example.net>
@@ -12001,7 +12014,7 @@ E.2.  Example text/html Cryptographic Payload with Legacy Display
    </html>
 
    A compatible MUA will recognize the hp-legacy-display="1" parameter
-   and mask out the Legacy Display div, rendering the body of the
+   and mask out the Legacy Display div, rendering the Body of the
    message as a simple paragraph:
 
    Let's meet at Rama's Roti Shop at 8pm and go to the park
@@ -12009,7 +12022,7 @@ E.2.  Example text/html Cryptographic Payload with Legacy Display
 
    A legacy decryption-capable MUA that is unaware of this mechanism
    will ignore the hp-legacy-display="1" parameter and instead render
-   the body including the Legacy Display Elements:
+   the Body including the Legacy Display Elements:
 
    Subject: Dinner plans
 
@@ -12082,7 +12095,7 @@ F.2.  Pretty Easy Privacy (pEp)
    not provide any guidance for handling them.  Please see [PEP-EMAIL]
    for more guidance.
 
-F.3.  Protected Email Headers
+F.3.  Autocrypt Protected Headers
 
    [PROTECTED-HEADERS] describes a scheme similar to the Header
    Protection scheme specified in this document.  However, instead of

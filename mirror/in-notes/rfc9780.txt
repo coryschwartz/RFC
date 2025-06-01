@@ -326,7 +326,7 @@ Table of Contents
    mentioned in Section 5.2.1 of [RFC8563]) and is the simplest of the
    methods described in [RFC8563].  The use of this method in BFD over
    P2MP MPLS LSP is discussed in this document.  Analysis of other
-   methods for a head to learn of the state of an P2MP MPLS LSP is
+   methods for a head to learn of the state of the P2MP MPLS LSP is
    outside the scope of this document.
 
    As specified in [RFC8563], BFD variables MUST be as follows for the

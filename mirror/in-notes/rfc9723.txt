@@ -14,7 +14,8 @@ ISSN: 2070-1721                                            K. Talaulikar
                                                                 May 2025
 
 
-        BGP Colored Prefix Routing (CPR) for SRv6-Based Services
+ BGP Colored Prefix Routing (CPR) for Services Based on Segment Routing
+                            over IPv6 (SRv6)
 
 Abstract
 
@@ -504,7 +505,7 @@ Table of Contents
    is possible for an on-path attacker in the trusted domain to identify
    packets associated with a particular intent.
 
-   The security considerations as described in [RFC4271], [RFC4272] and
+   The security considerations as described in [RFC4271], [RFC4272], and
    [RFC8754] apply to this document.
 
 7.  References

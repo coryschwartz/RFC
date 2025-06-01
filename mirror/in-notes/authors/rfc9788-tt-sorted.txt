@@ -1,0 +1,174 @@
+<tt>1</tt>
+<tt>addr-spec</tt>
+<tt>alice@example.com</tt>
+<tt>&amp;amp;</tt>
+<tt>&amp;gt;</tt>
+<tt>&amp;lt;</tt>
+<tt>&amp;</tt>
+<tt>application/pkcs7-mime; smime-type="enveloped-data"</tt>
+<tt>application/pkcs7-mime; smime-type="signed-data"</tt>
+<tt>ARC-Authentication-Results</tt>
+<tt>Archived-At</tt>
+<tt>A</tt>
+<tt>Bcc</tt>
+<tt>bob@example.org</tt>
+<tt>bodypart</tt>
+<tt>B</tt>
+<tt>[("Cc", "alice@example.net"), ("Subject", "Thursday's meeting")]</tt>
+<tt>Cc:</tt>
+<tt>Cc</tt>
+<tt>"cipher"</tt>
+<tt>cipher</tt>
+<tt>class</tt>
+<tt>"clear"</tt>
+<tt>clear</tt>
+<tt>Comments</tt>
+<tt>confmap[(name,val_in)]</tt>
+<tt>confmap</tt>
+<tt>Content-Disposition: attachment</tt>
+<tt>Content-*</tt>
+<tt>Content-Type: message/rfc822</tt>
+<tt>Content-Type</tt>
+<tt>crypto</tt>
+<tt>C</tt>
+<tt>ct</tt>
+<tt>Date</tt>
+<tt>Date: Wed, 11 Jan 2023 16:08:43 -0500</tt>
+<tt>display-name</tt>
+<tt>div</tt>
+<tt>DKIM-Signature</tt>
+<tt>domain</tt>
+<tt>D</tt>
+<tt>encoded-word</tt>
+<tt>encrypted-only</tt>
+<tt>E</tt>
+<tt>example.com</tt>
+<tt>false</tt>
+<tt>field-name</tt>
+<tt>From: Alice &lt;alice@example.net&gt;</tt>
+<tt>From: Bob &lt;bob@example.net&gt;</tt>
+<tt>From: &lt;alice@example.com&gt;</tt>
+<tt>From: &lt;bob@example.org&gt;</tt>
+<tt>From</tt>
+<tt>FWS</tt>
+<tt>genouter</tt>
+<tt>genprotected</tt>
+<tt>G</tt>
+<tt>&gt;</tt>
+<tt>h1</tt>
+<tt>(h1,v1)</tt>
+<tt>Handling the Jones contract</tt>
+<tt>hcp_baseline</tt>
+<tt>hcp_example_hide_cc</tt>
+<tt>hcp("From", val_in)</tt>
+<tt>hcp(h,v)</tt>
+<tt>hcp(name, val_in) -&gt; val_out</tt>
+<tt>hcp_no_confidentiality</tt>
+<tt>hcp_shy</tt>
+<tt>hcp</tt>
+<tt>header-protection-legacy-display</tt>
+<tt>(header, value)</tt>
+<tt>(h,newval)</tt>
+<tt>hp="cipher"</tt>
+<tt>hp="clear"</tt>
+<tt>hp-legacy-display="1"</tt>
+<tt>hp-legacy-display</tt>
+<tt>HP-Outer: From: &lt;alice@example.com&gt;</tt>
+<tt>HP-Outer</tt>
+<tt>hp-outer-value</tt>
+<tt>hp</tt>
+<tt>hp=</tt>
+<tt>h</tt>
+<tt>H</tt>
+<tt>(h,v) -&gt; result</tt>
+<tt>(h, v)</tt>
+<tt>(h,v)</tt>
+<tt>imap://bob@header-protection.cmrg.net/</tt>
+<tt>In-Reply-To: &lt;20230111T210843Z.1234@lhp.example&gt;</tt>
+<tt>In-Reply-To</tt>
+<tt>is_sig_valid</tt>
+<tt>Keywords</tt>
+<tt>ldlist</tt>
+<tt>legacy</tt>
+<tt>List-Archive</tt>
+<tt>List-Help</tt>
+<tt>List-Id</tt>
+<tt>List-Post</tt>
+<tt>List-Subscribe</tt>
+<tt>List-</tt>
+<tt>List-Unsubscribe</tt>
+<tt>local-part</tt>
+<tt>&lt;body&gt;</tt>
+<tt>&lt;div&gt;</tt>
+<tt>&lt;pre&gt;</tt>
+<tt>&lt;</tt>
+<tt>Mail-Followup-To</tt>
+<tt>Message-ID: &lt;20230111T210843Z.1234@lhp.example&gt;</tt>
+<tt>Message-Id</tt>
+<tt>Message-ID</tt>
+<tt>message/rfc822</tt>
+<tt>MIME-Version</tt>
+<tt>msg</tt>
+<tt>multipart/alternative</tt>
+<tt>multipart/mixed</tt>
+<tt>multipart/related</tt>
+<tt>name</tt>
+<tt>name</tt>
+<tt>name</tt>
+<tt>(name,val_in)</tt>
+<tt>newbody</tt>
+<tt>newheaders</tt>
+<tt>newval</tt>
+<tt>N</tt>
+<tt>null</tt>
+<tt>obs-unstruct</tt>
+<tt>origbody</tt>
+<tt>origheaders</tt>
+<tt>output</tt>
+<tt>Received</tt>
+<tt>RecipientInfo</tt>
+<tt>record</tt>
+<tt>References: &lt;20230111T210843Z.1234@lhp.example&gt;</tt>
+<tt>References</tt>
+<tt>refheaders</tt>
+<tt>refmsg</tt>
+<tt>refouter</tt>
+<tt>refprotected</tt>
+<tt>Reply-To</tt>
+<tt>respond(refouter)</tt>
+<tt>respond(refprotected)</tt>
+<tt>respond</tt>
+<tt>response_hcp(h,v)</tt>
+<tt>response_hcp</tt>
+<tt>result</tt>
+<tt>severity #183 serious</tt>
+<tt>signed-and-encrypted</tt>
+<tt>signed-only</tt>
+<tt>signed</tt>
+<tt>Subject: Handling the Jones contract</tt>
+<tt>Subject: Re: Handling the Jones contract ASAP</tt>
+<tt>("Subject", "Re: Handling the Jones contract") -&gt; "Re: [...]"</tt>
+<tt>Subject: Re: Handling the Jones contract</tt>
+<tt>Subject: Re: [...]</tt>
+<tt>Subject: [...]</tt>
+<tt>Subject:</tt>
+<tt>Subject</tt>
+<tt>text/html</tt>
+<tt>text/plain</tt>
+<tt>To: Alice &lt;alice@example.net&gt;</tt>
+<tt>To: Bob &lt;bob@example.net&gt;</tt>
+<tt>To</tt>
+<tt>true</tt>
+<tt>: </tt>
+<tt>[...]</tt>
+<tt>unprotected</tt>
+<tt>unstructured</tt>
+<tt>User-Agent</tt>
+<tt>v1</tt>
+<tt>val_in</tt>
+<tt>val_out</tt>
+<tt>VCHAR</tt>
+<tt>v</tt>
+<tt>WSP</tt>
+<tt>Y</tt>
+<tt>Z</tt>

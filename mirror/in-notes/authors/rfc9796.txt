@@ -141,7 +141,7 @@ Table of Contents
    [RFC9795], this document defines two additional new parameters,
    'verified' and 'integrity'.  These parameters help protect RCD
    information that had been sent via a SIP network to, for example, a
-   SIP entity on the edge of the network-to-network interface (NNI) that
+   SIP entity on the edge of the Network-to-Network Interface (NNI) that
    contains a verification service as defined in [RFC8224] and further
    defined specific to RCD information in [RFC9795].  The verification
    procedures include the successful verification of the "rcd" claims
@@ -161,7 +161,7 @@ Table of Contents
 
    Alternatively, this specification can be utilized in conjunction with
    the protocols defined in [RFC9795] as part of the communications
-   signaling path, specifically in the trusted User-Network Interface
+   signaling path, specifically in the trusted User-to-Network Interface
    (UNI) device interface at the terminating side as part of an
    authenticated, network-to-device, trusted signaling where a device
    may not have the ability to verify the "rcd" PASSporT, but it can
