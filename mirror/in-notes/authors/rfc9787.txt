@@ -8,7 +8,7 @@ Category: Informational                                B. Hoeneisen, Ed.
 ISSN: 2070-1721                                              pEp Project
                                                         A. Melnikov, Ed.
                                                                Isode Ltd
-                                                                May 2025
+                                                               June 2025
 
 
                  Guidance on End-to-End Email Security
@@ -196,13 +196,13 @@ Table of Contents
    information and metadata across multiple MUAs controlled by the same
    user.
 
+1.1.  Terminology
+
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
    "OPTIONAL" in this document are to be interpreted as described in BCP
    14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
-
-1.1.  Terminology
 
    For the purposes of this document, we define the following concepts:
 
@@ -221,9 +221,12 @@ Table of Contents
 
    *  _Structural Header Fields_ are documented in Section 1.1.1.
 
+   *  _Non-Structural Header Fields_ are header fields that are not
+      Structural Header Fields.
+
    *  _User-Facing Header Fields_ are documented in Section 1.1.2.
 
-   *  The _Main Body Part_ is the part (or parts) that is typically
+   *  A _Main Body Part_ is any part of a message that is typically
       rendered to the user as the message itself (not "as an
       attachment").  See Section 7.1.
 
@@ -268,9 +271,9 @@ Table of Contents
 1.1.2.  User-Facing Header Fields
 
    Of all the header fields that an email message may contain, only a
-   handful are typically presented directly to the user.  This document
-   refers to them as "user-facing" header fields.  Typically, user-
-   facing header fields are:
+   small subset are typically presented directly to the user.  This
+   document refers to them as User-Facing Header Fields.  Typically,
+   User-Facing Header Fields are:
 
    *  Subject
 
@@ -300,7 +303,7 @@ Table of Contents
 
    The above list contains the header fields most often presented
    directly to the user who views a message, though an MUA may also
-   decide to treat any other header field as "user-facing".  Of course,
+   decide to treat any other header field as "User-Facing".  Of course,
    many of these header fields are entirely absent from any given
    message, and an absent header field is not presented to the user at
    all.
@@ -318,7 +321,7 @@ Table of Contents
    message in a threaded discussion, or the List-* and Archived-At
    header fields added by mailing lists may cause additional buttons to
    be displayed during rendering), but they are not directly displayed
-   to the user and so are not considered "user-facing".
+   to the user and so are not considered "User-Facing".
 
 2.  Usability
 
@@ -359,10 +362,10 @@ Table of Contents
    See Section 3 for more details about mental models and cryptographic
    status.
 
-   (It is of course possible that a message forwarded as a MIME
-   attachment could have its own cryptographic status while still being
-   a message subpart, but that status should be distinct from the status
-   of the enclosing message.)
+      |  (It is of course possible that a message forwarded as a MIME
+      |  attachment could have its own cryptographic status while still
+      |  being a message subpart, but that status should be distinct
+      |  from the status of the enclosing message.)
 
 2.2.  Email Users Want a Familiar Experience
 
@@ -395,17 +398,18 @@ Table of Contents
    because of the distinctions outlined above.  When adding end-to-end
    cryptographic protection to an email endpoint, care should be taken
    not to negate any of the distinct features of email as a whole.  If
-   these features are violated to provide end-to-end crypto, the user
-   may just as well choose one of the other systems that don't have the
-   drawbacks that email has.  Implementers should try to provide end-to-
-   end protections that retain the familiar experience of email itself.
+   these features are violated to provide end-to-end cryptographic
+   protection, the user may just as well choose one of the other systems
+   that don't have the drawbacks that email has.  Implementers should
+   try to provide end-to-end protections that retain the familiar
+   experience of email itself.
 
    Furthermore, an email user is likely to regularly interact with other
    email correspondents who _cannot_ handle or produce end-to-end
-   cryptographic protections.  Care should be taken that enabling
-   cryptography in an MUA does not inadvertently limit the ability of
-   the user to interact with correspondents who use legacy or non-
-   cryptographic MUAs.
+   cryptographic protections.  Care should be taken when enabling
+   cryptography in an MUA so that the MUA does not inadvertently limit
+   the ability of the user to interact with correspondents who use
+   legacy or non-cryptographic MUAs.
 
 2.3.  Warning About Failure vs. Announcing Success
 
@@ -422,7 +426,7 @@ Table of Contents
    By analogy, when the user of an MUA first enables end-to-end
    cryptographic protection, it's likely that they will want to see
    which messages _have_ protection (that is, the security indicators
-   amenable to a conformant MUA as of 2024 are most likely to be
+   amenable to a conformant MUA as of 2025 are most likely to be
    comparable to those of a pre-2018 web browser).  But a user whose
    private email communications with a given correspondent, or within a
    given domain, are known to be entirely end-to-end protected might
@@ -438,9 +442,9 @@ Table of Contents
 
    It is out of scope for this document to define expectations about
    protections for any given message, but an implementer who cares about
-   usable experience should be deliberate and judicious about the
-   expectations their interface assumes that the user has in a given
-   context.  See Appendix A.9 for future work.
+   offering a simple user experience should be deliberate and judicious
+   about the expectations their interface assumes that the user has in a
+   given context.  See Appendix A.9 for future work.
 
 3.  Types of Protection
 
@@ -506,11 +510,11 @@ Table of Contents
    guidance).
 
    Alternately, an MUA may prefer to represent the state of an Encrypted
-   but Unverified message to the user as though it was Unprotected since
-   no verification is possible.  However, the MUA represents the message
-   to the user, though it MUST NOT leak cleartext of an encrypted
-   message (even an Encrypted but Unverified message) in subsequent
-   replies (see Section 5.4) or similar replications of the message.
+   But Unverified message to the user as though it was Unprotected since
+   no verification is possible.  However the MUA represents the message
+   to the user, it MUST NOT leak cleartext of an encrypted message (even
+   an Encrypted But Unverified message) in subsequent replies (see
+   Section 5.4) or similar replications of the message.
 
    Note that a cleartext message with an invalid signature SHOULD NOT be
    represented to the user as anything other than Unprotected (see
@@ -655,7 +659,7 @@ Table of Contents
 
    This MIME layer can offer:
 
-   *  confidentiality (via a Symmetrically Encrypted Data packet, see
+   *  confidentiality (via a Symmetrically Encrypted Data Packet, see
       Section 5.7 of [RFC9580]; an MUA MUST NOT generate this form due
       to ciphertext malleability),
 
@@ -673,7 +677,7 @@ Table of Contents
    MIME type (that is, with the Content-Type of the message itself).
 
    If the Content-Type of the message itself is not a Cryptographic
-   Layer, then the message has no cryptographic envelope.
+   Layer, then the message has no Cryptographic Envelope.
 
    "Contiguous" in the definition above indicates that if a
    Cryptographic Layer is the protected part of another Cryptographic
@@ -703,8 +707,8 @@ Table of Contents
 
    If the application wants to generate a message that is both encrypted
    and signed, it MAY use the simple MIME structure from Section 4.1.2.2
-   by ensuring that the Encrypted Message [RFC9580] within the
-   application/octet-stream part contains a Signed Message [RFC9580]
+   by ensuring that the [RFC9580] Encrypted Message within the
+   application/octet-stream part contains a [RFC9580] Signed Message
    (the final option described in Section 4.1.2.2).
 
 4.4.2.  Multilayer Cryptographic Envelopes
@@ -820,12 +824,12 @@ Table of Contents
 
    The message composition algorithm takes three parameters:
 
-   origbody:  The traditional unprotected message body as a well-formed
-      MIME tree (possibly just a single MIME leaf part).  As a well-
-      formed MIME tree, origbody already has structural header fields
-      present (see Section 1.1.1).
+   origbody:  The unprotected message body as a well-formed MIME tree
+      (possibly just a single MIME leaf part).  As a well-formed MIME
+      tree, origbody already has Structural Header Fields present (see
+      Section 1.1.1).
 
-   origheaders:  The intended non-structural header fields for the
+   origheaders:  The intended Non-Structural Header Fields for the
       message, represented here as a list of (h,v) pairs, where h is a
       header field name and v is the associated value.
 
@@ -847,9 +851,9 @@ Table of Contents
 
    3.  Return output.
 
-   This is the traditional algorithm.  It only protects the structural
-   header fields of the message body and leaves non-structural
-   (including user-facing) header fields unprotected.
+   This is the classic algorithm.  It only protects the Structural
+   Header Fields of the message body and leaves Non-Structural
+   (including User-Facing) Header Fields unprotected.
 
    Therefore, a conformant MUA MUST implement Header Protection as
    described in [RFC9788] (see Section 9.3).
@@ -1000,7 +1004,7 @@ Table of Contents
 6.2.  Errant Cryptographic Layers
 
    If an incoming message has any Errant Cryptographic Layers, a
-   conformant-interpreting MUA MUST ignore those layers when rendering
+   conformant interpreting MUA MUST ignore those layers when rendering
    the Cryptographic Summary of the message to the user.
 
 6.2.1.  Errant Signing Layer
@@ -1087,18 +1091,18 @@ Table of Contents
    they receive, so a conformant MUA in this situation SHOULD decrypt
    the part.
 
-   Although, in this case, a conformant MUA MUST NOT indicate in the
+   However, in this case, a conformant MUA MUST NOT indicate in the
    message's Cryptographic Summary that the message itself was
    encrypted.  Such an indication could be taken to mean that other
    (non-encrypted) parts of the message arrived with cryptographic
    confidentiality.
 
    Furthermore, when decrypting an Errant Cryptographic Layer, the MUA
-   MUST treat the decrypted cleartext as a distinct MIME subtree and not
-   attempt to merge or splice it together with any other part of the
-   message.  This offers protection against the direct exfiltration
-   (also known as EFAIL-DE) attacks described in [EFAIL] and so-called
-   multipart/oracle attacks described in [ORACLE].
+   MUST treat the decrypted cleartext as a distinct MIME subtree and it
+   MUST NOT attempt to merge or splice it together with any other part
+   of the message.  This offers protection against the direct
+   exfiltration (also known as EFAIL-DE) attacks described in [EFAIL]
+   and so-called multipart/oracle attacks described in [ORACLE].
 
 6.2.2.1.  Replying to a Message with an Errant Encryption Layer
 
@@ -1113,9 +1117,9 @@ Table of Contents
    encryption, unless quoted and attributed text is not included in the
    reply, as noted in Section 5.4.
 
-   When composing a reply to a message with an errant cryptographic
-   layer, a conformant MUA MUST NOT decrypt any errant cryptographic
-   layers when generating quoted or attributed text.  This will
+   When composing a reply to a message with an Errant Cryptographic
+   Layer, a conformant MUA MUST NOT decrypt any Errant Cryptographic
+   Layers when generating quoted or attributed text.  This will
    typically mean either leaving the ciphertext itself in the generated
    reply message or simply not generating any quoted or attributed text
    at all.  This offers protection against the reply-based attacks
@@ -1130,8 +1134,8 @@ Table of Contents
    In some cases, there may be a cryptographic signature or encryption
    that does not coincide with a MIME boundary.  For example, so-called
    "PGP Inline" messages typically contain base64-encoded ("ASCII-
-   armored", see Section 6 of [RFC9580]) ciphertext, or within the
-   content of a MIME part.
+   armored", see Section 6 of [RFC9580]) ciphertext within the content
+   of a MIME part.
 
 6.2.3.1.  Do Not Validate Non-MIME Signatures
 
@@ -1147,15 +1151,15 @@ Table of Contents
 6.2.3.2.  Skip or Isolate Non-MIME Decryption When Rendering
 
    When encountering what appears to be encrypted data not at a MIME
-   boundary, a conformant MUA MAY decline to decrypt the data at all.
+   boundary, a conformant MUA MAY fully decline to decrypt the data.
 
    During message rendering, if a conformant MUA attempts decryption of
    such a non-MIME encrypted section of an email, it MUST synthesize a
-   separate MIME part to contain only the decrypted data and not attempt
-   to merge or splice that part together with any other part of the
-   message.  Keeping such a section distinct and isolated from any other
-   part of the message offers protection against the direct exfiltration
-   attacks (also known as EFAIL-DE) described in [EFAIL].
+   separate MIME part to contain only the decrypted data and it MUST NOT
+   attempt to merge or splice that part together with any other part of
+   the message.  Keeping such a section distinct and isolated from any
+   other part of the message offers protection against the direct
+   exfiltration attacks (also known as EFAIL-DE) described in [EFAIL].
 
 6.2.3.3.  Do Not Decrypt Non-MIME Decryption When Replying
 
@@ -1182,11 +1186,11 @@ Table of Contents
    surrounding message -- they are simply layers that apply to the
    forwarded message itself.
 
-   A conformant-rendering MUA MUST NOT conflate the cryptographic
+   A conformant rendering MUA MUST NOT conflate the cryptographic
    protections of the forwarded message with the cryptographic
    protections of the incoming message.
 
-   A conformant-rendering MUA MAY render a Cryptographic Summary of the
+   A conformant rendering MUA MAY render a Cryptographic Summary of the
    protections afforded to the forwarded message by its own
    Cryptographic Envelope, as long as that rendering is unambiguously
    tied to the forwarded message itself and cannot be spoofed by either
@@ -1194,7 +1198,7 @@ Table of Contents
 
 6.4.  Signature Failures
 
-   A cryptographic signature may fail in multiple ways.  A conformant-
+   A cryptographic signature may fail in multiple ways.  A conformant
    receiving MUA that discovers a failed signature treats the message as
    though the signature did not exist.  This is similar to the standard
    guidance for failed DomainKeys Identified Mail (DKIM) signatures (see
@@ -1254,7 +1258,7 @@ Table of Contents
    Sometimes, an MUA might encounter a message with a well-formed
    Cryptographic Envelope that uses a form of encryption with
    substantial known flaws.  For example, a PGP/MIME message might use a
-   Symmetrically Encrypted Data packet, which is known to have malleable
+   Symmetrically Encrypted Data Packet, which is known to have malleable
    ciphertext (see Section 5.7 of [RFC9580]).  As another example, an S/
    MIME message may use an enveloped-data MIME part with a
    contentEncryptionAlgorithm of rc2-cbc with rc2ParameterVersion of
@@ -1265,8 +1269,8 @@ Table of Contents
    mechanisms are considered weak.
 
    A receiving MUA MUST warn the user that such a message has a known
-   weakness.  The receiving MUA MAY decline to decrypt such a message at
-   all.  If it decides to decrypt a message with a weak encryption
+   weakness.  The receiving MUA MAY fully decline to decrypt such a
+   message.  If it decides to decrypt a message with a weak encryption
    layer, it MUST NOT indicate in the message's Cryptographic Summary
    that the message was encrypted, as the confidentiality of the message
    is suspect.  This is similar to the approach taken in Section 6.2.2
@@ -1330,16 +1334,16 @@ Table of Contents
    preference given to the last child node with a MIME type that the MUA
    is capable of rendering directly.
 
-   An MUA MAY offer the user a mechanism to prefer a particular MIME
-   type within multipart/alternative instead of the last renderable
-   child.  For example, a user may explicitly prefer a text/plain
-   alternative part over text/html.  Note that due to uncertainty about
-   the capabilities and configuration of the receiving MUA, a
-   conformant-composing MUA should consider that multiple parts might be
-   rendered as the Main Body Part when the message is ultimately viewed.
-   In particular, the composing MUA should ensure that any part likely
-   to be viewed as the Main Body Part has the same semantic content as
-   any other such part.
+   An MUA MAY let the user select a preferred MIME type for rendering
+   within multipart/alternative instead of the last renderable child.
+   For example, a user may explicitly prefer a text/plain alternative
+   part over text/html.  Note that due to uncertainty about the
+   capabilities and configuration of the receiving MUA, a conformant
+   composing MUA should consider that multiple parts might be rendered
+   as the Main Body Part when the message is ultimately viewed.  In
+   particular, the composing MUA should ensure that any part likely to
+   be viewed as the Main Body Part has the same semantic content as any
+   other such part.
 
    When composing a message, an originating MUA operating on behalf of
    an active user can identify which part (or parts) are the "main"
@@ -1371,7 +1375,7 @@ Table of Contents
    by other MUAs as intended.
 
    Some MUAs have tried to compose messages where each attachment is
-   placed in its own cryptographic envelope.  Such a message is
+   placed in its own Cryptographic Envelope.  Such a message is
    problematic for several reasons:
 
    *  The attachments can be stripped, replaced, or reordered without
@@ -1472,14 +1476,14 @@ Table of Contents
    *  The certificate must be valid, not expired or revoked.
 
    *  It must have a subjectAltName of type rfc822Name whose contents
-      match the destination email address.  In particular, the local
+      match the destination email address.  In particular, the local-
       part of the two addresses should be an exact bytewise match, and
       the domain parts of the two addresses should be matched by
       ensuring label equivalence across the full domain name, as
       described in Section 2.3.2.4 of [RFC5890].
 
-   *  The algorithm OID in the certificate's SPKI is known to the MUA
-      and capable of encryption.  Examples include:
+   *  The algorithm OID in the certificate's SubjectPublicKeyInfo (SPKI)
+      is known to the MUA and capable of encryption.  Examples include:
 
       -  rsaEncryption (OID 1.2.840.113549.1.1.1), with the keyUsage
          (OID 2.5.29.15) extension present and the "key encipherment"
@@ -1523,18 +1527,18 @@ Table of Contents
    [DROWN] and [IKE]).  The simplest way to avoid any comparable risk is
    to use distinct key material for each cryptographic algorithm.  A
    conformant MUA that generates S/MIME certificates for the user MUST
-   also generate distinct S/MIME certificates to avoid possible cross-
+   generate distinct S/MIME certificates to avoid possible cross-
    protocol key misuse: one for encryption and another for signing.
 
    The simplest option for an S/MIME-capable MUA is for the MUA to
    permit the user to import a PKCS #12 [RFC7292] object that is
    expected to contain secret key material, end entity certificates for
-   the user, and intermediate certification authority certificates that
-   permit chaining from the end entity certificates to widely accepted
-   trust anchors.  A conformant MUA that imports such a PKCS #12 bundle
-   SHOULD warn the user if the bundle contains an S/MIME certificate and
-   corresponding secret key where the same secret key is used for both
-   encryption and signing.
+   the user, and intermediate certification authority (CA) certificates
+   that permit chaining from the end entity certificates to widely
+   accepted trust anchors.  A conformant MUA that imports such a PKCS
+   #12 bundle SHOULD warn the user if the bundle contains an S/MIME
+   certificate and corresponding secret key where the same secret key is
+   used for both encryption and signing.
 
    An S/MIME-capable MUA that has access to user certificates and their
    corresponding secret key material should also offer the ability to
@@ -1543,11 +1547,11 @@ Table of Contents
 
    Manual handling of PKCS #12 objects is challenging for most users.
    Producing the initial PKCS #12 object typically can only be done with
-   the aid of a certification authority via non-standardized, labor-
-   intensive, and error-prone procedures that most users do not
-   understand.  Furthermore, manual export and import incurs ongoing
-   labor (for example, before certificate expiration) by the user, which
-   most users are unprepared to do (see Section 8.2.2).
+   the aid of a CA via non-standardized, labor-intensive, and error-
+   prone procedures that most users do not understand.  Furthermore,
+   manual export and import incurs ongoing labor (for example, before
+   certificate expiration) by the user, which most users are unprepared
+   to do (see Section 8.2.2).
 
    A better approach is for the MUA to integrate some form of automated
    certificate issuance procedure, for example, by using the Automatic
@@ -1582,12 +1586,11 @@ Table of Contents
    between multiple MUAs controlled by the user.
 
    Since an OpenPGP certificate MAY be certified by third parties
-   (whether formal certification authorities or merely other well-
-   connected peers), the MUA SHOULD offer affordances to help the user
-   acquire and merge third-party certifications on their certificate.
-   When doing this, the MUA should prioritize third-party certifications
-   from entities that the user's peers are likely to know about and be
-   willing to rely on.
+   (whether formal CAs or merely other well-connected peers), the MUA
+   SHOULD offer affordances to help the user acquire and merge third-
+   party certifications on their certificate.  When doing this, the MUA
+   should prioritize third-party certifications from entities that the
+   user's peers are likely to know about and be willing to rely on.
 
    Since an OpenPGP certificate can grow arbitrarily large with third-
    party certifications, the MUA should assist the user in pruning it to
@@ -1602,8 +1605,9 @@ Table of Contents
    material from an untrusted external party as the basis for the user's
    certificate.  For example, a user who trusts their system
    administrator not to compromise their MUA may accept secret key
-   material generated by the sysadmin but probably should not accept
-   secret key material generated by an unaffiliated online web service.
+   material generated by the system administrator but probably should
+   not accept secret key material generated by an unaffiliated online
+   web service.
 
    An MUA that accepts secret key material from a third party cannot
    prevent that third party from retaining this material.  A third party
@@ -1645,15 +1649,15 @@ Table of Contents
          it were a peer certificate.
 
    An MUA that takes active steps to fix any of these problems before
-   they arise is even more usable than just warning, but guidance on how
-   to do active certificate maintenance is beyond the scope of this
-   document (see Appendix A.4.3).
+   they arise is even more usable than one that just issues warnings,
+   but guidance on how to do active certificate maintenance is beyond
+   the scope of this document (see Appendix A.4.3).
 
    If the MUA does find any of these issues and chooses to warn the
    user, it should use one aggregate warning with simple language that
-   the certificates might not be acceptable for other people and
-   recommend a course of action that the user can take to remedy the
-   problem.
+   describes how the certificates might not be acceptable for other
+   people and recommend a course of action that the user can take to
+   remedy the problem.
 
 8.2.3.  Shipping Certificates in Outbound Messages
 
@@ -1690,9 +1694,8 @@ Table of Contents
       recipient can easily "reply all" without needing to search for
       certificates.
 
-   *  any intermediate certification authority (CA) certificates needed
-      to chain all of the above to a widely trusted set of root
-      authorities.
+   *  any intermediate CA certificates needed to chain all of the above
+      to a widely trusted set of root authorities.
 
 8.2.3.2.  Shipping Certificates in PGP/MIME Messages
 
@@ -1758,15 +1761,15 @@ Table of Contents
 
    *  Store a cleartext version of the message in the Sent folder.  This
       presents a risk of information leakage: Anyone with access to the
-      Sent folder can read the contents of the message.  Furthermore,
-      any attempt to resend the message needs to also reapply the
-      cryptographic transformation before sending, or else the message
-      contents will leak upon resend.  A conformant MUA SHOULD NOT store
-      a cleartext copy in the Sent folder unless it knows that the Sent
-      folder cannot be read by an attacker.  For example, if end-to-end
-      confidentiality is desired, then storing the cleartext in an IMAP
-      folder where a potentially adversarial server can read it defeats
-      the purpose.
+      Sent folder can read the contents of the message.  Furthermore, in
+      any attempt to resend the message, the cryptographic
+      transformation needs to be reapplied before sending or else the
+      message contents will leak upon resend.  A conformant MUA SHOULD
+      NOT store a cleartext copy in the Sent folder unless it knows that
+      the Sent folder cannot be read by an attacker.  For example, if
+      end-to-end confidentiality is desired, then storing the cleartext
+      in an IMAP folder where a potentially adversarial server can read
+      it defeats the purpose.
 
    *  A final option is that the MUA can store a copy of the message's
       encryption session key.  Standard email encryption mechanisms
@@ -1824,9 +1827,9 @@ Table of Contents
 
    Note that some message header fields, such as List-*, Archived-At,
    and Resent-*, are typically added by an intervening MUA (see
-   Section 9.8), not by one of the traditional "ends" of an end-to-end
-   email exchange.  A receiving MUA may choose to consider the contents
-   of these header fields on an end-to-end protected message as markers
+   Section 9.8), not by one of the classic "ends" of an end-to-end email
+   exchange.  A receiving MUA may choose to consider the contents of
+   these header fields on an end-to-end protected message as markers
    added during message transit, even if they are not covered by the
    end-to-end cryptographic protection.
 
@@ -1865,14 +1868,14 @@ Table of Contents
    variants of the message created while leaving a coherent view of the
    message itself:
 
-   *  No cryptographic payload contains any Bcc header field.
+   *  No Cryptographic Payload contains any Bcc header field.
 
    *  The main copy of the message is signed and encrypted to all named
       recipients and to the sender.  A copy of this message is also
       stored in the sender's Sent folder.
 
    *  Each Bcc recipient receives a distinct copy of the message, with
-      an identical cryptographic payload, and the message is signed and
+      an identical Cryptographic Payload, and the message is signed and
       encrypted to that specific recipient and all the named recipients.
       These copies are not stored in the sender's Sent folder.
 
@@ -1889,14 +1892,14 @@ Table of Contents
    copy and to "reply all", should they want to.
 
    This should reduce user confusion on the receiving side: A recipient
-   of such a message who naively looks at the user-facing header fields
+   of such a message who naively looks at the User-Facing Header Fields
    from their own mailbox will have a good sense of what cryptographic
    treatments have been applied to the message.  It also simplifies
    message composition and user experience: The message composer sees
    fields that match their expectations about what will happen to the
    message.  Additionally, it may preserve the ability for a Bcc'ed
    recipient to retain their anonymity, should they need to offer the
-   signed cryptographic payload to an outside party as proof of the
+   signed Cryptographic Payload to an outside party as proof of the
    original sender's intent without revealing their own identity.
 
 9.5.  Draft Messages
@@ -2052,8 +2055,8 @@ Table of Contents
    For example, the sender cannot indicate via SMTP whether or not a
    given message _should_ be encrypted (some messages, such as those
    sent to a publicly archived mailing list, are pointless to encrypt)
-   or selected among multiple certificates for a recipient, if they
-   exist (see Section 8.1.1).
+   or select among multiple certificates for a recipient, if they exist
+   (see Section 8.1.1).
 
    Likewise, because such a proxy only interacts with the message when
    it is ready to be sent, it cannot indicate back to the user _during
@@ -2113,13 +2116,13 @@ Table of Contents
    *  Should the details of the cryptographic algorithms used in any
       signatures found be indicated as well?
 
-   *  Was the message encrypted?  If so, by whom?  What key was used to
+   *  Was the message encrypted?  If so, to whom?  What key was used to
       decrypt it?
 
    *  If both signed and encrypted, was the signing outside or inside
       the encryption?
 
-   *  How should errant Cryptographic Layers (see Section 4.5) be dealt
+   *  How should Errant Cryptographic Layers (see Section 4.5) be dealt
       with?
 
    *  What cryptographic protections do the header fields of the message
@@ -2147,9 +2150,10 @@ Table of Contents
    While an extension to IMAP (or POP or JMAP) might be able to express
    all the necessary semantics that would allow a generic MUA to
    indicate standardized cryptographic message status, such an extension
-   is beyond the scope of this document.  [RFC9219] describes the S/MIME
-   signature verification status over JMAP, which is a subset of the
-   cryptographic status information described here.
+   is beyond the scope of this document.  [RFC9219] describes the
+   transmission of an S/MIME signature verification status over JMAP,
+   which is a subset of the cryptographic status information described
+   here.
 
 9.7.3.  Who Controls the Proxy?
 
@@ -2255,7 +2259,7 @@ Table of Contents
    MUA that wants to offer its users true end-to-end guarantees for
    email messages.
 
-   A conformant-sending MUA that applies signing-only cryptographic
+   A conformant sending MUA that applies signing-only cryptographic
    protection to a new email message with an external subresource should
    take one of the following options:
 
@@ -2269,13 +2273,13 @@ Table of Contents
    *  prompt the composing user to remove the subresource from the
       message.
 
-   A conformant-sending MUA that applies encryption to a new email
+   A conformant sending MUA that applies encryption to a new email
    message with an external resource cannot depend on Subresource
    Integrity to protect the privacy and confidentiality of the message,
    so it should either pre-fetch the external resource to include it in
    the message or prompt the composing user to remove it before sending.
 
-   A conformant-receiving MUA that encounters a message with end-to-end
+   A conformant receiving MUA that encounters a message with end-to-end
    cryptographic protections that contain a subresource MUST either
    refuse to retrieve and render the external subresource or decline to
    treat the message as having cryptographic protections.  For example,
@@ -2335,7 +2339,7 @@ Table of Contents
 
    [RFC9788]  Gillmor, D. K., Hoeneisen, B., and A. Melnikov, "Header
               Protection for Cryptographically Protected Email",
-              RFC 9788, DOI 10.17487/RFC9788, May 2025,
+              RFC 9788, DOI 10.17487/RFC9788, June 2025,
               <https://www.rfc-editor.org/info/rfc9788>.
 
 12.2.  Informative References
@@ -2537,9 +2541,9 @@ Table of Contents
 
    [WEBKEY-SERVICE]
               Koch, W., "OpenPGP Web Key Directory", Work in Progress,
-              Internet-Draft, draft-koch-openpgp-webkey-service-19, 5
-              December 2024, <https://datatracker.ietf.org/doc/html/
-              draft-koch-openpgp-webkey-service-19>.
+              Internet-Draft, draft-koch-openpgp-webkey-service-20, 2
+              June 2025, <https://datatracker.ietf.org/doc/html/draft-
+              koch-openpgp-webkey-service-20>.
 
 Appendix A.  Future Work
 
@@ -2551,11 +2555,11 @@ Appendix A.  Future Work
 A.1.  Webmail Threat Model
 
    The webmail threat model for end-to-end cryptographic protections is
-   significantly more complex than the traditional MUA model.  For
-   example, the web server hosting the webmail interface could be a
-   potential adversary.  If the user treats the web server as a trusted
-   party, but the web server violates that trust, the end-to-end
-   cryptographic protections do not hold.
+   significantly more complex than the classic MUA model.  For example,
+   the web server hosting the webmail interface could be a potential
+   adversary.  If the user treats the web server as a trusted party, but
+   the web server violates that trust, the end-to-end cryptographic
+   protections do not hold.
 
    A future version of this document could include more detailed
    discussion of an adversarial threat model for end-to-end
@@ -2609,8 +2613,8 @@ A.3.4.  Further Peer Certificate Selection
 
    A future version of this document may describe more prescriptions for
    deciding whether a peer certificate is acceptable for encrypting a
-   message.  For example, if the SPKI is an Elliptic Curve (EC) Public
-   Key and the keyUsage extension is absent, what should the encrypting
+   message.  For example, if the SPKI is an Elliptic Curve (EC) public
+   key and the keyUsage extension is absent, what should the encrypting
    MUA do?
 
    A future version of this document might also provide guidance on what
@@ -2698,7 +2702,7 @@ A.4.3.  Active Local Certificate Maintenance
 A.5.  Certification Authorities
 
    A future document could offer guidance on how an MUA should select
-   and manage root certification authorities (CAs).
+   and manage root CAs.
 
    For example:
 
@@ -2809,7 +2813,7 @@ A.11.  Interaction with Opportunistic Encryption
 A.12.  Split Attachments
 
    As noted in Section 7.2, the standard form for encrypted email
-   messages is a single cryptographic envelope.  In a scenario where
+   messages is a single Cryptographic Envelope.  In a scenario where
    multiple user agents are drafting a single encrypted message over
    low-bandwidth links, this can create a poor user experience, as each
    MUA has to retrieve the full message, including attachments, to
