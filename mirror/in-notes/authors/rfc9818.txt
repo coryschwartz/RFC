@@ -9,14 +9,14 @@ Category: Informational
 ISSN: 2070-1721
 
 
-      IPv6 Customer Edge (CE) Routers LAN DHCPv6 Prefix Delegation
+  DHCPv6 Prefix Delegation on IPv6 Customer Edge (CE) Routers in LANs
 
 Abstract
 
    This document defines requirements for IPv6 Customer Edge (CE)
    routers to support DHCPv6 Prefix Delegation for distributing
-   available prefixes that were delegated to a IPv6 CE router.  This
-   document updates RFC 7084.
+   available prefixes to LAN devices that were delegated to a IPv6 CE
+   router.  This document updates RFC 7084.
 
 Status of This Memo
 
@@ -94,14 +94,13 @@ Table of Contents
    eRouter specification [eRouter].  A flat prefix delegation requires
    the router to be provisioned with the initial prefix and to assign
    /64 prefixes to all other prefix requests from routers in the LAN-
-   facing interface.  The default configuration of CE router supporting
-   prefix delegation is designed to be a flat model to support zero-
-   configuration networking.
+   facing interface.  The default configuration of CE routers is
+   designed to be a flat model to support zero-configuration networking.
 
-   This document does not cover dealing with multi-provisioned networks
-   with more than one provider.  Due to the complexity of a solution
-   that would require routing, provisioning, and policy, this is out of
-   scope of this document.
+   This document does not cover dealing with multi-prefix networks with
+   more than one provider.  Due to the complexity of a solution that
+   would require routing, provisioning, and policy, this is out of scope
+   of this document.
 
 2.  Requirements Language
 
@@ -125,7 +124,7 @@ Table of Contents
    The document makes use of the following terms, some of which are from
    Section 2 of [RFC8200]
 
-   IPv6 node:  A device that implements IPv6 protocol.
+   IPv6 node:  A device that implements IPv6.
 
    IPv6 router:  An IPv6 node that forwards IPv6 packets not explicitly
       addressed to itself.
@@ -138,7 +137,7 @@ Table of Contents
 
 4.  IPv6 End-User Network Architecture
 
-   The end-user network for IPv6 that is a stub network.  Figure 1
+   The end-user network for IPv6 contains stub networks.  Figure 1
    illustrates the model topology.
 
                           +-----------+
@@ -192,7 +191,7 @@ Table of Contents
             for Prefix Delegation (IA_PD) option) on its LAN
             interface(s).
 
-   LPD-2:   IPv6 CE routers MUST assign a prefix from the delegated
+   LPD-2:   Each IPv6 CE routers MUST assign a prefix from the delegated
             prefix as specified by L-2 in Section 4.3 of [RFC7084].  If
             insufficient prefixes are available, the IPv6 CE router MUST
             log a system management error.
@@ -206,28 +205,31 @@ Table of Contents
 
    LPD-5:   IPv6 CE routers MUST maintain a local routing table that is
             dynamically updated with leases and the associated next hops
-            as they are delegated to clients.  When a delegated prefix
-            is released or expires, the associated route MUST be removed
-            from the IPv6 CE router's routing table.  A delegated prefix
-            expires when the valid lifetime assigned in the IA_PD
-            expires without being renewed.  When a prefix is released or
-            expires, it MUST be returned the pool of available prefixes.
+            as they are delegated to clients.  Packets with destination
+            addresses in a delegated prefix MUST be routed to that
+            prefix regardless of which interface they are received on.
+            When a delegated prefix is released or expires, the
+            associated route MUST be removed from the IPv6 CE router's
+            routing table.  A delegated prefix expires when the valid
+            lifetime assigned in the IA_PD expires without being
+            renewed.  When a prefix is released or expires, it MUST be
+            returned the pool of available prefixes.
 
    LPD-6:   By default, the IPv6 CE router filtering rules MUST allow
             forwarding of packets with an outer IPv6 header containing a
-            source address belonging to Delegated Prefixes, along with
+            source address belonging to delegated prefixes, along with
             reciprocal packets from the same flow, following the
             recommendations of [RFC6092].  This updates WPD-5 of
             [RFC7084] to not drop packets from prefixes that have been
-            delegated.  IPv6 CE routers MUST continue to drop packets
-            including destination address that is not assigned to the
+            delegated.  IPv6 CE routers MUST continue to drop packets,
+            including destination address, that are not assigned to the
             LAN or delegated.
 
    LPD-7:   The IPv6 CE routers MUST provision IA_PD prefixes with a
             prefix-length of 64 on the LAN-facing interface unless
             configured to use a different prefix-length by the CE router
-            administrator.  The prefix length of 64 is used as that is
-            the current prefix length supported by SLAAC [RFC4862].  For
+            administrator.  The prefix-length of 64 is used as that is
+            the current prefix-length supported by SLAAC [RFC4862].  For
             hierarchical prefix delegation, a prefix-length shorter than
             64 may be configured.
 
@@ -235,7 +237,7 @@ Table of Contents
             defined in ULA-1 of Section 4.3 of [RFC7084] MUST continue
             to provision available GUA IPv6 prefixes.
 
-   LPD-9:   If an IPv6 CE router is provisioning both ULA and GUA via
+   LPD-9:   If an IPv6 CE router is provisioning both a ULA and GUA via
             prefix delegation, the GUA SHOULD appear first in the DHCPv6
             packets.
 

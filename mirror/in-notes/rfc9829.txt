@@ -79,7 +79,7 @@ Table of Contents
    extension is a means for an RP to determine which CRLs to rely upon.
 
    In the Resource Public Key Infrastructure (RPKI), a well-formed
-   Manifest fileList contains exactly one entry for its associated CRL,
+   manifest fileList contains exactly one entry for its associated CRL,
    together with a collision-resistant message digest of that CRL's
    contents (see Section 2.2 of [RFC6481] and Section 2 of [RFC9286]).
    Additionally, the target of the CRL Distribution Points extension in
@@ -89,7 +89,7 @@ Table of Contents
    that RPKI RPs will always be able to unambiguously identify exactly
    one current CRL for each RPKI CA.  Thus, in the RPKI, the ordering
    functionality provided by CRL Numbers is fully subsumed by
-   monotonically increasing Manifest Numbers (Section 4.2.1 of
+   monotonically increasing manifest numbers (Section 4.2.1 of
    [RFC9286]), thereby obviating the need for RPKI RPs to process CRL
    Number extensions at all.
 
@@ -142,11 +142,11 @@ Table of Contents
    *  the target of the certificate's CRL Distribution Points extension,
       and
 
-   *  listed in the issuing CA's current Manifest fileList and has a
+   *  listed in the issuing CA's current manifest fileList and has a
       matching hash (see Section 4.2.1 of [RFC9286]).
 
    In particular, a resource certificate cannot be validated without
-   consulting the current Manifest of the certificate's issuer.
+   consulting the current manifest of the certificate's issuer.
 
 3.  Updates to RFC 6487
 
@@ -209,7 +209,7 @@ Table of Contents
    |  5.  The issuer has not revoked the certificate.  A revoked
    |      certificate is identified by the certificate's serial number
    |      being listed on the issuer's current CRL, as identified by the
-   |      issuer's current Manifest and the CRLDP of the certificate.
+   |      issuer's current manifest and the CRLDP of the certificate.
    |      The CRL is itself valid and the public key used to verify the
    |      signature on the CRL is the same public key used to verify the
    |      certificate itself.
@@ -225,9 +225,9 @@ Table of Contents
    apply to Resource Certificates and CRLs.
 
    This document explicates that, in the RPKI, the CRL listed on the
-   certificate issuer's current Manifest is the one relevant and
+   certificate issuer's current manifest is the one relevant and
    appropriate for determining the revocation status of a resource
-   certificate.  The hash in the manifest's FileList provides a
+   certificate.  The hash in the manifest's fileList provides a
    cryptographic guarantee on the Certification Authority's intent that
    this is the most recent CRL and removes possible replay vectors.
 

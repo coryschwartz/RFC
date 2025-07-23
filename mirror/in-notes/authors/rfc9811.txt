@@ -372,7 +372,7 @@ Table of Contents
       parameters> refers to this document, instead of [RFC4210].
 
    *  the reference for "cmp" in the "Well-Known URIs" registry
-      <https://www.iana.org/assignments/core-parameters> refers to this
+      <https://www.iana.org/assignments/well-known-uris/> refers to this
       document instead of [RFC4210].
 
    *  the reference for "p" in the "CMP Well-Known URI Path Segments"

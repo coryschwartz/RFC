@@ -87,28 +87,32 @@ Table of Contents
    End.DT2M SRv6 Endpoint Behavior, which utilizes arguments (i.e.,
    Arg.FE2).  [RFC9252] subsequently specified the encoding and
    signaling procedures for the SRv6 SID and its associated argument via
-   EVPN Route Type 3 and EVPN Route Type 1, respectively.  However,
-   during implementation and interoperability testing, it was observed
-   that the specifications outlined in [RFC9252] lack sufficient detail,
-   leading to ambiguities in interpretation and implementation.
+   the Inclusive Multicast Ethernet Tag route (EVPN Route Type 3) and
+   the Ethernet A-D (Auto-Discovery) per ES route (EVPN Route Type 1),
+   respectively.  However, during implementation and interoperability
+   testing, it was observed that the specifications outlined in
+   [RFC9252] lack sufficient detail, leading to ambiguities in
+   interpretation and implementation.
 
    This document updates [RFC9252] by providing additional details and
    clarifications regarding the signaling of SRv6 Service SIDs
    associated with SRv6 Endpoint Behaviors that utilize arguments.
    While the focus is primarily on the signaling of the End.DT2M SRv6
-   Endpoint Behavior via EVPN Route Types 1 and 3, the procedures
-   described herein are also applicable to other similar SRv6 Endpoint
-   Behaviors with arguments that may be signaled using BGP.
+   Endpoint Behavior via the Ethernet A-D per ES route and Inclusive
+   Multicast Ethernet Tag route, the procedures described herein are
+   also applicable to other similar SRv6 Endpoint Behaviors with
+   arguments that may be signaled using BGP.
 
    Section 6.3 of [RFC9252] specifies that the SRv6 Service SID used in
    the data plane is derived by applying a bitwise logical-OR operation
-   between the SID with an argument signaled via EVPN Route Type 1 and
-   the SID with the 'Locator + Function' components signaled via EVPN
-   Route Type 3.  However, this approach assumes a uniform SID structure
-   across all SIDs advertised via EVPN Route Types 1 and 3.  This
-   assumption is not universally valid, and the procedures in this
-   document remove this restriction, ensuring greater flexibility in
-   SRv6 SID signaling.
+   between the SID with an argument signaled via the Ethernet A-D per ES
+   route and the SID with the 'Locator + Function' components signaled
+   via the Inclusive Multicast Ethernet Tag route.  However, this
+   approach assumes a uniform SID structure across all SIDs advertised
+   via the Ethernet A-D per ES route and Inclusive Multicast Ethernet
+   Tag route.  This assumption is not universally valid, and the
+   procedures in this document remove this restriction, ensuring greater
+   flexibility in SRv6 SID signaling.
 
    The descriptions and examples presented in this document do not
    utilize the Transposition Scheme (see Section 4 of [RFC9252]).
@@ -183,9 +187,9 @@ Table of Contents
    End.DT2M behavior is signaled via the Inclusive Multicast Ethernet
    Tag route, while the Ethernet Segment Identifier (ESI) Filtering ARG
    (denoted as Arg.FE2 in [RFC8986]) is signaled via the Ethernet A-D
-   (Auto-Discovery) per ES route.  The following subsections provide a
-   more detailed specification of the signaling and processing
-   mechanisms compared to [RFC9252].
+   per ES route.  The following subsections provide a more detailed
+   specification of the signaling and processing mechanisms compared to
+   [RFC9252].
 
    ESI Filtering is a split-horizon mechanism used for multihoming
    [RFC7432] or Ethernet-Tree (E-Tree) procedures [RFC8317].  ESI
@@ -214,8 +218,9 @@ Table of Contents
    Tag routes MAY consist of a combination of compressed and
    uncompressed End.DT2M behavior flavors.  The procedures in this
    document remain valid for such deployments provided that the AL
-   consistency checks between EVPN Route Type 1 and EVPN Route Type 3,
-   as described in the following subsections, are satisfied.
+   consistency checks between the Ethernet A-D per ES route and
+   Inclusive Multicast Ethernet Tag route, as described in the following
+   subsections, are satisfied.
 
 3.1.  Advertisement of Ethernet A-D per ES Route
 
@@ -246,7 +251,7 @@ Table of Contents
                SRv6 SID Structure Sub-Sub-TLV:
                    LBL: 32, LNL: 16, FL: 16, AL: 0, TPOS-L: 0, TPOS-O: 0
 
-         Figure 1: EVPN Route Type 1 Without ARG for ESI Filtering
+     Figure 1: Ethernet A-D per ES Route Without ARG for ESI Filtering
 
    When ESI Filtering is in use, the advertisement of this route MUST
    include the BGP Prefix-SID attribute with an SRv6 L2 Service TLV
@@ -274,7 +279,7 @@ Table of Contents
               SRv6 SID Structure Sub-Sub-TLV:
                   LBL: 32, LNL: 16, FL: 16, AL: 16, TPOS-L: 0, TPOS-O: 0
 
-          Figure 2: EVPN Route Type 1 with ARG for ESI Filtering
+      Figure 2: Ethernet A-D per ES Route with ARG for ESI Filtering
 
    In the examples above, it would have been possible to set the LBL,
    LNL, and FL values to 0 and to encode the SRv6 SID as either ::0 or
@@ -317,7 +322,8 @@ Table of Contents
                SRv6 SID Structure Sub-Sub-TLV:
                    LBL: 32, LNL: 16, FL: 16, AL: 0, TPOS-L: 0, TPOS-O: 0
 
-             Figure 3: EVPN Route Type 3 Without ESI Filtering
+        Figure 3: Inclusive Multicast Ethernet Tag Route Without ESI
+                                 Filtering
 
    When ESI Filtering is in use, the router expects to receive traffic
    in the data path to the SRv6 Service SID that it has signaled along
@@ -339,25 +345,28 @@ Table of Contents
               SRv6 SID Structure Sub-Sub-TLV:
                   LBL: 32, LNL: 16, FL: 16, AL: 16, TPOS-L: 0, TPOS-O: 0
 
-              Figure 4: EVPN Route Type 3 with ESI Filtering
+   Figure 4: Inclusive Multicast Ethernet Tag Route with ESI Filtering
 
    When ESI Filtering is in use, the advertising router MUST ensure that
-   the AL signaled in the EVPN Route Type 3 is equal to the AL signaled
-   in the corresponding EVPN Route Type 1.
+   the AL signaled in the Inclusive Multicast Ethernet Tag route is
+   equal to the AL signaled in the corresponding Ethernet A-D per ES
+   route.
 
 3.3.  Processing at Ingress PE
 
    An ingress PE receives the LOC:FUNC portion of the SRv6 Service SID
-   to be used for BUM traffic through EVPN Route Type 3 advertisements.
+   to be used for BUM traffic through Inclusive Multicast Ethernet Tag
+   route advertisements.
 
    When ESI Filtering is not in use, the SRv6 Service SID to be used
-   consists solely of the LOC:FUNC portion received via EVPN Route Type
-   3.
+   consists solely of the LOC:FUNC portion received via the Inclusive
+   Multicast Ethernet Tag route.
 
    When ESI Filtering is in use, the ESI Filtering ARG of the SRv6
    Service SID is signaled through the Ethernet A-D per ES route.  The
-   ARG, in combination with the LOC:FUNC portion received via EVPN Route
-   Type 3, forms the SRv6 Service SID to be used.
+   ARG, in combination with the LOC:FUNC portion received via the
+   Inclusive Multicast Ethernet Tag route, forms the SRv6 Service SID to
+   be used.
 
    Since the LOC:FUNC and ARG portions of the SRv6 Service SID are
    signaled via different route advertisements, there may be cases where
@@ -370,46 +379,48 @@ Table of Contents
    The ingress PE router MUST follow the processing steps outlined below
    when handling SRv6 Service SID advertisements:
 
-   1.  If AL=0 is signaled via EVPN Route Type 3, then the egress PE
-       either does not support ESI Filtering or does not require an ESI
-       Filtering ARG for the specific SID.  In this case, the SRv6
-       Service SID is formed using only the LOC:FUNC portion, and all
-       bits after LBL + LNL + FL MUST be set to zero for encoding on the
-       data path.  Additionally, the router MUST ignore the SID value
-       and its SID structure advertised in the corresponding EVPN Route
-       Type 1.
+   1.  If AL=0 is signaled via the Inclusive Multicast Ethernet Tag
+       route, then the egress PE either does not support ESI Filtering
+       or does not require an ESI Filtering ARG for the specific SID.
+       In this case, the SRv6 Service SID is formed using only the
+       LOC:FUNC portion, and all bits after LBL + LNL + FL MUST be set
+       to zero for encoding on the data path.  Additionally, the router
+       MUST ignore the SID value and its SID structure advertised in the
+       corresponding Ethernet A-D per ES route.
 
-   2.  If a non-zero AL is signaled via EVPN Route Type 3, then the
-       matching EVPN Route Type 1 for the Ethernet Segment is located
-       and the presence of an SRv6 SID advertisement with the End.DT2M
-       behavior is verified.
+   2.  If a non-zero AL is signaled via the Inclusive Multicast Ethernet
+       Tag route, then the matching Ethernet A-D per ES route for the
+       Ethernet Segment is located and the presence of an SRv6 SID
+       advertisement with the End.DT2M behavior is verified.
 
        a.  If the presence of such a SRv6 SID is not verified, or if the
-           AL is zero in the EVPN Route Type 1, then no usable ARG value
-           is available.  The SRv6 Service SID MUST be formed as
-           described in (1) above.
+           AL is zero in the Ethernet A-D per ES route, then no usable
+           ARG value is available.  The SRv6 Service SID MUST be formed
+           as described in (1) above.
 
-       b.  If the AL values in EVPN Route Type 1 and EVPN Route Type 3
-           are both non-zero but not equal, then no usable ARG value is
-           available.  This inconsistency in signaling from the egress
-           PE indicates a configuration error.  To prevent potential
-           looping, BUM traffic MUST NOT be forwarded for such routes
-           from the specific Ethernet Segment.  Implementations SHOULD
-           log an error message for troubleshooting this condition.
+       b.  If the AL values in the Ethernet A-D per ES route and
+           Inclusive Multicast Ethernet Tag route are both non-zero but
+           not equal, then no usable ARG value is available.  This
+           inconsistency in signaling from the egress PE indicates a
+           configuration error.  To prevent potential looping, BUM
+           traffic MUST NOT be forwarded for such routes from the
+           specific Ethernet Segment.  Implementations SHOULD log an
+           error message for troubleshooting this condition.
 
-       c.  If the AL values in EVPN Route Type 1 and EVPN Route Type 3
-           are both non-zero and equal, then the ARG value from EVPN
-           Route Type 1 is considered valid.  This ARG value MUST be
-           encoded within the SRv6 SID (LOC:FUNC) at the ARG offset as
-           specified in the SID structure (i.e., LBL + LNL + FL) in EVPN
-           Route Type 3.  All bits beyond LBL + LNL + FL + AL MUST be
-           set to zero.
+       c.  If the AL values in the Ethernet A-D per ES route and
+           Inclusive Multicast Ethernet Tag route are both non-zero and
+           equal, then the ARG value from the Ethernet A-D per ES route
+           is considered valid.  This ARG value MUST be encoded within
+           the SRv6 SID (LOC:FUNC) at the ARG offset as specified in the
+           SID structure (i.e., LBL + LNL + FL) in the Inclusive
+           Multicast Ethernet Tag route.  All bits beyond LBL + LNL + FL
+           + AL MUST be set to zero.
 
    Using the procedures above with the examples in Figures 1 and 3, the
    SRv6 Service SID encoding for the data plane without an ESI Filtering
    ARG is as follows:
 
-   EVPN Route Type 3:
+   Inclusive Multicast Ethernet Tag route:
     SID: 2001:db8:1:fbd1::
     Structure: LBL: 32, LNL: 16, FL: 16, AL: 0
 
@@ -421,11 +432,11 @@ Table of Contents
    SRv6 Service SID encoding for the data plane along with an ESI
    Filtering ARG is as follows:
 
-   EVPN Route Type 1:
+   Ethernet A-D per ES route:
     SID: ::aaaa:0:0:0
     Structure: LBL: 32, LNL: 16, FL: 16, AL: 16
 
-   EVPN Route Type 3:
+   Inclusive Multicast Ethernet Tag route:
     SID: 2001:db8:1:fbd1::
     Structure: LBL: 32, LNL: 16, FL: 16, AL: 16
 
@@ -463,15 +474,15 @@ Table of Contents
                          |                               |
                          +-------------------------------+
 
-    EVPN Route Type 1 ESI-1:
+    Ethernet A-D per ES route for ESI-1:
      SID: ::aaaa:0:0:0
      Structure: LBL: 32, LNL: 16, FL: 16, AL: 16
 
-    EVPN Route Type 3 from BD1:
+    Inclusive Multicast Ethernet Tag route from BD1:
      SID: 2001:db8:1:fbd1:fbd1:
      Structure: LBL: 32, LNL: 16, FL: 32, AL: 16
 
-    EVPN Route Type 3 from BD2:
+    Inclusive Multicast Ethernet Tag route from BD2:
      SID: 2001:db8:1:fbd2::
      Structure: LBL: 32, LNL: 16, FL: 16, AL: 16
 
@@ -490,9 +501,10 @@ Table of Contents
    are identical.
 
    Backward compatibility with implementations performing the bitwise
-   logical-OR operation is maintained when EVPN Route Type 3 and its
-   corresponding EVPN Route Type 1 advertise SIDs with the same SID
-   structure, as outlined in Sections 3.1 and 3.2.
+   logical-OR operation is maintained when the Inclusive Multicast
+   Ethernet Tag route and its corresponding Ethernet A-D per ES route
+   advertise SIDs with the same SID structure, as outlined in Sections
+   3.1 and 3.2.
 
    However, when the SID structures of the two route types are not
    identical, the bitwise logical-OR operation specified in [RFC9252]

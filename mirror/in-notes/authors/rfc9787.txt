@@ -4,11 +4,11 @@
 
 Internet Engineering Task Force (IETF)                D. K. Gillmor, Ed.
 Request for Comments: 9787                                          ACLU
-Category: Informational                                B. Hoeneisen, Ed.
-ISSN: 2070-1721                                              pEp Project
-                                                        A. Melnikov, Ed.
-                                                               Isode Ltd
-                                                               June 2025
+Category: Informational                                 A. Melnikov, Ed.
+ISSN: 2070-1721                                                Isode Ltd
+                                                       B. Hoeneisen, Ed.
+                                                             pEp Project
+                                                               July 2025
 
 
                  Guidance on End-to-End Email Security
@@ -579,9 +579,9 @@ Table of Contents
    internal subtree is known as the "protected part", though of course
    it may itself be a multipart object.
 
-   In the diagrams below, "↧" (DOWNWARDS ARROW FROM BAR, U+21A7)
-   indicates "decrypts to" and "⇩" (DOWNWARDS WHITE ARROW, U+21E9)
-   indicates "unwraps to".
+   In the diagrams below, "╧" (BOX DRAWINGS UP SINGLE AND HORIZONTAL
+   DOUBLE, U+2567) indicates "decrypts to" and "┴" (BOX DRAWINGS LIGHT
+   UP AND HORIZONTAL, U+2534) indicates "unwraps to".
 
 4.1.1.  S/MIME Cryptographic Layers
 
@@ -599,24 +599,24 @@ Table of Contents
 
 4.1.1.2.  S/MIME PKCS #7 signed-data Cryptographic Layer
 
-   └─╴application/pkcs7-mime; smime-type="signed-data"
-    ⇩ (unwraps to)
+   └┬╴application/pkcs7-mime; smime-type="signed-data"
+    ┴ (unwraps to)
     └─╴[protected part]
 
    This MIME layer offers authentication and integrity.
 
 4.1.1.3.  S/MIME PKCS #7 enveloped-data Cryptographic Layer
 
-   └─╴application/pkcs7-mime; smime-type="enveloped-data"
-    ↧ (decrypts to)
+   └┬╴application/pkcs7-mime; smime-type="enveloped-data"
+    ╧ (decrypts to)
     └─╴[protected part]
 
    This MIME layer offers confidentiality.
 
 4.1.1.4.  S/MIME PKCS #7 authEnveloped-data Cryptographic Layer
 
-   └─╴application/pkcs7-mime; smime-type="authEnveloped-data"
-    ↧ (decrypts to)
+   └┬╴application/pkcs7-mime; smime-type="authEnveloped-data"
+    ╧ (decrypts to)
     └─╴[protected part]
 
    This MIME layer offers confidentiality and integrity.
@@ -653,8 +653,8 @@ Table of Contents
 
    └┬╴multipart/encrypted
     ├─╴application/pgp-encrypted
-    └─╴application/octet-stream
-     ↧ (decrypts to)
+    └┬╴application/octet-stream
+     ╧ (decrypts to)
      └─╴[protected part]
 
    This MIME layer can offer:
@@ -668,7 +668,8 @@ Table of Contents
       [RFC9580]), or
 
    *  confidentiality, integrity, and authenticity all together (by
-      including an OpenPGP Signature Packet within the SEIPD).
+      including an OpenPGP Signature Packet, see Section 5.2 of
+      [RFC9580], within the SEIPD).
 
 4.2.  Cryptographic Envelope
 
@@ -717,10 +718,10 @@ Table of Contents
    multiple layers with either S/MIME or PGP/MIME, for example, using
    the following structure:
 
-   A └─╴application/pkcs7-mime; smime-type="enveloped-data"
-   B  ↧ (decrypts to)
-   C  └─╴application/pkcs7-mime; smime-type="signed-data"
-   D   ⇩ (unwraps to)
+   A └┬╴application/pkcs7-mime; smime-type="enveloped-data"
+   B  ╧ (decrypts to)
+   C  └┬╴application/pkcs7-mime; smime-type="signed-data"
+   D   ┴ (unwraps to)
    E   └─╴[protected part]
 
    When handling such a message, the properties of the Cryptographic
@@ -731,10 +732,10 @@ Table of Contents
 
 4.5.  Errant Cryptographic Layers
 
-   Due to confusion, malice, or well-intentioned tampering, a message
-   may contain a Cryptographic Layer that is not part of the
-   Cryptographic Envelope.  Such a layer is an Errant Cryptographic
-   Layer.
+   Due to confusion, malice, message forwarding, or well-intentioned
+   tampering, a message may contain a Cryptographic Layer that is not
+   part of the Cryptographic Envelope.  Such a layer is an Errant
+   Cryptographic Layer.
 
    An Errant Cryptographic Layer MUST NOT contribute to the message's
    overall cryptographic state.
@@ -767,14 +768,17 @@ Table of Contents
    tamper with content of the signed message, breaking the user's
    expectation of integrity and authenticity.
 
+   See also Section 6.2.1.1 for guidance on how a receiving MUA might
+   deal with this common pattern.
+
 4.5.2.  A Baroque Example
 
    Consider a message with the following overcomplicated structure:
 
    M └┬╴multipart/encrypted
    N  ├─╴application/pgp-encrypted
-   O  └─╴application/octet-stream
-   P   ↧ (decrypts to)
+   O  └┬╴application/octet-stream
+   P   ╧ (decrypts to)
    Q   └┬╴multipart/signed
    R    ├┬╴multipart/mixed
    S    │├┬╴multipart/signed
@@ -822,7 +826,7 @@ Table of Contents
    cryptographically protected message, such that it has a proper
    Cryptographic Envelope and Payload.
 
-   The message composition algorithm takes three parameters:
+   The inputs to the algorithm are:
 
    origbody:  The unprotected message body as a well-formed MIME tree
       (possibly just a single MIME leaf part).  As a well-formed MIME
@@ -843,11 +847,11 @@ Table of Contents
    The algorithm returns a MIME object that is ready to be injected into
    the mail system:
 
-   1.  Apply crypto to origbody, yielding MIME tree output.
+   1.  Apply crypto to MIME part origbody, producing MIME tree output.
 
-   2.  For each header name and value (h,v) in origheaders:
+   2.  For each header field name and value (h,v) in origheaders:
 
-       a.  Add header h to output with value v.
+       a.  Add header field h to output with value v.
 
    3.  Return output.
 
@@ -862,7 +866,7 @@ Table of Contents
 
    An email message that is both signed and encrypted is signed _inside_
    the encryption and not the other way around.  For example, when
-   crafting an encrypted and signed message using a simple Cryptographic
+   crafting a signed-and-encrypted message using a simple Cryptographic
    Envelope of a single layer (Section 4.4.1) with PGP/MIME, the OpenPGP
    Encrypted Message object should contain an OpenPGP Signed Message.
    Likewise, when using a multilayer Cryptographic Envelope
@@ -896,7 +900,7 @@ Table of Contents
       message to a mailing list that is intended to be published to a
       public archive).
 
-   *  Signed-and-Encrypted: In other cases, full end-to-end
+   *  Signed-and-encrypted: In other cases, full end-to-end
       confidentiality, authenticity, and integrity are desirable.
 
    *  Encrypted-only: There is no common use case for generating an
@@ -1041,8 +1045,8 @@ Table of Contents
    exception.
 
    If the MUA determines that the message comes from a mailing list (for
-   example, it has a List-ID header) and it has a structure that appends
-   a footer to a signing-only Cryptographic Layer with a valid
+   example, it has a List-ID header field) and it has a structure that
+   appends a footer to a signing-only Cryptographic Layer with a valid
    signature, such as:
 
    H └┬╴multipart/mixed
@@ -1054,8 +1058,8 @@ Table of Contents
    or:
 
    H └┬╴multipart/mixed
-   I  ├─╴application/pkcs7-mime; smime-type="signed-data"
-      │⇩ (unwraps to)
+   I  ├┬╴application/pkcs7-mime; smime-type="signed-data"
+      │┴ (unwraps to)
    J  │└─╴[protected part, may be an arbitrary MIME subtree]
    L  └─╴[footer, typically text/plain]
 
@@ -1118,8 +1122,8 @@ Table of Contents
    reply, as noted in Section 5.4.
 
    When composing a reply to a message with an Errant Cryptographic
-   Layer, a conformant MUA MUST NOT decrypt any Errant Cryptographic
-   Layers when generating quoted or attributed text.  This will
+   Layer, a conformant MUA MUST NOT quote or attribute text derived from
+   the decryption of any Errant Cryptographic Layer.  This will
    typically mean either leaving the ciphertext itself in the generated
    reply message or simply not generating any quoted or attributed text
    at all.  This offers protection against the reply-based attacks
@@ -1182,8 +1186,8 @@ Table of Contents
    Cryptographic Envelope.
 
    The Cryptographic Layers that are part of the Cryptographic Envelope
-   of the forwarded message are not Errant Cryptographic Layers of the
-   surrounding message -- they are simply layers that apply to the
+   of the forwarded message are Errant Cryptographic Layers with respect
+   to the surrounding message -- they are layers that only apply to the
    forwarded message itself.
 
    A conformant rendering MUA MUST NOT conflate the cryptographic
@@ -1209,10 +1213,10 @@ Table of Contents
    signature at all.  In both cases, the Cryptographic Summary should be
    Unprotected.
 
-   A conformant MUA that encounters an encrypted-and-signed message
-   where the signature is invalid SHOULD treat the message the same way
-   that it would treat a message that is encryption-only, unless the MUA
-   is providing the user with debugging information.
+   A conformant MUA that encounters a signed-and-encrypted message where
+   the signature is invalid SHOULD treat the message the same way that
+   it would treat a message that is encryption-only, unless the MUA is
+   providing the user with debugging information.
 
    These are some different ways that a signature may be invalid on a
    given message:
@@ -1399,10 +1403,10 @@ Table of Contents
 
    Consider a common message with the following MIME structure:
 
-   M └─╴application/pkcs7-mime
-      ↧ (decrypts to)
-   N  └─╴application/pkcs7-mime
-       ⇩ (unwraps to)
+   M └┬╴application/pkcs7-mime
+      ╧ (decrypts to)
+   N  └┬╴application/pkcs7-mime
+       ┴ (unwraps to)
    O   └┬╴multipart/mixed
    P    ├┬╴multipart/alternative
    Q    │├─╴text/plain
@@ -1414,18 +1418,18 @@ Table of Contents
    Parts Q and R are both Main Body Parts.
 
    If part S is Content-Disposition: attachment, then it is an
-   attachment.  If part S has no Content-Disposition header, it is
+   attachment.  If part S has no Content-Disposition header field, it is
    potentially ambiguous whether it is an attachment or not.  If the
    sender prefers a specific behavior, it should explicitly set the
-   Content-Disposition header on part S to either inline or attachment
-   as guidance to the receiving MUA.
+   Content-Disposition header field on part S to either inline or
+   attachment as guidance to the receiving MUA.
 
    Consider also this alternate structure:
 
-   M └─╴application/pkcs7-mime
-      ↧ (decrypts to)
-   N  └─╴application/pkcs7-mime
-       ⇩ (unwraps to)
+   M └┬╴application/pkcs7-mime
+      ╧ (decrypts to)
+   N  └┬╴application/pkcs7-mime
+       ┴ (unwraps to)
    O   └┬╴multipart/alternative
    P    ├─╴text/plain
    Q    └┬╴multipart/related
@@ -1458,10 +1462,8 @@ Table of Contents
 
    The MUA will need to be able to discover X.509 certificates for each
    peer, cache them, and select among them when composing an encrypted
-   message.
-
-   Detailed guidance about how to do this is beyond the scope of this
-   document, but future revisions may bring it into scope (see
+   message.  Detailed guidance about how to do this is beyond the scope
+   of this document, but future revisions may bring it into scope (see
    Appendix A.3).
 
 8.1.1.  Peer Certificate Selection
@@ -1475,12 +1477,15 @@ Table of Contents
 
    *  The certificate must be valid, not expired or revoked.
 
-   *  It must have a subjectAltName of type rfc822Name whose contents
-      match the destination email address.  In particular, the local-
-      part of the two addresses should be an exact bytewise match, and
-      the domain parts of the two addresses should be matched by
-      ensuring label equivalence across the full domain name, as
-      described in Section 2.3.2.4 of [RFC5890].
+   *  It must have a subjectAltName of type rfc822Name (for all ASCII
+      email addresses) or SmtpUTF8Mailbox (for Internationalized Email
+      Addresses) whose contents match the destination email address.  In
+      particular, for rfc822Name, the local-part of the two addresses
+      should be an exact bytewise match, and the domain parts of the two
+      addresses should be matched by ensuring label equivalence across
+      the full domain name, as described in Section 2.3.2.4 of
+      [RFC5890].  Comparison with SmtpUTF8Mailbox is specified in
+      Section 5 of [RFC9598].
 
    *  The algorithm OID in the certificate's SubjectPublicKeyInfo (SPKI)
       is known to the MUA and capable of encryption.  Examples include:
@@ -1677,7 +1682,7 @@ Table of Contents
    "certificates" member.  In any S/MIME EnvelopedData object,
    certificates can be shipped in the "originatorInfo.certs" member.
 
-   When a single S/MIME-protected email message is encrypted and signed,
+   When a single S/MIME-protected email message is signed-and-encrypted,
    it is usually sufficient to ship all the relevant certificates in the
    inner SignedData object's "certificates" member.
 
@@ -1817,10 +1822,11 @@ Table of Contents
    or message tampering (e.g., the Subject line is replaced, effectively
    changing the semantics of a signed message).  These are not only
    security vulnerabilities but also usability problems, because the
-   distinction between what is a header and what is the body of a
-   message is unclear to many end users and requires a more complex
-   mental model than is necessary.  Useful security comes from alignment
-   between simple mental models and tooling.
+   distinction between what is part of the header section and what is
+   part of the body of a message is unclear to many end users and
+   requires a more complex mental model than is necessary.  Useful
+   security comes from alignment between simple mental models and
+   tooling.
 
    To avoid these concerns, a conformant MUA MUST implement Header
    Protection as described in [RFC9788].
@@ -1875,9 +1881,10 @@ Table of Contents
       stored in the sender's Sent folder.
 
    *  Each Bcc recipient receives a distinct copy of the message, with
-      an identical Cryptographic Payload, and the message is signed and
-      encrypted to that specific recipient and all the named recipients.
-      These copies are not stored in the sender's Sent folder.
+      an identical Cryptographic Payload (that is, the cleartext is
+      identical), and the message is signed and encrypted to that
+      specific recipient and all the named recipients.  These copies are
+      not stored in the sender's Sent folder.
 
    *  Any Bcc'ed recipient MUST NOT be taken into consideration when
       determining which certificates to include in the message.  In
@@ -1936,9 +1943,14 @@ Table of Contents
    Appendix A.4.1).
 
    A conformant MUA MUST NOT sign a message draft with the user's normal
-   signing key.  If draft signing is intended for cryptographic
-   coordination between multiple MUAs of the same user, it should be
-   negotiated with a different key (but see Appendix A.4.1).
+   signing key, because creating a non-repudiable signature implies a
+   commitment from the sender.  If a signed draft message were to leak
+   to the user's "Drafts" folder on some untrustworthy server, the
+   server operator could claim that the user had committed to something
+   that they had not yet decided to commit to.  If draft signing is
+   intended for cryptographic coordination between multiple MUAs of the
+   same user, it should be negotiated with a different key (but see
+   Appendix A.4.1).
 
    The message should only be encrypted to its recipients upon actually
    sending the message.  No reasonable user expects their message's
@@ -2137,7 +2149,7 @@ Table of Contents
    that is willing to trust its contents, an attacker could spoof the
    field to make the user believe lies about the cryptographic status of
    the message.  In order for an MUA to be confident in such a header
-   field, it needs a guarantee from the proxy that any header it
+   field, it needs a guarantee from the proxy that any header field it
    produces will be safe.  How does the MUA reliably negotiate this
    guarantee with the proxy?  If the proxy can no longer offer this
    guarantee, how will the MUA know that things have changed?
@@ -2204,8 +2216,8 @@ Table of Contents
    signature from the original sender.  In many cases, breaking the
    original signature is the appropriate result, since the original
    message has been modified, and the original sender has no control
-   over the modifications made by the intervening MUA.  For encrypted-
-   and-signed messages, if the intervening MUA is capable of decrypting
+   over the modifications made by the intervening MUA.  For signed-and-
+   encrypted messages, if the intervening MUA is capable of decrypting
    the message, it must be careful when retransmitting the message.
    Will the new recipient be able to decrypt it?  If not, will the
    message be useful to the recipient?  If not, it may not make sense to
@@ -2248,9 +2260,9 @@ Table of Contents
    external subresource has strict integrity guarantees (e.g., via
    [SRI]).
 
-   Likewise, fetching an external subresource for an encrypted-and-
-   signed message effectively breaks goals of privacy and
-   confidentiality for the user.
+   Likewise, fetching an external subresource for a signed-and-encrypted
+   message effectively breaks goals of privacy and confidentiality for
+   the user.
 
    This is loosely analogous to security indicator problems that arose
    for web browsers as described in [MIXED-CONTENT].  However, while
@@ -2336,6 +2348,11 @@ Table of Contents
               Multipurpose Internet Mail Extensions (S/MIME) Version 4.0
               Message Specification", RFC 8551, DOI 10.17487/RFC8551,
               April 2019, <https://www.rfc-editor.org/info/rfc8551>.
+
+   [RFC9598]  Melnikov, A., Chuang, W., and C. Bonnell,
+              "Internationalized Email Addresses in X.509 Certificates",
+              RFC 9598, DOI 10.17487/RFC9598, May 2024,
+              <https://www.rfc-editor.org/info/rfc9598>.
 
    [RFC9788]  Gillmor, D. K., Hoeneisen, B., and A. Melnikov, "Header
               Protection for Cryptographically Protected Email",
@@ -2906,15 +2923,6 @@ Authors' Addresses
    Email: dkg@fifthhorseman.net
 
 
-   Bernie Hoeneisen (editor)
-   pEp Project
-   Oberer Graben 4
-   CH-8400 Winterthur
-   Switzerland
-   Email: bernie@ietf.hoeneisen.ch
-   URI:   https://pep-project.org/
-
-
    Alexey Melnikov (editor)
    Isode Ltd
    14 Castle Mews
@@ -2922,3 +2930,12 @@ Authors' Addresses
    TW12 2NP
    United Kingdom
    Email: alexey.melnikov@isode.com
+
+
+   Bernie Hoeneisen (editor)
+   pEp Project
+   Oberer Graben 4
+   CH-8400 Winterthur
+   Switzerland
+   Email: bernie@ietf.hoeneisen.ch
+   URI:   https://pep-project.org/

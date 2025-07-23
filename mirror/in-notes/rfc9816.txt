@@ -170,8 +170,8 @@ Table of Contents
    The BGP SPF modifications allow BGP to overcome these limitations.
    Furthermore, using the BGP-LS Network Layer Reachability Information
    (NLRI) format allows the BGP SPF data to be advertised for nodes,
-   links, and prefixes in the BGP routing domain and used for SPF
-   computations [RFC9552].
+   links, and prefixes in the BGP routing domain [RFC9552] and used for
+   SPF computations [RFC9815].
 
    Additional motivation for deploying BGP-SPF is included in [RFC9815].
 
@@ -201,7 +201,7 @@ Table of Contents
    Alternatively, as each and every router in the BGP-SPF domain will
    have a complete view of the topology, the operator can also choose to
    configure BGP sessions in the hop-by-hop peering model described in
-   [RFC7938] along with BFD [RFC5580].  In doing so, while the hop-by-
+   [RFC7938] along with BFD [RFC5880].  In doing so, while the hop-by-
    hop peering model lacks the inherent benefits of the controller-based
    model, BGP updates need not be serialized by the BGP best-path
    algorithm in either of these models.  This helps overall network
@@ -213,10 +213,10 @@ Table of Contents
    announcement of the BGP-SPF link-state.  The NLRI format and its
    associated attributes follow the format of BGP-LS for node, link, and
    prefix announcements.  Whether the peering model within a Clos
-   follows hop-by-hop peering described in [RFC7938] or any controller-
-   based or route-reflector peering, an operator can exchange BGP-LS-SPF
-   SAFI routes over the BGP peering by simply configuring BGP-LS-SPF
-   SAFI between the necessary BGP speakers.
+   follows hop-by-hop peering as described in [RFC7938] or any
+   controller-based or route-reflector peering, an operator can exchange
+   BGP-LS-SPF SAFI routes over the BGP peering by simply configuring
+   BGP-LS-SPF SAFI between the necessary BGP speakers.
 
    The BGP-LS-SPF SAFI can also coexist with BGP IP Unicast SAFI
    [RFC4760], which could exchange overlapping IP routes.  One use case
@@ -251,7 +251,7 @@ Table of Contents
 
 5.2.1.  Sparse Peering Model
 
-   Alternately, BFD [RFC5580] can be used to swiftly determine the
+   Alternately, BFD [RFC5880] can be used to swiftly determine the
    availability of links, and the BGP peering model can be significantly
    sparser than the data center fabric.  BGP-SPF sessions only need to
    be established with enough peers to provide a biconnected graph.  If
@@ -284,19 +284,19 @@ Table of Contents
    below the first tier, as shown in Figure 1 of [RFC7938], will
    establish BGP multi-hop sessions with the controllers.  For the
    multi-hop sessions, determining the route to the controllers without
-   depending on BGP would need to be through some other means beyond the
-   scope of this document.  However, the BGP discovery mechanisms
-   described in Section 5.5 would be one possibility.
+   depending on BGP would need to be through some other means, which is
+   beyond the scope of this document.  However, the BGP discovery
+   mechanisms described in Section 5.5 would be one possibility.
 
 5.2.2.  Biconnected Graph Heuristic
 
    With a biconnected graph heuristic, discovery of BGP SPF peers is
    assumed, e.g., as described in Section 5.5.  In this context,
    "biconnected" refers to the fact that there must be an advertised
-   Link NLRI for both BGP and SPF peers associated with the link before
-   the link can be used in the BGP SPF route calculation.  Additionally,
-   it is assumed that the direction of the peering can be ascertained.
-   In the context of a data center fabric, the direction is either
+   Link NLRI for both BGP SPF peers associated with the link before the
+   link can be used in the BGP SPF route calculation.  Additionally, it
+   is assumed that the direction of the peering can be ascertained.  In
+   the context of a data center fabric, the direction is either
    northbound (toward the spine), southbound (toward the Top-of-Rack
    (ToR) routers), or east-west (same level in the hierarchy).  The
    determination of the direction is beyond the scope of this document.
@@ -372,9 +372,9 @@ Table of Contents
 
    *  A Session Policy Identifier, which is a group number or name used
       to associate common session parameters with the peer.  For
-      example, in a data center, BGP sessions with a ToR device could
-      have different parameters than BGP sessions between leaf and
-      spine.
+      example, in a data center, BGP sessions with a ToR router could
+      have different parameters than BGP sessions between leaf and spine
+      nodes.
 
    In a data center fabric, it is often useful to know whether a peer is
    southbound (towards the servers) or northbound (towards the spine or
@@ -437,13 +437,13 @@ Table of Contents
 
    The BGP-SPF extensions [RFC9815] can be used in other topologies and
    avail the inherent convergence improvements.  Additionally, sparse
-   peering techniques may be utilized Section 5.2.  However, determining
-   whether to establish a BGP session is more complex, and the heuristic
-   described in Section 5.2.2 cannot be used.  In such topologies, other
-   techniques such as those described in [RFC9667] may be employed.  One
-   potential deployment would be the underlay for a Service Provider
-   (SP) backbone where usage of a single protocol, i.e., BGP, is
-   desired.
+   peering techniques may be utilized as described in Section 5.2.
+   However, determining whether to establish a BGP session is more
+   complex, and the heuristic described in Section 5.2.2 cannot be used.
+   In such topologies, other techniques such as those described in
+   [RFC9667] may be employed.  One potential deployment would be the
+   underlay for a Service Provider (SP) backbone where usage of a single
+   protocol, i.e., BGP, is desired.
 
 7.  Non-Transit Node Capability
 
@@ -534,11 +534,6 @@ Table of Contents
    [RFC5340]  Coltun, R., Ferguson, D., Moy, J., and A. Lindem, "OSPF
               for IPv6", RFC 5340, DOI 10.17487/RFC5340, July 2008,
               <https://www.rfc-editor.org/info/rfc5340>.
-
-   [RFC5580]  Tschofenig, H., Ed., Adrangi, F., Jones, M., Lior, A., and
-              B. Aboba, "Carrying Location Objects in RADIUS and
-              Diameter", RFC 5580, DOI 10.17487/RFC5580, August 2009,
-              <https://www.rfc-editor.org/info/rfc5580>.
 
    [RFC5880]  Katz, D. and D. Ward, "Bidirectional Forwarding Detection
               (BFD)", RFC 5880, DOI 10.17487/RFC5880, June 2010,

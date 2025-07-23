@@ -130,18 +130,18 @@ Table of Contents
 2.  SLH-DSA Hash-Based Signature Algorithm Overview
 
    SLH-DSA is a stateless hash-based signature algorithm.  SLH-DSA makes
-   use of a few time signature constructions, namely Forest of Random
-   Subsets (FORS) and a hypertree.  FORS signs a message with a private
-   key.  The corresponding FORS public keys are the leaves in k binary
-   trees.  The roots of these trees are hashed together to form a FORS
-   root.  SLH-DSA uses a one-time signature scheme called Winternitz
-   One-Time Signature Plus (WOTS+).  The FORS tree roots are signed by a
-   WOTS+ private key.  The corresponding WOTS+ public keys form the
-   leaves in d-layers of Merkle subtrees in the SLH-DSA hypertree.  The
-   bottom layer of that hypertree signs the FORS roots with WOTS+.  The
-   roots of the bottom Merkle subtrees are then signed with WOTS+ and
-   the corresponding WOTS+ public keys form the leaves of the next-
-   level-up subtree.  Subtree roots are consequently signed by their
+   use of a few-time signature construction (Forest of Random Subsets
+   (FORS)) and a hypertree.  FORS signs a message with a private key.
+   The corresponding FORS public keys are the leaves in k binary trees.
+   The roots of these trees are hashed together to form a FORS root.
+   SLH-DSA uses a one-time signature scheme called Winternitz One-Time
+   Signature Plus (WOTS+).  The FORS tree roots are signed by a WOTS+
+   private key.  The corresponding WOTS+ public keys form the leaves in
+   d-layers of Merkle subtrees in the SLH-DSA hypertree.  The bottom
+   layer of that hypertree signs the FORS roots with WOTS+.  The roots
+   of the bottom Merkle subtrees are then signed with WOTS+ and the
+   corresponding WOTS+ public keys form the leaves of the next-level-up
+   subtree.  Subtree roots are consequently signed by their
    corresponding subtree layers until the top subtree is reached.  The
    top-layer subtree forms the hypertree root, which is trusted at the
    verifier.

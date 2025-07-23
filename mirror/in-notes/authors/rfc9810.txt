@@ -379,8 +379,6 @@ Table of Contents
 
    CRMF:  Certificate Request Message Format
 
-   EE:  End Entity
-
    KEM:  Key Encapsulation Mechanism
 
    KGA:  Key Generation Authority
@@ -419,12 +417,12 @@ Table of Contents
    define the entities involved in PKI management and their interactions
    (in terms of the PKI management functions required).  We then group
    these functions in order to accommodate different identifiable types
-   of EEs.
+   of end entities.
 
 3.1.1.  Definitions of PKI Entities
 
-   The entities involved in PKI management include the EE (i.e., the
-   entity to whom the certificate is issued) and the CA (i.e., the
+   The entities involved in PKI management include the end entity (i.e.,
+   the entity to whom the certificate is issued) and the CA (i.e., the
    entity that issues the certificate).  An RA might also be involved in
    PKI management.
 
@@ -435,30 +433,32 @@ Table of Contents
    subjectAltName field of a certificate.  When we wish to distinguish
    the tools and/or software used by the subject (e.g., a local
    certificate management module), we will use the term "subject
-   equipment".  In general, the term "end entity" (EE), rather than
+   equipment".  In general, the term "end entity", rather than
    "subject", is preferred in order to avoid confusion with the field
-   name.  It is important to note that the EEs here will include not
-   only human users of applications but also applications themselves
-   (e.g., for Internet Key Exchange Protocol (IKE) / IPsec) or devices
-   (e.g., routers or industrial control systems).  This factor
-   influences the protocols that the PKI management operations use; for
-   example, application software is far more likely to know exactly
-   which certificate extensions are required than are human users.  PKI
-   management entities are also EEs in the sense that they are sometimes
-   named in the subject or subjectAltName field of a certificate or
-   cross-certificate.  Where appropriate, the term "end entity" will be
-   used to refer to EEs who are not PKI management entities.
+   name.  It is important to note that the end entities here will
+   include not only human users of applications but also applications
+   themselves (e.g., for Internet Key Exchange Protocol (IKE) / IPsec)
+   or devices (e.g., routers or industrial control systems).  This
+   factor influences the protocols that the PKI management operations
+   use; for example, application software is far more likely to know
+   exactly which certificate extensions are required than are human
+   users.  PKI management entities are also end entities in the sense
+   that they are sometimes named in the subject or subjectAltName field
+   of a certificate or cross-certificate.  Where appropriate, the term
+   "end entity" will be used to refer to end entities who are not PKI
+   management entities.
 
-   All EEs require secure local access to some information -- at a
-   minimum, their own name and private key, the name of a CA that is
-   directly trusted by this entity, and that CA's public key (or a
+   All end entities require secure local access to some information --
+   at a minimum, their own name and private key, the name of a CA that
+   is directly trusted by this entity, and that CA's public key (or a
    fingerprint of the public key where a self-certified version is
    available elsewhere).  Implementations MAY use secure local storage
-   for more than this minimum (e.g., the EE's own certificates or
-   application-specific information).  The form of storage will also
+   for more than this minimum (e.g., the end entity's own certificates
+   or application-specific information).  The form of storage will also
    vary -- from files to tamper-resistant cryptographic tokens.  The
    information stored in such local, trusted storage is referred to here
-   as the EE's TEE, also known as Personal Security Environment (PSE).
+   as the end entity's TEE, also known as Personal Security Environment
+   (PSE).
 
    Though TEE formats are beyond the scope of this document (they are
    very dependent on equipment, et cetera), a generic interchange format
@@ -467,9 +467,9 @@ Table of Contents
 
 3.1.1.2.  Certification Authority
 
-   The CA may or may not actually be a real "third party" from the EE's
-   point of view.  Quite often, the CA will actually belong to the same
-   organization as the EEs it supports.
+   The CA may or may not actually be a real "third party" from the end
+   entity's point of view.  Quite often, the CA will actually belong to
+   the same organization as the end entities it supports.
 
    Again, we use the term "CA" to refer to the entity named in the
    issuer field of a certificate.  When it is necessary to distinguish
@@ -482,9 +482,9 @@ Table of Contents
    (though it is also relevant as a policy issue).
 
    We use the term "root CA" to indicate a CA that is directly trusted
-   by an EE; that is, securely acquiring the value of a root CA public
-   key requires some out-of-band step(s).  This term is not meant to
-   imply that a root CA is necessarily at the top of any hierarchy,
+   by an end entity; that is, securely acquiring the value of a root CA
+   public key requires some out-of-band step(s).  This term is not meant
+   to imply that a root CA is necessarily at the top of any hierarchy,
    simply that the CA in question is trusted directly.  The "root CA"
    may provide its trust anchor information with or without using a
    certificate.  In some circumstances, such a certificate may be self-
@@ -496,52 +496,52 @@ Table of Contents
    continues using "root CA" based on the above definition because it is
    also present in the ASN.1 syntax that cannot be changed easily.
 
-   A "subordinate CA" is one that is not a root CA for the EE in
+   A "subordinate CA" is one that is not a root CA for the end entity in
    question.  Often, a subordinate CA will not be a root CA for any
    entity, but this is not mandatory.
 
 3.1.1.3.  Registration Authority
 
-   In addition to EEs and CAs, many environments call for the existence
-   of an RA separate from the CA.  The functions that the RA may carry
-   out will vary from case to case but MAY include identity checking,
-   token distribution, checking certificate requests and authentication
-   of their origin, revocation reporting, name assignment, archival of
-   key pairs, et cetera.
+   In addition to end entities and CAs, many environments call for the
+   existence of an RA separate from the CA.  The functions that the RA
+   may carry out will vary from case to case but MAY include identity
+   checking, token distribution, checking certificate requests and
+   authentication of their origin, revocation reporting, name
+   assignment, archival of key pairs, et cetera.
 
    This document views the RA as an OPTIONAL component: When it is not
    present, the CA is assumed to be able to carry out the RA's functions
-   so that the PKI management protocols are the same from the EE's point
-   of view.
+   so that the PKI management protocols are the same from the end
+   entity's point of view.
 
    Again, we distinguish, where necessary, between the RA and the tools
    used (the "RA equipment").
 
-   Note that an RA is itself an EE.  We further assume that all RAs are
-   in fact certified EEs and that RAs have private keys that are usable
-   for signing.  How a particular CA equipment identifies some EEs as
-   RAs is an implementation issue (i.e., this document specifies no
-   special RA certification operation).  We do not mandate that the RA
-   is certified by the CA with which it is interacting at the moment (so
-   one RA may work with more than one CA whilst only being certified
-   once).
+   Note that an RA is itself an end entity.  We further assume that all
+   RAs are in fact certified end entities and that RAs have private keys
+   that are usable for signing.  How a particular CA equipment
+   identifies some end entities as RAs is an implementation issue (i.e.,
+   this document specifies no special RA certification operation).  We
+   do not mandate that the RA is certified by the CA with which it is
+   interacting at the moment (so one RA may work with more than one CA
+   whilst only being certified once).
 
-   In some circumstances, EEs will communicate directly with a CA even
-   where an RA is present.  For example, for initial registration and/or
-   certification, the EE may use its RA but communicate directly with
-   the CA in order to refresh its certificate.
+   In some circumstances, end entities will communicate directly with a
+   CA even where an RA is present.  For example, for initial
+   registration and/or certification, the end entity may use its RA but
+   communicate directly with the CA in order to refresh its certificate.
 
 3.1.1.4.  Key Generation Authority
 
    A KGA is a PKI management entity generating key pairs on behalf of an
-   EE.  As the KGA generates the key pair, it knows the public and the
-   private part.
+   end entity.  As the KGA generates the key pair, it knows the public
+   and the private part.
 
    This document views the KGA as an OPTIONAL component.  When it is not
    present and central key generation is needed, the CA is assumed to be
    able to carry out the KGA's functions so that the PKI management
-   protocol messages are the same from the EE's point of view.  If
-   certain tasks of a CA are delegated to other components, this
+   protocol messages are the same from the end entity's point of view.
+   If certain tasks of a CA are delegated to other components, this
    delegation needs authorization, which can be indicated by EKUs (see
    Section 4.5).
 
@@ -549,7 +549,7 @@ Table of Contents
    consider the implications of server-side retention on the overall
    security of the system; in some cases, retention is good, for
    example, for escrow reasons, but in other cases, the server should
-   clear its copy after delivery to the EE.
+   clear its copy after delivery to the end entity.
 
    Note: If the CA delegates key generation to a KGA, the KGA can be
    collocated with the RA.
@@ -571,26 +571,26 @@ Table of Contents
 
    4.   PKI management protocols must allow the use of different
         industry-standard cryptographic algorithms (see CMP Algorithms
-        [RFC9481]).  This means that any given CA, RA, or EE may, in
-        principle, use whichever algorithms suit it for its own key
-        pair(s).
+        [RFC9481]).  This means that any given CA, RA, or end entity
+        may, in principle, use whichever algorithms suit it for its own
+        key pair(s).
 
    5.   PKI management protocols must not preclude the generation of key
-        pairs by the EE concerned, by a KGA, or by a CA.  Key generation
-        may also occur elsewhere, but for the purposes of PKI
+        pairs by the end entity concerned, by a KGA, or by a CA.  Key
+        generation may also occur elsewhere, but for the purposes of PKI
         management, we can regard key generation as occurring wherever
-        the key is first present at an EE, KGA, or CA.
+        the key is first present at an end entity, KGA, or CA.
 
    6.   PKI management protocols must support the publication of
-        certificates by the EE concerned, by an RA, or by a CA.
+        certificates by the end entity concerned, by an RA, or by a CA.
         Different implementations and different environments may choose
         any of the above approaches.
 
    7.   PKI management protocols must support the production of
-        Certificate Revocation Lists (CRLs) by allowing certified EEs to
-        make requests for the revocation of certificates.  This must be
-        done in such a way that the denial-of-service attacks, which are
-        possible, are not made simpler.
+        Certificate Revocation Lists (CRLs) by allowing certified end
+        entities to make requests for the revocation of certificates.
+        This must be done in such a way that the denial-of-service
+        attacks, which are possible, are not made simpler.
 
    8.   PKI management protocols must be usable over a variety of
         "transport" mechanisms, specifically including email, Hypertext
@@ -599,46 +599,48 @@ Table of Contents
         offline and non-networked file transfer methods.
 
    9.   Final authority for certification creation rests with the CA.
-        No RA or EE equipment can assume that any certificate issued by
-        a CA will contain what was requested; a CA may alter certificate
-        field values or may add, delete, or alter extensions according
-        to its operating policy.  In other words, all PKI entities (EEs,
-        RAs, KGAs, and CAs) must be capable of handling responses to
-        requests for certificates in which the actual certificate issued
-        is different from that requested (for example, a CA may shorten
-        the validity period requested).  Note that policy may dictate
-        that the CA must not publish or otherwise distribute the
-        certificate until the requesting entity has reviewed and
-        accepted the newly created certificate or the POP is completed.
-        In case of publication of the certificate (when using indirect
-        POP, see Section 8.11) or a precertificate in a CT log
-        [RFC9162], the certificate must be revoked if it was not
-        accepted by the EE or the POP could not be completed.
+        No RA or end entity equipment can assume that any certificate
+        issued by a CA will contain what was requested; a CA may alter
+        certificate field values or may add, delete, or alter extensions
+        according to its operating policy.  In other words, all PKI
+        entities (end entities, RAs, KGAs, and CAs) must be capable of
+        handling responses to requests for certificates in which the
+        actual certificate issued is different from that requested (for
+        example, a CA may shorten the validity period requested).  Note
+        that policy may dictate that the CA must not publish or
+        otherwise distribute the certificate until the requesting entity
+        has reviewed and accepted the newly created certificate or the
+        POP is completed.  In case of publication of the certificate
+        (when using indirect POP, see Section 8.11) or a precertificate
+        in a CT log [RFC9162], the certificate must be revoked if it was
+        not accepted by the end entity or the POP could not be
+        completed.
 
    10.  A graceful, scheduled changeover from one non-compromised CA key
         pair to the next (CA key update) must be supported (note that if
         the CA key is compromised, re-initialization must be performed
-        for all entities in the domain of that CA).  An EE whose TEE
-        contains the new CA public key (following a CA key update) may
-        also need to be able to verify certificates verifiable using the
-        old public key.  EEs who directly trust the old CA key pair may
-        also need to be able to verify certificates signed using the new
-        CA private key (required for situations where the old CA public
-        key is "hardwired" into the EE's cryptographic equipment).
+        for all entities in the domain of that CA).  An end entity whose
+        TEE contains the new CA public key (following a CA key update)
+        may also need to be able to verify certificates verifiable using
+        the old public key.  End entities who directly trust the old CA
+        key pair may also need to be able to verify certificates signed
+        using the new CA private key (required for situations where the
+        old CA public key is "hardwired" into the end entity's
+        cryptographic equipment).
 
    11.  The functions of an RA may, in some implementations or
         environments, be carried out by the CA itself.  The protocols
-        must be designed so that EEs will use the same protocol
+        must be designed so that end entities will use the same protocol
         regardless of whether the communication is with an RA or CA.
-        Naturally, the EE must use the correct RA or CA public key to
-        verify the protection of the communication.
+        Naturally, the end entity must use the correct RA or CA public
+        key to verify the protection of the communication.
 
-   12.  Where an EE requests a certificate containing a given public key
-        value, the EE must be ready to demonstrate possession of the
-        corresponding private key value.  This may be accomplished in
-        various ways, depending on the type of certification request.
-        See Section 4.3 for details of the in-band methods defined for
-        the PKIX-CMP (i.e., CMP) messages.
+   12.  Where an end entity requests a certificate containing a given
+        public key value, the end entity must be ready to demonstrate
+        possession of the corresponding private key value.  This may be
+        accomplished in various ways, depending on the type of
+        certification request.  See Section 4.3 for details of the in-
+        band methods defined for the PKIX-CMP (i.e., CMP) messages.
 
 3.1.3.  PKI Management Operations
 
@@ -700,19 +702,20 @@ Table of Contents
        certificates:
 
        a.  initial registration/certification: This is the process
-           whereby an EE first makes itself known to a CA or RA, prior
-           to the CA issuing a certificate or certificates for that EE.
-           The end result of this process (when it is successful) is
-           that a CA issues a certificate for an EE's public key and
-           returns that certificate to the EE and/or posts that
-           certificate in a repository.  This process may, and typically
-           will, involve multiple "steps", possibly including an
-           initialization of the EE's equipment.  For example, the EE's
-           equipment must be securely initialized with the public key of
-           a CA, e.g., using zero-touch methods like Bootstrapping
-           Remote Secure Key Infrastructure (BRSKI) [RFC8995] or Secure
-           Zero Touch Provisioning (SZTP) [RFC8572], to be used in
-           validating certificate paths.  Furthermore, an EE typically
+           whereby an end entity first makes itself known to a CA or RA,
+           prior to the CA issuing a certificate or certificates for
+           that end entity.  The end result of this process (when it is
+           successful) is that a CA issues a certificate for an end
+           entity's public key and returns that certificate to the end
+           entity and/or posts that certificate in a repository.  This
+           process may, and typically will, involve multiple "steps",
+           possibly including an initialization of the end entity's
+           equipment.  For example, the end entity's equipment must be
+           securely initialized with the public key of a CA, e.g., using
+           zero-touch methods like Bootstrapping Remote Secure Key
+           Infrastructure (BRSKI) [RFC8995] or Secure Zero Touch
+           Provisioning (SZTP) [RFC8572], to be used in validating
+           certificate paths.  Furthermore, an end entity typically
            needs to be initialized with its own key pair(s).
 
        b.  key pair update: Every key pair needs to be updated regularly
@@ -723,8 +726,8 @@ Table of Contents
            "refreshed" if nothing relevant in the environment has
            changed.
 
-       d.  CA key pair update: As with EEs, CA key pairs need to be
-           updated regularly; however, different mechanisms are
+       d.  CA key pair update: As with end entities, CA key pairs need
+           to be updated regularly; however, different mechanisms are
            required.
 
        e.  cross-certification request: One CA requests issuance of a
@@ -773,7 +776,7 @@ Table of Contents
        b.  CRL publication: As for certificate publication.
 
    5.  Recovery operations: Some PKI management operations are used when
-       an EE has "lost" its TEE:
+       an end entity has "lost" its TEE:
 
        a.  key pair recovery: As an option, user client key materials
            (e.g., a user's private key used for decryption purposes) MAY
@@ -803,7 +806,7 @@ Table of Contents
 
    Later sections define a set of standard messages supporting the above
    operations.  Transfer protocols for conveying these exchanges in
-   various environments (e.g., offline: file-based; online: mail, HTTP
+   various environments (e.g., offline: file-based; online: email, HTTP
    [RFC9811], MQTT, and CoAP [RFC9482]) are beyond the scope of this
    document and must be specified separately.  Appropriate transfer
    protocols MUST be capable of delivering the CMP messages reliably.
@@ -822,24 +825,25 @@ Table of Contents
 
 4.1.  End Entity Initialization
 
-   The first step for an EE in dealing with PKI management entities is
-   to request information about the PKI functions supported and to
-   securely acquire a copy of the relevant root CA public key(s).
+   The first step for an end entity in dealing with PKI management
+   entities is to request information about the PKI functions supported
+   and to securely acquire a copy of the relevant root CA public key(s).
 
 4.2.  Initial Registration/Certification
 
    There are many schemes that can be used to achieve initial
-   registration and certification of EEs.  No one method is suitable for
-   all situations due to the range of policies that a CA may implement
-   and the variation in the types of EE that can occur.
+   registration and certification of end entities.  No one method is
+   suitable for all situations due to the range of policies that a CA
+   may implement and the variation in the types of end entity that can
+   occur.
 
    However, we can classify the initial registration/certification
    schemes that are supported by this specification.  Note that the word
    "initial", above, is crucial: We are dealing with the situation where
-   the EE in question has had no previous contact with the PKI, except
-   having received the root CA certificate of that PKI by some zero-
-   touch method like BRSKI [RFC8995] [RFC9733] or SZTP [RFC8572].  In
-   case the EE already possesses certified keys, then some
+   the end entity in question has had no previous contact with the PKI,
+   except having received the root CA certificate of that PKI by some
+   zero-touch method like BRSKI [RFC8995] [RFC9733] or SZTP [RFC8572].
+   In case the end entity already possesses certified keys, then some
    simplifications/alternatives are possible.
 
    Having classified the schemes that are supported by this
@@ -869,28 +873,29 @@ Table of Contents
 
    In terms of the PKI messages that are produced, we can regard the
    initiation of the initial registration/certification exchanges as
-   occurring wherever the first PKI message relating to the EE is
-   produced.  Note that the real-world initiation of the registration/
-   certification procedure may occur elsewhere (e.g., a personnel
-   department may telephone an RA operator or use zero-touch methods
-   like BRSKI [RFC8995] or SZTP [RFC8572]).
+   occurring wherever the first PKI message relating to the end entity
+   is produced.  Note that the real-world initiation of the
+   registration/certification procedure may occur elsewhere (e.g., a
+   personnel department may telephone an RA operator or use zero-touch
+   methods like BRSKI [RFC8995] or SZTP [RFC8572]).
 
-   The possible locations are at the EE, an RA, or a CA.
+   The possible locations are at the end entity, an RA, or a CA.
 
 4.2.1.2.  End Entity Message Origin Authentication
 
-   The online messages produced by the EE that requires a certificate
-   may be authenticated or not.  The requirement here is to authenticate
-   the origin of any messages from the EE to the PKI (CA/RA).
+   The online messages produced by the end entity that requires a
+   certificate may be authenticated or not.  The requirement here is to
+   authenticate the origin of any messages from the end entity to the
+   PKI (CA/RA).
 
    In this specification, such authentication is achieved by two
    different means:
 
-   *  symmetric: The PKI (CA/RA) issuing the EE with a secret value
-      (initial authentication key) and reference value (used to identify
-      the secret value) via some out-of-band means.  The initial
-      authentication key can then be used to protect relevant PKI
-      messages.
+   *  symmetric: The PKI (CA/RA) issuing the end entity with a secret
+      value (initial authentication key) and reference value (used to
+      identify the secret value) via some out-of-band means.  The
+      initial authentication key can then be used to protect relevant
+      PKI messages.
 
    *  asymmetric: Using a private key and certificate issued by another
       PKI trusted for initial authentication, e.g., an Initial Device
@@ -905,12 +910,14 @@ Table of Contents
    Note 1:  We do not discuss the authentication of the 'PKI management
             entity -> end entity' messages here, as this is always
             REQUIRED.  In any case, it can be achieved simply once the
-            root-CA public key has been installed at the EE's equipment
-            or it can be based on the initial authentication key.
+            root-CA public key has been installed at the end entity's
+            equipment or it can be based on the initial authentication
+            key.
 
    Note 2:  An initial registration/certification procedure can be
-            secure where the messages from the EE are authenticated via
-            some out-of-band means (e.g., a subsequent visit).
+            secure where the messages from the end entity are
+            authenticated via some out-of-band means (e.g., a subsequent
+            visit).
 
 4.2.1.3.  Location of Key Generation
 
@@ -918,17 +925,17 @@ Table of Contents
    wherever either the public or private component of a key pair first
    occurs in a PKIMessage.  Note that this does not preclude a
    centralized key generation service by a KGA; the actual key pair MAY
-   have been generated elsewhere and transported to the EE, RA, or CA
-   using a (proprietary or standardized) key generation request/response
-   protocol (outside the scope of this specification).
+   have been generated elsewhere and transported to the end entity, RA,
+   or CA using a (proprietary or standardized) key generation request/
+   response protocol (outside the scope of this specification).
 
    Thus, there are three possibilities for the location of "key
-   generation": the EE, a KGA, or a CA.
+   generation": the end entity, a KGA, or a CA.
 
 4.2.1.4.  Confirmation of Successful Certification
 
-   Following the creation of a certificate for an EE, additional
-   assurance can be gained by having the EE explicitly confirm
+   Following the creation of a certificate for an end entity, additional
+   assurance can be gained by having the end entity explicitly confirm
    successful receipt of the message containing (or indicating the
    creation of) the certificate.  Naturally, this confirmation message
    must be protected (based on the initial symmetric or asymmetric
@@ -959,20 +966,21 @@ Table of Contents
    *  no confirmation message is required.
 
    In terms of message flow, this scheme means that the only message
-   required is sent from the CA to the EE.  The message must contain the
-   entire TEE for the EE.  Some out-of-band means must be provided to
-   allow the EE to authenticate the message received and to decrypt any
-   encrypted values.
+   required is sent from the CA to the end entity.  The message must
+   contain the entire TEE for the end entity.  Some out-of-band means
+   must be provided to allow the end entity to authenticate the message
+   received and to decrypt any encrypted values.
 
 4.2.2.2.  Basic Authenticated Scheme
 
    In terms of the classification above, this scheme is where:
 
-   *  initiation occurs at the EE;
+   *  initiation occurs at the end entity;
 
    *  message authentication is required;
 
-   *  "key generation" occurs at the EE (see Section 4.2.1.3); and
+   *  "key generation" occurs at the end entity (see Section 4.2.1.3);
+      and
 
    *  a confirmation message is recommended.
 
@@ -984,10 +992,10 @@ Table of Contents
    In terms of message flow, the basic authenticated scheme is as
    follows:
 
-     End entity                                          RA/CA
+     End Entity                                              RA/CA
      ==========                                      =============
           out-of-band distribution of Initial Authentication
-          Key (IAK) and reference value (RA/CA -> EE)
+          Key (IAK) and reference value (RA/CA -> end entity)
      Key generation
      Creation of certification request
      Protect request with IAK
@@ -1010,24 +1018,24 @@ Table of Contents
 
 4.3.  POP of Private Key
 
-   POP is where a PKI management entity (CA/RA) verifies if an EE has
-   access to the private key corresponding to a given public key.  The
-   question of whether, and in what circumstances, POPs add value to a
-   PKI is a debate as old as PKI itself!  See Section 8.1 for a further
-   discussion on the necessity of POP in PKI.
+   POP is where a PKI management entity (CA/RA) verifies if an end
+   entity has access to the private key corresponding to a given public
+   key.  The question of whether, and in what circumstances, POPs add
+   value to a PKI is a debate as old as PKI itself!  See Section 8.1 for
+   a further discussion on the necessity of POP in PKI.
 
    The PKI management operations specified here make it possible for an
-   EE to prove to a CA/RA that it has possession of (i.e., is able to
-   use) the private key corresponding to the public key for which a
-   certificate is requested (see Section 5.2.8 for different POP
+   end entity to prove to a CA/RA that it has possession of (i.e., is
+   able to use) the private key corresponding to the public key for
+   which a certificate is requested (see Section 5.2.8 for different POP
    methods).  A given CA/RA is free to choose how to enforce POP (e.g.,
    out-of-band procedural means versus PKIX-CMP in-band messages) in its
    certification exchanges (i.e., this may be a policy issue).  However,
    it is REQUIRED that CAs/RAs MUST enforce POP by some means because
    there are currently many non-PKIX operational protocols in use
    (various electronic mail protocols are one example) that do not
-   explicitly check the binding between the EE and the private key.
-   Until operational protocols that do verify the binding (for
+   explicitly check the binding between the end entity and the private
+   key.  Until operational protocols that do verify the binding (for
    signature, encryption, key agreement, and KEM key pairs) exist, and
    are ubiquitous, this binding can only be assumed to have been
    verified by the CA/RA.  Therefore, if the binding is not verified by
@@ -1041,35 +1049,37 @@ Table of Contents
    purposes, MUST NOT be sent to the CA/RA in order to prove possession
    unless archival of the private key is explicitly desired).
 
-   This specification explicitly allows for cases where an EE supplies
-   the relevant proof to an RA and the RA subsequently attests to the CA
-   that the required proof has been received (and validated!).  For
-   example, an EE wishing to have a signing key certified could send the
-   appropriate signature to the RA, which then simply notifies the
-   relevant CA that the EE has supplied the required proof.  Of course,
-   such a situation may be disallowed by some policies (e.g., CAs may be
-   the only entities permitted to verify POP during certification).
+   This specification explicitly allows for cases where an end entity
+   supplies the relevant proof to an RA and the RA subsequently attests
+   to the CA that the required proof has been received (and validated!).
+   For example, an end entity wishing to have a signing key certified
+   could send the appropriate signature to the RA, which then simply
+   notifies the relevant CA that the end entity has supplied the
+   required proof.  Of course, such a situation may be disallowed by
+   some policies (e.g., CAs may be the only entities permitted to verify
+   POP during certification).
 
 4.3.1.  Signature Keys
 
-   For signature keys, the EE can sign a value to prove possession of
-   the private key; see Section 5.2.8.2.
+   For signature keys, the end entity can sign a value to prove
+   possession of the private key; see Section 5.2.8.2.
 
 4.3.2.  Encryption Keys
 
-   For encryption keys, the EE can provide the private key to the CA/RA
-   (e.g., for archiving), see Section 5.2.8.3.1, or can be required to
-   decrypt a value in order to prove possession of the private key.
-   Decrypting a value can be achieved either directly (see
+   For encryption keys, the end entity can provide the private key to
+   the CA/RA (e.g., for archiving), see Section 5.2.8.3.1, or can be
+   required to decrypt a value in order to prove possession of the
+   private key.  Decrypting a value can be achieved either directly (see
    Section 5.2.8.3.3) or indirectly (see Section 5.2.8.3.2).
 
    The direct method is for the RA/CA to issue a random challenge to
-   which an immediate response by the EE is required.
+   which an immediate response by the end entity is required.
 
    The indirect method is to issue a certificate that is encrypted for
-   the EE (and have the EE demonstrate its ability to decrypt this
-   certificate in the confirmation message).  This allows a CA to issue
-   a certificate in a form that can only be used by the intended EE.
+   the end entity (and have the end entity demonstrate its ability to
+   decrypt this certificate in the confirmation message).  This allows a
+   CA to issue a certificate in a form that can only be used by the
+   intended end entity.
 
    This specification encourages use of the indirect method because it
    requires no extra messages to be sent (i.e., the proof can be
@@ -1078,37 +1088,37 @@ Table of Contents
 
 4.3.3.  Key Agreement Keys
 
-   For key agreement keys, the EE and the PKI management entity (i.e.,
-   CA or RA) must establish a shared secret key in order to prove that
-   the EE has possession of the private key.
+   For key agreement keys, the end entity and the PKI management entity
+   (i.e., CA or RA) must establish a shared secret key in order to prove
+   that the end entity has possession of the private key.
 
    Note that this need not impose any restrictions on the keys that can
    be certified by a given CA.  In particular, for Diffie-Hellman (DH)
-   keys, the EE may freely choose its algorithm parameters provided that
-   the CA can generate a short-term (or one-time) key pair with the
-   appropriate parameters when necessary.
+   keys, the end entity may freely choose its algorithm parameters
+   provided that the CA can generate a short-term (or one-time) key pair
+   with the appropriate parameters when necessary.
 
 4.3.4.  KEM Keys
 
-   For KEM keys, the EE can provide the private key to the CA/RA (e.g.,
-   for archiving), see Section 5.2.8.3.1, or can be required to decrypt
-   a value in order to prove possession of the private key.  Decrypting
-   a value can be achieved either directly (see Section 5.2.8.3.3) or
-   indirectly (see Section 5.2.8.3.2).
+   For KEM keys, the end entity can provide the private key to the CA/RA
+   (e.g., for archiving), see Section 5.2.8.3.1, or can be required to
+   decrypt a value in order to prove possession of the private key.
+   Decrypting a value can be achieved either directly (see
+   Section 5.2.8.3.3) or indirectly (see Section 5.2.8.3.2).
 
    Note: A definition of KEMs can be found in Section 1 of [RFC9629].
 
    The direct method is for the RA/CA to issue a random challenge to
-   which an immediate response by the EE is required.
+   which an immediate response by the end entity is required.
 
    The indirect method is to issue a certificate that is encrypted for
-   the EE using a shared secret key derived from a key encapsulated
-   using the public key (and have the EE demonstrate its ability to use
-   its private key for decapsulation of the KEM ciphertext, derive the
-   shared secret key, decrypt this certificate, and provide a hash of
-   the certificate in the confirmation message).  This allows a CA to
-   issue a certificate in a form that can only be used by the intended
-   EE.
+   the end entity using a shared secret key derived from a key
+   encapsulated using the public key (and have the end entity
+   demonstrate its ability to use its private key for decapsulation of
+   the KEM ciphertext, derive the shared secret key, decrypt this
+   certificate, and provide a hash of the certificate in the
+   confirmation message).  This allows a CA to issue a certificate in a
+   form that can only be used by the intended end entity.
 
    This specification encourages use of the indirect method because it
    requires no extra messages to be sent (i.e., the proof can be
@@ -1123,10 +1133,10 @@ Table of Contents
 4.4.  Root CA Key Update
 
    This discussion only applies to CAs that are directly trusted by some
-   EEs.  Recognizing whether a self-signed or non-self-signed CA is
-   supposed to be directly trusted for some EEs is a matter of CA policy
-   and EE configuration.  Thus, this is beyond the scope of this
-   document.
+   end entities.  Recognizing whether a self-signed or non-self-signed
+   CA is supposed to be directly trusted for some end entities is a
+   matter of CA policy and end entity configuration.  Thus, this is
+   beyond the scope of this document.
 
    The basis of the procedure described here is that the CA protects its
    new public key using its previous private key and vice versa.  Thus,
@@ -1144,11 +1154,12 @@ Table of Contents
 
    When a CA changes its key pair, those entities who have acquired the
    old CA public key via "out-of-band" means are most affected.  These
-   EEs need to acquire the new CA public key in a trusted way.  This may
-   be achieved "out-of-band" by using a repository or by using online
-   messages also containing the link certificates "new with old".  Once
-   the EE acquired and properly verified the new CA public key, it must
-   load the new trust anchor information into its trusted store.
+   end entities need to acquire the new CA public key in a trusted way.
+   This may be achieved "out-of-band" by using a repository or by using
+   online messages also containing the link certificates "new with old".
+   Once the end entity acquired and properly verified the new CA public
+   key, it must load the new trust anchor information into its trusted
+   store.
 
    The data structure used to protect the new and old CA public keys is
    typically a standard X.509v3 certificate (which may also contain
@@ -1162,16 +1173,18 @@ Table of Contents
 
    Note: While the scheme could be generalized to cover cases where the
    CA updates its key pair more than once during the validity period of
-   one of its EEs' certificates, this generalization seems of dubious
-   value.  Not having this generalization simply means that the validity
-   periods of certificates issued with the old CA key pair cannot exceed
-   the end of the "old with new" certificate validity period.
+   one of its end entities' certificates, this generalization seems of
+   dubious value.  Not having this generalization simply means that the
+   validity periods of certificates issued with the old CA key pair
+   cannot exceed the end of the "old with new" certificate validity
+   period.
 
-   Note: This scheme offers a mechanism to ensures that EEs will acquire
-   the new CA public key, at the latest by the expiry of the last
-   certificate they owned that was signed with the old CA private key.
-   Certificate and/or key update operations occurring at other times do
-   not necessarily require this (depending on the EE's equipment).
+   Note: This scheme offers a mechanism to ensures that end entities
+   will acquire the new CA public key, at the latest by the expiry of
+   the last certificate they owned that was signed with the old CA
+   private key.  Certificate and/or key update operations occurring at
+   other times do not necessarily require this (depending on the end
+   entity's equipment).
 
    Note: In practice, a new root CA may have a slightly different
    subject Distinguished Name (DN), e.g., indicating a generation
@@ -1198,16 +1211,16 @@ Table of Contents
        public key signed with the new private key (the "old with new"
        certificate).
 
-   5.  Publish these new certificates so that EEs may acquire it, e.g.,
-       using a repository or RootCaKeyUpdateContent.
+   5.  Publish these new certificates so that end entities may acquire
+       it, e.g., using a repository or RootCaKeyUpdateContent.
 
    The old CA private key is then no longer required when the validity
    of the "old with old" certificate ended.  However, the old CA public
    key will remain in use for validating the "new with old" link
    certificate until the new CA public key is loaded into the trusted
    store.  The old CA public key is no longer required (other than for
-   non-repudiation) when all EEs of this CA have securely acquired and
-   stored the new CA public key.
+   non-repudiation) when all end entities of this CA have securely
+   acquired and stored the new CA public key.
 
    The "new with new" certificate must have a validity period with a
    notBefore time that is before the notAfter time of the "old with old"
@@ -1216,9 +1229,9 @@ Table of Contents
 
    The "new with old" certificate must have a validity period with the
    same notBefore time as the "new with new" certificate and a notAfter
-   time by which all EEs of this CA will securely possess the new CA
-   public key (at the latest, at the notAfter time of the "old with old"
-   certificate).
+   time by which all end entities of this CA will securely possess the
+   new CA public key (at the latest, at the notAfter time of the "old
+   with old" certificate).
 
    The "old with new" certificate must have a validity period with the
    same notBefore and notAfter time as the "old with old" certificate.
@@ -1382,12 +1395,12 @@ Table of Contents
 
    CMP KGA:  CMP KGAs are CAs or are identified by the id-kp-cmKGA EKU.
       The CMP KGA knows the private key it generated on behalf of the
-      EE.  This is a very sensitive service and needs specific
+      end entity.  This is a very sensitive service and needs specific
       authorization, which by default is with the CA certificate itself.
       The CA may delegate its authorization by placing the id-kp-cmKGA
       EKU in the certificate used to authenticate the origin of the
       generated private key.  The authorization may also be determined
-      through local configuration of the EE.
+      through local configuration of the end entity.
 
 5.  Data Structures
 
@@ -1421,12 +1434,12 @@ Table of Contents
 
    The extraCerts field can contain certificates that may be useful to
    the recipient.  For example, this can be used by a CA or RA to
-   present an EE with certificates that it needs to verify its own new
-   certificate (for example, if the CA that issued the EE's certificate
-   is not a root CA for the EE).  Note that this field does not
-   necessarily contain a certification path; the recipient may have to
-   sort, select from, or otherwise process the extra certificates in
-   order to use them.
+   present an end entity with certificates that it needs to verify its
+   own new certificate (for example, if the CA that issued the end
+   entity's certificate is not a root CA for the end entity).  Note that
+   this field does not necessarily contain a certification path; the
+   recipient may have to sort, select from, or otherwise process the
+   extra certificates in order to use them.
 
 5.1.1.  PKI Message Header
 
@@ -1465,13 +1478,14 @@ Table of Contents
    This name (in conjunction with senderKID, if supplied) should be
    sufficient to indicate the key to use to verify the protection on the
    message.  If nothing about the sender is known to the sending entity
-   (e.g., in the initial request message, where the EE may not know its
-   own DN, email name, IP address, etc.), then the "sender" field MUST
-   contain a "NULL-DN" value in the directoryName choice.  A "NULL-DN"
-   is a SEQUENCE OF relative DNs of zero length and is encoded as
-   0x3000.  In such a case, the senderKID field MUST hold an identifier
-   (i.e., a reference number) that indicates to the receiver the
-   appropriate shared secret information to use to verify the message.
+   (e.g., in the initial request message, where the end entity may not
+   know its own DN, email name, IP address, etc.), then the "sender"
+   field MUST contain a "NULL-DN" value in the directoryName choice.  A
+   "NULL-DN" is a SEQUENCE OF relative DNs of zero length and is encoded
+   as 0x3000.  In such a case, the senderKID field MUST hold an
+   identifier (i.e., a reference number) that indicates to the receiver
+   the appropriate shared secret information to use to verify the
+   message.
 
    The recipient field contains the name of the recipient of the
    PKIMessage.  This name (in conjunction with recipKID, if supplied)
@@ -1545,8 +1559,9 @@ Table of Contents
    transaction.
 
    The messageTime field contains the time at which the sender created
-   the message.  This may be useful to allow EEs to correct/check their
-   local time for consistency with the time on a central system.
+   the message.  This may be useful to allow end entities to correct/
+   check their local time for consistency with the time on a central
+   system.
 
    The freeText field may be used to send a human-readable message to
    the recipient (in any number of languages).  Each UTF8String MAY
@@ -1560,36 +1575,36 @@ Table of Contents
 
 5.1.1.1.  ImplicitConfirm
 
-   This is used by the EE to inform the CA or RA that it does not wish
-   to send a certificate confirmation for issued certificates.
+   This is used by the end entity to inform the CA or RA that it does
+   not wish to send a certificate confirmation for issued certificates.
 
      id-it-implicitConfirm OBJECT IDENTIFIER ::= {id-it 13}
      ImplicitConfirmValue ::= NULL
 
-   If the CA grants the request to the EE, it MUST put the same
-   extension in the PKIHeader of the response.  If the EE does not find
-   the extension in the response, it MUST send the certificate
+   If the CA grants the request to the end entity, it MUST put the same
+   extension in the PKIHeader of the response.  If the end entity does
+   not find the extension in the response, it MUST send the certificate
    confirmation.
 
 5.1.1.2.  ConfirmWaitTime
 
-   This is used by the CA or RA to inform the EE how long it intends to
-   wait for the certificate confirmation before revoking the certificate
-   and deleting the transaction.
+   This is used by the CA or RA to inform the end entity how long it
+   intends to wait for the certificate confirmation before revoking the
+   certificate and deleting the transaction.
 
      id-it-confirmWaitTime OBJECT IDENTIFIER ::= {id-it 14}
      ConfirmWaitTimeValue ::= GeneralizedTime
 
 5.1.1.3.  OrigPKIMessage
 
-   An RA MAY include the original PKIMessage from the EE in the
+   An RA MAY include the original PKIMessage from the end entity in the
    generalInfo field of the PKIHeader of a PKIMessage.  This is used by
    the RA to inform the CA of the original PKIMessage that it received
-   from the EE and modified in some way (e.g., added or modified
+   from the end entity and modified in some way (e.g., added or modified
    particular field values or added new extensions) before forwarding
    the new PKIMessage.  This accommodates, for example, cases in which
    the CA wishes to check the message origin, the POP, or other
-   information on the original EE message.
+   information on the original end entity message.
 
    Note: If the changes made by the RA to the original PKIMessage break
    the POP of a certificate request, the RA can set the popo field of
@@ -1606,9 +1621,9 @@ Table of Contents
 
 5.1.1.4.  CertProfile
 
-   This is used by the EE to indicate specific certificate profiles,
-   e.g., when requesting a new certificate or a certificate request
-   template (see Section 5.3.19.16).
+   This is used by the end entity to indicate specific certificate
+   profiles, e.g., when requesting a new certificate or a certificate
+   request template (see Section 5.3.19.16).
 
      id-it-certProfile OBJECT IDENTIFIER ::= {id-it 21}
      CertProfileValue ::= SEQUENCE SIZE (1..MAX) OF UTF8String
@@ -1709,14 +1724,14 @@ Table of Contents
    PKIMessage (or simply the PKIBody (omitting the CHOICE tag), if the
    relevant PKIHeader information is securely carried in the external
    mechanism).  It is noted, however, that many such external mechanisms
-   require that the EE already possesses a public-key certificate, a
-   unique DN, and/or other such infrastructure-related information.
-   Thus, they may not be appropriate for initial registration, key-
-   recovery, or any other process with "bootstrapping" characteristics.
-   For those cases, it may be necessary that the PKIProtection parameter
-   be used.  In the future, if/when external mechanisms are modified to
-   accommodate bootstrapping scenarios, the use of PKIProtection may
-   become rare or non-existent.
+   require that the end entity already possesses a public-key
+   certificate, a unique DN, and/or other such infrastructure-related
+   information.  Thus, they may not be appropriate for initial
+   registration, key-recovery, or any other process with "bootstrapping"
+   characteristics.  For those cases, it may be necessary that the
+   PKIProtection parameter be used.  In the future, if/when external
+   mechanisms are modified to accommodate bootstrapping scenarios, the
+   use of PKIProtection may become rare or non-existent.
 
    Depending on the circumstances, the PKIProtection bits may contain a
    MAC or signature.  Only the following cases can occur:
@@ -1778,11 +1793,11 @@ Table of Contents
 
    Where the sender and receiver possess finite-field or elliptic-curve-
    based DH certificates with compatible DH parameters in order to
-   protect the message, the EE must generate a symmetric key based on
-   its private DH key value and the DH public key of the recipient of
-   the PKI message.  PKIProtection will contain a MAC value keyed with
-   this derived symmetric key, and the protectionAlg will be the
-   following:
+   protect the message, the end entity must generate a symmetric key
+   based on its private DH key value and the DH public key of the
+   recipient of the PKI message.  PKIProtection will contain a MAC value
+   keyed with this derived symmetric key, and the protectionAlg will be
+   the following:
 
      id-DHBasedMac OBJECT IDENTIFIER ::= {1 2 840 113533 7 66 30}
 
@@ -1935,13 +1950,13 @@ Table of Contents
        identifier and the ciphertext (ct) and sends it to Alice in an
        InfoTypeAndValue structure, as defined in Section 5.3.19.18.
 
-       Encapsulate(pk) -> (ct, ss)
+         Encapsulate(pk) -> (ct, ss)
 
    2.  Alice decapsulates the shared secret (ss) from the ciphertext
        (ct) using the KEM Decapsulate function and its private KEM key
        (sk).
 
-       Decapsulate(ct, sk) -> (ss)
+         Decapsulate(ct, sk) -> (ss)
 
        If the decapsulation operation outputs an error, any failInfo
        field in an error response message SHALL contain the value
@@ -1956,7 +1971,7 @@ Table of Contents
        KemBMParameter.  The DER-encoded KemOtherInfo structure, as
        defined below, is used as context for the KDF.
 
-       KDF(ss, len, context)->(ssk)
+         KDF(ss, len, context)->(ssk)
 
        The shared secret key (ssk) is used for MAC-based protection by
        Alice.
@@ -1967,7 +1982,7 @@ Table of Contents
        and the DER-encoded KemOtherInfo structure constructed in the
        same way as on Alice's side is used as context for the KDF.
 
-       KDF(ss, len, context)->(ssk)
+         KDF(ss, len, context)->(ssk)
 
        Bob uses the shared secret key (ssk) for verifying the MAC-based
        protection of the message received and in this way authenticates
@@ -2046,9 +2061,9 @@ Table of Contents
       forwarded in the same direction and forwards them in a batch.
       Request messages can be transferred as a batch upstream (towards
       the CA); response or announce messages can be transferred as a
-      batch downstream (towards an RA but not to the EE).  For instance,
-      this can be used when bridging an offline connection between two
-      PKI management entities.
+      batch downstream (towards an RA but not to the end entity).  For
+      instance, this can be used when bridging an offline connection
+      between two PKI management entities.
 
    These use cases are accomplished by nesting the messages within a new
    PKI message.  The structure used is as follows:
@@ -2068,12 +2083,11 @@ Table of Contents
 
    Various PKI management messages require that the originator of the
    message indicate some of the fields that are required to be present
-   in a certificate.  The CertTemplate structure allows an EE or RA to
-   specify as many data fields as the structure wishes for the requested
-   certificate.  The structure also allows an EE or RA to include any
-   other necessary data, such as the publicKey field, when it is
-   required for the certificate.  A CertTemplate structure is identical
-   to a TBSCertificate structure (see [RFC5280]) but with all fields
+   in a certificate.  The CertTemplate structure allows entities
+   requesting a certificate to specify the data fields that they want to
+   be included.  Typically, they are required to provide at least the
+   publicKey field.  A CertTemplate structure is identical to a
+   TBSCertificate structure (see [RFC5280]) but with all fields
    optional/situational.
 
    Note: Even if the originator completely specifies the contents of a
@@ -2085,9 +2099,9 @@ Table of Contents
    with a status of "rejected".  See Section 5.3.18 for the definition
    and use of CertHash and the certConf message.
 
-   Note: Before requesting a new certificate, an EE can request a
-   certTemplate structure as a kind of certificate request blueprint in
-   order to learn which data the CA expects to be present in the
+   Note: Before requesting a new certificate, an end entity can request
+   a certTemplate structure as a kind of certificate request blueprint
+   in order to learn which data the CA expects to be present in the
    certificate request (see Section 5.3.19.16).
 
    See CRMF [RFC4211] for CertTemplate syntax.
@@ -2136,8 +2150,8 @@ Table of Contents
    the-wire compatible with the old syntax.
 
    To indicate support for EnvelopedData, the pvno cmp2021 has been
-   introduced.  Details on the usage of the pvno are described in
-   Section 7.
+   introduced.  Details on the usage of the protocol version number are
+   described in Section 7.
 
    The EnvelopedData structure is RECOMMENDED to be used in CMP to
    transport a private key, certificate, POP challenge, or revocation
@@ -2326,16 +2340,16 @@ Table of Contents
 
 5.2.8.1.  raVerified
 
-   An EE MUST NOT use raVerified.  If an RA performs changes to a
-   certification request breaking the provided POP, or if the RA
-   requests a certificate on behalf of an EE and cannot provide the POP
-   itself, the RA MUST use raVerified.  Otherwise, it SHOULD NOT use
-   raVerified.
+   An end entity MUST NOT use raVerified.  If an RA performs changes to
+   a certification request breaking the provided POP, or if the RA
+   requests a certificate on behalf of an end entity and cannot provide
+   the POP itself, the RA MUST use raVerified.  Otherwise, it SHOULD NOT
+   use raVerified.
 
    When introducing raVerified, the RA MUST check the existing POP, or
-   it MUST ensure by other means that the EE is the holder of the
-   private key.  The RA MAY provide the original message containing the
-   POP in the generalInfo field using the id-it-origPKIMessage (see
+   it MUST ensure by other means that the end entity is the holder of
+   the private key.  The RA MAY provide the original message containing
+   the POP in the generalInfo field using the id-it-origPKIMessage (see
    Section 5.1.1.3) enabling the CA to verify it.
 
 5.2.8.2.  POPOSigningKey Structure
@@ -2379,10 +2393,10 @@ Table of Contents
    (i.e., the "value" OCTETs of the POPOSigningKeyInput DER).
 
    In the special case that the CA/RA has a DH certificate that is known
-   to the EE and the certification request is for a key agreement key
-   pair, the EE can also use the POPOSigningKey structure (where the
-   algorithmIdentifier field is DHBasedMAC and the signature field is
-   the MAC) for demonstrating POP.
+   to the end entity and the certification request is for a key
+   agreement key pair, the end entity can also use the POPOSigningKey
+   structure (where the algorithmIdentifier field is DHBasedMAC and the
+   signature field is the MAC) for demonstrating POP.
 
 5.2.8.3.  POPOPrivKey Structure
 
@@ -2406,8 +2420,8 @@ Table of Contents
       }
 
    When using agreeMAC or encryptedKey choices, the pvno cmp2021(3) MUST
-   be used.  Details on the usage of the pvno are described in
-   Section 7.
+   be used.  Details on the usage of the protocol version number are
+   described in Section 7.
 
 5.2.8.3.1.  Inclusion of the Private Key
 
@@ -2439,22 +2453,22 @@ Table of Contents
    indicated in the CertRequest by requesting the encrCert option in the
    subsequentMessage choice of POPOPrivKey.
 
-                   EE                         RA/CA
+           end entity                         RA/CA
                     ----       req        ---->
                     <---  rep (enc cert)  -----
                     ---- conf (cert hash) ---->
                     <---       ack        -----
 
-   The EE proves knowledge of the private key to the CA by providing the
-   correct CertHash for this certificate in the certConf message.  This
-   demonstrates POP because the EE can only compute the correct CertHash
-   if it is able to recover the encrypted certificate, and it can only
-   recover the certificate if it is able to obtain the symmetric key
-   using the required private key.  Clearly, for this to work, the CA
-   MUST NOT publish the certificate until the certConf message arrives
-   (when certHash is to be used to demonstrate POP).  See Section 5.3.18
-   for further details, and see Section 8.11 for security considerations
-   regarding use of CT logs.
+   The end entity proves knowledge of the private key to the CA by
+   providing the correct CertHash for this certificate in the certConf
+   message.  This demonstrates POP because the end entity can only
+   compute the correct CertHash if it is able to recover the encrypted
+   certificate, and it can only recover the certificate if it is able to
+   obtain the symmetric key using the required private key.  Clearly,
+   for this to work, the CA MUST NOT publish the certificate until the
+   certConf message arrives (when certHash is to be used to demonstrate
+   POP).  See Section 5.3.18 for further details, and see Section 8.11
+   for security considerations regarding use of CT logs.
 
    The recipient SHOULD maintain a context of the PKI management
    operation, e.g., using transactionID and certReqId, to identify the
@@ -2467,23 +2481,23 @@ Table of Contents
 5.2.8.3.3.  Direct Method - Challenge-Response Protocol
 
    The direct method mentioned previously in Section 4.3 demonstrates
-   POP of the private key by having the EE engage in a challenge-
-   response protocol (using the messages popdecc of type POPODecKeyChall
-   and popdecr of type POPODecKeyResp; see below) between
-   CertReqMessages and CertRepMessage.  This method is indicated in the
-   CertRequest by requesting the challengeResp option in the
+   POP of the private key by having the end entity engage in a
+   challenge-response protocol (using the messages popdecc of type
+   POPODecKeyChall and popdecr of type POPODecKeyResp; see below)
+   between CertReqMessages and CertRepMessage.  This method is indicated
+   in the CertRequest by requesting the challengeResp option in the
    subsequentMessage choice of POPOPrivKey.
 
    Note: This method would typically be used in an environment in which
    an RA verifies POP and then makes a certification request to the CA
-   on behalf of the EE.  In such a scenario, the CA trusts the RA to
-   have done POP correctly before the RA requests a certificate for the
-   EE.
+   on behalf of the end entity.  In such a scenario, the CA trusts the
+   RA to have done POP correctly before the RA requests a certificate
+   for the end entity.
 
    The complete protocol then looks as follows (note that req' does not
    necessarily encapsulate req as a nested message):
 
-                   EE            RA            CA
+           end entity            RA            CA
                     ---- req ---->
                     <--- chall ---
                     ---- resp --->
@@ -2502,7 +2516,7 @@ Table of Contents
    environments, a different order of the above messages may be
    required, such as the following (this may be determined by policy):
 
-                   EE            RA            CA
+           end entity            RA            CA
                     ---- req ---->
                     <--- chall ---
                     ---- resp --->
@@ -2567,9 +2581,9 @@ Table of Contents
 
       POPODecKeyRespContent ::= SEQUENCE OF INTEGER
 
-   On receiving the popdecc message, the EE decrypts all included
-   challenges and responds with a popdecr message containing the
-   decrypted integer values in the same order.
+   On receiving the popdecc message, the end entity decrypts all
+   included challenges and responds with a popdecr message containing
+   the decrypted integer values in the same order.
 
 5.2.8.4.  Summary of POP Options
 
@@ -2593,48 +2607,50 @@ Table of Contents
       KAKPOPChallengeResp; and
       KEMKPOPChallengeResp.
 
-   Given this array of options, it is natural to ask how an EE can know
-   what is supported by the CA/RA (i.e., which options it may use when
-   requesting certificates).  The following guidelines should clarify
-   this situation for EE implementers.
+   Given this array of options, it is natural to ask how an end entity
+   can know what is supported by the CA/RA (i.e., which options it may
+   use when requesting certificates).  The following guidelines should
+   clarify this situation for end entity implementers.
 
-   *  RAVerified: This is not an EE decision; the RA uses this if and
-      only if it has verified POP before forwarding the request on to
-      the CA, so it is not possible for the EE to choose this technique.
+   *  RAVerified: This is not an end entity decision; the RA uses this
+      if and only if it has verified POP before forwarding the request
+      on to the CA, so it is not possible for the end entity to choose
+      this technique.
 
-   *  SKPOP: If the EE has a signing key pair, this is the only POP
-      method specified for use in the request for a corresponding
+   *  SKPOP: If the end entity has a signing key pair, this is the only
+      POP method specified for use in the request for a corresponding
       certificate.
 
    *  EKPOPThisMessage (deprecated), KAKPOPThisMessage (deprecated),
       EKPOPEncryptedKey, KAKPOPEncryptedKey, KEMKPOPEncryptedKey:
-      Whether or not to give up its private key to the CA/RA is an EE
-      decision.  If the EE decides to reveal its key, then these are the
-      only POP methods available in this specification to achieve this
-      (and the key pair type and protocol version used will determine
-      which of these methods to use).  The reason for deprecating
-      EKPOPThisMessage and KAKPOPThisMessage options has been given in
-      Section 5.2.8.3.1.
+      Whether or not to give up its private key to the CA/RA is an end
+      entity decision.  If the end entity decides to reveal its key,
+      then these are the only POP methods available in this
+      specification to achieve this (and the key pair type and protocol
+      version used will determine which of these methods to use).  The
+      reason for deprecating EKPOPThisMessage and KAKPOPThisMessage
+      options has been given in Section 5.2.8.3.1.
 
-   *  KAKPOPThisMessageDHMAC: The EE can only use this method if (1) the
-      CA/RA has a DH certificate available for this purpose and (2) the
-      EE already has a copy of this certificate.  If both these
-      conditions hold, then this technique is clearly supported and may
-      be used by the EE, if desired.
+   *  KAKPOPThisMessageDHMAC: The end entity can only use this method if
+      (1) the CA/RA has a DH certificate available for this purpose and
+      (2) the end entity already has a copy of this certificate.  If
+      both these conditions hold, then this technique is clearly
+      supported and may be used by the end entity, if desired.
 
    *  EKPOPEncryptedCert, KAKPOPEncryptedCert, KEMKPOPEncryptedCert,
       EKPOPChallengeResp, KAKPOPChallengeResp, and KEMKPOPChallengeResp:
-      The EE picks one of these (in the subsequentMessage field) in the
-      request message, depending upon preference and key pair type.  The
-      EE is not doing POP at this point; it is simply indicating which
-      method it wants to use.  Therefore, if the CA/RA replies with a
-      "badPOP" error, the EE can re-request using the other POP method
-      chosen in subsequentMessage.  Note, however, that this
-      specification encourages the use of the EncryptedCert choice and,
-      furthermore, says that the challenge-response would typically be
-      used when an RA is involved and doing POP verification.  Thus, the
-      EE should be able to make an intelligent decision regarding which
-      of these POP methods to choose in the request message.
+      The end entity picks one of these (in the subsequentMessage field)
+      in the request message, depending upon preference and key pair
+      type.  The end entity is not doing POP at this point; it is simply
+      indicating which method it wants to use.  Therefore, if the CA/RA
+      replies with a "badPOP" error, the end entity can re-request using
+      the other POP method chosen in subsequentMessage.  Note, however,
+      that this specification encourages the use of the EncryptedCert
+      choice and, furthermore, says that the challenge-response would
+      typically be used when an RA is involved and doing POP
+      verification.  Thus, the end entity should be able to make an
+      intelligent decision regarding which of these POP methods to
+      choose in the request message.
 
 5.2.9.  GeneralizedTime
 
@@ -2738,11 +2754,12 @@ Table of Contents
    return the value of a certificate but with the constraint that only
    the intended recipient can obtain the actual certificate.  The
    benefit of this approach is that a CA may reply with a certificate
-   even in the absence of proof that the requester is the EE that can
-   use the relevant private key (note that the proof is not obtained
-   until the certConf message is received by the CA).  Thus, the CA will
-   not have to revoke that certificate in the event that something goes
-   wrong with the POP (but MAY do so anyway, depending upon policy).
+   even in the absence of proof that the requester is the end entity
+   that can use the relevant private key (note that the proof is not
+   obtained until the certConf message is received by the CA).  Thus,
+   the CA will not have to revoke that certificate in the event that
+   something goes wrong with the POP (but MAY do so anyway, depending
+   upon policy).
 
    The use of EncryptedKey is described in Section 5.2.2.
 
@@ -2863,12 +2880,12 @@ Table of Contents
    }
 
    When using RootCaKeyUpdateContent in the ckuann message, the pvno
-   cmp2021 MUST be used.  Details on the usage of the pvno are described
-   in Section 7.
+   cmp2021 MUST be used.  Details on the usage of the protocol version
+   number are described in Section 7.
 
    In contrast to CAKeyUpdAnnContent as supported with cmp2000,
    RootCaKeyUpdateContent offers omitting newWithOld and oldWithNew,
-   depending on the needs of the EE.
+   depending on the needs of the end entity.
 
 5.3.14.  Certificate Announcement
 
@@ -2976,19 +2993,20 @@ Table of Contents
 
 5.3.19.1.  CA Protocol Encryption Certificate
 
-   This MAY be used by the EE to get a certificate from the CA to use to
-   protect sensitive information during the protocol.
+   This MAY be used by the end entity to get a certificate from the CA
+   to use to protect sensitive information during the protocol.
 
      GenMsg:    {id-it 1}, < absent >
      GenRep:    {id-it 1}, Certificate | < absent >
 
-   EEs MUST ensure that the correct certificate is used for this
-   purpose.
+   End entities MUST ensure that the correct certificate is used for
+   this purpose.
 
 5.3.19.2.  Signing Key Pair Types
 
-   This MAY be used by the EE to get the list of signature algorithms
-   whose subject public key values the CA is willing to certify.
+   This MAY be used by the end entity to get the list of signature
+   algorithms whose subject public key values the CA is willing to
+   certify.
 
      GenMsg:    {id-it 2}, < absent >
      GenRep:    {id-it 2}, SEQUENCE SIZE (1..MAX) OF
@@ -3021,8 +3039,9 @@ Table of Contents
 
    This MAY be used by the client to get the CA-preferred symmetric
    encryption algorithm for any confidential information that needs to
-   be exchanged between the EE and the CA (for example, if the EE wants
-   to send its private decryption key to the CA for archival purposes).
+   be exchanged between the end entity and the CA (for example, if the
+   end entity wants to send its private decryption key to the CA for
+   archival purposes).
 
      GenMsg:    {id-it 4}, < absent >
      GenRep:    {id-it 4}, AlgorithmIdentifier
@@ -3052,10 +3071,10 @@ Table of Contents
 
 5.3.19.8.  Key Pair Parameters
 
-   This MAY be used by the EE to request the domain parameters to use
-   for generating the key pair for certain public-key algorithms.  It
-   can be used, for example, to request the appropriate P, Q, and G to
-   generate the DH/DSA key or to request a set of well-known elliptic
+   This MAY be used by the end entity to request the domain parameters
+   to use for generating the key pair for certain public-key algorithms.
+   It can be used, for example, to request the appropriate P, Q, and G
+   to generate the DH/DSA key or to request a set of well-known elliptic
    curves.
 
      GenMsg:    {id-it 10}, OBJECT IDENTIFIER -- (Algorithm object-id)
@@ -3064,16 +3083,17 @@ Table of Contents
    An absent infoValue in the GenRep indicates that the algorithm
    specified in GenMsg is not supported.
 
-   EEs MUST ensure that the parameters are acceptable to it and that the
-   GenRep message is authenticated (to avoid substitution attacks).
+   End entities MUST ensure that the parameters are acceptable to it and
+   that the GenRep message is authenticated (to avoid substitution
+   attacks).
 
 5.3.19.9.  Revocation Passphrase
 
-   This MAY be used by the EE to send a passphrase to a CA/RA for the
-   purpose of authenticating a later revocation request (in the case
-   that the appropriate signing private key is no longer available to
-   authenticate the request).  See Appendix B for further details on the
-   use of this mechanism.
+   This MAY be used by the end entity to send a passphrase to a CA/RA
+   for the purpose of authenticating a later revocation request (in the
+   case that the appropriate signing private key is no longer available
+   to authenticate the request).  See Appendix B for further details on
+   the use of this mechanism.
 
      GenMsg:    {id-it 12}, EncryptedKey
      GenRep:    {id-it 12}, < absent >
@@ -3119,8 +3139,9 @@ Table of Contents
    In contrast to the ckuann message, this approach follows the request/
    response model.
 
-   The EE SHOULD reference its current trust anchor in RootCaCertValue
-   in the request body, giving the root CA certificate if available.
+   The end entity SHOULD reference its current trust anchor in
+   RootCaCertValue in the request body, giving the root CA certificate
+   if available.
 
      GenMsg:    {id-it 20}, RootCaCertValue | < absent >
      GenRep:    {id-it 18}, RootCaKeyUpdateValue | < absent >
@@ -3137,7 +3158,7 @@ Table of Contents
 
    Note: In contrast to CAKeyUpdAnnContent (which was deprecated with
    pvno cmp2021), RootCaKeyUpdateContent offers omitting newWithOld and
-   oldWithNew, depending on the needs of the EE.
+   oldWithNew, depending on the needs of the end entity.
 
 5.3.19.16.  Certificate Request Template
 
@@ -3256,8 +3277,8 @@ Table of Contents
 
 5.3.21.  Error Message Content
 
-   This data structure MAY be used by an EE, CA, or RA to convey error
-   information and by a PKI management entity to initiate delayed
+   This data structure MAY be used by an end entity, CA, or RA to convey
+   error information and by a PKI management entity to initiate delayed
    delivery of responses.
 
      ErrorMsgContent ::= SEQUENCE {
@@ -3271,11 +3292,12 @@ Table of Contents
    pkiconf response or another error message if any part of the header
    is not valid.
 
-   In case a PKI management entity sends an error message to the EE with
-   the pKIStatusInfo field containing the status "waiting", the EE
-   SHOULD initiate polling as described in Section 5.3.22.  If the EE
-   does not initiate polling, both sides MUST treat this message as the
-   end of the transaction (if a transaction is in progress).
+   In case a PKI management entity sends an error message to the end
+   entity with the pKIStatusInfo field containing the status "waiting",
+   the end entity SHOULD initiate polling as described in
+   Section 5.3.22.  If the end entity does not initiate polling, both
+   sides MUST treat this message as the end of the transaction (if a
+   transaction is in progress).
 
    If protection is desired on the message, the client MUST protect it
    using the same technique (i.e., signature or MAC) as the starting
@@ -3308,23 +3330,23 @@ Table of Contents
    each ip, cp, kup, krp, or ccp that contains a CertStatus for an
    issued certificate.
 
-   1.  In response to an ip, cp, kup, krp, or ccp message, an EE will
-       send a certConf for all issued certificates and expect a pkiconf
-       for each certConf.  An EE will send a pollReq message in response
-       to each CertResponse element of an ip, cp, or kup message with
-       status "waiting" and in response to an error message with status
-       "waiting".  Its certReqId MUST be either the index of a
-       CertResponse data structure with status "waiting" or -1 referring
-       to the complete response.
+   1.  In response to an ip, cp, kup, krp, or ccp message, an end entity
+       will send a certConf for all issued certificates and expect a
+       pkiconf for each certConf.  An end entity will send a pollReq
+       message in response to each CertResponse element of an ip, cp, or
+       kup message with status "waiting" and in response to an error
+       message with status "waiting".  Its certReqId MUST be either the
+       index of a CertResponse data structure with status "waiting" or
+       -1 referring to the complete response.
 
    2.  In response to a pollReq, a CA/RA will return an ip, cp, kup,
        krp, or ccp if one or more of the still pending requested
        certificates are ready or the final response to some other type
        of request is available; otherwise, it will return a pollRep.
 
-   3.  If the EE receives a pollRep, it will wait for at least the
-       number of seconds given in the checkAfter field before sending
-       another pollReq.
+   3.  If the end entity receives a pollRep, it will wait for at least
+       the number of seconds given in the checkAfter field before
+       sending another pollReq.
 
        Note that the checkAfter value heavily depends on the certificate
        management environment.  There are different possible reasons for
@@ -3334,10 +3356,10 @@ Table of Contents
        Therefore, the checkAfter time can vary greatly.  This should
        also be considered by the transfer protocol.
 
-   4.  If the EE receives an ip, cp, kup, krp, or ccp, then it will be
-       treated in the same way as the initial response; if it receives
-       any other response, then this will be treated as the final
-       response to the original request.
+   4.  If the end entity receives an ip, cp, kup, krp, or ccp, then it
+       will be treated in the same way as the initial response; if it
+       receives any other response, then this will be treated as the
+       final response to the original request.
 
    The following client-side state machine describes polling for
    individual CertResponse elements at the example of an ir request
@@ -3370,10 +3392,10 @@ Table of Contents
                          +-----------------+   +---------------+
                             (pending list)
 
-   In the following exchange, the EE is enrolling for two certificates
-   in one request.
+   In the following exchange, the end entity is enrolling for two
+   certificates in one request.
 
-   Step# End Entity                       PKI
+   Step# End entity                       PKI
    ---------------------------------------------------------------------
      1   format ir
      2                   --> ir       -->
@@ -3441,10 +3463,10 @@ Table of Contents
                                      v
                                     End
 
-   In the following exchange, the EE is sending a general message
-   request, and the response is delayed by the server.
+   In the following exchange, the end entity is sending a general
+   message request, and the response is delayed by the server.
 
-   Step# End Entity                       PKI
+   Step# End entity                       PKI
    ---------------------------------------------------------------------
      1   format genm
      2                  --> genm    -->
@@ -3477,14 +3499,14 @@ Table of Contents
    described in this section.
 
    This section deals with functions that are "mandatory" in the sense
-   that all EE and CA/RA implementations MUST be able to provide the
-   functionality described.  This part is effectively the profile of the
-   PKI management functionality that MUST be supported.  Note, however,
-   that the management functions described in this section do not need
-   to be accomplished using the PKI messages defined in Section 5 if
-   alternate means are suitable for a given environment.  See Section 7
-   of [RFC9483] and Appendix C for profiles of the PKIMessage structures
-   that MUST be supported for specific use cases.
+   that all end entity and CA/RA implementations MUST be able to provide
+   the functionality described.  This part is effectively the profile of
+   the PKI management functionality that MUST be supported.  Note,
+   however, that the management functions described in this section do
+   not need to be accomplished using the PKI messages defined in
+   Section 5 if alternate means are suitable for a given environment.
+   See Section 7 of [RFC9483] and Appendix C for profiles of the
+   PKIMessage structures that MUST be supported for specific use cases.
 
 6.1.  Root CA Initialization
 
@@ -3495,12 +3517,12 @@ Table of Contents
    structure with the profile defined for the "newWithNew" certificate
    issued following a root CA key update.
 
-   In order to make the CA's self-certificate useful to EEs that do not
-   acquire the self-certificate via "out-of-band" means, the CA must
-   also produce a fingerprint for its certificate.  EEs that acquire
-   this fingerprint securely via some "out-of-band" means can then
-   verify the CA's self-certificate and, hence, the other attributes
-   contained therein.
+   In order to make the CA's self-certificate useful to end entities
+   that do not acquire the self-certificate via "out-of-band" means, the
+   CA must also produce a fingerprint for its certificate.  End entities
+   that acquire this fingerprint securely via some "out-of-band" means
+   can then verify the CA's self-certificate and, hence, the other
+   attributes contained therein.
 
    The data structure used to carry the fingerprint may be the
    OOBCertHash (see Section 5.2.5).
@@ -3510,10 +3532,11 @@ Table of Contents
    CA keys (as all other keys) have a finite lifetime and will have to
    be updated on a periodic basis.  The certificates NewWithNew,
    NewWithOld, and OldWithNew (see Section 4.4.1) MAY be issued by the
-   CA to aid existing EEs who hold the current root CA certificate
-   (OldWithOld) to transition securely to the new root CA certificate
-   (NewWithNew) and to aid new EEs who will hold NewWithNew to acquire
-   OldWithOld securely for verification of existing data.
+   CA to aid existing end entities who hold the current root CA
+   certificate (OldWithOld) to transition securely to the new root CA
+   certificate (NewWithNew) and to aid new end entities who will hold
+   NewWithNew to acquire OldWithOld securely for verification of
+   existing data.
 
 6.3.  Subordinate CA Initialization
 
@@ -3521,9 +3544,9 @@ Table of Contents
    CA".]
 
    From the perspective of PKI management protocols, the initialization
-   of a subordinate CA is the same as the initialization of an EE.  The
-   only difference is that the subordinate CA must also produce an
-   initial revocation list.
+   of a subordinate CA is the same as the initialization of an end
+   entity.  The only difference is that the subordinate CA must also
+   produce an initial revocation list.
 
 6.4.  CRL Production
 
@@ -3533,9 +3556,9 @@ Table of Contents
 
 6.5.  PKI Information Request
 
-   When a PKI entity (CA, RA, or EE) wishes to acquire information about
-   the current status of a CA, it MAY send that CA a request for such
-   information.
+   When a PKI entity (CA, RA, or end entity) wishes to acquire
+   information about the current status of a CA, it MAY send that CA a
+   request for such information.
 
    The CA MUST respond to the request by providing (at least) all of the
    information requested by the requester.  If some of the information
@@ -3547,7 +3570,7 @@ Table of Contents
    messages are protected using a MAC based on shared secret information
    (e.g., password-based MAC; see Section 6.1 of "CMP Algorithms"
    [RFC9481]) or using any asymmetric authentication means such as a
-   signature (if the EE has an existing certificate).
+   signature (if the end entity has an existing certificate).
 
 6.6.  Cross-Certification
 
@@ -3585,11 +3608,11 @@ Table of Contents
 
       The authorization code is used for authentication and integrity
       purposes.  This is done by generating a symmetric key based on the
-      authorization code and using the symmetric key for generating
-      MACs) on all messages exchanged.  (Authentication may
-      alternatively be done using signatures instead of MACs, if the CAs
-      are able to retrieve and validate the required public keys by some
-      means, such as an out-of-band hash comparison.)
+      authorization code and using the symmetric key for generating MACs
+      on all messages exchanged.  (Authentication may alternatively be
+      done using signatures instead of MACs, if the CAs are able to
+      retrieve and validate the required public keys by some means, such
+      as an out-of-band hash comparison.)
 
       The requester CA initiates the exchange by generating a cross-
       certification request (ccr) with a fresh random number (requester
@@ -3642,8 +3665,8 @@ Table of Contents
 
 6.7.  End Entity Initialization
 
-   As with CAs, EEs must be initialized.  Initialization of EEs requires
-   at least two steps:
+   As with CAs, end entities must be initialized.  Initialization of end
+   entities requires at least two steps:
 
    *  acquisition of PKI information
 
@@ -3668,41 +3691,41 @@ Table of Contents
    Additional information could be required (e.g., supported extensions
    or CA policy information) in order to produce a certification request
    that will be successful.  However, for simplicity, we do not mandate
-   that the EE acquires this information via the PKI messages.  The end
-   result is simply that some certification requests may fail (e.g., if
-   the EE wants to generate its own encryption key, but the CA doesn't
-   allow that).
+   that the end entity acquires this information via the PKI messages.
+   The end result is simply that some certification requests may fail
+   (e.g., if the end entity wants to generate its own encryption key,
+   but the CA doesn't allow that).
 
    The required information MAY be acquired as described in Section 6.5.
 
 6.7.2.  Out-of-Band Verification of the Root CA Key
 
-   An EE must securely possess the public key of its root CA.  One
-   method to achieve this is to provide the EE with the CA's self-
-   certificate fingerprint via some secure "out-of-band" means.  The EE
-   can then securely use the CA's self-certificate.
+   An end entity must securely possess the public key of its root CA.
+   One method to achieve this is to provide the end entity with the CA's
+   self-certificate fingerprint via some secure "out-of-band" means.
+   The end entity can then securely use the CA's self-certificate.
 
    See Section 6.1 for further details.
 
 6.8.  Certificate Request
 
-   An initialized EE MAY request an additional certificate at any time
-   (for any purpose).  This request will be made using the certification
-   request (cr) message.  If the EE already possesses a signing key pair
-   (with a corresponding verification certificate), then this cr message
-   will typically be protected by the entity's digital signature.  The
-   CA returns the new certificate (if the request is successful) in a
-   CertRepMessage.
+   An initialized end entity MAY request an additional certificate at
+   any time (for any purpose).  This request will be made using the
+   certification request (cr) message.  If the end entity already
+   possesses a signing key pair (with a corresponding verification
+   certificate), then this cr message will typically be protected by the
+   entity's digital signature.  The CA returns the new certificate (if
+   the request is successful) in a CertRepMessage.
 
 6.9.  Key Update
 
-   When a key pair is due to expire, the relevant EE MAY request a key
-   update; that is, it MAY request that the CA issue a new certificate
-   for a new key pair (or, in certain circumstances, a new certificate
-   for the same key pair).  The request is made using a key update
-   request (kur) message (referred to, in some environments, as a
-   "Certificate Update" operation).  If the EE already possesses a
-   signing key pair (with a corresponding verification certificate),
+   When a key pair is due to expire, the relevant end entity MAY request
+   a key update; that is, it MAY request that the CA issue a new
+   certificate for a new key pair (or, in certain circumstances, a new
+   certificate for the same key pair).  The request is made using a key
+   update request (kur) message (referred to, in some environments, as a
+   "Certificate Update" operation).  If the end entity already possesses
+   a signing key pair (with a corresponding verification certificate),
    then this message will typically be protected by the entity's digital
    signature.  The CA returns the new certificate (if the request is
    successful) in a key update response (kup) message, which is
@@ -3722,7 +3745,7 @@ Table of Contents
    cmp2021 SHOULD only be used if cmp2021 syntax is needed for the
    request being sent or for the expected response.
 
-   Note: Using cmp2000 as the default pvno is done to avoid extra
+   Note: Using cmp2000 as the default pvno value is done to avoid extra
    message exchanges for version negotiation and to foster compatibility
    with cmp2000 implementations.  Version cmp2021 syntax is only needed
    if a message exchange uses EnvelopedData, hashAlg (in CertStatus),
@@ -3752,9 +3775,9 @@ Table of Contents
 
 7.1.1.  Clients Talking to RFC 2510 Servers
 
-   If, after sending a message with a pvno higher than cmp1999, a client
-   receives an ErrorMsgContent with a version of cmp1999, then it MUST
-   abort the current transaction.
+   If, after sending a message with a pvno value higher than cmp1999, a
+   client receives an ErrorMsgContent with a version of cmp1999, then it
+   MUST abort the current transaction.
 
    If a client receives a non-error PKIMessage with a version of
    cmp1999, then it MAY decide to continue the transaction (if the
@@ -3775,24 +3798,24 @@ Table of Contents
 8.1.  On the Necessity of POP
 
    It is well established that the role of a CA is to verify that the
-   name and public key belong to the EE prior to issuing a certificate.
-   If an entity holding a private key obtains a certificate containing
-   the corresponding public key issued for a different entity, it can
-   authenticate as the entity named in the certificate.  This
-   facilitates masquerading.  It is not entirely clear what security
-   guarantees are lost if an EE is able to obtain a certificate
-   containing a public key that they do not possess the corresponding
-   private key for.  There are some scenarios, described as "forwarding
-   attacks" in Appendix A of [Gueneysu], in which this can lead to
-   protocol attacks against a naively implemented sign-then-encrypt
-   protocol, but in general, it merely results in the EE obtaining a
-   certificate that they cannot use.
+   name and public key belong to the end entity prior to issuing a
+   certificate.  If an entity holding a private key obtains a
+   certificate containing the corresponding public key issued for a
+   different entity, it can authenticate as the entity named in the
+   certificate.  This facilitates masquerading.  It is not entirely
+   clear what security guarantees are lost if an end entity is able to
+   obtain a certificate containing a public key that they do not possess
+   the corresponding private key for.  There are some scenarios,
+   described as "forwarding attacks" in Appendix A of [Gueneysu], in
+   which this can lead to protocol attacks against a naively implemented
+   sign-then-encrypt protocol, but in general, it merely results in the
+   end entity obtaining a certificate that they cannot use.
 
 8.2.  POP with a Decryption Key
 
    Some cryptographic considerations are worth explicitly spelling out.
-   In the protocols specified above, when an EE is required to prove
-   possession of a decryption key, it is effectively challenged to
+   In the protocols specified above, when an end entity is required to
+   prove possession of a decryption key, it is effectively challenged to
    decrypt something (its own certificate).  This scheme (and many
    others!) could be vulnerable to an attack if the possessor of the
    decryption key in question could be fooled into decrypting an
@@ -3831,20 +3854,21 @@ Table of Contents
 8.4.  Attack Against DH Key Exchange
 
    A small subgroup attack during a DH key exchange may be carried out
-   as follows.  A malicious EE may deliberately choose DH parameters
-   that enable it to derive (a significant number of bits of) the DH
-   private key of the CA during a key archival or key recovery
-   operation.  Armed with this knowledge, the EE would then be able to
-   retrieve the decryption private key of another unsuspecting EE, EE2,
-   during EE2's legitimate key archival or key recovery operation with
-   that CA.  In order to avoid the possibility of such an attack, two
-   courses of action are available.  (1) The CA may generate a fresh DH
-   key pair to be used as a protocol encryption key pair for each EE
-   with which it interacts.  (2) The CA may enter into a key validation
-   protocol (not specified in this document) with each requesting EE to
-   ensure that the EE's protocol encryption key pair will not facilitate
-   this attack.  Option (1) is clearly simpler (requiring no extra
-   protocol exchanges from either party) and is therefore RECOMMENDED.
+   as follows.  A malicious end entity may deliberately choose DH
+   parameters that enable it to derive (a significant number of bits of)
+   the DH private key of the CA during a key archival or key recovery
+   operation.  Armed with this knowledge, the end entity would then be
+   able to retrieve the decryption private key of another unsuspecting
+   end entity, EE2, during EE2's legitimate key archival or key recovery
+   operation with that CA.  In order to avoid the possibility of such an
+   attack, two courses of action are available.  (1) The CA may generate
+   a fresh DH key pair to be used as a protocol encryption key pair for
+   each end entity with which it interacts.  (2) The CA may enter into a
+   key validation protocol (not specified in this document) with each
+   requesting end entity to ensure that the end entity's protocol
+   encryption key pair will not facilitate this attack.  Option (1) is
+   clearly simpler (requiring no extra protocol exchanges from either
+   party) and is therefore RECOMMENDED.
 
 8.5.  Perfect Forward Secrecy
 
@@ -3894,7 +3918,7 @@ Table of Contents
    the details of the generation process and cannot be measured securely
    after it has been generated.  If user-generated passwords are used as
    shared secret information, their entropy cannot be measured.
-   Passwords generated from user generated entropy are typically
+   Passwords generated from user-supplied entropy are typically
    insufficient for protected delivery of centrally generated keys or
    trust anchors.
 
@@ -3954,20 +3978,21 @@ Table of Contents
    configuration management of its clients, MUST NOT include to-be-
    trusted CA certificates in a CMP message unless the specific
    deployment scenario can ensure that it is adequate that the receiving
-   EE trusts these certificates, e.g., by loading them into its trust
-   store.
+   end entity trusts these certificates, e.g., by loading them into its
+   trust store.
 
-   Whenever an EE receives in a CMP message a CA certificate to be used
-   as a trust anchor (for example, in the caPubs field of a certificate
-   response or in a general response), it MUST properly authenticate the
-   message sender with existing trust anchors without requiring new
-   trust anchor information included in the message.
+   Whenever an end entity receives in a CMP message a CA certificate to
+   be used as a trust anchor (for example, in the caPubs field of a
+   certificate response or in a general response), it MUST properly
+   authenticate the message sender with existing trust anchors without
+   requiring new trust anchor information included in the message.
 
-   Additionally, the EE MUST verify that the sender is an authorized
-   source of trust anchors.  This authorization is governed by local
-   policy and typically indicated using shared secret information or
-   with a signature-based message protection using a certificate issued
-   by a PKI that is explicitly authorized for this purpose.
+   Additionally, the end entity MUST verify that the sender is an
+   authorized source of trust anchors.  This authorization is governed
+   by local policy and typically indicated using shared secret
+   information or with a signature-based message protection using a
+   certificate issued by a PKI that is explicitly authorized for this
+   purpose.
 
 8.10.  Authorizing Requests for Certificates with Specific EKUs
 
@@ -4008,7 +4033,7 @@ Table of Contents
    Reference:  RFC 9810
 
    Note that the new OID 1.2.840.113533.7.66.16 was registered by
-   Entrust, and not by IANA, for id-KemBasedMac in the arch
+   Entrust, and not by IANA, for id-KemBasedMac in the arc
    1.2.840.113533.7.66.  This was done to match the previous
    registrations for id-PasswordBasedMac and id-DHBasedMac, which are
    also on the Entrust private arc.
@@ -4311,30 +4336,32 @@ Appendix A.  Reasons for the Presence of RAs
    those that are due to technical factors and those that are
    organizational in nature.  Technical reasons include the following.
 
-   *  If hardware tokens are in use, then not all EEs will have the
-      equipment needed to initialize these; the RA equipment can include
-      the necessary functionality (this may also be a matter of policy).
+   *  If hardware tokens are in use, then not all end entities will have
+      the equipment needed to initialize these; the RA equipment can
+      include the necessary functionality (this may also be a matter of
+      policy).
 
-   *  Some EEs may not have the capability to publish certificates;
-      again, the RA may be suitably placed for this.
+   *  Some end entities may not have the capability to publish
+      certificates; again, the RA may be suitably placed for this.
 
    *  The RA will be able to issue signed revocation requests on behalf
-      of EEs associated with it, whereas the EE may not be able to do
-      this (if the key pair is completely lost).
+      of end entities associated with it, whereas the end entity may not
+      be able to do this (if the key pair is completely lost).
 
    Some of the organizational reasons that argue for the presence of an
    RA are the following.
 
    *  It may be more cost effective to concentrate functionality in the
-      RA equipment than to supply functionality to all EEs (especially
-      if special token initialization equipment is to be used).
+      RA equipment than to supply functionality to all end entities
+      (especially if special token initialization equipment is to be
+      used).
 
    *  Establishing RAs within an organization can reduce the number of
       CAs required, which is sometimes desirable.
 
    *  RAs may be better placed to identify people with their
       "electronic" names, especially if the CA is physically remote from
-      the EE.
+      the end entity.
 
    *  For many applications, there will already be some administrative
       structure in place so that candidates for the role of RA are easy
@@ -4404,8 +4431,8 @@ Appendix B.  The Use of Revocation Passphrase
       [RFC2985] or the valueHint field of EncryptedValue MAY contain a
       key identifier (chosen by the entity, along with the passphrase
       itself) to assist in later retrieval of the correct passphrase
-      (e.g., when the revocation request is constructed by the EE and
-      received by the CA/RA).
+      (e.g., when the revocation request is constructed by the end
+      entity and received by the CA/RA).
 
    *  The revocation request message is protected by a password-based
       MAC (see Section 6.1 of "CMP Algorithms" [RFC9481]) with the
@@ -4456,9 +4483,9 @@ Appendix C.  PKI Management Message Profiles (REQUIRED)
    MUST be supported by conforming implementations (see Section 6).
 
    Note: Appendices C and D focus on PKI management operations managing
-   certificates for human EEs.  In contrast, the Lightweight CMP Profile
-   [RFC9483] focuses on typical use cases of industrial and IoT
-   scenarios supporting highly automated certificate lifecycle
+   certificates for human end entities.  In contrast, the Lightweight
+   CMP Profile [RFC9483] focuses on typical use cases of industrial and
+   IoT scenarios supporting highly automated certificate lifecycle
    management scenarios.
 
    Profiles for the PKIMessages used in the following PKI management
@@ -4478,8 +4505,8 @@ C.1.  General Rules for Interpretation of These Profiles
        profiles, they SHOULD be absent from the relevant message (i.e.,
        a receiver can validly reject a message containing such fields as
        being syntactically incorrect).  Mandatory fields are not
-       mentioned if they have an obvious value.  The pvno MUST be set as
-       specified in Section 7).
+       mentioned if they have an obvious value.  The protocol version
+       number MUST be set as specified in Section 7).
 
    2.  Where structures occur in more than one message, they are
        separately profiled as appropriate.
@@ -4492,9 +4519,9 @@ C.1.  General Rules for Interpretation of These Profiles
        (its DER encoding is then '3000'H).
 
    5.  Where a GeneralName is required for a field, but no suitable
-       value is available (e.g., an EE produces a request before knowing
-       its name), then the GeneralName is to be an X.500 NULL-DN (i.e.,
-       the Name field of the CHOICE is to contain a NULL-DN).
+       value is available (e.g., an end entity produces a request before
+       knowing its name), then the GeneralName is to be an X.500 NULL-DN
+       (i.e., the Name field of the CHOICE is to contain a NULL-DN).
 
    6.  Where a profile omits to specify the value for a GeneralName,
        then the NULL-DN value is to be present in the relevant
@@ -4558,34 +4585,35 @@ C.3.  POP Profile
    explicit for any given CA in its publicized Policy OID and
    Certification Practice Statement).  However, this specification
    mandates that CA/RA entities MUST do POP (by some means) as part of
-   the certification process.  All EEs MUST be prepared to provide POP
-   (i.e., these components of the PKIX-CMP protocol MUST be supported).
+   the certification process.  All end entities MUST be prepared to
+   provide POP (i.e., these components of the PKIX-CMP protocol MUST be
+   supported).
 
 C.4.  Initial Registration/Certification (Basic Authenticated Scheme)
 
-   An (uninitialized) EE requests a (first) certificate from a CA.  When
-   the CA responds with a message containing a certificate, the EE
-   replies with a certificate confirmation.  The CA sends a pkiconf
-   message back, closing the transaction.  All messages are
+   An (uninitialized) end entity requests a (first) certificate from a
+   CA.  When the CA responds with a message containing a certificate,
+   the end entity replies with a certificate confirmation.  The CA sends
+   a pkiconf message back, closing the transaction.  All messages are
    authenticated.
 
-   This scheme allows the EE to request certification of a locally
-   generated public key (typically a signature key).  The EE MAY also
-   choose to request the centralized generation and certification of
-   another key pair (typically an encryption key pair).
+   This scheme allows the end entity to request certification of a
+   locally generated public key (typically a signature key).  The end
+   entity MAY also choose to request the centralized generation and
+   certification of another key pair (typically an encryption key pair).
 
    Certification may only be requested for one locally generated public
    key (for more, use separate PKIMessages).
 
-   The EE MUST support POP of the private key associated with the
-   locally generated public key.
+   The end entity MUST support POP of the private key associated with
+   the locally generated public key.
 
    Preconditions:
 
-   1.  The EE can authenticate the CA's signature based on out-of-band
-       means.
+   1.  The end entity can authenticate the CA's signature based on out-
+       of-band means.
 
-   2.  The EE and the CA share a symmetric MACing key.
+   2.  The end entity and the CA share a symmetric MACing key.
 
    Message Flow:
 
@@ -4604,15 +4632,15 @@ C.4.  Initial Registration/Certification (Basic Authenticated Scheme)
     11                     <--  pkiconf  <--
     12   handle pkiconf
 
-   For this profile, we mandate that the EE MUST include all (i.e., one
-   or two) CertReqMsg in a single PKIMessage and that the PKI (CA) MUST
-   produce a single response PKIMessage that contains the complete
-   response (i.e., including the OPTIONAL second key pair, if it was
-   requested and if centralized key generation is supported).  For
-   simplicity, we also mandate that this message MUST be the final one
-   (i.e., no use of "waiting" status value).
+   For this profile, we mandate that the end entity MUST include all
+   (i.e., one or two) CertReqMsg in a single PKIMessage and that the PKI
+   (CA) MUST produce a single response PKIMessage that contains the
+   complete response (i.e., including the OPTIONAL second key pair, if
+   it was requested and if centralized key generation is supported).
+   For simplicity, we also mandate that this message MUST be the final
+   one (i.e., no use of "waiting" status value).
 
-   The EE has an out-of-band interaction with the CA/RA.  This
+   The end entity has an out-of-band interaction with the CA/RA.  This
    transaction established the shared secret, the referenceNumber, and
    optionally the DN used for both the sender and subject name in the
    certificate template.  See Section 8.7 for security considerations on
@@ -4630,7 +4658,7 @@ C.4.  Initial Registration/Certification (Basic Authenticated Scheme)
      -- on initial authentication key
    senderKID            referenceNum
      -- the reference number that the CA has previously issued
-     -- to the EE (together with the MACing key)
+     -- to the end entity (together with the MACing key)
    transactionID        present
      -- implementation-specific value, meaningful to end
      -- entity.
@@ -4664,12 +4692,12 @@ C.4.  Initial Registration/Certification (Basic Authenticated Scheme)
      -- (see Appendix D.3 for details)
    crm[0].certReq.      optionally present
       controls.archiveOptions
-     -- the EE MAY request that the locally generated
+     -- the end entity MAY request that the locally generated
      -- private key be archived
 
    crm[0].certReq.      optionally present
       controls.publicationInfo
-     -- the EE MAY ask for publication of resulting cert.
+     -- the end entity MAY ask for publication of resulting cert.
 
    crm[1].certReq       fixed value of one
          certReqId
@@ -4690,9 +4718,9 @@ C.4.  Initial Registration/Certification (Basic Authenticated Scheme)
          controls.protocolEncrKey
         -- if centralized key generation is supported by this CA,
         -- this short-term asymmetric encryption key (generated by
-        -- the EE) will be used by the CA to encrypt (a
+        -- the end entity) will be used by the CA to encrypt (a
         -- symmetric key used to encrypt) a private key generated by
-        -- the CA on behalf of the EE
+        -- the CA on behalf of the end entity
 
    crm[1].certReq.      optionally present
       controls.archiveOptions
@@ -4713,7 +4741,7 @@ C.4.  Initial Registration/Certification (Basic Authenticated Scheme)
      -- only MAC protection is allowed for this response
    senderKID             referenceNum
      -- the reference number that the CA has previously issued to the
-     -- EE (together with the MACing key)
+     -- end entity (together with the MACing key)
    transactionID        present
      -- value from corresponding ir message
    senderNonce          present
@@ -4797,11 +4825,11 @@ C.4.  Initial Registration/Certification (Basic Authenticated Scheme)
    protectionAlg        MSG_MAC_ALG
      -- only MAC protection is allowed for this message.  The
      -- MAC is based on the initial authentication key shared
-     -- between the EE and the CA.
+     -- between the end entity and the CA.
 
    senderKID            referenceNum
      -- the reference number that the CA has previously issued
-     -- to the EE (together with the MACing key)
+     -- to the end entity (together with the MACing key)
 
    body                 certConf
      -- see Section 5.3.18, "PKI Confirmation Content", for the
@@ -4835,10 +4863,10 @@ C.4.  Initial Registration/Certification (Basic Authenticated Scheme)
 
 C.5.  Certificate Request
 
-   An (initialized) EE requests a certificate from a CA (for any
+   An (initialized) end entity requests a certificate from a CA (for any
    reason).  When the CA responds with a message containing a
-   certificate, the EE replies with a certificate confirmation.  The CA
-   replies with a pkiconf message to close the transaction.  All
+   certificate, the end entity replies with a certificate confirmation.
+   The CA replies with a pkiconf message to close the transaction.  All
    messages are authenticated.
 
    The profile for this exchange is identical to that given in
@@ -4866,11 +4894,12 @@ C.5.  Certificate Request
 
 C.6.  Key Update Request
 
-   An (initialized) EE requests a certificate from a CA (to update the
-   key pair and/or corresponding certificate that it already possesses).
-   When the CA responds with a message containing a certificate, the EE
-   replies with a certificate confirmation.  The CA replies with a
-   PKIConfirm to close the transaction.  All messages are authenticated.
+   An (initialized) end entity requests a certificate from a CA (to
+   update the key pair and/or corresponding certificate that it already
+   possesses).  When the CA responds with a message containing a
+   certificate, the end entity replies with a certificate confirmation.
+   The CA replies with a PKIConfirm to close the transaction.  All
+   messages are authenticated.
 
    The profile for this exchange is identical to that given in
    Appendix C.4, with the following exceptions:
@@ -4965,8 +4994,8 @@ D.4.  Root CA Key Update
 
    A root CA updates its key pair.  It then produces a CA key update
    announcement message that can be made available (via some transport
-   mechanism) to the relevant EEs.  A confirmation message is not
-   required from the EEs.
+   mechanism) to the relevant entities.  A confirmation message is not
+   required from the end entities.
 
    ckuann message:
 
@@ -4999,13 +5028,13 @@ D.4.  Root CA Key Update
 
 D.5.  PKI Information Request/Response
 
-   The EE sends a general message to the PKI requesting details that
-   will be required for later PKI management operations.  The RA/CA
+   The end entity sends a general message to the PKI requesting details
+   that will be required for later PKI management operations.  The RA/CA
    responds with a general response.  If an RA generates the response,
    then it will simply forward the equivalent message that it previously
    received from the CA, with the possible addition of certificates to
    the extraCerts fields of the PKIMessage.  A confirmation message is
-   not required from the EE.
+   not required from the end entity.
 
    Message Flows:
 
@@ -5052,7 +5081,7 @@ D.5.  PKI Information Request/Response
    CAProtEncCert        present (object identifier one
                         of PROT_ENC_ALG), with relevant
                         value
-     -- to be used if EE needs to encrypt information for
+     -- to be used if end entity needs to encrypt information for
      -- the CA (e.g., private key for recovery purposes)
 
    SignKeyPairTypes     present, with relevant value
@@ -5229,33 +5258,33 @@ D.6.  Cross-Certification Request/Response (1-way)
 
 D.7.  In-Band Initialization Using External Identity Certificate
 
-   An (uninitialized) EE wishes to initialize into the PKI with a CA,
-   CA-1.  It uses, for authentication purposes, a pre-existing identity
-   certificate issued by another (external) CA, CA-X.  A trust
+   An (uninitialized) end entity wishes to initialize into the PKI with
+   a CA, CA-1.  It uses, for authentication purposes, a pre-existing
+   identity certificate issued by another (external) CA, CA-X.  A trust
    relationship must already have been established between CA-1 and CA-X
-   so that CA-1 can validate the EE identity certificate signed by CA-X.
-   Furthermore, some mechanism must already have been established within
-   the TEE, also known as PSE, of the EE that would allow it to
-   authenticate and verify PKIMessages signed by CA-1 (as one example,
-   the TEE may contain a certificate issued for the public key of CA-1,
-   signed by another CA that the EE trusts on the basis of out-of-band
-   authentication techniques).
+   so that CA-1 can validate the end entity identity certificate signed
+   by CA-X.  Furthermore, some mechanism must already have been
+   established within the TEE, also known as PSE, of the end entity that
+   would allow it to authenticate and verify PKIMessages signed by CA-1
+   (as one example, the TEE may contain a certificate issued for the
+   public key of CA-1, signed by another CA that the end entity trusts
+   on the basis of out-of-band authentication techniques).
 
-   The EE sends an initialization request to start the transaction.
-   When CA-1 responds with a message containing the new certificate, the
-   EE replies with a certificate confirmation.  CA-1 replies with a
-   pkiconf message to close the transaction.  All messages are signed
-   (the EE messages are signed using the private key that corresponds to
-   the public key in its external identity certificate; the CA-1
-   messages are signed using the private key that corresponds to the
-   public key in a certificate that can be chained to a trust anchor in
-   the EE's TEE).
+   The end entity sends an initialization request to start the
+   transaction.  When CA-1 responds with a message containing the new
+   certificate, the end entity replies with a certificate confirmation.
+   CA-1 replies with a pkiconf message to close the transaction.  All
+   messages are signed (the end entity messages are signed using the
+   private key that corresponds to the public key in its external
+   identity certificate; the CA-1 messages are signed using the private
+   key that corresponds to the public key in a certificate that can be
+   chained to a trust anchor in the end entity's TEE).
 
    The profile for this exchange is identical to that given in
    Appendix C.4, with the following exceptions:
 
-   *  the EE and CA-1 do not share a symmetric MACing key (i.e., there
-      is no out-of-band shared secret information between these
+   *  the end entity and CA-1 do not share a symmetric MACing key (i.e.,
+      there is no out-of-band shared secret information between these
       entities);
 
    *  sender name in ir MUST be present (and identical to the subject
@@ -6089,11 +6118,11 @@ Appendix F.  Compilable ASN.1 Definitions
 
    GenMsgContent ::= SEQUENCE OF InfoTypeAndValue
 
-   -- May be sent by EE, RA, or CA (depending on message content).
-   -- The OPTIONAL infoValue parameter of InfoTypeAndValue will
-   -- typically be omitted for some of the examples given above.
+   -- May be sent by end entity, RA, or CA (depending on message
+   -- content).  The OPTIONAL infoValue parameter of InfoTypeAndValue
+   -- will typically be omitted for some of the examples given above.
    -- The receiver is free to ignore any contained OIDs that it
-   -- does not recognize.  If sent from EE to CA, the empty set
+   -- does not recognize.  If sent from end entity to CA, the empty set
    -- indicates that the CA may send
    -- any/all information that it wishes.
 

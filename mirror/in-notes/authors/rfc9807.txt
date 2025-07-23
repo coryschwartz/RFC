@@ -172,7 +172,7 @@ Table of Contents
    almost instantaneous leakage of passwords upon server compromise.
 
    This document describes OPAQUE, an aPAKE protocol that is secure
-   against pre-computation attacks (as defined in [JKX18Full]).  OPAQUE
+   against pre-computation attacks (as defined in [JKX18]).  OPAQUE
    provides forward secrecy with respect to password leakage while also
    hiding the password from the server, even during password
    registration.  OPAQUE allows applications to increase the difficulty
@@ -2008,11 +2008,11 @@ Table of Contents
 10.1.  Notable Design Differences
 
    The specification as written here differs from the original
-   cryptographic design in [JKX18Full] and the corresponding CFRG
-   document [Krawczyk20], both of which were used as input to the CFRG
-   PAKE competition.  This section describes these differences,
-   including their motivation and explanation as to why they preserve
-   the provable security of OPAQUE based on [JKX18Full].
+   cryptographic design in [JKX18] and the corresponding CFRG document
+   [Krawczyk20], both of which were used as input to the CFRG PAKE
+   competition.  This section describes these differences, including
+   their motivation and explanation as to why they preserve the provable
+   security of OPAQUE based on [JKX18].
 
    The following list enumerates important functional differences that
    were made as part of the protocol specification process to address
@@ -2020,15 +2020,15 @@ Table of Contents
 
    *  Clients construct envelope contents without revealing the password
       to the server, as described in Section 5, whereas the servers
-      construct envelopes in [JKX18Full].  This change adds to the
-      security of the protocol.  [JKX18Full] considered the case where
-      the envelope was constructed by the server for reasons of
-      compatibility with previous Universal Composability (UC) security
-      modeling.  [HJKW23] analyzes the registration phase as specified
-      in this document.  This change was made to support registration
-      flows where the client chooses the password and wishes to keep it
-      secret from the server, and it is compatible with the variant in
-      [JKX18Full] that was originally analyzed.
+      construct envelopes in [JKX18].  This change adds to the security
+      of the protocol.  [JKX18] considered the case where the envelope
+      was constructed by the server for reasons of compatibility with
+      previous Universal Composability (UC) security modeling.  [HJKW23]
+      analyzes the registration phase as specified in this document.
+      This change was made to support registration flows where the
+      client chooses the password and wishes to keep it secret from the
+      server, and it is compatible with the variant in [JKX18] that was
+      originally analyzed.
 
    *  Envelopes do not contain encrypted credentials.  Instead,
       envelopes contain information used to derive client private key
@@ -2080,7 +2080,7 @@ Table of Contents
       required to verify.  This change (from the original 2-message
       protocol) was made to provide explicit client authentication and
       full forward security.  The 3-message protocol is analyzed in
-      [JKX18Full].
+      [JKX18].
 
    *  The protocol admits optional application-layer client and server
       identities.  In the absence of these identities, the client and
@@ -2111,73 +2111,73 @@ Table of Contents
       the protocol is secure.  The choice of such inputs is up to the
       application.
 
-   *  [JKX18Full] comments on a defense against offline dictionary
-      attacks upon server compromise or honest-but-curious servers.  The
-      authors suggest implementing the OPRF phase as a threshold OPRF
-      [TOPPSS], effectively forcing an attacker to act online or control
-      at least t key shares (of the total n), where t is the threshold
-      number of shares necessary to recombine the secret OPRF key.  Only
-      then would an attacker be able to run an offline dictionary
-      attack.  This implementation only affects the server and changes
-      nothing for the client.  Furthermore, if the threshold OPRF
-      servers holding these keys are separate from the authentication
-      server, then recovering all n shares would still not suffice to
-      run an offline dictionary attack without access to the client
-      record database.  However, this mechanism is out of scope for this
+   *  [JKX18] comments on a defense against offline dictionary attacks
+      upon server compromise or honest-but-curious servers.  The authors
+      suggest implementing the OPRF phase as a threshold OPRF [TOPPSS],
+      effectively forcing an attacker to act online or control at least
+      t key shares (of the total n), where t is the threshold number of
+      shares necessary to recombine the secret OPRF key.  Only then
+      would an attacker be able to run an offline dictionary attack.
+      This implementation only affects the server and changes nothing
+      for the client.  Furthermore, if the threshold OPRF servers
+      holding these keys are separate from the authentication server,
+      then recovering all n shares would still not suffice to run an
+      offline dictionary attack without access to the client record
+      database.  However, this mechanism is out of scope for this
       document.
 
    The following list enumerates notable differences and refinements
-   from the original cryptographic design in [JKX18Full] and the
+   from the original cryptographic design in [JKX18] and the
    corresponding CFRG document [Krawczyk20] that were made to make this
    specification suitable for interoperable implementations.
 
-   *  [JKX18Full] used a generic prime-order group for the DH-OPRF and
-      HMQV operations, and includes necessary prime-order subgroup
-      checks when receiving attacker-controlled values over the wire.
-      This specification instantiates the prime-order group used for 3DH
+   *  [JKX18] used a generic prime-order group for the DH-OPRF and HMQV
+      operations, and includes necessary prime-order subgroup checks
+      when receiving attacker-controlled values over the wire.  This
+      specification instantiates the prime-order group used for 3DH
       using prime-order groups based on elliptic curves as described in
       Section 2.1 of [RFC9497].  This specification also delegates OPRF
       group choice and operations to Section 4 of [RFC9497].  As such,
       the prime-order group as used in the OPRF and 3DH as specified in
-      this document both adhere to the requirements in [JKX18Full].
+      this document both adhere to the requirements in [JKX18].
 
-   *  [JKX18Full] specified DH-OPRF (see Appendix B) to instantiate the
-      OPRF functionality in the protocol.  A critical part of DH-OPRF is
-      the hash-to-group operation, which was not instantiated in the
+   *  Appendix B of [JKX18] specified DH-OPRF to instantiate the OPRF
+      functionality in the protocol.  A critical part of DH-OPRF is the
+      hash-to-group operation, which was not instantiated in the
       original analysis.  However, the requirements for this operation
       were included.  This specification instantiates the OPRF
       functionality based on Section 3.3.1 of [RFC9497], which is
-      identical to the DH-OPRF functionality in [JKX18Full] and,
-      concretely, uses the hash-to-curve functions in [RFC9380].  All
-      hash-to-curve methods in [RFC9380] are compliant with the
-      requirement in [JKX18Full], namely, that the output be a member of
-      the prime-order group.
+      identical to the DH-OPRF functionality in [JKX18] and, concretely,
+      uses the hash-to-curve functions in [RFC9380].  All hash-to-curve
+      methods in [RFC9380] are compliant with the requirement in
+      [JKX18], namely, that the output be a member of the prime-order
+      group.
 
-   *  [JKX18Full] and [Krawczyk20] both used HMQV as the AKE for the
+   *  [JKX18] and [Krawczyk20] both used HMQV as the AKE for the
       protocol.  However, this document fully specifies 3DH instead of
       HMQV (though a sketch for how to instantiate OPAQUE using HMQV is
       included in Appendix B.1).  Since 3DH satisfies the essential
-      requirements for the AKE protocol as described in [JKX18Full] and
+      requirements for the AKE protocol as described in [JKX18] and
       [Krawczyk20], as recalled in Section 10.2, this change preserves
       the overall security of the protocol. 3DH was chosen for its
       simplicity and ease of implementation.
 
    *  The DH-OPRF and HMQV instantiation of OPAQUE as shown in Figure 12
-      [JKX18Full] uses a different transcript than that which is
-      described in this specification.  In particular, the key exchange
-      transcript specified in Section 6.4 is a superset of the
-      transcript as defined in [JKX18Full].  This was done to align with
-      best practices, like what is done for key exchange protocols like
-      TLS 1.3 [RFC8446].
+      [JKX18] uses a different transcript than that which is described
+      in this specification.  In particular, the key exchange transcript
+      specified in Section 6.4 is a superset of the transcript as
+      defined in [JKX18].  This was done to align with best practices,
+      like what is done for key exchange protocols like TLS 1.3
+      [RFC8446].
 
-   *  Neither [JKX18Full] nor [Krawczyk20] included wire format details
-      for the protocol, which is essential for interoperability.  This
+   *  Neither [JKX18] nor [Krawczyk20] included wire format details for
+      the protocol, which is essential for interoperability.  This
       specification fills this gap by including such wire format details
       and corresponding test vectors; see Appendix C.
 
 10.2.  Security Analysis
 
-   Jarecki et al. [JKX18Full] proved the security of OPAQUE (modulo the
+   Jarecki et al. [JKX18] proved the security of OPAQUE (modulo the
    design differences outlined in Section 10.1) in a strong aPAKE model
    that ensures security against precomputation attacks and is
    formulated in the UC framework [Canetti01] under the random oracle
@@ -2207,8 +2207,8 @@ Table of Contents
    protocols for use in OPAQUE is to provide forward secrecy (against
    active attackers).
 
-   In [JKX18Full], security is proven for one instance (i.e., one key)
-   of the OPAQUE protocol, and without batching.  There is currently no
+   In [JKX18], security is proven for one instance (i.e., one key) of
+   the OPAQUE protocol, and without batching.  There is currently no
    security analysis available for the OPAQUE protocol described in this
    document in a setting with multiple server keys or batching.
 
@@ -2216,11 +2216,10 @@ Table of Contents
    separation, particularly against servers that choose the same OPRF
    key for multiple clients.  The client_identity as input to the OPRF
    also acts as a key identifier that would be required for a proof of
-   the protocol in the multi-key setting; the OPAQUE analysis in
-   [JKX18Full] assumes single server-key instances.  Adding
-   server_identity to the OPRF input provides domain separation for
-   clients that reuse the same client_identity across different server
-   instantiations.
+   the protocol in the multi-key setting; the OPAQUE analysis in [JKX18]
+   assumes single server-key instances.  Adding server_identity to the
+   OPRF input provides domain separation for clients that reuse the same
+   client_identity across different server instantiations.
 
 10.3.  Identities
 
@@ -2540,8 +2539,7 @@ Table of Contents
               (EuroS&P), pp. 276-291, DOI 10.1109/EuroSP.2016.30, 2016,
               <https://doi.org/10.1109/EuroSP.2016.30>.
 
-   [JKX18Full]
-              Jarecki, S., Krawczyk, H., and J. Xu, "OPAQUE: An
+   [JKX18]    Jarecki, S., Krawczyk, H., and J. Xu, "OPAQUE: An
               Asymmetric PAKE Protocol Secure Against Pre-Computation
               Attacks", Cryptology ePrint Archive, Paper 2018/163, 2018,
               <https://eprint.iacr.org/2018/163>.

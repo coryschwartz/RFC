@@ -96,7 +96,7 @@ Table of Contents
      7.1.  Processing of BGP-LS-SPF TLVs
      7.2.  Processing of BGP-LS-SPF NLRIs
      7.3.  Processing of BGP-LS Attributes
-     7.4.  BGP-LS-SPF Link State NLRI Database Synchronization
+     7.4.  BGP-LS-SPF Link State Database Synchronization
    8.  IANA Considerations
      8.1.  BGP-LS-SPF Allocation in the SAFI Values Registry
      8.2.  BGP-LS-SPF Assignments in the BGP-LS NLRI and Attribute
@@ -194,7 +194,7 @@ Table of Contents
    for defining an alternative BGP deployment model when a mature
    solution exists.  For both alternatives, BGP offers the operational
    benefits of a single routing protocol as opposed to the combination
-   of IGP for the underlay and BGP as the overlay.  However, BGP SPF
+   of an IGP for the underlay and BGP as the overlay.  However, BGP SPF
    offers some unique advantages above and beyond standard BGP path-
    vector routing.  With BGP SPF, the simple single-hop peering model
    recommended in Section 5.2.1 of [RFC7938] is augmented with peering
@@ -281,7 +281,7 @@ Table of Contents
    select routes for subsequent advertisement by applying the policies
    in the local Policy Information Base (PIB) to the routes stored in
    its Adj-RIBs-In.  The output of the Decision Process is the set of
-   routes that are announced by a BGP speaker to its peers.  These
+   routes that is announced by a BGP speaker to its peers.  These
    selected routes are stored by a BGP speaker in the speaker's Adj-
    RIBs-Out, according to policy.
 
@@ -446,13 +446,13 @@ Table of Contents
    format as the BGP-LS AFI [RFC9552].  In other words, all the TLVs
    used in the BGP-LS Attribute of the BGP-LS AFI are applicable and are
    used for the BGP-LS Attribute of the BGP-LS-SPF SAFI.  This attribute
-   is an optional, non-transitive BGP attribute that is used to carry
-   link, node, and prefix properties and attributes.  The BGP-LS
-   Attribute is a set of TLVs.
+   is an optional, non-transitive BGP attribute that is used to
+   advertise link, node, and prefix properties and attributes.  The BGP-
+   LS Attribute is a set of TLVs.
 
    All the TLVs defined for the BGP-LS Attribute [RFC9552] are
-   applicable and can be used with the BGP-LS-SPF SAFI to carry link,
-   node, and prefix properties and attributes.
+   applicable and can be used with the BGP-LS-SPF SAFI to advertise
+   link, node, and prefix properties and attributes.
 
    The BGP-LS Attribute may potentially be quite large depending on the
    amount of link-state information associated with a single BGP-LS-SPF
@@ -579,18 +579,19 @@ Table of Contents
    For a link to be used in SPF computation for a given address family,
    i.e., IPv4 or IPv6, both routers connecting the link MUST have
    matching addresses (i.e., router interface addresses must be on the
-   same subnet for numbered interfaces, and the Link Local/Remote
+   same subnet for numbered interfaces, or the Link Local/Remote
    Identifiers (Section 6.3) must match for unnumbered interfaces).
 
    The IGP Metric (TLV 1095) MUST be advertised.  If a BGP speaker
    receives a Link NLRI without an IGP Metric attribute TLV, then it
-   MUST consider the received NLRI as malformed (refer to Section 7).
-   The BGP SPF metric length is 4 octets.  A metric is associated with
-   the output side of each router interface.  This metric is
-   configurable by the system administrator.  The lower the metric, the
-   more likely the interface is to be used to forward data traffic.  One
-   possible default for the metric would be to give each interface a
-   metric of 1 making it effectively a hop count.
+   MUST consider the received NLRI as malformed and is handled as
+   described in Section 7.1.  The BGP SPF metric length is 4 octets.  A
+   metric is associated with the output side of each router interface.
+   This metric is configurable by the system administrator.  The lower
+   the metric, the more likely the interface is to be used to forward
+   data traffic.  One possible default for the metric would be to give
+   each interface a metric of 1 making the SPF metric effectively a hop
+   count.
 
    The usage of other link attribute TLVs is beyond the scope of this
    document.
@@ -776,8 +777,8 @@ Table of Contents
    immediately.
 
    If the Sequence Number TLV is not received, then the corresponding
-   NLRI is considered as malformed and MUST be handled as 'treat-as-
-   withdraw'.  An implementation SHOULD log an error for further
+   NLRI is considered as malformed and MUST be handled as described in
+   Section 7.1.  An implementation SHOULD log an error for further
    analysis.
 
 5.3.  BGP-LS-SPF End of RIB (EoR) Marker
@@ -957,8 +958,8 @@ Table of Contents
       plane.  This is commonly referred to in networking parlance as
       "the RIB".
 
-   Link State NLRI Database (LSNDB):  A database of BGP-LS-SPF NLRIs
-      that facilitate access to all Node, Link, and Prefix NLRIs.
+   Link State Database (LSDB):  A database of BGP-LS-SPF NLRIs that
+      facilitate access to all Node, Link, and Prefix NLRIs.
 
    Candidate List (CAN-LIST):  A list of candidate Node NLRIs used
       during the BGP SPF calculation.  The list is sorted by the cost to
@@ -1160,8 +1161,8 @@ Table of Contents
 
    It is RECOMMENDED that BGP-LS-SPF IPv4/IPv6 route computation and
    installation be given scheduling priority by default over other BGP
-   address families as these address families are considered as underlay
-   SAFIs.
+   address families as the BGP-LS-SPF SAFI is considered an underlay
+   SAFI.
 
 6.5.  NLRI Advertisement
 
@@ -1180,13 +1181,13 @@ Table of Contents
    for the BGP-LS-SPF Link NLRI including the SPF Status TLV (refer to
    Section 5.2.2.2) indicating the link is down with respect to BGP SPF.
    The configurable LinkStatusDownAdvertise timer controls the interval
-   that the BGP-LS-LINK NLRI is advertised with SPF Status indicating
-   the link is down prior to withdrawal.  If the BGP-LS-SPF Link NLRI is
-   advertised with the SPF Status TLV included in the BGP-LS Attribute,
-   and the link becomes available in that period, the originator of the
-   BGP-LS-SPF Link NLRI MUST advertise a more recent version of the BGP-
-   LS-SPF Link NLRI without the SPF Status TLV in the BGP-LS Link
-   Attribute.  The suggested default value for the
+   that the BGP-LS-SPF Link NLRI is advertised with SPF Status
+   indicating the link is down prior to withdrawal.  If the BGP-LS-SPF
+   Link NLRI is advertised with the SPF Status TLV included in the BGP-
+   LS Attribute, and the link becomes available in that period, the
+   originator of the BGP-LS-SPF Link NLRI MUST advertise a more recent
+   version of the BGP-LS-SPF Link NLRI without the SPF Status TLV in the
+   BGP-LS Link Attribute.  The suggested default value for the
    LinkStatusDownAdvertise timer is 2 seconds.
 
    Similarly, when a prefix becomes unreachable, a more recent version
@@ -1210,7 +1211,7 @@ Table of Contents
    such as BFD [RFC5880] is utilized, and the node is on the fastest
    converging path, the most recent versions of BGP-LS-SPF NLRI will be
    withdrawn.  This may result in older versions of NLRIs received from
-   one or more peers on a different path(s) in the LSNDB until they are
+   one or more peers on a different path(s) in the LSDB until they are
    withdrawn.  These stale NLRIs will not delay convergence since the
    adjacent nodes detect the link failure and advertise a more recent
    NLRI indicating the link is down with respect to BGP SPF (refer to
@@ -1293,7 +1294,7 @@ Table of Contents
    [RFC9552].  However, NLRIs without the BGP-LS Attribute MUST NOT be
    used in the SPF calculation (Section 6.3).  How this is accomplished
    is an implementation matter, but one way would be for these NLRIs not
-   to be returned in LSNDB lookups.
+   to be returned in LSDB lookups.
 
 7.2.  Processing of BGP-LS-SPF NLRIs
 
@@ -1310,9 +1311,9 @@ Table of Contents
    An implementation SHOULD log an error for further analysis for
    problems detected during syntax validation.
 
-7.4.  BGP-LS-SPF Link State NLRI Database Synchronization
+7.4.  BGP-LS-SPF Link State Database Synchronization
 
-   While uncommon, there may be situations where the LSNDBs of two BGP
+   While uncommon, there may be situations where the LSDBs of two BGP
    speakers support the BGP-LS-SPF SAFI lose synchronization.  In these
    situations, the BGP session MUST be reset unless other means of
    resynchronization are used (beyond the scope of this document).  When

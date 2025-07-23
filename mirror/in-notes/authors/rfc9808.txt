@@ -16,11 +16,10 @@ ISSN: 2070-1721                                                   Vecima
 
 Abstract
 
-   The Content Delivery Network Interconnection (CDNI) Capacity
-   Capability Advertisement Extensions define a set of additional
-   Capability Objects that provide information about current downstream
-   CDN (dCDN) utilization and specified usage limits to the delegating
-   upstream CDN (uCDN) in order to inform traffic delegation decisions.
+   This specification defines a set of additional Capability Objects
+   that provide information about current downstream CDN (dCDN)
+   utilization and specified usage limits to the delegating upstream CDN
+   (uCDN) in order to inform traffic delegation decisions.
 
    This document supplements the CDNI Capability Objects, defined in RFC
    8008 as part of the Footprint & Capabilities Advertisement Interface
@@ -75,8 +74,8 @@ Table of Contents
        2.2.2.  CapacityLimit Object Serialization
    3.  IANA Considerations
      3.1.  CDNI Payload Types
-       3.1.1.  CDNI FCI Telemetry Payload Type
-       3.1.2.  CDNI FCI Capacity Limits Payload Type
+       3.1.1.  CDNI FCI.Telemetry Payload Type
+       3.1.2.  CDNI FCI.CapacityLimits Payload Type
      3.2.  CDNI Telemetry Source Types Registry
        3.2.1.  CDNI Generic Telemetry Source Type
      3.3.  CDNI Capacity Limit Types Registry
@@ -100,7 +99,7 @@ Table of Contents
    commitment, or reservation of capacity.
 
    This document defines and registers CDNI Payload Types (as defined in
-   Section 7.1 of [RFC8006]).  These Payload types are used for
+   Section 7.1 of [RFC8006]).  These Payload Types are used for
    Capability Objects, which are added to those defined in Section 4 of
    [RFC8008].
 
@@ -138,17 +137,17 @@ Table of Contents
       second, etc.  These limits can be thought of as Not to Exceed
       (NTE) limits.
 
-      The dCDN should provide access to a telemetry source of near real-
+      The dCDN should provide access to a Telemetry Source of near real-
       time metrics that the uCDN can use to track current usage.  The
       uCDN should compare its current usage to the limits the dCDN has
       put forth and adjust traffic delegation decisions accordingly to
       keep current usage under the specified limits.
 
       In summary, the dCDN will inform the uCDN of the amount of traffic
-      that may be delegated.  Additionally, it will provide a telemetry
-      source aligned with this limit, allowing the uCDN to monitor its
+      that may be delegated.  Additionally, it will provide a Telemetry
+      Source aligned with this limit, allowing the uCDN to monitor its
       current usage against the advertised value.  Having a limit and a
-      corresponding telemetry source creates an unambiguous definition
+      corresponding Telemetry Source creates an unambiguous definition
       understood by both parties.
 
    Limits that are communicated from the dCDN to the uCDN should be
@@ -165,30 +164,31 @@ Table of Contents
 
    Section 5 of [RFC8008] describes the FCI Capability Advertisement
    Object, which contains a CDNI Capability Object as well as the
-   capability object type (a CDNI Payload Type).  The section also
-   defines the Capability Objects per such type.  Below, we define two
-   additional Capability Objects.
+   capability-type (a CDNI Payload Type).  The section also defines the
+   Capability Objects per such type.  Below, we define two additional
+   Capability Objects.
 
-   Note: In the following sections, the term "mandatory-to-specify" is
-   used to convey which properties MUST be included when serializing a
-   given capability object.  When mandatory-to-specify is defined as a
-   "Yes" for an individual property, it means that if the object
-   containing that property is included in an FCI message, then the
-   mandatory-to-specify property MUST be included.
+      |  Note: In the following sections, the term "mandatory-to-
+      |  specify" is used to convey which properties MUST be included
+      |  when serializing a given capability object.  When mandatory-to-
+      |  specify is defined as a "Yes" for an individual property, it
+      |  means that if the object containing that property is included
+      |  in an FCI message, then the mandatory-to-specify property MUST
+      |  be included.
 
 2.1.  Telemetry Capability Object
 
-   The Telemetry Capability Object advertises a list of telemetry
-   sources made available to the uCDN by the dCDN.  In this document,
+   The Telemetry Capability Object advertises a list of Telemetry
+   Sources made available to the uCDN by the dCDN.  In this document,
    telemetry data is being defined as near real-time aggregated metrics
    of dCDN utilization, such as bits per second egress, and is specific
    to the uCDN and dCDN traffic delegation relationship.
 
    Telemetry data is uniquely defined by a source ID, a metric name, and
-   the footprints that are associated with an FCI.Capability
+   the footprints that are associated with an FCI Capabilities
    advertisement.  When defining a CapacityLimit, the meaning of a limit
    might be ambiguous if the uCDN and dCDN are observing telemetry via
-   different data sources.  A dCDN-provided telemetry source that both
+   different data sources.  A dCDN-provided Telemetry Source that both
    parties reference serves as a non-ambiguous metric for use when
    comparing current usage to a limit.
 
@@ -209,12 +209,12 @@ Table of Contents
 
    Property:  sources
 
-      Description:  Telemetry sources made available to the uCDN.
+      Description:  Telemetry Sources made available to the uCDN.
 
       Type:  A JSON array of Telemetry Source objects (see
          Section 2.1.1).
 
-      Mandatory-to-Specify:  Yes.
+      Mandatory-to-Specify:  Yes
 
 2.1.1.  Telemetry Source Object
 
@@ -229,30 +229,30 @@ Table of Contents
          Telemetry Source Object.  The ID string MUST remain consistent
          for the same source reference across advertisements.
 
-      Type:  String.
+      Type:  String
 
-      Mandatory-to-Specify:  Yes.
+      Mandatory-to-Specify:  Yes
 
    Property:  type
 
-      Description:  A valid telemetry source type (see Section 2.1.1.1).
+      Description:  A valid Telemetry Source Type (see Section 2.1.1.1).
 
-      Type:  String.
+      Type:  String
 
-      Mandatory-to-Specify:  Yes.
+      Mandatory-to-Specify:  Yes
 
    Property:  metrics
 
       Description:  The metrics exposed by this source.
 
-      Type:  A JSON array of Telemetry Source Metric objects (see
+      Type:  A JSON array of Telemetry Source Metric Objects (see
          Section 2.1.1.2).
 
-      Mandatory-to-Specify:  Yes.
+      Mandatory-to-Specify:  Yes
 
    Property:  configuration
 
-      Description:  a source-specific representation of the Telemetry
+      Description:  A source-specific representation of the Telemetry
          Source configuration.  For the generic source type, this
          configuration format is defined as out-of-band.  For other
          types, the configuration format will be specified in a yet-to-
@@ -263,21 +263,13 @@ Table of Contents
       Type:  A JSON object, the structure of which is specific to the
          Telemetry Source and outside the scope of this document.
 
-      Mandatory-to-Specify:  No.
+      Mandatory-to-Specify:  No
 
 2.1.1.1.  Telemetry Source Types
 
-   At the time of this writing, the registry of valid Telemetry Source
-   Types is limited to a single type: generic (see Section 3.2.1).
-
-          +=============+=======================================+
-          | Source Type | Description                           |
-          +=============+=======================================+
-          | generic     | An object that allows for             |
-          |             | advertisement of generic data sources |
-          +-------------+---------------------------------------+
-
-                                  Table 1
+   At the time of this writing, the "CDNI Telemetry Source Types"
+   registry is limited to a single type: generic (see Table 3 in
+   Section 3.2.1).
 
 2.1.1.2.  Telemetry Source Metric Object
 
@@ -291,9 +283,9 @@ Table of Contents
          Source.  The name MUST remain consistent for the same source
          reference across advertisements.
 
-      Type:  String.
+      Type:  String
 
-      Mandatory-to-Specify:  Yes.
+      Mandatory-to-Specify:  Yes
 
    Property:  time-granularity
 
@@ -301,9 +293,9 @@ Table of Contents
          For example, a value representing the last 5 minutes would have
          a time-granularity of 300.
 
-      Type:  Unsigned Integer.
+      Type:  Unsigned Integer
 
-      Mandatory-to-Specify:  No.
+      Mandatory-to-Specify:  No
 
    Property:  data-percentile
 
@@ -312,9 +304,9 @@ Table of Contents
          granularity.  Lack of a data-percentile indicates that the data
          MUST be the mean over the time representation.
 
-      Type:  Unsigned Integer.
+      Type:  Unsigned Integer
 
-      Mandatory-to-Specify:  No.
+      Mandatory-to-Specify:  No
 
    Property:  latency
 
@@ -323,14 +315,14 @@ Table of Contents
          long it might take to reflect traffic adjustments in the
          metrics.
 
-      Type:  Unsigned Integer.
+      Type:  Unsigned Integer
 
-      Mandatory-to-Specify:  No.
+      Mandatory-to-Specify:  No
 
 2.1.2.  Telemetry Capability Object Serialization
 
-   The following shows an example of Telemetry Capability including two
-   metrics for a source, that is scoped to a footprint.
+   The following shows an example of a Telemetry Capability Object,
+   including two metrics for a source, that is scoped to a footprint.
 
    {
      "capabilities": [
@@ -366,28 +358,28 @@ Table of Contents
 2.2.  CapacityLimits Capability Object
 
    The CapacityLimits Capability Object enables the dCDN to specify
-   traffic delegation limits to a uCDN within an FCI.Capabilities
+   traffic delegation limits to a uCDN within an FCI Capabilities
    advertisement.  The limits specified by the dCDN will inform the uCDN
    on how much traffic may be delegated to the dCDN.  The limits
    specified by the dCDN should be considered NTE limits.  The limits
    should be based on near real-time telemetry data that the dCDN
    provides to the uCDN.  In other words, for each limit that is
-   advertised, there should also exist a telemetry source that provides
+   advertised, there should also exist a Telemetry Source that provides
    current utilization data against the particular advertised limit.
 
    Property:  limits
 
-      Description:  A collection of CapacityLimit objects.
+      Description:  A collection of CapacityLimit Objects.
 
-      Type:  A JSON array of CapacityLimit objects (see Section 2.2.1).
+      Type:  A JSON array of CapacityLimit Objects (see Section 2.2.1).
 
-      Mandatory-to-Specify:  Yes.
+      Mandatory-to-Specify:  Yes
 
 2.2.1.  CapacityLimit Object
 
-   A CapacityLimit object is used to represent traffic limits for
+   A CapacityLimit Object is used to represent traffic limits for
    delegation from the uCDN towards the dCDN.  The limit object is
-   scoped to the footprint associated with the FCI capability
+   scoped to the footprint associated with the FCI Capabilities
    advertisement encompassing this object.  Limits MUST be considered
    using a logical "AND": A uCDN will need to ensure that all limits are
    considered rather than choosing only the most specific.
@@ -398,7 +390,7 @@ Table of Contents
 
       Type:  String.  One of the values listed in Section 2.2.1.1.
 
-      Mandatory-to-Specify:  Yes.
+      Mandatory-to-Specify:  Yes
 
    Property:  id
 
@@ -406,21 +398,21 @@ Table of Contents
          This MAY be used as a relational identifier to a specific
          CapacityLimit Object.  If specified, this identifier MUST be
          unique among specified identifiers associated with any other
-         CapacityLimit objects in the advertisement containing this
+         CapacityLimit Objects in the advertisement containing this
          CapacityLimit Object.
 
-      Type:  String.
+      Type:  String
 
-      Mandatory-to-Specify:  No.
+      Mandatory-to-Specify:  No
 
    Property:  maximum-hard
 
       Description:  The maximum unit of capacity that is available for
          use.
 
-      Type:  Unsigned Integer.
+      Type:  Unsigned Integer
 
-      Mandatory-to-Specify:  Yes.
+      Mandatory-to-Specify:  Yes
 
    Property:  maximum-soft
 
@@ -429,9 +421,9 @@ Table of Contents
          the value of maximum-hard.  If this value is not specified, it
          is equal to the value of maximum-hard.
 
-      Type:  Unsigned Integer.
+      Type:  Unsigned Integer
 
-      Mandatory-to-Specify:  No.
+      Mandatory-to-Specify:  No
 
    Property:  current
 
@@ -439,31 +431,31 @@ Table of Contents
          is NOT RECOMMENDED to specify the current usage value inline
          with the FCI.CapacityLimits advertisements as it will reduce
          the ability to cache the response, but this mechanism exists
-         for simple use cases where an external telemetry source cannot
+         for simple use cases where an external Telemetry Source cannot
          be feasibly implemented.  The intended method for providing
-         telemetry data is to reference a Telemetry Source object (see
+         telemetry data is to reference a Telemetry Source Object (see
          Section 2.1.1) to poll for the current usage.
 
-      Type:  Unsigned Integer.
+      Type:  Unsigned Integer
 
-      Mandatory-to-Specify:  No.
+      Mandatory-to-Specify:  No
 
    Property:  telemetry-source
 
       Description:  The mapping of each particular limit to a specific
-         metric with relevant real-time data provided by a telemetry
-         source.
+         metric with relevant real-time data provided by a Telemetry
+         Source.
 
       Type:  CapacityLimitTelemetrySource object (see Section 2.2.1.2).
 
-      Mandatory-to-Specify:  No.
+      Mandatory-to-Specify:  No
 
 2.2.1.1.  CapacityLimit Types
 
-   Below are listed the valid capacity limit-types registered in the
-   "CDNI Capacity Limit Types" registry.  The values specified here
-   represent the types that were identified as being the most relevant
-   metrics for the purposes of traffic delegation between CDNs.
+   Below are listed the valid limit-type entries registered in the "CDNI
+   Capacity Limit Types" registry.  The values specified here represent
+   the types that were identified as being the most relevant metrics for
+   the purposes of traffic delegation between CDNs.
 
                +=====================+=====================+
                | Capacity Limit Type | Units               |
@@ -481,7 +473,7 @@ Table of Contents
                | cache-size          | Total bytes         |
                +---------------------+---------------------+
 
-                                  Table 2
+                                  Table 1
 
 2.2.1.2.  CapacityLimitTelemetrySource Object
 
@@ -490,21 +482,21 @@ Table of Contents
 
    Property:  id
 
-      Description:  Reference to the "id" of a telemetry source defined
-         by a Telemetry Capability object as defined in Section 2.1.
+      Description:  Reference to the "id" of a Telemetry Source defined
+         by a Telemetry Capability Object as defined in Section 2.1.
 
-      Type:  String.
+      Type:  String
 
-      Mandatory-to-Specify:  Yes.
+      Mandatory-to-Specify:  Yes
 
    Property:  metric
 
       Description:  Reference to the "name" property of a metric defined
-         within a telemetry source of a Telemetry Capability object.
+         within a Telemetry Source of a Telemetry Capability object.
 
-      Type:  String.
+      Type:  String
 
-      Mandatory-to-Specify:  Yes.
+      Mandatory-to-Specify:  Yes
 
 2.2.2.  CapacityLimit Object Serialization
 
@@ -551,24 +543,24 @@ Table of Contents
                     | FCI.CapacityLimits | RFC 9808  |
                     +--------------------+-----------+
 
-                                 Table 3
+                                 Table 2
 
-3.1.1.  CDNI FCI Telemetry Payload Type
+3.1.1.  CDNI FCI.Telemetry Payload Type
 
    Purpose:  The purpose of this Payload Type is to list the supported
-      telemetry sources and the metrics made available by each source.
+      Telemetry Sources and the metrics made available by each source.
 
-   Interface:  FCI.
+   Interface:  FCI
 
    Encoding:  See Section 2.1.
 
-3.1.2.  CDNI FCI Capacity Limits Payload Type
+3.1.2.  CDNI FCI.CapacityLimits Payload Type
 
    Purpose:  The purpose of this Payload Type is to define Capacity
-      Limits based on utilization metrics corresponding to telemetry
-      sources provided by the dCDN.
+      Limits based on utilization metrics corresponding to Telemetry
+      Sources provided by the dCDN.
 
-   Interface:  FCI.
+   Interface:  FCI
 
    Encoding:  See Section 2.2.
 
@@ -591,7 +583,7 @@ Table of Contents
 
       *  The new type definition does not duplicate existing types.
 
-      *  The review should verify that the telemetry source is
+      *  The review should verify that the Telemetry Source is
          applicable to the CDNI use cases and that the description is
          clear and unambiguous.
 
@@ -603,19 +595,20 @@ Table of Contents
 
    The following value has been registered:
 
-                        +=============+===========+
-                        | Source Type | Reference |
-                        +=============+===========+
-                        | generic     | RFC 9808  |
-                        +-------------+-----------+
+    +=============+=======================================+===========+
+    | Source Type | Decription                            | Reference |
+    +=============+=======================================+===========+
+    | generic     | An object that allows for             | RFC 9808  |
+    |             | advertisement of generic data sources |           |
+    +-------------+---------------------------------------+-----------+
 
-                                  Table 4
+                                  Table 3
 
 3.2.1.  CDNI Generic Telemetry Source Type
 
    Purpose:  The purpose of this Telemetry Source Type is to provide a
       source-agnostic telemetry type that may be used for generic
-      telemetry source advertisement.
+      Telemetry Source advertisement.
 
    Usage:  See Section 2.1.1.
 
@@ -629,21 +622,21 @@ Table of Contents
 
    Registry Description:  The "CDNI Capacity Limit Types" registry
       defines the valid values of the "limit-type" property of a
-      CapacityLimit object defined in Section 2.2.1.
+      CapacityLimit Object defined in Section 2.2.1.
 
    Registration Procedure:  The registry follows the Specification
       Required policy as defined in [RFC8126].  The designated expert
       should consider the following guidelines when evaluating
       registration requests:
 
-      *  The new capacity limit type does not duplicate existing
+      *  The new capacity limit-type does not duplicate existing
          entries.
 
       *  The submission has a defined purpose.  The newly defined
-         capacity limit type should be clearly justified in the context
+         capacity limit-type should be clearly justified in the context
          of one or more CDNI use cases.
 
-      *  The description of the capacity limit type is well-documented
+      *  The description of the capacity limit-type is well-documented
          and unambiguous.
 
    The following values have been registered:
@@ -664,7 +657,7 @@ Table of Contents
          | cache-size          | Total bytes         | RFC 9808  |
          +---------------------+---------------------+-----------+
 
-                                  Table 5
+                                  Table 4
 
    Usage:  See Section 2.2.1.1.
 
