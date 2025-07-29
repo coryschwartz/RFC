@@ -224,7 +224,7 @@ Table of Contents
    route update (e.g., for Internet or VPN routes) to specify the tunnel
    used for forwarding traffic.  This document does not modify or
    supersede the usage of the Tunnel Encapsulation Attribute for
-   existing AFIs/SAFIs as defined in [RFC9012].  Details regarding the
+   existing AFI/SAFIs as defined in [RFC9012].  Details regarding the
    processing of the Tunnel Encapsulation Attribute for the SR Policy
    SAFI are provided in Sections 2.2 and 2.3.
 
@@ -1364,10 +1364,10 @@ Table of Contents
    withdraw'.  In other cases, where the error in the NLRI encoding
    results in the inability to process the BGP UPDATE message (e.g.,
    length-related encoding errors), then the router SHOULD handle such
-   malformed NLRIs as "AFI/SAFI disable" when other AFIs/SAFIs besides
-   SR Policy are being advertised over the same session.  Alternately,
-   the router MUST perform "session reset" when the session is only
-   being used for SR Policy or when a "AFI/SAFI disable" action is not
+   malformed NLRIs as "AFI/SAFI disable" when other AFI/SAFIs besides SR
+   Policy are being advertised over the same session.  Alternately, the
+   router MUST perform "session reset" when the session is only being
+   used for SR Policy or when a "AFI/SAFI disable" action is not
    possible.
 
    The validation of the TLVs/sub-TLVs introduced in this document and

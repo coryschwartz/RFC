@@ -8,7 +8,7 @@ Category: Informational                                      RWTH Aachen
 ISSN: 2070-1721                                               D. Trossen
                                                             DaPaDOT Tech
                                                           M-J. Montpetit
-                                                                  McGill
+                                                               SLICES-RI
                                                                X. de Foy
                                         InterDigital Communications, LLC
                                                               D. Griffin
@@ -160,7 +160,7 @@ Table of Contents
       utilized and realized as well as the semantics of interactions in
       the use case.
 
-   Existing Solutions:  A description of current methods that may
+   Existing solutions:  A description of current methods that may
       realize the use case (if they exist), though not claiming to
       exhaustively review the landscape of solutions.
 
@@ -270,13 +270,13 @@ Table of Contents
    more suitably placed (COIN) program instances in the overall (COIN)
    system.
 
-   We can already see a trend toward supporting such functionality with
-   relyiccng on dedicated cloud hardware (e.g., gaming platforms
-   rendering content externally).  We envision, however, that such
-   functionality is becoming more pervasive through specific facilities,
-   such as entertainment parks or even hotels, in order to deploy needed
-   edge computing capabilities to enable localized gaming as well as
-   non-gaming scenarios.
+   We can already see a trend toward supporting such functionality that
+   relies on dedicated cloud hardware (e.g., gaming platforms rendering
+   content externally).  We envision, however, that such functionality
+   is becoming more pervasive through specific facilities, such as
+   entertainment parks or even hotels, in order to deploy needed edge
+   computing capabilities to enable localized gaming as well as non-
+   gaming scenarios.
 
    Figure 1 shows one realization of the above scenario, where a "DPR
    app" is running on a mobile device (containing the partitioned COIN
@@ -1107,12 +1107,13 @@ Table of Contents
    sampling, packet-based sub-sampling (i.e., only forwarding every n-th
    packet), or using filtering as long as the sensor value is in an
    uninteresting range while forwarding with a higher resolution once
-   the sensor value range becomes interesting (cf. [KUNZE-SIGNAL]).
-   While the former variants are oblivious to the semantics of the
-   sensor data, the latter variant requires an understanding of the
-   current sensor levels.  In any case, it is important that end hosts
-   are informed about the filtering so that they can distinguish between
-   data loss and data filtered out on purpose.
+   the sensor value range becomes interesting (cf. [KUNZE-SIGNAL] and
+   [TIRPITZ-REDUCIO]).  While the former variants are oblivious to the
+   semantics of the sensor data, the latter variant requires an
+   understanding of the current sensor levels.  In any case, it is
+   important that end hosts are informed about the filtering so that
+   they can distinguish between data loss and data filtered out on
+   purpose.
 
    In practice, the collected data is further processed using various
    forms of computation.  Some of them are very complex or need the
@@ -1164,15 +1165,16 @@ Table of Contents
       filtering and which filtering criteria make sense?
 
    *  RQ 4.2.3: Which kinds of COIN programs can be leveraged for
-      (pre)processing steps and what complexity can they have?
+      preprocessing and processing steps and what complexity can they
+      have?
 
    *  RQ 4.2.4: How to distribute and coordinate COIN programs?
 
    *  RQ 4.2.5: How to dynamically reconfigure and recompose COIN
       programs?
 
-   *  RQ 4.2.6: How to incorporate the (pre)processing and filtering
-      steps into the overall system?
+   *  RQ 4.2.6: How to incorporate the preprocessing, processing, and
+      filtering steps into the overall system?
 
    *  RQ 4.2.7: How can changes to the data by COIN programs be signaled
       to the end hosts?
@@ -1870,12 +1872,12 @@ Table of Contents
    because it got compromised or the deployment of functionality offers
    new attack vectors to outsiders).
 
-   However, similar to middlebox deployments, risks for privacy and data
-   exposure have to be carefully considered in the context of the
-   concrete deployment.  For example, exposing data to an external
-   operator for mobile application offloading leads to a significant
-   privacy loss of the user in any case.  In contrast, such privacy
-   considerations are not as relevant for COIN systems where all
+   However, similar to middlebox deployments, risks for privacy and the
+   risk of data exposure have to be carefully considered in the context
+   of the concrete deployment.  For example, exposing data to an
+   external operator for mobile application offloading leads to a
+   significant privacy loss of the user in any case.  In contrast, such
+   privacy considerations are not as relevant for COIN systems where all
    involved entities are under the same control, such as in an
    industrial context.  Here, exposed data and functionality can instead
    lead to stolen business secrets or the enabling of DoS attacks, for
@@ -1916,7 +1918,7 @@ Table of Contents
 
    Additional system-level security considerations may arise from
    regulatory requirements imposed on COIN systems overall, stemming
-   from regulation regarding, lawful interception, data localization, or
+   from regulation regarding lawful interception, data localization, or
    AI use, for example.  These requirements may impact, for example, the
    manner in which (COIN) programs may be placed or executed in the
    overall system, who can invoke certain (COIN) programs in what PND or
@@ -2168,6 +2170,16 @@ Table of Contents
               Programs",
               <https://flightplan.cis.upenn.edu/flightplan.pdf>.
 
+   [TIRPITZ-REDUCIO]
+              Tirpitz, L., Kunze, I., Niemietz, P., Gerhardus, A. K.,
+              Bergs, T., Wehrle, K., and S. Geisler, "Reducio: Data
+              Aggregation and Stability Detection for Industrial
+              Processes Using In-Network Computing", DEBS '25:
+              Proceedings of the 19th ACM International Conference on
+              Distributed and Event-based Systems, pp. 98-109,
+              DOI 10.1145/3701717.3730547, June 2025,
+              <https://doi.org/10.1145/3701717.3730547>.
+
    [TLSSURVEY]
               de Carné de Carnavalet, X. and P. van Oorschot, "A Survey
               and Analysis of TLS Interception Mechanisms and
@@ -2253,11 +2265,10 @@ Authors' Addresses
 
 
    Marie-Jose Montpetit
-   McGill University
-   680 Sherbrooke Street W.
-   Montreal  H3A 3R1
-   Canada
-   Email: marie-jose.montpetit@mcgill.ca
+   SLICES-RI
+   Paris
+   France
+   Email: marie-jose.montpetit@slices-ri.eu
 
 
    Xavier de Foy

@@ -117,12 +117,12 @@ Table of Contents
 
 2.  Administrative Tag Sub-TLV
 
-   This document creates a new Administrative Tag sub-TLV for OSPFv2 and
+   This document creates a new Administrative Tag Sub-TLV for OSPFv2 and
    OSPFv3.  This sub-TLV specifies one or more 32-bit unsigned integers
    that may be associated with an OSPF advertised prefix.  The precise
    usage of these tags is beyond the scope of this document.
 
-   The format of the Administrative Tag sub-TLV is as follows:
+   The format of the Administrative Tag Sub-TLV is as follows:
 
        0                   1                   2                   3
        0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
@@ -163,13 +163,13 @@ Table of Contents
 
 3.  Administrative Tag Applicability
 
-   The Administrative Tag sub-TLV specified herein will be valid as a
+   The Administrative Tag Sub-TLV specified herein will be valid as a
    sub-TLV of the following TLVs specified in [RFC7684]:
 
    *  Extended Prefix TLV advertised in the OSPFv2 Extended Prefix
       Opaque LSA
 
-   The Administrative Tag sub-TLV specified herein will be valid as a
+   The Administrative Tag Sub-TLV specified herein will be valid as a
    sub-TLV of the following TLVs specified in [RFC8362]:
 
    *  Inter-Area-Prefix TLV advertised in the E-Inter-Area-Prefix-LSA
@@ -179,7 +179,7 @@ Table of Contents
    *  External-Prefix TLV advertised in the E-AS-External-LSA and the E-
       NSSA-LSA
 
-   The Administrative Tag sub-TLV specified herein will be valid as a
+   The Administrative Tag Sub-TLV specified herein will be valid as a
    sub-TLV of the following TLVs specified in [RFC9513]:
 
    *  SRv6 Locator TLV advertised in the SRv6 Locator LSA
@@ -199,7 +199,7 @@ Table of Contents
    When tags are advertised for AS External or NSSA LSA prefixes, the
    existing tag in the OSPFv2 and OSPFv3 AS-External-LSA and NSSA-LSA
    encodings MUST be utilized for the first tag.  Additional tags MAY be
-   advertised using the Administrative Tag sub-TLV specified in this
+   advertised using the Administrative Tag Sub-TLV specified in this
    document.  This will facilitate backward compatibility with
    implementations that do not support this specification.
 
@@ -445,11 +445,11 @@ Table of Contents
 
      grouping prefix-admin-tag-sub-tlv {
        description
-         "Prefix Administrative Tag sub-TLVs.";
+         "Prefix Administrative Tag Sub-TLVs.";
        container prefix-admin-tag-sub-tlv {
          config false;
          description
-           "Prefix Administrative Tag sub-TLV.";
+           "Prefix Administrative Tag Sub-TLV.";
          leaf-list admin-tag {
            type uint32;
            description
@@ -563,7 +563,7 @@ Table of Contents
            "This augmentation is only valid for OSPFv2.";
        }
        description
-         "Prefix Administrative Tag sub-TLVs for OSPFv2 extended prefix
+         "Prefix Administrative Tag Sub-TLVs for OSPFv2 extended prefix
           TLV in type 9 opaque LSA.";
        uses prefix-admin-tag-sub-tlv;
      }
@@ -582,7 +582,7 @@ Table of Contents
            "This augmentation is only valid for OSPFv2.";
        }
        description
-         "Prefix Administrative Tag sub-TLVs for OSPFv2 extended prefix
+         "Prefix Administrative Tag Sub-TLVs for OSPFv2 extended prefix
           TLV in type 10 opaque LSA.";
        uses prefix-admin-tag-sub-tlv;
      }
@@ -600,7 +600,7 @@ Table of Contents
            "This augmentation is only valid for OSPFv2.";
        }
        description
-         "Prefix Administrative Tag sub-TLVs for OSPFv2 extended prefix
+         "Prefix Administrative Tag Sub-TLVs for OSPFv2 extended prefix
           TLV in type 11 opaque LSA.";
        uses prefix-admin-tag-sub-tlv;
      }
@@ -727,7 +727,7 @@ Table of Contents
    Some of the readable data nodes in this YANG module may be considered
    sensitive or vulnerable in some network environments.  Thus, it is
    important to control read access (e.g., via get, get-config, or
-   notification) to these data nodes.  Exposure ofthe OSPF link state
+   notification) to these data nodes.  Exposure of the OSPF link state
    database may be useful in mounting a Denial-of-Service (DoS) attack.
    Specifically, the following subtrees and data nodes have particular
    sensitivities:

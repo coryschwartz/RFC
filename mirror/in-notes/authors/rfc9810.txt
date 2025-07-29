@@ -4191,9 +4191,9 @@ Table of Contents
               Westerbaan, "Internet X.509 Public Key Infrastructure -
               Algorithm Identifiers for the Module-Lattice-Based Key-
               Encapsulation Mechanism (ML-KEM)", Work in Progress,
-              Internet-Draft, draft-ietf-lamps-kyber-certificates-10, 16
-              April 2025, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-lamps-kyber-certificates-10>.
+              Internet-Draft, draft-ietf-lamps-kyber-certificates-11, 22
+              July 2025, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-lamps-kyber-certificates-11>.
 
    [NIST.SP.800_90Ar1]
               Barker, E. B. and J. M. Kelsey, "Recommendation for Random

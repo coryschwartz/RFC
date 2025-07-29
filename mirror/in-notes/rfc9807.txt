@@ -2523,7 +2523,7 @@ Table of Contents
 
    [HJKW23]   Hesse, J., Jarecki, S., Krawczyk, H., and C. Wood,
               "Password-Authenticated TLS via OPAQUE and Post-Handshake
-              Authentication", Advances in Cryptology – EUROCRYPT 2023,
+              Authentication", Advances in Cryptology - EUROCRYPT 2023,
               Lecture Notes in Computer Science, vol. 14008, pp. 98-127,
               DOI 10.1007/978-3-031-30589-4_4, 2023,
               <https://doi.org/10.1007/978-3-031-30589-4_4>.

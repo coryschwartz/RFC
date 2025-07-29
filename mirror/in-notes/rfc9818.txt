@@ -15,7 +15,7 @@ Abstract
 
    This document defines requirements for IPv6 Customer Edge (CE)
    routers to support DHCPv6 Prefix Delegation for distributing
-   available prefixes to LAN devices that were delegated to a IPv6 CE
+   available prefixes to LAN devices that were delegated to an IPv6 CE
    router.  This document updates RFC 7084.
 
 Status of This Memo
@@ -122,7 +122,7 @@ Table of Contents
 3.  Terminology
 
    The document makes use of the following terms, some of which are from
-   Section 2 of [RFC8200]
+   Section 2 of [RFC8200].
 
    IPv6 node:  A device that implements IPv6.
 
@@ -205,15 +205,15 @@ Table of Contents
 
    LPD-5:   IPv6 CE routers MUST maintain a local routing table that is
             dynamically updated with leases and the associated next hops
-            as they are delegated to clients.  Packets with destination
-            addresses in a delegated prefix MUST be routed to that
-            prefix regardless of which interface they are received on.
-            When a delegated prefix is released or expires, the
-            associated route MUST be removed from the IPv6 CE router's
-            routing table.  A delegated prefix expires when the valid
-            lifetime assigned in the IA_PD expires without being
-            renewed.  When a prefix is released or expires, it MUST be
-            returned the pool of available prefixes.
+            as they are delegated to clients.  Absent explicit
+            filtering, packets with destination addresses in a delegated
+            prefix MUST be forwarded to that prefix regardless of which
+            interface they are received on.  When a delegated prefix is
+            released or expires, the associated route MUST be removed
+            from the IPv6 CE router's routing table.  A delegated prefix
+            expires when the valid lifetime assigned in the IA_PD
+            expires without being renewed.  When a prefix is released or
+            expires, it MUST be returned the pool of available prefixes.
 
    LPD-6:   By default, the IPv6 CE router filtering rules MUST allow
             forwarding of packets with an outer IPv6 header containing a
