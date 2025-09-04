@@ -11,7 +11,7 @@ ISSN: 2070-1721                                            Cisco Systems
                                                                Microsoft
                                                                  D. Jain
                                                                   Google
-                                                               July 2025
+                                                          September 2025
 
 
               Advertising Segment Routing Policies in BGP
@@ -78,9 +78,9 @@ Table of Contents
        2.4.3.  SRv6 Binding SID Sub-TLV
        2.4.4.  Segment List Sub-TLV
        2.4.5.  Explicit NULL Label Policy Sub-TLV
-       2.4.6.  Policy Priority Sub-TLV
-       2.4.7.  Policy Candidate Path Name Sub-TLV
-       2.4.8.  Policy Name Sub-TLV
+       2.4.6.  SR Policy Priority Sub-TLV
+       2.4.7.  SR Policy Candidate Path Name Sub-TLV
+       2.4.8.  SR Policy Name Sub-TLV
    3.  Color Extended Community
    4.  SR Policy Operations
      4.1.  Advertisement of SR Policies
@@ -156,11 +156,11 @@ Table of Contents
    UPDATE messages.  BGP can then be used to propagate the SR Policy CPs
    to the headend nodes in a network.  The usual BGP rules for BGP
    propagation and best-path selection are used.  At the headend of a
-   specific policy, this will result in one or more CPs being installed
-   into the "BGP table".  These paths are then passed to the SRPM.  The
-   SRPM may compare them to CPs learned via other mechanisms and will
-   choose one or more paths to be installed in the data plane.  BGP
-   itself does not install SR Policy CPs into the data plane.
+   specific SR Policy, this will result in one or more CPs being
+   installed into the "BGP table".  These paths are then passed to the
+   SRPM.  The SRPM may compare them to CPs learned via other mechanisms
+   and will choose one or more paths to be installed in the data plane.
+   BGP itself does not install SR Policy CPs into the data plane.
 
    This document introduces a BGP Subsequent Address Family Identifier
    (SAFI) for IPv4 and IPv6 address families.  In BGP UPDATE messages of
@@ -176,22 +176,23 @@ Table of Contents
    configuration.
 
    Typically, an SR Policy Controller [RFC9256] defines the set of
-   policies and advertises them to policy headend routers (typically
-   ingress routers).  These policy advertisements use the BGP extensions
-   defined in this document.  In most cases, the policy advertisement is
-   tailored for a specific policy headend; consequently, it may be
-   transmitted over a direct BGP session (i.e., without intermediate BGP
-   hops) to that headend and is not propagated any further.  In such
-   cases, the policy advertisements will not traverse any Route
-   Reflector (RR) (see [RFC4456] and Section 4.2.3).
+   policies and advertises them to SR Policy headend routers (typically
+   ingress routers).  These SR Policy advertisements use the BGP
+   extensions defined in this document.  In most cases, the SR Policy
+   advertisement is tailored for a specific SR Policy headend;
+   consequently, it may be transmitted over a direct BGP session (i.e.,
+   without intermediate BGP hops) to that headend and is not propagated
+   any further.  In such cases, the SR Policy advertisements will not
+   traverse any Route Reflector (RR) (see [RFC4456] and Section 4.2.3).
 
    Alternatively, a BGP egress router may advertise SR Policies that
    represent paths that terminate on it.  In such cases, the router can
    send these policies directly to each headend over a dedicated BGP
-   session, without necessitating any further propagation of the policy.
+   session, without necessitating any further propagation of the SR
+   Policy.
 
    In some situations, it is undesirable for a controller or BGP egress
-   router to have a BGP session to each policy headend.  In these
+   router to have a BGP session to each SR Policy headend.  In these
    situations, BGP RRs may be used to propagate the advertisements.  In
    certain other deployments, it may be necessary for the advertisement
    to propagate through a sequence of one or more Autonomous Systems
@@ -199,8 +200,8 @@ Table of Contents
    security considerations).  To make this possible, an attribute needs
    to be attached to the advertisement that enables a BGP speaker to
    determine whether it is intended to be a headend for the advertised
-   policy.  This is done by attaching one or more Route Target extended
-   communities to the advertisement [RFC4360].
+   SR Policy.  This is done by attaching one or more Route Target
+   extended communities to the advertisement [RFC4360].
 
    The BGP extensions for the advertisement of SR Policies include
    following components:
@@ -263,7 +264,7 @@ Table of Contents
    +------------------+
    |  Distinguisher   | 4 octets
    +------------------+
-   |  Policy Color    | 4 octets
+   |  Color           | 4 octets
    +------------------+
    |  Endpoint        | 4 or 16 octets
    +------------------+
@@ -276,8 +277,8 @@ Table of Contents
       defined in [RFC4760].  When AFI = 1, the value MUST be 96; when
       AFI = 2, the value MUST be 192.
 
-   Distinguisher:  4-octet value uniquely identifying the policy in the
-      context of <Color, Endpoint> tuple.  The distinguisher has no
+   Distinguisher:  4-octet value uniquely identifying the SR Policy in
+      the context of <Color, Endpoint> tuple.  The distinguisher has no
       semantic value.  It is used by the SR Policy originator to form
       unique NLRIs the following situations:
 
@@ -289,13 +290,13 @@ Table of Contents
       The distinguisher is the discriminator of the SR Policy CP as
       specified in Section 2.5 of [RFC9256].
 
-   Policy Color:  4 octets that carry an unsigned non-zero integer value
+   Color:  4 octets that carry an unsigned non-zero integer value
       indicating the Color of the SR Policy as specified in Section 2.1
       of [RFC9256].  The Color is used to match the Color of the
       destination prefixes to steer traffic into the SR Policy as
       specified in Section 8 of [RFC9256].
 
-   Endpoint:  a value that identifies the Endpoint of a policy.  The
+   Endpoint:  a value that identifies the Endpoint of an SR Policy.  The
       Endpoint may represent a single node or a set of nodes (e.g., an
       anycast address).  The Endpoint is an IPv4 (4-octet) address or an
       IPv6 (16-octet) address according to the AFI of the NLRI.  The
@@ -371,15 +372,15 @@ Table of Contents
 
    The SR Policy Encoding structure is as follows:
 
-   SR Policy SAFI NLRI: <Distinguisher, Policy-Color, Endpoint>
+   SR Policy SAFI NLRI: <Distinguisher, Color, Endpoint>
    Attributes:
       Tunnel Encapsulation Attribute (23)
          Tunnel Type: SR Policy (15)
              Binding SID
              Preference
              Priority
-             Policy Name
-             Policy Candidate Path Name
+             SR Policy Name
+             SR Policy Candidate Path Name
              Explicit NULL Label Policy (ENLP)
              Segment List
                  Weight
@@ -398,9 +399,9 @@ Table of Contents
 
    *  The Tunnel Type is set to 15.
 
-   *  Preference, Binding SID, Priority, Policy Name, Policy Candidate
-      Path Name, ENLP, Segment-List, Weight, and Segment sub-TLVs are
-      defined in Section 2.4.
+   *  Preference, Binding SID, Priority, SR Policy Name, SR Policy
+      Candidate Path Name, ENLP, Segment-List, Weight, and Segment sub-
+      TLVs are defined in Section 2.4.
 
    *  Additional sub-TLVs may be defined in the future.
 
@@ -432,8 +433,8 @@ Table of Contents
    This section specifies the sub-TLVs defined for encoding the
    information about the SR Policy Candidate Path.
 
-   Preference, Binding SID, SRv6 Binding SID, Segment-List, Priority,
-   Policy Name, Policy Candidate Path Name, and Explicit NULL Label
+   Preference, Binding SID, SRv6 Binding SID, Segment-List, Priority, SR
+   Policy Name, SR Policy Candidate Path Name, and Explicit NULL Label
    Policy are all optional sub-TLVs introduced for the BGP Tunnel
    Encapsulation Attribute [RFC9012] being defined in this section.
 
@@ -562,7 +563,7 @@ Table of Contents
          that the SR Policy is to perform the "Drop-Upon-Invalid"
          behavior when no valid CP is available for this SR Policy.  In
          this situation, the CP with the highest preference amongst
-         those with the "Drop-Upon-Invalid" config is made active to
+         those with the "Drop-Upon-Invalid" behavior is made active to
          drop traffic steered over the SR Policy.
 
       *  The unassigned bits in the Flags field MUST be set to zero upon
@@ -776,20 +777,20 @@ Table of Contents
 
    Type E:  IPv4 Prefix with Local Interface ID
 
-   Type F:  IPv4 Addresses for link Endpoints as Local, Remote pair
+   Type F:  IPv4 Addresses for link endpoints as Local, Remote pair
 
-   Type G:  IPv6 Prefix and Interface ID for link Endpoints as Local,
+   Type G:  IPv6 Prefix and Interface ID for link endpoints as Local,
       Remote pair for SR-MPLS
 
-   Type H:  IPv6 Addresses for link Endpoints as Local, Remote pair for
+   Type H:  IPv6 Addresses for link endpoints as Local, Remote pair for
       SR-MPLS
 
    Type I:  IPv6 Global Prefix with optional SR Algorithm for SRv6
 
-   Type J:  IPv6 Prefix and Interface ID for link Endpoints as Local,
+   Type J:  IPv6 Prefix and Interface ID for link endpoints as Local,
       Remote pair for SRv6
 
-   Type K:  IPv6 Addresses for link Endpoints as Local, Remote pair for
+   Type K:  IPv6 Addresses for link endpoints as Local, Remote pair for
       SRv6
 
    The following subsections specify the sub-TLVs used for Segment Types
@@ -926,7 +927,7 @@ Table of Contents
    *  B-Flag applies to Segment Type B.  If B-Flag appears with Segment
       Type A, it MUST be ignored.
 
-2.4.4.2.4.  SRv6 SID Endpoint Behavior and Structure
+2.4.4.2.4.  SRv6 Endpoint Behavior and SID Structure
 
    The Segment Type sub-TLVs described above MAY contain the SRv6
    Endpoint Behavior and SID Structure [RFC8986] encoding as described
@@ -938,7 +939,7 @@ Table of Contents
    |    LB Length  |  LN Length    | Fun. Length   |  Arg. Length  |
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-            Figure 14: SRv6 SID Endpoint Behavior and Structure
+            Figure 14: SRv6 Endpoint Behavior and SID Structure
 
    Where:
 
@@ -1035,12 +1036,12 @@ Table of Contents
       the behavior on the headend for the handling of the Explicit NULL
       label.
 
-2.4.6.  Policy Priority Sub-TLV
+2.4.6.  SR Policy Priority Sub-TLV
 
-   An operator MAY set the Policy Priority sub-TLV to indicate the order
-   in which the SR policies are recomputed upon topological change.  The
-   contents of this sub-TLV are used by the SRPM as described in
-   Section 2.12 of [RFC9256].
+   An operator MAY set the SR Policy Priority sub-TLV to indicate the
+   order in which the SR policies are recomputed upon topological
+   change.  The contents of this sub-TLV are used by the SRPM as
+   described in Section 2.12 of [RFC9256].
 
    The Priority sub-TLV is OPTIONAL; it MUST NOT appear more than once
    in the SR Policy encoding.
@@ -1068,38 +1069,38 @@ Table of Contents
    RESERVED:  1 octet of reserved bits.  This field MUST be set to zero
       on transmission and MUST be ignored on receipt.
 
-2.4.7.  Policy Candidate Path Name Sub-TLV
+2.4.7.  SR Policy Candidate Path Name Sub-TLV
 
-   An operator MAY set the Policy Candidate Path Name sub-TLV to attach
-   a symbolic name to the SR Policy CP.
+   An operator MAY set the SR Policy Candidate Path Name sub-TLV to
+   attach a symbolic name to the SR Policy CP.
 
-   Usage of the Policy Candidate Path Name sub-TLV is described in
+   Usage of the SR Policy Candidate Path Name sub-TLV is described in
    Section 2.6 of [RFC9256].
 
-   The Policy Candidate Path Name sub-TLV may exceed 255 bytes in length
-   due to a long name.  A 2-octet length is thus required.  According to
-   Section 2 of [RFC9012], the sub-TLV type defines the size of the
-   Length field.  Therefore, for the Policy Candidate Path Name sub-TLV,
-   a code point of 128 or higher is used.
+   The SR Policy Candidate Path Name sub-TLV may exceed 255 bytes in
+   length due to a long name.  A 2-octet length is thus required.
+   According to Section 2 of [RFC9012], the sub-TLV type defines the
+   size of the Length field.  Therefore, for the SR Policy Candidate
+   Path Name sub-TLV, a code point of 128 or higher is used.
 
    It is RECOMMENDED that the size of the symbolic name for the CP be
    limited to 255 bytes.  Implementations MAY choose to truncate long
    names to 255 bytes when signaling via BGP.
 
-   The Policy Candidate Path Name sub-TLV is OPTIONAL; it MUST NOT
+   The SR Policy Candidate Path Name sub-TLV is OPTIONAL; it MUST NOT
    appear more than once in the SR Policy encoding.
 
-   The Policy Candidate Path Name sub-TLV has the following format:
+   The SR Policy Candidate Path Name sub-TLV has the following format:
 
     0                   1                   2                   3
     0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
    |     Type      |   Length                      |   RESERVED    |
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   //              Policy Candidate Path Name                     //
+   //            SR Policy Candidate Path Name                     //
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-               Figure 17: Policy Candidate Path Name Sub-TLV
+              Figure 17: SR Policy Candidate Path Name Sub-TLV
 
    Where:
 
@@ -1112,43 +1113,43 @@ Table of Contents
    RESERVED:  1 octet of reserved bits.  This field MUST be set to zero
       on transmission and MUST be ignored on receipt.
 
-   Policy Candidate Path Name:  Symbolic name for the SR Policy CP
+   SR Policy Candidate Path Name:  Symbolic name for the SR Policy CP
       without a NULL terminator with encoding as specified in
       Section 2.6 of [RFC9256].
 
-2.4.8.  Policy Name Sub-TLV
+2.4.8.  SR Policy Name Sub-TLV
 
-   An operator MAY set the Policy Name sub-TLV to associate a symbolic
-   name with the SR Policy for which the CP is being advertised via the
-   SR Policy NLRI.
+   An operator MAY set the SR Policy Name sub-TLV to associate a
+   symbolic name with the SR Policy for which the CP is being advertised
+   via the SR Policy NLRI.
 
-   Usage of the Policy Name sub-TLV is described in Section 2.1 of
+   Usage of the SR Policy Name sub-TLV is described in Section 2.1 of
    [RFC9256].
 
-   The Policy Name sub-TLV may exceed 255 bytes in length due to a long
-   policy name.  A 2-octet length is thus required.  According to
-   Section 2 of [RFC9012], the sub-TLV type defines the size of the
-   Length field.  Therefore, for the Policy Name sub-TLV, a code point
-   of 128 or higher is used.
+   The SR Policy Name sub-TLV may exceed 255 bytes in length due to a
+   long SR Policy name.  A 2-octet length is thus required.  According
+   to Section 2 of [RFC9012], the sub-TLV type defines the size of the
+   Length field.  Therefore, for the SR Policy Name sub-TLV, a code
+   point of 128 or higher is used.
 
    It is RECOMMENDED that the size of the symbolic name for the SR
    Policy be limited to 255 bytes.  Implementations MAY choose to
    truncate long names to 255 bytes when signaling via BGP.
 
-   The Policy Name sub-TLV is OPTIONAL; it MUST NOT appear more than
+   The SR Policy Name sub-TLV is OPTIONAL; it MUST NOT appear more than
    once in the SR Policy encoding.
 
-   The Policy Name sub-TLV has the following format:
+   The SR Policy Name sub-TLV has the following format:
 
     0                   1                   2                   3
     0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
    |     Type      |   Length                      |   RESERVED    |
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   //                        Policy Name                          //
+   //                      SR Policy Name                          //
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-                       Figure 18: Policy Name Sub-TLV
+                     Figure 18: SR Policy Name Sub-TLV
 
    Where:
 
@@ -1161,7 +1162,7 @@ Table of Contents
    RESERVED:  1 octet of reserved bits.  This field MUST be set to zero
       on transmission and MUST be ignored on receipt.
 
-   Policy Name:  Symbolic name for the SR Policy without a NULL
+   SR Policy Name:  Symbolic name for the SR Policy without a NULL
       terminator with encoding as specified in Section 2.1 of [RFC9256].
 
 3.  Color Extended Community
@@ -1356,7 +1357,7 @@ Table of Contents
    validation of the length of each NLRI and the total length of the
    MP_REACH_NLRI and MP_UNREACH_NLRI attributes.  It also includes the
    validation of the consistency of the NLRI length with the AFI and the
-   Endpoint address as specified in Section 2.1.
+   endpoint address as specified in Section 2.1.
 
    When the error determined allows for the router to skip the malformed
    NLRI(s) and continue the processing of the rest of the BGP UPDATE
@@ -1480,10 +1481,10 @@ Table of Contents
    +-------+--------------------------+-----------+-------------------+
    | 128   | Segment List sub-TLV     | RFC 9830  | IETF              |
    +-------+--------------------------+-----------+-------------------+
-   | 129   | Policy Candidate Path    | RFC 9830  | IETF              |
+   | 129   | SR Policy Candidate Path | RFC 9830  | IETF              |
    |       | Name sub-TLV             |           |                   |
    +-------+--------------------------+-----------+-------------------+
-   | 130   | Policy Name sub-TLV      | RFC 9830  | IETF              |
+   | 130   | SR Policy Name sub-TLV   | RFC 9830  | IETF              |
    +-------+--------------------------+-----------+-------------------+
 
      Table 3: BGP Tunnel Encapsulation Attribute Sub-TLV Code Points
@@ -1517,7 +1518,7 @@ Table of Contents
               +========+========================+===========+
               | 0      | Reserved               | RFC 9830  |
               +--------+------------------------+-----------+
-              | 1      | Segment Type A sub-TLV | RFC 9830  |
+              | 1      | Type A Segment sub-TLV | RFC 9830  |
               +--------+------------------------+-----------+
               | 2      | Deprecated             | RFC 9830  |
               +--------+------------------------+-----------+
@@ -1531,7 +1532,7 @@ Table of Contents
               +--------+------------------------+-----------+
               | 12     | Deprecated             | RFC 9830  |
               +--------+------------------------+-----------+
-              | 13     | Segment Type B sub-TLV | RFC 9830  |
+              | 13     | Type B Segment sub-TLV | RFC 9830  |
               +--------+------------------------+-----------+
               | 14-255 | Unassigned                         |
               +--------+------------------------------------+
@@ -1849,9 +1850,9 @@ Table of Contents
               <https://www.rfc-editor.org/info/rfc9552>.
 
    [RFC9831]  Talaulikar, K., Ed., Filsfils, C., Previdi, S., Mattes,
-              P., and D. Jain, "Segment Routing Segment Types Extensions
-              for BGP SR Policy", RFC 9831, DOI 10.17487/RFC9831, July
-              2025, <https://www.rfc-editor.org/info/rfc9831>.
+              P., and D. Jain, "Segment Type Extensions for BGP Segment
+              Routing (SR) Policy", RFC 9831, DOI 10.17487/RFC9831,
+              September 2025, <https://www.rfc-editor.org/info/rfc9831>.
 
    [SR-POLICY-YANG]
               Raza, K., Ed., Saleh, T., Shunwan, Z., Voyer, D., Durrani,

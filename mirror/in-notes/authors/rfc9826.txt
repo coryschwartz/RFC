@@ -10,7 +10,7 @@ ISSN: 2070-1721                                         Juniper Networks
                                                                         
                                                              J. Tantsura
                                                                   Nvidia
-                                                               July 2025
+                                                             August 2025
 
 
     A YANG Data Model for the Path Computation Element Communication
@@ -59,7 +59,7 @@ Table of Contents
    3.  Terminology and Notation
      3.1.  Tree Diagrams
      3.2.  Prefixes in Data Node Names
-     3.3.  References in the Model
+     3.3.  References in the YANG Data Model
    4.  The Design of PCEP Data Model
      4.1.  The Entity
        4.1.1.  The Peer List
@@ -156,11 +156,22 @@ Table of Contents
    PCEP speaker:  term used when it is not necessary to distinguish
       between local and remote.
 
-   Further, this document uses the following terms defined in [RFC8231]:
+   Further, this document uses the following terms defined in [RFC8051]:
 
-   *  Stateful PCE, Passive Stateful PCE, Active Stateful PCE
+   *  Stateful PCE
 
-   *  Delegation, Revocation, Redelegation
+   *  Passive Stateful PCE
+
+   *  Active Stateful PCE
+
+   *  Delegation
+
+   In addition, this document uses the following terms defined in
+   [RFC8231]:
+
+   *  Revocation
+
+   *  Redelegation
 
    *  Path Computation LSP State Report (PCRpt) message
 
@@ -193,7 +204,7 @@ Table of Contents
 
 3.1.  Tree Diagrams
 
-   A simplified graphical representation of the data model is used in
+   Simplified graphical representations of the data model are used in
    this document.  The meaning of the symbols in these diagrams is
    defined in [RFC8340].
 
@@ -230,10 +241,10 @@ Table of Contents
                  Table 1: Prefixes and Corresponding YANG
                                  Modules
 
-3.3.  References in the Model
+3.3.  References in the YANG Data Model
 
-   The following documents are referenced in the model defined in this
-   document.
+   The following table lists the documents that are referenced in the
+   YANG data model defined in this document.
 
    +=====================================================+=============+
    | Documents                                           | Reference   |
@@ -357,7 +368,7 @@ Table of Contents
    | Label Switched Paths (LSPs)                         |             |
    +-----------------------------------------------------+-------------+
 
-                  Table 2: References in the YANG Modules
+                 Table 2: References in the YANG Data Model
 
 4.  The Design of PCEP Data Model
 
@@ -651,6 +662,30 @@ Table of Contents
            |     +--ro cps
            |     |  +--ro explicit-route-objects* [index]
            |     |     +--ro index    uint32
+           |     |     +--ro (type)?
+           |     |        +--:(numbered-node-hop)
+           |     |        |  +--ro numbered-node-hop
+           |     |        |     +--ro node-id     te-node-id
+           |     |        |     +--ro hop-type?   te-hop-type
+           |     |        +--:(numbered-link-hop)
+           |     |        |  +--ro numbered-link-hop
+           |     |        |     +--ro link-tp-id    te-tp-id
+           |     |        |     +--ro hop-type?     te-hop-type
+           |     |        |     +--ro direction?    te-link-direction
+           |     |        +--:(unnumbered-link-hop)
+           |     |        |  +--ro unnumbered-link-hop
+           |     |        |     +--ro link-tp-id    te-tp-id
+           |     |        |     +--ro node-id       te-node-id
+           |     |        |     +--ro hop-type?     te-hop-type
+           |     |        |     +--ro direction?    te-link-direction
+           |     |        +--:(as-number)
+           |     |        |  +--ro as-number-hop
+           |     |        |     +--ro as-number    inet:as-number
+           |     |        |     +--ro hop-type?    te-hop-type
+           |     |        +--:(label)
+           |     |           +--ro label-hop
+           |     |              +--ro te-label
+           |     |                    ...
            |     +--ro pcc-requester?   -> /pcep/entity/peers/peer/addr
            |     +--ro req-id?          uint32
            |     +--ro retrieved?       boolean
@@ -706,7 +741,8 @@ Table of Contents
                  |     +--rw domain    domain
                  +--rw capabilities
                  |  +--rw capability?             bits
-                 |  +--rw pce-initiated?          boolean {pce-initiated}?
+                 |  +--rw pce-initiated?          boolean
+                 |  |       {pce-initiated}?
                  |  +--rw include-db-ver?         boolean
                  |  |       {stateful,sync-opt}?
                  |  +--rw trigger-resync?         boolean
@@ -749,8 +785,10 @@ Table of Contents
                  |     |  +--rw (key-string-style)?
                  |     |     +--:(keystring)
                  |     |     |  +--rw keystring?            string
-                 |     |     +--:(hexadecimal) {key-chain:hex-key-string}?
-                 |     |        +--rw hexadecimal-string?   yang:hex-string
+                 |     |     +--:(hexadecimal)
+                 |     |              {key-chain:hex-key-string}?
+                 |     |        +--rw hexadecimal-string?
+                 |     |                yang:hex-string
                  |     +--:(auth-tls) {tls}?
                  |        +--rw (role)?
                  |           +--:(server)
@@ -800,7 +838,8 @@ Table of Contents
                  +--ro sessions
                     +--ro session* [initiator]
                        +--ro initiator                    initiator
-                       +--ro role?                        -> ../../../role
+                       +--ro role?
+                       |       -> ../../../role
                        +--ro state-last-change?           yang:timestamp
                        +--ro state?                       sess-state
                        +--ro session-creation?            yang:timestamp
@@ -1095,7 +1134,7 @@ Table of Contents
    *  Hierarchical PCE (H-PCE)
 
    Segment Routing in the IPv6 data plane is out of the scope of this
-   document.  Refer to [YANG-PCEP-SR] for the PCEP-SRv6 YANG module.
+   document.  Refer to [YANG-PCEP-SRV6] for the PCEP-SRv6 YANG module.
 
 6.1.  Stateful PCE's LSP-DB
 
@@ -1265,7 +1304,7 @@ Table of Contents
           - pcc(1): the role is of a Path Computation
            Client (PCC),
           - pce(2): the role is of a Path Computation
-           Server (PCE),
+           Element (PCE),
           - pcc-and-pce(3): the role is of both a PCC and
            a PCE.";
        reference
@@ -3311,14 +3350,14 @@ Table of Contents
                type uint32;
                units "minutes";
                description
-                 "A time after which this path-keys will be
+                 "A time after which this path-key will be
                   discarded.";
              }
              leaf reuse-time {
                type uint32;
                units "minutes";
                description
-                 "A time after which this path-keys could be
+                 "A time after which this path-key could be
                   reused.";
              }
            }
@@ -4681,7 +4720,7 @@ Table of Contents
 
 9.  Security Considerations
 
-   This section is modeled after the template described in Section 3.7
+   This section is modeled after the template described in Section 3.7.1
    of [YANG-GUIDELINES].
 
    The "ietf-pcep" and "ietf-pcep-stats" YANG modules define data models
@@ -4742,19 +4781,9 @@ Table of Contents
 
    This YANG module uses groupings from other YANG modules that define
    nodes that may be considered sensitive or vulnerable in network
-   environments.  Refer to the Security Considerations of respective
-   RFCs for information as to which nodes may be considered sensitive or
-   vulnerable in network environments.
-
-   The YANG module defines a set of identities, types, and groupings.
-   These nodes are intended to be reused by other YANG modules.  The
-   module by itself does not expose any data nodes that are writable,
-   data nodes that contain read-only state, or RPCs.  As such, there are
-   no additional security issues related to the YANG module that need to
-   be considered.
-
-   Modules that use the groupings that are defined in this document
-   should identify the corresponding security considerations.
+   environments.  Refer to the Security Considerations of [RFC9645] and
+   [RFC8776] for information as to which nodes may be considered
+   sensitive or vulnerable in network environments.
 
    The actual authentication key data (whether locally specified or part
    of a key-chain) is sensitive and needs to be kept secret from
@@ -4774,17 +4803,9 @@ Table of Contents
 
    *The "ietf-pcep-stats" YANG module:*
 
-   This document also includes another YANG module (called "ietf-pcep-
-   stats") for maintaining the statistics by augmenting the "ietf-pcep"
-   YANG module.
-
    There are no particularly sensitive writable data nodes.
 
-   The readable data nodes in this YANG module may be considered
-   sensitive or vulnerable in some network environments.  It is thus
-   important to control read access (e.g., via get, get-config, or
-   notification) to these data nodes.  The statistics could provide
-   information related to the current usage patterns of the network.
+   There are no particularly sensitive readable data nodes.
 
    Some of the RPC or action operations in this YANG module may be
    considered sensitive or vulnerable in some network environments.  It
@@ -5088,6 +5109,11 @@ Table of Contents
               RFC 7420, DOI 10.17487/RFC7420, December 2014,
               <https://www.rfc-editor.org/info/rfc7420>.
 
+   [RFC8051]  Zhang, X., Ed. and I. Minei, Ed., "Applicability of a
+              Stateful Path Computation Element (PCE)", RFC 8051,
+              DOI 10.17487/RFC8051, January 2017,
+              <https://www.rfc-editor.org/info/rfc8051>.
+
    [RFC8342]  Bjorklund, M., Schoenwaelder, J., Shafer, P., Watsen, K.,
               and R. Wilton, "Network Management Datastore Architecture
               (NMDA)", RFC 8342, DOI 10.17487/RFC8342, March 2018,
@@ -5112,7 +5138,7 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
               rfc8407bis-28>.
 
-   [YANG-PCEP-SR]
+   [YANG-PCEP-SRV6]
               Li, C., Sivabalan, S., Peng, S., Koldychev, M., and L.
               Ndifor, "A YANG Data Model for Segment Routing (SR) Policy
               and SR in IPv6 (SRv6) support in Path Computation Element
@@ -5325,6 +5351,30 @@ Appendix A.  The Full PCEP Data Model
            |     +--ro cps
            |     |  +--ro explicit-route-objects* [index]
            |     |     +--ro index    uint32
+           |     |     +--ro (type)?
+           |     |        +--:(numbered-node-hop)
+           |     |        |  +--ro numbered-node-hop
+           |     |        |     +--ro node-id     te-node-id
+           |     |        |     +--ro hop-type?   te-hop-type
+           |     |        +--:(numbered-link-hop)
+           |     |        |  +--ro numbered-link-hop
+           |     |        |     +--ro link-tp-id    te-tp-id
+           |     |        |     +--ro hop-type?     te-hop-type
+           |     |        |     +--ro direction?    te-link-direction
+           |     |        +--:(unnumbered-link-hop)
+           |     |        |  +--ro unnumbered-link-hop
+           |     |        |     +--ro link-tp-id    te-tp-id
+           |     |        |     +--ro node-id       te-node-id
+           |     |        |     +--ro hop-type?     te-hop-type
+           |     |        |     +--ro direction?    te-link-direction
+           |     |        +--:(as-number)
+           |     |        |  +--ro as-number-hop
+           |     |        |     +--ro as-number    inet:as-number
+           |     |        |     +--ro hop-type?    te-hop-type
+           |     |        +--:(label)
+           |     |           +--ro label-hop
+           |     |              +--ro te-label
+           |     |                    ...
            |     +--ro pcc-requester?   -> /pcep/entity/peers/peer/addr
            |     +--ro req-id?          uint32
            |     +--ro retrieved?       boolean
@@ -5343,7 +5393,8 @@ Appendix A.  The Full PCEP Data Model
                  |     +--rw domain    domain
                  +--rw capabilities
                  |  +--rw capability?             bits
-                 |  +--rw pce-initiated?          boolean {pce-initiated}?
+                 |  +--rw pce-initiated?          boolean
+                 |  |       {pce-initiated}?
                  |  +--rw include-db-ver?         boolean
                  |  |       {stateful,sync-opt}?
                  |  +--rw trigger-resync?         boolean
@@ -5386,8 +5437,10 @@ Appendix A.  The Full PCEP Data Model
                  |     |  +--rw (key-string-style)?
                  |     |     +--:(keystring)
                  |     |     |  +--rw keystring?            string
-                 |     |     +--:(hexadecimal) {key-chain:hex-key-string}?
-                 |     |        +--rw hexadecimal-string?   yang:hex-string
+                 |     |     +--:(hexadecimal)
+                 |     |              {key-chain:hex-key-string}?
+                 |     |        +--rw hexadecimal-string?
+                 |     |                yang:hex-string
                  |     +--:(auth-tls) {tls}?
                  |        +--rw (role)?
                  |           +--:(server)
@@ -5405,7 +5458,8 @@ Appendix A.  The Full PCEP Data Model
                  +--ro sessions
                     +--ro session* [initiator]
                        +--ro initiator                    initiator
-                       +--ro role?                        -> ../../../role
+                       +--ro role?
+                       |       -> ../../../role
                        +--ro state-last-change?           yang:timestamp
                        +--ro state?                       sess-state
                        +--ro session-creation?            yang:timestamp
@@ -5482,7 +5536,7 @@ Appendix A.  The Full PCEP Data Model
 Appendix B.  Example
 
    The example below provides an overview of PCEP peer session
-   information and LSP-DB in the YANG module.
+   information and LSP-DB in the "ietf-pcep" module.
 
           +-------+                  +-------+
           |       |                  |       |
@@ -5965,9 +6019,9 @@ Appendix D.  Relationship with PCEP MIB
 
 Acknowledgements
 
-   The initial document is based on the PCEP MIB [RFC7420].  The authors
-   of this document would like to thank the authors of the above
-   document.
+   The initial draft version of this document was based on the PCEP MIB
+   [RFC7420].  The authors of this document would like to thank the
+   authors of [RFC7420].
 
    Thanks to Martin Bjorklund and Tom Petch for the detailed review.
    Thanks to Mahesh Jethanandani and Jan Lindblad for the YANGDOCTOR
@@ -6016,7 +6070,7 @@ Contributors
 
 
    Avantika
-   ECI Telecom
+   Ciena
    India
    Email: avantika.srm@gmail.com
 

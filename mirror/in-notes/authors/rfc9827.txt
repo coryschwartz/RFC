@@ -4,12 +4,12 @@
 
 Internet Engineering Task Force (IETF)                        V. Smyslov
 Request for Comments: 9827                                    ELVIS-PLUS
-Updates: 7296                                                  July 2025
+Updates: 7296                                                August 2025
 Category: Standards Track                                               
 ISSN: 2070-1721
 
 
-   Renaming the Extended Sequence Number (ESN) Transform Type in the
+   Renaming the Extended Sequence Numbers (ESN) Transform Type in the
             Internet Key Exchange Protocol Version 2 (IKEv2)
 
 Abstract
@@ -147,19 +147,19 @@ Table of Contents
 3.  Extending the Semantics of Transform Type 5
 
    This document extends the semantics of Transform Type 5 in IKEv2 to
-   the following definition.
+   be defined as follows:
 
-   Transform Type 5 defines the set of properties of sequence numbers of
-   IPsec packets of a given SA when these packets enter the network.
+      Transform Type 5 defines the set of properties of sequence numbers
+      of IPsec packets of a given SA when these packets enter the
+      network.
 
-   This definition requires some clarifications.
+   This updated definition is clarified as follows:
 
-   *  By "sequence numbers" here we assume logical entities (like
-      counters) that can be used for replay protection on receiving
-      sides.  In particular, these entities are not necessarily the
-      content of the Sequence Number field in the IPsec packets, but may
-      be constructed using some information, that is not necessarily
-      transmitted.
+   *  "Sequence numbers" in this definition are not necessarily the
+      content of the Sequence Number field in the IPsec packets; they
+      may also be some logical entities (e.g., counters) that could be
+      constructed taking some information that is not transmitted on the
+      wire into account.
 
    *  The properties are interpreted as characteristics of IPsec SA
       packets rather than the results of sender actions.  For example,
@@ -178,7 +178,8 @@ Table of Contents
 
    Given this updated definition, Transform Type 5 in the "Transform
    Type Values" registry [IKEV2-IANA] has been renamed from "Extended
-   Sequence Numbers (ESN)" to "Sequence Numbers (SN)".
+   Sequence Numbers (ESN)" to "Sequence Numbers (SN)" in the sense that
+   it defines the properties of the sequence numbers in general.
 
    It is expected that new Transform IDs will be defined for this
    Transform Type in the future (like in G-IKEv2 [G-IKEv2] for the case
@@ -204,10 +205,10 @@ Table of Contents
       of AH and ESP packets.  They never wrap around and are guaranteed
       to be unique, thus they are suitable for replay protection.  They
       can also be used with protocols that rely on sequence number
-      uniqueness (e.g., [RFC8750]) or their monotonic increase (e.g.,
-      [RFC9347]).  The sender and the receiver actions are defined in
-      Sections 3.3.2 and 3.4.3 of [RFC4302] for AH and in Sections 3.3.3
-      and 3.4.3 of [RFC4303] for ESP.
+      uniqueness (e.g., [RFC8750]) or monotonically increasing sequence
+      numbers (e.g., [RFC9347]).  The sender and the receiver actions
+      are defined in Sections 3.3.2 and 3.4.3 of [RFC4302] for AH and in
+      Sections 3.3.3 and 3.4.3 of [RFC4303] for ESP.
 
    *  Value 1 defines sequence numbers as monotonically increasing
       64-bit counters.  The low-order 32 bits are transmitted in the
@@ -348,15 +349,15 @@ Table of Contents
 
    [EESP]     Klassert, S., Antony, A., and C. Hopps, "Enhanced
               Encapsulating Security Payload (EESP)", Work in Progress,
-              Internet-Draft, draft-klassert-ipsecme-eesp-02, 26
-              February 2025, <https://datatracker.ietf.org/doc/html/
-              draft-klassert-ipsecme-eesp-02>.
+              Internet-Draft, draft-ietf-ipsecme-eesp-01, 3 July 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-ipsecme-
+              eesp-01>.
 
    [G-IKEv2]  Smyslov, V. and B. Weis, "Group Key Management using
               IKEv2", Work in Progress, Internet-Draft, draft-ietf-
-              ipsecme-g-ikev2-22, 16 March 2025,
+              ipsecme-g-ikev2-23, 31 July 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-ipsecme-
-              g-ikev2-22>.
+              g-ikev2-23>.
 
    [RFC8750]  Migault, D., Guggemos, T., and Y. Nir, "Implicit
               Initialization Vector (IV) for Counter-Based Ciphers in

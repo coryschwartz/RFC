@@ -5,7 +5,7 @@
                              RFC INDEX
                            -------------
 
-(CREATED ON: 07/29/2025.)
+(CREATED ON: 09/04/2025.)
 
 This file contains citations for all RFCs in numeric order.
 
@@ -7934,8 +7934,8 @@ See the RFC Editor Web page http://www.rfc-editor.org
      STANDARD) (DOI: 10.17487/RFC2082) 
 
 2083 PNG (Portable Network Graphics) Specification Version 1.0. T.
-     Boutell. March 1997. (Format: TXT, HTML) (Status: INFORMATIONAL)
-     (DOI: 10.17487/RFC2083) 
+     Boutell. March 1997. (Format: TXT, HTML) (Status: HISTORIC) (DOI:
+     10.17487/RFC2083) 
 
 2084 Considerations for Web Transaction Security. G. Bossert, S. Cooper,
      W. Drummond. January 1997. (Format: TXT, HTML) (Status:
@@ -16086,8 +16086,8 @@ See the RFC Editor Web page http://www.rfc-editor.org
 3986 Uniform Resource Identifier (URI): Generic Syntax. T. Berners-Lee,
      R. Fielding, L. Masinter. January 2005. (Format: TXT, HTML)
      (Obsoletes RFC2732, RFC2396, RFC1808) (Updates RFC1738) (Updated by
-     RFC6874, RFC7320, RFC8820) (Also STD0066) (Status: INTERNET
-     STANDARD) (DOI: 10.17487/RFC3986) 
+     RFC7320, RFC8820) (Also STD0066) (Status: INTERNET STANDARD) (DOI:
+     10.17487/RFC3986) 
 
 3987 Internationalized Resource Identifiers (IRIs). M. Duerst, M.
      Suignard. January 2005. (Format: TXT, HTML) (Status: PROPOSED
@@ -16174,7 +16174,7 @@ See the RFC Editor Web page http://www.rfc-editor.org
 
 4007 IPv6 Scoped Address Architecture. S. Deering, B. Haberman, T.
      Jinmei, E. Nordmark, B. Zill. March 2005. (Format: TXT, HTML)
-     (Updated by RFC7346) (Status: PROPOSED STANDARD) (DOI:
+     (Updated by RFC7346, RFC9844) (Status: PROPOSED STANDARD) (DOI:
      10.17487/RFC4007) 
 
 4008 Definitions of Managed Objects for Network Address Translators
@@ -17062,9 +17062,9 @@ See the RFC Editor Web page http://www.rfc-editor.org
 
 4210 Internet X.509 Public Key Infrastructure Certificate Management
      Protocol (CMP). C. Adams, S. Farrell, T. Kause, T. Mononen.
-     September 2005. (Format: TXT, HTML) (Obsoletes RFC2510) (Updated by
-     RFC6712, RFC9480, RFC9481) (Status: PROPOSED STANDARD) (DOI:
-     10.17487/RFC4210) 
+     September 2005. (Format: TXT, HTML) (Obsoletes RFC2510) (Obsoleted
+     by RFC9810) (Updated by RFC6712, RFC9480, RFC9481) (Status: PROPOSED
+     STANDARD) (DOI: 10.17487/RFC4210) 
 
 4211 Internet X.509 Public Key Infrastructure Certificate Request Message
      Format (CRMF). J. Schaad. September 2005. (Format: TXT, HTML)
@@ -24474,7 +24474,7 @@ See the RFC Editor Web page http://www.rfc-editor.org
 
 5912 New ASN.1 Modules for the Public Key Infrastructure Using X.509
      (PKIX). P. Hoffman, J. Schaad. June 2010. (Format: TXT, HTML)
-     (Updated by RFC6960, RFC9480) (Status: INFORMATIONAL) (DOI:
+     (Updated by RFC6960, RFC9480, RFC9810) (Status: INFORMATIONAL) (DOI:
      10.17487/RFC5912) 
 
 5913 Clearance Attribute and Authority Clearance Constraints Certificate
@@ -27925,8 +27925,9 @@ See the RFC Editor Web page http://www.rfc-editor.org
 
 6712 Internet X.509 Public Key Infrastructure -- HTTP Transfer for the
      Certificate Management Protocol (CMP). T. Kause, M. Peylo. September
-     2012. (Format: TXT, HTML) (Updates RFC4210) (Updated by RFC9480)
-     (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC6712) 
+     2012. (Format: TXT, HTML) (Obsoleted by RFC9811) (Updates RFC4210)
+     (Updated by RFC9480) (Status: PROPOSED STANDARD) (DOI:
+     10.17487/RFC6712) 
 
 6713 The 'application/zlib' and 'application/gzip' Media Types. J.
      Levine. August 2012. (Format: TXT, HTML) (Status: INFORMATIONAL)
@@ -28644,7 +28645,7 @@ See the RFC Editor Web page http://www.rfc-editor.org
 
 6874 Representing IPv6 Zone Identifiers in Address Literals and Uniform
      Resource Identifiers. B. Carpenter, S. Cheshire, R. Hinden. February
-     2013. (Format: TXT, HTML) (Updates RFC3986) (Status: PROPOSED
+     2013. (Format: TXT, HTML) (Obsoleted by RFC9844) (Status: PROPOSED
      STANDARD) (DOI: 10.17487/RFC6874) 
 
 6875 The P2P Network Experiment Council's Activities and Experiments with
@@ -31982,7 +31983,8 @@ See the RFC Editor Web page http://www.rfc-editor.org
 
 7622 Extensible Messaging and Presence Protocol (XMPP): Address Format.
      P. Saint-Andre. September 2015. (Format: TXT, HTML) (Obsoletes
-     RFC6122) (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC7622) 
+     RFC6122) (Updated by RFC9844) (Status: PROPOSED STANDARD) (DOI:
+     10.17487/RFC7622) 
 
 7623 Provider Backbone Bridging Combined with Ethernet VPN (PBB-EVPN). A.
      Sajassi, Ed., S. Salam, N. Bitar, A. Isaac, W. Henderickx. September
@@ -34072,8 +34074,8 @@ See the RFC Editor Web page http://www.rfc-editor.org
      INFORMATIONAL) (DOI: 10.17487/RFC8088) 
 
 8089 The "file" URI Scheme. M. Kerwin. February 2017. (Format: TXT, HTML)
-     (Updates RFC1738) (Status: PROPOSED STANDARD) (DOI:
-     10.17487/RFC8089) 
+     (Updates RFC1738) (Updated by RFC9844) (Status: PROPOSED STANDARD)
+     (DOI: 10.17487/RFC8089) 
 
 8090 Appointment Procedures for the IETF Representatives to the Community
      Coordination Group (CCG). R. Housley. February 2017. (Format: TXT,
@@ -36131,8 +36133,8 @@ See the RFC Editor Web page http://www.rfc-editor.org
 
 8551 Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 4.0
      Message Specification. J. Schaad, B. Ramsdell, S. Turner. April
-     2019. (Format: TXT, HTML) (Obsoletes RFC5751) (Status: PROPOSED
-     STANDARD) (DOI: 10.17487/RFC8551) 
+     2019. (Format: TXT, HTML) (Obsoletes RFC5751) (Updated by RFC9788)
+     (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC8551) 
 
 8552 Scoped Interpretation of DNS Resource Records through "Underscored"
      Naming of Attribute Leaves. D. Crocker. March 2019. (Format: TXT,
@@ -36932,7 +36934,7 @@ See the RFC Editor Web page http://www.rfc-editor.org
      February 2020. (Format: HTML, TXT, PDF, XML) (Obsoletes RFC4844)
      (Updated by RFC9280) (Status: INFORMATIONAL) (DOI: 10.17487/RFC8729) 
 
-8730 Independent Submission Editor Model. N. Brownlee, Ed., B. Hinden,
+8730 Independent Submission Editor Model. N. Brownlee, Ed., R. Hinden,
      Ed.. February 2020. (Format: HTML, TXT, PDF, XML) (Obsoletes
      RFC6548) (Updated by RFC9280) (Status: INFORMATIONAL) (DOI:
      10.17487/RFC8730) 
@@ -40352,8 +40354,8 @@ See the RFC Editor Web page http://www.rfc-editor.org
 
 9480 Certificate Management Protocol (CMP) Updates. H. Brockhaus, D. von
      Oheimb, J. Gray. November 2023. (Format: HTML, TXT, PDF, XML)
-     (Updates RFC4210, RFC5912, RFC6712) (Status: PROPOSED STANDARD)
-     (DOI: 10.17487/RFC9480) 
+     (Obsoleted by RFC9810, RFC9811) (Updates RFC4210, RFC5912, RFC6712)
+     (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC9480) 
 
 9481 Certificate Management Protocol (CMP) Algorithms. H. Brockhaus, H.
      Aschauer, M. Ounsworth, J. Gray. November 2023. (Format: HTML, TXT,
@@ -41758,6 +41760,15 @@ See the RFC Editor Web page http://www.rfc-editor.org
      Wen, E. Leyton, J. Rabadan. June 2025. (Format: HTML, TXT, PDF, XML)
      (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC9786) 
 
+9787 Guidance on End-to-End Email Security. D. K. Gillmor, Ed., A.
+     Melnikov, Ed., B. Hoeneisen, Ed.. August 2025. (Format: HTML, TXT,
+     PDF, XML) (Status: INFORMATIONAL) (DOI: 10.17487/RFC9787) 
+
+9788 Header Protection for Cryptographically Protected Email. D. K.
+     Gillmor, B. Hoeneisen, A. Melnikov. August 2025. (Format: HTML, TXT,
+     PDF, XML) (Updates RFC8551) (Status: PROPOSED STANDARD) (DOI:
+     10.17487/RFC9788) 
+
 9789 MPLS Network Actions (MNAs) Framework. L. Andersson, S. Bryant, M.
      Bocci, T. Li. July 2025. (Format: HTML, TXT, PDF, XML) (Status:
      INFORMATIONAL) (DOI: 10.17487/RFC9789) 
@@ -41845,10 +41856,27 @@ See the RFC Editor Web page http://www.rfc-editor.org
      (Format: HTML, TXT, PDF, XML) (Status: INFORMATIONAL) (DOI:
      10.17487/RFC9807) 
 
+9808 Content Delivery Network Interconnection (CDNI) Capacity Capability
+     Advertisement Extensions. A. Ryan, B. Rosenblum, N. Sopher. July
+     2025. (Format: HTML, TXT, PDF, XML) (Status: PROPOSED STANDARD)
+     (DOI: 10.17487/RFC9808) 
+
 9809 X.509 Certificate Extended Key Usage (EKU) for Configuration,
      Updates, and Safety-Critical Communication. H. Brockhaus, D.
      Goltzsche. July 2025. (Format: HTML, TXT, PDF, XML) (Status:
      PROPOSED STANDARD) (DOI: 10.17487/RFC9809) 
+
+9810 Internet X.509 Public Key Infrastructure -- Certificate Management
+     Protocol (CMP). H. Brockhaus, D. von Oheimb, M. Ounsworth, J. Gray.
+     July 2025. (Format: HTML, TXT, PDF, XML) (Obsoletes RFC4210,
+     RFC9480) (Updates RFC5912) (Status: PROPOSED STANDARD) (DOI:
+     10.17487/RFC9810) 
+
+9811 Internet X.509 Public Key Infrastructure -- HTTP Transfer for the
+     Certificate Management Protocol (CMP). H. Brockhaus, D. von Oheimb,
+     M. Ounsworth, J. Gray. July 2025. (Format: HTML, TXT, PDF, XML)
+     (Obsoletes RFC6712, RFC9480) (Status: PROPOSED STANDARD) (DOI:
+     10.17487/RFC9811) 
 
 9813 Operational Considerations for Using TLS Pre-Shared Keys (TLS-PSKs)
      with RADIUS. A. DeKok. July 2025. (Format: HTML, TXT, PDF, XML)
@@ -41869,6 +41897,10 @@ See the RFC Editor Web page http://www.rfc-editor.org
      G. Dawra, J. Dong. July 2025. (Format: HTML, TXT, PDF, XML) (Status:
      INFORMATIONAL) (DOI: 10.17487/RFC9816) 
 
+9817 Use Cases for In-Network Computing. I. Kunze, K. Wehrle, D. Trossen,
+     M-J. Montpetit, X. de Foy, D. Griffin, M. Rio. August 2025. (Format:
+     HTML, TXT, PDF, XML) (Status: INFORMATIONAL) (DOI: 10.17487/RFC9817) 
+
 9818 DHCPv6 Prefix Delegation on IPv6 Customer Edge (CE) Routers in LANs.
      T. Winters. July 2025. (Format: HTML, TXT, PDF, XML) (Updates
      RFC7084) (Status: INFORMATIONAL) (DOI: 10.17487/RFC9818) 
@@ -41878,7 +41910,28 @@ See the RFC Editor Web page http://www.rfc-editor.org
      (Format: HTML, TXT, PDF, XML) (Updates RFC9252) (Status: PROPOSED
      STANDARD) (DOI: 10.17487/RFC9819) 
 
+9825 Extensions to OSPF for Advertising Prefix Administrative Tags. A.
+     Lindem, Ed., P. Psenak, Y. Qu. July 2025. (Format: HTML, TXT, PDF,
+     XML) (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC9825) 
+
+9828 RTP Payload Format for JPEG 2000 Streaming with Sub-Codestream
+     Latency. P.-A. Lemieux, Ed., D. Taubman. August 2025. (Format: HTML,
+     TXT, PDF, XML) (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC9828) 
+
 9829 Handling of Resource Public Key Infrastructure (RPKI) Certificate
      Revocation List (CRL) Number Extensions. J. Snijders, B. Maddison,
      T. Buehler. July 2025. (Format: HTML, TXT, PDF, XML) (Updates
      RFC6487) (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC9829) 
+
+9837 The IPv6 VPN Service Destination Option. R. Bonica, X. Li, A.
+     Farrel, Y. Kamite, L. Jalil. August 2025. (Format: HTML, TXT, PDF,
+     XML) (Status: EXPERIMENTAL) (DOI: 10.17487/RFC9837) 
+
+9839 Unicode Character Repertoire Subsets. T. Bray, P. Hoffman. August
+     2025. (Format: HTML, TXT, PDF, XML) (Status: PROPOSED STANDARD)
+     (DOI: 10.17487/RFC9839) 
+
+9844 Entering IPv6 Zone Identifiers in User Interfaces. B. Carpenter, R.
+     Hinden. August 2025. (Format: HTML, TXT, PDF, XML) (Obsoletes
+     RFC6874) (Updates RFC4007, RFC7622, RFC8089) (Status: PROPOSED
+     STANDARD) (DOI: 10.17487/RFC9844) 
