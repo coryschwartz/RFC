@@ -4,86 +4,86 @@
   To get the full list of RFCs, please look up rfc-index.txt
 ===========================================================================
 
-9808 Content Delivery Network Interconnection (CDNI) Capacity Capability
-     Advertisement Extensions. A. Ryan, B. Rosenblum, N. Sopher. July
-     2025. (Format: HTML, TXT, PDF, XML) (Status: PROPOSED STANDARD)
-     (DOI: 10.17487/RFC9808) 
+9909 Internet X.509 Public Key Infrastructure -- Algorithm Identifiers
+     for the Stateless Hash-Based Digital Signature Algorithm (SLH-DSA).
+     K. Bashiri, S. Fluhrer, S. Gazdag, D. Van Geest, S. Kousidis.
+     December 2025. (Format: HTML, TXT, PDF, XML) (Status: PROPOSED
+     STANDARD) (DOI: 10.17487/RFC9909) 
 
-9809 X.509 Certificate Extended Key Usage (EKU) for Configuration,
-     Updates, and Safety-Critical Communication. H. Brockhaus, D.
-     Goltzsche. July 2025. (Format: HTML, TXT, PDF, XML) (Status:
-     PROPOSED STANDARD) (DOI: 10.17487/RFC9809) 
+9910 Registration Data Access Protocol (RDAP) Regional Internet Registry
+     (RIR) Search. T. Harrison, J. Singh. January 2026. (Format: HTML,
+     TXT, PDF, XML) (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC9910) 
 
-9810 Internet X.509 Public Key Infrastructure -- Certificate Management
-     Protocol (CMP). H. Brockhaus, D. von Oheimb, M. Ounsworth, J. Gray.
-     July 2025. (Format: HTML, TXT, PDF, XML) (Obsoletes RFC4210,
-     RFC9480) (Updates RFC5912) (Status: PROPOSED STANDARD) (DOI:
-     10.17487/RFC9810) 
+9911 Common YANG Data Types. J. Schönwälder, Ed.. December 2025. (Format:
+     HTML, TXT, PDF, XML) (Obsoletes RFC6991) (Status: PROPOSED STANDARD)
+     (DOI: 10.17487/RFC9911) 
 
-9811 Internet X.509 Public Key Infrastructure -- HTTP Transfer for the
-     Certificate Management Protocol (CMP). H. Brockhaus, D. von Oheimb,
-     M. Ounsworth, J. Gray. July 2025. (Format: HTML, TXT, PDF, XML)
-     (Obsoletes RFC6712, RFC9480) (Status: PROPOSED STANDARD) (DOI:
-     10.17487/RFC9811) 
+9915 Dynamic Host Configuration Protocol for IPv6 (DHCPv6). T. Mrugalski,
+     B. Volz, M. Richardson, S. Jiang, T. Winters. January 2026. (Format:
+     HTML, TXT, PDF, XML) (Obsoletes RFC8415) (Also STD0102) (Status:
+     INTERNET STANDARD) (DOI: 10.17487/RFC9915) 
 
-9813 Operational Considerations for Using TLS Pre-Shared Keys (TLS-PSKs)
-     with RADIUS. A. DeKok. July 2025. (Format: HTML, TXT, PDF, XML)
-     (Also BCP0243) (Status: BEST CURRENT PRACTICE) (DOI:
-     10.17487/RFC9813) 
+9917 IGP Flexible Algorithms Reverse Affinity Constraint. P. Psenak, J.
+     Horn, A. Dhamija. January 2026. (Format: HTML, TXT, PDF, XML)
+     (Updates RFC9350, RFC9843) (Status: PROPOSED STANDARD) (DOI:
+     10.17487/RFC9917) 
 
-9814 Use of the SLH-DSA Signature Algorithm in the Cryptographic Message
-     Syntax (CMS). R. Housley, S. Fluhrer, P. Kampanakis, B. Westerbaan.
-     July 2025. (Format: HTML, TXT, PDF, XML) (Status: PROPOSED STANDARD)
-     (DOI: 10.17487/RFC9814) 
+9920 RFC Editor Model (Version 3). P. Hoffman, A. Rossi. February 2026.
+     (Format: HTML, TXT, PDF, XML) (Obsoletes RFC9280) (Updates RFC7841,
+     RFC7991, RFC7992, RFC7993, RFC7994, RFC7995, RFC7996, RFC7997,
+     RFC8729, RFC8730, RFC9720) (Status: INFORMATIONAL) (DOI:
+     10.17487/RFC9920) 
 
-9815 BGP Link State (BGP-LS) Shortest Path First (SPF) Routing. K. Patel,
-     A. Lindem, S. Zandi, W. Henderickx. July 2025. (Format: HTML, TXT,
-     PDF, XML) (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC9815) 
+9921 CBOR Object Signing and Encryption (COSE) Header Parameter for
+     Timestamp Tokens as Defined in RFC 3161. H. Birkholz, T. Fossati, M.
+     Riechert. February 2026. (Format: HTML, TXT, PDF, XML) (Status:
+     PROPOSED STANDARD) (DOI: 10.17487/RFC9921) 
 
-9816 Usage and Applicability of BGP Link State (BGP-LS) Shortest Path
-     First (SPF) Routing in Data Centers. K. Patel, A. Lindem, S. Zandi,
-     G. Dawra, J. Dong. July 2025. (Format: HTML, TXT, PDF, XML) (Status:
-     INFORMATIONAL) (DOI: 10.17487/RFC9816) 
+9923 The FNV Non-Cryptographic Hash Algorithm. L. Noll, K. Vo, D.
+     Eastlake 3rd, T. Hansen. February 2026. (Format: HTML, TXT, PDF,
+     XML) (Status: INFORMATIONAL) (DOI: 10.17487/RFC9923) 
 
-9817 Use Cases for In-Network Computing. I. Kunze, K. Wehrle, D. Trossen,
-     M-J. Montpetit, X. de Foy, D. Griffin, M. Rio. August 2025. (Format:
-     HTML, TXT, PDF, XML) (Status: INFORMATIONAL) (DOI: 10.17487/RFC9817) 
+9924 Advanced Professional Video. Y. Lim, M. Park, M. Budagavi, R. Joshi,
+     K. Choi. February 2026. (Format: HTML, TXT, PDF, XML) (Status:
+     INFORMATIONAL) (DOI: 10.17487/RFC9924) 
 
-9818 DHCPv6 Prefix Delegation on IPv6 Customer Edge (CE) Routers in LANs.
-     T. Winters. July 2025. (Format: HTML, TXT, PDF, XML) (Updates
-     RFC7084) (Status: INFORMATIONAL) (DOI: 10.17487/RFC9818) 
+9925 Unsigned X.509 Certificates. D. Benjamin. February 2026. (Format:
+     HTML, TXT, PDF, XML) (Updates RFC5280) (Status: PROPOSED STANDARD)
+     (DOI: 10.17487/RFC9925) 
 
-9819 Argument Signaling for BGP Services in Segment Routing over IPv6
-     (SRv6). K. Talaulikar, K. Raza, J. Rabadan, W. Lin. July 2025.
-     (Format: HTML, TXT, PDF, XML) (Updates RFC9252) (Status: PROPOSED
-     STANDARD) (DOI: 10.17487/RFC9819) 
+9926 Prefix Registration for IPv6 Neighbor Discovery. P. Thubert, Ed..
+     February 2026. (Format: HTML, TXT, PDF, XML) (Updates RFC4861,
+     RFC6550, RFC8505, RFC8928, RFC9010) (Status: PROPOSED STANDARD)
+     (DOI: 10.17487/RFC9926) 
 
-9825 Extensions to OSPF for Advertising Prefix Administrative Tags. A.
-     Lindem, Ed., P. Psenak, Y. Qu. July 2025. (Format: HTML, TXT, PDF,
-     XML) (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC9825) 
+9927 Fixing the C-Flag in the Extended Address Registration Option
+     (EARO). P. Thubert, A. Rashid. February 2026. (Format: HTML, TXT,
+     PDF, XML) (Updates RFC8928) (Status: PROPOSED STANDARD) (DOI:
+     10.17487/RFC9927) 
 
-9828 RTP Payload Format for JPEG 2000 Streaming with Sub-Codestream
-     Latency. P.-A. Lemieux, Ed., D. Taubman. August 2025. (Format: HTML,
-     TXT, PDF, XML) (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC9828) 
+9929 IGP Unreachable Prefix Announcement. P. Psenak, Ed., C. Filsfils, D.
+     Voyer, S. Hegde, G. Mishra. February 2026. (Format: HTML, TXT, PDF,
+     XML) (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC9929) 
 
-9829 Handling of Resource Public Key Infrastructure (RPKI) Certificate
-     Revocation List (CRL) Number Extensions. J. Snijders, B. Maddison,
-     T. Buehler. July 2025. (Format: HTML, TXT, PDF, XML) (Updates
-     RFC6487) (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC9829) 
+9930 Tunnel Extensible Authentication Protocol (TEAP) Version 1. A.
+     DeKok, Ed.. February 2026. (Format: HTML, TXT, PDF, XML) (Obsoletes
+     RFC7170) (Updates RFC9427) (Status: PROPOSED STANDARD) (DOI:
+     10.17487/RFC9930) 
 
-9837 The IPv6 VPN Service Destination Option. R. Bonica, X. Li, A.
-     Farrel, Y. Kamite, L. Jalil. August 2025. (Format: HTML, TXT, PDF,
-     XML) (Status: EXPERIMENTAL) (DOI: 10.17487/RFC9837) 
+9937 Proportional Rate Reduction (PRR). M. Mathis, N. Cardwell, Y. Cheng,
+     N. Dukkipati. December 2025. (Format: HTML, TXT, PDF, XML)
+     (Obsoletes RFC6937) (Status: PROPOSED STANDARD) (DOI:
+     10.17487/RFC9937) 
 
-9839 Unicode Character Repertoire Subsets. T. Bray, P. Hoffman. August
-     2025. (Format: HTML, TXT, PDF, XML) (Status: PROPOSED STANDARD)
-     (DOI: 10.17487/RFC9839) 
+9939 PKCS #8: Private-Key Information Content Types. J. Mandel, R.
+     Housley, S. Turner. February 2026. (Format: HTML, TXT, PDF, XML)
+     (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC9939) 
 
-9844 Entering IPv6 Zone Identifiers in User Interfaces. B. Carpenter, R.
-     Hinden. August 2025. (Format: HTML, TXT, PDF, XML) (Obsoletes
-     RFC6874) (Updates RFC4007, RFC7622, RFC8089) (Status: PROPOSED
-     STANDARD) (DOI: 10.17487/RFC9844) 
+9945 IETF Community Moderation. L. Eggert, Ed., E. Lear, Ed.. February
+     2026. (Format: HTML, TXT, PDF, XML) (Obsoletes RFC3683, RFC3934)
+     (Updates RFC2418, RFC9245) (Also BCP0245) (Status: BEST CURRENT
+     PRACTICE) (DOI: 10.17487/RFC9945) 
 
 ===========================================================================
- - This file last updated Thu 04 Sep 2025 02:30:01 AM PDT
+ - This file last updated Tue 03 Mar 2026 02:30:01 AM PST
 

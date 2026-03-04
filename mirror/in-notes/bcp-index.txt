@@ -5,7 +5,7 @@
                              BCP INDEX
                            -------------
 
-CREATED ON: 09/04/2025.
+CREATED ON: 03/03/2026.
 
 This file contains citations for all BCPs in numeric order.  The BCPs
 form a sub-series of the RFC document series, specifically those RFCs
@@ -146,7 +146,7 @@ RFC Editor Web page http://www.rfc-editor.org.
 
 0025 IETF Working Group Guidelines and Procedures. S. Bradner, M.
      Wasserman, P. Resnick, A. Farrel. September 1998. (Format: TXT=114406
-     HTML= bytes) (Also RFC2418, RFC3934, RFC7776, RFC8716)
+     HTML= bytes) (Also RFC2418, RFC7776, RFC8716)
 
 0026 Guidelines for Writing an IANA Considerations Section in RFCs. M.
      Cotton, B. Leiba, T. Narten. June 2017. (Format: TXT=109907 HTML=
@@ -221,7 +221,8 @@ RFC Editor Web page http://www.rfc-editor.org.
      (Format: TXT =18899 HTML= bytes) (Also RFC2964)
 
 0045 IETF Discussion List Charter. L. Eggert, S. Harris. June 2022.
-     (Obsoletes RFC3005) (Updates RFC3683) (Also RFC9245)
+     (Obsoletes RFC3005) (Updates RFC3683) (Updated by RFC9945) (Also
+     RFC9245)
 
 0046 Recommended Internet Service Provider Security Services and
      Procedures. T. Killalea. November 2000. (Format: TXT =27905 HTML=
@@ -296,6 +297,11 @@ RFC Editor Web page http://www.rfc-editor.org.
 0065 Registration Rules for URI.ARPA. M. Mealling, T. Hardie. October
      2002. (Format: bytes) (Also RFC3405, RFC8958)
 
+0066 [BCP 66 was previously RFC 3406 ("Uniform Resource Names (URN)
+     Namespace Definition Mechanisms"), which has been obsoleted by RFC
+     8141 (Proposed Standard; "Uniform Resource Names (URNs)"). See RFC
+     8141 for more information.]
+
 0067 The SIP Change Process. J. Peterson, C. Jennings, R. Sparks, B.
      Campbell, Ed., A. Cooper, B. Leiba. March 2010. (Format: TXT=47266
      HTML= bytes) (Also RFC5727, RFC7957)
@@ -361,9 +367,7 @@ RFC Editor Web page http://www.rfc-editor.org.
      Narten. January 2004. (Format: TXT =15054 HTML= bytes) (Updates
      RFC2434) (Also RFC3692)
 
-0083 A Practice for Revoking Posting Rights to IETF Mailing Lists. M.
-     Rose. March 2004. (Format: TXT =15698 HTML= bytes) (Updated by
-     RFC9245) (Also RFC3683)
+0083 [BCP 83 is retired. See BCP 245.]
 
 0084 Ingress Filtering for Multihomed Networks. F. Baker, P. Savola,
      K. Sriram, D. Montgomery, J. Haas. March 2004. (Format: bytes) (Also
@@ -479,6 +483,12 @@ RFC Editor Web page http://www.rfc-editor.org.
 0112 Prioritized Treatment of Specific OSPF Version 2 Packets and
      Congestion Avoidance. G. Choudhury, Ed.. October 2005. (Format:
      TXT=34132 HTML= bytes) (Updated by RFC9454) (Also RFC4222)
+
+0113 [BCP 113 was previously RFC 4333 ("The IETF Administrative
+     Oversight Committee (IAOC) Member Selection Guidelines and Process").
+     It has been obsoleted by RFC 8711 ("Structure of the IETF
+     Administrative Support Activity, Version 2.0"), which is part of BCP
+     101. See BCP 101 for more information.]
 
 0114 BGP Communities for Data Collection. D. Meyer. February 2006.
      (Format: TXT=26078 HTML= bytes) (Also RFC4384)
@@ -962,5 +972,16 @@ RFC Editor Web page http://www.rfc-editor.org.
 0241 Operational Considerations for Use of DNS in Internet of Things
      (IoT) Devices. M. Richardson, W. Pan. March 2025. (Also RFC9726)
 
+0242 Clarification of IPv6 Address Allocation Policy. B. Carpenter, S.
+     Krishnan, D. Farmer. October 2025. (Updates RFC7249) (Also RFC9812)
+
 0243 Operational Considerations for Using TLS Pre-Shared Keys
      (TLS-PSKs) with RADIUS. A. DeKok. July 2025. (Also RFC9813)
+
+0244 Best Practices for Deletion of Domain and Host Objects in the
+     Extensible Provisioning Protocol (EPP). S. Hollenbeck, W. Carroll, G.
+     Akiwate. September 2025. (Also RFC9874)
+
+0245 IETF Community Moderation. L. Eggert, Ed., E. Lear, Ed.. February
+     2026. (Format: HTML=46243 TEXT= v3PDF= XML= bytes) (Obsoletes
+     RFC3683, RFC3934) (Updates RFC2418, RFC9245) (Also RFC9945)
