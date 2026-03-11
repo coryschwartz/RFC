@@ -8,7 +8,7 @@ Updates: 3168                                               M. Kühlewind
 Category: Standards Track                                       Ericsson
 ISSN: 2070-1721                                         R. Scheffenegger
                                                                   NetApp
-                                                           February 2026
+                                                              March 2026
 
 
 More Accurate Explicit Congestion Notification (AccECN) Feedback in TCP
@@ -1515,60 +1515,27 @@ Table of Contents
 
 3.2.2.4.  Testing for Zeroing of the ACE Field
 
+   NOTE: This section does not concern the case where the ACE field is
+   zero when the handshake encoding has been used on the ACK of the SYN/
+   ACK under the carefully worded conditions in Section 3.2.2.1
+
    Section 3.2.2 required the Data Receiver to initialize the r.cep
    counter to a non-zero value.  Therefore, in either direction the
-   initial value of the ACE counter ought to be non-zero.
-
-   This section does not concern the case where the ACE field is zero
-   when the handshake encoding has been used on the ACK of the SYN/ACK
-   under the carefully worded conditions in Section 3.2.2.1.
-
-   If AccECN has been successfully negotiated, the Data Sender MAY check
-   the value of the ACE counter in the first feedback packet (with or
-   without data) that arrives after the three-way handshake.  If the
-   value of this ACE field is found to be zero (0b000), for the
-   remainder of the half-connection the Data Sender ought to send non-
-   ECN-capable packets and it is advised not to respond to any feedback
-   of CE markings.
-
-   Reason: the symptoms imply any or all of the following:
-
-   *  the remote peer has somehow entered Not ECN feedback mode;
-
-   *  a broken remote TCP implementation;
-
-   *  potential mangling of the ECN fields in the TCP headers (although
-      unlikely given they clearly survived during the handshake).
-
-   This advice is not stated normatively (in capitals), because the best
-   strategy might depend on the likelihood to experience these
-   scenarios, which can only be known at the time of deployment.
-
-      |  Note that a host in AccECN mode MUST continue to provide
-      |  Accurate ECN feedback to its peer, even if it is no longer
-      |  sending ECT itself over the other half-connection.
-
-   If reordering occurs, the first feedback packet that arrives will not
+   initial value of the ACE counter ought to be non-zero.  However, if
+   reordering occurs, the first feedback packet that arrives will not
    necessarily be the same as the first packet in sequence order.  The
-   test has been specified loosely like this to simplify implementation,
-   and because it would not have been any more precise to have specified
-   the first packet in sequence order, which would not necessarily be
-   the first ACE counter that the Data Receiver fed back anyway, given
-   it might have been a retransmission.
+   possibility of reordering means that there is a chance that the ACE
+   field on the first packet to arrive is genuinely zero (without
+   middlebox interference).  This would cause a host to unnecessarily
+   disable ECN for a half-connection.  Therefore, it is NOT RECOMMENDED
+   to explicitly test for zeroing/bleaching of the ACE as reordering or
+   ACK loss can still cause the initially observed value to be zero and
+   would disable AccECN randomly and unnecessarily.
 
-   The possibility of reordering means that there is a small chance that
-   the ACE field on the first packet to arrive is genuinely zero
-   (without middlebox interference).  This would cause a host to
-   unnecessarily disable ECN for a half-connection.  Therefore, in
-   environments where there is no evidence of the ACE field being
-   zeroed, implementations MAY skip this test.
-
-      |  Note that the Data Sender MUST NOT test whether the arriving
-      |  counter in the initial ACE field has been initialized to a
-      |  specific valid value -- the above check solely tests whether
-      |  the ACE fields have been incorrectly zeroed.  This allows hosts
-      |  to use different initial values as an additional signalling
-      |  channel in the future.
+   Further, the Data Sender MUST NOT test whether the arriving counter
+   in the initial ACE field has been initialized to a specific valid
+   value.  This allows hosts to use different initial values as an
+   additional signalling channel in the future.
 
 3.2.2.5.  Safety Against Ambiguity of the ACE Field
 
@@ -2679,21 +2646,6 @@ Table of Contents
    fingerprinting of specific versions of operation systems.  However,
    the latter can be done using different means independent of Accurate
    ECN.
-
-   As Accurate ECN exposes more bits in the TCP header that could be
-   tampered with without interfering with the transport excessively, it
-   may allow an additional way to identify specific data streams across
-   a virtual private network (VPN) to an attacker that has access to the
-   datastream before and after the VPN tunnel endpoints.  This may be
-   achieved by injecting or modifying the ACE field in specific patterns
-   that can be recognized.
-
-   Overall, Accurate ECN does not change the risk profile on privacy to
-   a user dramatically beyond what is already possible using classic
-   ECN.  However, in order to prevent such attacks and means of easier
-   identification of flows, it is advisable for privacy-conscious users
-   behind VPNs to not enable Accurate ECN, or Classic ECN for that
-   matter.
 
 9.  References
 

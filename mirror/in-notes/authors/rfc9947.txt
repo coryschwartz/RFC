@@ -12,7 +12,7 @@ ISSN: 2070-1721                                                G. Mishra
                                                                 G. Zhang
                                                             China Mobile
                                                              M. Cociglio
-                                                           February 2026
+                                                              March 2026
 
 
    Application of the Alternate-Marking Method to the Segment Routing
@@ -36,8 +36,8 @@ Abstract
    experimental implementation and ensure interoperability among
    implementations to better determine the value of this approach.
    Researchers are invited to submit their evaluations of this work to
-   the RFC Editor for consideration as Independent Submissions or to the
-   IETF SPRING Working Group as Internet-Drafts.
+   the Independent Submissions Editor or to the IETF SPRING Working
+   Group as Internet-Drafts.
 
 Status of This Memo
 
@@ -105,9 +105,8 @@ Table of Contents
    flows can be distinguished and identified.  [RFC9343] defines the
    standard for how the marking field can be encoded in a new TLV in
    either Hop-by-Hop or Destination Options Headers of IPv6 packets in
-   order to achieve Alternate Marking.  The mechanism to carry is
-   equally applicable to Segment Routing for IPv6 (SRv6) networks
-   [RFC8402].
+   order to achieve Alternate Marking.  This mechanism is equally
+   applicable to Segment Routing for IPv6 (SRv6) networks [RFC8402].
 
    This document describes an alternative experimental approach that
    encodes the marking field in a new TLV carried in the Segment Routing
@@ -127,8 +126,10 @@ Table of Contents
    implementations to better determine the value of this approach.  As
    also highlighted in [IETF-EXPERIMENTS], when two protocol extensions
    are proposed to solve a single problem, an experiment can be
-   initiated, and this is the purpose of this document.  See Section 5
-   for more details about the experimentation.
+   initiated to gather operational experience and "determine which, if
+   either, of the protocols should be progressed to the standards
+   track."  This is the purpose of this document.  See Section 5 for
+   more details about the experiment.
 
 1.1.  Observations on RFC 9343
 
@@ -157,7 +158,8 @@ Table of Contents
    used, then every hop along the path will process the AltMark data.
    If the Destination Option positioned before the SRH is used, or the
    SRH AltMark TLV is used, then only the segment endpoints will process
-   the AltMark data.
+   the AltMark data, unless the intermediate node has a different
+   priority rule.
 
    Both [RFC9343] and the approach specified in this document can
    coexist.  Indeed, this document does not change or invalidate any
@@ -197,9 +199,9 @@ Table of Contents
    defined in [RFC9343] is the basis of the AltMark SRH TLV introduced
    in Section 3.
 
-   In addition to the base data fields of [RFC9343], it is also allowed
-   the insertion of optional extended data fields that are not present
-   in [RFC9343].  These extended data fields can support metadata for
+   In addition to the base data fields of [RFC9343], the insertion of
+   optional extended data fields that are not present in [RFC9343] is
+   also allowed.  These extended data fields can support metadata for
    additional telemetry requirements, as further described below.
 
 2.1.  Controlled Domain
@@ -214,8 +216,8 @@ Table of Contents
    network management, and security requirements.  This is also the case
    for applying the Alternate-Marking Method to SRv6.
 
-   Therefore, the experimentation of the Alternate-Marking Method to
-   SRv6 MUST be deployed only within a controlled domain.  For SRv6, the
+   Therefore, the experiment of applying the Alternate-Marking Method to
+   SRv6 MUST only be deployed within a controlled domain.  For SRv6, the
    controlled domain corresponds to an SR domain, as defined in
    [RFC8402].  The Alternate-Marking measurement domain overlaps with
    the controlled domain.
@@ -223,7 +225,7 @@ Table of Contents
    The use of a controlled domain is also appropriate for the deployment
    of an experimental protocol extension.  Carefully bounding the domain
    reduces the risk of the experiment leaking out and clashing with
-   other experiments of causing unforeseen consequences in wider
+   other experiments or causing unforeseen consequences in wider
    deployments.
 
 3.  Definition of the SRH AltMark TLV
@@ -252,11 +254,11 @@ Table of Contents
    SRH TLV Type:  The 8-bit identifier of the Alternate-Marking SRH TLV.
       The value for this field is taken from the range 124-126.  It is
       an Experimental code point that indicates a TLV that does not
-      change en route.  Experimentation of this document must coordinate
-      the value used by all implementations participating in the
-      experiment.  Therefore, experiments should carefully consider any
-      other implementations running in the controlled domain to avoid
-      clashes with other SRH TLVs.
+      change en route.  Deployment of this document must coordinate the
+      value used by all implementations participating in the experiment.
+      Therefore, experiments should carefully consider any other
+      implementations running in the controlled domain to avoid clashes
+      with other SRH TLVs.
 
    SRH TLV Len:  The length of the Data Fields of this TLV in bytes.
       This is set to 6 when Enhanced Alternate Marking is not in use.
@@ -356,9 +358,10 @@ Table of Contents
       R bit:  Reserved.  This bit MUST be set to zero and ignored on
          receipt.
 
-   Len:  Length.  Indicates the length of the extended data fields in
-      bytes for Enhanced Alternate Marking.  It includes all of the
-      fields shown in Figure 2 including any metadata that is present.
+   Len:  Length.  Indicates the length of the extended data fields for
+      Enhanced Alternate Marking as a multiple of 4 bytes.  It includes
+      all of the fields shown in Figure 2 including any metadata that is
+      present.
 
    Rsvd:  Reserved for further use.  These bits MUST be set to zero on
       transmission and ignored on receipt.
@@ -513,22 +516,21 @@ Table of Contents
    Option carrying AltMark data can coexist without problems.  If both
    are present, the only issue could be the duplication of information,
    but this will not affect in any way the device and the network
-   services.  The security requirement of controlled domain applies to
-   both this document and [RFC9343], and it also confines this
-   duplication to single service provider networks.  However,
-   duplication of the same information in different places should be
-   avoided, and it is recommended to only analyze the use of the SRH
-   AltMark TLV for the experimentation.
+   services.  Both this document and [RFC9343] require a controlled
+   domain for security purposes, which confines this duplication to a
+   single service provider network.  Duplication of the same information
+   in different places should be avoided, and analyzing the use of only
+   the SRH AltMark TLV is recommended as part of this experiment.
 
 5.  Experimentation Overview
 
    The protocol extension described in this document is built on
-   existing technology using an Experimental code point.
-   Experimentation of this document must use a code point chosen from
-   the Experimental range, as noted in Section 3, and should make it
-   possible for the operator to configure the value used in a deployment
-   such that it is possible to conduct multiple non-conflicting
-   experiments within the same network.
+   existing technology using an Experimental code point.  Experiment
+   participants must use a code point chosen from the Experimental
+   range, as noted in Section 3, and should make it possible for the
+   operator to configure the value used in a deployment such that it is
+   possible to conduct multiple non-conflicting experiments within the
+   same network.
 
    This experiment aims to determine whether or not the use of the SRH
    AltMark TLV brings advantages, in particular, in consideration of
@@ -552,12 +554,12 @@ Table of Contents
    live networks.
 
    The results of this experiment will be collected and shared with the
-   RFC Editor for consideration as an Independent Submission or with the
-   IETF SPRING Working Group as an Internet-Draft, to help forward the
-   discussions that will determine the correct development of Alternate-
-   Marking Method solutions in SRv6 networks.  It is expected that
-   initial results will be made available within two years of the
-   publication of this document as an RFC.
+   Independent Submissions Editor or with the IETF SPRING Working Group
+   as Internet-Drafts to help progress the discussions that will
+   determine the correct development of Alternate-Marking Method
+   solutions in SRv6 networks.  It is expected that initial results will
+   be made available within two years of the publication of this
+   document as an RFC.
 
 5.1.  Objective of the Experiment
 
@@ -572,8 +574,8 @@ Table of Contents
       hindrance on the device as compared to the Destination Option?
 
    *  Is the forwarding plane performance impacted across different
-      device architecture types compared to the use of the SRH TLV and
-      Destination Option?
+      device architecture types when comparing the use of the SRH TLV
+      with the use of Destination Option?
 
    *  How does use of the extended data fields, introduced in
       Section 3.2, compare to other on-path telemetry methods from the
@@ -716,13 +718,13 @@ Contributors
 
 
    Massimo Nilo
-   Telecom Italia
-   Email: massimo.nilo@telecomitalia.it
+   FiberCop
+   Email: massimo.nilo@fibercop.com
 
 
    Fabrizio Milan
-   Telecom Italia
-   Email: fabrizio.milan@telecomitalia.it
+   FiberCop
+   Email: fabrizio.milan@fibercop.com
 
 
 Authors' Addresses

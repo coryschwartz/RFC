@@ -851,7 +851,7 @@ Table of Contents
    This module imports types defined in [RFC9911] and [RFC7317].
 
    <CODE BEGINS>
-   file "ietf-schedule@2026-02-18.yang"
+   file "ietf-schedule@2026-03-10.yang"
    module ietf-schedule {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-schedule";
@@ -911,7 +911,7 @@ Table of Contents
         in the 'YANG Parameters' registry group
         (https://www.iana.org/assignments/yang-parameters).";
 
-     revision 2026-02-18 {
+     revision 2026-03-10 {
        description
          "Initial revision.";
        reference
@@ -1851,9 +1851,9 @@ Table of Contents
 
    [NTPv5]    Lichvar, M. and T. Mizrahi, "Network Time Protocol Version
               5", Work in Progress, Internet-Draft, draft-ietf-ntp-
-              ntpv5-07, 16 October 2025,
+              ntpv5-08, 1 March 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-ntp-
-              ntpv5-07>.
+              ntpv5-08>.
 
    [RFC3339]  Klyne, G. and C. Newman, "Date and Time on the Internet:
               Timestamps", RFC 3339, DOI 10.17487/RFC3339, July 2002,
@@ -1937,9 +1937,9 @@ Table of Contents
    [YANG-OAM] Contreras, L. M., Lopez, V., and Q. Wu, "A YANG Data Model
               for Network Diagnosis using Scheduled Sequences of OAM
               Tests", Work in Progress, Internet-Draft, draft-ietf-
-              opsawg-scheduling-oam-tests-03, 20 October 2025,
+              opsawg-scheduling-oam-tests-04, 28 February 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-
-              scheduling-oam-tests-03>.
+              scheduling-oam-tests-04>.
 
    [YANG-SCHEDULE]
               Qu, Y., Lindem, A., Kinzie, E., Fedyk, D., and M.

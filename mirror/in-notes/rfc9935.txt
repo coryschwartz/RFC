@@ -540,7 +540,7 @@ Table of Contents
 
    [RFC9936]  Prat, J., Ounsworth, M., and D. Van Geest, "Use of ML-KEM
               in the Cryptographic Message Syntax (CMS)", RFC 9936,
-              DOI 10.17487/RFC9936, February 2026,
+              DOI 10.17487/RFC9936, March 2026,
               <https://www.rfc-editor.org/info/rfc9936>.
 
 Appendix A.  ASN.1 Module

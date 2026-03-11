@@ -8,7 +8,7 @@ Category: Standards Track                                   M. Ounsworth
 ISSN: 2070-1721                                                  Entrust
                                                             D. Van Geest
                                                      CryptoNext Security
-                                                           February 2026
+                                                              March 2026
 
 
         Use of ML-KEM in the Cryptographic Message Syntax (CMS)
@@ -469,7 +469,7 @@ Table of Contents
               Westerbaan, "Internet X.509 Public Key Infrastructure -
               Algorithm Identifiers for the Module-Lattice-Based Key-
               Encapsulation Mechanism (ML-KEM)", RFC 9935,
-              DOI 10.17487/RFC9935, February 2026,
+              DOI 10.17487/RFC9935, March 2026,
               <https://www.rfc-editor.org/info/rfc9935>.
 
    [X680]     ITU-T, "Information technology - Abstract Syntax Notation
@@ -484,12 +484,12 @@ Table of Contents
               cryptographic-module-validation-program>.
 
    [IKEv2-MLKEM]
-              Kampanakis, P., "Post-quantum Hybrid Key Exchange with ML-
-              KEM in the Internet Key Exchange Protocol Version 2
-              (IKEv2)", Work in Progress, Internet-Draft, draft-ietf-
-              ipsecme-ikev2-mlkem-03, 29 September 2025,
+              Kampanakis, P., "Post-quantum Key Exchange with ML-KEM in
+              the Internet Key Exchange Protocol Version 2 (IKEv2)",
+              Work in Progress, Internet-Draft, draft-ietf-ipsecme-
+              ikev2-mlkem-04, 26 February 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-ipsecme-
-              ikev2-mlkem-03>.
+              ikev2-mlkem-04>.
 
    [MLKEM-SEC-CONS]
               Fluhrer, S., Dang, Q., Mattsson, J. P., Milner, K., and D.

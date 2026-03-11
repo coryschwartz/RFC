@@ -190,7 +190,7 @@ Table of Contents
               Resource Records)", RFC 9460, DOI 10.17487/RFC9460,
               November 2023, <https://www.rfc-editor.org/info/rfc9460>.
 
-   [RFC9848]  Schwartz, B. M., Bishop, M., and E. Nygren, "Bootstrapping
+   [RFC9848]  Schwartz, B., Bishop, M., and E. Nygren, "Bootstrapping
               TLS Encrypted ClientHello with DNS Service Bindings",
               RFC 9848, March 2026,
               <https://www.rfc-editor.org/info/rfc9848>.
