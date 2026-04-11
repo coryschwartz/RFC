@@ -4,7 +4,7 @@
 
 Internet Engineering Task Force (IETF)                   P. Thubert, Ed.
 Request for Comments: 9912                                   Independent
-Category: Informational                                    February 2026
+Category: Informational                                       April 2026
 ISSN: 2070-1721
 
 
@@ -1366,7 +1366,7 @@ Table of Contents
        packets that are routed within the recovery graph.
 
    4.  Service protection actions are actuated or triggered over the LL
-       API by the PLR to increase the reliability of the end-to- end
+       API by the PLR to increase the reliability of the end-to-end
        transmissions.  The RAW architecture also covers in-situ
        signaling that is embedded within live user traffic [RFC9378]
        (e.g., via OAM) when the decision is acted (like the "A" in
@@ -1818,8 +1818,8 @@ Table of Contents
    [RAW-TECHNOS]
               Thubert, P., Ed., Cavalcanti, D., Vilajosana, X., Schmitt,
               C., and J. Farkas, "Reliable and Available Wireless (RAW)
-              Technologies", RFC 9913, DOI 10.17487/RFC9913, February
-              2026, <https://www.rfc-editor.org/info/rfc9913>.
+              Technologies", RFC 9913, DOI 10.17487/RFC9913, April 2026,
+              <https://www.rfc-editor.org/info/rfc9913>.
 
    [RFC4427]  Mannie, E., Ed. and D. Papadimitriou, Ed., "Recovery
               (Protection and Restoration) Terminology for Generalized
@@ -1859,12 +1859,11 @@ Table of Contents
               <https://www.rfc-editor.org/info/rfc8938>.
 
    [DetNet-PLANE]
-              Malis, A. G., Geng, X., Ed., Chen, M., Varga, B., and C.
-              J. Bernardos, "A Framework for Deterministic Networking
-              (DetNet) Controller Plane", Work in Progress, Internet-
-              Draft, draft-ietf-detnet-controller-plane-framework-14, 9
-              September 2025, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-detnet-controller-plane-framework-14>.
+              Malis, A., Geng, X., Ed., Chen, M., Varga, B., and CJ.
+              Bernardos, "A Framework for the Deterministic Networking
+              (DetNet) Controller Plane", RFC 9938,
+              DOI 10.17487/RFC9938, March 2026,
+              <https://www.rfc-editor.org/info/rfc9938>.
 
    [DLEP]     Ratliff, S., Jury, S., Satterwhite, D., Taylor, R., and B.
               Berry, "Dynamic Link Exchange Protocol (DLEP)", RFC 8175,

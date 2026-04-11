@@ -4,44 +4,6 @@
   To get the full list of RFCs, please look up rfc-index.txt
 ===========================================================================
 
-9917 IGP Flexible Algorithms Reverse Affinity Constraint. P. Psenak, J.
-     Horn, A. Dhamija. January 2026. (Format: HTML, TXT, PDF, XML)
-     (Updates RFC9350, RFC9843) (Status: PROPOSED STANDARD) (DOI:
-     10.17487/RFC9917) 
-
-9920 RFC Editor Model (Version 3). P. Hoffman, A. Rossi. February 2026.
-     (Format: HTML, TXT, PDF, XML) (Obsoletes RFC9280) (Updates RFC7841,
-     RFC7991, RFC7992, RFC7993, RFC7994, RFC7995, RFC7996, RFC7997,
-     RFC8729, RFC8730, RFC9720) (Status: INFORMATIONAL) (DOI:
-     10.17487/RFC9920) 
-
-9921 CBOR Object Signing and Encryption (COSE) Header Parameter for
-     Timestamp Tokens as Defined in RFC 3161. H. Birkholz, T. Fossati, M.
-     Riechert. February 2026. (Format: HTML, TXT, PDF, XML) (Status:
-     PROPOSED STANDARD) (DOI: 10.17487/RFC9921) 
-
-9923 The FNV Non-Cryptographic Hash Algorithm. L. Noll, K. Vo, D.
-     Eastlake 3rd, T. Hansen. February 2026. (Format: HTML, TXT, PDF,
-     XML) (Status: INFORMATIONAL) (DOI: 10.17487/RFC9923) 
-
-9924 Advanced Professional Video. Y. Lim, M. Park, M. Budagavi, R. Joshi,
-     K. Choi. February 2026. (Format: HTML, TXT, PDF, XML) (Status:
-     INFORMATIONAL) (DOI: 10.17487/RFC9924) 
-
-9925 Unsigned X.509 Certificates. D. Benjamin. February 2026. (Format:
-     HTML, TXT, PDF, XML) (Updates RFC5280) (Status: PROPOSED STANDARD)
-     (DOI: 10.17487/RFC9925) 
-
-9926 Prefix Registration for IPv6 Neighbor Discovery. P. Thubert, Ed..
-     February 2026. (Format: HTML, TXT, PDF, XML) (Updates RFC4861,
-     RFC6550, RFC8505, RFC8928, RFC9010) (Status: PROPOSED STANDARD)
-     (DOI: 10.17487/RFC9926) 
-
-9927 Fixing the C-Flag in the Extended Address Registration Option
-     (EARO). P. Thubert, A. Rashid. February 2026. (Format: HTML, TXT,
-     PDF, XML) (Updates RFC8928) (Status: PROPOSED STANDARD) (DOI:
-     10.17487/RFC9927) 
-
 9929 IGP Unreachable Prefix Announcement. P. Psenak, Ed., C. Filsfils, D.
      Voyer, S. Hegde, G. Mishra. February 2026. (Format: HTML, TXT, PDF,
      XML) (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC9929) 
@@ -66,24 +28,61 @@
      (Format: HTML, TXT, PDF, XML) (Status: PROPOSED STANDARD) (DOI:
      10.17487/RFC9935) 
 
-9936 Use of ML-KEM in the Cryptographic Message Syntax (CMS). P. Julien,
-     M. Ounsworth, D. Van Geest. March 2026. (Format: HTML, TXT, PDF,
-     XML) (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC9936) 
+9936 Use of ML-KEM in the Cryptographic Message Syntax (CMS). J. Prat, M.
+     Ounsworth, D. Van Geest. March 2026. (Format: HTML, TXT, PDF, XML)
+     (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC9936) 
 
 9937 Proportional Rate Reduction (PRR). M. Mathis, N. Cardwell, Y. Cheng,
      N. Dukkipati. December 2025. (Format: HTML, TXT, PDF, XML)
      (Obsoletes RFC6937) (Status: PROPOSED STANDARD) (DOI:
      10.17487/RFC9937) 
 
+9938 A Framework for the Deterministic Networking (DetNet) Controller
+     Plane. A. Malis, X. Geng, Ed., M. Chen, B. Varga, CJ. Bernardos.
+     March 2026. (Format: HTML, TXT, PDF, XML) (Status: INFORMATIONAL)
+     (DOI: 10.17487/RFC9938) 
+
 9939 PKCS #8: Private-Key Information Content Types. J. Mandel, R.
      Housley, S. Turner. February 2026. (Format: HTML, TXT, PDF, XML)
      (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC9939) 
+
+9940 Some Key Terms for Network Fault and Problem Management. N. Davis,
+     Ed., A. Farrel, Ed., T. Graf, Q. Wu, C. Yu. April 2026. (Format:
+     HTML, TXT, PDF, XML) (Status: INFORMATIONAL) (DOI: 10.17487/RFC9940) 
 
 9945 IETF Community Moderation. L. Eggert, Ed., E. Lear, Ed.. February
      2026. (Format: HTML, TXT, PDF, XML) (Obsoletes RFC3683, RFC3934)
      (Updates RFC2418, RFC9245) (Also BCP0245) (Status: BEST CURRENT
      PRACTICE) (DOI: 10.17487/RFC9945) 
 
+9947 Application of the Alternate-Marking Method to the Segment Routing
+     Header. G. Fioccola, T. Zhou, G. Mishra, X. Wang, G. Zhang, M.
+     Cociglio. March 2026. (Format: HTML, TXT, PDF, XML) (Status:
+     EXPERIMENTAL) (DOI: 10.17487/RFC9947) 
+
+9948 Internet Protocol Police (IPP) - Schedule of Punishments. G.R.
+     Beard, O.F. Art, H. Alvestrand, Ed.. 1 April 2026. (Format: HTML,
+     TXT, PDF, XML) (Status: INFORMATIONAL) (DOI: 10.17487/RFC9948) 
+
+9949 BUSA-TLS: Mandatory Audio Component (MAC) Pre-Shared Key (PSK)
+     Derivation for TLS 1.3 Using 2 Live Crew's "Banned in the U.S.A.".
+     R. Sayre. 1 April 2026. (Format: HTML, TXT, PDF, XML) (Status:
+     INFORMATIONAL) (DOI: 10.17487/RFC9949) 
+
+9950 A YANG Data Model for Terminal Access Controller Access-Control
+     System Plus (TACACS+). M. Boucadair, Ed., B. Wu. March 2026.
+     (Format: HTML, TXT, PDF, XML) (Obsoletes RFC9105) (Status: PROPOSED
+     STANDARD) (DOI: 10.17487/RFC9950) 
+
+9952 Application-Layer Protocol Negotiation (ALPN) ID for CoAP over DTLS.
+     M. S. Lenders, C. Amsüss, T. C. Schmidt, M. Wählisch. March 2026.
+     (Format: HTML, TXT, PDF, XML) (Status: INFORMATIONAL) (DOI:
+     10.17487/RFC9952) 
+
+9953 DNS over CoAP (DoC). M. S. Lenders, C. Amsüss, C. Gündoğan, T. C.
+     Schmidt, M. Wählisch. March 2026. (Format: HTML, TXT, PDF, XML)
+     (Status: PROPOSED STANDARD) (DOI: 10.17487/RFC9953) 
+
 ===========================================================================
- - This file last updated Tue 10 Mar 2026 02:30:01 AM PDT
+ - This file last updated Fri 10 Apr 2026 02:30:01 AM PDT
 

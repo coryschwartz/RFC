@@ -1,0 +1,33 @@
+Use of <tt> in draft-ietf-pquip-hybrid-signature-spectrums-07 (RFC-to-be 9955)
+---------------
+
+<tt>1-out-of-n approved software module</tt>
+<tt>accept (b=1)</tt>
+<tt>all approved software module</tt>
+<tt>approval</tt>
+<tt>b</tt>
+<tt>degrees</tt>
+<tt>"FIPS mode"</tt>
+<tt>full signature</tt>
+<tt>[hybrid] signatures</tt>
+<tt>[hybrid]</tt>
+<tt>KeyGen() -&gt; (pk, sk)</tt>
+<tt>m1, m2, ..., mN</tt>
+<tt>m</tt>
+<tt>need for approval</tt>
+<tt>pk</tt>
+<tt>reject (b=0)</tt>
+<tt>scale of approval</tt>
+<tt>(sig_1, sig_2)</tt>
+<tt>sig_1 = Sigma_1.Sign(hybridAlgID, m)</tt>
+<tt>sig_1</tt>
+<tt>sig_2 = Sigma_2.Sign(hybridAlgID || m)</tt>
+<tt>sig_h</tt>
+<tt>Sigma_1.pk</tt>
+<tt>Sigma_1.Sign</tt>
+<tt>Sigma_2.pk</tt>
+<tt>Sigma_2.Sign</tt>
+<tt>Sign(sk, m) -&gt; (sig)</tt>
+<tt>sig</tt>
+<tt>sk</tt>
+<tt>Verify(pk, sig, m) -&gt; b</tt>

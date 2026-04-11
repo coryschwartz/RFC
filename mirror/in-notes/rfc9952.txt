@@ -13,14 +13,13 @@ ISSN: 2070-1721
                                                               March 2026
 
 
- The Application-Layer Protocol Negotiation (ALPN) ID Specification for
-         the Constrained Application Protocol (CoAP) over DTLS
+  Application-Layer Protocol Negotiation (ALPN) ID for CoAP over DTLS
 
 Abstract
 
    This document specifies an Application-Layer Protocol Negotiation
-   (ALPN) ID for transport-layer-secured Constrained Application
-   Protocol (CoAP) services.
+   (ALPN) ID for Constrained Application Protocol (CoAP) services that
+   are secured by DTLS.
 
 Status of This Memo
 
@@ -75,12 +74,11 @@ Table of Contents
    Parameter Keys [RFC9460].  As an example, applications that use the
    Constrained Application Protocol (CoAP) [RFC7252] can obtain this
    information as part of the discovery of DNS over CoAP (DoC) servers
-   (see Section 3.2 of [PRE-RFC9953]) that deploy TLS 1.3 [RFC8446] as
-   well as Datagram Transport Layer Security (DTLS) 1.2 or 1.3 [RFC6347]
+   (see Section 3.2 of [RFC9953]) that deploy TLS 1.3 [RFC8446] as well
+   as Datagram Transport Layer Security (DTLS) 1.2 or 1.3 [RFC6347]
    [RFC9147] to secure their messages.  This document specifies an ALPN
-   ID for CoAP services that are secured by TLS using DTLS.  An ALPN ID
-   for CoAP services secured by TLS has already been specified in
-   [RFC8323].
+   ID for CoAP services that are secured by DTLS.  An ALPN ID for CoAP
+   services secured by TLS has already been specified in [RFC8323].
 
 2.  Application-Layer Protocol Negotiation (ALPN) IDs
 
@@ -155,12 +153,6 @@ Table of Contents
 
 5.2.  Informative References
 
-   [PRE-RFC9953]
-              Lenders, M. S., Amsüss, C., Gündoğan, C., Schmidt, T. C.,
-              and M. Wählisch, "DNS over the Constrained Application
-              Protocol (DoC)", RFC PRE-9953, DOI 10.17487/PRE-RFC9953,
-              March 2026, <https://www.rfc-editor.org/info/rfc9953>.
-
    [RFC4944]  Montenegro, G., Kushalnagar, N., Hui, J., and D. Culler,
               "Transmission of IPv6 Packets over IEEE 802.15.4
               Networks", RFC 4944, DOI 10.17487/RFC4944, September 2007,
@@ -176,6 +168,11 @@ Table of Contents
               Version 1.3", RFC 8446, DOI 10.17487/RFC8446, August 2018,
               <https://www.rfc-editor.org/info/rfc8446>.
 
+   [RFC9953]  Lenders, M. S., Amsüss, C., Gündoğan, C., Schmidt, T. C.,
+              and M. Wählisch, "DNS over CoAP (DoC)", RFC 9953,
+              DOI 10.17487/RFC9953, March 2026,
+              <https://www.rfc-editor.org/info/rfc9953>.
+
 Acknowledgments
 
    We would like to thank Rich Salz for the expert review on the "co"
@@ -183,6 +180,13 @@ Acknowledgments
    and Ben Schwartz for their early reviews before WG adoption of this
    specification and Esko Dijk, Thomas Fossati, and Marco Tiloca for
    their feedback and comments.
+
+   This work was supported in parts by the German Federal Ministry of
+   Research, Technology, and Space (BMFTR) under the grant numbers
+   16KIS1386K (TU Dresden) and 16KIS1387 (HAW Hamburg) within the
+   research project PIVOT and under the grant numbers 16KIS1694K (TU
+   Dresden) and 16KIS1695 (HAW Hamburg) within the research project
+   C-ray4edge.
 
 Authors' Addresses
 

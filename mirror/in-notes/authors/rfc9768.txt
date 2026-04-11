@@ -8,7 +8,7 @@ Updates: 3168                                               M. Kühlewind
 Category: Standards Track                                       Ericsson
 ISSN: 2070-1721                                         R. Scheffenegger
                                                                   NetApp
-                                                              March 2026
+                                                              April 2026
 
 
 More Accurate Explicit Congestion Notification (AccECN) Feedback in TCP
@@ -157,7 +157,7 @@ Table of Contents
    sender.  In RFC 3168, ECN was specified for TCP in such a way that
    only one feedback signal could be transmitted per Round-Trip Time
    (RTT).  This is sufficient for congestion control schemes like Reno
-   [RFC6582] and CUBIC [RFC9438], as those schemes reduce their
+   [RFC5681] and CUBIC [RFC9438], as those schemes reduce their
    congestion window by a fixed factor if congestion occurs within an
    RTT independent of the number of received congestion markings.  More
    recently defined mechanisms like Congestion Exposure (ConEx
@@ -257,9 +257,9 @@ Table of Contents
    integrity, accuracy (including ordering and lack of bias),
    complexity, overhead, and compatibility (both backward and forward).
    It recognizes that a perfect scheme that fully satisfies all the
-   requirements is unlikely and trade-offs between requirements are
+   requirements is unlikely and tradeoffs between requirements are
    likely.  Section 6 assesses the properties of AccECN against these
-   requirements and discusses the trade-offs.
+   requirements and discusses the tradeoffs.
 
    The requirements document recognizes that a protocol as ubiquitous as
    TCP needs to be able to serve as-yet-unspecified requirements.
@@ -648,8 +648,7 @@ Table of Contents
    received the first SYN/ACK.
 
    Once in AccECN mode, a TCP Client or Server has the rights and
-   obligations to participate in the ECN protocol defined in
-   Section 3.1.5.
+   obligations defined in Section 3.1.5 concerning use of ECN.
 
    The procedures for retransmission of SYNs or SYN/ACKs are given in
    Section 3.1.4.
@@ -936,12 +935,12 @@ Table of Contents
    Section 6.1.1 of [RFC3168].  This section uses the following
    definitions:
 
-   'During the handshake':  The connection states prior to
-      synchronization.
+      'During the handshake':  The connection states prior to
+         synchronization.
 
-   'Valid SYN':  A SYN that has the same port numbers and the same ISN
-      as the SYN that first caused the Server to open the connection.
-      An 'Acceptable' packet is defined in Section 1.3.
+      'Valid SYN':  A SYN that has the same port numbers and the same
+         ISN as the SYN that first caused the Server to open the
+         connection.  An 'Acceptable' packet is defined in Section 1.3.
 
    Handling SYNs or SYN/ACKs of multiple types (e.g., fall-back):
 
@@ -1200,14 +1199,14 @@ Table of Contents
 
 3.2.2.1.  ACE Field on the ACK of the SYN/ACK
 
-   A TCP Client (A) in AccECN mode MUST feed back which of the 4
-   possible values of the IP-ECN field was on the SYN/ACK by writing it
-   into the ACE field of a pure ACK with no SACK blocks using the binary
-   encoding in Table 3 (which is the same as that used on the SYN/ACK in
-   Table 2).  This shall be called the "handshake encoding" of the ACE
-   field, and it is the only exception to the rule that the ACE field
-   carries the 3 least significant bits of the r.cep counter on packets
-   with SYN=0.
+   If the TCP Client (A) in AccECN mode uses a pure ACK with no SACK
+   blocks to acknowledge the SYN/ACK, it MUST use the binary encoding in
+   Table 3 when writing the ACE field (which is the same as the encoding
+   used on the SYN/ACK in Table 2).  This feeds back which of the 4
+   possible values of the IP-ECN field was on the SYN/ACK.  This shall
+   be called the "handshake encoding" of the ACE field, and it is the
+   only exception to the rule that the ACE field carries the 3 least
+   significant bits of the r.cep counter on packets with SYN=0.
 
    Normally, a TCP Client acknowledges a SYN/ACK with an ACK that
    satisfies the above conditions anyway (SYN=0, no data, no SACK
@@ -1305,7 +1304,7 @@ Table of Contents
                unfortunate pattern of loss or delay.
 
             *  There is some form of non-compliance at the TCP Client or
-               on the path (see Section 3.2.2.4).
+               on the path.
 
    Note 2:  If the Server is in AccECN mode, these values are Currently
             Unused but the AccECN Server's behaviour is still defined
@@ -1515,22 +1514,24 @@ Table of Contents
 
 3.2.2.4.  Testing for Zeroing of the ACE Field
 
-   NOTE: This section does not concern the case where the ACE field is
-   zero when the handshake encoding has been used on the ACK of the SYN/
-   ACK under the carefully worded conditions in Section 3.2.2.1
+   NOTE: This section concerns the ACE field after the three way
+   handshake.  It does not concern the case where the ACE field is zero
+   when the handshake encoding has been used on the ACK of the SYN/ACK
+   under the carefully worded conditions in Section 3.2.2.1
 
    Section 3.2.2 required the Data Receiver to initialize the r.cep
-   counter to a non-zero value.  Therefore, in either direction the
-   initial value of the ACE counter ought to be non-zero.  However, if
-   reordering occurs, the first feedback packet that arrives will not
-   necessarily be the same as the first packet in sequence order.  The
-   possibility of reordering means that there is a chance that the ACE
-   field on the first packet to arrive is genuinely zero (without
-   middlebox interference).  This would cause a host to unnecessarily
-   disable ECN for a half-connection.  Therefore, it is NOT RECOMMENDED
-   to explicitly test for zeroing/bleaching of the ACE as reordering or
-   ACK loss can still cause the initially observed value to be zero and
-   would disable AccECN randomly and unnecessarily.
+   counter to a non-zero value.  Therefore, in either direction the ACE
+   counter ought to be non-zero in the first feedback packet (with or
+   without data) that arrives at a host in AccECN mode after the three-
+   way handshake.  However, if reordering occurs, the first feedback
+   packet that arrives will not necessarily be the same as the first
+   packet in sequence order.  The possibility of reordering means that
+   there is a chance that the ACE field on the first packet to arrive
+   after the three-way handshake is genuinely zero (without middlebox
+   interference).  Disabling ECN for a half-connection in this case
+   would be unnecessary.  Therefore, it is NOT RECOMMENDED for either
+   Data Sender to explicitly test for zeroing/bleaching of the ACE field
+   after the three-way handshake.
 
    Further, the Data Sender MUST NOT test whether the arriving counter
    in the initial ACE field has been initialized to a specific valid
@@ -1918,8 +1919,8 @@ Table of Contents
 
 3.2.3.2.4.  Test for Zeroing of the AccECN Option
 
-   For a related test for invalid initialization of the ACE field, see
-   Section 3.2.2.4.
+   For the merits of a related test for invalid initialization of the
+   ACE field, see Section 3.2.2.4.
 
    Section 3.2.1 required the Data Receiver to initialize the r.e0b and
    r.e1b counters to a non-zero value.  Therefore, in either direction
@@ -2051,8 +2052,8 @@ Table of Contents
          where n can be chosen by the implementer;
 
       *  it SHOULD always include an AccECN Option if the r.ceb counter
-         is incrementing and it MAY include an AccECN Option if r.ec0b
-         or r.ec1b is incrementing;
+         is incrementing and it MAY include an AccECN Option if r.e0b or
+         r.e1b is incrementing;
 
       *  it SHOULD include each counter at least once for every 2^22
          bytes incremented to prevent overflow during continual
@@ -2078,7 +2079,7 @@ Table of Contents
    fields, EE0B and ECEB.  As a second example, if the first packet to
    arrive happens to be CE marked, the Data Receiver will have to
    arbitrarily choose whether to precede the ECEB field with an EE0B
-   field or an EE1B field.  If it chooses, say, EEB0 but it turns out
+   field or an EE1B field.  If it chooses, say, EE0B but it turns out
    never to receive ECT(0), it can start sending EE1B and ECEB instead
    -- it does not have to include the EE0B field if the r.e0b counter
    never changed during the connection.
@@ -2142,13 +2143,12 @@ Table of Contents
 
 3.3.3.  Requirements for TCP ACK Filtering
 
-   Section Section 5.2.1 of [RFC3449] gives best current practice on
-   filtering (aka thinning or coalescing) of pure TCP ACKs.  It advises
-   that filtering ACKs carrying ECN feedback ought to preserve the
-   correct operation of ECN feedback.  As the present specification
-   updates the operation of ECN feedback, this section discusses how an
-   ACK filter might preserve correct operation of AccECN feedback as
-   well.
+   Section 5.2.1 of [RFC3449] gives best current practice on filtering
+   (aka thinning or coalescing) of pure TCP ACKs.  It advises that
+   filtering ACKs carrying ECN feedback ought to preserve the correct
+   operation of ECN feedback.  As the present specification updates the
+   operation of ECN feedback, this section discusses how an ACK filter
+   might preserve correct operation of AccECN feedback as well.
 
    The problem divides into two parts: determining if an ACK is part of
    a connection that is using AccECN and then preserving the correct
@@ -2733,11 +2733,6 @@ Table of Contents
               Authentication Option", RFC 5925, DOI 10.17487/RFC5925,
               June 2010, <https://www.rfc-editor.org/info/rfc5925>.
 
-   [RFC6582]  Henderson, T., Floyd, S., Gurtov, A., and Y. Nishida, "The
-              NewReno Modification to TCP's Fast Recovery Algorithm",
-              RFC 6582, DOI 10.17487/RFC6582, April 2012,
-              <https://www.rfc-editor.org/info/rfc6582>.
-
    [RFC6679]  Westerlund, M., Johansson, I., Perkins, C., O'Hanlon, P.,
               and K. Carlberg, "Explicit Congestion Notification (ECN)
               for RTP over UDP", RFC 6679, DOI 10.17487/RFC6679, August
@@ -2909,7 +2904,7 @@ A.2.1.  Safety Algorithm Without the AccECN Option
 
       DIVACE = 2^3
 
-   Every time an Acceptable CE marked packet arrives (Section 3.2.2.2),
+   Every time an Acceptable CE-marked packet arrives (Section 3.2.2.2),
    the Data Receiver increments its local value of r.cep by 1.  It
    repeats the same value of ACE in every subsequent ACK until the next
    CE marking arrives, where
@@ -2936,7 +2931,7 @@ A.2.1.  Safety Algorithm Without the AccECN Option
    covers a stream of data long enough to contain 8 or more CE marks.
    We use the word 'missing' rather than 'lost', because some or all the
    missing ACKs might arrive eventually, but out of order.  Even if some
-   of the missing ACKs were piggy-backed on data (i.e., not pure ACKs)
+   of the missing ACKs were piggybacked on data (i.e., not pure ACKs)
    retransmissions will not repair the lost AccECN information, because
    AccECN requires retransmissions to carry the latest AccECN counters,
    not the original ones.
@@ -3028,7 +3023,7 @@ A.2.2.  Safety Algorithm With the AccECN Option
       }
 
    The chart below shows when the above algorithm will replace
-   dSafer.cep with d.cep as a safe enough estimate of the number of CE
+   dSafer.cep with d.cep as a safe enough estimate of the number of CE-
    marked packets:
 
                     ^
@@ -3124,7 +3119,7 @@ A.4.  Example Algorithm to Count Not-ECT Bytes
 
    However, such precision is unlikely to be necessary.  The only known
    use of a count of Not-ECT marked bytes is to test whether equipment
-   on the path is clearing the ECN field (perhaps due to an out-dated
+   on the path is clearing the ECN field (perhaps due to an outdated
    attempt to clear, or bleach, what used to be the IPv4 ToS byte or the
    IPv6 Traffic Class field).  To detect bleaching, it will be
    sufficient to detect whether nearly all bytes arrive marked as Not-
@@ -3153,7 +3148,7 @@ B.1.  Three TCP Header Flags in the SYN-SYN/ACK Handshake
 
    In order to be backward compatible with RFC 3168, AccECN continues
    this approach, using the 3rd least significant TCP header flag that
-   had previously been allocated for the ECN-nonce (now historic).
+   had previously been allocated for the ECN-nonce (now Historic).
    Then, whatever form of Server an AccECN Client encounters, the
    connection can fall back to the highest version of feedback protocol
    that both ends support, as explained in Section 3.1.
@@ -3185,16 +3180,16 @@ B.1.  Three TCP Header Flags in the SYN-SYN/ACK Handshake
 
 B.2.  Four Codepoints in the SYN/ACK
 
-   Of the eight possible codepoints that the three TCP header flags can
-   indicate on the SYN/ACK, four already indicated earlier (or broken)
-   versions of ECN support, one now being Historic.  In the early design
-   of AccECN, an AccECN Server could use only 2 of the 4 remaining
-   codepoints.  They both indicated AccECN support, but one fed back
-   that the SYN had arrived marked as CE.  Even though ECN support on a
-   SYN is not yet on the Standards Track, the idea is for either end to
-   act as a mechanistic reflector, so that future capabilities can be
-   unilaterally deployed without requiring 2-ended deployment (justified
-   in Section 2.5).
+   Of the eight possible codepoints that the three TCP-ECN header flags
+   can indicate on the SYN/ACK, four already indicated earlier (or
+   broken) versions of ECN support, one now being Historic.  In the
+   early design of AccECN, an AccECN Server could use only 2 of the 4
+   remaining codepoints.  They both indicated AccECN support, but one
+   fed back that the SYN had arrived marked as CE.  Even though ECN
+   support on a SYN is not yet on the Standards Track, the idea is for
+   either end to act as a mechanistic reflector, so that future
+   capabilities can be unilaterally deployed without requiring 2-ended
+   deployment (justified in Section 2.5).
 
    During traversal testing, it was discovered that the IP-ECN field in
    the SYN was mangled on a non-negligible proportion of paths.
@@ -3217,7 +3212,7 @@ B.3.  Space for Future Evolution
    Future AccECN variants:  When the AccECN capability is negotiated
       during TCP's three-way handshake, the rows in Table 2 tagged as
       'Nonce' and 'Broken' in the column for the capability of node B
-      are unused by any current protocol defined in the RFC series.
+      are unused by any current protocol defined in the RFC Series.
       These could be used by TCP Servers in the future to indicate a
       variant of the AccECN protocol.  In recent measurement studies in
       which the response of large numbers of Servers to an AccECN SYN

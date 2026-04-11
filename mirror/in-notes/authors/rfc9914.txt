@@ -8,7 +8,7 @@ Updates: 6550, 6553, 8138                                    R.A. Jadhav
 Category: Standards Track                                       AccuKnox
 ISSN: 2070-1721                                            M. Richardson
                                                                Sandelman
-                                                              March 2026
+                                                              April 2026
 
 
  Root-Initiated Routing State in the Routing Protocol for Low-Power and
@@ -94,7 +94,7 @@ Table of Contents
    4.  Extending and Amending Existing RFCs
      4.1.  Extending RFC 6550
        4.1.1.  Projected DAO
-       4.1.2.  Projected DAO-ACK
+       4.1.2.  Projected DAO Acknowledgment
        4.1.3.  Via Information Option
        4.1.4.  Sibling Information Option
        4.1.5.  P-DAO Request
@@ -136,7 +136,8 @@ Table of Contents
      11.5.  RPL Control Codes
      11.6.  RPL Control Message Options
      11.7.  Registry for Projected DAO Request Flags
-     11.8.  Registry for PDR-ACK Flags
+     11.8.  Registry for Projected DAO Request Acknowledgment
+             (PDR-ACK) Flags
      11.9.  Registry for PDR-ACK Acceptance Status Values
      11.10. Registry for PDR-ACK Rejection Status Values
      11.11. Registry for Via Information Options Flags
@@ -308,11 +309,15 @@ Table of Contents
 
    P-DAO:       Projected DAO
 
+   P-DAO-ACK:   Projected DAO Acknowledgment
+
+   P-DAO-REQ:   Projected DAO Request
+
    P-Route:     Projected Route
 
    PCE:         Path Computation Element
 
-   PDAOReq:     P-DAO Request
+   PDR-ACK      Projected DAO Request Acknowledgment
 
    PLR:         Point of Local Repair
 
@@ -416,14 +421,14 @@ Table of Contents
 2.4.5.  Track
 
    The concept of Track is inherited from the 6TiSCH architecture
-   [RFC9030] and matches that of a protection path in the RAW
-   architecture [RAW-ARCH].  A Track is a networking graph that can be
-   followed to transport packets with equivalent treatment; as opposed
-   to other definitions of a path (see Section 1.3.3 of [INT-ARCH] and
+   [RFC9030] and equals that of a recovery graph in the RAW architecture
+   [RAW-ARCH].  A Track is a networking graph that can be followed to
+   transport packets with equivalent treatment; as opposed to other
+   definitions of a path (see Section 1.3.3 of [INT-ARCH] and
    Section 3.1.1 of [RAW-ARCH], a Track is not necessarily linear.  It
    may contain multiple paths that may fork and rejoin and that may
-   enable RAW Packet ARQ, Replication, Elimination, and Overhearing
-   (PAREO) operations.
+   enable RAW Packet Replication, Elimination, and Ordering Functions
+   (PREOF).
 
    Figure 1 illustrates the mapping of the DODAG with the generic
    concept of a Track, with the DODAG Root acting as the ingress for the
@@ -893,9 +898,10 @@ Table of Contents
 3.4.1.  Building Tracks with RPL
 
    The concept of a Track was introduced in the 6TiSCH architecture
-   [RFC9030] as a collection of potential paths that leverage redundant
-   forwarding solutions along the way.  This can be a DODAG or a more
-   complex structure that is only partially acyclic (e.g., per packet).
+   [RFC9030] as a collection of potential protection paths that leverage
+   redundant forwarding solutions along the way.  This can be a DODAG or
+   a more complex structure that is only partially acyclic (e.g., per
+   packet).
 
    With this specification, a Track is shaped as a DODAG, and following
    the directed edges leads to a Track ingress.  Storing Mode P-DAO
@@ -1846,16 +1852,16 @@ Table of Contents
 
 3.7.2.4.  Providing for RAW
 
-   The RAW architecture [RAW-ARCH] extends the definition of Track as
-   being composed of forward directional segments and North-South
+   A recovery graph as in the RAW architecture [RAW-ARCH] can be
+   composed of forward East-West directional segments and North-South
    bidirectional segments to enable additional path diversity using
-   PREOF functions over the available paths.  This provides a dynamic
-   balance between the reliability and availability requirements of the
-   flows and the need to conserve energy and spectrum.  This
-   specification prepares for RAW by setting up the Tracks, but it only
-   forms DODAGs, which are composed of aggregated end-to-end loose
-   source-routed protection paths, joined by strict routed segments, all
-   oriented forward.
+   PREOF to select the protection paths to be used for a given datagram.
+   This provides a dynamic balance between the reliability and
+   availability requirements of the flows and the need to conserve
+   energy and spectrum.  This specification prepares for RAW by setting
+   up the Tracks, but it only forms DODAGs, which are composed of
+   aggregated end-to-end loose source-routed protection paths, joined by
+   strict routed segments, all oriented forward.
 
    The RAW architecture defines a data plane extension of the PCE called
    the Point of Local Repair (PLR) that adapts the use of the path
@@ -1897,15 +1903,16 @@ Table of Contents
    strict or a loose sequence of hops to form a Track segment or a
    protection path, respectively.
 
-   The P-DAO Request (PDAOReq) is a new message detailed in Section 5.1.
-   As per Section 6 of [RPL], if a node receives this message and it
-   does not understand this new code, it discards the message.  When the
-   Root initiates communication to a node that it has not communicated
-   with before and that it has not ascertained to implement this
-   specification (by means such as capabilities), then the Root SHOULD
-   request a P-DAO Request Acknowledgement (PDR-ACK).
+   The Projected DAO Request (P-DAO-REQ) is a new message detailed in
+   Section 5.1.  As per Section 6 of [RPL], if a node receives this
+   message and it does not understand this new code, it discards the
+   message.  When the Root initiates communication to a node that it has
+   not communicated with before and that it has not ascertained to
+   implement this specification (by means such as capabilities), then
+   the Root SHOULD request a Projected DAO Request Acknowledgment (PDR-
+   ACK).
 
-   A PDAOReq message enables a Track ingress to request the Track from
+   A P-DAO-REQ message enables a Track ingress to request the Track from
    the Root.  The resulting Track is also a DODAG for which the Track
    ingress is the Root, and the owner is the address that serves as the
    DODAGID and is authoritative for the associated namespace from which
@@ -1914,8 +1921,8 @@ Table of Contents
    Targets, and the Track ingress forwards the packets toward the
    Targets via the Track using normal longest match IP forwarding.
 
-   To ensure that the PDAOReq and P-DAO messages can flow at most times,
-   it is RECOMMENDED that the nodes involved in a Track maintain
+   To ensure that the P-DAO-REQ and P-DAO messages can flow at most
+   times, it is RECOMMENDED that the nodes involved in a Track maintain
    multiple parents in the main DODAG, advertise them all to the Root,
    and use them in turn to retry similar packets.  It is also
    RECOMMENDED that the Root uses diverse source route paths to retry
@@ -1985,9 +1992,9 @@ Table of Contents
 
    The 'D' flag is set to 1 to signal that the DODAGID field is present.
    It may be set to 0 if and only if the destination address of the
-   Projected DAO-ACK (P-DAO-ACK) message is set to the IPv6 address that
-   serves as the DODAGID, and it MUST be set to one otherwise, meaning
-   that the DODAGID field MUST then be present.
+   Projected DAO Acknowledgment (P-DAO-ACK) message is set to the IPv6
+   address that serves as the DODAGID, and it MUST be set to one
+   otherwise, meaning that the DODAGID field MUST then be present.
 
    In RPL Non-Storing Mode, the TIO and RTO are combined in a DAO
    message to inform the DODAG Root of all the edges in the DODAG, which
@@ -2000,7 +2007,7 @@ Table of Contents
    signal a collection of children that can be reached through the
    parent or the Track, respectively.
 
-4.1.2.  Projected DAO-ACK
+4.1.2.  Projected DAO Acknowledgment
 
    This document also Amends the DAO-ACK message.  The new 'P' flag
    signals the projected form.
@@ -2023,7 +2030,7 @@ Table of Contents
    |   Option(s)...
    +-+-+-+-+-+-+-+-+
 
-                  Figure 9: Projected DAO-ACK Base Object
+                      Figure 9: P-DAO-ACK Base Object
 
    New fields:
 
@@ -2100,12 +2107,12 @@ Table of Contents
 
 4.1.5.  P-DAO Request
 
-   The set of RPL Control Messages is Extended to include the PDAOReq
+   The set of RPL Control Messages is Extended to include the P-DAO-REQ
    and PDR-ACK.  These two new RPL Control Messages enable a RAN to
    request the establishment of a Track between itself (as the Track
    ingress Node) and a Track egress.  The node makes its request by
-   sending a new PDAOReq message to the Root.  The Root confirms with a
-   new PDR-ACK message back to the requester RAN; see Section 5.1 for
+   sending a new P-DAO-REQ message to the Root.  The Root confirms with
+   a new PDR-ACK message back to the requester RAN; see Section 5.1 for
    more.
 
 4.1.6.  Amending the RPI
@@ -2155,12 +2162,12 @@ Table of Contents
 
    The 'D' flag is set to 1 to indicate that this specification is
    enabled in the network and that the Root will install the requested
-   Tracks when feasible upon receiving a PDAOReq message.
+   Tracks when feasible upon receiving a P-DAO-REQ message.
 
    Section 4.1.2 of [RFC9008] Amends [RPL] to indicate that the
    definition of the Flags applies to MOP values from zero (0) to six
    (6) only.  For a MOP value of 7, the implementation MUST consider
-   that the Root accepts PDAOReq messages and will install P-Routes.
+   that the Root accepts P-DAO-REQ messages and will install P-Routes.
 
    The RPL DODAG Configuration option is typically placed in a DIO
    message.  The DIO message propagates down the DODAG to form and then
@@ -2281,9 +2288,9 @@ Table of Contents
 
 5.1.  New P-DAO Request Control Message
 
-   The PDAOReq message is sent by a node in the main DODAG to the Root.
-   It is a request to establish or refresh a Track where the node
-   sending the PDAOReq is the Track ingress, and it signals whether or
+   The P-DAO-REQ message is sent by a node in the main DODAG to the
+   Root.  It is a request to establish or refresh a Track where the node
+   sending the P-DAO-REQ is the Track ingress, and it signals whether or
    not an acknowledgment called PDR-ACK is requested.  A positive PDR-
    ACK indicates that the Track was built and that the Root commits to
    maintaining the Track for the negotiated lifetime.
@@ -2291,14 +2298,14 @@ Table of Contents
    The main Root MAY indicate to the Track ingress that the Track was
    terminated before its time; to do so, it MUST use an asynchronous
    PDR-ACK with a negative status.  A status of "Transient Failure" (see
-   Section 11.10) is an indication that the PDAOReq may be retried after
-   a reasonable time that depends on the deployment.  Other negative
-   status values indicate a permanent error; the attempt must be
-   abandoned until a corrective action is taken at the application layer
-   or through network management.
+   Section 11.10) is an indication that the P-DAO-REQ may be retried
+   after a reasonable time that depends on the deployment.  Other
+   negative status values indicate a permanent error; the attempt must
+   be abandoned until a corrective action is taken at the application
+   layer or through network management.
 
    The Track ingress to be of the requested Track is indicated in the
-   source IPv6 address of the PDAOReq, and the TrackID is indicated in
+   source IPv6 address of the P-DAO-REQ, and the TrackID is indicated in
    the message itself.  At least one RPL Target Option MUST be present
    in the message.  If more than one RPL Target Option is present, the
    Root will provide a Track that reaches the first listed Target and a
@@ -2306,13 +2313,13 @@ Table of Contents
    out of scope.  The RTO signals the Track egress (see more in
    Section 6.2).
 
-   The RPL Control Code for the PDAOReq is 0x09.  The format of the
-   PDAOReq Base Object is as follows:
+   The RPL Control Code for the P-DAO-REQ is 0x09.  The format of the P-
+   DAO-REQ Base Object is as follows:
 
      0                   1                   2                   3
      0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |    TrackID    |K|R|   Flags   |  ReqLifetime  |PDAOReqSequence|
+    |    TrackID    |K|R|   Flags   |  ReqLifetime  |  PDRSequence  |
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
     |   Option(s)...
     +-+-+-+-+-+-+-+-+
@@ -2337,26 +2344,26 @@ Table of Contents
       Configuration option).  The value of 255 (0xFF) represents
       infinity (never time out).
 
-      A PDAOReq with a fresher PDAOReqSequence refreshes the lifetime,
-      and a ReqLifetime of 0 indicates that the Track MUST be destroyed,
+      A P-DAO-REQ with a fresher PDRSequence refreshes the lifetime, and
+      a ReqLifetime of 0 indicates that the Track MUST be destroyed,
       e.g., when the application that requested the Track terminates.
 
-   PDAOReqSequence:  8-bit wrapping sequence number, obeying the
-      operation in Section 7.2 of [RPL].  The PDAOReqSequence is used to
-      correlate a PDR-ACK message with the PDAOReq message that
-      triggered it.  It is incremented at each PDAOReq message and
-      echoed in the PDR-ACK by the Root.
+   PDRSequence:  8-bit wrapping sequence number, obeying the operation
+      in Section 7.2 of [RPL].  The PDRSequence is used to correlate a
+      PDR-ACK message with the P-DAO-REQ message that triggered it.  It
+      is incremented at each P-DAO-REQ message and echoed in the PDR-ACK
+      by the Root.
 
 5.2.  New PDR-ACK Control Message
 
-   The new PDR-ACK is sent as a response to a PDAOReq message with the
+   The new PDR-ACK is sent as a response to a P-DAO-REQ message with the
    'K' flag set.  The RPL Control Code for the PDR-ACK is 0x0A.  Its
    format is as follows:
 
     0                   1                   2                   3
     0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-   |    TrackID    |     Flags     | Track Lifetime|PDAOReqSequence|
+   |    TrackID    |     Flags     | Track Lifetime|  PDRSequence  |
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
    | PDR-ACK Status|                Reserved                       |
    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -2365,8 +2372,8 @@ Table of Contents
 
                Figure 14: New PDR-ACK Control Message Format
 
-   TrackID:  Set to the TrackID indicated in the TrackID field of the
-      PDAOReq messages that this replies to.
+   TrackID:  Set to the TrackID indicated in the TrackID field of the P-
+      DAO-REQ messages that this replies to.
 
    Flags:  Reserved.  The Flags field MUST be initialized to zero by the
       sender and MUST be ignored by the receiver.
@@ -2376,8 +2383,8 @@ Table of Contents
       infinity.  The value of zero (0x00) indicates that the Track was
       destroyed or not created.
 
-   PDAOReqSequence:  8-bit wrapping sequence number.  It is incremented
-      at each PDAOReq message and echoed in the PDR-ACK.
+   PDRSequence:  8-bit wrapping sequence number.  It is incremented at
+      each P-DAO-REQ message and echoed in the PDR-ACK.
 
    PDR-ACK Status:  8-bit field indicating the completion.  The PDR-ACK
       Status is substructured as indicated in Figure 15:
@@ -2661,15 +2668,15 @@ Table of Contents
 
 6.2.  Requesting a Track
 
-   This specification introduces the PDAOReq message, which is used by
+   This specification introduces the P-DAO-REQ message, which is used by
    an LLN node to request the formation of a new Track for which the LLN
    node is the ingress.  Note that the namespace for the TrackID is
-   owned by the ingress node, and in the absence of a PDAOReq, there
+   owned by the ingress node, and in the absence of a P-DAO-REQ, there
    must be some procedure for the Root to assign TrackIDs in that
    namespace while avoiding collisions (see more in Section 6.3).
 
-   The PDAOReq signals the desired TrackID and the duration for which
-   the Track should be established.  Upon a PDAOReq, the Root MAY
+   The P-DAO-REQ signals the desired TrackID and the duration for which
+   the Track should be established.  Upon a P-DAO-REQ, the Root MAY
    install the Track as requested, in which case it answers with a PDR-
    ACK indicating the granted Track Lifetime.  All the segments MUST be
    of the same mode, either Storing or Non-Storing.  All the segments
@@ -2683,7 +2690,7 @@ Table of Contents
    Track ingress.  If the main Root cannot maintain an expected service
    level, then it needs to tear down the Track completely.  The Segment
    Lifetime in the P-DAO messages does not need to be aligned to the
-   Requested Lifetime in the PDAOReq or between P-DAO messages for
+   Requested Lifetime in the P-DAO-REQ or between P-DAO messages for
    different segments.  For example, the Root may use shorter lifetimes
    for the segments and renew them or change them during the lifetime of
    the Track.  All the components (protection paths and segments) of a
@@ -2692,9 +2699,9 @@ Table of Contents
 
    When the Track Lifetime is relatively close to elapse -- meaning in
    the order of the trip time from the node to the Root -- the
-   requesting node SHOULD resend a PDAOReq using the TrackID in the PDR-
-   ACK to extend the lifetime of the Track; otherwise, the Track will
-   time out, and the Root will tear down the whole structure.
+   requesting node SHOULD resend a P-DAO-REQ using the TrackID in the
+   PDR-ACK to extend the lifetime of the Track; otherwise, the Track
+   will time out, and the Root will tear down the whole structure.
 
    If the Track fails and cannot be restored, the Root notifies the
    requesting node asynchronously with a PDR-ACK with a Track Lifetime
@@ -2750,16 +2757,16 @@ Table of Contents
 
       The Track ingress is the Root of the DODAGID formed by the Local
       RPL Instance.  It owns the namespace of its TrackIDs, so it can
-      pick any unused value to request a new Track with a PDAOReq.  In a
-      particular deployment where PDAOReqs are not used, a portion of
-      the namespace can be administratively delegated to the main Root,
-      meaning that the main Root is authoritative for assigning the
-      TrackIDs for the Tracks it creates.
+      pick any unused value to request a new Track with a P-DAO-REQ.  In
+      a particular deployment where P-DAO-REQs are not used, a portion
+      of the namespace can be administratively delegated to the main
+      Root, meaning that the main Root is authoritative for assigning
+      the TrackIDs for the Tracks it creates.
 
       With this specification, the main Root is aware of all the active
       Tracks, so it can also pick any unused value to form Tracks
-      without a PDAOReq.  To avoid a collision of the main Root and the
-      Track ingress picking the same value at the same time, it is
+      without a P-DAO-REQ.  To avoid a collision of the main Root and
+      the Track ingress picking the same value at the same time, it is
       RECOMMENDED that the Track ingress starts allocating the ID value
       of the Local RPLInstanceID (see Section 5.1 of [RPL]) used as
       TrackIDs with the value 0 incrementing, while the Root starts with
@@ -2885,13 +2892,13 @@ Table of Contents
               +-----+
               |     | Border Router
               |     |  (RPL Root)
-              +-----+                      |     ^                   |
-                 |                         | DAO | ACK               |
+              +-----+                      | P-  ^                   |
+                 |                         | DAO | P-DAO-ACK         |
            o    o   o    o                 |     |                   |
        o o   o  o Ingress  o  o  o         |  ^       | Projected    .
-      o  o o  o    o  \\  o  o    o        |  | DAO   | Route        .
+      o  o o  o    o  \\  o  o    o        |  | P-DAO | Route        .
       o   o    o  o    \\  o    o  o  o    | ^        |              .
-     o  o   o  o   o    Egress   o o       v | DAO    v              .
+     o  o   o  o   o    Egress   o o       v | P-DAO  v              .
      o          o   LLN   o   o     o                                |
          o o   o        o     o              Loose Source Route Path |
       o       o      o    o                                          v
@@ -2973,16 +2980,17 @@ Table of Contents
                  +-----+
                  |     | Border Router
                  |     |  (RPL Root)
-                 +-----+                    |  P  ^ ACK
+                 +-----+                    | P-  ^ P-DAO-ACK
                     |        Track          | DAO |
-              o    o   o  o  Ingress X      V     |   X
-          o o   o  o   o  o     o   X   o             X Source-
-         o  o o  o o    o   o  o    X  o  o           X Routed
-         o   o    o  o     o   o   o X     o          X Segment
-        o  o   o  o   o  o    o  o     X Egress       X
-           o  o  o  o             o    |
-                                     Target
-          o       o     LLN          o    o
+              o    o   o    Ingress         V     |
+          o o   o  o   o  o     X   o                X Source-
+         o  o o  o o    o   o     X    o  o          X Routed
+         o   o    o  o     o   o    X     o          X Segment
+        o  o   o  o   o  o    o  o    X              X
+                                    Egress
+           o  o  o  o           o     |
+                                    Target
+          o       o     LLN          o
         o          o             o     o
 
                  Figure 19: Projecting a Non-Storing Route
@@ -3049,10 +3057,9 @@ Table of Contents
 
    Repathing a Track segment or protection path may cause jitter and
    packet misordering.  For critical flows that require timely and/or
-   in-order delivery, it might be necessary to deploy the PAREO
-   functions [RAW-ARCH] over a highly redundant Track.  This
-   specification allows the use of more than one protection path for a
-   Track and 1+N packet redundancy.
+   in-order delivery, it might be necessary to deploy PREOF [RAW-ARCH]
+   over a highly redundant Track.  This specification allows the use of
+   more than one protection path for a Track and 1+N packet redundancy.
 
    This section provides the steps to ensure that no packet is lost due
    to the operation itself.  This is ensured by installing the new
@@ -3638,7 +3645,7 @@ Table of Contents
    security from the lower layer.
 
    With this specification, the Root MAY generate P-DAO messages but
-   other nodes MUST NOT do so.  PDAOReq messages MUST be sent to the
+   other nodes MUST NOT do so.  P-DAO-REQ messages MUST be sent to the
    Root.  This specification expects that the communication with the
    Root is authenticated but does not enforce which method is used.
 
@@ -3734,7 +3741,7 @@ Table of Contents
              |   4..255   | Unassigned           |           |
              +------------+----------------------+-----------+
 
-                      Table 24: Initial PDAOReq Flags
+                     Table 24: Initial P-DAO-REQ Flags
 
 11.5.  RPL Control Codes
 
@@ -3742,15 +3749,16 @@ Table of Contents
    Protocol for Low Power and Lossy Networks (RPL)" registry group
    [IANA-RPL] as indicated in Table 25:
 
-          +======+=================================+===========+
-          | Code | Description                     | Reference |
-          +======+=================================+===========+
-          | 0x09 | Projected DAO Request (PDAOReq) | RFC 9914  |
-          +------+---------------------------------+-----------+
-          | 0x0A | PDR-ACK                         | RFC 9914  |
-          +------+---------------------------------+-----------+
+   +======+================================================+===========+
+   | Code | Description                                    | Reference |
+   +======+================================================+===========+
+   | 0x09 | Projected DAO Request (P-DAO-REQ)              | RFC 9914  |
+   +------+------------------------------------------------+-----------+
+   | 0x0A | Projected DAO Request                          | RFC 9914  |
+   |      | Acknowledgment (PDR-ACK)                       |           |
+   +------+------------------------------------------------+-----------+
 
-                     Table 25: New RPL Control Codes
+                      Table 25: New RPL Control Codes
 
 11.6.  RPL Control Message Options
 
@@ -3772,10 +3780,10 @@ Table of Contents
 
 11.7.  Registry for Projected DAO Request Flags
 
-   IANA has created the "Projected DAO Request (PDAOReq) Flags" registry
-   under the "Routing Protocol for Low Power and Lossy Networks (RPL)"
-   registry group [IANA-RPL].  The bits are indexed from 0 (leftmost) to
-   7.  Each bit is tracked with the following qualities:
+   IANA has created the "Projected DAO Request (P-DAO-REQ) Flags"
+   registry under the "Routing Protocol for Low Power and Lossy Networks
+   (RPL)" registry group [IANA-RPL].  The bits are indexed from 0
+   (leftmost) to 7.  Each bit is tracked with the following qualities:
 
    *  Bit number (counting from bit 0 as the most significant bit)
 
@@ -3796,14 +3804,14 @@ Table of Contents
     |   2..255   | Unassigned                             |           |
     +------------+----------------------------------------+-----------+
 
-                      Table 27: Initial PDAOReq Flags
+                     Table 27: Initial P-DAO-REQ Flags
 
-11.8.  Registry for PDR-ACK Flags
+11.8.  Registry for Projected DAO Request Acknowledgment (PDR-ACK) Flags
 
-   IANA has created the "PDR-ACK Flags" registry under the "Routing
-   Protocol for Low Power and Lossy Networks (RPL)" registry group
-   [IANA-RPL].  The bits are indexed from 0 (leftmost) to 7.  Each bit
-   is tracked with the following qualities:
+   IANA has created the "Projected DAO Request Acknowledgment (PDR-ACK)
+   Flags" registry under the "Routing Protocol for Low Power and Lossy
+   Networks (RPL)" registry group [IANA-RPL].  The bits are indexed from
+   0 (leftmost) to 7.  Each bit is tracked with the following qualities:
 
    *  Bit number (counting from bit 0 as the most significant bit)
 
@@ -3911,7 +3919,10 @@ Table of Contents
    +============+=========================================+===========+
    |     0      | 'S' flag: Sibling in same DODAG as self | RFC 9914  |
    +------------+-----------------------------------------+-----------+
-   |    1..4    | Unassigned                              |           |
+   |     1      | 'B' flag: Connectivity to the sibling   | RFC 9914  |
+   |            | is roughly symmetrical                  |           |
+   +------------+-----------------------------------------+-----------+
+   |    2..4    | Unassigned                              |           |
    +------------+-----------------------------------------+-----------+
 
                        Table 30: Initial SIO Flags
@@ -3940,11 +3951,11 @@ Table of Contents
    registry group [IANA-RPL] as indicated in Table 32 (see more in
    Section 4.1.2):
 
-            +============+========================+===========+
-            | Bit Number | Capability Description | Reference |
-            +============+========================+===========+
-            |     1      | Projected DAO-ACK (P)  | RFC 9914  |
-            +------------+------------------------+-----------+
+       +============+==================================+===========+
+       | Bit Number | Capability Description           | Reference |
+       +============+==================================+===========+
+       |     1      | Projected DAO Acknowledgment (P) | RFC 9914  |
+       +------------+----------------------------------+-----------+
 
                Table 32: New Destination Advertisement Object
                             Acknowledgment Flag
@@ -4054,8 +4065,8 @@ Table of Contents
               <https://www.rfc-editor.org/info/rfc9030>.
 
    [RAW-ARCH] Thubert, P., Ed., "Reliable and Available Wireless (RAW)
-              Architecture", RFC 9912, DOI 10.17487/RFC9912, February
-              2026, <https://www.rfc-editor.org/info/rfc9912>.
+              Architecture", RFC 9912, DOI 10.17487/RFC9912, April 2026,
+              <https://www.rfc-editor.org/info/rfc9912>.
 
 12.2.  Informative References
 

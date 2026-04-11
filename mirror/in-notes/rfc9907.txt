@@ -8,7 +8,7 @@ BCP: 216                                               M. Boucadair, Ed.
 Obsoletes: 8407                                                   Orange
 Updates: 8126                                                      Q. Wu
 Category: Best Current Practice                                   Huawei
-ISSN: 2070-1721                                            February 2026
+ISSN: 2070-1721                                               March 2026
 
 
  Guidelines for Authors and Reviewers of Documents Containing YANG Data
@@ -732,7 +732,7 @@ Table of Contents
 
    The "<module-name>" YANG module defines a data model that is
    designed to be accessed via YANG-based management protocols,
-   such as Network Configuration Protocol (NETCONF) [RFC6241]
+   such as the Network Configuration Protocol (NETCONF) [RFC6241]
    and RESTCONF [RFC8040].  These YANG-based management protocols
    (1) have to use a secure transport layer (e.g., Secure Shell (SSH)
    [RFC4252], TLS [RFC8446], and QUIC [RFC9000]) and (2) have to use
@@ -777,7 +777,7 @@ Table of Contents
    -- Readable nodes section:
    --
    -- If the data model contains any readable data nodes (i.e., those
-   -- that are "config false" nodes, but also all other nodes, because
+   -- that are "config false" nodes, but also all other nodes because
    -- they can also be read via operations like get or get-config), then
    -- include the following text:
 
@@ -790,7 +790,7 @@ Table of Contents
 
    -- You must evaluate whether the data model contains any readable
    -- data nodes (those are all the "config false" nodes, but also all
-   -- other nodes, because they can also be read via operations like get
+   -- other nodes because they can also be read via operations like get
    -- or get-config) that are particularly sensitive or vulnerable
    -- (e.g., if they might reveal customer information or violate
    -- personal privacy laws).  Typically, particularly sensitive
@@ -3511,7 +3511,7 @@ Table of Contents
    "description":  Replicates the description from the registry.
 
    "reference":   Replicates the reference(s) from the registry.
-                  References to documents should also inlcude titles.
+                  References to documents should also include titles.
 
   -- Optional:
 
@@ -3601,7 +3601,7 @@ Table of Contents
    substatements in IANA-maintained YANG modules.
 
    These considerations cover both the creation and maintenance of an
-   IANA-mainatined YANG module, and they include both instructions
+   IANA-maintained YANG module, and they include both instructions
    applicable to all IANA-maintained YANG modules and instructions that
    can be customized by module creators.
 

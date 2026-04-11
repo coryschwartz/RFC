@@ -12,7 +12,7 @@ ISSN: 2070-1721                                                    Intel
                                         Research Institute CODE, UniBw M
                                                                J. Farkas
                                                                 Ericsson
-                                                           February 2026
+                                                              April 2026
 
 
            Reliable and Available Wireless (RAW) Technologies
@@ -356,7 +356,7 @@ Table of Contents
    technology.  While previous 802.11 generations, such as 802.11n and
    802.11ac, focused mainly on improving peak throughput, more recent
    generations are also considering other performance vectors, such as
-   efficiency enhancements for dense environments in IEEEE Std 802.11ax
+   efficiency enhancements for dense environments in IEEE Std 802.11ax
    [IEEE802.11ax] (approved in 2021) and throughput, latency, and
    reliability enhancements in IEEE Std 802.11be [IEEE802.11be]
    (approved in 2024).
@@ -1422,11 +1422,10 @@ Table of Contents
 
    The 5G Radio Access Network (5G RAN) with its NR interface includes
    several features to achieve Quality of Service (QoS), such as a
-   guaranteeably low latency or tolerable packet error rates for
-   selected data flows.  Determinism is achieved by centralized
-   admission control and scheduling of the wireless frequency resources,
-   which are typically licensed frequency bands assigned to a network
-   operator.
+   guaranteed low latency or tolerable packet error rates for selected
+   data flows.  Determinism is achieved by centralized admission control
+   and scheduling of the wireless frequency resources, which are
+   typically licensed frequency bands assigned to a network operator.
 
    NR enables short transmission slots in a radio subframe, which
    benefits low-latency applications.  NR also introduces mini-slots,
@@ -2144,16 +2143,16 @@ Table of Contents
    s on the FL and 294 kbit/s on the RL.
 
    In addition to the communications capability, LDACS also offers a
-   navigation capability.  Ranging data, similar to DME (Distance
-   Measuring Equipment), is extracted from the LDACS communication links
+   navigation capability.  Ranging data, similar to Distance Measuring
+   Equipment (DME), is extracted from the LDACS communication links
    between aircraft and LDACS ground stations.  This results in LDACS
-   providing an APNT (Alternative Position, Navigation and Timing)
-   capability to supplement the existing on-board GNSS (Global
-   Navigation Satellite System) without the need for additional
-   bandwidth.  Operationally, there will be no difference for pilots
-   whether the navigation data are provided by LDACS or DME.  This
-   capability was flight tested and proven during the MICONAV flight
-   trials in 2019 [BAT19].
+   providing an Alternative Position, Navigation, and Timing (APNT)
+   capability to supplement the existing on-board Global Navigation
+   Satellite System (GNSS) without the need for additional bandwidth.
+   Operationally, there will be no difference for pilots whether the
+   navigation data are provided by LDACS or DME.  This capability was
+   flight tested and proven during the MICONAV flight trials in 2019
+   [BAT19].
 
    In previous works and during the MICONAV flight campaign in 2019, it
    was also shown that LDACS can be used for surveillance capability.
@@ -2465,90 +2464,55 @@ Table of Contents
               <https://www.rfc-editor.org/info/rfc8655>.
 
    [RFC9912]  Thubert, P., Ed., "Reliable and Available Wireless (RAW)
-              Architecture", RFC 9912, DOI 10.17487/RFC9912, February
-              2026, <https://www.rfc-editor.org/info/rfc9912>.
+              Architecture", RFC 9912, DOI 10.17487/RFC9912, April 2026,
+              <https://www.rfc-editor.org/info/rfc9912>.
 
 10.2.  Informative References
 
-   [RFC9030]  Thubert, P., Ed., "An Architecture for IPv6 over the Time-
-              Slotted Channel Hopping Mode of IEEE 802.15.4 (6TiSCH)",
-              RFC 9030, DOI 10.17487/RFC9030, May 2021,
-              <https://www.rfc-editor.org/info/rfc9030>.
+   [Avnu]     "Avnu Alliance", <https://www.avnu.org>.
 
-   [RFC8480]  Wang, Q., Ed., Vilajosana, X., and T. Watteyne, "6TiSCH
-              Operation Sublayer (6top) Protocol (6P)", RFC 8480,
-              DOI 10.17487/RFC8480, November 2018,
-              <https://www.rfc-editor.org/info/rfc8480>.
+   [BAT19]    Battista, G., Osechas, O., Narayanan, S., Crespillo, O.G.,
+              Gerbeth, D., Maeurer, N., Mielke, D., and T. Graeupl,
+              "Real-Time Demonstration of Integrated Communication and
+              Navigation Services Using LDACS", Integrated
+              Communications, Navigation and Surveillance Conference
+              (ICNS), pp. i-xii, DOI 10.1109/ICNSURV.2019.8735195, 2019,
+              <https://elib.dlr.de/134475/1/08735195.pdf>.
 
-   [RFC9372]  Mäurer, N., Ed., Gräupl, T., Ed., and C. Schmitt, Ed.,
-              "L-Band Digital Aeronautical Communications System
-              (LDACS)", RFC 9372, DOI 10.17487/RFC9372, March 2023,
-              <https://www.rfc-editor.org/info/rfc9372>.
+   [BEL22]    Bellido-Manganell, M. A., Gräupl, T., Heirich, O., Mäurer,
+              N., Filip-Dhaubhadel, A., Mielke, D. M., Schalk, L. M.,
+              Becker, D., Schneckenburger, N., and M. Schnell, "LDACS
+              Flight Trials: Demonstration and Performance Analysis of
+              the Future Aeronautical Communications System", IEEE
+              Transactions on Aerospace and Electronic Systems, vol. 58,
+              no. 1, pp. 615-634, DOI 10.1109/TAES.2021.3111722,
+              February 2022,
+              <https://doi.org/10.1109/TAES.2021.3111722>.
 
-   [RFC9033]  Chang, T., Ed., Vučinić, M., Vilajosana, X., Duquennoy,
-              S., and D. Dujovne, "6TiSCH Minimal Scheduling Function
-              (MSF)", RFC 9033, DOI 10.17487/RFC9033, May 2021,
-              <https://www.rfc-editor.org/info/rfc9033>.
+   [BRA06]    Brandes, S., Schnell, M., Rokitansky, C.-h., Ehammer, M.,
+              Graeupl, T., Steendam, H., Guenach, M., Rihacek, C., and
+              B. Haindl, "B-VHF - Selected Simulation Results and Final
+              Assessment", IEEE 25th Digital Avionics Systems Conference
+              (DACS), pp. 1-12, DOI 10.1109/DASC.2006.313670, 2006,
+              <https://doi.org/10.1109/DASC.2006.313670>.
 
-   [RFC8200]  Deering, S. and R. Hinden, "Internet Protocol, Version 6
-              (IPv6) Specification", STD 86, RFC 8200,
-              DOI 10.17487/RFC8200, July 2017,
-              <https://www.rfc-editor.org/info/rfc8200>.
+   [Cavalcanti1287]
+              Cavalcanti, D., Venkatesan, G., Cariou, L., and C.
+              Cordeiro, "TSN support in 802.11 and potential extensions
+              for TGbe", 10 September 2019,
+              <https://mentor.ieee.org/802.11/dcn/19/11-19-1287>.
 
-   [RFC6550]  Winter, T., Ed., Thubert, P., Ed., Brandt, A., Hui, J.,
-              Kelsey, R., Levis, P., Pister, K., Struik, R., Vasseur,
-              JP., and R. Alexander, "RPL: IPv6 Routing Protocol for
-              Low-Power and Lossy Networks", RFC 6550,
-              DOI 10.17487/RFC6550, March 2012,
-              <https://www.rfc-editor.org/info/rfc6550>.
+   [Cavalcanti_2019]
+              Cavalcanti, D., Perez-Ramirez, J., Rashid, M. M., Fang,
+              J., Galeev, M., and K. B. Stanton, "Extending Accurate
+              Time Distribution and Timeliness Capabilities Over the Air
+              to Enable Future Wireless Industrial Automation Systems",
+              Proceedings of the IEEE, vol. 107, no. 6, pp. 1132-1152,
+              DOI 10.1109/JPROC.2019.2903414, June 2019,
+              <https://doi.org/10.1109/JPROC.2019.2903414>.
 
-   [RFC6551]  Vasseur, JP., Ed., Kim, M., Ed., Pister, K., Dejean, N.,
-              and D. Barthel, "Routing Metrics Used for Path Calculation
-              in Low-Power and Lossy Networks", RFC 6551,
-              DOI 10.17487/RFC6551, March 2012,
-              <https://www.rfc-editor.org/info/rfc6551>.
-
-   [RFC6291]  Andersson, L., van Helvoort, H., Bonica, R., Romascanu,
-              D., and S. Mansfield, "Guidelines for the Use of the "OAM"
-              Acronym in the IETF", BCP 161, RFC 6291,
-              DOI 10.17487/RFC6291, June 2011,
-              <https://www.rfc-editor.org/info/rfc6291>.
-
-   [RFC7276]  Mizrahi, T., Sprecher, N., Bellagamba, E., and Y.
-              Weingarten, "An Overview of Operations, Administration,
-              and Maintenance (OAM) Tools", RFC 7276,
-              DOI 10.17487/RFC7276, June 2014,
-              <https://www.rfc-editor.org/info/rfc7276>.
-
-   [RFC8279]  Wijnands, IJ., Ed., Rosen, E., Ed., Dolganow, A.,
-              Przygienda, T., and S. Aldrin, "Multicast Using Bit Index
-              Explicit Replication (BIER)", RFC 8279,
-              DOI 10.17487/RFC8279, November 2017,
-              <https://www.rfc-editor.org/info/rfc8279>.
-
-   [RFC9023]  Varga, B., Ed., Farkas, J., Malis, A., and S. Bryant,
-              "Deterministic Networking (DetNet) Data Plane: IP over
-              IEEE 802.1 Time-Sensitive Networking (TSN)", RFC 9023,
-              DOI 10.17487/RFC9023, June 2021,
-              <https://www.rfc-editor.org/info/rfc9023>.
-
-   [RFC9262]  Eckert, T., Ed., Menth, M., and G. Cauchie, "Tree
-              Engineering for Bit Index Explicit Replication (BIER-TE)",
-              RFC 9262, DOI 10.17487/RFC9262, October 2022,
-              <https://www.rfc-editor.org/info/rfc9262>.
-
-   [NSA-EXT]  Koutsiamanis, R., Ed., Papadopoulos, G. Z., Montavont, N.,
-              and P. Thubert, "Common Ancestor Objective Function and
-              Parent Set DAG Metric Container Extension", Work in
-              Progress, Internet-Draft, draft-ietf-roll-nsa-extension-
-              13, 7 July 2025, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-roll-nsa-extension-13>.
-
-   [RFC9914]  Thubert, P., Ed., Jadhav, R.A., and M. Richardson, "Root-
-              Initiated Routing State in the Routing Protocol for Low-
-              Power and Lossy Networks (RPL)", RFC 9914,
-              DOI 10.17487/RFC9914, February 2026,
-              <https://www.rfc-editor.org/info/rfc9914>.
+   [CCAMP]    IETF, "Common Control and Measurement Plane",
+              <https://datatracker.ietf.org/doc/charter-ietf-ccamp/>.
 
    [CoAP-6TiSCH]
               Sudhaakar, R. S., Ed. and P. Zand, "6TiSCH Resource
@@ -2557,10 +2521,86 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-ietf-6tisch-
               coap-03>.
 
-   [IEEE802.15.4]
-              IEEE, "IEEE Standard for Low-Rate Wireless Networks", IEEE
-              Std 802.15.4-2015, DOI 10.1109/IEEESTD.2016.7460875,
-              <https://doi.org/10.1109/IEEESTD.2016.7460875>.
+   [EHA11]    Ehammer, M., Pschernig, E., and T. Graeupl, "AeroMACS - An
+              Airport Communications System", 2011 IEEE/AIAA 30th
+              Digital Avionics Systems Conference, pp. 4C1-1-4C1-16,
+              DOI 10.1109/DASC.2011.6095903, 2011,
+              <https://doi.org/10.1109/DASC.2011.6095903>.
+
+   [Fang_2021]
+              Fang, J., Sudhakaran, S., Cavalcanti, D., Cordeiro, C.,
+              and C. Chen, "Wireless TSN with Multi-Radio Wi-Fi", 2021
+              IEEE Conference on Standards for Communications and
+              Networking (CSCN), pp. 105-110,
+              DOI 10.1109/CSCN53733.2021.9686180, 2021,
+              <https://doi.org/10.1109/CSCN53733.2021.9686180>.
+
+   [FIL19]    Filip-Dhaubhadel, A. and D. Shutin, "LDACS- Based Non-
+              Cooperative Surveillance Multistatic Radar Design and
+              Detection Coverage Assessment", IEEE/AIAA 38th Digital
+              Avionics Systems Conference (DASC), pp. 1-10,
+              DOI 10.1109/DASC43569.2019.9081714, 2019,
+              <https://doi.org/10.1109/DASC43569.2019.9081714>.
+
+   [Ghasempour_2017]
+              Ghasempour, Y., Silva, C. R. C. M. D., Cordeiro, C., and
+              E. W. Knightly, "802.11ay: Next-Generation 60 GHz
+              Communications for 100 Gb/s Wi-Fi", IEEE Communications
+              Magazine, vol. 55, no. 12, pp. 186-192,
+              DOI 10.1109/MCOM.2017.1700393, December 2017,
+              <https://doi.org/10.1109/MCOM.2017.1700393>.
+
+   [GRA11]    Gräupl, T., "LDACS1 Data Link Layer Evolution of ATN/IPS",
+              IEEE/AIAA 30th Digital Avionics Systems Conference, pp.
+              1-28, DOI 10.1109/DASC.2011.6096230, October 2011,
+              <https://doi.org/10.1109/DASC.2011.6096230>.
+
+   [GRA18]    Gräupl, T., Schneckenburger, N., Jost, T., Schnell, M.,
+              Filip, A., Bellido-Manganell, M. A., Mielke, D. M.,
+              Mäurer, N., Kumar, R., Osechas, O., and G. Battista,
+              "L-band Digital Aeronautical Communications System (LDACS)
+              flight trials in the national German project MICONAV",
+              2018 Integrated Communications, Navigation, Surveillance
+              Conference (ICNS), pp. 4A2-1-4A2-7,
+              DOI 10.1109/ICNSURV.2018.8384881, April 2018,
+              <https://doi.org/10.1109/ICNSURV.2018.8384881>.
+
+   [GRA19]    Gräupl, T., Rihacek, C., Haindl, B., and Q. Parrod,
+              "SESAR2020 - PJ14-02-01 - LDACS A/G SPECIFICATION",
+              EDITION 00.02.02, 16 August 2019, <https://www.ldacs.com/
+              wp-content/uploads/2013/12/SESAR2020_PJ14_D3_3_030_LDACS_A
+              G_Specification_00_02_02-1_0.pdf>.
+
+   [GRA23]    Gräupl, T., Mielke, D. M., Bellido-Manganell, M. A.,
+              Jansen, L. J., Mäurer, N., Gürbüz, A., Filip-Dhaubhadel,
+              A., Schalk, L., Becker, D., Skorepa, M., Wrobel, F.,
+              Morioka, K., Kurz, S., and J. Meser, "LDACS Flight Trials:
+              Demonstration of ATS-B2, IPS, and Seamless Mobility", 2023
+              Integrated Communication, Navigation and Surveillance
+              Conference (ICNS), pp. 1-13,
+              DOI 10.1109/ICNS58246.2023.10124329, 2023,
+              <https://doi.org/10.1109/ICNS58246.2023.10124329>.
+
+   [HAI09]    Haindl, B., Rihacek, C., Sajatovic, M., Phillips, B.,
+              Budinger, J., Schnell, M., Kamiano, D., and W. Wilson,
+              "Improvement of L-DACS1 Design by Combining B-AMC with P34
+              and WiMAX Technologies", 2009 Integrated Communications,
+              Navigation and Surveillance Conference, pp. 1-8,
+              DOI 10.1109/ICNSURV.2009.5172873, May 2009,
+              <https://doi.org/10.1109/ICNSURV.2009.5172873>.
+
+   [ICAO18]   International Civil Aviation Organization (ICAO), "L-Band
+              Digital Aeronautical Communication System (LDACS)",
+              International Standards and Recommended Practices, Annex
+              10 - Aeronautical Telecommunications, Vol. III -
+              Communication Systems, July 2018,
+              <https://elibrary.icao.int/product/279816>.
+
+   [ICAO19]   International Civil Aviation Organization (ICAO), "TLDACS
+              White Paper - A Roll-out Scenario", Communications Panel -
+              Data Communications Infrastructure Working Group, October
+              2019, <https://www.ldacs.com/wp-content/uploads/2013/12/
+              ACP-DCIWG-IP01-LDACS-White-Paper.pdf>.
 
    [IEEE802.11]
               IEEE, "IEEE Standard for Information Technology --
@@ -2570,6 +2610,17 @@ Table of Contents
               (MAC) and Physical Layer (PHY) Specifications", IEEE
               Std 802.11-2024, DOI 10.1109/IEEESTD.2025.10979691, 2024,
               <https://ieeexplore.ieee.org/document/10979691>.
+
+   [IEEE802.11ad]
+              IEEE, "IEEE Standard for Information technology --
+              Telecommunications and information exchange between
+              systems -- Local and metropolitan area networks --
+              Specific requirements-Part 11: Wireless LAN Medium Access
+              Control (MAC) and Physical Layer (PHY) Specifications
+              Amendment 3: Enhancements for Very High Throughput in the
+              60 GHz Band", IEEE Std 802.11ad-2012,
+              DOI 10.1109/IEEESTD.2012.6392842, 2012,
+              <https://ieeexplore.ieee.org/document/6392842/>.
 
    [IEEE802.11ax]
               IEEE, "IEEE Standard for Information Technology --
@@ -2592,17 +2643,6 @@ Table of Contents
               DOI 10.1109/IEEESTD.2021.9502046, 2021,
               <https://ieeexplore.ieee.org/document/9502046/>.
 
-   [IEEE802.11ad]
-              IEEE, "IEEE Standard for Information technology --
-              Telecommunications and information exchange between
-              systems -- Local and metropolitan area networks --
-              Specific requirements-Part 11: Wireless LAN Medium Access
-              Control (MAC) and Physical Layer (PHY) Specifications
-              Amendment 3: Enhancements for Very High Throughput in the
-              60 GHz Band", IEEE Std 802.11ad-2012,
-              DOI 10.1109/IEEESTD.2012.6392842, 2012,
-              <https://ieeexplore.ieee.org/document/6392842/>.
-
    [IEEE802.11be]
               IEEE, "IEEE Standard for Information technology --
               Telecommunications and information exchange between
@@ -2613,6 +2653,25 @@ Table of Contents
               Std 802.11be-2024, DOI 10.1109/IEEESTD.2024.11090080,
               <https://ieeexplore.ieee.org/document/11090080>.
 
+   [IEEE802.15.4]
+              IEEE, "IEEE Standard for Low-Rate Wireless Networks", IEEE
+              Std 802.15.4-2015, DOI 10.1109/IEEESTD.2016.7460875,
+              <https://doi.org/10.1109/IEEESTD.2016.7460875>.
+
+   [IEEE802.1AS]
+              IEEE, "IEEE Standard for Local and Metropolitan Area
+              Networks -- Timing and Synchronization for Time-Sensitive
+              Applications", IEEE Std 802.1AS-2020,
+              DOI 10.1109/IEEESTD.2020.9121845,
+              <https://doi.org/10.1109/IEEESTD.2020.9121845>.
+
+   [IEEE802.1CB]
+              IEEE, "IEEE Standard for Local and metropolitan area
+              networks -- Frame Replication and Elimination for
+              Reliability", IEEE Std 802.1CB-2017,
+              DOI 10.1109/IEEEStd2017.8091139, 2017,
+              <https://ieeexplore.ieee.org/document/8091139>.
+
    [IEEE802.1Qat]
               IEEE, "IEEE Standard for Local and metropolitan area
               networks -- Virtual Bridged Local Area Networks Amendment
@@ -2620,14 +2679,73 @@ Table of Contents
               2010, DOI 10.1109/IEEESTD.2010.5594972,
               <https://doi.org/10.1109/IEEESTD.2010.5594972>.
 
-   [Cavalcanti_2019]
-              Cavalcanti, D., Perez-Ramirez, J., Rashid, M. M., Fang,
-              J., Galeev, M., and K. B. Stanton, "Extending Accurate
-              Time Distribution and Timeliness Capabilities Over the Air
-              to Enable Future Wireless Industrial Automation Systems",
-              Proceedings of the IEEE, vol. 107, no. 6, pp. 1132-1152,
-              DOI 10.1109/JPROC.2019.2903414, June 2019,
-              <https://doi.org/10.1109/JPROC.2019.2903414>.
+   [IEEE802.1Qbv]
+              IEEE, "IEEE Standard for Local and metropolitan area
+              networks -- Bridges and Bridged Networks - Amendment 25:
+              Enhancements for Scheduled Traffic", IEEE Std 802.1Qbv-
+              2015, DOI 10.1109/IEEESTD.2016.8613095, 2016,
+              <https://doi.org/10.1109/IEEESTD.2016.8613095>.
+
+   [IEEE802.1Qcc]
+              IEEE, "IEEE Standard for Local and metropolitan area
+              networks -- Bridges and Bridged Networks -- Amendment 31:
+              Stream Reservation Protocol (SRP) Enhancements and
+              Performance Improvements", IEEE Std 802.1Qcc-2018,
+              DOI 10.1109/IEEESTD.2018.8514112,
+              <https://ieeexplore.ieee.org/document/8514112>.
+
+   [IEEE802.1TSN]
+              IEEE 802.1 Working Group, "Time-Sensitive Networking Task
+              Group", <http://www.ieee802.org/1/pages/tsn.html>.
+
+   [IEEE802.3]
+              IEEE, "IEEE Standard for Ethernet", IEEE Std 802.3-2022,
+              DOI 10.1109/IEEESTD.2022.9844436,
+              <https://ieeexplore.ieee.org/document/9844436>.
+
+   [IEEE_doc_11-18-2009-06]
+              IEEE, "802.11 Real-Time Applications (RTA) Topic Interest
+              Group (TIG) Report", November 2018,
+              <https://mentor.ieee.org/802.11/dcn/18/11-18-2009-06-0rta-
+              rta-report-draft.docx>.
+
+   [IMT2020]  ITU, "IMT-2020 (a.k.a. "5G")", <https://www.itu.int/en/
+              ITU-R/study-groups/rsg5/rwp5d/imt-2020/Pages/
+              default.aspx>.
+
+   [ISA100.11a]
+              ISA, "ISA100 Wireless", ANSI/ISA-100.11a-2011 (IEC 26743),
+              <https://isa100wci.org/about-isa100-wireless?_gl=1*19xrxgo
+              *_up*MQ..*_ga*NDczNjkxOTQ1LjE3NjI0NjQ2NDk.*_ga_L2KSW4EHCS*
+              czE3NjI0NjQ2NDkkbzEkZzEkdDE3NjI0NjQ3MzQkajYwJGwwJGgw>.
+
+   [MAE18]    Maeurer, N. and A. Bilzhause, "A Cybersecurity
+              Architecture for the L-band Digital Aeronautical
+              Communications System (LDACS)", 2018 IEEE/AIAA 37th
+              Digital Avionics Systems Conference (DASC), pp. 1-10,
+              DOI 10.1109/DASC.2018.8569878, 2018,
+              <https://doi.org/10.1109/DASC.2018.8569878>.
+
+   [MAE191]   Maeurer, N. and C. Schmitt, "Towards Successful
+              Realization of the LDACS Cybersecurity Architecture: An
+              Updated Datalink Security Threat- and Risk Analysis",
+              Integrated Communications, Navigation and Surveillance
+              Conference (ICNS), pp. 1-13,
+              DOI 10.1109/ICNSURV.2019.8735139, 2019,
+              <https://doi.org/10.1109/ICNSURV.2019.8735139>.
+
+   [MAE192]   Maeurer, N., Graeupl, T., and C. Schmitt, "Evaluation of
+              the LDACS Cybersecurity Implementation", IEEE/AIAA 38th
+              Digital Avionics Systems Conference (DASC), pp. 1-10,
+              DOI 10.1109/DASC43569.2019.9081786, September 2019,
+              <https://doi.org/10.1109/DASC43569.2019.9081786>.
+
+   [MAE20]    Maeurer, N., Graeupl, T., Gentsch, C., and C. Schmitt,
+              "Comparing Different Diffie-Hellman Key Exchange Flavors
+              for LDACS", AIAA/IEEE 39th Digital Avionics Systems
+              Conference (DASC), pp. 1-10,
+              DOI 10.1109/DASC50938.2020.9256746, 2020,
+              <https://doi.org/10.1109/DASC50938.2020.9256746>.
 
    [Nitsche_2015]
               Nitsche, T., Cordeiro, C., Flores, A. B., Knightly, E. W.,
@@ -2637,52 +2755,88 @@ Table of Contents
               132-141, DOI 10.1109/MCOM.2014.6979964, December 2014,
               <https://doi.org/10.1109/MCOM.2014.6979964>.
 
-   [Ghasempour_2017]
-              Ghasempour, Y., Silva, C. R. C. M. D., Cordeiro, C., and
-              E. W. Knightly, "802.11ay: Next-Generation 60 GHz
-              Communications for 100 Gb/s Wi-Fi", IEEE Communications
-              Magazine, vol. 55, no. 12, pp. 186-192,
-              DOI 10.1109/MCOM.2017.1700393, December 2017,
-              <https://doi.org/10.1109/MCOM.2017.1700393>.
-
-   [IEEE_doc_11-18-2009-06]
-              IEEE, "802.11 Real-Time Applications (RTA) Topic Interest
-              Group (TIG) Report", November 2018,
-              <https://mentor.ieee.org/802.11/dcn/18/11-18-2009-06-0rta-
-              rta-report-draft.docx>.
-
-   [vilajosana21]
-              Vilajosana, X., Watteyne, T., Chang, T., Vucinic, M.,
-              Duquennoy, S., and P. Thubert, "IETF 6TiSCH: A Tutorial",
-              Communications Surveys and Tutorials, IEEE Communications
-              Society, HAL ID: hal-02420974,
-              DOI 10.1109/COMST.2019.2939407, December 2019,
-              <https://inria.hal.science/hal-02420974/file/
-              IETF_6TiSCH__A_Tutorial__17099609gkvsxdpffdvc_%20(1).pdf>.
-
-   [ISA100.11a]
-              ISA, "ISA100 Wireless", ANSI/ISA-100.11a-2011 (IEC 26743),
-              <https://isa100wci.org/about-isa100-wireless?_gl=1*19xrxgo
-              *_up*MQ..*_ga*NDczNjkxOTQ1LjE3NjI0NjQ2NDk.*_ga_L2KSW4EHCS*
-              czE3NjI0NjQ2NDkkbzEkZzEkdDE3NjI0NjQ3MzQkajYwJGwwJGgw>.
-
-   [WirelessHART]
-              FieldComm Group, "WirelessHART",
-              <https://www.fieldcommgroup.org/technologies/
-              wirelesshart>.
-
-   [WFA]      "Wi-Fi Alliance", <https://www.wi-fi.org>.
-
-   [Avnu]     "Avnu Alliance", <https://www.avnu.org>.
+   [NSA-EXT]  Koutsiamanis, R., Ed., Papadopoulos, G. Z., Montavont, N.,
+              and P. Thubert, "Common Ancestor Objective Function and
+              Parent Set DAG Metric Container Extension", Work in
+              Progress, Internet-Draft, draft-ietf-roll-nsa-extension-
+              13, 7 July 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-roll-nsa-extension-13>.
 
    [PCE]      IETF, "Path Computation Element",
               <https://datatracker.ietf.org/doc/charter-ietf-pce/>.
 
-   [CCAMP]    IETF, "Common Control and Measurement Plane",
-              <https://datatracker.ietf.org/doc/charter-ietf-ccamp/>.
+   [RFC6291]  Andersson, L., van Helvoort, H., Bonica, R., Romascanu,
+              D., and S. Mansfield, "Guidelines for the Use of the "OAM"
+              Acronym in the IETF", BCP 161, RFC 6291,
+              DOI 10.17487/RFC6291, June 2011,
+              <https://www.rfc-editor.org/info/rfc6291>.
 
-   [TiSCH]    IETF, "IPv6 over the TSCH mode over 802.15.4e",
-              <https://datatracker.ietf.org/doc/charter-ietf-6tisch/>.
+   [RFC6550]  Winter, T., Ed., Thubert, P., Ed., Brandt, A., Hui, J.,
+              Kelsey, R., Levis, P., Pister, K., Struik, R., Vasseur,
+              JP., and R. Alexander, "RPL: IPv6 Routing Protocol for
+              Low-Power and Lossy Networks", RFC 6550,
+              DOI 10.17487/RFC6550, March 2012,
+              <https://www.rfc-editor.org/info/rfc6550>.
+
+   [RFC6551]  Vasseur, JP., Ed., Kim, M., Ed., Pister, K., Dejean, N.,
+              and D. Barthel, "Routing Metrics Used for Path Calculation
+              in Low-Power and Lossy Networks", RFC 6551,
+              DOI 10.17487/RFC6551, March 2012,
+              <https://www.rfc-editor.org/info/rfc6551>.
+
+   [RFC7276]  Mizrahi, T., Sprecher, N., Bellagamba, E., and Y.
+              Weingarten, "An Overview of Operations, Administration,
+              and Maintenance (OAM) Tools", RFC 7276,
+              DOI 10.17487/RFC7276, June 2014,
+              <https://www.rfc-editor.org/info/rfc7276>.
+
+   [RFC8200]  Deering, S. and R. Hinden, "Internet Protocol, Version 6
+              (IPv6) Specification", STD 86, RFC 8200,
+              DOI 10.17487/RFC8200, July 2017,
+              <https://www.rfc-editor.org/info/rfc8200>.
+
+   [RFC8279]  Wijnands, IJ., Ed., Rosen, E., Ed., Dolganow, A.,
+              Przygienda, T., and S. Aldrin, "Multicast Using Bit Index
+              Explicit Replication (BIER)", RFC 8279,
+              DOI 10.17487/RFC8279, November 2017,
+              <https://www.rfc-editor.org/info/rfc8279>.
+
+   [RFC8480]  Wang, Q., Ed., Vilajosana, X., and T. Watteyne, "6TiSCH
+              Operation Sublayer (6top) Protocol (6P)", RFC 8480,
+              DOI 10.17487/RFC8480, November 2018,
+              <https://www.rfc-editor.org/info/rfc8480>.
+
+   [RFC9023]  Varga, B., Ed., Farkas, J., Malis, A., and S. Bryant,
+              "Deterministic Networking (DetNet) Data Plane: IP over
+              IEEE 802.1 Time-Sensitive Networking (TSN)", RFC 9023,
+              DOI 10.17487/RFC9023, June 2021,
+              <https://www.rfc-editor.org/info/rfc9023>.
+
+   [RFC9030]  Thubert, P., Ed., "An Architecture for IPv6 over the Time-
+              Slotted Channel Hopping Mode of IEEE 802.15.4 (6TiSCH)",
+              RFC 9030, DOI 10.17487/RFC9030, May 2021,
+              <https://www.rfc-editor.org/info/rfc9030>.
+
+   [RFC9033]  Chang, T., Ed., Vučinić, M., Vilajosana, X., Duquennoy,
+              S., and D. Dujovne, "6TiSCH Minimal Scheduling Function
+              (MSF)", RFC 9033, DOI 10.17487/RFC9033, May 2021,
+              <https://www.rfc-editor.org/info/rfc9033>.
+
+   [RFC9262]  Eckert, T., Ed., Menth, M., and G. Cauchie, "Tree
+              Engineering for Bit Index Explicit Replication (BIER-TE)",
+              RFC 9262, DOI 10.17487/RFC9262, October 2022,
+              <https://www.rfc-editor.org/info/rfc9262>.
+
+   [RFC9372]  Mäurer, N., Ed., Gräupl, T., Ed., and C. Schmitt, Ed.,
+              "L-Band Digital Aeronautical Communications System
+              (LDACS)", RFC 9372, DOI 10.17487/RFC9372, March 2023,
+              <https://www.rfc-editor.org/info/rfc9372>.
+
+   [RFC9914]  Thubert, P., Ed., Jadhav, R.A., and M. Richardson, "Root-
+              Initiated Routing State in the Routing Protocol for Low-
+              Power and Lossy Networks (RPL)", RFC 9914,
+              DOI 10.17487/RFC9914, April 2026,
+              <https://www.rfc-editor.org/info/rfc9914>.
 
    [RIH18]    Rihacek, C., Haindl, B., Fantappie, P., Pierattelli, S.,
               Gräupl, T., Schnell, M., and N. Fistas, "L-band Digital
@@ -2692,11 +2846,11 @@ Table of Contents
               DOI 10.1109/ICNSURV.2018.8384880, April 2018,
               <https://doi.org/10.1109/ICNSURV.2018.8384880>.
 
-   [GRA19]    Gräupl, T., Rihacek, C., Haindl, B., and Q. Parrod,
-              "SESAR2020 - PJ14-02-01 - LDACS A/G SPECIFICATION",
-              EDITION 00.02.02, 16 August 2019, <https://www.ldacs.com/
-              wp-content/uploads/2013/12/SESAR2020_PJ14_D3_3_030_LDACS_A
-              G_Specification_00_02_02-1_0.pdf>.
+   [RP210854] 3GPP, "Revised WID: Enhanced Industrial Internet of Things
+              (IoT) and ultra-reliable and low latency communication
+              (URLLC) support for NR", 3GPP RP-210854, March 2021,
+              <https://www.3gpp.org/ftp/tsg_ran/TSG_RAN/TSGR_91e/Docs/
+              RP-210854.zip>.
 
    [SAJ14]    Haindl, B., Meser, J., Sajatovic, M., Muller, S.,
               Arthaber, H., Faseth, T., and M. Zaisberger, "LDACS1
@@ -2705,47 +2859,59 @@ Table of Contents
               3B3-1-3B3-11, DOI 10.1109/DASC.2014.6979447, October 2014,
               <https://doi.org/10.1109/DASC.2014.6979447>.
 
-   [GRA11]    Gräupl, T., "LDACS1 Data Link Layer Evolution of ATN/IPS",
-              IEEE/AIAA 30th Digital Avionics Systems Conference, pp.
-              1-28, DOI 10.1109/DASC.2011.6096230, October 2011,
-              <https://doi.org/10.1109/DASC.2011.6096230>.
+   [SCH08]    Schnell, M., Brandes, S., Gligorevic, S., Rokitansky, C.-
+              H., Ehammer, M., Graeupl, T., Rihacek, C., and M.
+              Sajatovic, "B-AMC - Broadband Aeronautical Multi-carrier
+              Communications", 2008 Integrated Communications,
+              Navigation and Surveillance Conference, pp. 1-12,
+              DOI 10.1109/ICNSURV.2008.4559173, 2008,
+              <https://doi.org/10.1109/ICNSURV.2008.4559173>.
 
-   [ICAO18]   International Civil Aviation Organization (ICAO), "L-Band
-              Digital Aeronautical Communication System (LDACS)",
-              International Standards and Recommended Practices, Annex
-              10 - Aeronautical Telecommunications, Vol. III -
-              Communication Systems, July 2018,
-              <https://elibrary.icao.int/product/279816>.
+   [SCH14]    Schnell, M., Epple, U., Shutin, D., and N.
+              Schneckenburger, "LDACS: Future Aeronautical
+              Communications for Air- Traffic Management", IEEE
+              Communications Magazine, vol. 52, no. 5, pp. 104-110,
+              DOI 10.1109/MCOM.2014.6815900, May 2014,
+              <https://doi.org/10.1109/MCOM.2014.6815900>.
 
-   [GRA18]    Gräupl, T., Schneckenburger, N., Jost, T., Schnell, M.,
-              Filip, A., Bellido-Manganell, M. A., Mielke, D. M.,
-              Mäurer, N., Kumar, R., Osechas, O., and G. Battista,
-              "L-band Digital Aeronautical Communications System (LDACS)
-              flight trials in the national German project MICONAV",
-              2018 Integrated Communications, Navigation, Surveillance
-              Conference (ICNS), pp. 4A2-1-4A2-7,
-              DOI 10.1109/ICNSURV.2018.8384881, April 2018,
-              <https://doi.org/10.1109/ICNSURV.2018.8384881>.
+   [SCH19]    German Aerospace Center (DLR), "DLR tests digital
+              communications technologies combined with additional
+              navigation functions for the first time", 27 March 2019,
+              <https://www.dlr.de/en/latest/
+              news/2019/01/20190327_modern-technology-for-the-flight-
+              deck>.
 
-   [BEL22]    Bellido-Manganell, M. A., Gräupl, T., Heirich, O., Mäurer,
-              N., Filip-Dhaubhadel, A., Mielke, D. M., Schalk, L. M.,
-              Becker, D., Schneckenburger, N., and M. Schnell, "LDACS
-              Flight Trials: Demonstration and Performance Analysis of
-              the Future Aeronautical Communications System", IEEE
-              Transactions on Aerospace and Electronic Systems, vol. 58,
-              no. 1, pp. 615-634, DOI 10.1109/TAES.2021.3111722,
-              February 2022,
-              <https://doi.org/10.1109/TAES.2021.3111722>.
+   [SP211634] 3GPP, "Study on 5G Timing Resiliency, TSC, and URLLC
+              enhancements", 3GPP SP-211634, December 2021,
+              <https://www.3gpp.org/ftp/tsg_sa/TSG_SA/
+              TSGS_94E_Electronic_2021_12/Docs/SP-211634.zip>.
 
-   [GRA23]    Gräupl, T., Mielke, D. M., Bellido-Manganell, M. A.,
-              Jansen, L. J., Mäurer, N., Gürbüz, A., Filip-Dhaubhadel,
-              A., Schalk, L., Becker, D., Skorepa, M., Wrobel, F.,
-              Morioka, K., Kurz, S., and J. Meser, "LDACS Flight Trials:
-              Demonstration of ATS-B2, IPS, and Seamless Mobility", 2023
-              Integrated Communication, Navigation and Surveillance
-              Conference (ICNS), pp. 1-13,
-              DOI 10.1109/ICNS58246.2023.10124329, 2023,
-              <https://doi.org/10.1109/ICNS58246.2023.10124329>.
+   [Sudhakaran2021]
+              Sudhakaran, S., Montgomery, K., Kashef, M., Cavalcanti,
+              D., and R. Candell, "Wireless Time Sensitive Networking
+              for Industrial Collaborative Robotic Workcells", 2021 17th
+              IEEE International Conference on Factory Communication
+              Systems (WFCS), pp. 91-94,
+              DOI 10.1109/WFCS46889.2021.9483447, 2021,
+              <https://ieeexplore.ieee.org/abstract/document/9483447>.
+
+   [SYSTOVER5G]
+              3GPP, "5G System Overview", 8 August 2022,
+              <https://www.3gpp.org/technologies/5g-system-overview>.
+
+   [TiSCH]    IETF, "IPv6 over the TSCH mode over 802.15.4e",
+              <https://datatracker.ietf.org/doc/charter-ietf-6tisch/>.
+
+   [TR22804]  3GPP, "Study on Communication for Automation in Vertical
+              domains (CAV)", 3GPP TS 22.804,
+              <https://portal.3gpp.org/desktopmodules/Specifications/
+              SpecificationDetails.aspx?specificationId=3187>.
+
+   [TR2370046]
+              3GPP, "Study on 5GS Deterministic Networking (DetNet)
+              interworking", 3GPP TR 23.700-46,
+              <https://portal.3gpp.org/desktopmodules/Specifications/
+              SpecificationDetails.aspx?specificationId=3994>.
 
    [TR37910]  3GPP, "Study on self evaluation towards IMT-2020
               submission", 3GPP TR 37.910,
@@ -2767,11 +2933,6 @@ Table of Contents
               <https://portal.3gpp.org/desktopmodules/Specifications/
               SpecificationDetails.aspx?specificationId=3528>.
 
-   [TR22804]  3GPP, "Study on Communication for Automation in Vertical
-              domains (CAV)", 3GPP TS 22.804,
-              <https://portal.3gpp.org/desktopmodules/Specifications/
-              SpecificationDetails.aspx?specificationId=3187>.
-
    [TS23501]  3GPP, "System architecture for the 5G System (5GS)",
               3GPP TS 23.501,
               <https://portal.3gpp.org/desktopmodules/Specifications/
@@ -2782,188 +2943,26 @@ Table of Contents
               <https://portal.3gpp.org/desktopmodules/Specifications/
               SpecificationDetails.aspx?specificationId=3191>.
 
-   [SYSTOVER5G]
-              3GPP, "5G System Overview", 8 August 2022,
-              <https://www.3gpp.org/technologies/5g-system-overview>.
-
-   [RP210854] 3GPP, "Revised WID: Enhanced Industrial Internet of Things
-              (IoT) and ultra-reliable and low latency communication
-              (URLLC) support for NR", 3GPP RP-210854, March 2021,
-              <https://www.3gpp.org/ftp/tsg_ran/TSG_RAN/TSGR_91e/Docs/
-              RP-210854.zip>.
-
-   [TR2370046]
-              3GPP, "Study on 5GS Deterministic Networking (DetNet)
-              interworking", 3GPP TR 23.700-46,
-              <https://portal.3gpp.org/desktopmodules/Specifications/
-              SpecificationDetails.aspx?specificationId=3994>.
-
-   [SP211634] 3GPP, "Study on 5G Timing Resiliency, TSC, and URLLC
-              enhancements", 3GPP SP-211634, December 2021,
-              <https://www.3gpp.org/ftp/tsg_sa/TSG_SA/
-              TSGS_94E_Electronic_2021_12/Docs/SP-211634.zip>.
-
-   [IMT2020]  ITU, "IMT-2020 (a.k.a. "5G")", <https://www.itu.int/en/
-              ITU-R/study-groups/rsg5/rwp5d/imt-2020/Pages/
-              default.aspx>.
-
-   [IEEE802.1TSN]
-              IEEE 802.1 Working Group, "Time-Sensitive Networking Task
-              Group", <http://www.ieee802.org/1/pages/tsn.html>.
-
-   [IEEE802.1AS]
-              IEEE, "IEEE Standard for Local and Metropolitan Area
-              Networks -- Timing and Synchronization for Time-Sensitive
-              Applications", IEEE Std 802.1AS-2020,
-              DOI 10.1109/IEEESTD.2020.9121845,
-              <https://doi.org/10.1109/IEEESTD.2020.9121845>.
-
-   [IEEE802.1CB]
-              IEEE, "IEEE Standard for Local and metropolitan area
-              networks -- Frame Replication and Elimination for
-              Reliability", IEEE Std 802.1CB-2017,
-              DOI 10.1109/IEEEStd2017.8091139, 2017,
-              <https://ieeexplore.ieee.org/document/8091139>.
-
-   [IEEE802.1Qbv]
-              IEEE, "IEEE Standard for Local and metropolitan area
-              networks -- Bridges and Bridged Networks - Amendment 25:
-              Enhancements for Scheduled Traffic", IEEE Std 802.1Qbv-
-              2015, DOI 10.1109/IEEESTD.2016.8613095, 2016,
-              <https://doi.org/10.1109/IEEESTD.2016.8613095>.
-
-   [IEEE802.1Qcc]
-              IEEE, "IEEE Standard for Local and metropolitan area
-              networks -- Bridges and Bridged Networks -- Amendment 31:
-              Stream Reservation Protocol (SRP) Enhancements and
-              Performance Improvements", IEEE Std 802.1Qcc-2018,
-              DOI 10.1109/IEEESTD.2018.8514112,
-              <https://ieeexplore.ieee.org/document/8514112>.
-
-   [IEEE802.3]
-              IEEE, "IEEE Standard for Ethernet", IEEE Std 802.3-2022,
-              DOI 10.1109/IEEESTD.2022.9844436,
-              <https://ieeexplore.ieee.org/document/9844436>.
-
    [TSN5G]    5G-ACIA, "Integration of 5G with Time-Sensitive Networking
               for Industrial Communications", 5G-ACIA White Paper,
               <https://5g-acia.org/whitepapers/integration-of-5g-with-
               time-sensitive-networking-for-industrial-communications>.
 
-   [MAE18]    Maeurer, N. and A. Bilzhause, "A Cybersecurity
-              Architecture for the L-band Digital Aeronautical
-              Communications System (LDACS)", 2018 IEEE/AIAA 37th
-              Digital Avionics Systems Conference (DASC), pp. 1-10,
-              DOI 10.1109/DASC.2018.8569878, 2018,
-              <https://doi.org/10.1109/DASC.2018.8569878>.
+   [vilajosana21]
+              Vilajosana, X., Watteyne, T., Chang, T., Vucinic, M.,
+              Duquennoy, S., and P. Thubert, "IETF 6TiSCH: A Tutorial",
+              Communications Surveys and Tutorials, IEEE Communications
+              Society, HAL ID: hal-02420974,
+              DOI 10.1109/COMST.2019.2939407, December 2019,
+              <https://inria.hal.science/hal-02420974/file/
+              IETF_6TiSCH__A_Tutorial__17099609gkvsxdpffdvc_%20(1).pdf>.
 
-   [MAE191]   Maeurer, N. and C. Schmitt, "Towards Successful
-              Realization of the LDACS Cybersecurity Architecture: An
-              Updated Datalink Security Threat- and Risk Analysis",
-              Integrated Communications, Navigation and Surveillance
-              Conference (ICNS), pp. 1-13,
-              DOI 10.1109/ICNSURV.2019.8735139, 2019,
-              <https://doi.org/10.1109/ICNSURV.2019.8735139>.
+   [WFA]      "Wi-Fi Alliance", <https://www.wi-fi.org>.
 
-   [ICAO19]   International Civil Aviation Organization (ICAO), "TLDACS
-              White Paper - A Roll-out Scenario", Communications Panel -
-              Data Communications Infrastructure Working Group, October
-              2019, <https://www.ldacs.com/wp-content/uploads/2013/12/
-              ACP-DCIWG-IP01-LDACS-White-Paper.pdf>.
-
-   [MAE192]   Maeurer, N., Graeupl, T., and C. Schmitt, "Evaluation of
-              the LDACS Cybersecurity Implementation", IEEE/AIAA 38th
-              Digital Avionics Systems Conference (DASC), pp. 1-10,
-              DOI 10.1109/DASC43569.2019.9081786, September 2019,
-              <https://doi.org/10.1109/DASC43569.2019.9081786>.
-
-   [MAE20]    Maeurer, N., Graeupl, T., Gentsch, C., and C. Schmitt,
-              "Comparing Different Diffie-Hellman Key Exchange Flavors
-              for LDACS", AIAA/IEEE 39th Digital Avionics Systems
-              Conference (DASC), pp. 1-10,
-              DOI 10.1109/DASC50938.2020.9256746, 2020,
-              <https://doi.org/10.1109/DASC50938.2020.9256746>.
-
-   [FIL19]    Filip-Dhaubhadel, A. and D. Shutin, "LDACS- Based Non-
-              Cooperative Surveillance Multistatic Radar Design and
-              Detection Coverage Assessment", IEEE/AIAA 38th Digital
-              Avionics Systems Conference (DASC), pp. 1-10,
-              DOI 10.1109/DASC43569.2019.9081714, 2019,
-              <https://doi.org/10.1109/DASC43569.2019.9081714>.
-
-   [BAT19]    Battista, G., Osechas, O., Narayanan, S., Crespillo, O.G.,
-              Gerbeth, D., Maeurer, N., Mielke, D., and T. Graeupl,
-              "Real-Time Demonstration of Integrated Communication and
-              Navigation Services Using LDACS", Integrated
-              Communications, Navigation and Surveillance Conference
-              (ICNS), pp. i-xii, DOI 10.1109/ICNSURV.2019.8735195, 2019,
-              <https://elib.dlr.de/134475/1/08735195.pdf>.
-
-   [BRA06]    Brandes, S., Schnell, M., Rokitansky, C.-h., Ehammer, M.,
-              Graeupl, T., Steendam, H., Guenach, M., Rihacek, C., and
-              B. Haindl, "B-VHF - Selected Simulation Results and Final
-              Assessment", IEEE 25th Digital Avionics Systems Conference
-              (DACS), pp. 1-12, DOI 10.1109/DASC.2006.313670, 2006,
-              <https://doi.org/10.1109/DASC.2006.313670>.
-
-   [SCH08]    Schnell, M., Brandes, S., Gligorevic, S., Rokitansky, C.-
-              H., Ehammer, M., Graeupl, T., Rihacek, C., and M.
-              Sajatovic, "B-AMC - Broadband Aeronautical Multi-carrier
-              Communications", 2008 Integrated Communications,
-              Navigation and Surveillance Conference, pp. 1-12,
-              DOI 10.1109/ICNSURV.2008.4559173, 2008,
-              <https://doi.org/10.1109/ICNSURV.2008.4559173>.
-
-   [SCH19]    German Aerospace Center (DLR), "DLR tests digital
-              communications technologies combined with additional
-              navigation functions for the first time", 27 March 2019,
-              <https://www.dlr.de/en/latest/
-              news/2019/01/20190327_modern-technology-for-the-flight-
-              deck>.
-
-   [HAI09]    Haindl, B., Rihacek, C., Sajatovic, M., Phillips, B.,
-              Budinger, J., Schnell, M., Kamiano, D., and W. Wilson,
-              "Improvement of L-DACS1 Design by Combining B-AMC with P34
-              and WiMAX Technologies", 2009 Integrated Communications,
-              Navigation and Surveillance Conference, pp. 1-8,
-              DOI 10.1109/ICNSURV.2009.5172873, May 2009,
-              <https://doi.org/10.1109/ICNSURV.2009.5172873>.
-
-   [EHA11]    Ehammer, M., Pschernig, E., and T. Graeupl, "AeroMACS - An
-              Airport Communications System", 2011 IEEE/AIAA 30th
-              Digital Avionics Systems Conference, pp. 4C1-1-4C1-16,
-              DOI 10.1109/DASC.2011.6095903, 2011,
-              <https://doi.org/10.1109/DASC.2011.6095903>.
-
-   [SCH14]    Schnell, M., Epple, U., Shutin, D., and N.
-              Schneckenburger, "LDACS: Future Aeronautical
-              Communications for Air- Traffic Management", IEEE
-              Communications Magazine, vol. 52, no. 5, pp. 104-110,
-              DOI 10.1109/MCOM.2014.6815900, May 2014,
-              <https://doi.org/10.1109/MCOM.2014.6815900>.
-
-   [Cavalcanti1287]
-              Cavalcanti, D., Venkatesan, G., Cariou, L., and C.
-              Cordeiro, "TSN support in 802.11 and potential extensions
-              for TGbe", 10 September 2019,
-              <https://mentor.ieee.org/802.11/dcn/19/11-19-1287>.
-
-   [Sudhakaran2021]
-              Sudhakaran, S., Montgomery, K., Kashef, M., Cavalcanti,
-              D., and R. Candell, "Wireless Time Sensitive Networking
-              for Industrial Collaborative Robotic Workcells", 2021 17th
-              IEEE International Conference on Factory Communication
-              Systems (WFCS), pp. 91-94,
-              DOI 10.1109/WFCS46889.2021.9483447, 2021,
-              <https://ieeexplore.ieee.org/abstract/document/9483447>.
-
-   [Fang_2021]
-              Fang, J., Sudhakaran, S., Cavalcanti, D., Cordeiro, C.,
-              and C. Chen, "Wireless TSN with Multi-Radio Wi-Fi", 2021
-              IEEE Conference on Standards for Communications and
-              Networking (CSCN), pp. 105-110,
-              DOI 10.1109/CSCN53733.2021.9686180, 2021,
-              <https://doi.org/10.1109/CSCN53733.2021.9686180>.
+   [WirelessHART]
+              FieldComm Group, "WirelessHART",
+              <https://www.fieldcommgroup.org/technologies/
+              wirelesshart>.
 
 Acknowledgments
 
