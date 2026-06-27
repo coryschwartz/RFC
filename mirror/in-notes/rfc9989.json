@@ -1,0 +1,32 @@
+{
+  "draft": "draft-ietf-dmarc-dmarcbis",
+  "doc_id": "RFC9989",
+  "title": "Domain-Based Message Authentication, Reporting, and Conformance (DMARC)",
+  "authors": [
+    "T. Herr, Ed.",
+    "J. Levine, Ed."
+  ],
+  "format": [
+    "XML",
+    "TEXT",
+    "HTML",
+    "PDF"
+  ],
+  "page_count": "69",
+  "pub_status": "PROPOSED STANDARD",
+  "status": "PROPOSED STANDARD",
+  "source": "dmarc (art)",
+  "abstract": "This document describes the Domain-based Message Authentication, Reporting, and Conformance (DMARC) protocol.\n\n DMARC permits the owner of an email's Author Domain to enable validation of the domain's use to indicate the Domain Owner's or Public Suffix Operator's message handling preference regarding failed validation and to request reports about the use of the domain name. Mail-receiving organizations can use this information when evaluating handling choices for incoming mail.\n\n This document obsoletes RFCs 7489 and 9091.",
+  "pub_date": "May 2026",
+  "keywords": [],
+  "obsoletes": [
+    "RFC7489",
+    "RFC9091"
+  ],
+  "obsoleted_by": [],
+  "updates": [],
+  "updated_by": [],
+  "see_also": [],
+  "doi": "10.17487/RFC9989",
+  "errata_url": "https://www.rfc-editor.org/errata/rfc9989"
+}
