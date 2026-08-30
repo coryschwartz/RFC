@@ -5,7 +5,7 @@
                              BCP INDEX
                            -------------
 
-(CREATED ON: 07/17/2026.)
+(CREATED ON: 08/28/2026.)
 
 This file contains citations for all BCPs in numeric order.  The BCPs
 form a sub-series of the RFC document series, specifically those RFCs
@@ -1072,6 +1072,11 @@ BCPs and other RFCs may be obtained from https://www.rfc-editor.org.
               A. Durand, J. Ihren, "DNS IPv6 Transport Operational Guidelines",
               BCP 91, RFC 3901, DOI 10.17487/RFC3901, September 2004,
               <https://www.rfc-editor.org/info/rfc3901>.
+
+              Momoka, T. Fiebig, "Operational Guidelines for DNS Transport in
+              Mixed IPv4/IPv6 Environments", BCP 91, RFC 10001,
+              DOI 10.17487/RFC10001, August 2026,
+              <https://www.rfc-editor.org/info/rfc10001>.
 
 
 
@@ -2397,6 +2402,10 @@ BCPs and other RFCs may be obtained from https://www.rfc-editor.org.
               RFC 8252, DOI 10.17487/RFC8252, October 2017,
               <https://www.rfc-editor.org/info/rfc8252>.
 
+              A. Parecki, P. De Ryck, D. Waite, "OAuth 2.0 for Browser-Based
+              Applications", BCP 212, RFC 10017, DOI 10.17487/RFC10017, August
+              2026, <https://www.rfc-editor.org/info/rfc10017>.
+
 
 
    [BCP213]   Best Current Practice 213,
@@ -2760,6 +2769,28 @@ BCPs and other RFCs may be obtained from https://www.rfc-editor.org.
               L. Eggert, Ed., E. Lear, Ed., "IETF Community Moderation",
               BCP 245, RFC 9945, DOI 10.17487/RFC9945, February 2026,
               <https://www.rfc-editor.org/info/rfc9945>.
+
+
+
+   [BCP246]   Best Current Practice 246,
+              <https://www.rfc-editor.org/info/bcp246>.
+              At the time of writing, this BCP comprises the following:
+
+              S. Sheng, P. Thomassen, "Operational Recommendations for DNSSEC
+              Delegation Signer (DS) Automation", BCP 246, RFC 10026,
+              DOI 10.17487/RFC10026, July 2026,
+              <https://www.rfc-editor.org/info/rfc10026>.
+
+
+
+   [BCP247]   Best Current Practice 247,
+              <https://www.rfc-editor.org/info/bcp247>.
+              At the time of writing, this BCP comprises the following:
+
+              P. Kasselman, D. Fett, F. Skokan, "Best Current Practice for
+              Security of Cross-Device Flows", BCP 247, RFC 10027,
+              DOI 10.17487/RFC10027, August 2026,
+              <https://www.rfc-editor.org/info/rfc10027>.
 
 
 
